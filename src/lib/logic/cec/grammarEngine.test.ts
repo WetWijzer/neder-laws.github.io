@@ -6,6 +6,10 @@ import {
   createDefaultCecGrammarEngine,
   createDefaultCecGrammarLoader,
 } from './grammarEngine';
+import {
+  createCecNativeGrammarLoader,
+  getCecNativeGrammarLoaderCapabilities,
+} from './grammarLoader';
 
 describe('CEC grammar loader and engine', () => {
   it('loads default grammar sections and operator metadata without filesystem access', () => {
@@ -43,6 +47,68 @@ describe('CEC grammar loader and engine', () => {
     expect(loader.getAllWords()).toEqual(
       expect.arrayContaining(['and', 'must', 'believes', 'always', 'every']),
     );
+  });
+
+  it('ports grammar_loader.py as an in-memory browser-native artifact facade', () => {
+    const nativeLoader = createCecNativeGrammarLoader();
+    const loaded = nativeLoader.loadDefaultGrammar();
+
+    const capabilities = getCecNativeGrammarLoaderCapabilities();
+    expect(capabilities.pythonModule).toBe('logic/CEC/native/grammar_loader.py');
+    expect(capabilities).toMatchObject({
+      browserNative: true,
+      pythonRuntime: false,
+      serverRuntime: false,
+      filesystem: false,
+      subprocess: false,
+      rpc: false,
+      wasmCompatible: true,
+      externalResourcePolicy: 'none',
+    });
+    expect(loaded).toMatchObject({
+      ok: true,
+      name: 'default-cec-grammar',
+      errors: [],
+      metadata: {
+        sourcePythonModule: 'logic/CEC/native/grammar_loader.py',
+        runtime: 'browser-native-typescript',
+      },
+    });
+    expect(loaded.artifact?.source).toBe('in-memory');
+    expect(loaded.artifact?.externalResourcePolicy).toBe('none');
+    expect(loaded.engine?.lexicon.get('must')?.[0].category).toBe('V');
+  });
+
+  it('loads registered static grammar artifacts and fails closed for missing or invalid entries', () => {
+    const nativeLoader = createCecNativeGrammarLoader({
+      legal: {
+        config: { version: '1.0', language: 'en' },
+        connectives: { and: { word: 'and' } },
+        deontic: { obligation: { words: ['must'], semantics: { operator: 'obligated' } } },
+        cognitive: { knowledge: { words: ['knows'], semantics: { operator: 'knowledge' } } },
+        temporal: { always: { words: ['always'], semantics: { operator: 'always' } } },
+        quantifiers: { universal: { words: ['every'], semantics: { operator: 'forall' } } },
+      },
+    });
+
+    const loaded = nativeLoader.loadRegisteredGrammar('LEGAL');
+    const invalid = nativeLoader.loadStaticGrammar('broken', { connectives: {} });
+
+    expect(nativeLoader.listRegisteredArtifacts()).toEqual(['legal']);
+    expect(loaded.ok).toBe(true);
+    expect(loaded.loader?.getWordsForOperator('deontic', 'obligation')).toEqual(['must']);
+    expect(nativeLoader.loadRegisteredGrammar('unknown')).toMatchObject({
+      ok: false,
+      validation: { issues: [{ code: 'artifact-not-found' }] },
+    });
+    expect(invalid.ok).toBe(false);
+    expect(invalid.validation.issues.map((issue) => issue.code)).toEqual([
+      'missing-section',
+      'missing-section',
+      'missing-section',
+      'missing-section',
+    ]);
+    expect(invalid.engine).toBeUndefined();
   });
 
   it('accepts static browser-native grammar data and validates required sections', () => {

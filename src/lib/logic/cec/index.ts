@@ -25,6 +25,7 @@ export * from './fluents';
 export * from './formatter';
 export * from './formulaCache';
 export * from './grammarEngine';
+export * from './grammarLoader';
 export * from './inferenceRules';
 export * from './languageDetector';
 export * from './lemmaGeneration';
