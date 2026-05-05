@@ -18,7 +18,16 @@ import {
   validateSafeInput,
   validateText,
 } from './inputValidation';
-import { RateLimitExceeded, RateLimiter, rateLimit, setRateLimiter } from './rateLimiting';
+import {
+  RATE_LIMITING_METADATA,
+  RateLimitExceeded,
+  RateLimiter,
+  get_rate_limiter,
+  rateLimit,
+  rate_limit,
+  setRateLimiter,
+  set_rate_limiter,
+} from './rateLimiting';
 
 describe('logic security browser-native parity helpers', () => {
   afterEach(() => {
@@ -65,6 +74,14 @@ describe('logic security browser-native parity helpers', () => {
     let now = 0;
     const limiter = new RateLimiter(2, 10, () => now);
 
+    expect(limiter.metadata).toEqual(RATE_LIMITING_METADATA);
+    expect(RATE_LIMITING_METADATA).toMatchObject({
+      sourcePythonModule: 'logic/security/rate_limiting.py',
+      browserNative: true,
+      serverCallsAllowed: false,
+      pythonRuntimeAllowed: false,
+      algorithm: 'sliding_window',
+    });
     limiter.checkRateLimit('ada');
     limiter.checkRateLimit('ada');
     expect(limiter.getRemaining('ada')).toBe(0);
@@ -80,9 +97,27 @@ describe('logic security browser-native parity helpers', () => {
     ).toBe(2);
 
     setRateLimiter(new RateLimiter(1, 60, () => 0));
-    const guarded = rateLimit(() => 'ok');
-    expect(guarded()).toBe('ok');
-    expect(() => guarded()).toThrow(RateLimitExceeded);
+    const guarded = rateLimit((request: { user_id: string }) => `ok:${request.user_id}`);
+    expect(guarded({ user_id: 'kwarg-equivalent' })).toBe('ok:kwarg-equivalent');
+    expect(() => guarded({ user_id: 'kwarg-equivalent' })).toThrow(RateLimitExceeded);
+  });
+
+  it('ports rate_limiting.py snake-case aliases and object user_id decorator behavior', () => {
+    let now = 100;
+    const limiter = new RateLimiter({ calls: 1, period: 5, now: () => now });
+    const guarded = limiter.wrap((request: { user_id: string }) => request.user_id);
+
+    expect(guarded({ user_id: 'python-kwarg' })).toBe('python-kwarg');
+    expect(() => guarded({ user_id: 'python-kwarg' })).toThrow('Try again in 5.0s');
+    expect(limiter.get_remaining('python-kwarg')).toBe(0);
+    now = 106;
+    expect(limiter.get_remaining('python-kwarg')).toBe(1);
+
+    set_rate_limiter(new RateLimiter({ calls: 1, period: 60, now: () => 0 }));
+    expect(get_rate_limiter().getRemaining()).toBe(1);
+    const globalGuarded = rate_limit((request: { userId: string }) => request.userId);
+    expect(globalGuarded({ userId: 'camel' })).toBe('camel');
+    expect(() => globalGuarded({ userId: 'camel' })).toThrow(RateLimitExceeded);
   });
 
   it('opens, half-opens, recovers, and reports circuit-breaker metrics', () => {

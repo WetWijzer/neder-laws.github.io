@@ -2027,3 +2027,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T022542Z-ported-llm_circuit_breaker.py-parity-helpers-for-browser-native-typescript..json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T022542Z-ported-llm_circuit_breaker.py-parity-helpers-for-browser-native-typescript..diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T022542Z-ported-llm_circuit_breaker.py-parity-helpers-for-browser-native-typescript..stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 02:28:13 UTC
+
+- Target: `Task checkbox-416: Port remaining Python logic module `logic/security/rate_limiting.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Summary: Ported remaining security rate_limiting.py parity into the browser-native TypeScript security package.
+- Impact: src/lib/logic/security/rateLimiting.ts now exposes sliding-window metadata, option-based construction, Python-style snake_case aliases, global limiter aliases, and decorator user_id extraction without server, Python runtime, filesystem, subprocess, or RPC dependencies. src/lib/logic/security/security.test.ts validates the Python parity surface through Jest, and the task ledger marks checkbox-416 complete.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/security/rateLimiting.ts`, `src/lib/logic/security/security.test.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T022813Z-ported-remaining-security-rate_limiting.py-parity-into-the-browser-native-typesc.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T022813Z-ported-remaining-security-rate_limiting.py-parity-into-the-browser-native-typesc.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T022813Z-ported-remaining-security-rate_limiting.py-parity-into-the-browser-native-typesc.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+
