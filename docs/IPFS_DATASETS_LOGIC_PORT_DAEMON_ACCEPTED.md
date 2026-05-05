@@ -2243,3 +2243,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T040324Z-ported-remaining-vk_registry-parity-for-browser-native-typescript-by-tightening-.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T040324Z-ported-remaining-vk_registry-parity-for-browser-native-typescript-by-tightening-.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T040324Z-ported-remaining-vk_registry-parity-for-browser-native-typescript-by-tightening-.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 04:05:59 UTC
+
+- Target: `Task checkbox-440: Port remaining Python logic module `logic/zkp/witness_manager.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Summary: Port remaining witness_manager parity for dict-shaped witness/proof statement interchange and defensive browser-native witness caching.
+- Impact: The TypeScript ZKP WitnessManager now supports Python-style dict import/export helpers and factory aliases without Python, server, filesystem, subprocess, or RPC dependencies. Focused Jest coverage validates v2 TDFOL witness derivation from snake_case dict input, proof statement export, required theorem failures, and cache copy isolation.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/zkp/witnessManager.test.ts`, `src/lib/logic/zkp/witnessManager.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T040559Z-port-remaining-witness_manager-parity-for-dict-shaped-witness-proof-statement-in.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T040559Z-port-remaining-witness_manager-parity-for-dict-shaped-witness-proof-statement-in.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T040559Z-port-remaining-witness_manager-parity-for-dict-shaped-witness-proof-statement-in.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+
