@@ -1024,7 +1024,7 @@ The daemon completed all currently eligible TypeScript port-plan checkboxes, the
 <!-- logic-port-daemon-task-board:start -->
 ## Daemon Task Board
 
-Last updated: 2026-05-05 07:30:36 UTC
+Last updated: 2026-05-05 07:40:36 UTC
 
 Selection policy: choose the first needed or in-progress port-plan checkbox; if none remain, revisit blocked checkboxes with `fewest-failures` strategy because blocked-task revisit mode is enabled.
 
@@ -1507,8 +1507,8 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - [x] `Task checkbox-471: Manual unblock: port 'logic/CEC/native/dcec_parsing.py' by adding parser utility parity for DCEC atom, connective, quantifier, and modal/deontic forms.` - complete
 - [x] `Task checkbox-472: Manual unblock: port 'logic/CEC/native/dcec_prototypes.py' by adding prototype/type-conflict checks and deterministic validation fixtures.` - complete
 - [x] `Task checkbox-473: Manual unblock: port 'logic/CEC/native/dcec_types.py' by adding DCEC container helpers, type guards, serialization, and compatibility tests.` - complete
-- [x] `Task checkbox-474: Manual unblock: port 'logic/CEC/native/enhanced_grammar_parser.py' by adding chart-parser style diagnostics, parse alternatives, and grammar fixture tests.` - validated by latest daemon round
-- [ ] `Task checkbox-475: Manual unblock: port 'logic/CEC/native/error_handling.py' by adding fail-closed CEC error facades, recovery metadata, and validation result adapters.` - needed
+- [x] `Task checkbox-474: Manual unblock: port 'logic/CEC/native/enhanced_grammar_parser.py' by adding chart-parser style diagnostics, parse alternatives, and grammar fixture tests.` - complete
+- [!] `Task checkbox-475: Manual unblock: port 'logic/CEC/native/error_handling.py' by adding fail-closed CEC error facades, recovery metadata, and validation result adapters.` - latest daemon round failed validation or preflight
 - [ ] `Task checkbox-476: Manual unblock: port 'logic/CEC/native/event_calculus.py' by adding event, fluent, happens, holds, initiates, terminates, and timeline query helpers with parity tests.` - needed
 - [ ] `Task checkbox-477: Manual unblock: port 'logic/CEC/native/grammar_engine.py' and 'grammar_loader.py' by adding deterministic in-memory grammar artifacts, loader validation, and no-network browser tests.` - needed
 - [ ] `Task checkbox-478: Manual unblock: port 'logic/CEC/native/inference_rules/base.py', 'cognitive.py', and 'modal.py' by adding rule tables, applicability checks, proof-step metadata, and focused parity tests.` - needed
@@ -1517,11 +1517,13 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 
 ### Latest Round
 
-- Target: `Task checkbox-474: Manual unblock: port 'logic/CEC/native/enhanced_grammar_parser.py' by adding chart-parser style diagnostics, parse alternatives, and grammar fixture tests.`
-- Result: `valid`
-- Summary: Added enhanced DCEC grammar parser diagnostics and parse alternatives with focused fixture tests.
-- Impact: The browser-native TypeScript CEC parser now exposes parseWithDiagnostics() for chart sizes, scanner/predictor/completer counts, unknown-token diagnostics, completion status, and preserved alternative parse trees. Existing parse() callers continue to receive parse trees, while Jest validates successful parses, failed diagnostics, and an ambiguous grammar fixture without Python, server, filesystem, or Node-only runtime dependencies.
-- Accepted changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/cec/enhancedGrammarParser.test.ts`, `src/lib/logic/cec/enhancedGrammarParser.ts`
+- Target: `Task checkbox-475: Manual unblock: port 'logic/CEC/native/error_handling.py' by adding fail-closed CEC error facades, recovery metadata, and validation result adapters.`
+- Result: `needs follow-up`
+- Summary: Added browser-native fail-closed CEC error recovery metadata and validation result adapters for logic/CEC/native/error_handling.py parity.
+- Impact: CEC callers can now normalize thrown parser/prover/knowledge-base errors and validation payloads into deterministic LogicValidationIssue results with local recovery metadata, and the focused Jest coverage exercises the browser-native fail-closed facade without Python, server, filesystem, subprocess, or RPC dependencies.
+- Accepted changed files: `src/lib/logic/cec/cecErrors.test.ts`, `src/lib/logic/cec/cecErrors.ts`
+- Errors: Rejected proposal because it imports from '@jest/globals'; logic tests use Jest globals without test-framework imports.
+- Failure kind: `preflight`
 
 ### Blocked Backlog
 
