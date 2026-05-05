@@ -1024,7 +1024,7 @@ The daemon completed all currently eligible TypeScript port-plan checkboxes, the
 <!-- logic-port-daemon-task-board:start -->
 ## Daemon Task Board
 
-Last updated: 2026-05-05 07:40:36 UTC
+Last updated: 2026-05-05 07:53:58 UTC
 
 Selection policy: choose the first needed or in-progress port-plan checkbox; if none remain, revisit blocked checkboxes with `fewest-failures` strategy because blocked-task revisit mode is enabled.
 
@@ -1519,8 +1519,8 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 
 - Target: `Task checkbox-475: Manual unblock: port 'logic/CEC/native/error_handling.py' by adding fail-closed CEC error facades, recovery metadata, and validation result adapters.`
 - Result: `needs follow-up`
-- Summary: Added browser-native fail-closed CEC error recovery metadata and validation result adapters for logic/CEC/native/error_handling.py parity.
-- Impact: CEC callers can now normalize thrown parser/prover/knowledge-base errors and validation payloads into deterministic LogicValidationIssue results with local recovery metadata, and the focused Jest coverage exercises the browser-native fail-closed facade without Python, server, filesystem, subprocess, or RPC dependencies.
+- Summary: Added browser-native fail-closed CEC error facades, recovery metadata, and validation result adapters for logic/CEC/native/error_handling.py parity.
+- Impact: The TypeScript CEC error module now exposes serializable fail-closed recovery metadata, default-value facade results, and LogicValidationIssue adapters that browser callers can use without Python, server, filesystem, subprocess, RPC, or Node-only fallbacks. The CEC error Jest suite exercises the new adapter path and verifies preserved error context and suggestions.
 - Accepted changed files: `src/lib/logic/cec/cecErrors.test.ts`, `src/lib/logic/cec/cecErrors.ts`
 - Errors: Rejected proposal because it imports from '@jest/globals'; logic tests use Jest globals without test-framework imports.
 - Failure kind: `preflight`
