@@ -15,6 +15,20 @@ export interface CecTemporalScope {
   entityNames: string[];
 }
 
+export interface CecContextWindowOptions {
+  windowSize?: number;
+  entityTypes?: CecContextEntityType[];
+  includeClosedTemporalScopes?: boolean;
+}
+
+export interface CecContextWindow {
+  position: number;
+  utterances: string[];
+  entities: CecContextEntity[];
+  temporalScopes: CecTemporalScope[];
+  focus?: CecContextEntity;
+}
+
 export class CecContextEntity {
   readonly name: string;
   readonly entityType: CecContextEntityType;
@@ -42,6 +56,19 @@ export class CecContextEntity {
 
   mostRecentMention(): number | undefined {
     return this.mentions.length === 0 ? undefined : Math.max(...this.mentions);
+  }
+
+  salienceAt(position: number, decayPerStep = 0.5): number {
+    if (!Number.isInteger(position) || position < 0) {
+      throw new Error('CEC context salience position must be a non-negative integer');
+    }
+    if (!Number.isFinite(decayPerStep) || decayPerStep < 0) {
+      throw new Error('CEC context salience decay must be a non-negative number');
+    }
+    const mostRecent = this.mostRecentMention();
+    if (mostRecent === undefined) return 0;
+    const distance = Math.max(0, position - mostRecent);
+    return this.mentions.length / (1 + distance * decayPerStep);
   }
 
   merge(other: CecContextEntity): CecContextEntity {
@@ -350,6 +377,38 @@ export class CecContextManager {
 
   getFocusedEntity(): CecContextEntity | undefined {
     return this.state.focus;
+  }
+
+  getContextWindow(options: CecContextWindowOptions = {}): CecContextWindow {
+    const windowSize = options.windowSize ?? this.state.discourseHistory.length;
+    if (!Number.isInteger(windowSize) || windowSize < 0) {
+      throw new Error('CEC context window size must be a non-negative integer');
+    }
+
+    const startPosition = Math.max(1, this.state.position - windowSize + 1);
+    const entityTypes = options.entityTypes ? new Set(options.entityTypes) : undefined;
+    const entities = [...this.state.entities.values()]
+      .filter((entity) => {
+        if (entityTypes && !entityTypes.has(entity.entityType)) return false;
+        return entity.mentions.some((mention) => mention >= startPosition);
+      })
+      .sort((left, right) => {
+        const salienceDifference =
+          right.salienceAt(this.state.position) - left.salienceAt(this.state.position);
+        return salienceDifference !== 0 ? salienceDifference : left.name.localeCompare(right.name);
+      });
+
+    const temporalScopes = this.state.temporalScopes
+      .filter((scope) => options.includeClosedTemporalScopes || scope.end === undefined)
+      .map((scope) => ({ ...scope, entityNames: [...scope.entityNames] }));
+
+    return {
+      position: this.state.position,
+      utterances: this.state.discourseHistory.slice(-windowSize),
+      entities,
+      temporalScopes,
+      focus: this.state.focus,
+    };
   }
 
   private extractEntities(utterance: string): CecContextEntity[] {

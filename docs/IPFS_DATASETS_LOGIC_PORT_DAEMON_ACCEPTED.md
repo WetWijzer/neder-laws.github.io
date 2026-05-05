@@ -2684,3 +2684,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T093534Z-extended-the-browser-native-cec-zkp-facade-with-deterministic-circuit-public-inp.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T093534Z-extended-the-browser-native-cec-zkp-facade-with-deterministic-circuit-public-inp.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T093534Z-extended-the-browser-native-cec-zkp-facade-with-deterministic-circuit-public-inp.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 09:38:06 UTC
+
+- Target: `Task checkbox-204: Port remaining Python logic module `logic/CEC/native/context_manager.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Summary: Ported the remaining CEC context-manager slice with browser-native context windows and salience scoring.
+- Impact: The TypeScript CEC context manager now exposes deterministic local context windows that return recent discourse, salience-ranked active entities, focus, and open temporal scopes without Python, server, filesystem, subprocess, or RPC dependencies. Focused Jest tests exercise the new browser-native parity behavior and fail-closed validation paths.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/cec/contextManager.test.ts`, `src/lib/logic/cec/contextManager.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T093806Z-ported-the-remaining-cec-context-manager-slice-with-browser-native-context-windo.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T093806Z-ported-the-remaining-cec-context-manager-slice-with-browser-native-context-windo.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T093806Z-ported-the-remaining-cec-context-manager-slice-with-browser-native-context-windo.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+

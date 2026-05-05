@@ -142,6 +142,46 @@ describe('CEC context manager', () => {
     ).toBeCloseTo(1 / 3);
   });
 
+  it('returns a bounded context window with salience-ranked active entities', () => {
+    const manager = new CecContextManager();
+    manager.processUtterance('Alice opens the door.');
+    manager.processUtterance('The tenant receives the notice.');
+    manager.processUtterance('The tenant checks the permit.');
+    manager.pushTemporalScope('review window', 2, ['tenant', 'notice']);
+    manager.pushTemporalScope('old window', 1, ['alice']);
+    manager.closeTemporalScope('old window', 3);
+
+    const window = manager.getContextWindow({ windowSize: 2, entityTypes: ['agent', 'object'] });
+
+    expect(window.position).toBe(3);
+    expect(window.utterances).toEqual([
+      'The tenant receives the notice.',
+      'The tenant checks the permit.',
+    ]);
+    expect(
+      window.entities.map((entity) => [entity.name, entity.salienceAt(window.position)]),
+    ).toEqual([
+      ['tenant', 2],
+      ['permit', 1],
+      ['notice', 1 / 1.5],
+    ]);
+    expect(window.temporalScopes).toEqual([
+      { label: 'review window', start: 2, entityNames: ['notice', 'tenant'] },
+    ]);
+    expect(window.focus?.name).toBe('permit');
+  });
+
+  it('validates context window and salience inputs fail closed', () => {
+    const manager = new CecContextManager();
+    const entity = new CecContextEntity('permit', 'object');
+
+    expect(() => manager.getContextWindow({ windowSize: -1 })).toThrow(
+      'window size must be a non-negative integer',
+    );
+    expect(() => entity.salienceAt(-1)).toThrow('salience position');
+    expect(() => entity.salienceAt(1, -0.25)).toThrow('salience decay');
+  });
+
   it('resets context and validates entity mention positions', () => {
     const manager = new CecContextManager();
     manager.processUtterance('Alice opens the door.');
