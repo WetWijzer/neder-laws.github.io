@@ -2513,3 +2513,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T070539Z-ported-dcec-cleaning-unblock-with-browser-native-legal-text-normalization-token-.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T070539Z-ported-dcec-cleaning-unblock-with-browser-native-legal-text-normalization-token-.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T070539Z-ported-dcec-cleaning-unblock-with-browser-native-legal-text-normalization-token-.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 07:10:10 UTC
+
+- Target: `Task checkbox-469: Manual unblock: port `logic/CEC/native/dcec_integration.py` by adding DCEC token/formula conversion helpers, CEC bridge metadata, and round-trip validation tests.`
+- Summary: Ported the DCEC integration unblock with browser-native conversion metadata, formula-to-token helpers, and round-trip validation.
+- Impact: The TypeScript DCEC integration layer now exposes Python-module parity metadata and validates string/token/formula round trips locally, so downstream CEC/DCEC validation can exercise dcec_integration.py behavior without Python, server, RPC, filesystem, or subprocess fallbacks.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/cec/dcecIntegration.test.ts`, `src/lib/logic/cec/dcecIntegration.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T071010Z-ported-the-dcec-integration-unblock-with-browser-native-conversion-metadata-form.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T071010Z-ported-the-dcec-integration-unblock-with-browser-native-conversion-metadata-form.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T071010Z-ported-the-dcec-integration-unblock-with-browser-native-conversion-metadata-form.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+
