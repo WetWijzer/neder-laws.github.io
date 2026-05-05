@@ -1012,7 +1012,7 @@ The daemon completed all currently eligible TypeScript port-plan checkboxes, the
 - [x] Manual unblock: port `logic/CEC/native/dcec_namespace.py` by adding namespace registration, symbol statistics, validation diagnostics, and collision tests.
 - [x] Manual unblock: port `logic/CEC/native/dcec_parsing.py` by adding parser utility parity for DCEC atom, connective, quantifier, and modal/deontic forms.
 - [x] Manual unblock: port `logic/CEC/native/dcec_prototypes.py` by adding prototype/type-conflict checks and deterministic validation fixtures.
-- [ ] Manual unblock: port `logic/CEC/native/dcec_types.py` by adding DCEC container helpers, type guards, serialization, and compatibility tests.
+- [x] Manual unblock: port `logic/CEC/native/dcec_types.py` by adding DCEC container helpers, type guards, serialization, and compatibility tests.
 - [ ] Manual unblock: port `logic/CEC/native/enhanced_grammar_parser.py` by adding chart-parser style diagnostics, parse alternatives, and grammar fixture tests.
 - [ ] Manual unblock: port `logic/CEC/native/error_handling.py` by adding fail-closed CEC error facades, recovery metadata, and validation result adapters.
 - [ ] Manual unblock: port `logic/CEC/native/event_calculus.py` by adding event, fluent, happens, holds, initiates, terminates, and timeline query helpers with parity tests.
@@ -1024,11 +1024,11 @@ The daemon completed all currently eligible TypeScript port-plan checkboxes, the
 <!-- logic-port-daemon-task-board:start -->
 ## Daemon Task Board
 
-Last updated: 2026-05-05 07:20:39 UTC
+Last updated: 2026-05-05 07:27:43 UTC
 
 Selection policy: choose the first needed or in-progress port-plan checkbox; if none remain, revisit blocked checkboxes with `fewest-failures` strategy because blocked-task revisit mode is enabled.
 
-Current target: `Task checkbox-473: Manual unblock: port 'logic/CEC/native/dcec_types.py' by adding DCEC container helpers, type guards, serialization, and compatibility tests.`
+Current target: `Task checkbox-474: Manual unblock: port 'logic/CEC/native/enhanced_grammar_parser.py' by adding chart-parser style diagnostics, parse alternatives, and grammar fixture tests.`
 
 Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failing.
 
@@ -1505,8 +1505,8 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - [x] `Task checkbox-469: Manual unblock: port 'logic/CEC/native/dcec_integration.py' by adding DCEC token/formula conversion helpers, CEC bridge metadata, and round-trip validation tests.` - complete
 - [x] `Task checkbox-470: Manual unblock: port 'logic/CEC/native/dcec_namespace.py' by adding namespace registration, symbol statistics, validation diagnostics, and collision tests.` - complete
 - [x] `Task checkbox-471: Manual unblock: port 'logic/CEC/native/dcec_parsing.py' by adding parser utility parity for DCEC atom, connective, quantifier, and modal/deontic forms.` - complete
-- [x] `Task checkbox-472: Manual unblock: port 'logic/CEC/native/dcec_prototypes.py' by adding prototype/type-conflict checks and deterministic validation fixtures.` - validated by latest daemon round
-- [ ] `Task checkbox-473: Manual unblock: port 'logic/CEC/native/dcec_types.py' by adding DCEC container helpers, type guards, serialization, and compatibility tests.` - needed
+- [x] `Task checkbox-472: Manual unblock: port 'logic/CEC/native/dcec_prototypes.py' by adding prototype/type-conflict checks and deterministic validation fixtures.` - complete
+- [x] `Task checkbox-473: Manual unblock: port 'logic/CEC/native/dcec_types.py' by adding DCEC container helpers, type guards, serialization, and compatibility tests.` - validated by latest daemon round
 - [ ] `Task checkbox-474: Manual unblock: port 'logic/CEC/native/enhanced_grammar_parser.py' by adding chart-parser style diagnostics, parse alternatives, and grammar fixture tests.` - needed
 - [ ] `Task checkbox-475: Manual unblock: port 'logic/CEC/native/error_handling.py' by adding fail-closed CEC error facades, recovery metadata, and validation result adapters.` - needed
 - [ ] `Task checkbox-476: Manual unblock: port 'logic/CEC/native/event_calculus.py' by adding event, fluent, happens, holds, initiates, terminates, and timeline query helpers with parity tests.` - needed
@@ -1517,11 +1517,11 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 
 ### Latest Round
 
-- Target: `Task checkbox-472: Manual unblock: port 'logic/CEC/native/dcec_prototypes.py' by adding prototype/type-conflict checks and deterministic validation fixtures.`
+- Target: `Task checkbox-473: Manual unblock: port 'logic/CEC/native/dcec_types.py' by adding DCEC container helpers, type guards, serialization, and compatibility tests.`
 - Result: `valid`
-- Summary: Added DCEC prototype registration conflict checks plus deterministic validation APIs and fixtures.
-- Impact: The TypeScript CEC prototype namespace now rejects unknown-sort registrations and overlapping overloads with conflicting return types, and the Jest suite directly exercises atomic/function validation outcomes used by the browser-native logic port.
-- Accepted changed files: `src/lib/logic/cec/dcecPrototypes.test.ts`, `src/lib/logic/cec/dcecPrototypes.ts`
+- Summary: Ported DCEC native type helper parity with browser-native symbol guards, JSON serialization helpers, and focused compatibility tests.
+- Impact: The TypeScript DCEC type layer now exposes serializable sort, variable, function, predicate, and symbol-container records that validation and browser consumers can use without Python or server runtime dependencies; the existing DCEC namespace Jest suite asserts the new guards and serialization contract.
+- Accepted changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/cec/dcecNamespace.test.ts`, `src/lib/logic/cec/dcecTypes.ts`
 
 ### Blocked Backlog
 

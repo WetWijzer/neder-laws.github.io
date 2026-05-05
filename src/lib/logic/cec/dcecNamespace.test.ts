@@ -9,6 +9,12 @@ import {
   DcecSort,
   DcecTemporalOperator,
   DcecVariable,
+  isDcecFunctionSymbol,
+  isDcecPredicateSymbol,
+  isDcecSort,
+  isDcecSymbolJson,
+  isDcecVariable,
+  serializeDcecSymbolContainer,
 } from './dcecTypes';
 
 describe('DCEC namespace and type utilities', () => {
@@ -36,6 +42,51 @@ describe('DCEC namespace and type utilities', () => {
     expect(String(age)).toBe('age(Human) -> Number');
     expect(eligible.arity()).toBe(1);
     expect(String(eligible)).toBe('eligible(Human)');
+  });
+
+  it('serializes DCEC type symbols and guards Python-compatible JSON records', () => {
+    const entity = new DcecSort('Entity');
+    const agent = new DcecSort('Agent', entity);
+    const variable = new DcecVariable('a', agent);
+    const functionSymbol = new DcecFunctionSymbol('actorOf', [new DcecSort('Action')], agent);
+    const predicate = new DcecPredicateSymbol('liable', [agent]);
+
+    expect(isDcecSort(agent)).toBe(true);
+    expect(isDcecVariable(variable)).toBe(true);
+    expect(isDcecFunctionSymbol(functionSymbol)).toBe(true);
+    expect(isDcecPredicateSymbol(predicate)).toBe(true);
+    expect(isDcecSymbolJson({ kind: 'variable', name: 'a', sort: 'Agent' })).toBe(true);
+    expect(isDcecSymbolJson({ kind: 'function', name: 'bad', argumentSorts: ['Agent'] })).toBe(
+      false,
+    );
+  });
+
+  it('serializes DCEC symbol containers without Python runtime support', () => {
+    const namespace = new DcecNamespace();
+    namespace.registerFunction('actorOf', ['Action'], 'Agent');
+    namespace.registerPredicate('liable', ['Agent']);
+    namespace.registerVariable('a', 'Agent');
+
+    const serialized = serializeDcecSymbolContainer({
+      sorts: namespace.sorts.values(),
+      variables: namespace.variables.values(),
+      functions: namespace.functions.values(),
+      predicates: namespace.predicates.values(),
+    });
+
+    expect(serialized.sorts.find((sort) => sort.name === 'Agent')).toEqual({
+      kind: 'sort',
+      name: 'Agent',
+      parent: 'Entity',
+    });
+    expect(serialized.variables).toEqual([{ kind: 'variable', name: 'a', sort: 'Agent' }]);
+    expect(serialized.functions).toEqual([
+      { kind: 'function', name: 'actorOf', argumentSorts: ['Action'], returnSort: 'Agent' },
+    ]);
+    expect(serialized.predicates).toEqual([
+      { kind: 'predicate', name: 'liable', argumentSorts: ['Agent'] },
+    ]);
+    expect(serialized.functions.every(isDcecSymbolJson)).toBe(true);
   });
 
   it('initializes Python-compatible built-in sorts and statistics', () => {
