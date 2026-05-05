@@ -131,8 +131,21 @@ export interface ParsePosition {
   column: number;
 }
 
-export type BridgeCapability = 'bidirectional' | 'incremental' | 'rule_extraction' | 'optimization' | 'parallel';
+export type BridgeCapability =
+  | 'bidirectional'
+  | 'incremental'
+  | 'rule_extraction'
+  | 'optimization'
+  | 'parallel';
 export type BridgeConversionStatus = 'success' | 'partial' | 'failed' | 'unsupported';
+
+export const BRIDGE_TYPES_PORT_METADATA = {
+  sourcePythonModule: 'logic/types/bridge_types.py',
+  browserNative: true,
+  serverCallsAllowed: false,
+  pythonRuntimeAllowed: false,
+  runtimeDependencies: [],
+} as const;
 
 export const BRIDGE_CAPABILITIES = {
   BIDIRECTIONAL_CONVERSION: 'bidirectional',
@@ -175,6 +188,34 @@ export class BridgeMetadata {
   }
 }
 
+export function isBridgeCapability(value: unknown): value is BridgeCapability {
+  return (
+    typeof value === 'string' &&
+    Object.values(BRIDGE_CAPABILITIES).includes(value as BridgeCapability)
+  );
+}
+
+export function isBridgeConversionStatus(value: unknown): value is BridgeConversionStatus {
+  return (
+    typeof value === 'string' &&
+    Object.values(BRIDGE_CONVERSION_STATUSES).includes(value as BridgeConversionStatus)
+  );
+}
+
+export function bridgeMetadataFromDict(value: Record<string, unknown>): BridgeMetadata {
+  const capabilities = Array.isArray(value.capabilities)
+    ? value.capabilities.filter(isBridgeCapability)
+    : [];
+  return new BridgeMetadata(
+    stringField(value, 'name'),
+    stringField(value, 'version'),
+    stringField(value, 'target_system', stringField(value, 'targetSystem')),
+    capabilities,
+    booleanField(value, 'requires_external_prover', booleanField(value, 'requiresExternalProver')),
+    stringField(value, 'description'),
+  );
+}
+
 export class LogicBridgeConversionResult {
   constructor(
     readonly status: BridgeConversionStatus,
@@ -209,6 +250,25 @@ export class LogicBridgeConversionResult {
   }
 }
 
+export function bridgeConversionResultFromDict(
+  value: Record<string, unknown>,
+): LogicBridgeConversionResult {
+  const status = isBridgeConversionStatus(value.status) ? value.status : 'failed';
+  const warnings = Array.isArray(value.warnings)
+    ? value.warnings.filter((item) => typeof item === 'string')
+    : [];
+  return new LogicBridgeConversionResult(
+    status,
+    stringField(value, 'source_formula', stringField(value, 'sourceFormula')),
+    stringField(value, 'target_formula', stringField(value, 'targetFormula')),
+    stringField(value, 'source_format', stringField(value, 'sourceFormat')),
+    stringField(value, 'target_format', stringField(value, 'targetFormat')),
+    numberField(value, 'confidence', status === 'success' ? 1 : 0),
+    warnings,
+    recordField(value, 'metadata'),
+  );
+}
+
 export class BridgeConfig {
   constructor(
     readonly name: string,
@@ -237,6 +297,18 @@ export class BridgeConfig {
   }
 }
 
+export function bridgeConfigFromDict(value: Record<string, unknown>): BridgeConfig {
+  return new BridgeConfig(
+    stringField(value, 'name'),
+    stringField(value, 'target_system', stringField(value, 'targetSystem')),
+    numberField(value, 'timeout', 30),
+    numberField(value, 'max_retries', numberField(value, 'maxRetries', 3)),
+    booleanField(value, 'enable_caching', booleanField(value, 'enableCaching', true)),
+    numberField(value, 'cache_ttl', numberField(value, 'cacheTtl', 3600)),
+    recordField(value, 'custom_settings', recordField(value, 'customSettings')),
+  );
+}
+
 export class ProverRecommendation {
   constructor(
     readonly proverName: string,
@@ -259,8 +331,74 @@ export class ProverRecommendation {
   }
 }
 
-export type FolOutputFormatType = 'prolog' | 'tptp' | 'json' | 'defeasible' | 'smtlib' | 'natural_language';
-export type PredicateCategoryType = 'entity' | 'action' | 'relation' | 'property' | 'temporal' | 'modal' | 'unknown';
+export function proverRecommendationFromDict(value: Record<string, unknown>): ProverRecommendation {
+  const reasons = Array.isArray(value.reasons)
+    ? value.reasons.filter((item) => typeof item === 'string')
+    : [];
+  return new ProverRecommendation(
+    stringField(value, 'prover_name', stringField(value, 'proverName')),
+    numberField(value, 'confidence', 0),
+    reasons,
+    optionalNumberField(value, 'estimated_time', optionalNumberField(value, 'estimatedTime')),
+  );
+}
+
+export function validateBridgeTypesPort(value: unknown) {
+  const issues: Array<LogicValidationIssue> = [];
+  if (!isRecord(value)) {
+    issues.push({ severity: 'error', message: 'expected_object' });
+    return { valid: false, issues, metadata: BRIDGE_TYPES_PORT_METADATA };
+  }
+
+  if ('capabilities' in value) {
+    const capabilities = value.capabilities;
+    if (!Array.isArray(capabilities) || capabilities.some((item) => !isBridgeCapability(item))) {
+      issues.push({
+        severity: 'error',
+        field: 'capabilities',
+        message: 'expected_bridge_capability_array',
+      });
+    }
+  }
+  if ('status' in value && !isBridgeConversionStatus(value.status)) {
+    issues.push({
+      severity: 'error',
+      field: 'status',
+      message: 'expected_bridge_conversion_status',
+    });
+  }
+  if ('server_calls_allowed' in value && value.server_calls_allowed !== false) {
+    issues.push({
+      severity: 'error',
+      field: 'server_calls_allowed',
+      message: 'server_calls_not_allowed',
+    });
+  }
+  if ('python_runtime_allowed' in value && value.python_runtime_allowed !== false) {
+    issues.push({
+      severity: 'error',
+      field: 'python_runtime_allowed',
+      message: 'python_runtime_not_allowed',
+    });
+  }
+  return { valid: issues.length === 0, issues, metadata: BRIDGE_TYPES_PORT_METADATA };
+}
+
+export type FolOutputFormatType =
+  | 'prolog'
+  | 'tptp'
+  | 'json'
+  | 'defeasible'
+  | 'smtlib'
+  | 'natural_language';
+export type PredicateCategoryType =
+  | 'entity'
+  | 'action'
+  | 'relation'
+  | 'property'
+  | 'temporal'
+  | 'modal'
+  | 'unknown';
 
 export class PredicateType {
   constructor(
@@ -387,4 +525,41 @@ export class AbstractLogicFormulaType {
       source_formula_id: this.sourceFormulaId,
     };
   }
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+function recordField(
+  value: Record<string, unknown>,
+  key: string,
+  defaultValue: Record<string, unknown> = {},
+): Record<string, unknown> {
+  const field = value[key];
+  return isRecord(field) ? { ...field } : defaultValue;
+}
+
+function stringField(value: Record<string, unknown>, key: string, defaultValue = ''): string {
+  const field = value[key];
+  return typeof field === 'string' ? field : defaultValue;
+}
+
+function numberField(value: Record<string, unknown>, key: string, defaultValue = 0): number {
+  const field = value[key];
+  return typeof field === 'number' && Number.isFinite(field) ? field : defaultValue;
+}
+
+function optionalNumberField(
+  value: Record<string, unknown>,
+  key: string,
+  defaultValue?: number,
+): number | undefined {
+  const field = value[key];
+  return typeof field === 'number' && Number.isFinite(field) ? field : defaultValue;
+}
+
+function booleanField(value: Record<string, unknown>, key: string, defaultValue = false): boolean {
+  const field = value[key];
+  return typeof field === 'boolean' ? field : defaultValue;
 }
