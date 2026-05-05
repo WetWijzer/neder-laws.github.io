@@ -986,10 +986,44 @@ These tasks were added automatically after the daemon found no eligible unchecke
 - [x] Compare TypeScript logic public exports against Python logic module public APIs and add missing browser-native compatibility adapters or parity tests.
 - [x] Port remaining Python logic module `logic/zkp/form_circuit.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.
 
+## Manual Unblock Queue
+
+Last unblocked: 2026-05-05 05:00 UTC
+
+The daemon completed all currently eligible TypeScript port-plan checkboxes, then stopped with only blocked items remaining. These recovery slices intentionally create fresh task labels for capabilities that were blocked under older router, patch, or validation conditions. Each item must land a small browser-native TypeScript/WASM-compatible implementation slice with focused tests, no Python runtime dependency, and no external server-side calls. When a slice proves parity for an older blocked item, update the older item as complete or replace it with the next concrete gap.
+
+- [ ] Manual unblock: implement a browser-native TDFOL ZKP acceleration scheduler slice with worker-safe proof-search queues, deterministic simulated prover fallback, and tests covering parallel-search metadata without requiring server crypto.
+- [ ] Manual unblock: complete a modal tableaux countermodel export slice that turns proof search branches into serializable visualization data and validates it against existing TDFOL/CEC examples.
+- [ ] Manual unblock: add a TDFOL security validator parity slice covering fail-closed formula, proof-cache, witness, and ZKP input checks in browser-safe TypeScript.
+- [ ] Manual unblock: port the next deterministic `ml_confidence.py` parity slice with fixture-backed scoring, calibration metadata, and local browser execution only.
+- [ ] Manual unblock: add local model artifact manifest, cache lifecycle, version checks, and unload controls for browser-native ML/NLP parity without server calls.
+- [ ] Manual unblock: remove the next `nlpUnavailable` or `mlUnavailable` capability path by replacing it with local TypeScript/WASM, Transformers.js, ONNX/WebGPU, or deterministic fixture parity.
+- [ ] Manual unblock: complete an EVM public-input and verification-key registry helper slice using browser-compatible crypto abstractions and deterministic tests.
+- [ ] Manual unblock: add developer-panel live inspection snapshots for logic parse, proof, cache, ML/NLP, and ZKP capability state.
+- [ ] Manual unblock: add CLI/devtools command adapter parity for `logic/cli.py` as browser/devtools-safe TypeScript entry points.
+- [ ] Manual unblock: port IPFS/IPLD proof cache semantics to browser-native storage and content-addressed cache adapters with deterministic tests.
+- [ ] Manual unblock: port `logic/CEC/native/advanced_inference.py` by adding a TypeScript advanced-inference registry, rule classification helpers, and parity tests for cognitive, modal, and deontic rule selection.
+- [ ] Manual unblock: port `logic/CEC/native/cec_proof_cache.py` by adding CEC proof cache keys, TTL/LRU behavior, validation metadata, and deterministic browser storage tests.
+- [ ] Manual unblock: port `logic/CEC/native/cec_zkp_integration.py` by adding an educational local ZKP integration facade with simulated backend parity and fail-closed unsupported-backend results.
+- [ ] Manual unblock: port `logic/CEC/native/context_manager.py` by adding discourse/context snapshots, entity bindings, temporal scopes, and deterministic merge/rollback tests.
+- [ ] Manual unblock: port `logic/CEC/native/dcec_cleaning.py` by adding DCEC text/formula normalization, token cleanup, and fixture tests for malformed legal-text inputs.
+- [ ] Manual unblock: port `logic/CEC/native/dcec_integration.py` by adding DCEC token/formula conversion helpers, CEC bridge metadata, and round-trip validation tests.
+- [ ] Manual unblock: port `logic/CEC/native/dcec_namespace.py` by adding namespace registration, symbol statistics, validation diagnostics, and collision tests.
+- [ ] Manual unblock: port `logic/CEC/native/dcec_parsing.py` by adding parser utility parity for DCEC atom, connective, quantifier, and modal/deontic forms.
+- [ ] Manual unblock: port `logic/CEC/native/dcec_prototypes.py` by adding prototype/type-conflict checks and deterministic validation fixtures.
+- [ ] Manual unblock: port `logic/CEC/native/dcec_types.py` by adding DCEC container helpers, type guards, serialization, and compatibility tests.
+- [ ] Manual unblock: port `logic/CEC/native/enhanced_grammar_parser.py` by adding chart-parser style diagnostics, parse alternatives, and grammar fixture tests.
+- [ ] Manual unblock: port `logic/CEC/native/error_handling.py` by adding fail-closed CEC error facades, recovery metadata, and validation result adapters.
+- [ ] Manual unblock: port `logic/CEC/native/event_calculus.py` by adding event, fluent, happens, holds, initiates, terminates, and timeline query helpers with parity tests.
+- [ ] Manual unblock: port `logic/CEC/native/grammar_engine.py` and `grammar_loader.py` by adding deterministic in-memory grammar artifacts, loader validation, and no-network browser tests.
+- [ ] Manual unblock: port `logic/CEC/native/inference_rules/base.py`, `cognitive.py`, and `modal.py` by adding rule tables, applicability checks, proof-step metadata, and focused parity tests.
+- [ ] Manual unblock: port `logic/CEC/native/prover_core.py` by adding a bounded browser-native proof facade, deterministic search limits, proof summaries, and failure diagnostics.
+- [ ] Manual unblock: port `logic/external_provers/interactive/coq_prover_bridge.py` by adding a local adapter contract that reports WASM-capable support when available and fail-closed unsupported-local results otherwise.
+
 <!-- logic-port-daemon-task-board:start -->
 ## Daemon Task Board
 
-Last updated: 2026-05-05 04:55:10 UTC
+Last updated: 2026-05-05 04:55:25 UTC
 
 Selection policy: choose the first needed or in-progress port-plan checkbox; if none remain, revisit blocked checkboxes with `fewest-failures` strategy because blocked-task revisit mode is enabled.
 
