@@ -1002,7 +1002,7 @@ The daemon completed all currently eligible TypeScript port-plan checkboxes, the
 - [x] Manual unblock: complete an EVM public-input and verification-key registry helper slice using browser-compatible crypto abstractions and deterministic tests.
 - [x] Manual unblock: add developer-panel live inspection snapshots for logic parse, proof, cache, ML/NLP, and ZKP capability state.
 - [x] Manual unblock: add CLI/devtools command adapter parity for `logic/cli.py` as browser/devtools-safe TypeScript entry points.
-- [ ] Manual unblock: port IPFS/IPLD proof cache semantics to browser-native storage and content-addressed cache adapters with deterministic tests.
+- [x] Manual unblock: port IPFS/IPLD proof cache semantics to browser-native storage and content-addressed cache adapters with deterministic tests.
 - [ ] Manual unblock: port `logic/CEC/native/advanced_inference.py` by adding a TypeScript advanced-inference registry, rule classification helpers, and parity tests for cognitive, modal, and deontic rule selection.
 - [ ] Manual unblock: port `logic/CEC/native/cec_proof_cache.py` by adding CEC proof cache keys, TTL/LRU behavior, validation metadata, and deterministic browser storage tests.
 - [ ] Manual unblock: port `logic/CEC/native/cec_zkp_integration.py` by adding an educational local ZKP integration facade with simulated backend parity and fail-closed unsupported-backend results.
@@ -1024,11 +1024,11 @@ The daemon completed all currently eligible TypeScript port-plan checkboxes, the
 <!-- logic-port-daemon-task-board:start -->
 ## Daemon Task Board
 
-Last updated: 2026-05-05 06:05:07 UTC
+Last updated: 2026-05-05 06:08:36 UTC
 
 Selection policy: choose the first needed or in-progress port-plan checkbox; if none remain, revisit blocked checkboxes with `fewest-failures` strategy because blocked-task revisit mode is enabled.
 
-Current target: `Task checkbox-463: Manual unblock: port IPFS/IPLD proof cache semantics to browser-native storage and content-addressed cache adapters with deterministic tests.`
+Current target: `Task checkbox-464: Manual unblock: port 'logic/CEC/native/advanced_inference.py' by adding a TypeScript advanced-inference registry, rule classification helpers, and parity tests for cognitive, modal, and deontic rule selection.`
 
 Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failing.
 
@@ -1495,8 +1495,8 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - [x] `Task checkbox-459: Manual unblock: remove the next 'nlpUnavailable' or 'mlUnavailable' capability path by replacing it with local TypeScript/WASM, Transformers.js, ONNX/WebGPU, or deterministic fixture parity.` - complete
 - [x] `Task checkbox-460: Manual unblock: complete an EVM public-input and verification-key registry helper slice using browser-compatible crypto abstractions and deterministic tests.` - complete
 - [x] `Task checkbox-461: Manual unblock: add developer-panel live inspection snapshots for logic parse, proof, cache, ML/NLP, and ZKP capability state.` - complete
-- [x] `Task checkbox-462: Manual unblock: add CLI/devtools command adapter parity for 'logic/cli.py' as browser/devtools-safe TypeScript entry points.` - validated by latest daemon round
-- [ ] `Task checkbox-463: Manual unblock: port IPFS/IPLD proof cache semantics to browser-native storage and content-addressed cache adapters with deterministic tests.` - needed
+- [x] `Task checkbox-462: Manual unblock: add CLI/devtools command adapter parity for 'logic/cli.py' as browser/devtools-safe TypeScript entry points.` - complete
+- [x] `Task checkbox-463: Manual unblock: port IPFS/IPLD proof cache semantics to browser-native storage and content-addressed cache adapters with deterministic tests.` - validated by latest daemon round
 - [ ] `Task checkbox-464: Manual unblock: port 'logic/CEC/native/advanced_inference.py' by adding a TypeScript advanced-inference registry, rule classification helpers, and parity tests for cognitive, modal, and deontic rule selection.` - needed
 - [ ] `Task checkbox-465: Manual unblock: port 'logic/CEC/native/cec_proof_cache.py' by adding CEC proof cache keys, TTL/LRU behavior, validation metadata, and deterministic browser storage tests.` - needed
 - [ ] `Task checkbox-466: Manual unblock: port 'logic/CEC/native/cec_zkp_integration.py' by adding an educational local ZKP integration facade with simulated backend parity and fail-closed unsupported-backend results.` - needed
@@ -1517,11 +1517,11 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 
 ### Latest Round
 
-- Target: `Task checkbox-462: Manual unblock: add CLI/devtools command adapter parity for 'logic/cli.py' as browser/devtools-safe TypeScript entry points.`
+- Target: `Task checkbox-463: Manual unblock: port IPFS/IPLD proof cache semantics to browser-native storage and content-addressed cache adapters with deterministic tests.`
 - Result: `valid`
-- Summary: Added browser-safe CLI/devtools command adapter parity for logic CLI commands.
-- Impact: src/lib/logic/cli.ts now exposes structured devtools-safe command entry points, snake-case aliases, and a validate command backed by browser-native runtime validation. src/lib/logic/cli.test.ts exercises object-based devtools invocation, conversion, validation, and no Python/server fallback guarantees. The TypeScript port ledger marks the selected manual unblock task complete.
-- Accepted changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/cli.test.ts`, `src/lib/logic/cli.ts`
+- Summary: Added browser-native content-addressed proof storage for IPFS proof cache entries.
+- Impact: The TypeScript logic proof cache can now persist IPFS/IPLD proof blocks through injected browser-native storage adapters, verify stored content addresses on reads, fail closed for tampered blocks, and exercise the behavior through deterministic Jest coverage.
+- Accepted changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/proofCache.test.ts`, `src/lib/logic/proofCache.ts`
 
 ### Blocked Backlog
 

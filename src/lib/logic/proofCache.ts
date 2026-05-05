@@ -101,15 +101,23 @@ export interface BrowserNativeIpfsProofTransport<Result = unknown> {
   getProof(cid: string): Promise<IpfsProofCacheEntry<Result> | undefined>;
 }
 
+export interface BrowserNativeContentAddressedProofStorage<Result = unknown> {
+  readonly mode: 'browser-native-content-addressed-storage';
+  putProof(entry: IpfsProofCacheEntry<Result>): Promise<string>;
+  getProof(cid: string): Promise<IpfsProofCacheEntry<Result> | undefined>;
+  deleteProof?(cid: string): Promise<boolean>;
+}
+
 export interface IpfsProofCacheResult<Result = unknown> {
   ok: boolean;
   cid: string;
-  source: 'browser-cache' | 'browser-native-ipfs' | 'unavailable-ipfs-adapter';
+  source: 'browser-cache' | 'browser-storage' | 'browser-native-ipfs' | 'unavailable-ipfs-adapter';
   entry?: IpfsProofCacheEntry<Result>;
   error?: string;
 }
 
 export interface IpfsProofCacheOptions<Result = unknown> extends ProofCacheOptions {
+  storage?: BrowserNativeContentAddressedProofStorage<Result>;
   transport?: BrowserNativeIpfsProofTransport<Result>;
 }
 
@@ -176,6 +184,7 @@ export const IPFS_PROOF_CACHE_METADATA = {
     'order_insensitive_axiom_keys',
     'prover_config_sensitive_lookup',
     'browser_cache_first_reads',
+    'browser_native_content_addressed_storage',
     'injected_browser_ipfs_transport',
     'fail_closed_unavailable_adapter',
     'cid_verification_on_remote_reads',
@@ -419,10 +428,12 @@ export class ExternalProverProofCache {
 export class IpfsProofCache<Result = unknown> {
   private readonly cache: ProofCache<IpfsProofCacheEntry<Result>>;
   private readonly now: () => number;
+  private readonly storage?: BrowserNativeContentAddressedProofStorage<Result>;
   private readonly transport?: BrowserNativeIpfsProofTransport<Result>;
 
   constructor(options: IpfsProofCacheOptions<Result> = {}) {
     this.now = options.now ?? (() => Date.now());
+    this.storage = options.storage;
     this.transport = options.transport;
     this.cache = new ProofCache<IpfsProofCacheEntry<Result>>({ ...options, now: this.now });
   }
@@ -444,8 +455,24 @@ export class IpfsProofCache<Result = unknown> {
       sourcePythonModule: IPFS_PROOF_CACHE_METADATA.sourcePythonModule,
     };
     this.cache.set(cid, entry);
+    if (this.storage) {
+      try {
+        const storedCid = await this.storage.putProof(entry);
+        if (storedCid !== cid) {
+          return {
+            ok: false,
+            cid,
+            source: 'browser-storage',
+            entry,
+            error: `Browser content-addressed proof storage returned ${storedCid}`,
+          };
+        }
+      } catch (error) {
+        return { ok: false, cid, source: 'browser-storage', entry, error: String(error) };
+      }
+    }
     if (!this.transport) {
-      return { ok: true, cid, source: 'browser-cache', entry };
+      return { ok: true, cid, source: this.storage ? 'browser-storage' : 'browser-cache', entry };
     }
     try {
       const remoteCid = await this.transport.addProof(entry);
@@ -468,6 +495,21 @@ export class IpfsProofCache<Result = unknown> {
     const cached = this.cache.get(cid);
     if (cached) {
       return { ok: true, cid, source: 'browser-cache', entry: cached };
+    }
+    if (this.storage) {
+      const stored = await this.storage.getProof(cid);
+      if (stored) {
+        if (!verifyIpfsProofEntry(stored, cid)) {
+          return {
+            ok: false,
+            cid,
+            source: 'browser-storage',
+            error: 'Stored proof CID verification failed.',
+          };
+        }
+        this.cache.set(cid, stored);
+        return { ok: true, cid, source: 'browser-storage', entry: stored };
+      }
     }
     if (!this.transport) {
       return {
@@ -497,8 +539,44 @@ export class IpfsProofCache<Result = unknown> {
     return this.cache.snapshot();
   }
 
-  getStats(): ProofCacheStats & { transportAvailable: boolean } {
-    return { ...this.cache.getStats(), transportAvailable: this.transport !== undefined };
+  getStats(): ProofCacheStats & { storageAvailable: boolean; transportAvailable: boolean } {
+    return {
+      ...this.cache.getStats(),
+      storageAvailable: this.storage !== undefined,
+      transportAvailable: this.transport !== undefined,
+    };
+  }
+}
+
+export class BrowserNativeContentAddressedProofStore<Result = unknown>
+  implements BrowserNativeContentAddressedProofStorage<Result>
+{
+  readonly mode = 'browser-native-content-addressed-storage' as const;
+  private readonly entries = new Map<string, IpfsProofCacheEntry<Result>>();
+
+  async putProof(entry: IpfsProofCacheEntry<Result>): Promise<string> {
+    if (!verifyIpfsProofEntry(entry, entry.cid)) {
+      throw new Error('Browser content-addressed proof storage rejected an invalid proof block.');
+    }
+    this.entries.set(entry.cid, cloneIpfsProofEntry(entry));
+    return entry.cid;
+  }
+
+  async getProof(cid: string): Promise<IpfsProofCacheEntry<Result> | undefined> {
+    const entry = this.entries.get(cid);
+    return entry ? cloneIpfsProofEntry(entry) : undefined;
+  }
+
+  async deleteProof(cid: string): Promise<boolean> {
+    return this.entries.delete(cid);
+  }
+
+  clear(): void {
+    this.entries.clear();
+  }
+
+  get size(): number {
+    return this.entries.size;
   }
 }
 
@@ -675,6 +753,20 @@ function verifyIpfsProofEntry(entry: IpfsProofCacheEntry<unknown>, expectedCid: 
     entry.canonicalJson === stableStringify({ query: entry.query, result: entry.result }) &&
     cidForObject({ query: entry.query, result: entry.result }) === expectedCid
   );
+}
+
+function cloneIpfsProofEntry<Result>(
+  entry: IpfsProofCacheEntry<Result>,
+): IpfsProofCacheEntry<Result> {
+  return {
+    ...entry,
+    query: {
+      formula: entry.query.formula,
+      axioms: [...entry.query.axioms],
+      proverName: entry.query.proverName,
+      proverConfig: { ...entry.query.proverConfig },
+    },
+  };
 }
 
 function normalizeIntegrationProofQuery(

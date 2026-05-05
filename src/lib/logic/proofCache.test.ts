@@ -4,9 +4,11 @@ import {
   INTEGRATION_CACHING_PROOF_CACHE_METADATA,
   INTEGRATION_PROOF_CACHE_METADATA,
   IPFS_PROOF_CACHE_METADATA,
+  BrowserNativeContentAddressedProofStore,
   IntegrationCachingProofCache,
   IntegrationProofCache,
   IpfsProofCache,
+  type BrowserNativeContentAddressedProofStorage,
   type BrowserNativeIpfsProofTransport,
   type IpfsProofCacheEntry,
   ExternalProverProofCache,
@@ -191,6 +193,7 @@ describe('ProofCache', () => {
     expect(IPFS_PROOF_CACHE_METADATA.parity).toEqual(
       expect.arrayContaining([
         'deterministic_content_addressed_entries',
+        'browser_native_content_addressed_storage',
         'injected_browser_ipfs_transport',
         'fail_closed_unavailable_adapter',
         'cid_verification_on_remote_reads',
@@ -330,7 +333,64 @@ describe('ProofCache', () => {
       source: 'browser-cache',
       entry: { result: { status: 'proved' } },
     });
-    expect(cache.getStats()).toMatchObject({ hits: 1, sets: 1, transportAvailable: false });
+    expect(cache.getStats()).toMatchObject({
+      hits: 1,
+      sets: 1,
+      storageAvailable: false,
+      transportAvailable: false,
+    });
+  });
+
+  it('persists IPFS proof blocks through browser-native content-addressed storage', async () => {
+    const storage = new BrowserNativeContentAddressedProofStore<{ status: string }>();
+    const writer = new IpfsProofCache<{ status: string }>({ now: () => 50, storage });
+    const query = { formula: 'R', axioms: ['Z', 'A'], proverName: 'ipld-prover' };
+
+    const stored = await writer.set(query, { status: 'proved' });
+    const reader = new IpfsProofCache<{ status: string }>({ storage });
+
+    expect(stored).toMatchObject({ ok: true, source: 'browser-storage' });
+    expect(storage.size).toBe(1);
+    await expect(reader.get(stored.cid)).resolves.toMatchObject({
+      ok: true,
+      source: 'browser-storage',
+      entry: {
+        query: { formula: 'R', axioms: ['A', 'Z'], proverName: 'ipld-prover' },
+        result: { status: 'proved' },
+        storedAt: 50,
+      },
+    });
+    await expect(storage.deleteProof(stored.cid)).resolves.toBe(true);
+    await expect(
+      new IpfsProofCache<{ status: string }>({ storage }).get(stored.cid),
+    ).resolves.toMatchObject({
+      ok: false,
+      source: 'unavailable-ipfs-adapter',
+    });
+  });
+
+  it('fails closed when browser storage returns a tampered content-addressed block', async () => {
+    const valid = new BrowserNativeContentAddressedProofStore<{ status: string }>();
+    const writer = new IpfsProofCache<{ status: string }>({ storage: valid });
+    const stored = await writer.set({ formula: 'S', proverName: 'tdfol' }, { status: 'proved' });
+    const clean = await valid.getProof(stored.cid);
+    const storage: BrowserNativeContentAddressedProofStorage<{ status: string }> = {
+      mode: 'browser-native-content-addressed-storage',
+      async putProof(entry) {
+        return entry.cid;
+      },
+      async getProof() {
+        return clean ? { ...clean, canonicalJson: '{"tampered":true}' } : undefined;
+      },
+    };
+
+    await expect(
+      new IpfsProofCache<{ status: string }>({ storage }).get(stored.cid),
+    ).resolves.toMatchObject({
+      ok: false,
+      source: 'browser-storage',
+      error: 'Stored proof CID verification failed.',
+    });
   });
 
   it('fails closed without an adapter and verifies injected IPFS transport CIDs', async () => {
