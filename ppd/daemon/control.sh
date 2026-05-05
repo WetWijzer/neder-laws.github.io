@@ -120,6 +120,13 @@ wait_for_systemd_main_pid() {
   return 1
 }
 
+daemon_clean_idle_exit() {
+  [[ -f "$STATUS_FILE" ]] || return 1
+  [[ -f "$LIFECYCLE_LOG" ]] || return 1
+  grep -Eq '"active_state"[[:space:]]*:[[:space:]]*"no_eligible_tasks"' "$STATUS_FILE" || return 1
+  tail -n 5 "$LIFECYCLE_LOG" | grep -q '"event":"watchdog_clean_exit"'
+}
+
 stop_systemd_unit() {
   local unit="$1"
   if systemd_available; then
@@ -363,12 +370,17 @@ start() {
   if systemd_available; then
     stop_systemd_unit "$DAEMON_UNIT"
     run_systemd_watchdog_unit "$DAEMON_UNIT" \
-      "exec bash '$WATCHDOG_SCRIPT' daemon '$PID_FILE' '$CHILD_PID_FILE' '$LIFECYCLE_LOG' 5 env PYTHONPATH=ipfs_datasets_py PPD_LLM_BACKEND=llm_router IPFS_DATASETS_PY_CODEX_SANDBOX=read-only python3 ppd/daemon/ppd_daemon.py --apply --watch --iterations 0 --interval 0 --llm-timeout 300 --llm-max-new-tokens 1536 --max-prompt-chars 20000 --max-compact-prompt-chars 3600 --crash-backoff 5 --repair-validation-failures >> '$OUT_FILE' 2>&1"
+      "exec bash '$WATCHDOG_SCRIPT' daemon '$PID_FILE' '$CHILD_PID_FILE' '$LIFECYCLE_LOG' 5 env PYTHONPATH=ipfs_datasets_py PPD_LLM_BACKEND=llm_router IPFS_DATASETS_PY_CODEX_SANDBOX=read-only python3 ppd/daemon/ppd_daemon.py --apply --watch --iterations 0 --interval 0 --llm-timeout 300 --llm-max-new-tokens 1536 --max-prompt-chars 20000 --max-compact-prompt-chars 3600 --crash-backoff 5 --repair-validation-failures >> '$OUT_FILE' 2>&1" \
+      "on-failure"
   else
     setsid -f bash -c "cd '$ROOT' && exec bash '$WATCHDOG_SCRIPT' daemon '$PID_FILE' '$CHILD_PID_FILE' '$LIFECYCLE_LOG' 5 env PYTHONPATH=ipfs_datasets_py PPD_LLM_BACKEND=llm_router IPFS_DATASETS_PY_CODEX_SANDBOX=read-only python3 ppd/daemon/ppd_daemon.py --apply --watch --iterations 0 --interval 0 --llm-timeout 300 --llm-max-new-tokens 1536 --max-prompt-chars 20000 --max-compact-prompt-chars 3600 --crash-backoff 5 --repair-validation-failures >> '$OUT_FILE' 2>&1"
   fi
   local pid
   if ! pid="$(wait_for_pid_file_process "$PID_FILE" 10)"; then
+    if daemon_clean_idle_exit; then
+      echo "PP&D daemon completed cleanly: no eligible tasks"
+      return 0
+    fi
     echo "PP&D daemon did not start; see $OUT_FILE" >&2
     if systemd_available; then
       systemctl --user --no-pager --plain status "$DAEMON_UNIT" | sed -n '1,8p' >&2 || true

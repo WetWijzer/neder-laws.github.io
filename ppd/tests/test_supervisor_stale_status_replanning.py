@@ -504,6 +504,49 @@ class SupervisorStaleStatusReplanningTest(unittest.TestCase):
         self.assertEqual("observe_circuit_breaker", decision.action)
         self.assertFalse(decision.should_restart_daemon)
 
+    def test_active_circuit_breaker_restarts_when_deterministic_no_llm_work_is_open(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            daemon_dir = repo / "ppd" / "daemon"
+            daemon_dir.mkdir(parents=True)
+            now = datetime(2026, 5, 4, 12, 0, tzinfo=timezone.utc)
+            (daemon_dir / "task-board.md").write_text(
+                "- [ ] Task checkbox-455: Add processor-suite integration planning for tranche 4 proving PP&D "
+                "public documents flow through archive manifests, normalized document records, PDF metadata, and "
+                "requirement batches before agents use them.\n",
+                encoding="utf-8",
+            )
+            atomic_write_json(
+                daemon_dir / "status.json",
+                {
+                    "updated_at": now.isoformat().replace("+00:00", "Z"),
+                    "active_state": "paused_by_supervisor_circuit_breaker",
+                    "state": "paused_by_supervisor_circuit_breaker",
+                },
+            )
+            atomic_write_json(
+                daemon_dir / "supervisor-circuit-breaker.json",
+                {
+                    "schemaVersion": 1,
+                    "createdAt": now.isoformat().replace("+00:00", "Z"),
+                    "repairKind": "termination_storm_circuit_breaker",
+                },
+            )
+
+            decision = diagnose(
+                SupervisorConfig(
+                    repo_root=repo,
+                    pid_file=Path("ppd/daemon/missing.pid"),
+                    termination_storm_backoff_seconds=900,
+                ),
+                now=now,
+            )
+
+        self.assertEqual("restart_daemon", decision.action)
+        self.assertTrue(decision.should_restart_daemon)
+        self.assertIn("deterministic fixture-only PP&D fallback work", decision.reason)
+        self.assertIn("no-LLM progress path", decision.reason)
+
     def test_expired_circuit_breaker_recovers_with_vetted_non_generated_tasks(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:
             repo = Path(tempdir)

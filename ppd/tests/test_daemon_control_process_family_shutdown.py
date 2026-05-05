@@ -86,6 +86,8 @@ class DaemonControlProcessFamilyShutdownTest(unittest.TestCase):
         self.assertIn('wait_for_pid_file_process "$SUPERVISOR_PID_FILE" 10', source)
         self.assertIn('terminate_process_family "$pid" "PP&D daemon"', source)
         self.assertIn('terminate_process_family "$pid" "PP&D supervisor"', source)
+        self.assertIn('"on-failure"', source)
+        self.assertIn("daemon_clean_idle_exit", source)
 
         watchdog = WATCHDOG_SCRIPT.read_text(encoding="utf-8")
         self.assertIn("setsid \"$@\" &", watchdog)
@@ -94,6 +96,7 @@ class DaemonControlProcessFamilyShutdownTest(unittest.TestCase):
         self.assertIn("terminate_process_family", watchdog)
         self.assertIn("payload+=", watchdog)
         self.assertIn("printf '%s\\n' \"$payload\"", watchdog)
+        self.assertIn("watchdog_clean_exit", watchdog)
 
     def test_watchdog_records_child_exit_and_cleans_pid_files_in_oneshot_mode(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:
@@ -135,6 +138,43 @@ class DaemonControlProcessFamilyShutdownTest(unittest.TestCase):
         self.assertEqual("child_exit", rows[2]["event"])
         self.assertEqual(7, rows[2]["exit_code"])
         self.assertEqual("test-role", rows[2]["role"])
+
+    def test_watchdog_stops_after_clean_child_exit_without_oneshot(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            temp = Path(tempdir)
+            pid_file = temp / "watchdog.pid"
+            child_pid_file = temp / "child.pid"
+            lifecycle_log = temp / "lifecycle.jsonl"
+
+            result = subprocess.run(
+                [
+                    "bash",
+                    str(WATCHDOG_SCRIPT),
+                    "test-role",
+                    str(pid_file),
+                    str(child_pid_file),
+                    str(lifecycle_log),
+                    "0",
+                    "bash",
+                    "-lc",
+                    "exit 0",
+                ],
+                cwd=REPO_ROOT,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+                timeout=10,
+            )
+            rows = [json.loads(line) for line in lifecycle_log.read_text(encoding="utf-8").splitlines()]
+
+        self.assertEqual(0, result.returncode)
+        self.assertFalse(pid_file.exists())
+        self.assertFalse(child_pid_file.exists())
+        self.assertEqual(1, sum(1 for row in rows if row["event"] == "child_start"))
+        self.assertEqual("child_exit", rows[-2]["event"])
+        self.assertEqual(0, rows[-2]["exit_code"])
+        self.assertEqual("watchdog_clean_exit", rows[-1]["event"])
 
     def test_watchdog_cleans_stale_child_pid_before_launching_new_child(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:

@@ -180,6 +180,12 @@ while true; do
     exit "$rc"
   fi
 
+  if [[ "$rc" -eq 0 ]]; then
+    append_event "watchdog_clean_exit" "" "" "$$" "$rc" "" "child exited cleanly; watchdog will not restart"
+    rm -f "$PID_FILE" "$CHILD_PID_FILE" "$STOP_FILE"
+    exit 0
+  fi
+
   sleep "$RESTART_DELAY" &
   sleep_pid="$!"
   wait "$sleep_pid" || true

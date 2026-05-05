@@ -13,7 +13,9 @@ from ppd.daemon.ppd_daemon import (
     Config,
     Daemon,
     Proposal,
+    build_deterministic_task_fallback_proposal,
     failure_block_threshold,
+    has_deterministic_task_fallback,
     parse_tasks,
     select_task_for_config,
     should_block_task_before_llm,
@@ -288,6 +290,63 @@ class DaemonLlmResultDurabilityTest(unittest.TestCase):
 
         self.assertEqual("no_eligible_tasks", proposal.failure_kind)
 
+    def test_deterministic_platform_task_fallback_builds_progress_manifest_without_llm(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            (repo / "ppd" / "daemon").mkdir(parents=True)
+            config = Config(repo_root=repo)
+            task = parse_tasks(
+                "- [ ] Task checkbox-455: Add processor-suite integration planning for tranche 4 proving PP&D public "
+                "documents flow through archive manifests, normalized document records, PDF metadata, and requirement "
+                "batches before agents use them.\n"
+            )[0]
+
+            proposal = build_deterministic_task_fallback_proposal(config, task)
+            assert proposal is not None
+            payload = json.loads(proposal.files[0]["content"])
+            record = payload["records"][0]
+
+        self.assertTrue(has_deterministic_task_fallback(task))
+        self.assertTrue(proposal.trusted_validation_commands)
+        self.assertEqual(["ppd/daemon/deterministic-progress.json"], [item["path"] for item in proposal.files])
+        self.assertIn(["python3", "ppd/tests/validate_ppd.py"], proposal.validation_commands)
+        self.assertEqual(455, record["checkboxId"])
+        self.assertEqual("processor_suite_planning", record["fallbackKind"])
+        self.assertIn("official_upload", record["blockedActions"])
+        self.assertIn("fee_payment", record["blockedActions"])
+        self.assertIn("evidence:devhub-faq:2026-05-01", record["sourceEvidenceIds"])
+        self.assertFalse(record["runtimePolicy"]["liveCrawlAllowedByDefault"])
+        self.assertTrue(record["runtimePolicy"]["requiresHumanAttendanceBeforeBrowserUse"])
+
+    def test_daemon_completes_deterministic_task_without_calling_llm(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            daemon_dir = repo / "ppd" / "daemon"
+            daemon_dir.mkdir(parents=True)
+            target = (
+                "Task checkbox-455: Add processor-suite integration planning for tranche 4 proving PP&D public "
+                "documents flow through archive manifests, normalized document records, PDF metadata, and requirement "
+                "batches before agents use them."
+            )
+            (daemon_dir / "task-board.md").write_text(f"- [ ] {target}\n", encoding="utf-8")
+            daemon = Daemon(
+                Config(
+                    repo_root=repo,
+                    apply=True,
+                    validation_commands=(("true",),),
+                )
+            )
+
+            proposal = daemon.run_cycle()
+            board = (daemon_dir / "task-board.md").read_text(encoding="utf-8")
+            manifest = json.loads((daemon_dir / "deterministic-progress.json").read_text(encoding="utf-8"))
+
+        self.assertTrue(proposal.valid)
+        self.assertEqual(["ppd/daemon/deterministic-progress.json"], proposal.changed_files)
+        self.assertIn(f"- [x] {target}", board)
+        self.assertEqual(455, manifest["records"][0]["checkboxId"])
+        self.assertEqual("processor_suite_planning", manifest["records"][0]["fallbackKind"])
+
     def test_llm_timeout_cleanup_terminates_descendant_processes(self) -> None:
         process = subprocess.Popen(
             ["bash", "-lc", "setsid sleep 30 & echo $!; wait"],
@@ -378,6 +437,40 @@ class DaemonLlmResultDurabilityTest(unittest.TestCase):
         self.assertEqual(2, len(proposals))
         self.assertEqual("daemon_exception", proposals[0].failure_kind)
         self.assertTrue(proposals[1].valid)
+
+    def test_daemon_cli_exits_zero_when_watch_reaches_no_eligible_tasks(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            daemon_dir = repo / "ppd" / "daemon"
+            daemon_dir.mkdir(parents=True)
+            (daemon_dir / "task-board.md").write_text(
+                "- [!] Task checkbox-1: Parked task.\n",
+                encoding="utf-8",
+            )
+            project_root = Path(__file__).resolve().parents[2]
+
+            completed = subprocess.run(
+                [
+                    "python3",
+                    "ppd/daemon/ppd_daemon.py",
+                    "--repo-root",
+                    str(repo),
+                    "--apply",
+                    "--watch",
+                    "--iterations",
+                    "0",
+                ],
+                cwd=project_root,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+            status = json.loads((daemon_dir / "status.json").read_text(encoding="utf-8"))
+
+        self.assertEqual(0, completed.returncode)
+        self.assertIn("no_eligible_tasks", completed.stdout)
+        self.assertEqual("", status["active_target_task"])
 
 
 if __name__ == "__main__":

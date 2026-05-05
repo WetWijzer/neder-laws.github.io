@@ -1,6 +1,7 @@
 # PP&D runtime daemon state
 /daemon/status.json
 /daemon/progress.json
+/daemon/deterministic-progress.json
 /daemon/supervisor-status.json
 /daemon/supervisor-actions.jsonl
 /daemon/*.jsonl

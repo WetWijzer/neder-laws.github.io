@@ -34,6 +34,7 @@ from ppd.daemon.ppd_daemon import (  # noqa: E402
     atomic_write_json,
     compact_message,
     cleanup_stale_validation_worktrees,
+    has_open_deterministic_task_fallback,
     is_private_write_path,
     parse_proposal,
     parse_tasks,
@@ -1465,6 +1466,7 @@ def diagnose(config: SupervisorConfig, *, now: Optional[datetime] = None) -> Sup
     active_breaker, breaker_remaining = active_termination_storm_circuit_breaker(config, now=now)
     generated_blocked_total, generated_blocked_open = generated_blocked_cascade_task_counts(tasks)
     has_recovery_work = has_open_circuit_breaker_recovery_task(tasks)
+    has_deterministic_work = has_open_deterministic_task_fallback(tasks)
 
     if tasks and all(task.status == "complete" for task in tasks):
         return SupervisorDecision(
@@ -1540,6 +1542,34 @@ def diagnose(config: SupervisorConfig, *, now: Optional[datetime] = None) -> Sup
                 "until the worker exits, stalls, or records a fresh result"
             ),
             severity="info",
+        )
+
+    if has_deterministic_work and not running:
+        if active_breaker:
+            reason = (
+                "deterministic fixture-only PP&D fallback work is available while the termination-storm "
+                "circuit breaker is active; restart daemon on the no-LLM progress path"
+            )
+        elif termination_storm_count >= config.termination_storm_threshold:
+            reason = (
+                "deterministic fixture-only PP&D fallback work is available despite historical llm_router "
+                "termination diagnostics; restart daemon on the no-LLM progress path before opening another breaker"
+            )
+        elif generated_blocked_total >= MAX_GENERATED_BLOCKED_CASCADE_TASKS:
+            reason = (
+                "deterministic fixture-only PP&D fallback work is available despite exhausted generated-repair "
+                "budget; restart daemon on the no-LLM progress path instead of growing repair tasks"
+            )
+        else:
+            reason = (
+                "deterministic fixture-only PP&D fallback work is available; restart daemon so safe "
+                "processor, Playwright-draft, PDF-preview, and formal-logic planning can continue without LLM"
+            )
+        return SupervisorDecision(
+            action="restart_daemon",
+            reason=reason,
+            severity="warning",
+            should_restart_daemon=True,
         )
 
     if (
