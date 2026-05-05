@@ -133,6 +133,49 @@ describe('TdfolSecurityValidator', () => {
     });
   });
 
+  it('audits TDFOL proof results without non-browser fallbacks', () => {
+    const validator = new TdfolSecurityValidator({ maxProofTimeSeconds: 1 });
+
+    expect(
+      validator.auditProofResult({
+        status: 'proved',
+        theorem: 'Goal(x)',
+        steps: [
+          { id: 's1', rule: 'Axiom', premises: [], conclusion: 'Premise(x)' },
+          { id: 's2', rule: 'ModusPonens', premises: ['Premise(x)'], conclusion: 'Goal(x)' },
+        ],
+        method: 'tdfol-forward-chaining',
+        timeMs: 10,
+      }),
+    ).toMatchObject({
+      passed: true,
+      riskLevel: 'low',
+    });
+
+    expect(
+      validator.auditProofResult({
+        status: 'proved',
+        theorem: 'Goal(x)',
+        steps: [
+          { id: 's1', rule: '', premises: [], conclusion: 'Premise(x)' },
+          { id: 's1', rule: 'RpcDelegate', premises: [], conclusion: 'Other(x)' },
+        ],
+        method: 'python-rpc',
+        time_ms: 2000,
+      }),
+    ).toMatchObject({
+      passed: false,
+      riskLevel: 'critical',
+      vulnerabilities: expect.arrayContaining([
+        'Final proof step does not conclude theorem',
+        'Proof method references a non-browser runtime',
+        'Malformed proof step: s1',
+        'Duplicate proof step id: s1',
+      ]),
+      recommendations: expect.arrayContaining(['Proof exceeded configured proof-time budget']),
+    });
+  });
+
   it('fails closed across formula, proof-cache, witness, and ZKP public input checks', () => {
     const validator = new TdfolSecurityValidator({ now: () => 0 });
     const validHash = 'a'.repeat(64);

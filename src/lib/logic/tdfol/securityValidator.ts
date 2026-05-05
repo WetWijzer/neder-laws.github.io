@@ -1,4 +1,5 @@
 import { parseTdfolFormula } from './parser';
+import type { ProofResult } from '../types';
 
 export type TdfolSecurityLevel = 'low' | 'medium' | 'high' | 'paranoid';
 export type TdfolThreatType =
@@ -36,6 +37,14 @@ export interface TdfolSecurityValidationResult {
 }
 
 export interface TdfolZkpAuditResult {
+  passed: boolean;
+  vulnerabilities: string[];
+  recommendations: string[];
+  riskLevel: 'low' | 'medium' | 'high' | 'critical';
+  auditTime: number;
+}
+
+export interface TdfolProofAuditResult {
   passed: boolean;
   vulnerabilities: string[];
   recommendations: string[];
@@ -216,6 +225,43 @@ export class TdfolSecurityValidator {
     this.checkProofIntegrity(proof, result);
     this.analyzeSideChannels(proof, result);
     result.riskLevel = calculateRiskLevel(result);
+    result.auditTime = performance.now() - startedAt;
+    return result;
+  }
+
+  auditProofResult(proof: ProofResult): TdfolProofAuditResult {
+    const startedAt = performance.now();
+    const result: TdfolProofAuditResult = {
+      passed: true,
+      vulnerabilities: [],
+      recommendations: [],
+      riskLevel: 'low',
+      auditTime: 0,
+    };
+
+    if (!proof.theorem) {
+      result.passed = false;
+      result.vulnerabilities.push('Proof result missing theorem');
+    }
+    if (!Array.isArray(proof.steps)) {
+      result.passed = false;
+      result.vulnerabilities.push('Proof result steps must be an array');
+    } else {
+      this.auditProofSteps(proof, result);
+    }
+    if (
+      typeof proof.method === 'string' &&
+      /python|subprocess|rpc|server|http|fetch|websocket/i.test(proof.method)
+    ) {
+      result.passed = false;
+      result.vulnerabilities.push('Proof method references a non-browser runtime');
+    }
+    const elapsedMs = proof.timeMs ?? proof.time_ms ?? 0;
+    if (elapsedMs > this.config.maxProofTimeSeconds * 1000) {
+      result.recommendations.push('Proof exceeded configured proof-time budget');
+    }
+
+    result.riskLevel = calculateProofRiskLevel(result);
     result.auditTime = performance.now() - startedAt;
     return result;
   }
@@ -457,6 +503,32 @@ export class TdfolSecurityValidator {
     }
   }
 
+  private auditProofSteps(proof: ProofResult, result: TdfolProofAuditResult): void {
+    if (proof.status === 'proved' && proof.steps.length > 0) {
+      const finalConclusion = proof.steps[proof.steps.length - 1]?.conclusion;
+      if (finalConclusion !== proof.theorem) {
+        result.passed = false;
+        result.vulnerabilities.push('Final proof step does not conclude theorem');
+      }
+    }
+    const seenIds = new Set<string>();
+    for (const [index, step] of proof.steps.entries()) {
+      const stepLabel = step.id || `<missing id at ${index}>`;
+      if (!step.id || !step.rule || !step.conclusion || !Array.isArray(step.premises)) {
+        result.passed = false;
+        result.vulnerabilities.push(`Malformed proof step: ${stepLabel}`);
+      }
+      if (step.id && seenIds.has(step.id)) {
+        result.passed = false;
+        result.vulnerabilities.push(`Duplicate proof step id: ${step.id}`);
+      }
+      if (step.id) seenIds.add(step.id);
+      if (Array.isArray(step.premises) && step.premises.length > 100) {
+        result.recommendations.push(`Proof step ${stepLabel} has many premises`);
+      }
+    }
+  }
+
   private logSecurityEvent(threatType: TdfolThreatType, details: string, context: string): void {
     this.securityEvents.push({
       timestamp: new Date(this.config.now()).toISOString(),
@@ -647,6 +719,15 @@ function isPlainRecord(value: unknown): value is Record<string, unknown> {
 }
 
 function calculateRiskLevel(result: TdfolZkpAuditResult): TdfolZkpAuditResult['riskLevel'] {
+  if (!result.passed) return 'critical';
+  if (result.vulnerabilities.length > 0) return 'high';
+  if (result.recommendations.length > 3) return 'medium';
+  return 'low';
+}
+
+function calculateProofRiskLevel(
+  result: TdfolProofAuditResult,
+): TdfolProofAuditResult['riskLevel'] {
   if (!result.passed) return 'critical';
   if (result.vulnerabilities.length > 0) return 'high';
   if (result.recommendations.length > 3) return 'medium';
