@@ -9,11 +9,7 @@ import { CecProver, type CecKnowledgeBase, type CecProverOptions } from './prove
 export const HAVE_CEC_ZKP = true;
 export const HAVE_CEC_CACHE = true;
 
-export type CecProvingMethod =
-  | 'cec_standard'
-  | 'cec_zkp'
-  | 'cec_hybrid'
-  | 'cec_cached';
+export type CecProvingMethod = 'cec_standard' | 'cec_zkp' | 'cec_hybrid' | 'cec_cached';
 
 export interface CecZkpProof {
   backend: 'simulated' | 'groth16';
@@ -27,6 +23,12 @@ export interface CecZkpProof {
   securityNote: string;
 }
 
+export interface UnsupportedCecZkpBackend {
+  backend: string;
+  supportedBackends: string[];
+  reason: string;
+}
+
 export interface UnifiedCecProofResult {
   isProved: boolean;
   formula: CecExpression;
@@ -38,6 +40,7 @@ export interface UnifiedCecProofResult {
   inferenceRules?: string[];
   errorMessage?: string;
   zkpProof?: CecZkpProof;
+  unsupportedBackend?: UnsupportedCecZkpBackend;
   isPrivate: boolean;
   zkpBackend?: string;
   fromCache: boolean;
@@ -88,13 +91,16 @@ export class UnifiedCecProof implements UnifiedCecProofResult {
   readonly inferenceRules?: string[];
   readonly errorMessage?: string;
   readonly zkpProof?: CecZkpProof;
+  readonly unsupportedBackend?: UnsupportedCecZkpBackend;
   readonly isPrivate: boolean;
   readonly zkpBackend?: string;
   readonly fromCache: boolean;
   readonly cacheHitTime?: number;
   readonly timestamp: number;
 
-  constructor(options: Omit<UnifiedCecProofResult, 'toDict' | 'timestamp'> & { timestamp?: number }) {
+  constructor(
+    options: Omit<UnifiedCecProofResult, 'toDict' | 'timestamp'> & { timestamp?: number },
+  ) {
     this.isProved = options.isProved;
     this.formula = options.formula;
     this.axioms = [...options.axioms];
@@ -105,6 +111,7 @@ export class UnifiedCecProof implements UnifiedCecProofResult {
     this.inferenceRules = options.inferenceRules ? [...options.inferenceRules] : undefined;
     this.errorMessage = options.errorMessage;
     this.zkpProof = options.zkpProof;
+    this.unsupportedBackend = options.unsupportedBackend;
     this.isPrivate = options.isPrivate;
     this.zkpBackend = options.zkpBackend;
     this.fromCache = options.fromCache;
@@ -126,7 +133,7 @@ export class UnifiedCecProof implements UnifiedCecProofResult {
       proofTime: options.proofTime ?? (proof.timeMs ?? 0) / 1000,
       baseResult: proof.status,
       proofSteps: proof.steps.length,
-      inferenceRules: [...new Set(proof.steps.map((step) => step.rule).filter(Boolean))],
+      inferenceRules: uniqueRuleNames(proof.steps.map((step) => step.rule)),
       errorMessage: proof.error,
       isPrivate: false,
       fromCache: options.fromCache ?? false,
@@ -157,6 +164,34 @@ export class UnifiedCecProof implements UnifiedCecProofResult {
     });
   }
 
+  static unsupportedZkpBackend(
+    formula: CecExpression,
+    axioms: CecExpression[],
+    backend: string,
+    proofTime: number,
+    isPrivate: boolean,
+  ): UnifiedCecProof {
+    const supportedBackends = ['simulated'];
+    const reason = `CEC ZKP backend '${backend}' is not available in the browser-native port.`;
+    return new UnifiedCecProof({
+      isProved: false,
+      formula,
+      axioms: isPrivate ? [] : axioms,
+      method: 'cec_zkp',
+      proofTime,
+      baseResult: 'error',
+      errorMessage: `${reason} Supported local backend: simulated.`,
+      isPrivate,
+      zkpBackend: backend,
+      unsupportedBackend: {
+        backend,
+        supportedBackends,
+        reason,
+      },
+      fromCache: false,
+    });
+  }
+
   toDict(): Record<string, unknown> {
     return {
       is_proved: this.isProved,
@@ -168,6 +203,7 @@ export class UnifiedCecProof implements UnifiedCecProofResult {
       proof_steps: this.proofSteps,
       inference_rules: this.inferenceRules,
       error_message: this.errorMessage,
+      unsupported_backend: this.unsupportedBackend,
       is_private: this.isPrivate,
       zkp_backend: this.zkpBackend,
       from_cache: this.fromCache,
@@ -215,8 +251,8 @@ export class ZkpCecProver {
     const kb: CecKnowledgeBase = { axioms };
     const proverOptions = mergeProverOptions(this.proverOptions, options);
     const useCache = (options.useCache ?? true) && this.enableCaching && !options.forceStandard;
-    const preferZkp = options.forceStandard ? false : options.preferZkp ?? false;
-    const privateAxioms = options.forceStandard ? false : options.privateAxioms ?? false;
+    const preferZkp = options.forceStandard ? false : (options.preferZkp ?? false);
+    const privateAxioms = options.forceStandard ? false : (options.privateAxioms ?? false);
 
     if (useCache) {
       const cacheStart = performanceNow();
@@ -233,10 +269,19 @@ export class ZkpCecProver {
     if (preferZkp && this.enableZkp) {
       try {
         this.zkpAttempts += 1;
-        const zkpResult = await this.proveWithZkp(goal, axioms, privateAxioms, proverOptions, start);
+        const zkpResult = await this.proveWithZkp(
+          goal,
+          axioms,
+          privateAxioms,
+          proverOptions,
+          start,
+        );
         if (zkpResult.isProved) {
           this.zkpSuccesses += 1;
           if (useCache) this.cache.set(goal, kb, zkpResultToProofResult(zkpResult), proverOptions);
+          return zkpResult;
+        }
+        if (zkpResult.baseResult === 'error') {
           return zkpResult;
         }
       } catch (error) {
@@ -286,7 +331,13 @@ export class ZkpCecProver {
     start: number,
   ): Promise<UnifiedCecProof> {
     if (this.zkpBackend !== 'simulated') {
-      throw new Error('Only the simulated CEC ZKP backend is available in the browser-native port.');
+      return UnifiedCecProof.unsupportedZkpBackend(
+        goal,
+        axioms,
+        this.zkpBackend,
+        (performanceNow() - start) / 1000,
+        privateAxioms,
+      );
     }
 
     const proof = new CecProver(proverOptions).prove(goal, { axioms });
@@ -328,7 +379,9 @@ export async function createSimulatedCecZkpProof(
     witness.theorem ?? '',
     String(isProved),
   ]);
-  const proofDigest = await theoremHashHex(`${goalText}#${axiomsCommitment}#${witnessCommitment}#${isProved}`);
+  const proofDigest = await theoremHashHex(
+    `${goalText}#${axiomsCommitment}#${witnessCommitment}#${isProved}`,
+  );
 
   return {
     backend: 'simulated',
@@ -364,6 +417,14 @@ function mergeProverOptions(base: CecProverOptions, overrides: CecProverOptions)
     maxDerivedExpressions: overrides.maxDerivedExpressions ?? base.maxDerivedExpressions,
     rules: overrides.rules ?? base.rules,
   };
+}
+
+function uniqueRuleNames(values: unknown[]): string[] {
+  return [...new Set(values.filter(isRuleName))];
+}
+
+function isRuleName(value: unknown): value is string {
+  return typeof value === 'string' && value.length > 0;
 }
 
 function performanceNow(): number {

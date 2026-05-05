@@ -2486,3 +2486,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T065438Z-fixed-the-cec-proof-cache-storage-test-fixture-so-it-satisfies-the-mutable-proof.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T065438Z-fixed-the-cec-proof-cache-storage-test-fixture-so-it-satisfies-the-mutable-proof.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T065438Z-fixed-the-cec-proof-cache-storage-test-fixture-so-it-satisfies-the-mutable-proof.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 07:01:03 UTC
+
+- Target: `Task checkbox-466: Manual unblock: port `logic/CEC/native/cec_zkp_integration.py` by adding an educational local ZKP integration facade with simulated backend parity and fail-closed unsupported-backend results.`
+- Summary: Added fail-closed unsupported-backend handling to the browser-native CEC ZKP facade while preserving deterministic simulated proof parity.
+- Impact: The TypeScript CEC ZKP integration now returns structured local error results for unavailable backends such as groth16 instead of attempting server/Python fallback or silently standard-proving, and the focused Jest test exercises the simulated facade plus fail-closed metadata.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/cec/cecZkpIntegration.test.ts`, `src/lib/logic/cec/cecZkpIntegration.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T070103Z-added-fail-closed-unsupported-backend-handling-to-the-browser-native-cec-zkp-fac.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T070103Z-added-fail-closed-unsupported-backend-handling-to-the-browser-native-cec-zkp-fac.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T070103Z-added-fail-closed-unsupported-backend-handling-to-the-browser-native-cec-zkp-fac.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+

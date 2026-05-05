@@ -63,7 +63,10 @@ describe('CEC ZKP integration parity helpers', () => {
     const axioms = [parseCecExpression('p'), parseCecExpression('(implies p q)')];
 
     const disabled = await prover.proveTheorem(goal, axioms, { preferZkp: true });
-    const forced = await prover.proveTheorem(goal, axioms, { forceStandard: true, preferZkp: true });
+    const forced = await prover.proveTheorem(goal, axioms, {
+      forceStandard: true,
+      preferZkp: true,
+    });
 
     expect(disabled.method).toBe('cec_standard');
     expect(disabled.isProved).toBe(true);
@@ -72,13 +75,59 @@ describe('CEC ZKP integration parity helpers', () => {
     expect(forced.method).toBe('cec_standard');
   });
 
+  it('fails closed with structured metadata for unsupported local ZKP backends', async () => {
+    const prover = new ZkpCecProver({
+      enableZkp: true,
+      enableCaching: false,
+      zkpBackend: 'groth16',
+    });
+    const goal = parseCecExpression('q');
+    const axioms = [parseCecExpression('p'), parseCecExpression('(implies p q)')];
+
+    const result = await prover.proveTheorem(goal, axioms, {
+      preferZkp: true,
+      privateAxioms: true,
+    });
+
+    expect(result.isProved).toBe(false);
+    expect(result.method).toBe('cec_zkp');
+    expect(result.baseResult).toBe('error');
+    expect(result.isPrivate).toBe(true);
+    expect(result.axioms).toEqual([]);
+    expect(result.zkpProof).toBeUndefined();
+    expect(result.unsupportedBackend).toEqual({
+      backend: 'groth16',
+      supportedBackends: ['simulated'],
+      reason: "CEC ZKP backend 'groth16' is not available in the browser-native port.",
+    });
+    expect(result.toDict()).toMatchObject({
+      is_proved: false,
+      axioms: ['<private>'],
+      method: 'cec_zkp',
+      base_result: 'error',
+      zkp_backend: 'groth16',
+      unsupported_backend: {
+        backend: 'groth16',
+        supportedBackends: ['simulated'],
+      },
+    });
+    expect(prover.getStatistics()).toMatchObject({
+      zkp_attempts: 1,
+      zkp_successes: 0,
+      standard_proofs: 0,
+    });
+  });
+
   it('serves cached standard proofs before hybrid work', async () => {
     const prover = new ZkpCecProver({ enableZkp: true, enableCaching: true });
     const goal = parseCecExpression('q');
     const axioms = [parseCecExpression('p'), parseCecExpression('(implies p q)')];
 
     const first = await prover.proveTheorem(goal, axioms, { preferZkp: false });
-    const second = await prover.proveTheorem(goal, axioms, { preferZkp: true, privateAxioms: true });
+    const second = await prover.proveTheorem(goal, axioms, {
+      preferZkp: true,
+      privateAxioms: true,
+    });
 
     expect(first.method).toBe('cec_standard');
     expect(second.method).toBe('cec_cached');
@@ -112,7 +161,9 @@ describe('CEC ZKP integration parity helpers', () => {
 
   it('clears statistics independently of the proof cache', async () => {
     const prover = new ZkpCecProver({ enableZkp: true, enableCaching: true });
-    await prover.proveTheorem(parseCecExpression('q'), [parseCecExpression('q')], { preferZkp: true });
+    await prover.proveTheorem(parseCecExpression('q'), [parseCecExpression('q')], {
+      preferZkp: true,
+    });
 
     expect(prover.getStatistics().zkp_attempts).toBe(1);
     prover.clearStatistics();
