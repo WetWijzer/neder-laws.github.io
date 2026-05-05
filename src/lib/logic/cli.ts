@@ -2,7 +2,19 @@ import { createLogicApi, type LogicApiOptions } from './api';
 import { validateBrowserNativeLogicRuntime } from './browserNativeValidation';
 import type { BridgeProofRequest, LogicBridgeFormat } from './integration/bridge';
 
-export type LogicCliCommand = 'health' | 'convert' | 'prove' | 'policy' | 'validate';
+export type LogicCliCommand =
+  | 'health'
+  | 'convert'
+  | 'prove'
+  | 'policy'
+  | 'evaluate-policy'
+  | 'validate';
+export interface LogicCliCommandSpec {
+  readonly command: LogicCliCommand;
+  readonly summary: string;
+  readonly requiredFlags: readonly string[];
+  readonly optionalFlags: readonly string[];
+}
 export interface LogicCliResult {
   ok: boolean;
   exitCode: 0 | 1 | 2;
@@ -23,6 +35,7 @@ export interface LogicDevtoolsCommandAdapter {
   readonly pythonRuntime: false;
   readonly serverRuntime: false;
   readonly commands: readonly LogicCliCommand[];
+  readonly commandSpecs: readonly LogicCliCommandSpec[];
   run(invocation: LogicDevtoolsCommandInvocation): LogicCliResult;
 }
 type Runtime = {
@@ -38,7 +51,40 @@ const runtime: Runtime = {
   serverRuntime: false,
   serverCallsAllowed: false,
 };
-const commands: readonly LogicCliCommand[] = ['health', 'convert', 'prove', 'policy', 'validate'];
+const commandSpecs: readonly LogicCliCommandSpec[] = [
+  spec('health', 'Report the browser-native logic runtime and supported commands.', [], ['json']),
+  spec(
+    'convert',
+    'Convert logic text between supported local bridge formats.',
+    ['source'],
+    ['from', 'source-format', 'to', 'target-format', 'json'],
+  ),
+  spec(
+    'prove',
+    'Run a bounded browser-native proof request.',
+    ['theorem', 'axiom'],
+    ['logic', 'json'],
+  ),
+  spec(
+    'policy',
+    'Compile natural-language policy text into a local DCEC policy formula.',
+    ['source'],
+    ['json'],
+  ),
+  spec(
+    'evaluate-policy',
+    'Compile and evaluate a natural-language policy against a tool/action name.',
+    ['source', 'tool'],
+    ['actor', 'json'],
+  ),
+  spec(
+    'validate',
+    'Validate browser-native logic modules without server or Python fallbacks.',
+    [],
+    ['fol-text', 'deontic-text', 'json'],
+  ),
+];
+const commands: readonly LogicCliCommand[] = commandSpecs.map((spec) => spec.command);
 const formats: readonly LogicBridgeFormat[] = [
   'natural_language',
   'legal_text',
@@ -63,6 +109,7 @@ export function runLogicCli(
   if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
     return pass('health', `logic commands: ${commands.join(', ')}`, {
       commands: [...commands],
+      command_specs: commandSpecs.map(commandSpecToData),
     });
   }
   if (blockedRuntime.test(args.join(' '))) {
@@ -75,12 +122,16 @@ export function runLogicCli(
 
   const command = args.shift() as LogicCliCommand;
   const flags = parseFlags(args);
+  const json = hasFlag(flags, 'json');
   const api = createLogicApi(options);
   if (command === 'health') {
-    return pass(command, 'logic runtime: browser-native-typescript-wasm', {
+    const data: Record<string, unknown> = {
       runtime: 'browser-native-typescript-wasm',
+      commands: [...commands],
+      command_specs: commandSpecs.map(commandSpecToData),
       ...runtime,
-    });
+    };
+    return pass(command, stdout('logic runtime: browser-native-typescript-wasm', data, json), data);
   }
   if (command === 'convert') {
     const source = first(flags, 'source', 'text', 'input');
@@ -95,7 +146,11 @@ export function runLogicCli(
     const data: Record<string, unknown> = { ...result.toDict(), command, ...runtime };
     return result.status === 'failed' || result.status === 'unsupported'
       ? fail(command, 1, String(data.error ?? data.status), data)
-      : pass(command, String(data.target_formula ?? data.targetFormula ?? ''), data);
+      : pass(
+          command,
+          stdout(String(data.target_formula ?? data.targetFormula ?? ''), data, json),
+          data,
+        );
   }
   if (command === 'prove') {
     const theorem = first(flags, 'theorem', 'goal');
@@ -111,7 +166,7 @@ export function runLogicCli(
     const data: Record<string, unknown> = { ...result, command, ...runtime };
     return result.status === 'error'
       ? fail(command, 1, result.error ?? 'proof failed', data)
-      : pass(command, result.status, data);
+      : pass(command, stdout(result.status, data, json), data);
   }
   if (command === 'policy') {
     const text = first(flags, 'source', 'text', 'input');
@@ -121,8 +176,20 @@ export function runLogicCli(
     const result = api.compileNlToPolicy(text);
     const data: Record<string, unknown> = { ...result, command, ...runtime };
     return result.success
-      ? pass(command, result.policyFormula, data)
+      ? pass(command, stdout(result.policyFormula, data, json), data)
       : fail(command, 1, result.warnings.join('; ') || 'policy compilation failed', data);
+  }
+  if (command === 'evaluate-policy') {
+    const text = first(flags, 'source', 'text', 'input');
+    const tool = first(flags, 'tool', 'action');
+    if (text === undefined || tool === undefined) {
+      return fail(command, 2, 'evaluate-policy requires --source <policy> and --tool <name>.');
+    }
+    const result = api.evaluateNlPolicy(text, { tool, actor: first(flags, 'actor') });
+    const data: Record<string, unknown> = { ...result, command, ...runtime };
+    return result.success
+      ? pass(command, stdout(result.allowed ? 'allowed' : 'denied', data, json), data)
+      : fail(command, 1, result.warnings.join('; ') || 'policy evaluation failed', data);
   }
   if (command === 'validate') {
     const data: Record<string, unknown> = {
@@ -134,13 +201,19 @@ export function runLogicCli(
       ...runtime,
     };
     return data.valid === true
-      ? pass(command, 'browser-native logic runtime valid', data)
+      ? pass(command, stdout('browser-native logic runtime valid', data, json), data)
       : fail(command, 1, 'browser-native logic runtime validation failed', data);
   }
   return fail(undefined, 2, `Unknown logic CLI command: ${String(command)}`);
 }
 
 export const run_logic_cli = runLogicCli;
+
+export function describeLogicCliCommands(): readonly LogicCliCommandSpec[] {
+  return commandSpecs;
+}
+
+export const describe_logic_cli_commands = describeLogicCliCommands;
 
 export function createLogicDevtoolsCommandAdapter(
   options: LogicApiOptions = {},
@@ -150,6 +223,7 @@ export function createLogicDevtoolsCommandAdapter(
     pythonRuntime: false,
     serverRuntime: false,
     commands,
+    commandSpecs,
     run(invocation: LogicDevtoolsCommandInvocation): LogicCliResult {
       return runLogicCli(toArgv(invocation), options);
     },
@@ -221,6 +295,10 @@ function values(flags: Map<string, Array<string>>, ...keys: readonly string[]): 
   return keys.flatMap((key) => flags.get(key) ?? []).filter((value) => value.trim().length > 0);
 }
 
+function hasFlag(flags: Map<string, Array<string>>, key: string): boolean {
+  return flags.has(key);
+}
+
 function format(
   flags: Map<string, Array<string>>,
   ...keys: readonly string[]
@@ -234,6 +312,28 @@ function format(
 function proofLogic(flags: Map<string, Array<string>>): BridgeProofRequest['logic'] | undefined {
   const value = first(flags, 'logic');
   return value === 'tdfol' || value === 'cec' || value === 'dcec' ? value : undefined;
+}
+
+function spec(
+  command: LogicCliCommand,
+  summary: string,
+  requiredFlags: readonly string[],
+  optionalFlags: readonly string[],
+): LogicCliCommandSpec {
+  return { command, summary, requiredFlags, optionalFlags };
+}
+
+function commandSpecToData(spec: LogicCliCommandSpec): Record<string, unknown> {
+  return {
+    command: spec.command,
+    summary: spec.summary,
+    required_flags: [...spec.requiredFlags],
+    optional_flags: [...spec.optionalFlags],
+  };
+}
+
+function stdout(text: string, data: Record<string, unknown>, json: boolean): string {
+  return json ? JSON.stringify(data) : text;
 }
 
 function pass(

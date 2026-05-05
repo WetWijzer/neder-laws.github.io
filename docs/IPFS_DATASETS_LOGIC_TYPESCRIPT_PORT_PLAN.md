@@ -599,7 +599,7 @@ Acceptance criteria:
   - [x] Add richer developer-panel integration for live UI inspection.
 - [x] Replace Python API/CLI surfaces with TypeScript developer scripts or browser devtools.
   - [x] Initial browser-native public API facade for `logic/api.py` import-surface parity.
-  - [!] Add CLI/devtools command adapter parity for `logic/cli.py`.
+  - [x] Add CLI/devtools command adapter parity for `logic/cli.py`.
 - [!] Port IPFS/IPLD proof cache semantics to browser-native storage/IPFS clients where possible.
 
 ## Full-Port Completion Definition
@@ -1025,11 +1025,11 @@ The daemon completed all currently eligible TypeScript port-plan checkboxes, the
 <!-- logic-port-daemon-task-board:start -->
 ## Daemon Task Board
 
-Last updated: 2026-05-05 09:19:23 UTC
+Last updated: 2026-05-05 09:22:31 UTC
 
 Selection policy: choose the first needed or in-progress port-plan checkbox; if none remain, revisit blocked checkboxes with `fewest-failures` strategy because blocked-task revisit mode is enabled.
 
-Current target: `Task checkbox-195: Add CLI/devtools command adapter parity for 'logic/cli.py'.`
+Current target: `Task checkbox-196: Port IPFS/IPLD proof cache semantics to browser-native storage/IPFS clients where possible.`
 
 Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failing.
 
@@ -1226,10 +1226,10 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - [x] `Task checkbox-189: Port observability structured logging, Prometheus-style metrics, and OTel-style tracing to browser-local equivalents.` - complete
 - [x] `Task checkbox-190: Port monitoring/metrics to in-browser telemetry objects and developer panels.` - complete
 - [x] `Task checkbox-191: Initial top-level 'logic/monitoring.py' parity for operation metrics, tracking helpers, health checks, error/warning counters, global monitor, reset, operation summaries, and optional Prometheus text export.` - complete
-- [x] `Task checkbox-192: Add richer developer-panel integration for live UI inspection.` - validated by latest daemon round
+- [x] `Task checkbox-192: Add richer developer-panel integration for live UI inspection.` - complete
 - [x] `Task checkbox-193: Replace Python API/CLI surfaces with TypeScript developer scripts or browser devtools.` - complete
 - [x] `Task checkbox-194: Initial browser-native public API facade for 'logic/api.py' import-surface parity.` - complete
-- [!] `Task checkbox-195: Add CLI/devtools command adapter parity for 'logic/cli.py'.` - blocked
+- [x] `Task checkbox-195: Add CLI/devtools command adapter parity for 'logic/cli.py'.` - validated by latest daemon round
 - [!] `Task checkbox-196: Port IPFS/IPLD proof cache semantics to browser-native storage/IPFS clients where possible.` - blocked
 - [x] `Task checkbox-197: Port remaining Python logic module 'logic/CEC/cec_framework.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.` - complete
 - [x] `Task checkbox-198: Port remaining Python logic module 'logic/CEC/dcec_wrapper.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.` - complete
@@ -1519,11 +1519,11 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 
 ### Latest Round
 
-- Target: `Task checkbox-192: Add richer developer-panel integration for live UI inspection.`
+- Target: `Task checkbox-195: Add CLI/devtools command adapter parity for 'logic/cli.py'.`
 - Result: `valid`
-- Summary: Added telemetry-backed live inspection details to the logic developer panel snapshot.
-- Impact: The TypeScript logic port can now feed browser developer panels from local telemetry collectors or precomputed summaries, exposing grouped counters, gauges, timings, event counts, warning rollups, and inspectable section metadata without server calls or Python runtime bridges. The focused Jest test exercises the live inspection contract alongside parse, proof, cache, ML/NLP, and simulated ZKP state.
-- Accepted changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/developerPanelSnapshots.test.ts`, `src/lib/logic/developerPanelSnapshots.ts`
+- Summary: Added browser-native CLI/devtools command contract parity for logic/cli.py.
+- Impact: src/lib/logic/cli.ts now exposes devtools-readable command specs, JSON stdout mode, and a local evaluate-policy command backed by the existing browser-native LogicApi. src/lib/logic/cli.test.ts validates the new command metadata, structured JSON output, and policy evaluation path without Python, server, subprocess, filesystem, or RPC fallbacks.
+- Accepted changed files: `src/lib/logic/cli.test.ts`, `src/lib/logic/cli.ts`
 
 ### Blocked Backlog
 
@@ -1541,8 +1541,6 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
   - Latest errors: llm_router could not generate with model='gpt-5.5' provider='auto'. Configure the provider credentials or pass --provider. Original error: copilot CLI binary not found on PATH (required for session/tracing flags). Install the GitHub Copilot...
 - `Task checkbox-179: Remove 'nlpUnavailable' and 'mlUnavailable' capability flags once browser-native parity is implemented.`
   - Failures since success: `0`
-- `Task checkbox-195: Add CLI/devtools command adapter parity for 'logic/cli.py'.`
-  - Failures since success: `0`
 - `Task checkbox-196: Port IPFS/IPLD proof cache semantics to browser-native storage/IPFS clients where possible.`
   - Failures since success: `0`
 - `Task checkbox-200: Port remaining Python logic module 'logic/CEC/native/advanced_inference.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
@@ -1554,6 +1552,8 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - `Task checkbox-204: Port remaining Python logic module 'logic/CEC/native/context_manager.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
   - Failures since success: `0`
 - `Task checkbox-205: Port remaining Python logic module 'logic/CEC/native/dcec_cleaning.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+  - Failures since success: `0`
+- `Task checkbox-208: Port remaining Python logic module 'logic/CEC/native/dcec_integration.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
   - Failures since success: `0`
 
 ### Required Daemon Behavior

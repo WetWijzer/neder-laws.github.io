@@ -2639,3 +2639,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T091923Z-added-telemetry-backed-live-inspection-details-to-the-logic-developer-panel-snap.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T091923Z-added-telemetry-backed-live-inspection-details-to-the-logic-developer-panel-snap.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T091923Z-added-telemetry-backed-live-inspection-details-to-the-logic-developer-panel-snap.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 09:22:32 UTC
+
+- Target: `Task checkbox-195: Add CLI/devtools command adapter parity for `logic/cli.py`.`
+- Summary: Added browser-native CLI/devtools command contract parity for logic/cli.py.
+- Impact: src/lib/logic/cli.ts now exposes devtools-readable command specs, JSON stdout mode, and a local evaluate-policy command backed by the existing browser-native LogicApi. src/lib/logic/cli.test.ts validates the new command metadata, structured JSON output, and policy evaluation path without Python, server, subprocess, filesystem, or RPC fallbacks.
+- Changed files: `src/lib/logic/cli.test.ts`, `src/lib/logic/cli.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T092232Z-added-browser-native-cli-devtools-command-contract-parity-for-logic-cli.py..json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T092232Z-added-browser-native-cli-devtools-command-contract-parity-for-logic-cli.py..diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T092232Z-added-browser-native-cli-devtools-command-contract-parity-for-logic-cli.py..stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+

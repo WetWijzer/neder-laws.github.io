@@ -1,4 +1,9 @@
-import { createLogicDevtoolsCommandAdapter, runLogicCli, runLogicDevtoolsCommand } from './cli';
+import {
+  createLogicDevtoolsCommandAdapter,
+  describeLogicCliCommands,
+  runLogicCli,
+  runLogicDevtoolsCommand,
+} from './cli';
 
 describe('browser-native logic CLI adapter', () => {
   it('runs health and conversion commands locally', () => {
@@ -68,7 +73,20 @@ describe('browser-native logic CLI adapter', () => {
       browserNative: true,
       pythonRuntime: false,
       serverRuntime: false,
-      commands: expect.arrayContaining(['health', 'convert', 'prove', 'policy', 'validate']),
+      commands: expect.arrayContaining([
+        'health',
+        'convert',
+        'prove',
+        'policy',
+        'evaluate-policy',
+        'validate',
+      ]),
+      commandSpecs: expect.arrayContaining([
+        expect.objectContaining({
+          command: 'evaluate-policy',
+          requiredFlags: ['source', 'tool'],
+        }),
+      ]),
     });
     expect(converted).toMatchObject({
       ok: true,
@@ -80,6 +98,54 @@ describe('browser-native logic CLI adapter', () => {
       command: 'validate',
       stdout: 'browser-native logic runtime valid',
       data: { valid: true, serverCallsAllowed: false, pythonRuntime: false },
+    });
+  });
+
+  it('describes CLI command contracts and evaluates policies for devtools callers', () => {
+    const specs = describeLogicCliCommands();
+    const evaluation = runLogicDevtoolsCommand({
+      command: 'evaluate-policy',
+      flags: {
+        source: 'Tenants may use the community room.',
+        tool: 'use-community-room',
+        actor: 'did:example:tenant',
+      },
+    });
+    const jsonHealth = runLogicCli(['health', '--json']);
+
+    expect(specs).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          command: 'convert',
+          requiredFlags: ['source'],
+          optionalFlags: expect.arrayContaining(['from', 'to', 'json']),
+        }),
+        expect.objectContaining({
+          command: 'evaluate-policy',
+          requiredFlags: ['source', 'tool'],
+        }),
+      ]),
+    );
+    expect(evaluation).toMatchObject({
+      ok: true,
+      command: 'evaluate-policy',
+      stdout: 'allowed',
+      data: {
+        allowed: true,
+        tool: 'use-community-room',
+        actor: 'did:example:tenant',
+        pythonRuntime: false,
+        serverCallsAllowed: false,
+      },
+    });
+    expect(JSON.parse(jsonHealth.stdout)).toMatchObject({
+      runtime: 'browser-native-typescript-wasm',
+      commands: expect.arrayContaining(['evaluate-policy']),
+      command_specs: expect.arrayContaining([
+        expect.objectContaining({ command: 'evaluate-policy' }),
+      ]),
+      pythonRuntime: false,
+      serverCallsAllowed: false,
     });
   });
 
