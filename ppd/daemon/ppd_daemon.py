@@ -16,10 +16,7 @@ import json
 import os
 import py_compile
 import re
-import signal
-import subprocess
 import sys
-import tempfile
 import traceback
 from dataclasses import dataclass, replace
 from datetime import datetime, timezone
@@ -79,18 +76,48 @@ from ipfs_datasets_py.optimizers.todo_daemon.engine import (  # noqa: E402
 from ipfs_datasets_py.optimizers.todo_daemon.file_replacement import (  # noqa: E402
     FileReplacementHooks,
     FileReplacementTodoDaemonRunner,
+    build_file_replacement_apply_proposal,
+)
+from ipfs_datasets_py.optimizers.todo_daemon.app import (  # noqa: E402
+    print_todo_daemon_result,
+    run_todo_daemon,
+    todo_daemon_exit_code,
 )
 from ipfs_datasets_py.optimizers.todo_daemon.runner import (  # noqa: E402
     PreTaskBlock,
     TodoDaemonHooks,
 )
+from ipfs_datasets_py.optimizers.todo_daemon.history import (  # noqa: E402
+    read_daemon_proposal_records,
+    recent_proposal_failures,
+    should_use_compact_prompt_for_failures,
+)
+from ipfs_datasets_py.optimizers.todo_daemon.diagnostics import (  # noqa: E402
+    count_recent_proposal_failures,
+    is_retryable_proposal_failure,
+    prompt_limit_for_mode,
+    proposal_block_threshold,
+    proposal_record_has_failure_markers,
+    should_skip_validation_for_empty_proposal,
+)
+from ipfs_datasets_py.optimizers.todo_daemon.task_board import (  # noqa: E402
+    count_unmanaged_generated_status_sections as count_todo_unmanaged_generated_status_sections,
+    strip_unmanaged_generated_status_sections as strip_todo_unmanaged_generated_status_sections,
+    update_generated_status_block as update_todo_generated_status_block,
+)
+from ipfs_datasets_py.optimizers.todo_daemon.llm import (  # noqa: E402
+    LlmRouterInvocation,
+    call_llm_router,
+    collect_descendant_pids,
+    install_active_llm_signal_handlers,
+    process_groups_for_family,
+    terminate_process_group,
+)
 
 
 CHECKBOX_RE = re.compile(r"^(?P<prefix>\s*-\s+\[)(?P<mark>[ xX~!])(?P<suffix>\]\s+)(?P<title>.+)$")
-TASK_BOARD_STATUS_RE = re.compile(
-    r"\n?<!-- ppd-daemon-task-board:start -->[\s\S]*?<!-- ppd-daemon-task-board:end -->\n?",
-    re.MULTILINE,
-)
+TASK_BOARD_STATUS_START = "<!-- ppd-daemon-task-board:start -->"
+TASK_BOARD_STATUS_END = "<!-- ppd-daemon-task-board:end -->"
 LLM_TERMINATION_ERROR_MARKERS = (
     "143",
     "137",
@@ -176,9 +203,6 @@ PROTECTED_BLOCKED_REVISIT_CHECKBOX_IDS = frozenset(
         210,
     }
 )
-
-_ACTIVE_LLM_PROCESS: Optional[subprocess.Popen[Any]] = None
-
 
 @dataclass
 class Config:
@@ -280,75 +304,31 @@ def replace_task_mark(markdown: str, selected: Task, mark: str) -> str:
 def count_unmanaged_generated_status_sections(markdown: str) -> int:
     """Count generated-status headings outside the daemon-managed marker block."""
 
-    count = 0
-    in_managed_block = False
-    for line in markdown.splitlines():
-        stripped = line.strip()
-        if stripped == "<!-- ppd-daemon-task-board:start -->":
-            in_managed_block = True
-            continue
-        if stripped == "<!-- ppd-daemon-task-board:end -->":
-            in_managed_block = False
-            continue
-        if not in_managed_block and stripped == "## Generated Status":
-            count += 1
-    return count
+    return count_todo_unmanaged_generated_status_sections(
+        markdown,
+        start_marker=TASK_BOARD_STATUS_START,
+        end_marker=TASK_BOARD_STATUS_END,
+    )
 
 
 def strip_unmanaged_generated_status_sections(markdown: str) -> str:
     """Remove stale generated-status sections outside the managed marker block."""
 
-    lines = markdown.splitlines()
-    cleaned: list[str] = []
-    in_managed_block = False
-    skipping_unmanaged_status = False
-    for line in lines:
-        stripped = line.strip()
-        if stripped == "<!-- ppd-daemon-task-board:start -->":
-            in_managed_block = True
-            skipping_unmanaged_status = False
-            cleaned.append(line)
-            continue
-        if stripped == "<!-- ppd-daemon-task-board:end -->":
-            in_managed_block = False
-            cleaned.append(line)
-            continue
-        if skipping_unmanaged_status:
-            if stripped.startswith("## ") or stripped == "<!-- ppd-daemon-task-board:start -->":
-                skipping_unmanaged_status = False
-            else:
-                continue
-        if not in_managed_block and stripped == "## Generated Status":
-            skipping_unmanaged_status = True
-            continue
-        cleaned.append(line)
-    return "\n".join(cleaned).rstrip() + ("\n" if markdown.endswith("\n") else "")
+    return strip_todo_unmanaged_generated_status_sections(
+        markdown,
+        start_marker=TASK_BOARD_STATUS_START,
+        end_marker=TASK_BOARD_STATUS_END,
+    )
 
 
 def update_generated_status(markdown: str, *, latest: dict[str, Any], tasks: list[Task]) -> str:
-    markdown = strip_unmanaged_generated_status_sections(markdown)
-    counts = {
-        "needed": sum(1 for task in tasks if task.status == "needed"),
-        "in_progress": sum(1 for task in tasks if task.status == "in-progress"),
-        "complete": sum(1 for task in tasks if task.status == "complete"),
-        "blocked": sum(1 for task in tasks if task.status == "blocked"),
-    }
-    block = f"""
-<!-- ppd-daemon-task-board:start -->
-## Generated Status
-
-Last updated: {utc_now()}
-
-- Latest target: `{latest.get("target_task", "")}`
-- Latest result: `{latest.get("result", "")}`
-- Latest summary: {latest.get("summary", "")}
-- Counts: `{json.dumps(counts, sort_keys=True)}`
-
-<!-- ppd-daemon-task-board:end -->
-"""
-    if TASK_BOARD_STATUS_RE.search(markdown):
-        return TASK_BOARD_STATUS_RE.sub("\n" + block.strip() + "\n", markdown).rstrip() + "\n"
-    return markdown.rstrip() + "\n\n" + block
+    return update_todo_generated_status_block(
+        markdown,
+        latest=latest,
+        tasks=tasks,
+        start_marker=TASK_BOARD_STATUS_START,
+        end_marker=TASK_BOARD_STATUS_END,
+    )
 
 
 def should_sleep_between_watch_cycles(markdown: str, *, revisit_blocked: bool = False) -> bool:
@@ -362,121 +342,82 @@ def exception_diagnostic(exc: BaseException, *, limit: int = 5000) -> str:
 
 
 def is_retryable_failure(proposal: Proposal) -> bool:
-    if proposal.failure_kind in {"llm", "parse", "empty_proposal"}:
-        return True
-    text = " ".join(proposal.errors).lower()
-    return any(
-        marker in text
-        for marker in (
-            "cloudflare",
-            "403 forbidden",
-            "plugins/featured",
-            "timed out",
-            "timeout",
-            "could not generate",
-            "provider",
-        )
+    return is_retryable_proposal_failure(
+        proposal,
+        retry_error_markers=frozenset(
+            {
+                "cloudflare",
+                "403 forbidden",
+                "plugins/featured",
+                "timed out",
+                "timeout",
+                "could not generate",
+                "provider",
+            }
+        ),
     )
 
 
 def is_llm_termination_failure_record(proposal: dict[str, Any]) -> bool:
-    if str(proposal.get("failure_kind") or "") != "llm":
-        return False
-    text = " ".join(str(error).lower() for error in proposal.get("errors", []) or [])
-    return bool(text and any(marker in text for marker in LLM_TERMINATION_ERROR_MARKERS))
+    return proposal_record_has_failure_markers(
+        proposal,
+        failure_kind="llm",
+        markers=frozenset(LLM_TERMINATION_ERROR_MARKERS),
+    )
 
 
 def failure_block_threshold(proposal: Proposal, config: Config) -> int:
     """Use a tighter stop condition for parser-invalid generated patches."""
 
-    if proposal.failure_kind in {"syntax_preflight", "llm_termination"}:
-        return min(config.max_task_failures_before_block, 2)
-    if proposal.failure_kind == "no_visible_source_change":
-        return 1
-    return config.max_task_failures_before_block
+    return proposal_block_threshold(
+        proposal,
+        default_threshold=config.max_task_failures_before_block,
+        capped_failure_kinds=frozenset({"syntax_preflight", "llm_termination"}),
+        capped_threshold=2,
+        exact_thresholds={"no_visible_source_change": 1},
+    )
 
 
 def should_skip_validation_for_no_file_failure(proposal: Proposal) -> bool:
     """Avoid expensive validation when the LLM produced no candidate files."""
 
-    if proposal.files:
-        return False
-    return proposal.failure_kind in {"llm", "parse", "empty_proposal"}
+    return should_skip_validation_for_empty_proposal(proposal)
 
 
 def read_result_log(path: Path) -> list[dict[str, Any]]:
-    if not path.exists():
-        return []
-    rows: list[dict[str, Any]] = []
-    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
-        if not line.strip():
-            continue
-        try:
-            parsed = json.loads(line)
-        except json.JSONDecodeError:
-            continue
-        proposal = parsed.get("proposal")
-        if isinstance(proposal, dict):
-            rows.append(proposal)
-    return rows
+    return read_daemon_proposal_records(path)
 
 
 def read_result_and_diagnostic_log(path: Path) -> list[dict[str, Any]]:
-    if not path.exists():
-        return []
-    rows: list[dict[str, Any]] = []
-    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
-        if not line.strip():
-            continue
-        try:
-            parsed = json.loads(line)
-        except json.JSONDecodeError:
-            continue
-        proposal = parsed.get("proposal")
-        diagnostic = parsed.get("diagnostic")
-        if isinstance(proposal, dict):
-            rows.append(proposal)
-        elif isinstance(diagnostic, dict):
-            row = dict(diagnostic)
-            row["_diagnostic_stage"] = parsed.get("stage", "")
-            rows.append(row)
-    return rows
+    return read_daemon_proposal_records(path, include_diagnostics=True)
 
 
 def recent_task_failures(config: Config, task_label: str, *, limit: int = 3) -> list[dict[str, Any]]:
-    failures: list[dict[str, Any]] = []
-    for proposal in reversed(read_result_and_diagnostic_log(config.resolve(config.result_log))):
-        if proposal.get("target_task") != task_label:
-            continue
-        if proposal.get("applied") and proposal.get("validation_passed") and not proposal.get("errors"):
-            break
-        failures.append(proposal)
-        if len(failures) >= limit:
-            break
-    return failures
+    return recent_proposal_failures(
+        read_result_and_diagnostic_log(config.resolve(config.result_log)),
+        task_label,
+        limit=limit,
+        normalize_task_labels=False,
+    )
 
 
 def should_use_compact_prompt(failures: list[dict[str, Any]], *, threshold: int = 2) -> bool:
-    count = 0
-    for failure in failures:
-        if str(failure.get("failure_kind") or "") in {"parse", "llm"}:
-            count += 1
-    return count >= threshold
+    return should_use_compact_prompt_for_failures(failures, threshold=threshold)
 
 
 def effective_prompt_limit(config: Config, *, compact_prompt: bool) -> int:
-    if compact_prompt:
-        return min(config.max_prompt_chars, config.max_compact_prompt_chars)
-    return config.max_prompt_chars
+    return prompt_limit_for_mode(
+        max_prompt_chars=config.max_prompt_chars,
+        max_compact_prompt_chars=config.max_compact_prompt_chars,
+        compact_prompt=compact_prompt,
+    )
 
 
 def task_failure_count(config: Config, task_label: str, *, kinds: Optional[set[str]] = None) -> int:
-    count = 0
-    for proposal in recent_task_failures(config, task_label, limit=100):
-        kind = str(proposal.get("failure_kind") or "")
-        if kinds is None or kind in kinds:
-            count += 1
-    return count
+    return count_recent_proposal_failures(
+        recent_task_failures(config, task_label, limit=100),
+        failure_kinds=kinds,
+    )
 
 
 def llm_termination_failure_count(config: Config, task_label: str) -> int:
@@ -1181,10 +1122,7 @@ def ppd_file_replacement_hooks() -> FileReplacementHooks:
 
 
 def apply_files_with_validation(proposal: Proposal, config: Config) -> Proposal:
-    return ppd_file_replacement_runner(config).hooks.apply_proposal(
-        proposal,
-        config,
-    )
+    return build_file_replacement_apply_proposal(ppd_file_replacement_hooks())(proposal, config)
 
 
 def persist_accepted_work(proposal: Proposal, config: Config, *, diff_text: str, transport: str = "direct") -> None:
@@ -1379,175 +1317,26 @@ Current files:
 
 
 def call_llm(prompt: str, config: Config) -> str:
-    backend = os.environ.get("PPD_LLM_BACKEND", "llm_router")
-    if backend != "llm_router":
-        raise RuntimeError(f"Unsupported PP&D LLM backend {backend!r}; expected 'llm_router'.")
-    if len(prompt) > config.max_prompt_chars + len("\n\n[truncated]\n"):
-        raise RuntimeError(
-            f"LLM prompt exceeds configured budget before llm_router child launch: {len(prompt)} > {config.max_prompt_chars}"
-        )
-    prompt_file: Optional[Path] = None
-    try:
-        with tempfile.NamedTemporaryFile(
-            "w",
-            encoding="utf-8",
-            delete=False,
-            prefix="ppd-llm-prompt-",
-            suffix=".txt",
-        ) as handle:
-            handle.write(prompt)
-            prompt_file = Path(handle.name)
-        env = os.environ.copy()
-        env.update(
-            {
-                "PPD_LLM_PROMPT_FILE": str(prompt_file),
-                "PPD_LLM_MODEL_NAME": config.model_name,
-                "PPD_LLM_PROVIDER": config.provider or "",
-                "PPD_LLM_ALLOW_LOCAL_FALLBACK": "1" if config.allow_local_fallback else "0",
-                "PPD_LLM_TIMEOUT": str(config.llm_timeout_seconds),
-                "PPD_LLM_MAX_NEW_TOKENS": str(config.llm_max_new_tokens),
-            }
-        )
-        child_code = r"""
-import os
-import pathlib
-import sys
-
-from ipfs_datasets_py import llm_router
-
-prompt = pathlib.Path(os.environ["PPD_LLM_PROMPT_FILE"]).read_text(encoding="utf-8")
-provider = os.environ.get("PPD_LLM_PROVIDER") or None
-text = llm_router.generate_text(
-    prompt,
-    model_name=os.environ["PPD_LLM_MODEL_NAME"],
-    provider=provider,
-    allow_local_fallback=os.environ.get("PPD_LLM_ALLOW_LOCAL_FALLBACK") == "1",
-    timeout=int(os.environ["PPD_LLM_TIMEOUT"]),
-    max_new_tokens=int(os.environ["PPD_LLM_MAX_NEW_TOKENS"]),
-    temperature=0.1,
-)
-sys.stdout.write("" if text is None else str(text))
-"""
-        command = ["python3", "-c", child_code]
-        process = subprocess.Popen(
-            command,
-            cwd=str(config.repo_root),
-            text=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            env=env,
-            start_new_session=True,
-        )
-        global _ACTIVE_LLM_PROCESS
-        _ACTIVE_LLM_PROCESS = process
-        try:
-            stdout, stderr = process.communicate(timeout=config.llm_timeout_seconds + 30)
-        except subprocess.TimeoutExpired as exc:
-            terminate_process_group(process)
-            raise RuntimeError(f"llm_router child timed out after {config.llm_timeout_seconds + 30} seconds") from exc
-        finally:
-            if _ACTIVE_LLM_PROCESS is process:
-                _ACTIVE_LLM_PROCESS = None
-        completed = subprocess.CompletedProcess(
-            command,
-            returncode=int(process.returncode or 0),
-            stdout=stdout,
-            stderr=stderr,
-        )
-    except subprocess.TimeoutExpired as exc:
-        raise RuntimeError(f"llm_router child timed out after {config.llm_timeout_seconds + 30} seconds") from exc
-    finally:
-        if prompt_file is not None:
-            try:
-                prompt_file.unlink()
-            except FileNotFoundError:
-                pass
-    if completed.returncode != 0:
-        details = compact_message((completed.stdout or "") + " " + (completed.stderr or ""), limit=1200)
-        raise RuntimeError(f"llm_router child exited with code {completed.returncode}: {details}")
-    return completed.stdout
-
-
-def collect_descendant_pids(pid: int) -> list[int]:
-    try:
-        completed = subprocess.run(
-            ["pgrep", "-P", str(pid)],
-            text=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.DEVNULL,
-            check=False,
-        )
-    except OSError:
-        return []
-    descendants: list[int] = []
-    for line in completed.stdout.splitlines():
-        try:
-            child = int(line.strip())
-        except ValueError:
-            continue
-        descendants.append(child)
-        descendants.extend(collect_descendant_pids(child))
-    return descendants
-
-
-def process_groups_for_family(root_pid: int) -> set[int]:
-    groups: set[int] = set()
-    for pid in [root_pid, *collect_descendant_pids(root_pid)]:
-        try:
-            groups.add(os.getpgid(pid))
-        except ProcessLookupError:
-            continue
-    return groups
-
-
-def terminate_process_group(process: subprocess.Popen[Any], *, grace_seconds: float = 5.0) -> None:
-    """Terminate a subprocess and descendant process groups when it owns a session."""
-
-    if process.poll() is not None:
-        return
-    process_groups = process_groups_for_family(process.pid) or {process.pid}
-    try:
-        for pgid in process_groups:
-            try:
-                os.killpg(pgid, signal.SIGTERM)
-            except ProcessLookupError:
-                continue
-            except PermissionError:
-                continue
-    except ProcessLookupError:
-        pass
-    try:
-        process.communicate(timeout=grace_seconds)
-        return
-    except subprocess.TimeoutExpired:
-        pass
-    try:
-        for pgid in process_groups:
-            try:
-                os.killpg(pgid, signal.SIGKILL)
-            except ProcessLookupError:
-                continue
-            except PermissionError:
-                continue
-    except ProcessLookupError:
-        pass
-    try:
-        process.communicate(timeout=grace_seconds)
-    except subprocess.TimeoutExpired:
-        pass
-
-
-def handle_daemon_signal(signum: int, _frame: object) -> None:
-    process = _ACTIVE_LLM_PROCESS
-    if process is not None and process.poll() is None:
-        terminate_process_group(process, grace_seconds=1.0)
-    raise SystemExit(128 + signum)
+    return call_llm_router(
+        prompt,
+        LlmRouterInvocation(
+            repo_root=config.repo_root,
+            model_name=config.model_name,
+            provider=config.provider,
+            allow_local_fallback=config.allow_local_fallback,
+            timeout_seconds=config.llm_timeout_seconds,
+            max_new_tokens=config.llm_max_new_tokens,
+            max_prompt_chars=config.max_prompt_chars,
+            backend_env_name="PPD_LLM_BACKEND",
+            backend_label="PP&D LLM backend",
+            env_prefix="PPD_LLM",
+            prompt_file_prefix="ppd-llm-prompt-",
+        ),
+    )
 
 
 def install_daemon_signal_handlers() -> None:
-    signal.signal(signal.SIGTERM, handle_daemon_signal)
-    signal.signal(signal.SIGINT, handle_daemon_signal)
-    signal.signal(signal.SIGHUP, handle_daemon_signal)
+    install_active_llm_signal_handlers()
 
 
 def ppd_pre_task_block(config: Config, selected: Task) -> Optional[PreTaskBlock]:
@@ -1799,14 +1588,11 @@ def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def main(argv: Optional[list[str]] = None) -> int:
-    args = parse_args(argv)
-    repo_root = Path(args.repo_root).resolve()
-    if args.self_test:
-        return self_test(repo_root)
-    install_daemon_signal_handlers()
-    config = Config(
-        repo_root=repo_root,
+def config_from_args(args: argparse.Namespace) -> Config:
+    """Build PP&D daemon config from CLI args while keeping runner startup reusable."""
+
+    return Config(
+        repo_root=Path(args.repo_root).resolve(),
         apply=bool(args.apply),
         watch=bool(args.watch),
         iterations=int(args.iterations),
@@ -1824,14 +1610,18 @@ def main(argv: Optional[list[str]] = None) -> int:
         max_validation_repair_attempts=max(0, int(args.max_validation_repair_attempts)),
         crash_backoff_seconds=max(0.0, float(args.crash_backoff)),
     )
-    proposals = Daemon(config).run()
-    print(json.dumps([proposal.to_dict() for proposal in proposals], indent=2))
-    if not proposals:
-        return 1
-    latest = proposals[-1]
-    if latest.valid or latest.failure_kind == "no_eligible_tasks":
-        return 0
-    return 1
+
+
+def main(argv: Optional[list[str]] = None) -> int:
+    args = parse_args(argv)
+    repo_root = Path(args.repo_root).resolve()
+    if args.self_test:
+        return self_test(repo_root)
+    install_daemon_signal_handlers()
+    config = config_from_args(args)
+    proposals = run_todo_daemon(config, runner_factory=ppd_file_replacement_runner)
+    print_todo_daemon_result(proposals, output="proposals")
+    return todo_daemon_exit_code(proposals)
 
 
 if __name__ == "__main__":
