@@ -8,6 +8,9 @@ import {
 import {
   BrowserTdfolIpfsProofStorage,
   TDFOL_IPFS_PROOF_STORAGE_STATUS,
+  createTdfolIpldProofBlock,
+  verifyTdfolIpldProofBlock,
+  type TdfolIpldProofBlock,
   type TdfolIpfsProofTransport,
   type TdfolStoredProof,
 } from './tdfol/ipfsProofStorage';
@@ -259,5 +262,59 @@ describe('BrowserTdfolIpfsProofStorage', () => {
       source: 'browser-native-ipfs',
     });
     expect(other.cid).not.toBe(stored.cid);
+  });
+
+  it('stores canonical proof blocks through an injected browser-native IPLD blockstore', async () => {
+    const blocks = new Map<string, TdfolIpldProofBlock>();
+    const transport: TdfolIpfsProofTransport = {
+      mode: 'browser-native-ipfs',
+      async putBlock(block) {
+        blocks.set(block.cid, block);
+        return block.cid;
+      },
+      async getBlock(cid) {
+        return blocks.get(cid);
+      },
+    };
+    const storage = new BrowserTdfolIpfsProofStorage({ maxEntries: 1, transport });
+    const stored = await storage.storeProof(proofPayload);
+    await storage.storeProof({ ...proofPayload, theorem: 'Evict(a)' });
+
+    expect(stored).toMatchObject({ ok: true, source: 'browser-native-ipld' });
+    expect(blocks.get(stored.cid)).toMatchObject({
+      codec: 'dag-json',
+      canonicalJson: stored.entry?.canonicalJson,
+    });
+    expect(await storage.retrieveProof(stored.cid)).toMatchObject({
+      ok: true,
+      source: 'browser-native-ipld',
+      entry: { cid: stored.cid, payload: { theorem: 'Goal(a)' } },
+    });
+  });
+
+  it('fails closed when an injected IPLD proof block is not content addressed', async () => {
+    const storage = new BrowserTdfolIpfsProofStorage();
+    const stored = await storage.storeProof(proofPayload);
+    const block = createTdfolIpldProofBlock(stored.entry!);
+    const tampered = {
+      ...block,
+      canonicalJson: block.canonicalJson.replace('Goal(a)', 'Other(a)'),
+    };
+
+    expect(verifyTdfolIpldProofBlock(tampered, stored.cid)).toBe('Proof CID verification failed.');
+
+    const transport: TdfolIpfsProofTransport = {
+      mode: 'browser-native-ipfs',
+      async getBlock() {
+        return tampered;
+      },
+    };
+    const remoteStorage = new BrowserTdfolIpfsProofStorage({ transport });
+
+    await expect(remoteStorage.retrieveProof(stored.cid)).resolves.toMatchObject({
+      ok: false,
+      source: 'browser-native-ipld',
+      error: 'Proof CID verification failed.',
+    });
   });
 });

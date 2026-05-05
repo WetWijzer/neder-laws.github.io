@@ -2648,3 +2648,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T092232Z-added-browser-native-cli-devtools-command-contract-parity-for-logic-cli.py..json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T092232Z-added-browser-native-cli-devtools-command-contract-parity-for-logic-cli.py..diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T092232Z-added-browser-native-cli-devtools-command-contract-parity-for-logic-cli.py..stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 09:27:16 UTC
+
+- Target: `Task checkbox-196: Port IPFS/IPLD proof cache semantics to browser-native storage/IPFS clients where possible.`
+- Summary: Added browser-native IPLD blockstore semantics for TDFOL proof storage.
+- Impact: The TypeScript proof storage now emits and verifies canonical dag-json proof blocks through injected browser-native IPFS/IPLD clients, falls closed on CID or block-byte tampering, and is covered by the existing Jest cache validation suite.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/cache.test.ts`, `src/lib/logic/tdfol/ipfsProofStorage.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T092716Z-added-browser-native-ipld-blockstore-semantics-for-tdfol-proof-storage..json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T092716Z-added-browser-native-ipld-blockstore-semantics-for-tdfol-proof-storage..diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T092716Z-added-browser-native-ipld-blockstore-semantics-for-tdfol-proof-storage..stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+
