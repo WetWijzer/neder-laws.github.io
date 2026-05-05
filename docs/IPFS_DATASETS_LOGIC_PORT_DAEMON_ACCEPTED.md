@@ -2477,3 +2477,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T061322Z-verified-the-advanced-inference-registry-rule-classification-helpers-and-parity-.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T061322Z-verified-the-advanced-inference-registry-rule-classification-helpers-and-parity-.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T061322Z-verified-the-advanced-inference-registry-rule-classification-helpers-and-parity-.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 06:54:38 UTC
+
+- Target: `Task checkbox-465: Manual unblock: port `logic/CEC/native/cec_proof_cache.py` by adding CEC proof cache keys, TTL/LRU behavior, validation metadata, and deterministic browser storage tests.`
+- Summary: Fixed the CEC proof cache storage test fixture so it satisfies the mutable ProofResult.steps contract while preserving deterministic browser-native proof cache coverage.
+- Impact: TypeScript compilation now succeeds for the daemon-selected CEC proof cache task without changing runtime cache behavior.
+- Changed files: `src/lib/logic/cec/proofCache.test.ts`, `src/lib/logic/cec/proofCache.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T065438Z-fixed-the-cec-proof-cache-storage-test-fixture-so-it-satisfies-the-mutable-proof.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T065438Z-fixed-the-cec-proof-cache-storage-test-fixture-so-it-satisfies-the-mutable-proof.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T065438Z-fixed-the-cec-proof-cache-storage-test-fixture-so-it-satisfies-the-mutable-proof.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+
