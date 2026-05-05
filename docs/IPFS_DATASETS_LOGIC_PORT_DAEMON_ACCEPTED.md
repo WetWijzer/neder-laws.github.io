@@ -2522,3 +2522,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T071010Z-ported-the-dcec-integration-unblock-with-browser-native-conversion-metadata-form.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T071010Z-ported-the-dcec-integration-unblock-with-browser-native-conversion-metadata-form.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T071010Z-ported-the-dcec-integration-unblock-with-browser-native-conversion-metadata-form.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 07:15:22 UTC
+
+- Target: `Task checkbox-470: Manual unblock: port `logic/CEC/native/dcec_namespace.py` by adding namespace registration, symbol statistics, validation diagnostics, and collision tests.`
+- Summary: Ported DCEC namespace registration, symbol statistics, validation diagnostics, and collision coverage.
+- Impact: The browser-native DCEC namespace now exposes explicit registration aliases, enriched symbol statistics, cross-kind collision failures, and validation diagnostics that are exercised by focused Jest tests and recorded in the TypeScript port ledger.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/cec/dcecNamespace.test.ts`, `src/lib/logic/cec/dcecNamespace.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T071522Z-ported-dcec-namespace-registration-symbol-statistics-validation-diagnostics-and-.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T071522Z-ported-dcec-namespace-registration-symbol-statistics-validation-diagnostics-and-.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T071522Z-ported-dcec-namespace-registration-symbol-statistics-validation-diagnostics-and-.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+
