@@ -19,6 +19,11 @@ export interface CecEventCalculusStats {
   cachedHoldsAtQueries: number;
 }
 
+export interface CecTimelineEntry {
+  time: number;
+  holds: boolean;
+}
+
 export type CecEventCalculusPredicate =
   | 'happens'
   | 'initiates'
@@ -67,7 +72,10 @@ export class CecEventCalculus {
 
   initiates(event: CecEventTerm | string, fluent: CecFluentTerm | string, time: number): boolean {
     assertTime(time);
-    return this.initiationRules.has(ruleKey(toEventTerm(event), toFluentTerm(fluent))) && this.happens(event, time);
+    return (
+      this.initiationRules.has(ruleKey(toEventTerm(event), toFluentTerm(fluent))) &&
+      this.happens(event, time)
+    );
   }
 
   addTerminationRule(event: CecEventTerm | string, fluent: CecFluentTerm | string): void {
@@ -77,7 +85,10 @@ export class CecEventCalculus {
 
   terminates(event: CecEventTerm | string, fluent: CecFluentTerm | string, time: number): boolean {
     assertTime(time);
-    return this.terminationRules.has(ruleKey(toEventTerm(event), toFluentTerm(fluent))) && this.happens(event, time);
+    return (
+      this.terminationRules.has(ruleKey(toEventTerm(event), toFluentTerm(fluent))) &&
+      this.happens(event, time)
+    );
   }
 
   addReleaseRule(event: CecEventTerm | string, fluent: CecFluentTerm | string): void {
@@ -87,7 +98,10 @@ export class CecEventCalculus {
 
   releases(event: CecEventTerm | string, fluent: CecFluentTerm | string, time: number): boolean {
     assertTime(time);
-    return this.releaseRules.has(ruleKey(toEventTerm(event), toFluentTerm(fluent))) && this.happens(event, time);
+    return (
+      this.releaseRules.has(ruleKey(toEventTerm(event), toFluentTerm(fluent))) &&
+      this.happens(event, time)
+    );
   }
 
   setInitiallyTrue(fluent: CecFluentTerm | string): void {
@@ -99,7 +113,11 @@ export class CecEventCalculus {
     assertTime(time);
     const target = toFluentTerm(fluent);
     return this.eventEntries().some(({ event, time: eventTime }) => {
-      return eventTime < time && this.releases(event, target, eventTime) && !this.reinitiatedOrTerminated(eventTime, target, time);
+      return (
+        eventTime < time &&
+        this.releases(event, target, eventTime) &&
+        !this.reinitiatedOrTerminated(eventTime, target, time)
+      );
     });
   }
 
@@ -134,9 +152,9 @@ export class CecEventCalculus {
       .sort(compareTerms);
   }
 
-  getTimeline(fluent: CecFluentTerm | string, maxTime: number): Array<{ time: number; holds: boolean }> {
+  getTimeline(fluent: CecFluentTerm | string, maxTime: number): Array<CecTimelineEntry> {
     assertTime(maxTime);
-    const timeline: Array<{ time: number; holds: boolean }> = [];
+    const timeline: Array<CecTimelineEntry> = [];
     let previous: boolean | undefined;
 
     for (let time = 0; time <= maxTime; time += 1) {
@@ -156,22 +174,37 @@ export class CecEventCalculus {
     if (!predicate) return false;
 
     if (predicate === 'happens' && expression.args.length === 2) {
-      this.recordEvent(termFromExpression(expression.args[0]), timeFromExpression(expression.args[1]));
+      this.recordEvent(
+        termFromExpression(expression.args[0]),
+        timeFromExpression(expression.args[1]),
+      );
       return true;
     }
     if (predicate === 'initiates' && expression.args.length >= 2) {
-      this.addInitiationRule(termFromExpression(expression.args[0]), termFromExpression(expression.args[1]));
+      this.addInitiationRule(
+        termFromExpression(expression.args[0]),
+        termFromExpression(expression.args[1]),
+      );
       return true;
     }
     if (predicate === 'terminates' && expression.args.length >= 2) {
-      this.addTerminationRule(termFromExpression(expression.args[0]), termFromExpression(expression.args[1]));
+      this.addTerminationRule(
+        termFromExpression(expression.args[0]),
+        termFromExpression(expression.args[1]),
+      );
       return true;
     }
     if (predicate === 'releases' && expression.args.length >= 2) {
-      this.addReleaseRule(termFromExpression(expression.args[0]), termFromExpression(expression.args[1]));
+      this.addReleaseRule(
+        termFromExpression(expression.args[0]),
+        termFromExpression(expression.args[1]),
+      );
       return true;
     }
-    if ((predicate === 'holdsAt' || expression.name.toLowerCase() === 'initiallytrue') && expression.args.length === 1) {
+    if (
+      (predicate === 'holdsAt' || expression.name.toLowerCase() === 'initiallytrue') &&
+      expression.args.length === 1
+    ) {
       this.setInitiallyTrue(termFromExpression(expression.args[0]));
       return true;
     }
@@ -185,7 +218,10 @@ export class CecEventCalculus {
     if (!predicate) return undefined;
 
     if (predicate === 'happens' && expression.args.length === 2) {
-      return this.happens(termFromExpression(expression.args[0]), timeFromExpression(expression.args[1]));
+      return this.happens(
+        termFromExpression(expression.args[0]),
+        timeFromExpression(expression.args[1]),
+      );
     }
     if (predicate === 'initiates' && expression.args.length >= 3) {
       return this.initiates(
@@ -209,10 +245,16 @@ export class CecEventCalculus {
       );
     }
     if (predicate === 'releasedAt' && expression.args.length === 2) {
-      return this.releasedAt(termFromExpression(expression.args[0]), timeFromExpression(expression.args[1]));
+      return this.releasedAt(
+        termFromExpression(expression.args[0]),
+        timeFromExpression(expression.args[1]),
+      );
     }
     if (predicate === 'holdsAt' && expression.args.length === 2) {
-      return this.holdsAt(termFromExpression(expression.args[0]), timeFromExpression(expression.args[1]));
+      return this.holdsAt(
+        termFromExpression(expression.args[0]),
+        timeFromExpression(expression.args[1]),
+      );
     }
     if (predicate === 'clipped' && expression.args.length === 3) {
       return this.clipped(
@@ -247,7 +289,10 @@ export class CecEventCalculus {
 
   private computeHoldsAt(fluent: CecFluentTerm, time: number): boolean {
     const initiationTimes = this.eventEntries()
-      .filter(({ event, time: eventTime }) => eventTime < time && this.initiates(event, fluent, eventTime))
+      .filter(
+        ({ event, time: eventTime }) =>
+          eventTime < time && this.initiates(event, fluent, eventTime),
+      )
       .map(({ time: eventTime }) => eventTime);
 
     if (this.initiallyTrue.has(termKey(fluent))) initiationTimes.push(0);
@@ -258,9 +303,17 @@ export class CecEventCalculus {
     return !this.clipped(mostRecentInitiation, fluent, time);
   }
 
-  private reinitiatedOrTerminated(fromTime: number, fluent: CecFluentTerm, toTime: number): boolean {
+  private reinitiatedOrTerminated(
+    fromTime: number,
+    fluent: CecFluentTerm,
+    toTime: number,
+  ): boolean {
     return this.eventEntries().some(({ event, time }) => {
-      return fromTime < time && time < toTime && (this.initiates(event, fluent, time) || this.terminates(event, fluent, time));
+      return (
+        fromTime < time &&
+        time < toTime &&
+        (this.initiates(event, fluent, time) || this.terminates(event, fluent, time))
+      );
     });
   }
 
@@ -287,12 +340,72 @@ export class CecEventCalculus {
   }
 }
 
-export function createCecEventTerm(name: string, parameters: readonly unknown[] = []): CecEventTerm {
+export function createCecEventTerm(
+  name: string,
+  parameters: readonly unknown[] = [],
+): CecEventTerm {
   return createTerm(name, parameters);
 }
 
-export function createCecFluentTerm(name: string, parameters: readonly unknown[] = []): CecFluentTerm {
+export function createCecFluentTerm(
+  name: string,
+  parameters: readonly unknown[] = [],
+): CecFluentTerm {
   return createTerm(name, parameters);
+}
+
+export function event(name: string, ...parameters: Array<unknown>): CecEventTerm {
+  return createCecEventTerm(name, parameters);
+}
+
+export function fluent(name: string, ...parameters: Array<unknown>): CecFluentTerm {
+  return createCecFluentTerm(name, parameters);
+}
+
+export function happens(
+  calculus: CecEventCalculus,
+  targetEvent: CecEventTerm | string,
+  time: number,
+): boolean {
+  return calculus.happens(targetEvent, time);
+}
+
+export function holds(
+  calculus: CecEventCalculus,
+  targetFluent: CecFluentTerm | string,
+  time: number,
+): boolean {
+  return calculus.holdsAt(targetFluent, time);
+}
+
+export function initiates(
+  calculus: CecEventCalculus,
+  targetEvent: CecEventTerm | string,
+  targetFluent: CecFluentTerm | string,
+  time: number,
+): boolean {
+  return calculus.initiates(targetEvent, targetFluent, time);
+}
+
+export function terminates(
+  calculus: CecEventCalculus,
+  targetEvent: CecEventTerm | string,
+  targetFluent: CecFluentTerm | string,
+  time: number,
+): boolean {
+  return calculus.terminates(targetEvent, targetFluent, time);
+}
+
+export function fluentsAt(calculus: CecEventCalculus, time: number): Array<CecFluentTerm> {
+  return calculus.getAllFluentsAt(time);
+}
+
+export function timeline(
+  calculus: CecEventCalculus,
+  targetFluent: CecFluentTerm | string,
+  maxTime: number,
+): Array<CecTimelineEntry> {
+  return calculus.getTimeline(targetFluent, maxTime);
 }
 
 function createTerm(name: string, parameters: readonly unknown[]): CecEventTerm {
@@ -354,17 +467,21 @@ function termFromExpression(expression: CecExpression): CecEventTerm {
 
 function parameterFromExpression(expression: CecExpression): unknown {
   if (expression.kind === 'atom') return expression.name;
-  if (expression.kind === 'application') return `${expression.name}(${expression.args.map(parameterFromExpression).join(',')})`;
+  if (expression.kind === 'application')
+    return `${expression.name}(${expression.args.map(parameterFromExpression).join(',')})`;
   throw new Error('CEC event calculus parameter must be atomic');
 }
 
 function timeFromExpression(expression: CecExpression): number {
   if (expression.kind !== 'atom') throw new Error('CEC event calculus time must be an atom');
-  const value = expression.name.startsWith('t') ? Number(expression.name.slice(1)) : Number(expression.name);
+  const value = expression.name.startsWith('t')
+    ? Number(expression.name.slice(1))
+    : Number(expression.name);
   assertTime(value);
   return value;
 }
 
 function assertTime(time: number): void {
-  if (!Number.isInteger(time) || time < 0) throw new Error('CEC event calculus time must be a non-negative integer');
+  if (!Number.isInteger(time) || time < 0)
+    throw new Error('CEC event calculus time must be a non-negative integer');
 }

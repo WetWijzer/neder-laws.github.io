@@ -2567,3 +2567,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T073037Z-added-enhanced-dcec-grammar-parser-diagnostics-and-parse-alternatives-with-focus.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T073037Z-added-enhanced-dcec-grammar-parser-diagnostics-and-parse-alternatives-with-focus.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T073037Z-added-enhanced-dcec-grammar-parser-diagnostics-and-parse-alternatives-with-focus.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 08:14:56 UTC
+
+- Target: `Task checkbox-476: Manual unblock: port `logic/CEC/native/event_calculus.py` by adding event, fluent, happens, holds, initiates, terminates, and timeline query helpers with parity tests.`
+- Summary: Added Python-style CEC event calculus helper exports and parity coverage.
+- Impact: The TypeScript CEC module now exposes browser-native event, fluent, happens, holds, initiates, terminates, fluentsAt, and timeline helpers over the existing event calculus engine, and the Jest suite directly validates parameterized helper parity without Python or server runtime dependencies.
+- Changed files: `src/lib/logic/cec/eventCalculus.test.ts`, `src/lib/logic/cec/eventCalculus.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T081456Z-added-python-style-cec-event-calculus-helper-exports-and-parity-coverage..json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T081456Z-added-python-style-cec-event-calculus-helper-exports-and-parity-coverage..diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T081456Z-added-python-style-cec-event-calculus-helper-exports-and-parity-coverage..stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+

@@ -3,6 +3,14 @@ import {
   CecTimePoint,
   createCecEventTerm,
   createCecFluentTerm,
+  event,
+  fluent,
+  fluentsAt,
+  happens,
+  holds,
+  initiates,
+  terminates,
+  timeline,
 } from './eventCalculus';
 import { parseCecExpression } from './parser';
 
@@ -22,6 +30,31 @@ describe('CEC event calculus', () => {
     expect(ec.happens(turnOn, 3)).toBe(false);
     expect(ec.initiates(turnOn, lightOn, 2)).toBe(true);
     expect(ec.terminates(turnOff, lightOn, 5)).toBe(true);
+  });
+
+  it('exports Python-style event calculus helper queries', () => {
+    const ec = new CecEventCalculus();
+    const approve = event('approve', 'permit-17');
+    const revoke = event('revoke', 'permit-17');
+    const active = fluent('active', 'permit-17');
+
+    ec.addInitiationRule(approve, active);
+    ec.addTerminationRule(revoke, active);
+    ec.recordEvent(approve, 1);
+    ec.recordEvent(revoke, 4);
+
+    expect(approve).toEqual(createCecEventTerm('approve', ['permit-17']));
+    expect(active).toEqual(createCecFluentTerm('active', ['permit-17']));
+    expect(happens(ec, approve, 1)).toBe(true);
+    expect(initiates(ec, approve, active, 1)).toBe(true);
+    expect(holds(ec, active, 2)).toBe(true);
+    expect(terminates(ec, revoke, active, 4)).toBe(true);
+    expect(fluentsAt(ec, 2)).toEqual([active]);
+    expect(timeline(ec, active, 5)).toEqual([
+      { time: 0, holds: false },
+      { time: 2, holds: true },
+      { time: 5, holds: false },
+    ]);
   });
 
   it('implements Python-compatible discrete HoldsAt and Clipped semantics', () => {
@@ -82,7 +115,9 @@ describe('CEC event calculus', () => {
     expect(ec.evaluatePredicate(parseCecExpression('(HoldsAt (on light) 3)'))).toBe(true);
     expect(ec.evaluatePredicate(parseCecExpression('(Clipped 3 (on light) 7)'))).toBe(true);
     expect(ec.evaluatePredicate(parseCecExpression('(Happens (turn_on light) t2)'))).toBe(true);
-    expect(ec.evaluatePredicate(parseCecExpression('(not (HoldsAt (on light) 3))'))).toBeUndefined();
+    expect(
+      ec.evaluatePredicate(parseCecExpression('(not (HoldsAt (on light) 3))')),
+    ).toBeUndefined();
   });
 
   it('reports statistics, clears state, and validates time values', () => {
