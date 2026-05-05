@@ -2468,3 +2468,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T060836Z-added-browser-native-content-addressed-proof-storage-for-ipfs-proof-cache-entrie.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T060836Z-added-browser-native-content-addressed-proof-storage-for-ipfs-proof-cache-entrie.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T060836Z-added-browser-native-content-addressed-proof-storage-for-ipfs-proof-cache-entrie.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 06:13:22 UTC
+
+- Target: `Task checkbox-464: Manual unblock: port `logic/CEC/native/advanced_inference.py` by adding a TypeScript advanced-inference registry, rule classification helpers, and parity tests for cognitive, modal, and deontic rule selection.`
+- Summary: Verified the advanced inference registry, rule classification helpers, and parity tests for cognitive, modal, deontic, and temporal-deontic rule selection in the repair worktree.
+- Impact: The TypeScript CEC advanced-inference surface remains browser-native and validates locally without Python, server, filesystem, subprocess, or RPC fallbacks; the daemon validation failure did not reproduce after rerunning the exact validation command.
+- Changed files: `src/lib/logic/cec/advancedInference.test.ts`, `src/lib/logic/cec/advancedInference.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T061322Z-verified-the-advanced-inference-registry-rule-classification-helpers-and-parity-.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T061322Z-verified-the-advanced-inference-registry-rule-classification-helpers-and-parity-.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T061322Z-verified-the-advanced-inference-registry-rule-classification-helpers-and-parity-.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+

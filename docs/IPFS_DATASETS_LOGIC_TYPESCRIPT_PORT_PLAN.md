@@ -1003,7 +1003,7 @@ The daemon completed all currently eligible TypeScript port-plan checkboxes, the
 - [x] Manual unblock: add developer-panel live inspection snapshots for logic parse, proof, cache, ML/NLP, and ZKP capability state.
 - [x] Manual unblock: add CLI/devtools command adapter parity for `logic/cli.py` as browser/devtools-safe TypeScript entry points.
 - [x] Manual unblock: port IPFS/IPLD proof cache semantics to browser-native storage and content-addressed cache adapters with deterministic tests.
-- [ ] Manual unblock: port `logic/CEC/native/advanced_inference.py` by adding a TypeScript advanced-inference registry, rule classification helpers, and parity tests for cognitive, modal, and deontic rule selection.
+- [x] Manual unblock: port `logic/CEC/native/advanced_inference.py` by adding a TypeScript advanced-inference registry, rule classification helpers, and parity tests for cognitive, modal, and deontic rule selection.
 - [ ] Manual unblock: port `logic/CEC/native/cec_proof_cache.py` by adding CEC proof cache keys, TTL/LRU behavior, validation metadata, and deterministic browser storage tests.
 - [ ] Manual unblock: port `logic/CEC/native/cec_zkp_integration.py` by adding an educational local ZKP integration facade with simulated backend parity and fail-closed unsupported-backend results.
 - [ ] Manual unblock: port `logic/CEC/native/context_manager.py` by adding discourse/context snapshots, entity bindings, temporal scopes, and deterministic merge/rollback tests.
@@ -1024,11 +1024,11 @@ The daemon completed all currently eligible TypeScript port-plan checkboxes, the
 <!-- logic-port-daemon-task-board:start -->
 ## Daemon Task Board
 
-Last updated: 2026-05-05 06:08:36 UTC
+Last updated: 2026-05-05 06:13:21 UTC
 
 Selection policy: choose the first needed or in-progress port-plan checkbox; if none remain, revisit blocked checkboxes with `fewest-failures` strategy because blocked-task revisit mode is enabled.
 
-Current target: `Task checkbox-464: Manual unblock: port 'logic/CEC/native/advanced_inference.py' by adding a TypeScript advanced-inference registry, rule classification helpers, and parity tests for cognitive, modal, and deontic rule selection.`
+Current target: `Task checkbox-465: Manual unblock: port 'logic/CEC/native/cec_proof_cache.py' by adding CEC proof cache keys, TTL/LRU behavior, validation metadata, and deterministic browser storage tests.`
 
 Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failing.
 
@@ -1496,8 +1496,8 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - [x] `Task checkbox-460: Manual unblock: complete an EVM public-input and verification-key registry helper slice using browser-compatible crypto abstractions and deterministic tests.` - complete
 - [x] `Task checkbox-461: Manual unblock: add developer-panel live inspection snapshots for logic parse, proof, cache, ML/NLP, and ZKP capability state.` - complete
 - [x] `Task checkbox-462: Manual unblock: add CLI/devtools command adapter parity for 'logic/cli.py' as browser/devtools-safe TypeScript entry points.` - complete
-- [x] `Task checkbox-463: Manual unblock: port IPFS/IPLD proof cache semantics to browser-native storage and content-addressed cache adapters with deterministic tests.` - validated by latest daemon round
-- [ ] `Task checkbox-464: Manual unblock: port 'logic/CEC/native/advanced_inference.py' by adding a TypeScript advanced-inference registry, rule classification helpers, and parity tests for cognitive, modal, and deontic rule selection.` - needed
+- [x] `Task checkbox-463: Manual unblock: port IPFS/IPLD proof cache semantics to browser-native storage and content-addressed cache adapters with deterministic tests.` - complete
+- [x] `Task checkbox-464: Manual unblock: port 'logic/CEC/native/advanced_inference.py' by adding a TypeScript advanced-inference registry, rule classification helpers, and parity tests for cognitive, modal, and deontic rule selection.` - validated by latest daemon round
 - [ ] `Task checkbox-465: Manual unblock: port 'logic/CEC/native/cec_proof_cache.py' by adding CEC proof cache keys, TTL/LRU behavior, validation metadata, and deterministic browser storage tests.` - needed
 - [ ] `Task checkbox-466: Manual unblock: port 'logic/CEC/native/cec_zkp_integration.py' by adding an educational local ZKP integration facade with simulated backend parity and fail-closed unsupported-backend results.` - needed
 - [ ] `Task checkbox-467: Manual unblock: port 'logic/CEC/native/context_manager.py' by adding discourse/context snapshots, entity bindings, temporal scopes, and deterministic merge/rollback tests.` - needed
@@ -1517,11 +1517,11 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 
 ### Latest Round
 
-- Target: `Task checkbox-463: Manual unblock: port IPFS/IPLD proof cache semantics to browser-native storage and content-addressed cache adapters with deterministic tests.`
+- Target: `Task checkbox-464: Manual unblock: port 'logic/CEC/native/advanced_inference.py' by adding a TypeScript advanced-inference registry, rule classification helpers, and parity tests for cognitive, modal, and deontic rule selection.`
 - Result: `valid`
-- Summary: Added browser-native content-addressed proof storage for IPFS proof cache entries.
-- Impact: The TypeScript logic proof cache can now persist IPFS/IPLD proof blocks through injected browser-native storage adapters, verify stored content addresses on reads, fail closed for tampered blocks, and exercise the behavior through deterministic Jest coverage.
-- Accepted changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/proofCache.test.ts`, `src/lib/logic/proofCache.ts`
+- Summary: Verified the advanced inference registry, rule classification helpers, and parity tests for cognitive, modal, deontic, and temporal-deontic rule selection in the repair worktree.
+- Impact: The TypeScript CEC advanced-inference surface remains browser-native and validates locally without Python, server, filesystem, subprocess, or RPC fallbacks; the daemon validation failure did not reproduce after rerunning the exact validation command.
+- Accepted changed files: `src/lib/logic/cec/advancedInference.test.ts`, `src/lib/logic/cec/advancedInference.ts`
 
 ### Blocked Backlog
 
