@@ -152,6 +152,76 @@ class DaemonLlmResultDurabilityTest(unittest.TestCase):
                 )
             )
 
+    def test_repeated_llm_terminations_block_before_next_llm(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            daemon_dir = repo / "ppd" / "daemon"
+            daemon_dir.mkdir(parents=True)
+            target = "Task checkbox-446: Add supervisor circuit-breaker recovery coverage."
+            for message in ("llm_router child exited with code -15:", "143"):
+                with (daemon_dir / "ppd-daemon.jsonl").open("a", encoding="utf-8") as handle:
+                    handle.write(
+                        json.dumps(
+                            {
+                                "proposal": {
+                                    "failure_kind": "llm",
+                                    "target_task": target,
+                                    "errors": [message],
+                                }
+                            }
+                        )
+                        + "\n"
+                    )
+
+            self.assertTrue(
+                should_block_task_before_llm(
+                    Config(repo_root=repo, max_task_failures_before_block=3),
+                    target,
+                )
+            )
+            self.assertFalse(
+                should_block_task_before_llm(
+                    Config(repo_root=repo, max_task_failures_before_block=3),
+                    "Task checkbox-447: Add daemon circuit-breaker resume coverage.",
+                )
+            )
+
+    def test_daemon_parks_repeated_llm_termination_task_without_calling_llm(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            daemon_dir = repo / "ppd" / "daemon"
+            daemon_dir.mkdir(parents=True)
+            target = "Task checkbox-446: Add supervisor circuit-breaker recovery coverage."
+            (daemon_dir / "task-board.md").write_text(
+                f"- [ ] {target}\n"
+                "- [ ] Task checkbox-447: Add daemon circuit-breaker resume coverage.\n",
+                encoding="utf-8",
+            )
+            for message in ("llm_router child exited with code -15:", "143"):
+                with (daemon_dir / "ppd-daemon.jsonl").open("a", encoding="utf-8") as handle:
+                    handle.write(
+                        json.dumps(
+                            {
+                                "proposal": {
+                                    "failure_kind": "llm",
+                                    "target_task": target,
+                                    "errors": [message],
+                                }
+                            }
+                        )
+                        + "\n"
+                    )
+            daemon = Daemon(Config(repo_root=repo, apply=True))
+
+            proposal = daemon.run_cycle()
+            board = (daemon_dir / "task-board.md").read_text(encoding="utf-8")
+            progress = json.loads((daemon_dir / "progress.json").read_text(encoding="utf-8"))
+
+        self.assertEqual("llm_termination", proposal.failure_kind)
+        self.assertIn(f"- [!] {target}", board)
+        self.assertIn("- [ ] Task checkbox-447: Add daemon circuit-breaker resume coverage.", board)
+        self.assertEqual("llm_termination", progress["latest"]["failure_kind"])
+
     def test_llm_timeout_cleanup_terminates_descendant_processes(self) -> None:
         process = subprocess.Popen(
             ["bash", "-lc", "setsid sleep 30 & echo $!; wait"],

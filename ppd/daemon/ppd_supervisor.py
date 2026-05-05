@@ -135,6 +135,13 @@ AUTONOMOUS_EXECUTION_CAPABILITY_TITLES = (
     "Add supervisor execution-capability recovery coverage proving stale calling_llm or applying_files status on old platform slices parks the stale tranche, appends this comprehensive execution tranche, validates the daemon, and restarts with PPD_LLM_BACKEND=llm_router.",
 )
 
+CIRCUIT_BREAKER_RECOVERY_TITLES = (
+    "Add supervisor circuit-breaker recovery coverage proving expired termination storms append vetted non-generated recovery tasks and restart without reopening generated blocked-cascade work.",
+    "Add daemon circuit-breaker resume coverage proving blocked generated cascade tasks stay skipped while a fresh vetted recovery task is selected first.",
+    "Add PP&D supervisor operations documentation for persistent user-unit recovery, explicit daemon resume gates, and no live DevHub or official-action side effects.",
+    "Add a fixture-only circuit-breaker status scenario proving paused daemon state records quarantine, restart eligibility, and source-safe recovery boundaries before autonomous work resumes.",
+)
+
 
 @dataclass(frozen=True)
 class SupervisorConfig:
@@ -451,6 +458,14 @@ def generated_blocked_cascade_budget_exhausted(tasks: list[Task]) -> bool:
     return total >= MAX_GENERATED_BLOCKED_CASCADE_TASKS
 
 
+def is_circuit_breaker_recovery_task(task: Task) -> bool:
+    return task.title.strip() in CIRCUIT_BREAKER_RECOVERY_TITLES
+
+
+def has_open_circuit_breaker_recovery_task(tasks: list[Task]) -> bool:
+    return any(is_circuit_breaker_recovery_task(task) and task.status in {"needed", "in-progress"} for task in tasks)
+
+
 def active_termination_storm_circuit_breaker(
     config: SupervisorConfig,
     *,
@@ -463,6 +478,40 @@ def active_termination_storm_circuit_breaker(
     if age is None or age > config.termination_storm_backoff_seconds:
         return {}, None
     return payload, max(0.0, float(config.termination_storm_backoff_seconds) - age)
+
+
+def append_circuit_breaker_recovery_tasks(markdown: str) -> tuple[str, tuple[str, ...]]:
+    tasks = parse_tasks(markdown)
+    open_labels = tuple(
+        f"checkbox-{task.checkbox_id}"
+        for task in tasks
+        if is_circuit_breaker_recovery_task(task) and task.status in {"needed", "in-progress"}
+    )
+    if open_labels:
+        return markdown, open_labels
+
+    titles = existing_task_titles(markdown)
+    templates = [
+        title
+        for title in CIRCUIT_BREAKER_RECOVERY_TITLES
+        if not task_title_already_covered(title, titles)
+    ]
+    if not templates:
+        return markdown, ()
+
+    start = next_checkbox_number(markdown)
+    labels = tuple(f"checkbox-{start + offset}" for offset in range(len(templates)))
+    lines = ["", "## Built-In Circuit Breaker Recovery Tranche", ""]
+    for offset, title in enumerate(templates):
+        lines.append(f"- [ ] Task checkbox-{start + offset}: {title}")
+    note = (
+        "\n"
+        "## Built-In Circuit Breaker Recovery Notes\n\n"
+        "- Appended vetted non-generated recovery tasks after generated blocked-cascade work was quarantined. "
+        "These tasks keep recovery inside PP&D daemon/supervisor fixtures, lifecycle handling, and documentation; "
+        "they do not authorize live DevHub actions, uploads, submissions, payments, or real PDF filling.\n"
+    )
+    return markdown.rstrip() + "\n" + "\n".join(lines) + note, labels
 
 
 def quarantine_generated_blocked_cascade_tasks(markdown: str) -> tuple[str, tuple[str, ...]]:
@@ -1415,6 +1464,7 @@ def diagnose(config: SupervisorConfig, *, now: Optional[datetime] = None) -> Sup
     termination_storm_count, termination_storm_targets = recent_llm_termination_storm_count(current_rows)
     active_breaker, breaker_remaining = active_termination_storm_circuit_breaker(config, now=now)
     generated_blocked_total, generated_blocked_open = generated_blocked_cascade_task_counts(tasks)
+    has_recovery_work = has_open_circuit_breaker_recovery_task(tasks)
 
     if tasks and all(task.status == "complete" for task in tasks):
         return SupervisorDecision(
@@ -1488,6 +1538,30 @@ def diagnose(config: SupervisorConfig, *, now: Optional[datetime] = None) -> Sup
             ),
             severity="critical",
             should_restart_daemon=False,
+        )
+
+    if has_recovery_work and not running:
+        return SupervisorDecision(
+            action="restart_daemon",
+            reason="vetted circuit-breaker recovery tasks are available; restart daemon on non-generated recovery work",
+            severity="warning",
+            should_restart_daemon=True,
+        )
+
+    if (
+        not has_recovery_work
+        and generated_blocked_open == 0
+        and active_state == "paused_by_supervisor_circuit_breaker"
+        and (termination_storm_count >= config.termination_storm_threshold or generated_blocked_total >= MAX_GENERATED_BLOCKED_CASCADE_TASKS)
+    ):
+        return SupervisorDecision(
+            action="recover_termination_storm_and_restart",
+            reason=(
+                "termination storm circuit breaker has quarantined generated work; append vetted non-generated "
+                "recovery tasks and restart the daemon instead of refreshing the breaker"
+            ),
+            severity="critical",
+            should_restart_daemon=True,
         )
 
     if termination_storm_count >= config.termination_storm_threshold:
@@ -2112,6 +2186,83 @@ def invoke_termination_storm_circuit_breaker(config: SupervisorConfig, decision:
     return proposal
 
 
+def invoke_termination_storm_recovery(config: SupervisorConfig, decision: SupervisorDecision) -> Proposal:
+    created_at = utc_now()
+    board_path = config.resolve(config.task_board)
+    status_path = config.resolve(config.status_file)
+    board = read_text(board_path) if board_path.exists() else ""
+    repaired_board, labels = append_circuit_breaker_recovery_tasks(board)
+    payload = {
+        "schemaVersion": 1,
+        "createdAt": created_at,
+        "repairKind": "termination_storm_recovery_tranche",
+        "decision": {
+            "action": decision.action,
+            "reason": decision.reason,
+            "severity": decision.severity,
+        },
+        "recoveryTaskLabels": list(labels),
+        "recoveryPolicy": "append_vetted_non_generated_recovery_tasks_after_quarantine",
+    }
+    breaker_payload = {
+        "schemaVersion": 1,
+        "createdAt": created_at,
+        "repairKind": "termination_storm_recovered",
+        "decision": {
+            "action": decision.action,
+            "reason": decision.reason,
+            "severity": decision.severity,
+        },
+        "recoveryTaskLabels": list(labels),
+        "operatorAction": (
+            "The supervisor converted the termination-storm pause into vetted non-generated recovery work. "
+            "The daemon may resume on those tasks, while generated blocked-cascade tasks remain blocked."
+        ),
+    }
+    ready_status = {
+        "schemaVersion": 1,
+        "updated_at": created_at,
+        "state": "ready_after_supervisor_circuit_breaker_recovery",
+        "active_state": "ready_after_supervisor_circuit_breaker_recovery",
+        "active_state_started_at": created_at,
+        "active_target_task": "",
+        "supervisor_action": decision.action,
+        "supervisor_reason": decision.reason,
+        "recovery_task_labels": list(labels),
+    }
+    files = [
+        {
+            "path": "ppd/daemon/builtin-repair-status.json",
+            "content": json.dumps(payload, indent=2, sort_keys=True) + "\n",
+        },
+        {
+            "path": "ppd/daemon/supervisor-circuit-breaker.json",
+            "content": json.dumps(breaker_payload, indent=2, sort_keys=True) + "\n",
+        },
+        {
+            "path": "ppd/daemon/status.json",
+            "content": json.dumps(ready_status, indent=2, sort_keys=True) + "\n",
+        },
+    ]
+    if repaired_board != board:
+        files.append({"path": "ppd/daemon/task-board.md", "content": repaired_board})
+    proposal = Proposal(
+        summary="Append vetted recovery work after termination-storm circuit breaker.",
+        impact=(
+            "The supervisor can move from a paused circuit-breaker state back to useful daemon work by "
+            "appending non-generated recovery tasks, marking the breaker recovered, and restarting on that "
+            "safe recovery tranche."
+        ),
+        files=files,
+    )
+    proposal.target_task = f"Built-in supervisor fallback: {decision.reason}"
+    proposal.dry_run = not config.apply
+    if config.apply:
+        return apply_files_with_validation(proposal, supervisor_daemon_config(config))
+    proposal.validation_results = run_validation(supervisor_daemon_config(config))
+    return proposal
+
+
 def invoke_codex_repair(config: SupervisorConfig, decision: SupervisorDecision) -> Proposal:
     if config.apply:
         run_control(config, "stop")
@@ -2219,6 +2370,12 @@ def run_once(config: SupervisorConfig) -> SupervisorDecision:
         if config.restart_daemon:
             run_control(config, "stop")
         proposal = invoke_termination_storm_circuit_breaker(config, decision)
+    elif decision.action == "recover_termination_storm_and_restart" and config.apply:
+        if config.restart_daemon:
+            run_control(config, "stop")
+        proposal = invoke_termination_storm_recovery(config, decision)
+        if config.restart_daemon and proposal.valid:
+            run_control(config, "start")
     elif decision.action == "reconcile_repeated_llm_loop_and_restart" and config.apply:
         if config.restart_daemon:
             run_control(config, "stop")

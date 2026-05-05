@@ -94,12 +94,12 @@ This board is the controlling backlog for the isolated PP&D daemon. The daemon s
 <!-- ppd-daemon-task-board:start -->
 ## Generated Status
 
-Last updated: 2026-05-04T07:30:42.161311Z
+Last updated: 2026-05-05T01:46:52.418832Z
 
-- Latest target: `Task checkbox-443: Add generated blocked-cascade daemon-repair coverage for tranche 50 item 2 proving blocked PP&D work stays parked until a fresh daemon repair task validates.`
+- Latest target: `Task checkbox-226: Add processor-suite integration planning for tranche 2 proving PP&D public documents flow through archive manifests, normalized document records, PDF metadata, and requirement batches before agents use them.`
 - Latest result: `llm`
 - Latest summary: LLM proposal failed.
-- Counts: `{"blocked": 198, "complete": 74, "in_progress": 0, "needed": 3}`
+- Counts: `{"blocked": 201, "complete": 78, "in_progress": 0, "needed": 0}`
 
 <!-- ppd-daemon-task-board:end -->
 ## Built-In Supervisor Repair Notes
@@ -133,7 +133,7 @@ Last updated: 2026-05-04T07:30:42.161311Z
 
 ## Built-In Autonomous PP&D Platform Tranche 2
 
-- [!] Task checkbox-225: Add autonomous platform continuation coverage for tranche 2 proving whole-site archival, Playwright draft automation, PDF field filling, and formal-logic outputs stay connected through source evidence IDs.
+- [x] Task checkbox-225: Add autonomous platform continuation coverage for tranche 2 proving whole-site archival, Playwright draft automation, PDF field filling, and formal-logic outputs stay connected through source evidence IDs.
 - [!] Task checkbox-226: Add processor-suite integration planning for tranche 2 proving PP&D public documents flow through archive manifests, normalized document records, PDF metadata, and requirement batches before agents use them.
 - [!] Task checkbox-227: Add Playwright/PDF handoff validation for tranche 2 proving redacted user facts can fill draft fields and PDF previews while official DevHub transitions stay behind exact confirmation checkpoints.
 - [!] Task checkbox-228: Add supervisor idle-recovery validation for tranche 2 proving completed boards synthesize new goal-aligned platform tasks without sleeping, duplicate tranche reuse, or blocked-task retry churn.
@@ -1289,3 +1289,12 @@ Last updated: 2026-05-04T07:30:42.161311Z
 
 - Parked open generated blocked-cascade daemon-repair tasks after a systemic termination storm. The supervisor will not grow generated fallback tranches again until the resource policy is hardened or a vetted human-authored task is reopened.
 
+## Built-In Circuit Breaker Recovery Tranche
+
+- [!] Task checkbox-446: Add supervisor circuit-breaker recovery coverage proving expired termination storms append vetted non-generated recovery tasks and restart without reopening generated blocked-cascade work.
+- [x] Task checkbox-447: Add daemon circuit-breaker resume coverage proving blocked generated cascade tasks stay skipped while a fresh vetted recovery task is selected first.
+- [x] Task checkbox-448: Add PP&D supervisor operations documentation for persistent user-unit recovery, explicit daemon resume gates, and no live DevHub or official-action side effects.
+- [x] Task checkbox-449: Add a fixture-only circuit-breaker status scenario proving paused daemon state records quarantine, restart eligibility, and source-safe recovery boundaries before autonomous work resumes.
+## Built-In Circuit Breaker Recovery Notes
+
+- Appended vetted non-generated recovery tasks after generated blocked-cascade work was quarantined. These tasks keep recovery inside PP&D daemon/supervisor fixtures, lifecycle handling, and documentation; they do not authorize live DevHub actions, uploads, submissions, payments, or real PDF filling.

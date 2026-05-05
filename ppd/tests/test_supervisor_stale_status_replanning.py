@@ -12,7 +12,9 @@ import ppd.daemon.ppd_supervisor as supervisor
 from ppd.daemon.ppd_daemon import atomic_write_json
 from ppd.daemon.ppd_supervisor import (
     AUTONOMOUS_EXECUTION_CAPABILITY_TITLES,
+    CIRCUIT_BREAKER_RECOVERY_TITLES,
     SupervisorConfig,
+    append_circuit_breaker_recovery_tasks,
     append_jsonl,
     builtin_autonomous_execution_goal_repair_task_board,
     builtin_autonomous_execution_replenish_task_board,
@@ -439,6 +441,108 @@ class SupervisorStaleStatusReplanningTest(unittest.TestCase):
 
         self.assertEqual("observe_circuit_breaker", decision.action)
         self.assertFalse(decision.should_restart_daemon)
+
+    def test_expired_circuit_breaker_recovers_with_vetted_non_generated_tasks(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            daemon_dir = repo / "ppd" / "daemon"
+            daemon_dir.mkdir(parents=True)
+            now = datetime(2026, 5, 4, 12, 20, tzinfo=timezone.utc)
+            created = datetime(2026, 5, 4, 12, 0, tzinfo=timezone.utc)
+            (daemon_dir / "task-board.md").write_text(
+                "- [!] Task checkbox-430: Blocked repair task one.\n"
+                "- [!] Task checkbox-431: Blocked repair task two.\n",
+                encoding="utf-8",
+            )
+            atomic_write_json(
+                daemon_dir / "status.json",
+                {
+                    "updated_at": created.isoformat().replace("+00:00", "Z"),
+                    "active_state": "paused_by_supervisor_circuit_breaker",
+                },
+            )
+            atomic_write_json(
+                daemon_dir / "supervisor-circuit-breaker.json",
+                {
+                    "schemaVersion": 1,
+                    "createdAt": created.isoformat().replace("+00:00", "Z"),
+                    "repairKind": "termination_storm_circuit_breaker",
+                },
+            )
+            for _ in range(4):
+                append_jsonl(
+                    daemon_dir / "ppd-daemon.jsonl",
+                    {
+                        "stage": "before_validation",
+                        "diagnostic": {
+                            "failure_kind": "llm",
+                            "target_task": "Task checkbox-430: Blocked repair task one.",
+                            "errors": ["llm_router child exited with code -15:"],
+                        },
+                    },
+                )
+
+            decision = diagnose(
+                SupervisorConfig(
+                    repo_root=repo,
+                    pid_file=Path("ppd/daemon/missing.pid"),
+                    termination_storm_threshold=4,
+                    termination_storm_backoff_seconds=900,
+                ),
+                now=now,
+            )
+            repaired, labels = append_circuit_breaker_recovery_tasks(
+                (daemon_dir / "task-board.md").read_text(encoding="utf-8")
+            )
+
+        self.assertEqual("recover_termination_storm_and_restart", decision.action)
+        self.assertTrue(decision.should_restart_daemon)
+        self.assertEqual(tuple(f"checkbox-{432 + offset}" for offset in range(4)), labels)
+        for title in CIRCUIT_BREAKER_RECOVERY_TITLES:
+            self.assertIn(title, repaired)
+        self.assertNotIn("generated blocked-cascade daemon-repair", "\n".join(CIRCUIT_BREAKER_RECOVERY_TITLES))
+
+    def test_open_circuit_breaker_recovery_task_restarts_daemon_despite_old_storm(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            daemon_dir = repo / "ppd" / "daemon"
+            daemon_dir.mkdir(parents=True)
+            (daemon_dir / "task-board.md").write_text(
+                f"- [ ] Task checkbox-500: {CIRCUIT_BREAKER_RECOVERY_TITLES[0]}\n"
+                "- [!] Task checkbox-501: Blocked old generated task.\n",
+                encoding="utf-8",
+            )
+            atomic_write_json(
+                daemon_dir / "status.json",
+                {
+                    "updated_at": "2026-05-04T12:00:00Z",
+                    "active_state": "ready_after_supervisor_circuit_breaker_recovery",
+                },
+            )
+            for _ in range(4):
+                append_jsonl(
+                    daemon_dir / "ppd-daemon.jsonl",
+                    {
+                        "stage": "before_validation",
+                        "diagnostic": {
+                            "failure_kind": "llm",
+                            "target_task": "Task checkbox-501: Blocked old generated task.",
+                            "errors": ["143"],
+                        },
+                    },
+                )
+
+            decision = diagnose(
+                SupervisorConfig(
+                    repo_root=repo,
+                    pid_file=Path("ppd/daemon/missing.pid"),
+                    termination_storm_threshold=4,
+                )
+            )
+
+        self.assertEqual("restart_daemon", decision.action)
+        self.assertTrue(decision.should_restart_daemon)
+        self.assertIn("vetted circuit-breaker recovery tasks", decision.reason)
 
     def test_supervisor_honors_term_when_service_manager_owns_restart_policy(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:

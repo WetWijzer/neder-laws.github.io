@@ -49,6 +49,16 @@ TASK_BOARD_STATUS_RE = re.compile(
     r"\n?<!-- ppd-daemon-task-board:start -->[\s\S]*?<!-- ppd-daemon-task-board:end -->\n?",
     re.MULTILINE,
 )
+LLM_TERMINATION_ERROR_MARKERS = (
+    "143",
+    "137",
+    "code -15",
+    "code -9",
+    "signal 15",
+    "signal 9",
+    "sigterm",
+    "sigkill",
+)
 
 ALLOWED_WRITE_PREFIXES = (
     "ppd/",
@@ -220,6 +230,13 @@ class Config:
 
     def resolve(self, path: Path) -> Path:
         return path if path.is_absolute() else self.repo_root / path
+
+
+@dataclass(frozen=True)
+class PreLlmBlockDecision:
+    summary: str
+    failure_kind: str
+    result: str
 
 
 def utc_now() -> str:
@@ -421,10 +438,17 @@ def is_retryable_failure(proposal: Proposal) -> bool:
     )
 
 
+def is_llm_termination_failure_record(proposal: dict[str, Any]) -> bool:
+    if str(proposal.get("failure_kind") or "") != "llm":
+        return False
+    text = " ".join(str(error).lower() for error in proposal.get("errors", []) or [])
+    return bool(text and any(marker in text for marker in LLM_TERMINATION_ERROR_MARKERS))
+
+
 def failure_block_threshold(proposal: Proposal, config: Config) -> int:
     """Use a tighter stop condition for parser-invalid generated patches."""
 
-    if proposal.failure_kind == "syntax_preflight":
+    if proposal.failure_kind in {"syntax_preflight", "llm_termination"}:
         return min(config.max_task_failures_before_block, 2)
     return config.max_task_failures_before_block
 
@@ -512,14 +536,43 @@ def task_failure_count(config: Config, task_label: str, *, kinds: Optional[set[s
     return count
 
 
-def should_block_task_before_llm(config: Config, task_label: str) -> bool:
-    """Stop retrying a task that already hit the parser-invalid proposal threshold."""
+def llm_termination_failure_count(config: Config, task_label: str) -> int:
+    count = 0
+    for proposal in recent_task_failures(config, task_label, limit=100):
+        if is_llm_termination_failure_record(proposal):
+            count += 1
+    return count
+
+
+def pre_llm_block_decision(config: Config, task_label: str) -> Optional[PreLlmBlockDecision]:
+    """Return a durable stop decision for tasks that are already known-stuck."""
 
     syntax_probe = Proposal(failure_kind="syntax_preflight")
-    return (
+    if (
         task_failure_count(config, task_label, kinds={"syntax_preflight"})
         >= failure_block_threshold(syntax_probe, config)
-    )
+    ):
+        return PreLlmBlockDecision(
+            summary="Task blocked before LLM after repeated syntax-preflight failures.",
+            failure_kind="syntax_preflight",
+            result="syntax_preflight_blocked",
+        )
+
+    termination_probe = Proposal(failure_kind="llm_termination")
+    if llm_termination_failure_count(config, task_label) >= failure_block_threshold(termination_probe, config):
+        return PreLlmBlockDecision(
+            summary="Task blocked before LLM after repeated LLM termination failures.",
+            failure_kind="llm_termination",
+            result="llm_termination_blocked",
+        )
+
+    return None
+
+
+def should_block_task_before_llm(config: Config, task_label: str) -> bool:
+    """Stop retrying a task that already hit a pre-LLM block threshold."""
+
+    return pre_llm_block_decision(config, task_label) is not None
 
 
 def format_failure_context(failures: list[dict[str, Any]]) -> str:
@@ -1413,14 +1466,19 @@ class Daemon:
             return proposal
 
         self.write_status("selected_task", target_task=selected.label)
+        pre_llm_block = (
+            pre_llm_block_decision(self.config, selected.label)
+            if self.config.apply and selected.status in {"needed", "in-progress"}
+            else None
+        )
         if (
             self.config.apply
             and selected.status in {"needed", "in-progress"}
-            and should_block_task_before_llm(self.config, selected.label)
+            and pre_llm_block is not None
         ):
             proposal = Proposal(
-                summary="Task blocked before LLM after repeated syntax-preflight failures.",
-                failure_kind="syntax_preflight",
+                summary=pre_llm_block.summary,
+                failure_kind=pre_llm_block.failure_kind,
                 target_task=selected.label,
             )
             proposal.dry_run = False
@@ -1430,7 +1488,7 @@ class Daemon:
                 board,
                 latest={
                     "target_task": selected.label,
-                    "result": "syntax_preflight_blocked",
+                    "result": pre_llm_block.result,
                     "summary": proposal.summary,
                 },
                 tasks=tasks_after,
