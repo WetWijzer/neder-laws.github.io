@@ -50,7 +50,48 @@ export type CecNativeInferencePythonModule =
 
 export type CecNativeInferenceRuleGroup = 'base' | 'cognitive' | 'modal';
 
-export type CecNativePythonRuleName = string;
+export type CecNativeBasePythonRuleName =
+  | 'ModusPonens'
+  | 'HypotheticalSyllogism'
+  | 'ConjunctionIntroduction'
+  | 'ConjunctionEliminationLeft'
+  | 'ConjunctionEliminationRight'
+  | 'DoubleNegationElimination';
+
+export type CecNativeCognitivePythonRuleName =
+  | 'BeliefDistribution'
+  | 'BeliefConjunction'
+  | 'BeliefMonotonicity'
+  | 'BeliefNegation'
+  | 'BeliefRevision'
+  | 'KnowledgeImpliesBelief'
+  | 'KnowledgeDistribution'
+  | 'KnowledgeConjunction'
+  | 'KnowledgeMonotonicity'
+  | 'CommonBeliefIntroduction'
+  | 'CommonKnowledgeDistribution'
+  | 'CommonKnowledgeImpliesKnowledge'
+  | 'CommonKnowledgeIntroduction'
+  | 'CommonKnowledgeMonotonicity'
+  | 'CommonKnowledgeNegation'
+  | 'CommonKnowledgeTransitivity'
+  | 'IntentionCommitment'
+  | 'IntentionMeansEnd'
+  | 'IntentionPersistence'
+  | 'PerceptionImpliesKnowledge'
+  | 'TemporallyInducedCommonKnowledge';
+
+export type CecNativeModalPythonRuleName =
+  | 'NecessityElimination'
+  | 'NecessityDistribution'
+  | 'PossibilityIntroduction'
+  | 'PossibilityDuality'
+  | 'NecessitationIntroduction';
+
+export type CecNativePythonRuleName =
+  | CecNativeBasePythonRuleName
+  | CecNativeCognitivePythonRuleName
+  | CecNativeModalPythonRuleName;
 
 export interface CecNativePythonProofStepMetadata {
   stepId: number;
@@ -1566,11 +1607,34 @@ const CEC_NATIVE_PYTHON_RULE_SPECS: readonly CecNativePythonRuleSpec[] = [
   nativeSpec('ConjunctionEliminationRight', 'base', CecConjunctionEliminationRightRule),
   nativeSpec('DoubleNegationElimination', 'base', CecDoubleNegationEliminationRule),
   nativeSpec('BeliefDistribution', 'cognitive', CecBeliefDistributionRule),
-  nativeSpec('KnowledgeImpliesBelief', 'cognitive', CecKnowledgeImpliesBeliefRule),
+  nativeSpec('BeliefConjunction', 'cognitive', CecBeliefConjunctionRule),
   nativeSpec('BeliefMonotonicity', 'cognitive', CecBeliefMonotonicityRule),
-  nativeSpec('IntentionCommitment', 'cognitive', CecIntentionCommitmentRule),
-  nativeSpec('PerceptionImpliesKnowledge', 'cognitive', CecPerceptionImpliesKnowledgeRule),
+  nativeSpec('BeliefNegation', 'cognitive', CecBeliefNegationRule),
   nativeSpec('BeliefRevision', 'cognitive', CecBeliefRevisionRule),
+  nativeSpec('KnowledgeImpliesBelief', 'cognitive', CecKnowledgeImpliesBeliefRule),
+  nativeSpec('KnowledgeDistribution', 'cognitive', CecKnowledgeDistributionRule),
+  nativeSpec('KnowledgeConjunction', 'cognitive', CecKnowledgeConjunctionRule),
+  nativeSpec('KnowledgeMonotonicity', 'cognitive', CecKnowledgeMonotonicityRule),
+  nativeSpec('CommonBeliefIntroduction', 'cognitive', CecCommonBeliefIntroductionRule),
+  nativeSpec('CommonKnowledgeDistribution', 'cognitive', CecCommonKnowledgeDistributionRule),
+  nativeSpec(
+    'CommonKnowledgeImpliesKnowledge',
+    'cognitive',
+    CecCommonKnowledgeImpliesKnowledgeRule,
+  ),
+  nativeSpec('CommonKnowledgeIntroduction', 'cognitive', CecCommonKnowledgeIntroductionRule),
+  nativeSpec('CommonKnowledgeMonotonicity', 'cognitive', CecCommonKnowledgeMonotonicityRule),
+  nativeSpec('CommonKnowledgeNegation', 'cognitive', CecCommonKnowledgeNegationRule),
+  nativeSpec('CommonKnowledgeTransitivity', 'cognitive', CecCommonKnowledgeTransitivityRule),
+  nativeSpec('IntentionCommitment', 'cognitive', CecIntentionCommitmentRule),
+  nativeSpec('IntentionMeansEnd', 'cognitive', CecIntentionMeansEndRule),
+  nativeSpec('IntentionPersistence', 'cognitive', CecIntentionPersistenceRule),
+  nativeSpec('PerceptionImpliesKnowledge', 'cognitive', CecPerceptionImpliesKnowledgeRule),
+  nativeSpec(
+    'TemporallyInducedCommonKnowledge',
+    'cognitive',
+    CecTemporallyInducedCommonKnowledgeRule,
+  ),
   nativeSpec('NecessityElimination', 'modal', CecNecessityEliminationRule),
   nativeSpec('NecessityDistribution', 'modal', CecNecessityDistributionRule),
   nativeSpec('PossibilityIntroduction', 'modal', CecPossibilityIntroductionRule),

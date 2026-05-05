@@ -79,6 +79,7 @@ import {
   CecTemporalTRule,
   CecTemporalNegationRule,
   CecTautologyRule,
+  CEC_NATIVE_INFERENCE_RUNTIMES,
   CecTemporallyInducedCommonKnowledgeRule,
   CecTranspositionRule,
   CecTemporalUntilEliminationRule,
@@ -408,7 +409,29 @@ describe('CEC inference rules', () => {
       applications.map((application) => [application.pythonRuleName, application]),
     );
     expect(tables.base).toContain('ModusPonens');
-    expect(tables.cognitive).toContain('BeliefDistribution');
+    expect(tables.cognitive).toEqual([
+      'BeliefDistribution',
+      'BeliefConjunction',
+      'BeliefMonotonicity',
+      'BeliefNegation',
+      'BeliefRevision',
+      'KnowledgeImpliesBelief',
+      'KnowledgeDistribution',
+      'KnowledgeConjunction',
+      'KnowledgeMonotonicity',
+      'CommonBeliefIntroduction',
+      'CommonKnowledgeDistribution',
+      'CommonKnowledgeImpliesKnowledge',
+      'CommonKnowledgeIntroduction',
+      'CommonKnowledgeMonotonicity',
+      'CommonKnowledgeNegation',
+      'CommonKnowledgeTransitivity',
+      'IntentionCommitment',
+      'IntentionMeansEnd',
+      'IntentionPersistence',
+      'PerceptionImpliesKnowledge',
+      'TemporallyInducedCommonKnowledge',
+    ]);
     expect(tables.modal).toContain('NecessityDistribution');
     expect(formatCecExpression(byName.get('ModusPonens')!.conclusion)).toBe('(q)');
     expect(formatCecExpression(byName.get('BeliefDistribution')!.conclusion)).toBe(
@@ -426,6 +449,79 @@ describe('CEC inference rules', () => {
       browserNative: true,
       pythonRuntime: false,
     });
+  });
+
+  it('ports cognitive.py rule applications through the browser-native parity adapter', () => {
+    const applications = applyCecNativePythonParityRules(
+      [
+        parseCecExpression('(B alice (p))'),
+        parseCecExpression('(B alice (q))'),
+        parseCecExpression('(B alice (not (p)))'),
+        parseCecExpression('(B bob (p))'),
+        parseCecExpression('(K alice (p))'),
+        parseCecExpression('(K alice (q))'),
+        parseCecExpression('(K alice (and (p) (q)))'),
+        parseCecExpression('(K bob (p))'),
+        parseCecExpression('(C all (and (p) (q)))'),
+        parseCecExpression('(C all (not (p)))'),
+        parseCecExpression('(C all (C team (p)))'),
+        parseCecExpression('(I alice (q))'),
+        parseCecExpression('(B alice (implies (p) (q)))'),
+        parseCecExpression('(not (B alice (q)))'),
+        parseCecExpression('(Perceives alice (not (p)))'),
+        parseCecExpression('(always (K all (p)))'),
+        parseCecExpression('(implies (p) (r))'),
+      ],
+      ['cognitive'],
+    );
+
+    const byName = new Map(
+      applications.map((application) => [application.pythonRuleName, application]),
+    );
+    expect(CEC_NATIVE_INFERENCE_RUNTIMES.cognitive).toEqual({
+      sourcePythonModule: 'logic/CEC/native/inference_rules/cognitive.py',
+      browserNative: true,
+      pythonRuntime: false,
+    });
+    expect(formatCecExpression(byName.get('BeliefConjunction')!.conclusion)).toBe(
+      '(B alice (and (p) (q)))',
+    );
+    expect(formatCecExpression(byName.get('BeliefNegation')!.conclusion)).toBe(
+      '(not (B alice (p)))',
+    );
+    expect(formatCecExpression(byName.get('KnowledgeDistribution')!.conclusion)).toBe(
+      '(and (K alice (p)) (K alice (q)))',
+    );
+    expect(formatCecExpression(byName.get('KnowledgeConjunction')!.conclusion)).toBe(
+      '(K alice (and (p) (q)))',
+    );
+    expect(formatCecExpression(byName.get('CommonKnowledgeIntroduction')!.conclusion)).toBe(
+      '(C all (p))',
+    );
+    expect(formatCecExpression(byName.get('CommonBeliefIntroduction')!.conclusion)).toBe(
+      '(CB all (p))',
+    );
+    expect(formatCecExpression(byName.get('CommonKnowledgeNegation')!.conclusion)).toBe(
+      '(not (C all (p)))',
+    );
+    expect(formatCecExpression(byName.get('CommonKnowledgeTransitivity')!.conclusion)).toBe(
+      '(C all (p))',
+    );
+    expect(formatCecExpression(byName.get('IntentionMeansEnd')!.conclusion)).toBe('(I alice (p))');
+    expect(formatCecExpression(byName.get('IntentionPersistence')!.conclusion)).toBe(
+      '(I alice (q))',
+    );
+    expect(formatCecExpression(byName.get('TemporallyInducedCommonKnowledge')!.conclusion)).toBe(
+      '(C all (p))',
+    );
+    expect(
+      applications.every(
+        (application) =>
+          application.sourcePythonModule === 'logic/CEC/native/inference_rules/cognitive.py' &&
+          application.proofStep.browserNative &&
+          !application.proofStep.pythonRuntime,
+      ),
+    ).toBe(true);
   });
 
   it('applies quantified CEC rules', () => {

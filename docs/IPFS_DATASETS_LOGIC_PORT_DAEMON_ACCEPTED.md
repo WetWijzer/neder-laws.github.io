@@ -2783,3 +2783,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T102618Z-ported-cec-native-grammar_loader.py-as-a-browser-native-in-memory-grammar-loader.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T102618Z-ported-cec-native-grammar_loader.py-as-a-browser-native-in-memory-grammar-loader.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T102618Z-ported-cec-native-grammar_loader.py-as-a-browser-native-in-memory-grammar-loader.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 10:36:49 UTC
+
+- Target: `Task checkbox-220: Port remaining Python logic module `logic/CEC/native/inference_rules/cognitive.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Summary: Completed the CEC native cognitive.py parity table for existing browser-native cognitive inference rules.
+- Impact: The TypeScript CEC native parity adapter now exposes typed Python rule names for the cognitive.py rule surface and includes all existing browser-native cognitive rule implementations in getCecNativeInferenceRuleTables/applyCecNativePythonParityRules. Focused Jest coverage validates representative cognitive adapter applications and confirms the runtime metadata remains browser-native with no Python runtime.
+- Changed files: `src/lib/logic/cec/inferenceRules.test.ts`, `src/lib/logic/cec/inferenceRules.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T103649Z-completed-the-cec-native-cognitive.py-parity-table-for-existing-browser-native-c.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T103649Z-completed-the-cec-native-cognitive.py-parity-table-for-existing-browser-native-c.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T103649Z-completed-the-cec-native-cognitive.py-parity-table-for-existing-browser-native-c.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+
