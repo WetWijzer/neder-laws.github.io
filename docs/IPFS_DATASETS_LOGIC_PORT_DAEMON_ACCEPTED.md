@@ -2747,3 +2747,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T095818Z-ported-native-dcec-type-descriptors-and-symbol-container-validation-for-logic-ce.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T095818Z-ported-native-dcec-type-descriptors-and-symbol-container-validation-for-logic-ce.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T095818Z-ported-native-dcec-type-descriptors-and-symbol-container-validation-for-logic-ce.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 10:01:40 UTC
+
+- Target: `Task checkbox-213: Port remaining Python logic module `logic/CEC/native/enhanced_grammar_parser.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Summary: Added browser-native DCEC enhanced grammar snapshot import/export with fail-closed validation.
+- Impact: The TypeScript enhanced grammar parser can now serialize and restore complete in-memory grammar and lexicon artifacts for logic/CEC/native/enhanced_grammar_parser.py parity without filesystem, network, Python, RPC, or server dependencies. Focused Jest tests exercise valid round-trips and malformed snapshot rejection before parser state mutation.
+- Changed files: `src/lib/logic/cec/enhancedGrammarParser.test.ts`, `src/lib/logic/cec/enhancedGrammarParser.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T100140Z-added-browser-native-dcec-enhanced-grammar-snapshot-import-export-with-fail-clos.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T100140Z-added-browser-native-dcec-enhanced-grammar-snapshot-import-export-with-fail-clos.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T100140Z-added-browser-native-dcec-enhanced-grammar-snapshot-import-export-with-fail-clos.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+

@@ -19,6 +19,40 @@ export const DcecGrammarCategory = {
 export type DcecGrammarCategoryValue =
   (typeof DcecGrammarCategory)[keyof typeof DcecGrammarCategory];
 
+export interface DcecEnhancedGrammarRuleData {
+  readonly lhs: DcecGrammarCategoryValue;
+  readonly rhs: Array<DcecGrammarCategoryValue>;
+}
+
+export interface DcecEnhancedGrammarSnapshot {
+  readonly sourcePythonModule: 'logic/CEC/native/enhanced_grammar_parser.py';
+  readonly runtime: 'browser-native';
+  readonly externalResourcePolicy: 'none';
+  readonly startSymbol: DcecGrammarCategoryValue;
+  readonly rules: Array<DcecEnhancedGrammarRuleData>;
+  readonly lexicon: Record<string, Array<DcecGrammarCategoryValue>>;
+}
+
+export interface DcecEnhancedGrammarSnapshotIssue {
+  readonly code:
+    | 'missing-start-symbol'
+    | 'invalid-start-symbol'
+    | 'missing-rules'
+    | 'invalid-rule-category'
+    | 'empty-rule-rhs'
+    | 'missing-lexicon'
+    | 'empty-lexical-entry'
+    | 'invalid-lexical-category';
+  readonly message: string;
+  readonly word?: string;
+  readonly ruleIndex?: number;
+}
+
+export interface DcecEnhancedGrammarSnapshotValidation {
+  readonly valid: boolean;
+  readonly issues: Array<DcecEnhancedGrammarSnapshotIssue>;
+}
+
 export class DcecGrammarTerminal {
   readonly word: string;
   readonly category: DcecGrammarCategoryValue;
@@ -182,9 +216,15 @@ export class DcecEnhancedGrammarParser {
   readonly lexicon = new Map<string, DcecGrammarTerminal[]>();
   startSymbol: DcecGrammarCategoryValue = DcecGrammarCategory.S;
 
-  constructor() {
-    this.initGrammar();
-    this.initLexicon();
+  constructor(
+    options: {
+      readonly initializeDefaults?: boolean;
+    } = {},
+  ) {
+    if (options.initializeDefaults !== false) {
+      this.initGrammar();
+      this.initLexicon();
+    }
   }
 
   addRule(rule: DcecGrammarRule): void {
@@ -193,6 +233,106 @@ export class DcecEnhancedGrammarParser {
 
   addLexicalEntry(word: string, category: DcecGrammarCategoryValue): void {
     this.addWords([word], category);
+  }
+
+  createSnapshot(): DcecEnhancedGrammarSnapshot {
+    const lexicon: Record<string, Array<DcecGrammarCategoryValue>> = {};
+    for (const [word, terminals] of [...this.lexicon.entries()].sort(([left], [right]) =>
+      left.localeCompare(right),
+    )) {
+      lexicon[word] = terminals.map((terminal) => terminal.category);
+    }
+
+    return {
+      sourcePythonModule: 'logic/CEC/native/enhanced_grammar_parser.py',
+      runtime: 'browser-native',
+      externalResourcePolicy: 'none',
+      startSymbol: this.startSymbol,
+      rules: this.rules.map((rule) => ({ lhs: rule.lhs, rhs: [...rule.rhs] })),
+      lexicon,
+    };
+  }
+
+  loadSnapshot(snapshot: DcecEnhancedGrammarSnapshot): DcecEnhancedGrammarSnapshotValidation {
+    const validation = this.validateSnapshot(snapshot);
+    if (!validation.valid) return validation;
+
+    this.rules.length = 0;
+    this.lexicon.clear();
+    this.startSymbol = snapshot.startSymbol;
+    for (const rule of snapshot.rules) {
+      this.addRule(new DcecGrammarRule(rule.lhs, rule.rhs));
+    }
+    for (const [word, categories] of Object.entries(snapshot.lexicon)) {
+      for (const category of categories) this.addLexicalEntry(word, category);
+    }
+
+    return validation;
+  }
+
+  validateSnapshot(snapshot: DcecEnhancedGrammarSnapshot): DcecEnhancedGrammarSnapshotValidation {
+    const issues: Array<DcecEnhancedGrammarSnapshotIssue> = [];
+    const categoryValues = new Set<DcecGrammarCategoryValue>(
+      Object.values(DcecGrammarCategory) as Array<DcecGrammarCategoryValue>,
+    );
+
+    if (snapshot.startSymbol === undefined) {
+      issues.push({ code: 'missing-start-symbol', message: 'Snapshot startSymbol is required.' });
+    } else if (!categoryValues.has(snapshot.startSymbol)) {
+      issues.push({
+        code: 'invalid-start-symbol',
+        message: `Unknown start symbol ${String(snapshot.startSymbol)}.`,
+      });
+    }
+
+    if (!Array.isArray(snapshot.rules) || snapshot.rules.length === 0) {
+      issues.push({ code: 'missing-rules', message: 'Snapshot must include grammar rules.' });
+    } else {
+      snapshot.rules.forEach((rule, ruleIndex) => {
+        if (
+          !categoryValues.has(rule.lhs) ||
+          rule.rhs.some((category) => !categoryValues.has(category))
+        ) {
+          issues.push({
+            code: 'invalid-rule-category',
+            message: `Rule ${ruleIndex} contains an unknown category.`,
+            ruleIndex,
+          });
+        }
+        if (rule.rhs.length === 0) {
+          issues.push({
+            code: 'empty-rule-rhs',
+            message: `Rule ${ruleIndex} must include at least one RHS category.`,
+            ruleIndex,
+          });
+        }
+      });
+    }
+
+    if (snapshot.lexicon === undefined || Object.keys(snapshot.lexicon).length === 0) {
+      issues.push({ code: 'missing-lexicon', message: 'Snapshot must include lexical entries.' });
+    } else {
+      for (const [word, categories] of Object.entries(snapshot.lexicon)) {
+        if (word.trim().length === 0 || categories.length === 0) {
+          issues.push({
+            code: 'empty-lexical-entry',
+            message: `Lexical entry "${word}" must include a word and categories.`,
+            word,
+          });
+        }
+        for (const category of categories) {
+          if (!categoryValues.has(category)) {
+            issues.push({
+              code: 'invalid-lexical-category',
+              message: `Lexical entry "${word}" uses unknown category ${String(category)}.`,
+              word,
+            });
+          }
+        }
+      }
+    }
+
+    return { valid: issues.length === 0, issues };
   }
 
   parse(sentence: string): DcecParseTree[] {

@@ -98,6 +98,46 @@ describe('DCEC enhanced grammar parser parity helpers', () => {
     expect(parser.lexicon.get('tenant')?.[0].category).toBe(DcecGrammarCategory.AGENT);
   });
 
+  it('round-trips browser-native grammar snapshots without external resources', () => {
+    const parser = createDcecEnhancedGrammarParser();
+    parser.addLexicalEntry('tenant', DcecGrammarCategory.AGENT);
+    parser.addLexicalEntry('repair', DcecGrammarCategory.ACTION);
+
+    const snapshot = parser.createSnapshot();
+    const restored = new DcecEnhancedGrammarParser({ initializeDefaults: false });
+    const validation = restored.loadSnapshot(snapshot);
+
+    expect(snapshot).toMatchObject({
+      sourcePythonModule: 'logic/CEC/native/enhanced_grammar_parser.py',
+      runtime: 'browser-native',
+      externalResourcePolicy: 'none',
+      startSymbol: DcecGrammarCategory.S,
+    });
+    expect(validation).toEqual({ valid: true, issues: [] });
+    expect(restored.parse('tenant must repair')).toHaveLength(1);
+    expect(restored.createSnapshot().lexicon.tenant).toEqual([DcecGrammarCategory.AGENT]);
+  });
+
+  it('rejects malformed grammar snapshots before mutating parser state', () => {
+    const parser = createDcecEnhancedGrammarParser();
+    const before = parser.createSnapshot();
+    const invalid = {
+      ...before,
+      rules: [{ lhs: DcecGrammarCategory.S, rhs: [] }],
+      lexicon: { '': [], alice: ['UnknownCategory'] },
+    } as unknown as ReturnType<DcecEnhancedGrammarParser['createSnapshot']>;
+
+    const validation = parser.loadSnapshot(invalid);
+
+    expect(validation.valid).toBe(false);
+    expect(validation.issues.map((issue) => issue.code)).toEqual([
+      'empty-rule-rhs',
+      'empty-lexical-entry',
+      'invalid-lexical-category',
+    ]);
+    expect(parser.createSnapshot()).toEqual(before);
+  });
+
   it('validates productive and reachable grammar categories', () => {
     const parser = new DcecEnhancedGrammarParser();
     const [valid, issues] = parser.validateGrammar();
