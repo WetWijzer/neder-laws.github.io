@@ -2,6 +2,7 @@ import { normalizePredicateName } from '../normalization';
 import { getLogicRuntimeCapabilities } from '../runtimeCapabilities';
 import type { LogicValidationResult } from '../types';
 import { createValidationResult } from '../validation';
+import { extractBrowserNativeFolNlp, type BrowserNativeFolNlpExtraction } from './browserNativeNlp';
 
 export interface FolTokenMatch {
   type: string;
@@ -15,6 +16,7 @@ export interface FolParseResult {
   quantifiers: FolTokenMatch[];
   operators: FolTokenMatch[];
   validation: LogicValidationResult;
+  nlp: BrowserNativeFolNlpExtraction;
   capabilities: {
     nlpUnavailable: boolean;
     mlUnavailable: boolean;
@@ -88,6 +90,7 @@ const OPERATOR_PATTERNS: Array<{ type: string; symbol: string; pattern: RegExp }
 
 export function parseFolText(text: string): FolParseResult {
   const normalized = text.trim();
+  const nlp = extractBrowserNativeFolNlp(normalized);
   const quantifiers = parseFolQuantifiers(normalized);
   const operators = parseFolOperators(normalized);
   const formula = buildFolFormula(normalized, quantifiers, operators);
@@ -97,6 +100,7 @@ export function parseFolText(text: string): FolParseResult {
     quantifiers,
     operators,
     validation: validateFolSyntax(formula),
+    nlp,
     capabilities: {
       nlpUnavailable: getLogicRuntimeCapabilities().fol.nlpUnavailable,
       mlUnavailable: getLogicRuntimeCapabilities().fol.mlUnavailable,

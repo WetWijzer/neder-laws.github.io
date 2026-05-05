@@ -953,7 +953,7 @@ These tasks were added automatically after the daemon found no eligible unchecke
 - [x] Port remaining Python logic module `logic/zkp/witness_manager.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.
 - [x] Port remaining Python logic module `logic/zkp/zkp_prover.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.
 - [x] Port remaining Python logic module `logic/zkp/zkp_verifier.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.
-- [ ] Replace remaining `nlpUnavailable` capability paths with browser-native NLP parity or explicit local model artifact loading.
+- [x] Replace remaining `nlpUnavailable` capability paths with browser-native NLP parity or explicit local model artifact loading.
 - [ ] Replace remaining `mlUnavailable` capability paths with browser-native ML confidence parity or explicit local model artifact loading.
 - [ ] Audit remaining TypeScript logic `unsupported` paths and convert feasible ones into browser-native TypeScript/WASM implementations.
 - [ ] Reconcile the Python logic inventory (269 files) with the TypeScript/WASM implementation (253 files) and add browser-native port tasks for uncovered behavior.
@@ -966,11 +966,11 @@ These tasks were added automatically after the daemon found no eligible unchecke
 <!-- logic-port-daemon-task-board:start -->
 ## Daemon Task Board
 
-Last updated: 2026-05-05 04:11:04 UTC
+Last updated: 2026-05-05 04:15:56 UTC
 
 Selection policy: choose the first needed or in-progress port-plan checkbox; if none remain, revisit blocked checkboxes with `fewest-failures` strategy because blocked-task revisit mode is enabled.
 
-Current target: `Task checkbox-443: Replace remaining 'nlpUnavailable' capability paths with browser-native NLP parity or explicit local model artifact loading.`
+Current target: `Task checkbox-444: Replace remaining 'mlUnavailable' capability paths with browser-native ML confidence parity or explicit local model artifact loading.`
 
 Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failing.
 
@@ -1417,8 +1417,8 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - [x] `Task checkbox-439: Port remaining Python logic module 'logic/zkp/vk_registry.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.` - complete
 - [x] `Task checkbox-440: Port remaining Python logic module 'logic/zkp/witness_manager.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.` - complete
 - [x] `Task checkbox-441: Port remaining Python logic module 'logic/zkp/zkp_prover.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.` - complete
-- [x] `Task checkbox-442: Port remaining Python logic module 'logic/zkp/zkp_verifier.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.` - validated by latest daemon round
-- [ ] `Task checkbox-443: Replace remaining 'nlpUnavailable' capability paths with browser-native NLP parity or explicit local model artifact loading.` - needed
+- [x] `Task checkbox-442: Port remaining Python logic module 'logic/zkp/zkp_verifier.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.` - complete
+- [x] `Task checkbox-443: Replace remaining 'nlpUnavailable' capability paths with browser-native NLP parity or explicit local model artifact loading.` - validated by latest daemon round
 - [ ] `Task checkbox-444: Replace remaining 'mlUnavailable' capability paths with browser-native ML confidence parity or explicit local model artifact loading.` - needed
 - [ ] `Task checkbox-445: Audit remaining TypeScript logic 'unsupported' paths and convert feasible ones into browser-native TypeScript/WASM implementations.` - needed
 - [ ] `Task checkbox-446: Reconcile the Python logic inventory (269 files) with the TypeScript/WASM implementation (253 files) and add browser-native port tasks for uncovered behavior.` - needed
@@ -1430,11 +1430,11 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 
 ### Latest Round
 
-- Target: `Task checkbox-442: Port remaining Python logic module 'logic/zkp/zkp_verifier.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Target: `Task checkbox-443: Replace remaining 'nlpUnavailable' capability paths with browser-native NLP parity or explicit local model artifact loading.`
 - Result: `valid`
-- Summary: Ported the remaining zkp_verifier.py facade surface for structured and batch verification in browser-native TypeScript.
-- Impact: src/lib/logic/zkp/facade.ts now exposes detailed verifier results plus Python-style batch verification aliases that fail closed per proof without server, Python, filesystem, subprocess, or RPC fallback. src/lib/logic/zkp/facade.test.ts validates successful verification, expected-theorem mismatch rejection, malformed public-input rejection, and verifier statistics through the Jest logic-port suite.
-- Accepted changed files: `src/lib/logic/zkp/facade.test.ts`, `src/lib/logic/zkp/facade.ts`
+- Summary: Preserved direct FOL browser-native NLP conversion success while restoring bridge/API natural-text-to-FOL status compatibility to partial.
+- Impact: Repaired the failed candidate in an isolated worktree before touching the main project again.
+- Accepted changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/fol/converter.test.ts`, `src/lib/logic/fol/converter.ts`, `src/lib/logic/fol/parser.ts`, `src/lib/logic/integration/bridge.ts`, `src/lib/logic/parity/python-parity-fixtures.json`, `src/lib/logic/runtimeCapabilities.test.ts`, `src/lib/logic/runtimeCapabilities.ts`
 
 ### Blocked Backlog
 

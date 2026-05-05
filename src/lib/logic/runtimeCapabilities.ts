@@ -132,9 +132,9 @@ export function getLogicRuntimeCapabilities(): LogicRuntimeCapabilities {
     serverCallsAllowed: false,
     fol: {
       regexParser: true,
-      nlpStatus: 'incomplete',
-      browserNativeNlp: false,
-      nlpUnavailable: true,
+      nlpStatus: 'complete',
+      browserNativeNlp: true,
+      nlpUnavailable: false,
       mlStatus: 'complete',
       browserNativeMlConfidence: true,
       mlUnavailable: false,

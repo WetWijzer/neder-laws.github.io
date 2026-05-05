@@ -14,8 +14,9 @@ describe('logic runtime capabilities', () => {
       serverCallsAllowed: false,
       fol: {
         regexParser: true,
-        nlpStatus: 'incomplete',
-        nlpUnavailable: true,
+        nlpStatus: 'complete',
+        browserNativeNlp: true,
+        nlpUnavailable: false,
         mlStatus: 'complete',
         mlUnavailable: false,
       },
@@ -64,11 +65,18 @@ describe('logic runtime capabilities', () => {
     expect(getRecommendedLocalWasmProvers('proof-checking')).toEqual([]);
   });
 
-  it('surfaces temporary incomplete-port ML/NLP capabilities in converter outputs', () => {
+  it('surfaces browser-native FOL NLP and ML capabilities in converter outputs', () => {
     expect(parseFolText('All humans are mortal').capabilities).toEqual({
-      nlpUnavailable: true,
+      nlpUnavailable: false,
       mlUnavailable: false,
       serverCallsAllowed: false,
+    });
+    expect(parseFolText('All humans are mortal').nlp).toMatchObject({
+      provider: 'deterministic-token-classifier',
+      serverCallsAllowed: false,
+      pythonSpacy: false,
+      fallback: 'none',
+      predicateCandidates: ['humans', 'mortal'],
     });
 
     expect(convertLegalTextToDeontic('The tenant must pay rent.').capabilities).toEqual({

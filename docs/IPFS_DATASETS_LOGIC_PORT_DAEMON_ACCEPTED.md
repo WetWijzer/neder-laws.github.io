@@ -2270,3 +2270,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T041104Z-ported-the-remaining-zkp_verifier.py-facade-surface-for-structured-and-batch-ver.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T041104Z-ported-the-remaining-zkp_verifier.py-facade-surface-for-structured-and-batch-ver.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T041104Z-ported-the-remaining-zkp_verifier.py-facade-surface-for-structured-and-batch-ver.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 04:15:56 UTC
+
+- Target: `Task checkbox-443: Replace remaining `nlpUnavailable` capability paths with browser-native NLP parity or explicit local model artifact loading.`
+- Summary: Preserved direct FOL browser-native NLP conversion success while restoring bridge/API natural-text-to-FOL status compatibility to partial.
+- Impact: Repaired the failed candidate in an isolated worktree before touching the main project again.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/fol/converter.test.ts`, `src/lib/logic/fol/converter.ts`, `src/lib/logic/fol/parser.ts`, `src/lib/logic/integration/bridge.ts`, `src/lib/logic/parity/python-parity-fixtures.json`, `src/lib/logic/runtimeCapabilities.test.ts`, `src/lib/logic/runtimeCapabilities.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T041556Z-preserved-direct-fol-browser-native-nlp-conversion-success-while-restoring-bridg.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T041556Z-preserved-direct-fol-browser-native-nlp-conversion-success-while-restoring-bridg.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T041556Z-preserved-direct-fol-browser-native-nlp-conversion-success-while-restoring-bridg.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+
