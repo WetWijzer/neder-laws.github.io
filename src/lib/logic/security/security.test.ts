@@ -2,9 +2,13 @@ import { LogicValidationError } from '../errors';
 import { AUDIT_LOG_METADATA, AuditLogger, logProofAttempt, setAuditLogger } from './auditLog';
 import {
   CircuitBreakerOpenError,
+  getAllCircuitBreakerStats,
   getCircuitBreaker,
+  LLM_CIRCUIT_BREAKER_METADATA,
   LLMCircuitBreaker,
   resetAllCircuitBreakers,
+  withCircuitBreaker,
+  withCircuitBreakerAsync,
 } from './circuitBreaker';
 import {
   INPUT_VALIDATION_METADATA,
@@ -136,6 +140,49 @@ describe('logic security browser-native parity helpers', () => {
     expect(breaker.call(() => 'blocked')).toBe('fallback');
     expect(getCircuitBreaker('shared')).toBe(getCircuitBreaker('shared'));
     expect(resetAllCircuitBreakers()).toBeGreaterThanOrEqual(1);
+  });
+
+  it('ports llm_circuit_breaker.py metadata, wrappers, and async calls without runtime bridges', async () => {
+    let now = 10;
+    const breaker = new LLMCircuitBreaker({
+      failureThreshold: 1,
+      timeoutSeconds: 5,
+      name: 'async-llm',
+      now: () => now,
+    });
+    const guarded = breaker.wrap((value: string) => `ok:${value}`);
+    const guardedAsync = breaker.wrapAsync(async (value: string) => `async:${value}`);
+
+    expect(breaker.metadata).toEqual(LLM_CIRCUIT_BREAKER_METADATA);
+    expect(LLM_CIRCUIT_BREAKER_METADATA).toMatchObject({
+      sourcePythonModule: 'logic/security/llm_circuit_breaker.py',
+      browserNative: true,
+      serverCallsAllowed: false,
+      pythonRuntimeAllowed: false,
+      supportsAsyncCalls: true,
+    });
+    expect(guarded('local')).toBe('ok:local');
+    now = 11;
+    await expect(guardedAsync('local')).resolves.toBe('async:local');
+    await expect(
+      breaker.callAsync(async () => {
+        throw new Error('llm failed');
+      }),
+    ).rejects.toThrow('llm failed');
+    expect(breaker.state).toBe('open');
+    await expect(breaker.callAsync(async () => 'blocked')).rejects.toThrow(CircuitBreakerOpenError);
+
+    expect(withCircuitBreaker('global-wrapper', () => 'sync')).toBe('sync');
+    await expect(withCircuitBreakerAsync('global-wrapper', async () => 'async')).resolves.toBe(
+      'async',
+    );
+    expect(getAllCircuitBreakerStats()).toMatchObject({
+      'global-wrapper': {
+        metrics: {
+          successes: 2,
+        },
+      },
+    });
   });
 
   it('records in-memory audit events and JSON-lines export', () => {
