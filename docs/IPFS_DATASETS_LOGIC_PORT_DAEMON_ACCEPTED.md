@@ -2108,3 +2108,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T030525Z-added-the-missing-groth16-backup-backend-exports-to-the-browser-native-typescrip.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T030525Z-added-the-missing-groth16-backup-backend-exports-to-the-browser-native-typescrip.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T030525Z-added-the-missing-groth16-backup-backend-exports-to-the-browser-native-typescrip.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 03:07:55 UTC
+
+- Target: `Task checkbox-425: Port remaining Python logic module `logic/zkp/backends/groth16_ffi.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Summary: Ported groth16_ffi.py as a browser-native injected WASM Groth16 backend.
+- Impact: The TypeScript logic port now exposes Groth16 FFI metadata and factories that use only injected local browser/WASM-compatible proving and verification functions, fail closed when absent, and are exercised by focused Jest coverage without Python, server calls, subprocesses, or filesystem fallbacks.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/groth16.test.ts`, `src/lib/logic/groth16.ts`, `src/lib/logic/zkp/index.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T030755Z-ported-groth16_ffi.py-as-a-browser-native-injected-wasm-groth16-backend..json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T030755Z-ported-groth16_ffi.py-as-a-browser-native-injected-wasm-groth16-backend..diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T030755Z-ported-groth16_ffi.py-as-a-browser-native-injected-wasm-groth16-backend..stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+

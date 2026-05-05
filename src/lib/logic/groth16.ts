@@ -72,6 +72,8 @@ export interface Groth16BackupBackendOptions {
   circuitId?: string;
   circuitVersion?: number;
   rulesetId?: string;
+  backendId?: string;
+  sourcePythonModule?: string;
 }
 
 export interface Groth16BackupBackendMetadata {
@@ -92,6 +94,26 @@ export const GROTH16_BACKUP_BACKEND_METADATA: Groth16BackupBackendMetadata = {
   requiresInjectedWasmBackend: true,
   serverCallsAllowed: false,
   sourcePythonModule: 'logic/zkp/backends/groth16_backup.py',
+};
+
+export interface Groth16FfiBackendMetadata {
+  sourcePythonModule: 'logic/zkp/backends/groth16_ffi.py';
+  backendId: 'groth16_ffi';
+  proofSystem: 'Groth16';
+  browserNative: true;
+  serverCallsAllowed: false;
+  pythonRuntimeAllowed: false;
+  requiresInjectedWasmBackend: true;
+}
+
+export const GROTH16_FFI_BACKEND_METADATA: Groth16FfiBackendMetadata = {
+  backendId: 'groth16_ffi',
+  browserNative: true,
+  proofSystem: 'Groth16',
+  pythonRuntimeAllowed: false,
+  requiresInjectedWasmBackend: true,
+  serverCallsAllowed: false,
+  sourcePythonModule: 'logic/zkp/backends/groth16_ffi.py',
 };
 
 function isObject(value: unknown): value is { [key: string]: unknown } {
@@ -244,8 +266,8 @@ export function createGroth16Adapter(backend?: BrowserGroth16Backend): Groth16Ad
 }
 
 export class Groth16BackupBackend implements BrowserNativeZkpBackendProtocol {
-  readonly backendId = 'groth16_backup';
-  readonly backend_id = 'groth16_backup';
+  readonly backendId: string;
+  readonly backend_id: string;
 
   private readonly adapter: Groth16Adapter;
   private readonly provingArtifacts?: Groth16ProvingArtifacts;
@@ -253,14 +275,19 @@ export class Groth16BackupBackend implements BrowserNativeZkpBackendProtocol {
   private readonly circuitId: string;
   private readonly circuitVersion: number;
   private readonly rulesetId: string;
+  private readonly sourcePythonModule: string;
 
   constructor(options: Groth16BackupBackendOptions = {}) {
+    this.backendId = options.backendId ?? 'groth16_backup';
+    this.backend_id = this.backendId;
     this.adapter = createGroth16Adapter(options.backend);
     this.provingArtifacts = options.provingArtifacts;
     this.verificationKey = options.verificationKey;
     this.circuitId = options.circuitId ?? 'legal_theorem_groth16';
     this.circuitVersion = options.circuitVersion ?? 1;
     this.rulesetId = options.rulesetId ?? 'TDFOL_v1';
+    this.sourcePythonModule =
+      options.sourcePythonModule ?? GROTH16_BACKUP_BACKEND_METADATA.sourcePythonModule;
   }
 
   async generateProof(
@@ -303,7 +330,7 @@ export class Groth16BackupBackend implements BrowserNativeZkpBackendProtocol {
         browser_native: true,
         groth16_proof: cloneJson(provingResult.proof),
         proof_system: 'Groth16',
-        source_python_module: GROTH16_BACKUP_BACKEND_METADATA.sourcePythonModule,
+        source_python_module: this.sourcePythonModule,
       },
       proofData: encodeProofPayload(provingResult.proof, provingResult.publicSignals),
       publicInputs,
@@ -342,6 +369,24 @@ export function createGroth16BackupBackend(
 }
 
 export const create_groth16_backup_backend = createGroth16BackupBackend;
+
+export class Groth16FfiBackend extends Groth16BackupBackend {
+  constructor(options: Groth16BackupBackendOptions = {}) {
+    super({
+      ...options,
+      backendId: GROTH16_FFI_BACKEND_METADATA.backendId,
+      sourcePythonModule: GROTH16_FFI_BACKEND_METADATA.sourcePythonModule,
+    });
+  }
+}
+
+export function createGroth16FfiBackend(
+  options: Groth16BackupBackendOptions = {},
+): Groth16FfiBackend {
+  return new Groth16FfiBackend(options);
+}
+
+export const create_groth16_ffi_backend = createGroth16FfiBackend;
 
 export async function verifyGroth16Proof(
   verificationKey: unknown,
