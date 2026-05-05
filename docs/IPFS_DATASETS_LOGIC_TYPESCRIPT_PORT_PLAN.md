@@ -937,7 +937,7 @@ These tasks were added automatically after the daemon found no eligible unchecke
 - [x] Port remaining Python logic module `logic/zkp/backends/groth16_backup.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.
 - [x] Port remaining Python logic module `logic/zkp/backends/groth16_ffi.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.
 - [x] Port remaining Python logic module `logic/zkp/backends/simulated.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.
-- [ ] Port remaining Python logic module `logic/zkp/eth_contract_artifacts.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.
+- [x] Port remaining Python logic module `logic/zkp/eth_contract_artifacts.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.
 - [ ] Port remaining Python logic module `logic/zkp/eth_integration.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.
 - [ ] Port remaining Python logic module `logic/zkp/eth_vk_registry_payloads.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.
 - [ ] Port remaining Python logic module `logic/zkp/evm_harness.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.
@@ -966,11 +966,11 @@ These tasks were added automatically after the daemon found no eligible unchecke
 <!-- logic-port-daemon-task-board:start -->
 ## Daemon Task Board
 
-Last updated: 2026-05-05 03:10:55 UTC
+Last updated: 2026-05-05 03:15:52 UTC
 
 Selection policy: choose the first needed or in-progress port-plan checkbox; if none remain, revisit blocked checkboxes with `fewest-failures` strategy because blocked-task revisit mode is enabled.
 
-Current target: `Task checkbox-427: Port remaining Python logic module 'logic/zkp/eth_contract_artifacts.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+Current target: `Task checkbox-428: Port remaining Python logic module 'logic/zkp/eth_integration.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
 
 Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failing.
 
@@ -1401,8 +1401,8 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - [x] `Task checkbox-423: Port remaining Python logic module 'logic/zkp/backends/backend_protocol.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.` - complete
 - [x] `Task checkbox-424: Port remaining Python logic module 'logic/zkp/backends/groth16_backup.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.` - complete
 - [x] `Task checkbox-425: Port remaining Python logic module 'logic/zkp/backends/groth16_ffi.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.` - complete
-- [x] `Task checkbox-426: Port remaining Python logic module 'logic/zkp/backends/simulated.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.` - validated by latest daemon round
-- [ ] `Task checkbox-427: Port remaining Python logic module 'logic/zkp/eth_contract_artifacts.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.` - needed
+- [x] `Task checkbox-426: Port remaining Python logic module 'logic/zkp/backends/simulated.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.` - complete
+- [x] `Task checkbox-427: Port remaining Python logic module 'logic/zkp/eth_contract_artifacts.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.` - validated by latest daemon round
 - [ ] `Task checkbox-428: Port remaining Python logic module 'logic/zkp/eth_integration.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.` - needed
 - [ ] `Task checkbox-429: Port remaining Python logic module 'logic/zkp/eth_vk_registry_payloads.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.` - needed
 - [ ] `Task checkbox-430: Port remaining Python logic module 'logic/zkp/evm_harness.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.` - needed
@@ -1430,11 +1430,11 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 
 ### Latest Round
 
-- Target: `Task checkbox-426: Port remaining Python logic module 'logic/zkp/backends/simulated.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Target: `Task checkbox-427: Port remaining Python logic module 'logic/zkp/eth_contract_artifacts.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
 - Result: `valid`
-- Summary: Ported the remaining simulated ZKP backend parity slice with stricter proof dictionary validation, deterministic seeded browser proof fixtures, segment commitment public inputs, and fail-closed segment verification.
-- Impact: The TypeScript simulated backend now exposes Python-compatible proof aliases and dictionary validation while keeping proof generation and verification fully browser-native through Web Crypto. The focused Jest coverage validates SIMZKP/1 segment metadata, deterministic seeded proofs, tamper rejection, size mismatch rejection, registry behavior, and backend protocol compatibility, and the logic-port ledger marks checkbox-426 complete.
-- Accepted changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/zkp/simulatedBackend.test.ts`, `src/lib/logic/zkp/simulatedBackend.ts`
+- Summary: Ported remaining browser-native eth contract artifact parsing parity for compiled artifact maps and deployed bytecode.
+- Impact: The TypeScript ZKP artifact loader now handles Solidity compiler contract maps and runtime bytecode directly from JSON/object values in browser code, while focused Jest coverage validates the no-filesystem contract and Python-style snake-case aliases.
+- Accepted changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/zkp/ethContractArtifacts.test.ts`, `src/lib/logic/zkp/ethContractArtifacts.ts`
 
 ### Blocked Backlog
 

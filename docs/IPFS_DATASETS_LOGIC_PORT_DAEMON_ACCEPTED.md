@@ -2126,3 +2126,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T031055Z-ported-the-remaining-simulated-zkp-backend-parity-slice-with-stricter-proof-dict.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T031055Z-ported-the-remaining-simulated-zkp-backend-parity-slice-with-stricter-proof-dict.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T031055Z-ported-the-remaining-simulated-zkp-backend-parity-slice-with-stricter-proof-dict.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 03:15:52 UTC
+
+- Target: `Task checkbox-427: Port remaining Python logic module `logic/zkp/eth_contract_artifacts.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Summary: Ported remaining browser-native eth contract artifact parsing parity for compiled artifact maps and deployed bytecode.
+- Impact: The TypeScript ZKP artifact loader now handles Solidity compiler contract maps and runtime bytecode directly from JSON/object values in browser code, while focused Jest coverage validates the no-filesystem contract and Python-style snake-case aliases.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/zkp/ethContractArtifacts.test.ts`, `src/lib/logic/zkp/ethContractArtifacts.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T031552Z-ported-remaining-browser-native-eth-contract-artifact-parsing-parity-for-compile.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T031552Z-ported-remaining-browser-native-eth-contract-artifact-parsing-parity-for-compile.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T031552Z-ported-remaining-browser-native-eth-contract-artifact-parsing-parity-for-compile.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+
