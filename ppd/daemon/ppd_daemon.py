@@ -36,9 +36,36 @@ if (
     sys.modules.pop("ipfs_datasets_py", None)
 
 from ppd.daemon.syntax_preflight import run_apply_flow_syntax_preflight
+from ppd.daemon.deterministic_fallback import (  # noqa: E402
+    build_deterministic_task_fallback_proposal as build_ppd_deterministic_task_fallback_proposal,
+    DETERMINISTIC_FALLBACK_VALIDATION_COMMANDS,
+    DETERMINISTIC_PLATFORM_INIT,
+    DETERMINISTIC_PROGRESS_SOURCE_PATH,
+    DETERMINISTIC_SOURCE_FILES,
+    DETERMINISTIC_TASK_FALLBACK_TITLES,
+    DETERMINISTIC_TASK_SOURCE_EVIDENCE_IDS,
+    compact_deterministic_progress_source_payload,
+    deterministic_artifact_contracts,
+    deterministic_progress_manifest,
+    deterministic_progress_record,
+    deterministic_progress_source_content,
+    deterministic_task_fallback_kind,
+    has_deterministic_task_fallback,
+    has_open_deterministic_task_fallback,
+)
+from ppd.daemon.path_policy import (  # noqa: E402
+    ALLOWED_WRITE_PREFIXES,
+    DISALLOWED_WRITE_PREFIXES,
+    PPD_PATH_POLICY,
+    PRIVATE_WRITE_PATH_FRAGMENTS,
+    PRIVATE_WRITE_PATH_TOKENS,
+    RUNTIME_ONLY_CHANGE_PATHS,
+    has_visible_source_change,
+    is_private_write_path,
+    validate_write_path,
+)
 from ipfs_datasets_py.optimizers.todo_daemon.engine import (  # noqa: E402
     CommandResult,
-    PathPolicy,
     Proposal,
     Task,
     append_jsonl,
@@ -104,15 +131,6 @@ from ipfs_datasets_py.optimizers.todo_daemon.diagnostics import (  # noqa: E402
     proposal_record_has_failure_markers,
     should_skip_validation_for_empty_proposal,
 )
-from ipfs_datasets_py.optimizers.todo_daemon.deterministic_fallback import (  # noqa: E402
-    build_deterministic_progress_record as build_todo_deterministic_progress_record,
-    build_deterministic_replacement_proposal,
-    fallback_kind_for_task,
-    load_deterministic_progress_manifest,
-    open_task_has_deterministic_fallback,
-    task_has_deterministic_fallback,
-    upsert_deterministic_progress_record,
-)
 from ipfs_datasets_py.optimizers.todo_daemon.task_board import (  # noqa: E402
     count_unmanaged_generated_status_sections as count_todo_unmanaged_generated_status_sections,
     replace_task_mark as replace_todo_task_mark,
@@ -144,28 +162,6 @@ LLM_TERMINATION_ERROR_MARKERS = (
     "sigkill",
 )
 
-ALLOWED_WRITE_PREFIXES = (
-    "ppd/",
-    "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
-)
-
-DISALLOWED_WRITE_PREFIXES = (
-    "src/lib/logic/",
-    "public/corpus/portland-or/current/",
-    "ipfs_datasets_py/.daemon/",
-    "docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md",
-    "docs/IPFS_DATASETS_LOGIC_PORT_DAEMON_ACCEPTED.md",
-)
-
-PRIVATE_WRITE_PATH_FRAGMENTS = (
-    "ppd/data/private/",
-    "storage-state",
-    "storage_state",
-    "auth-state",
-    "auth_state",
-)
-PRIVATE_WRITE_PATH_TOKENS = {"session", "sessions"}
-
 DEFAULT_VALIDATION_COMMANDS = (
     ("python3", "ppd/daemon/ppd_daemon.py", "--self-test"),
     ("python3", "-m", "unittest", "discover", "-s", "ppd/tests", "-p", "test_*.py"),
@@ -176,17 +172,6 @@ DEFAULT_VALIDATION_COMMANDS = (
         "test -z \"$files\" || npx tsc --noEmit --target ES2020 --module ESNext "
         "--moduleResolution node --strict --skipLibCheck --types node $files",
     ),
-)
-
-DETERMINISTIC_FALLBACK_VALIDATION_COMMANDS = (
-    (
-        "python3",
-        "-m",
-        "unittest",
-        "ppd.tests.test_daemon_llm_result_durability",
-        "ppd.tests.test_supervisor_stale_status_replanning",
-    ),
-    ("python3", "ppd/tests/validate_ppd.py"),
 )
 
 FORBIDDEN_ABSENCE_MARKERS = (
@@ -465,310 +450,12 @@ def should_block_task_before_llm(config: Config, task_label: str) -> bool:
     return pre_llm_block_decision(config, task_label) is not None
 
 
-DETERMINISTIC_TASK_FALLBACK_TITLES: tuple[tuple[str, str], ...] = (
-    ("autonomous platform continuation coverage", "platform_continuation"),
-    ("processor-suite integration planning", "processor_suite_planning"),
-    ("playwright/pdf handoff validation", "playwright_pdf_handoff"),
-    ("supervisor idle-recovery validation", "supervisor_idle_recovery"),
-)
-
-DETERMINISTIC_TASK_SOURCE_EVIDENCE_IDS = (
-    "evidence:ppd-home:2026-05-01",
-    "evidence:permit-applications-index:2026-05-01",
-    "evidence:devhub-faq:2026-05-01",
-    "evidence:single-pdf-process:2026-05-01",
-)
-DETERMINISTIC_PROGRESS_SOURCE_PATH = "ppd/platform/deterministic_fallback_progress.py"
-
-DETERMINISTIC_PLATFORM_INIT = '''"""Source-backed PP&D autonomous platform contracts.
-
-Modules in this package are imported directly by capability area so a partially
-implemented tranche never imports a source file that has not been created yet.
-"""
-'''
-
-DETERMINISTIC_SOURCE_FILES: dict[str, tuple[str, str]] = {
-    "platform_continuation": (
-        "ppd/platform/autonomous_archival_contract.py",
-        '''"""Source-backed contract for PP&D public archival capability.
-
-The contract is intentionally side-effect-free: it names the implementation
-surfaces the daemon must wire together before any live crawl is allowed.
-"""
-
-from __future__ import annotations
-
-
-def archival_contract() -> dict[str, object]:
-    return {
-        "capability": "whole_site_public_archival",
-        "entrypoints": [
-            "ppd.crawler.live_public_preflight",
-            "ppd.crawler.whole_site_archival",
-            "ipfs_datasets_py.processors",
-        ],
-        "requiredOutputs": [
-            "archive_manifest",
-            "normalized_document_record",
-            "source_evidence_id",
-            "requirement_batch",
-        ],
-        "defaultMode": "fixture_only",
-        "liveCrawlAllowedByDefault": False,
-    }
-''',
-    ),
-    "processor_suite_planning": (
-        "ppd/platform/processor_suite_contract.py",
-        '''"""Source-backed contract for processor-suite PP&D handoff."""
-
-from __future__ import annotations
-
-
-def processor_suite_contract() -> dict[str, object]:
-    return {
-        "capability": "processor_suite_handoff",
-        "processorSuite": "ipfs_datasets_py.processors",
-        "requiredInputs": [
-            "public_source_url",
-            "robots_decision",
-            "content_type",
-            "canonical_document_id",
-        ],
-        "requiredOutputs": [
-            "processor_handoff_manifest",
-            "pdf_metadata_record",
-            "normalized_public_document",
-            "formal_logic_source_evidence_id",
-        ],
-        "rawBodyPersistenceAllowed": False,
-    }
-''',
-    ),
-    "playwright_pdf_handoff": (
-        "ppd/platform/playwright_pdf_contract.py",
-        '''"""Source-backed contract for attended Playwright and PDF draft work."""
-
-from __future__ import annotations
-
-
-def playwright_pdf_contract() -> dict[str, object]:
-    return {
-        "capability": "attended_draft_automation",
-        "allowedActions": [
-            "manual_login_handoff",
-            "journal_replay",
-            "reversible_draft_field_fill",
-            "local_pdf_preview_fill",
-        ],
-        "blockedActions": [
-            "official_upload",
-            "permit_submission",
-            "certification",
-            "fee_payment",
-            "account_security_transition",
-            "inspection_scheduling",
-        ],
-        "requiresHumanAttendanceBeforeBrowserUse": True,
-        "exactConfirmationBeforeOfficialAction": True,
-    }
-''',
-    ),
-    "supervisor_idle_recovery": (
-        "ppd/platform/supervisor_idle_policy.py",
-        '''"""Source-backed contract for supervisor idle and replenishment behavior."""
-
-from __future__ import annotations
-
-
-def supervisor_idle_policy() -> dict[str, object]:
-    return {
-        "capability": "supervisor_idle_recovery",
-        "noEligibleTasksPolicy": "review_goal_before_replenishment",
-        "replenishmentLimits": {
-            "autonomousPlatformTranches": 1,
-            "executionCapabilityTranches": 1,
-        },
-        "mustNotAcceptRuntimeOnlyProgress": True,
-        "mustVerifyPromotionToMainWorktree": True,
-        "acceptedEvidenceMode": "ledger_only",
-    }
-''',
-    ),
-}
-
-
-def compact_deterministic_progress_source_payload(
-    manifest: dict[str, Any],
-    *,
-    recent_limit: int = 8,
-) -> dict[str, Any]:
-    """Return a reviewable source payload without embedding the full runtime ledger."""
-
-    records = [record for record in manifest.get("records", []) if isinstance(record, dict)]
-    fallback_counts: dict[str, int] = {}
-    for record in records:
-        fallback_kind = str(record.get("fallbackKind") or "unknown")
-        fallback_counts[fallback_kind] = fallback_counts.get(fallback_kind, 0) + 1
-    recent_records = sorted(records, key=lambda record: str(record.get("completedAt") or ""))[-recent_limit:]
-    return {
-        "schemaVersion": manifest.get("schemaVersion", 1),
-        "strategy": manifest.get("strategy", "deterministic_task_fallback_when_llm_unavailable"),
-        "updatedAt": manifest.get("updatedAt", ""),
-        "recordCount": len(records),
-        "fallbackCounts": dict(sorted(fallback_counts.items())),
-        "recentRecords": recent_records,
-    }
-
-
-def deterministic_progress_source_content(manifest: dict[str, Any]) -> str:
-    """Return a commit-visible source mirror for deterministic fallback progress."""
-
-    payload = json.dumps(compact_deterministic_progress_source_payload(manifest), indent=2, sort_keys=True)
-    return f'''"""Commit-visible PP&D deterministic fallback progress.
-
-The daemon also writes a runtime JSON manifest, but accepted autonomous work must
-promote a visible source or fixture change. This module mirrors the same records
-so deterministic continuation tasks leave reviewable source-backed evidence.
-"""
-
-from __future__ import annotations
-
-import json
-from typing import Any
-
-
-DETERMINISTIC_FALLBACK_PROGRESS_JSON = {payload!r}
-
-
-def deterministic_fallback_progress() -> dict[str, Any]:
-    return json.loads(DETERMINISTIC_FALLBACK_PROGRESS_JSON)
-'''
-
-
-def deterministic_task_fallback_kind(task: Task) -> str:
-    return fallback_kind_for_task(task, DETERMINISTIC_TASK_FALLBACK_TITLES)
-
-
-def has_deterministic_task_fallback(task: Task) -> bool:
-    return task_has_deterministic_fallback(task, DETERMINISTIC_TASK_FALLBACK_TITLES)
-
-
-def has_open_deterministic_task_fallback(tasks: Iterable[Task]) -> bool:
-    return open_task_has_deterministic_fallback(tasks, DETERMINISTIC_TASK_FALLBACK_TITLES)
-
-
 def build_deterministic_task_fallback_proposal(config: Config, selected: Task) -> Optional[Proposal]:
-    """Build a fixture-only proposal for known platform tasks when the LLM path is unhealthy."""
-
-    fallback_kind = deterministic_task_fallback_kind(selected)
-    if not fallback_kind:
-        return None
-
-    manifest = upsert_deterministic_progress_record(
-        deterministic_progress_manifest(config),
+    return build_ppd_deterministic_task_fallback_proposal(
+        config,
         selected,
-        deterministic_progress_record(selected, fallback_kind),
+        default_validation_commands=DEFAULT_VALIDATION_COMMANDS,
     )
-    validation_commands = (
-        DETERMINISTIC_FALLBACK_VALIDATION_COMMANDS
-        if config.validation_commands == DEFAULT_VALIDATION_COMMANDS
-        else config.validation_commands
-    )
-    source_path, source_content = DETERMINISTIC_SOURCE_FILES[fallback_kind]
-
-    return build_deterministic_replacement_proposal(
-        selected=selected,
-        fallback_kind=fallback_kind,
-        manifest=manifest,
-        progress_path=config.deterministic_progress_file,
-        source_files=[
-            ("ppd/platform/__init__.py", DETERMINISTIC_PLATFORM_INIT),
-            (source_path, source_content),
-            (DETERMINISTIC_PROGRESS_SOURCE_PATH, deterministic_progress_source_content(manifest)),
-        ],
-        summary=f"Complete {fallback_kind.replace('_', ' ')} with deterministic PP&D fallback.",
-        impact=(
-            "The daemon can keep making fixture-only PP&D platform progress while the LLM backend is in "
-            "a termination storm. The generated record preserves source evidence, processor, draft "
-            "automation, PDF-preview, and formal-logic boundaries without live DevHub or official actions."
-        ),
-        validation_commands=validation_commands,
-    )
-
-
-def deterministic_progress_manifest(config: Config) -> dict[str, Any]:
-    return load_deterministic_progress_manifest(
-        config.resolve(config.deterministic_progress_file),
-        strategy="deterministic_task_fallback_when_llm_unavailable",
-    )
-
-
-def deterministic_progress_record(selected: Task, fallback_kind: str) -> dict[str, Any]:
-    return build_todo_deterministic_progress_record(
-        selected,
-        fallback_kind,
-        source_evidence_ids=DETERMINISTIC_TASK_SOURCE_EVIDENCE_IDS,
-        artifact_contracts=deterministic_artifact_contracts(fallback_kind),
-        guardrails=[
-            "public_sources_only",
-            "redacted_user_facts_only",
-            "reversible_draft_actions_only",
-            "local_pdf_preview_only",
-            "exact_confirmation_before_official_action",
-            "formal_logic_requires_source_evidence",
-        ],
-        blocked_actions=[
-            "official_upload",
-            "permit_submission",
-            "certification",
-            "fee_payment",
-            "account_security_transition",
-            "inspection_scheduling",
-        ],
-        runtime_policy={
-            "liveCrawlAllowedByDefault": False,
-            "officialDevhubActionAllowedByDefault": False,
-            "privateArtifactPersistence": "forbidden",
-            "requiresHumanAttendanceBeforeBrowserUse": True,
-        },
-    )
-
-
-def deterministic_artifact_contracts(fallback_kind: str) -> list[str]:
-    if fallback_kind == "platform_continuation":
-        return [
-            "archive_manifest",
-            "normalized_document_record",
-            "playwright_draft_plan",
-            "pdf_preview_field_map",
-            "formal_logic_guardrail_batch",
-        ]
-    if fallback_kind == "processor_suite_planning":
-        return [
-            "processor_handoff_manifest",
-            "normalized_public_document",
-            "pdf_metadata_record",
-            "requirement_batch",
-            "human_review_gate",
-        ]
-    if fallback_kind == "playwright_pdf_handoff":
-        return [
-            "redacted_fact_map",
-            "accessible_selector_plan",
-            "pdf_preview_field_map",
-            "exact_confirmation_checkpoint",
-            "audit_event",
-        ]
-    if fallback_kind == "supervisor_idle_recovery":
-        return [
-            "completed_board_summary",
-            "goal_aligned_task_synthesis",
-            "duplicate_tranche_guard",
-            "blocked_retry_churn_guard",
-            "immediate_restart_gate",
-        ]
-    return ["deterministic_progress_record"]
 
 
 def format_failure_context(failures: list[dict[str, Any]]) -> str:
@@ -808,57 +495,10 @@ def is_forbidden_absence_marker_validation_failure(failure: dict[str, Any]) -> b
     return any(marker in text for marker in FORBIDDEN_ABSENCE_MARKERS)
 
 
-RUNTIME_ONLY_CHANGE_PATHS = frozenset(
-    {
-        "ppd/daemon/builtin-repair-status.json",
-        "ppd/daemon/deterministic-progress.json",
-        "ppd/daemon/task-board.md",
-    }
-)
-
-PPD_PATH_POLICY = PathPolicy(
-    allowed_write_prefixes=ALLOWED_WRITE_PREFIXES,
-    disallowed_write_prefixes=DISALLOWED_WRITE_PREFIXES,
-    private_write_path_fragments=PRIVATE_WRITE_PATH_FRAGMENTS,
-    private_write_path_tokens=PRIVATE_WRITE_PATH_TOKENS,
-    runtime_only_change_paths=RUNTIME_ONLY_CHANGE_PATHS,
-    ignored_visible_prefixes=(
-        "ppd/daemon/accepted-work/",
-        "ppd/daemon/failed-patches/",
-        "ppd/daemon/worktrees/",
-    ),
-    visible_source_prefixes=("ppd/",),
-)
-
-
-def extract_json(text: str) -> Optional[dict[str, Any]]:
-    return todo_extract_json(text)
-
-
-def parse_proposal(text: str) -> Proposal:
-    return parse_json_proposal(text)
-
-
-def normalized_relative_path(path: str) -> str:
-    return todo_normalized_relative_path(path)
-
-
-def validate_write_path(path: str) -> list[str]:
-    return PPD_PATH_POLICY.validate_write_path(path, daemon_label="PP&D daemon")
-
-
-def is_private_write_path(normalized: str) -> bool:
-    return PPD_PATH_POLICY.is_private_write_path(normalized)
-
-
-def has_visible_source_change(changed_files: Iterable[str]) -> bool:
-    """Return True when accepted work changes source or fixture files, not only runtime state."""
-
-    return PPD_PATH_POLICY.has_visible_source_change(changed_files)
-
-
-def run_command(command: tuple[str, ...], *, cwd: Path, timeout: int) -> CommandResult:
-    return todo_run_command(command, cwd=cwd, timeout=timeout)
+extract_json = todo_extract_json
+parse_proposal = parse_json_proposal
+normalized_relative_path = todo_normalized_relative_path
+run_command = todo_run_command
 
 
 def validation_commands_for_proposal(proposal: Proposal, config: Config) -> tuple[tuple[str, ...], ...]:
@@ -876,12 +516,8 @@ def run_validation(
     )
 
 
-def diff_for_file(path: str, before: str, after: str) -> str:
-    return todo_diff_for_file(path, before, after)
-
-
-def worktree_marker_payload(*, state: str, source_root: Path) -> dict[str, Any]:
-    return todo_worktree_marker_payload(state=state, source_root=source_root)
+diff_for_file = todo_diff_for_file
+worktree_marker_payload = todo_worktree_marker_payload
 
 
 def cleanup_stale_validation_worktrees(config: Config, *, max_age_seconds: Optional[int] = None) -> list[str]:
