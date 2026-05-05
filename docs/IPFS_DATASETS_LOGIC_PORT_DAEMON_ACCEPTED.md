@@ -2693,3 +2693,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T093806Z-ported-the-remaining-cec-context-manager-slice-with-browser-native-context-windo.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T093806Z-ported-the-remaining-cec-context-manager-slice-with-browser-native-context-windo.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T093806Z-ported-the-remaining-cec-context-manager-slice-with-browser-native-context-windo.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 09:40:55 UTC
+
+- Target: `Task checkbox-205: Port remaining Python logic module `logic/CEC/native/dcec_cleaning.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Summary: Ported a fuller browser-native DCEC cleaning slice for logic/CEC/native/dcec_cleaning.py.
+- Impact: The TypeScript CEC cleaning module now exposes Python-module runtime metadata, normalizes additional DCEC operator aliases and truth constants, sanitizes quoted legal labels, and fails closed on unsupported cleaning syntax. The existing Jest suite directly validates the browser-native cleaning pipeline without Python, server, filesystem, subprocess, or RPC fallback.
+- Changed files: `src/lib/logic/cec/dcecCleaning.test.ts`, `src/lib/logic/cec/dcecCleaning.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T094055Z-ported-a-fuller-browser-native-dcec-cleaning-slice-for-logic-cec-native-dcec_cle.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T094055Z-ported-a-fuller-browser-native-dcec-cleaning-slice-for-logic-cec-native-dcec_cle.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T094055Z-ported-a-fuller-browser-native-dcec-cleaning-slice-for-logic-cec-native-dcec_cle.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+

@@ -1,10 +1,15 @@
 const SYMBOL_REPLACEMENTS: Record<string, string> = {
+  '<=>': 'ifAndOnlyIf',
   '<->': 'ifAndOnlyIf',
+  '=>': 'implies',
   '->': 'implies',
   '>=': 'greaterOrEqual',
   '<=': 'lessOrEqual',
+  '!=': 'notEquals',
   '===': 'tautology',
   '==': 'equals',
+  '&&': 'and',
+  '||': 'or',
   '=': 'equals',
   '>': 'greater',
   '<': 'less',
@@ -13,8 +18,9 @@ const SYMBOL_REPLACEMENTS: Record<string, string> = {
   '/': 'divide',
   '+': 'add',
   '-': '-',
-  '&': '&',
-  '|': '|',
+  '&': 'and',
+  '|': 'or',
+  '!': 'not',
   '~': 'not',
 };
 
@@ -29,9 +35,14 @@ const TOKEN_REPLACEMENTS: Record<string, string> = {
   '∧': 'and',
   '∨': 'or',
   '→': 'implies',
+  '⇒': 'implies',
   '↔': 'ifAndOnlyIf',
+  '⇔': 'ifAndOnlyIf',
+  '≡': 'ifAndOnlyIf',
   '≥': 'greaterOrEqual',
   '≤': 'lessOrEqual',
+  '⊤': 'true',
+  '⊥': 'false',
 };
 
 const TOKEN_ALIASES: Record<string, string> = {
@@ -43,12 +54,54 @@ const TOKEN_ALIASES: Record<string, string> = {
   false_: 'false',
 };
 
+const DCEC_OPERATOR_TOKENS = new Set<string>([
+  'and',
+  'or',
+  'implies',
+  'ifAndOnlyIf',
+  'equals',
+  'notEquals',
+  'greater',
+  'less',
+  'greaterOrEqual',
+  'lessOrEqual',
+  'add',
+  'divide',
+  'exponent',
+]);
+
+const UNSUPPORTED_CHARACTER_PATTERN = /[{};]/;
+const TOKEN_PATTERN =
+  /"[^\n"]*"|'[^\n']*'|[A-Za-z_][A-Za-z0-9_-]*|\d+(?:\.\d+)?|<=>|<->|=>|->|>=|<=|!=|===|==|&&|\|\||[()[\],~!^*/+=<>|&-]/g;
+
+export const DCEC_CLEANING_METADATA = {
+  sourcePythonModule: 'logic/CEC/native/dcec_cleaning.py',
+  runtime: 'browser-native-typescript',
+  implementation: 'deterministic-dcec-cleaning',
+  browserNative: true,
+  pythonRuntime: false,
+  serverRuntime: false,
+  filesystem: false,
+  subprocess: false,
+  rpc: false,
+  supportedOperations: [
+    'comment-stripping',
+    'whitespace-normalization',
+    'unicode-operator-normalization',
+    'symbol-functorization',
+    'function-call-tucking',
+    'paren-validation',
+    'token-cleanup',
+  ],
+} as const;
+
 export interface DcecCleaningResult {
   cleaned: string;
   normalizedText: string;
   tokens: Array<string>;
   rejected: boolean;
   warnings: Array<string>;
+  metadata: typeof DCEC_CLEANING_METADATA;
 }
 
 export function stripDcecWhitespace(expression: string): string {
@@ -222,6 +275,7 @@ export function normalizeDcecText(expression: string): string {
   }
 
   return text
+    .replace(/\bif\s+and\s+only\s+if\b/gi, ' ifAndOnlyIf ')
     .replace(/\biff\b/gi, ' ifAndOnlyIf ')
     .replace(/\bimplies\b/gi, ' implies ')
     .replace(/\s+/g, ' ')
@@ -234,11 +288,9 @@ export function cleanupDcecTokens(expression: string): Array<string> {
     return [];
   }
 
-  const tokens =
-    normalized.match(/[A-Za-z_][A-Za-z0-9_-]*|\d+(?:\.\d+)?|<->|->|>=|<=|==|[()[\],~^*/+=<>|-]/g) ??
-    [];
+  const tokens = normalized.match(TOKEN_PATTERN) ?? [];
   return tokens
-    .map((token) => TOKEN_ALIASES[token] ?? token)
+    .map((token) => normalizeDcecToken(token))
     .filter((token) => token.trim().length > 0 && token !== ',,');
 }
 
@@ -247,7 +299,25 @@ export function cleanDcecLegalText(expression: string): DcecCleaningResult {
   const warnings: Array<string> = [];
 
   if (normalizedText.length === 0) {
-    return { cleaned: '', normalizedText, tokens: [], rejected: true, warnings: ['empty-input'] };
+    return {
+      cleaned: '',
+      normalizedText,
+      tokens: [],
+      rejected: true,
+      warnings: ['empty-input'],
+      metadata: DCEC_CLEANING_METADATA,
+    };
+  }
+
+  if (UNSUPPORTED_CHARACTER_PATTERN.test(normalizedText)) {
+    return {
+      cleaned: '',
+      normalizedText,
+      tokens: cleanupDcecTokens(normalizedText),
+      rejected: true,
+      warnings: ['unsupported-character'],
+      metadata: DCEC_CLEANING_METADATA,
+    };
   }
 
   if (!checkDcecParens(normalizedText)) {
@@ -257,6 +327,7 @@ export function cleanDcecLegalText(expression: string): DcecCleaningResult {
       tokens: cleanupDcecTokens(normalizedText),
       rejected: true,
       warnings: ['unbalanced-parentheses'],
+      metadata: DCEC_CLEANING_METADATA,
     };
   }
 
@@ -266,7 +337,14 @@ export function cleanDcecLegalText(expression: string): DcecCleaningResult {
     warnings.push('empty-cleaned-expression');
   }
 
-  return { cleaned, normalizedText, tokens, rejected: cleaned.length === 0, warnings };
+  return {
+    cleaned,
+    normalizedText,
+    tokens,
+    rejected: cleaned.length === 0,
+    warnings,
+    metadata: DCEC_CLEANING_METADATA,
+  };
 }
 
 export function cleanDcecExpression(expression: string): string {
@@ -313,9 +391,13 @@ function splitTopLevelArguments(input: string): Array<string> {
 function renderDcecTokensForCleaning(tokens: Array<string>): string {
   let result = '';
 
-  for (const token of tokens) {
+  for (let index = 0; index < tokens.length; index += 1) {
+    const token = tokens[index];
     if (token === '(' || token === '[') {
-      result = result.trimEnd() + token;
+      const previousToken = tokens[index - 1];
+      const joinAsFunctionCall =
+        previousToken !== undefined && !DCEC_OPERATOR_TOKENS.has(previousToken);
+      result = joinAsFunctionCall ? result.trimEnd() + token : `${result.trimEnd()} ${token}`;
     } else if (token === ')' || token === ']' || token === ',') {
       result += token;
     } else {
@@ -324,6 +406,28 @@ function renderDcecTokensForCleaning(tokens: Array<string>): string {
   }
 
   return result;
+}
+
+function normalizeDcecToken(token: string): string {
+  const alias = TOKEN_ALIASES[token];
+  if (alias !== undefined) {
+    return alias;
+  }
+  const symbol = SYMBOL_REPLACEMENTS[token];
+  if (symbol !== undefined) {
+    return symbol;
+  }
+  if (
+    (token.startsWith('"') && token.endsWith('"')) ||
+    (token.startsWith("'") && token.endsWith("'"))
+  ) {
+    const inner = token
+      .slice(1, -1)
+      .trim()
+      .replace(/[^A-Za-z0-9_]+/g, '_');
+    return inner.length === 0 ? 'stringLiteral' : inner.replace(/^(\d)/, '_$1');
+  }
+  return token;
 }
 
 function isIdentifierStart(value: string | undefined): boolean {

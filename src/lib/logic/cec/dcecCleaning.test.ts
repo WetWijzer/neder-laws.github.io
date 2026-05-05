@@ -1,5 +1,6 @@
 import {
   checkDcecParens,
+  DCEC_CLEANING_METADATA,
   cleanDcecLegalText,
   cleanDcecExpression,
   consolidateDcecParens,
@@ -51,10 +52,13 @@ describe('DCEC cleaning utilities', () => {
 
   it('functorizes symbolic operators with longest-match replacements', () => {
     expect(functorizeDcecSymbols('a -> b')).toBe('a  implies  b');
+    expect(functorizeDcecSymbols('a => b')).toBe('a  implies  b');
     expect(functorizeDcecSymbols('x + y')).toBe('x  add  y');
     expect(functorizeDcecSymbols('~p')).toBe(' not p');
+    expect(functorizeDcecSymbols('!p')).toBe(' not p');
     expect(functorizeDcecSymbols('a >= b')).toBe('a  greaterOrEqual  b');
     expect(functorizeDcecSymbols('a <-> b')).toBe('a  ifAndOnlyIf  b');
+    expect(functorizeDcecSymbols('p && q || r')).toBe('p  and  q  or  r');
   });
 
   it('runs the standard cleaning pipeline without Python or server fallbacks', () => {
@@ -84,6 +88,22 @@ describe('DCEC cleaning utilities', () => {
       ')',
       ')',
     ]);
+    expect(cleanupDcecTokens('⊤ ⇔ (Filed(x) && !Void(x))')).toEqual([
+      'true',
+      'ifAndOnlyIf',
+      '(',
+      'Filed',
+      '(',
+      'x',
+      ')',
+      'and',
+      'not',
+      'Void',
+      '(',
+      'x',
+      ')',
+      ')',
+    ]);
   });
 
   it('returns fail-closed fixture results for malformed legal-text inputs', () => {
@@ -95,6 +115,10 @@ describe('DCEC cleaning utilities', () => {
       {
         input: '   # only a margin comment',
         warning: 'empty-input',
+      },
+      {
+        input: 'Rule { Obligated(agent, act) }',
+        warning: 'unsupported-character',
       },
     ];
 
@@ -113,5 +137,22 @@ describe('DCEC cleaning utilities', () => {
     expect(result.rejected).toBe(false);
     expect(result.tokens).toContain('and');
     expect(result.normalizedText).toBe('Happens("Filing"(case_1), t1) and Valid(case_1)');
+    expect(result.metadata).toEqual(DCEC_CLEANING_METADATA);
+    expect(result.metadata.sourcePythonModule).toBe('logic/CEC/native/dcec_cleaning.py');
+    expect(result.metadata.pythonRuntime).toBe(false);
+    expect(result.metadata.serverRuntime).toBe(false);
+  });
+
+  it('sanitizes quoted legal labels and cleans alternate Python-style operator aliases', () => {
+    const result = cleanDcecLegalText(
+      '"Notice Sent"(case_1) <=> (Delivered(case_1) && !Invalid(case_1))',
+    );
+
+    expect(result.cleaned).toBe(
+      '((Notice_Sent,case_1),ifAndOnlyIf,((Delivered,case_1),and,not,(Invalid,case_1)))',
+    );
+    expect(result.tokens).toContain('Notice_Sent');
+    expect(result.tokens).toContain('ifAndOnlyIf');
+    expect(result.rejected).toBe(false);
   });
 });
