@@ -47,15 +47,20 @@ export interface CecStoredProofEntry {
 
 export interface CecProofCacheOptions extends ProofCacheOptions {
   proverName?: string;
+  storage?: BrowserNativeCecProofStore;
 }
 
 export class CecProofCache {
   private readonly cache: ProofCache<ProofResult>;
+  private readonly now: () => number;
   private readonly proverName: string;
+  private readonly storage?: BrowserNativeCecProofStore;
 
   constructor(options: CecProofCacheOptions = {}) {
-    this.cache = new ProofCache<ProofResult>(options);
+    this.now = options.now ?? (() => Date.now());
+    this.cache = new ProofCache<ProofResult>({ ...options, now: this.now });
     this.proverName = options.proverName ?? 'cec-forward-chaining';
+    this.storage = options.storage;
   }
 
   computeCid(theorem: CecExpression, kb: CecKnowledgeBase, options: CecProverOptions = {}): string {
@@ -73,12 +78,34 @@ export class CecProofCache {
     kb: CecKnowledgeBase,
     options: CecProverOptions = {},
   ): ProofResult | undefined {
-    return this.cache.get(
+    const cached = this.cache.get(
       formatCecExpression(theorem),
       normalizeCecAxioms(kb),
       this.proverName,
       normalizeCecProverConfig(options),
     );
+    if (cached) {
+      return cached;
+    }
+    if (!this.storage) {
+      return undefined;
+    }
+    const cid = this.computeCid(theorem, kb, options);
+    const stored = this.storage.getProof(cid);
+    if (!stored) {
+      return undefined;
+    }
+    if (!verifyCecStoredProofEntry(stored, cid)) {
+      throw new Error('CEC proof storage returned an invalid content-addressed proof entry.');
+    }
+    this.cache.set(
+      stored.query.theorem,
+      stored.result,
+      stored.query.axioms,
+      stored.query.proverName,
+      stored.query.proverConfig,
+    );
+    return stored.result;
   }
 
   set(
@@ -87,13 +114,15 @@ export class CecProofCache {
     result: ProofResult,
     options: CecProverOptions = {},
   ): string {
-    return this.cache.set(
+    const cid = this.cache.set(
       formatCecExpression(theorem),
       result,
       normalizeCecAxioms(kb),
       this.proverName,
       normalizeCecProverConfig(options),
     );
+    this.storage?.putProof(this.toStoredProofEntry(theorem, kb, result, options, cid));
+    return cid;
   }
 
   invalidate(
@@ -136,6 +165,25 @@ export class CecProofCache {
     const result = new CecProver(options).prove(theorem, kb);
     this.set(theorem, kb, result, options);
     return result;
+  }
+
+  toStoredProofEntry(
+    theorem: CecExpression,
+    kb: CecKnowledgeBase,
+    result: ProofResult,
+    options: CecProverOptions = {},
+    cid = this.computeCid(theorem, kb, options),
+  ): CecStoredProofEntry {
+    return {
+      cid,
+      result,
+      query: toCecProofCacheQuery(theorem, kb, this.proverName, options),
+      storedAt: this.now(),
+      validation: {
+        sourcePythonModule: CEC_PROOF_CACHE_METADATA.sourcePythonModule,
+        browserNative: true,
+      },
+    };
   }
 }
 
@@ -198,6 +246,7 @@ function verifyCecStoredProofEntry(entry: CecStoredProofEntry, expectedCid: stri
     entry.cid === expectedCid &&
     entry.validation.sourcePythonModule === CEC_PROOF_CACHE_METADATA.sourcePythonModule &&
     entry.validation.browserNative === true &&
+    entry.result.theorem === entry.query.theorem &&
     cidForObject({
       formula: entry.query.theorem,
       axioms: entry.query.axioms,

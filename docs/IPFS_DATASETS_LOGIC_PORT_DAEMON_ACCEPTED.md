@@ -2666,3 +2666,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T093041Z-ported-the-advanced_inference.py-surface-with-a-bounded-browser-native-dcec-deri.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T093041Z-ported-the-advanced_inference.py-surface-with-a-bounded-browser-native-dcec-deri.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T093041Z-ported-the-advanced_inference.py-surface-with-a-bounded-browser-native-dcec-deri.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 09:33:02 UTC
+
+- Target: `Task checkbox-202: Port remaining Python logic module `logic/CEC/native/cec_proof_cache.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Summary: Ported CEC proof cache storage integration for browser-native validated proof reuse.
+- Impact: CecProofCache now writes validated content-addressed proof entries to injected browser-native storage and reloads them on cache misses without server, Python, filesystem, subprocess, or RPC dependencies. Focused Jest coverage exercises write-through storage persistence and validated storage-backed cache reloads for the cec_proof_cache.py parity task.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/cec/proofCache.test.ts`, `src/lib/logic/cec/proofCache.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T093302Z-ported-cec-proof-cache-storage-integration-for-browser-native-validated-proof-re.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T093302Z-ported-cec-proof-cache-storage-integration-for-browser-native-validated-proof-re.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T093302Z-ported-cec-proof-cache-storage-integration-for-browser-native-validated-proof-re.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+

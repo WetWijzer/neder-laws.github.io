@@ -131,6 +131,27 @@ describe('CEC proof cache', () => {
     );
   });
 
+  it('writes through to injected browser storage and reloads validated proof entries', () => {
+    let now = 100;
+    const storage = new BrowserNativeCecProofStore();
+    const writer = new CecProofCache({ storage, now: () => now });
+    const theorem = parseCecExpression('(active stored)');
+    const kb = { axioms: [theorem] };
+
+    const first = writer.prove(theorem, kb);
+    const cid = writer.computeCid(theorem, kb);
+    now = 200;
+    const reader = new CecProofCache({ storage, now: () => now });
+
+    expect(first).toMatchObject({ status: 'proved', method: 'cec-forward-chaining' });
+    expect(storage.getProof(cid)).toMatchObject({ cid, storedAt: 100 });
+    expect(reader.get(theorem, kb)).toMatchObject({
+      status: 'proved',
+      theorem: '(active stored)',
+    });
+    expect(reader.getStats()).toMatchObject({ misses: 1, sets: 1, cacheSize: 1 });
+  });
+
   it('proves through the cache and marks cached method names', () => {
     const cache = new CecProofCache();
     const theorem = parseCecExpression('(comply_with agent code)');
