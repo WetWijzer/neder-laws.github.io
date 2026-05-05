@@ -2531,3 +2531,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T071522Z-ported-dcec-namespace-registration-symbol-statistics-validation-diagnostics-and-.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T071522Z-ported-dcec-namespace-registration-symbol-statistics-validation-diagnostics-and-.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T071522Z-ported-dcec-namespace-registration-symbol-statistics-validation-diagnostics-and-.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 07:18:18 UTC
+
+- Target: `Task checkbox-471: Manual unblock: port `logic/CEC/native/dcec_parsing.py` by adding parser utility parity for DCEC atom, connective, quantifier, and modal/deontic forms.`
+- Summary: Added browser-native DCEC parser utility builders and classifiers for atom, connective, quantifier, modal, and deontic parse forms.
+- Impact: The TypeScript DCEC parser utility layer now exposes deterministic token-level parity helpers for Python dcec_parsing.py form construction and classification, with focused Jest coverage exercising the new public exports and ledger entries marking checkbox-471 complete.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/cec/dcecParsing.test.ts`, `src/lib/logic/cec/dcecParsing.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T071818Z-added-browser-native-dcec-parser-utility-builders-and-classifiers-for-atom-conne.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T071818Z-added-browser-native-dcec-parser-utility-builders-and-classifiers-for-atom-conne.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T071818Z-added-browser-native-dcec-parser-utility-builders-and-classifiers-for-atom-conne.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+

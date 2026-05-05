@@ -1,5 +1,11 @@
 import {
   DcecParseToken,
+  classifyDcecParseForm,
+  createDcecAtom,
+  createDcecConnective,
+  createDcecDeonticForm,
+  createDcecModalForm,
+  createDcecQuantifier,
   prefixDcecEmdas,
   prefixDcecLogicalFunctions,
   replaceDcecSynonyms,
@@ -62,5 +68,58 @@ describe('DCEC parsing utilities', () => {
       y: ['Numeric'],
       z: ['Numeric'],
     });
+  });
+
+  it('builds and classifies DCEC atom and connective parser forms', () => {
+    const atom = createDcecAtom('happens', ['PayRent', 't1']);
+    const connective = createDcecConnective('ifAndOnlyIf', [
+      atom,
+      createDcecConnective('not', [createDcecAtom('breach')]),
+    ]);
+
+    expect(atom.createSExpression()).toBe('(happens PayRent t1)');
+    expect(classifyDcecParseForm(atom)).toMatchObject({
+      kind: 'atom',
+      predicate: 'happens',
+      arguments: ['PayRent', 't1'],
+    });
+    expect(connective.createFExpression()).toBe('iff(happens(PayRent,t1),not(breach()))');
+    expect(classifyDcecParseForm(connective)).toMatchObject({
+      kind: 'connective',
+      operator: 'iff',
+    });
+  });
+
+  it('builds and classifies DCEC quantifier forms with default and explicit sorts', () => {
+    const defaultSort = createDcecQuantifier('forall', 'x', createDcecAtom('tenant', ['x']));
+    const explicitSort = createDcecQuantifier(
+      'exists',
+      'm',
+      createDcecAtom('moment', ['m']),
+      'Moment',
+    );
+
+    expect(defaultSort.createSExpression()).toBe('(forAll x Entity (tenant x))');
+    expect(classifyDcecParseForm(defaultSort)).toMatchObject({
+      kind: 'quantifier',
+      operator: 'forAll',
+      variable: 'x',
+      sort: 'Entity',
+    });
+    expect(explicitSort.createFExpression()).toBe('exists(m,Moment,moment(m))');
+    expect(classifyDcecParseForm(explicitSort).body).toBeInstanceOf(DcecParseToken);
+  });
+
+  it('builds and classifies modal and deontic parser forms', () => {
+    const obligation = createDcecDeonticForm('obligation', createDcecAtom('payRent', ['tenant']));
+    const permission = createDcecDeonticForm('permission', createDcecAtom('inspect'), 'landlord');
+    const knowledge = createDcecModalForm('knows', 'judge', obligation);
+
+    expect(obligation.createFExpression()).toBe('O(payRent(tenant))');
+    expect(permission.createSExpression()).toBe('(P landlord (inspect))');
+    expect(knowledge.createFExpression()).toBe('K(judge,O(payRent(tenant)))');
+    expect(classifyDcecParseForm(obligation)).toMatchObject({ kind: 'deontic', operator: 'O' });
+    expect(classifyDcecParseForm(permission).body).toBeInstanceOf(DcecParseToken);
+    expect(classifyDcecParseForm(knowledge)).toMatchObject({ kind: 'modal', operator: 'K' });
   });
 });
