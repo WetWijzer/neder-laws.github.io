@@ -51,6 +51,33 @@ describe('ZKP prover and verifier browser-native facades', () => {
     await expect(prover.prove('Q')).rejects.toThrow('At least one axiom required');
   });
 
+  it('generates batch proofs with Python-style request keys and per-item errors', async () => {
+    const prover = new ZKPProver({ enableCaching: true });
+    const results = await prover.generate_batch_proofs([
+      { theorem: 'Q', private_axioms: ['P'], metadata: { seed: 'batch' } },
+      { theorem: 'R', axioms: [] },
+      { theorem: ' Q ', privateAxioms: ['P'], metadata: { seed: 'batch' } },
+    ]);
+
+    expect(results).toHaveLength(3);
+    expect(results[0]).toMatchObject({ index: 0, ok: true });
+    expect(results[0].proof).toBeInstanceOf(ZKPProof);
+    expect(results[1]).toMatchObject({
+      index: 1,
+      ok: false,
+      error: 'Proof generation failed: At least one axiom required',
+    });
+    expect(results[2]).toMatchObject({ index: 2, ok: true });
+    expect(results[2].proof?.publicInputs.theorem).toBe(' Q ');
+    expect(results[2].proof?.publicInputs.theorem_hash).toBe(
+      results[0].proof?.publicInputs.theorem_hash,
+    );
+    expect(prover.get_stats()).toMatchObject({
+      cache_hits: 1,
+      proofs_generated: 1,
+    });
+  });
+
   it('wraps invalid proof generation in ZKPError', async () => {
     const prover = new ZKPProver();
 

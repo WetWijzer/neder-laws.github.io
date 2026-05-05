@@ -10,6 +10,21 @@ export interface ZKPProverStats {
   cache_hit_rate: number;
 }
 
+export interface ZKPBatchProofRequest {
+  theorem: string;
+  privateAxioms?: string[];
+  private_axioms?: string[];
+  axioms?: string[];
+  metadata?: Record<string, unknown>;
+}
+
+export interface ZKPBatchProofResult {
+  index: number;
+  ok: boolean;
+  proof?: ZKPProof;
+  error?: string;
+}
+
 export interface ZKPVerifierStats {
   proofs_verified: number;
   proofs_rejected: number;
@@ -84,7 +99,9 @@ export class ZKPProver {
       if (error instanceof ZKPError && error.message.startsWith('Proof generation failed:')) {
         throw error;
       }
-      throw new ZKPError(`Proof generation failed: ${error instanceof Error ? error.message : String(error)}`);
+      throw new ZKPError(
+        `Proof generation failed: ${error instanceof Error ? error.message : String(error)}`,
+      );
     }
   }
 
@@ -96,7 +113,37 @@ export class ZKPProver {
     return this.generateProof(theorem, privateAxioms, metadata);
   }
 
-  async prove(statement: string, witness?: { axioms?: string[] } | string | string[], metadata?: Record<string, unknown>): Promise<ZKPProof> {
+  async generateBatchProofs(requests: ZKPBatchProofRequest[]): Promise<ZKPBatchProofResult[]> {
+    const results: ZKPBatchProofResult[] = [];
+    for (let index = 0; index < requests.length; index += 1) {
+      const request = requests[index];
+      const privateAxioms = request.privateAxioms ?? request.private_axioms ?? request.axioms ?? [];
+      try {
+        results.push({
+          index,
+          ok: true,
+          proof: await this.generateProof(request.theorem, privateAxioms, request.metadata ?? {}),
+        });
+      } catch (error) {
+        results.push({
+          error: error instanceof Error ? error.message : String(error),
+          index,
+          ok: false,
+        });
+      }
+    }
+    return results;
+  }
+
+  generate_batch_proofs(requests: ZKPBatchProofRequest[]): Promise<ZKPBatchProofResult[]> {
+    return this.generateBatchProofs(requests);
+  }
+
+  async prove(
+    statement: string,
+    witness?: { axioms?: string[] } | string | string[],
+    metadata?: Record<string, unknown>,
+  ): Promise<ZKPProof> {
     let privateAxioms: string[] = [];
     if (Array.isArray(witness)) {
       privateAxioms = witness;
@@ -108,7 +155,11 @@ export class ZKPProver {
     return this.generateProof(statement, privateAxioms, metadata);
   }
 
-  async computeCacheKey(theorem: string, axioms: string[], metadata: Record<string, unknown> = {}): Promise<string> {
+  async computeCacheKey(
+    theorem: string,
+    axioms: string[],
+    metadata: Record<string, unknown> = {},
+  ): Promise<string> {
     const meta: Record<string, unknown> = { security_level: this.securityLevel };
     for (const key of ['seed', 'circuit_version', 'ruleset_id']) {
       if (Object.prototype.hasOwnProperty.call(metadata, key)) {
@@ -124,7 +175,11 @@ export class ZKPProver {
     );
   }
 
-  _compute_cache_key(theorem: string, axioms: string[], metadata: Record<string, unknown> = {}): Promise<string> {
+  _compute_cache_key(
+    theorem: string,
+    axioms: string[],
+    metadata: Record<string, unknown> = {},
+  ): Promise<string> {
     return this.computeCacheKey(theorem, axioms, metadata);
   }
 
@@ -133,7 +188,9 @@ export class ZKPProver {
     return {
       ...this.stats,
       avg_proving_time:
-        this.stats.proofs_generated > 0 ? this.stats.total_proving_time / this.stats.proofs_generated : 0,
+        this.stats.proofs_generated > 0
+          ? this.stats.total_proving_time / this.stats.proofs_generated
+          : 0,
       cache_hit_rate: totalAttempts > 0 ? this.stats.cache_hits / totalAttempts : 0,
     };
   }
@@ -203,7 +260,9 @@ export class ZKPVerifier {
       }
       return isValid;
     } catch (error) {
-      throw new ZKPError(`Proof verification failed: ${error instanceof Error ? error.message : String(error)}`);
+      throw new ZKPError(
+        `Proof verification failed: ${error instanceof Error ? error.message : String(error)}`,
+      );
     }
   }
 
@@ -220,8 +279,11 @@ export class ZKPVerifier {
         return false;
       }
 
-      const proofBackend = String(proof.metadata.backend ?? proof.metadata.proof_system ?? '').toLowerCase();
-      const maxSize = proofBackend.startsWith('groth16') || proofBackend.includes('groth16') ? 50_000 : 300;
+      const proofBackend = String(
+        proof.metadata.backend ?? proof.metadata.proof_system ?? '',
+      ).toLowerCase();
+      const maxSize =
+        proofBackend.startsWith('groth16') || proofBackend.includes('groth16') ? 50_000 : 300;
       if (proof.sizeBytes < 100 || proof.sizeBytes > maxSize) {
         return false;
       }
@@ -238,7 +300,8 @@ export class ZKPVerifier {
   }
 
   validatePublicInputs(publicInputs: unknown): boolean {
-    if (!publicInputs || typeof publicInputs !== 'object' || Array.isArray(publicInputs)) return false;
+    if (!publicInputs || typeof publicInputs !== 'object' || Array.isArray(publicInputs))
+      return false;
     const inputs = publicInputs as Record<string, unknown>;
     if (typeof inputs.theorem !== 'string' || inputs.theorem === '') return false;
     if (!isHex32Bytes(inputs.theorem_hash)) return false;
@@ -253,13 +316,21 @@ export class ZKPVerifier {
       if (typeof inputs.circuit_ref !== 'string' || inputs.circuit_ref === '') return false;
       try {
         const parsed = parseCircuitRefLenient(inputs.circuit_ref);
-        if ('circuit_version' in inputs && Number(inputs.circuit_version) !== Number(parsed.version)) return false;
+        if (
+          'circuit_version' in inputs &&
+          Number(inputs.circuit_version) !== Number(parsed.version)
+        )
+          return false;
       } catch {
         return false;
       }
     }
 
-    if ('ruleset_id' in inputs && (typeof inputs.ruleset_id !== 'string' || inputs.ruleset_id === '')) return false;
+    if (
+      'ruleset_id' in inputs &&
+      (typeof inputs.ruleset_id !== 'string' || inputs.ruleset_id === '')
+    )
+      return false;
     return true;
   }
 

@@ -2252,3 +2252,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T040559Z-port-remaining-witness_manager-parity-for-dict-shaped-witness-proof-statement-in.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T040559Z-port-remaining-witness_manager-parity-for-dict-shaped-witness-proof-statement-in.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T040559Z-port-remaining-witness_manager-parity-for-dict-shaped-witness-proof-statement-in.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 04:08:04 UTC
+
+- Target: `Task checkbox-441: Port remaining Python logic module `logic/zkp/zkp_prover.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Summary: Ported the remaining zkp_prover.py batch-generation facade behavior into the browser-native ZKP prover.
+- Impact: The TypeScript ZKP facade now supports deterministic batch proof generation with Python-style request aliases, cache reuse, and fail-closed per-item errors. The focused Jest facade test directly exercises the new browser-native prover path without server calls, Python runtime bridges, filesystem, subprocess, or RPC fallbacks.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/zkp/facade.test.ts`, `src/lib/logic/zkp/facade.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T040804Z-ported-the-remaining-zkp_prover.py-batch-generation-facade-behavior-into-the-bro.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T040804Z-ported-the-remaining-zkp_prover.py-batch-generation-facade-behavior-into-the-bro.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T040804Z-ported-the-remaining-zkp_prover.py-batch-generation-facade-behavior-into-the-bro.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+
