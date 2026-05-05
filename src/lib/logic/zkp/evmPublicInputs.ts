@@ -1,4 +1,6 @@
 import { BN254_FIELD_MODULUS } from './canonicalization';
+import type { BrowserCryptoOptions } from './browserCrypto';
+import { bytesToHex, sha256Digest } from './browserCrypto';
 
 export const BN254_FR_MODULUS = BN254_FIELD_MODULUS;
 
@@ -103,16 +105,20 @@ export function normalizeEvmPublicInputTuple(
   };
 }
 
-export async function hashTextToFieldSha256(text: string): Promise<string> {
+export async function hashTextToFieldSha256(
+  text: string,
+  options: BrowserCryptoOptions = {},
+): Promise<string> {
   if (typeof text !== 'string') {
     throw new TypeError('text must be str');
   }
-  const digest = await globalThis.crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-  return intTo0x32(BigInt(`0x${bytesToHex(new Uint8Array(digest))}`));
+  const digest = await sha256Digest(new TextEncoder().encode(text), options);
+  return intTo0x32(BigInt(`0x${bytesToHex(digest)}`));
 }
 
 export async function packPublicInputsForEvm(
   input: EvmPublicInputTuple | EvmPublicInputRecord,
+  options: BrowserCryptoOptions = {},
 ): Promise<string[]> {
   const normalized = normalizeEvmPublicInputTuple(input);
   const circuitVersion = BigInt(normalized.circuitVersion);
@@ -127,42 +133,52 @@ export async function packPublicInputsForEvm(
     intTo0x32(bytes32HexToIntModFr(normalized.theoremHashHex)),
     intTo0x32(bytes32HexToIntModFr(normalized.axiomsCommitmentHex)),
     intTo0x32(circuitVersion),
-    await hashTextToFieldSha256(normalized.rulesetId),
+    await hashTextToFieldSha256(normalized.rulesetId, options),
   ];
 }
 
-export function pack_public_inputs_for_evm(options: {
-  theorem_hash_hex: string;
-  axioms_commitment_hex: string;
-  circuit_version: number | bigint;
-  ruleset_id: string;
-}): Promise<string[]> {
-  return packPublicInputsForEvm({
-    axiomsCommitmentHex: options.axioms_commitment_hex,
-    circuitVersion: options.circuit_version,
-    rulesetId: options.ruleset_id,
-    theoremHashHex: options.theorem_hash_hex,
-  });
+export function pack_public_inputs_for_evm(
+  options: {
+    theorem_hash_hex: string;
+    axioms_commitment_hex: string;
+    circuit_version: number | bigint;
+    ruleset_id: string;
+  } & BrowserCryptoOptions,
+): Promise<string[]> {
+  return packPublicInputsForEvm(
+    {
+      axiomsCommitmentHex: options.axioms_commitment_hex,
+      circuitVersion: options.circuit_version,
+      rulesetId: options.ruleset_id,
+      theoremHashHex: options.theorem_hash_hex,
+    },
+    options,
+  );
 }
 
-export async function packPublicInputRecordForEvm(input: EvmPublicInputRecord): Promise<string[]> {
-  return packPublicInputsForEvm(input);
+export async function packPublicInputRecordForEvm(
+  input: EvmPublicInputRecord,
+  options: BrowserCryptoOptions = {},
+): Promise<string[]> {
+  return packPublicInputsForEvm(input, options);
 }
 
 export const pack_public_input_record_for_evm = packPublicInputRecordForEvm;
 
 export async function packManyPublicInputsForEvm(
   inputs: Iterable<EvmPublicInputTuple | EvmPublicInputRecord>,
+  options: BrowserCryptoOptions = {},
 ): Promise<string[][]> {
   const packed: string[][] = [];
   for (const input of inputs) {
-    packed.push(await packPublicInputsForEvm(input));
+    packed.push(await packPublicInputsForEvm(input, options));
   }
   return packed;
 }
 
 export function pack_many_public_inputs_for_evm(
   inputs: Iterable<[string, string, number | bigint, string]>,
+  options: BrowserCryptoOptions = {},
 ): Promise<string[][]> {
   return packManyPublicInputsForEvm(
     [...inputs].map(([theoremHashHex, axiomsCommitmentHex, circuitVersion, rulesetId]) => ({
@@ -171,9 +187,6 @@ export function pack_many_public_inputs_for_evm(
       rulesetId,
       theoremHashHex,
     })),
+    options,
   );
-}
-
-function bytesToHex(bytes: Uint8Array): string {
-  return [...bytes].map((byte) => byte.toString(16).padStart(2, '0')).join('');
 }

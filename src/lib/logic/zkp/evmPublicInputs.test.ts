@@ -26,6 +26,13 @@ Object.defineProperty(globalThis, 'TextEncoder', {
 describe('EVM public input packing', () => {
   const theoremHashHex = '11'.repeat(32);
   const axiomsCommitmentHex = `0x${'22'.repeat(32)}`;
+  const deterministicCrypto = {
+    async digest(algorithm: 'SHA-256', data: Uint8Array): Promise<ArrayBuffer> {
+      expect(algorithm).toBe('SHA-256');
+      expect(String.fromCharCode(...data)).toBe('deterministic-ruleset');
+      return new Uint8Array(32).fill(7).buffer;
+    },
+  };
 
   it('exposes browser-native Python module metadata', () => {
     expect(EVM_PUBLIC_INPUTS_METADATA.pythonSource).toBe('logic/zkp/evm_public_inputs.py');
@@ -47,6 +54,29 @@ describe('EVM public input packing', () => {
     const expected = `0x${(BigInt(`0x${digest}`) % BN254_FR_MODULUS).toString(16).padStart(64, '0')}`;
 
     await expect(hashTextToFieldSha256('TDFOL_v1')).resolves.toBe(expected);
+  });
+
+  it('accepts an injected browser crypto digest for deterministic public-input packing', async () => {
+    await expect(
+      hashTextToFieldSha256('deterministic-ruleset', { crypto: deterministicCrypto }),
+    ).resolves.toBe(`0x${'07'.repeat(32)}`);
+
+    const packed = await packPublicInputsForEvm(
+      {
+        axiomsCommitmentHex,
+        circuitVersion: 4,
+        rulesetId: 'deterministic-ruleset',
+        theoremHashHex,
+      },
+      { crypto: deterministicCrypto },
+    );
+
+    expect(packed).toEqual([
+      `0x${theoremHashHex}`,
+      `0x${'22'.repeat(32)}`,
+      `0x${'0'.repeat(63)}4`,
+      `0x${'07'.repeat(32)}`,
+    ]);
   });
 
   it('packs logical public inputs into four EVM-friendly field scalars', async () => {

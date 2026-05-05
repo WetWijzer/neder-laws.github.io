@@ -2432,3 +2432,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T055349Z-removed-deprecated-runtime-level-nlpunavailable-mlunavailable-capability-reporti.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T055349Z-removed-deprecated-runtime-level-nlpunavailable-mlunavailable-capability-reporti.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T055349Z-removed-deprecated-runtime-level-nlpunavailable-mlunavailable-capability-reporti.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 05:57:33 UTC
+
+- Target: `Task checkbox-460: Manual unblock: complete an EVM public-input and verification-key registry helper slice using browser-compatible crypto abstractions and deterministic tests.`
+- Summary: Completed the EVM public-input and VK registry helper slice with injectable browser crypto digest helpers and deterministic coverage.
+- Impact: The TypeScript ZKP EVM public-input packer and VK registry now share browser-native SHA-256 abstractions, support deterministic injected Web Crypto-compatible digest providers, and expose a registry helper that hashes verification-key material before registration without Node, Python, RPC, or server fallbacks. The focused Jest tests and logic-port validation suite exercise the new public-input and registry paths.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/zkp/browserCrypto.ts`, `src/lib/logic/zkp/evmPublicInputs.test.ts`, `src/lib/logic/zkp/evmPublicInputs.ts`, `src/lib/logic/zkp/index.ts`, `src/lib/logic/zkp/vkRegistry.test.ts`, `src/lib/logic/zkp/vkRegistry.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T055733Z-completed-the-evm-public-input-and-vk-registry-helper-slice-with-injectable-brow.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T055733Z-completed-the-evm-public-input-and-vk-registry-helper-slice-with-injectable-brow.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T055733Z-completed-the-evm-public-input-and-vk-registry-helper-slice-with-injectable-brow.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+

@@ -1,4 +1,6 @@
 import { parseCircuitRefLenient } from './statement';
+import type { BrowserCryptoOptions } from './browserCrypto';
+import { sha256Hex } from './browserCrypto';
 
 const U64_MAX = (BigInt(1) << BigInt(64)) - BigInt(1);
 
@@ -14,7 +16,10 @@ export interface VKRegistryDict {
   vk_registry: Record<string, Record<string, string>>;
 }
 
-export async function computeVkHash(vk: VKHashInput): Promise<string> {
+export async function computeVkHash(
+  vk: VKHashInput,
+  options: BrowserCryptoOptions = {},
+): Promise<string> {
   let payload: Uint8Array;
   if (vk instanceof Uint8Array) {
     payload = vk;
@@ -25,12 +30,14 @@ export async function computeVkHash(vk: VKHashInput): Promise<string> {
   } else {
     throw new TypeError('vk must be bytes, str, dict, or list');
   }
-  const digest = await globalThis.crypto.subtle.digest('SHA-256', payload);
-  return bytesToHex(new Uint8Array(digest));
+  return sha256Hex(payload, options);
 }
 
-export async function compute_vk_hash(vk: VKHashInput): Promise<string> {
-  return computeVkHash(vk);
+export async function compute_vk_hash(
+  vk: VKHashInput,
+  options: BrowserCryptoOptions = {},
+): Promise<string> {
+  return computeVkHash(vk, options);
 }
 
 export class VKRegistry {
@@ -80,6 +87,26 @@ export class VKRegistry {
     overwrite = false,
   ): void {
     this.registerVk(circuitId, version, vkHashHex, overwrite);
+  }
+
+  async registerVerificationKey(
+    circuitId: string,
+    version: number | bigint,
+    vk: VKHashInput,
+    options: { overwrite?: boolean } & BrowserCryptoOptions = {},
+  ): Promise<string> {
+    const hash = await computeVkHash(vk, options);
+    this.register(circuitId, version, hash, { overwrite: options.overwrite });
+    return hash;
+  }
+
+  async register_verification_key(
+    circuitId: string,
+    version: number | bigint,
+    vk: VKHashInput,
+    options: { overwrite?: boolean } & BrowserCryptoOptions = {},
+  ): Promise<string> {
+    return this.registerVerificationKey(circuitId, version, vk, options);
   }
 
   get(circuitId: string, version: number | bigint): string | undefined {
@@ -270,8 +297,4 @@ function stableJsonStringify(value: unknown): string {
     throw new TypeError('vk must contain JSON-serializable values');
   }
   return JSON.stringify(value);
-}
-
-function bytesToHex(bytes: Uint8Array): string {
-  return [...bytes].map((byte) => byte.toString(16).padStart(2, '0')).join('');
 }

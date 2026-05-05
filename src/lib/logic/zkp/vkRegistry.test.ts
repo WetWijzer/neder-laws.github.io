@@ -13,6 +13,14 @@ Object.defineProperty(globalThis, 'TextEncoder', {
 });
 
 describe('VK registry browser-native parity', () => {
+  const deterministicCrypto = {
+    async digest(algorithm: 'SHA-256', data: Uint8Array): Promise<ArrayBuffer> {
+      expect(algorithm).toBe('SHA-256');
+      expect(String.fromCharCode(...data)).toBe('{"a":[1],"b":2}');
+      return new Uint8Array(32).fill(171).buffer;
+    },
+  };
+
   it('computes stable VK hashes for bytes, text, and structured data', async () => {
     await expect(computeVkHash(new Uint8Array([1, 2, 3]))).resolves.toBe(
       createHash('sha256')
@@ -31,6 +39,29 @@ describe('VK registry browser-native parity', () => {
     await expect(computeVkHash(1 as never)).rejects.toThrow('vk must be bytes, str, dict, or list');
     await expect(computeVkHash({ a: undefined } as never)).rejects.toThrow('JSON-serializable');
     await expect(computeVkHash([Number.POSITIVE_INFINITY] as never)).rejects.toThrow('finite');
+  });
+
+  it('computes and registers VK material through an injected browser crypto digest', async () => {
+    const registry = new VKRegistry();
+    const hash = await registry.registerVerificationKey(
+      'tdfol_v1',
+      3,
+      { b: 2, a: [1] },
+      { crypto: deterministicCrypto },
+    );
+
+    expect(hash).toBe('ab'.repeat(32));
+    expect(registry.getVkHash('tdfol_v1', 3)).toBe('ab'.repeat(32));
+    await expect(
+      registry.register_verification_key(
+        'tdfol_v1',
+        3,
+        { b: 2, a: [1] },
+        {
+          crypto: deterministicCrypto,
+        },
+      ),
+    ).resolves.toBe('ab'.repeat(32));
   });
 
   it('registers, looks up, serializes, and restores VK hashes', async () => {

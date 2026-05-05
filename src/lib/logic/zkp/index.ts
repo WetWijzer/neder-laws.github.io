@@ -1,6 +1,7 @@
 export * from './backendProtocol';
 export * from './advancedDemo';
 export * from './basicDemo';
+export * from './browserCrypto';
 export * from './canonicalization';
 export * from './circuits';
 export * from './ethContractArtifacts';

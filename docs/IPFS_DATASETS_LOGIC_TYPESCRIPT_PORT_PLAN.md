@@ -999,7 +999,7 @@ The daemon completed all currently eligible TypeScript port-plan checkboxes, the
 - [x] Manual unblock: port the next deterministic `ml_confidence.py` parity slice with fixture-backed scoring, calibration metadata, and local browser execution only.
 - [x] Manual unblock: add local model artifact manifest, cache lifecycle, version checks, and unload controls for browser-native ML/NLP parity without server calls.
 - [x] Manual unblock: remove the next `nlpUnavailable` or `mlUnavailable` capability path by replacing it with local TypeScript/WASM, Transformers.js, ONNX/WebGPU, or deterministic fixture parity.
-- [ ] Manual unblock: complete an EVM public-input and verification-key registry helper slice using browser-compatible crypto abstractions and deterministic tests.
+- [x] Manual unblock: complete an EVM public-input and verification-key registry helper slice using browser-compatible crypto abstractions and deterministic tests.
 - [ ] Manual unblock: add developer-panel live inspection snapshots for logic parse, proof, cache, ML/NLP, and ZKP capability state.
 - [ ] Manual unblock: add CLI/devtools command adapter parity for `logic/cli.py` as browser/devtools-safe TypeScript entry points.
 - [ ] Manual unblock: port IPFS/IPLD proof cache semantics to browser-native storage and content-addressed cache adapters with deterministic tests.
@@ -1024,11 +1024,11 @@ The daemon completed all currently eligible TypeScript port-plan checkboxes, the
 <!-- logic-port-daemon-task-board:start -->
 ## Daemon Task Board
 
-Last updated: 2026-05-05 05:53:48 UTC
+Last updated: 2026-05-05 05:57:33 UTC
 
 Selection policy: choose the first needed or in-progress port-plan checkbox; if none remain, revisit blocked checkboxes with `fewest-failures` strategy because blocked-task revisit mode is enabled.
 
-Current target: `Task checkbox-460: Manual unblock: complete an EVM public-input and verification-key registry helper slice using browser-compatible crypto abstractions and deterministic tests.`
+Current target: `Task checkbox-461: Manual unblock: add developer-panel live inspection snapshots for logic parse, proof, cache, ML/NLP, and ZKP capability state.`
 
 Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failing.
 
@@ -1492,8 +1492,8 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - [x] `Task checkbox-456: Manual unblock: add a TDFOL security validator parity slice covering fail-closed formula, proof-cache, witness, and ZKP input checks in browser-safe TypeScript.` - complete
 - [x] `Task checkbox-457: Manual unblock: port the next deterministic 'ml_confidence.py' parity slice with fixture-backed scoring, calibration metadata, and local browser execution only.` - complete
 - [x] `Task checkbox-458: Manual unblock: add local model artifact manifest, cache lifecycle, version checks, and unload controls for browser-native ML/NLP parity without server calls.` - complete
-- [x] `Task checkbox-459: Manual unblock: remove the next 'nlpUnavailable' or 'mlUnavailable' capability path by replacing it with local TypeScript/WASM, Transformers.js, ONNX/WebGPU, or deterministic fixture parity.` - validated by latest daemon round
-- [ ] `Task checkbox-460: Manual unblock: complete an EVM public-input and verification-key registry helper slice using browser-compatible crypto abstractions and deterministic tests.` - needed
+- [x] `Task checkbox-459: Manual unblock: remove the next 'nlpUnavailable' or 'mlUnavailable' capability path by replacing it with local TypeScript/WASM, Transformers.js, ONNX/WebGPU, or deterministic fixture parity.` - complete
+- [x] `Task checkbox-460: Manual unblock: complete an EVM public-input and verification-key registry helper slice using browser-compatible crypto abstractions and deterministic tests.` - validated by latest daemon round
 - [ ] `Task checkbox-461: Manual unblock: add developer-panel live inspection snapshots for logic parse, proof, cache, ML/NLP, and ZKP capability state.` - needed
 - [ ] `Task checkbox-462: Manual unblock: add CLI/devtools command adapter parity for 'logic/cli.py' as browser/devtools-safe TypeScript entry points.` - needed
 - [ ] `Task checkbox-463: Manual unblock: port IPFS/IPLD proof cache semantics to browser-native storage and content-addressed cache adapters with deterministic tests.` - needed
@@ -1517,11 +1517,11 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 
 ### Latest Round
 
-- Target: `Task checkbox-459: Manual unblock: remove the next 'nlpUnavailable' or 'mlUnavailable' capability path by replacing it with local TypeScript/WASM, Transformers.js, ONNX/WebGPU, or deterministic fixture parity.`
+- Target: `Task checkbox-460: Manual unblock: complete an EVM public-input and verification-key registry helper slice using browser-compatible crypto abstractions and deterministic tests.`
 - Result: `valid`
-- Summary: Removed deprecated runtime-level nlpUnavailable/mlUnavailable capability reporting and switched validation to positive browser-native NLP/ML status checks.
-- Impact: The TypeScript logic runtime now exposes browser-native NLP and ML parity through complete status and local artifact capability fields instead of unavailable flags. Browser-native validation directly exercises those positive fields, while FOL parser compatibility output derives its legacy nlpUnavailable value from the local TypeScript NLP status without reintroducing a runtime unavailable path.
-- Accepted changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/browserNativeValidation.test.ts`, `src/lib/logic/browserNativeValidation.ts`, `src/lib/logic/fol/parser.ts`, `src/lib/logic/runtimeCapabilities.test.ts`, `src/lib/logic/runtimeCapabilities.ts`
+- Summary: Completed the EVM public-input and VK registry helper slice with injectable browser crypto digest helpers and deterministic coverage.
+- Impact: The TypeScript ZKP EVM public-input packer and VK registry now share browser-native SHA-256 abstractions, support deterministic injected Web Crypto-compatible digest providers, and expose a registry helper that hashes verification-key material before registration without Node, Python, RPC, or server fallbacks. The focused Jest tests and logic-port validation suite exercise the new public-input and registry paths.
+- Accepted changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/zkp/browserCrypto.ts`, `src/lib/logic/zkp/evmPublicInputs.test.ts`, `src/lib/logic/zkp/evmPublicInputs.ts`, `src/lib/logic/zkp/index.ts`, `src/lib/logic/zkp/vkRegistry.test.ts`, `src/lib/logic/zkp/vkRegistry.ts`
 
 ### Blocked Backlog
 
