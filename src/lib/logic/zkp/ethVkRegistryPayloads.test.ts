@@ -1,6 +1,9 @@
 import {
+  buildManyRegisterVkPayloads,
   buildRegisterVkCalldata,
+  buildRegisterVkCalldataFromEntry,
   buildRegisterVkPayload,
+  buildRegisterVkPayloadFromEntry,
   build_register_vk_payload,
   circuitIdTextToBytes32,
   keccak256Hex,
@@ -42,6 +45,28 @@ describe('EVM VK registry payload helpers', () => {
     });
   });
 
+  it('derives registerVK payloads from VK registry entries', () => {
+    const expectedCircuitIdBytes32 = circuitIdTextToBytes32('tdfol_v1');
+
+    expect(
+      buildRegisterVkPayloadFromEntry({
+        circuitId: 'tdfol_v1',
+        version: BigInt(7),
+        vkHashHex: vkHash,
+      }),
+    ).toEqual({
+      circuitIdBytes32: expectedCircuitIdBytes32,
+      version: BigInt(7),
+      vkHashBytes32: vkHash,
+    });
+    expect(
+      buildManyRegisterVkPayloads([
+        { circuit_id: 'tdfol_v1', version: 1, vk_hash_hex: vkHash },
+        { circuitId: 'tdfol_v2', version: 2, vkHashHex: 'cc'.repeat(32) },
+      ]).map((payload) => payload.version),
+    ).toEqual([1, 2]);
+  });
+
   it('hashes circuit ids with browser-native Keccak-256', () => {
     expect(keccak256Hex('')).toBe(
       '0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470',
@@ -75,11 +100,25 @@ describe('EVM VK registry payload helpers', () => {
     ).toThrow('overwrite must be bool');
   });
 
+  it('builds calldata directly from registry entries for browser chain clients', () => {
+    const bundle = buildRegisterVkCalldataFromEntry(
+      { circuitId: 'tdfol_v1', version: 5, vkHashHex: vkHash },
+      { overwrite: true },
+    );
+
+    expect(bundle.payload.circuitIdBytes32).toBe(circuitIdTextToBytes32('tdfol_v1'));
+    expect(bundle.calldata).toMatch(/^0x[0-9a-f]+$/);
+    expect(bundle.calldata.endsWith('1'.padStart(64, '0'))).toBe(true);
+  });
+
   it('validates malformed payload values', () => {
     expect(() => normalizeBytes32Hex('abc')).toThrow('32 bytes');
     expect(() => normalizeBytes32Hex('zz'.repeat(32))).toThrow('hex');
     expect(() =>
       buildRegisterVkPayload({ circuitIdBytes32: circuitId, version: -1, vkHashHex: vkHash }),
     ).toThrow('uint64');
+    expect(() =>
+      buildRegisterVkPayloadFromEntry({ circuitId: '', version: 1, vkHashHex: vkHash }),
+    ).toThrow('cannot be empty');
   });
 });

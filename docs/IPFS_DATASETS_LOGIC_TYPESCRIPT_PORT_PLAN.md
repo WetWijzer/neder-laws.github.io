@@ -584,7 +584,7 @@ Acceptance criteria:
 - [x] Port external prover router and bridge contracts to local browser adapters.
 - [x] Evaluate and integrate local WASM provers for Z3/cvc5/Tau Prolog/Lean/Coq-style workflows where feasible.
 - [x] Port Groth16 verification/proving path using browser-native cryptographic libraries where feasible.
-- [!] Port EVM/public-input/vk-registry helpers using browser-compatible crypto and chain libraries.
+- [x] Port EVM/public-input/vk-registry helpers using browser-compatible crypto and chain libraries.
 - [x] Add strict UI/API language distinguishing simulated, heuristic, proof-checking, and cryptographic outputs.
 
 ### Phase 15: Integration, Security, Observability, And Developer Tools
@@ -1025,11 +1025,11 @@ The daemon completed all currently eligible TypeScript port-plan checkboxes, the
 <!-- logic-port-daemon-task-board:start -->
 ## Daemon Task Board
 
-Last updated: 2026-05-05 09:14:48 UTC
+Last updated: 2026-05-05 09:16:57 UTC
 
 Selection policy: choose the first needed or in-progress port-plan checkbox; if none remain, revisit blocked checkboxes with `fewest-failures` strategy because blocked-task revisit mode is enabled.
 
-Current target: `Task checkbox-183: Port EVM/public-input/vk-registry helpers using browser-compatible crypto and chain libraries.`
+Current target: `Task checkbox-192: Add richer developer-panel integration for live UI inspection.`
 
 Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failing.
 
@@ -1210,14 +1210,14 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - [x] `Task checkbox-173: Port CEC NL policy compilers and language detection with browser-native NLP.` - complete
 - [x] `Task checkbox-174: Add deeper CEC/DCEC parity fixtures against Python parser and prover outputs.` - complete
 - [x] `Task checkbox-175: Replace spaCy extraction with browser-native NLP: Transformers.js token classification, dependency-light NLP, ONNX/WebGPU, or WASM NLP.` - complete
-- [x] `Task checkbox-176: Port 'ml_confidence.py' to local browser inference or an equivalent deterministic TypeScript model.` - validated by latest daemon round
+- [x] `Task checkbox-176: Port 'ml_confidence.py' to local browser inference or an equivalent deterministic TypeScript model.` - complete
 - [x] `Task checkbox-177: Add local model artifact loading, caching, versioning, and unload controls.` - complete
 - [x] `Task checkbox-178: Add exact/tolerance parity tests against Python ML/spaCy development fixtures.` - complete
 - [!] `Task checkbox-179: Remove 'nlpUnavailable' and 'mlUnavailable' capability flags once browser-native parity is implemented.` - blocked
 - [x] `Task checkbox-180: Port external prover router and bridge contracts to local browser adapters.` - complete
 - [x] `Task checkbox-181: Evaluate and integrate local WASM provers for Z3/cvc5/Tau Prolog/Lean/Coq-style workflows where feasible.` - complete
 - [x] `Task checkbox-182: Port Groth16 verification/proving path using browser-native cryptographic libraries where feasible.` - complete
-- [!] `Task checkbox-183: Port EVM/public-input/vk-registry helpers using browser-compatible crypto and chain libraries.` - blocked
+- [x] `Task checkbox-183: Port EVM/public-input/vk-registry helpers using browser-compatible crypto and chain libraries.` - validated by latest daemon round
 - [x] `Task checkbox-184: Add strict UI/API language distinguishing simulated, heuristic, proof-checking, and cryptographic outputs.` - complete
 - [x] `Task checkbox-185: Port logic integration bridges to route to TS/WASM cores.` - complete
 - [x] `Task checkbox-186: Initial browser-native bridge facade for local route inventory, FOL/deontic/TDFOL/CEC conversion routing, TDFOL/CEC proof routing, and explicit unsupported-route results with 'server_calls_allowed: false'.` - complete
@@ -1519,11 +1519,11 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 
 ### Latest Round
 
-- Target: `Task checkbox-176: Port 'ml_confidence.py' to local browser inference or an equivalent deterministic TypeScript model.`
+- Target: `Task checkbox-183: Port EVM/public-input/vk-registry helpers using browser-compatible crypto and chain libraries.`
 - Result: `valid`
-- Summary: Added an exact browser-native deterministic artifact format for Python ml_confidence.py heuristic inference.
-- Impact: src/lib/logic/mlConfidence.ts can now load a deterministic-python-heuristic-v1 artifact that scores from the existing feature vector with the same rule weights as the Python fallback model, so browser callers can use local artifact inference without Python, server, filesystem, subprocess, or RPC fallbacks. src/lib/logic/mlConfidence.test.ts validates the artifact against the captured Python parity fixture, and the port ledger marks checkbox-176 complete.
-- Accepted changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/mlConfidence.test.ts`, `src/lib/logic/mlConfidence.ts`
+- Summary: Ported the VK registry entry-to-EVM payload bridge with browser-native Keccak calldata helpers.
+- Impact: The TypeScript ZKP port can now derive registerVK bytes32 payloads and ABI calldata directly from VK registry entry shapes using browser-compatible crypto code, and the focused Jest suite validates the new browser-local chain helper path.
+- Accepted changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/zkp/ethVkRegistryPayloads.test.ts`, `src/lib/logic/zkp/ethVkRegistryPayloads.ts`
 
 ### Blocked Backlog
 
@@ -1541,8 +1541,6 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
   - Latest errors: llm_router could not generate with model='gpt-5.5' provider='auto'. Configure the provider credentials or pass --provider. Original error: copilot CLI binary not found on PATH (required for session/tracing flags). Install the GitHub Copilot...
 - `Task checkbox-179: Remove 'nlpUnavailable' and 'mlUnavailable' capability flags once browser-native parity is implemented.`
   - Failures since success: `0`
-- `Task checkbox-183: Port EVM/public-input/vk-registry helpers using browser-compatible crypto and chain libraries.`
-  - Failures since success: `0`
 - `Task checkbox-192: Add richer developer-panel integration for live UI inspection.`
   - Failures since success: `0`
 - `Task checkbox-195: Add CLI/devtools command adapter parity for 'logic/cli.py'.`
@@ -1554,6 +1552,8 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - `Task checkbox-202: Port remaining Python logic module 'logic/CEC/native/cec_proof_cache.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
   - Failures since success: `0`
 - `Task checkbox-203: Port remaining Python logic module 'logic/CEC/native/cec_zkp_integration.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+  - Failures since success: `0`
+- `Task checkbox-204: Port remaining Python logic module 'logic/CEC/native/context_manager.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
   - Failures since success: `0`
 
 ### Required Daemon Behavior

@@ -134,6 +134,24 @@ export interface RegisterVKPayloadDict {
   vk_hash_bytes32: string;
 }
 
+export interface VKRegistryPayloadSource {
+  circuitId?: string;
+  circuit_id?: string;
+  version: number | bigint;
+  vkHashHex?: string;
+  vk_hash_hex?: string;
+}
+
+export interface RegisterVKCalldataBundle {
+  payload: RegisterVKPayload;
+  calldata: string;
+}
+
+export interface RegisterVKCalldataBundleDict {
+  payload: RegisterVKPayloadDict;
+  calldata: string;
+}
+
 export function normalizeHexNoPrefix(value: string): string {
   if (typeof value !== 'string') {
     throw new TypeError('value must be a str');
@@ -218,6 +236,56 @@ export function build_register_vk_payload(options: {
   };
 }
 
+export function buildRegisterVkPayloadFromEntry(entry: VKRegistryPayloadSource): RegisterVKPayload {
+  if (!entry || typeof entry !== 'object') {
+    throw new TypeError('entry must be a dict');
+  }
+  const circuitId = entry.circuitId ?? entry.circuit_id;
+  const vkHashHex = entry.vkHashHex ?? entry.vk_hash_hex;
+  if (typeof circuitId !== 'string') {
+    throw new TypeError('circuit_id must be a str');
+  }
+  if (typeof vkHashHex !== 'string') {
+    throw new TypeError('vk_hash_hex must be a str');
+  }
+  return buildRegisterVkPayload({
+    circuitIdBytes32: circuitIdTextToBytes32(circuitId),
+    version: entry.version,
+    vkHashHex,
+  });
+}
+
+export function build_register_vk_payload_from_entry(
+  entry: VKRegistryPayloadSource,
+): RegisterVKPayloadDict {
+  const payload = buildRegisterVkPayloadFromEntry(entry);
+  return {
+    circuit_id_bytes32: payload.circuitIdBytes32,
+    version: payload.version,
+    vk_hash_bytes32: payload.vkHashBytes32,
+  };
+}
+
+export function buildManyRegisterVkPayloads(
+  entries: Iterable<VKRegistryPayloadSource>,
+): Array<RegisterVKPayload> {
+  const payloads: Array<RegisterVKPayload> = [];
+  for (const entry of entries) {
+    payloads.push(buildRegisterVkPayloadFromEntry(entry));
+  }
+  return payloads;
+}
+
+export function build_many_register_vk_payloads(
+  entries: Iterable<VKRegistryPayloadSource>,
+): Array<RegisterVKPayloadDict> {
+  return buildManyRegisterVkPayloads(entries).map((payload) => ({
+    circuit_id_bytes32: payload.circuitIdBytes32,
+    version: payload.version,
+    vk_hash_bytes32: payload.vkHashBytes32,
+  }));
+}
+
 function uint256Word(value: number | bigint): string {
   const version = BigInt(value);
   return version.toString(16).padStart(64, '0');
@@ -262,4 +330,30 @@ export function build_register_vk_calldata(options: {
       vkHashBytes32: options.payload.vk_hash_bytes32,
     },
   });
+}
+
+export function buildRegisterVkCalldataFromEntry(
+  entry: VKRegistryPayloadSource,
+  options: { overwrite?: boolean } = {},
+): RegisterVKCalldataBundle {
+  const payload = buildRegisterVkPayloadFromEntry(entry);
+  return {
+    calldata: buildRegisterVkCalldata({ payload, overwrite: options.overwrite }),
+    payload,
+  };
+}
+
+export function build_register_vk_calldata_from_entry(
+  entry: VKRegistryPayloadSource,
+  options: { overwrite?: boolean } = {},
+): RegisterVKCalldataBundleDict {
+  const bundle = buildRegisterVkCalldataFromEntry(entry, options);
+  return {
+    calldata: bundle.calldata,
+    payload: {
+      circuit_id_bytes32: bundle.payload.circuitIdBytes32,
+      version: bundle.payload.version,
+      vk_hash_bytes32: bundle.payload.vkHashBytes32,
+    },
+  };
 }

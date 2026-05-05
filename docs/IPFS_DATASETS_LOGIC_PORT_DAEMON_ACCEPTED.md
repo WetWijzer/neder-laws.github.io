@@ -2621,3 +2621,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T091448Z-added-an-exact-browser-native-deterministic-artifact-format-for-python-ml_confid.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T091448Z-added-an-exact-browser-native-deterministic-artifact-format-for-python-ml_confid.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T091448Z-added-an-exact-browser-native-deterministic-artifact-format-for-python-ml_confid.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 09:16:57 UTC
+
+- Target: `Task checkbox-183: Port EVM/public-input/vk-registry helpers using browser-compatible crypto and chain libraries.`
+- Summary: Ported the VK registry entry-to-EVM payload bridge with browser-native Keccak calldata helpers.
+- Impact: The TypeScript ZKP port can now derive registerVK bytes32 payloads and ABI calldata directly from VK registry entry shapes using browser-compatible crypto code, and the focused Jest suite validates the new browser-local chain helper path.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/zkp/ethVkRegistryPayloads.test.ts`, `src/lib/logic/zkp/ethVkRegistryPayloads.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T091657Z-ported-the-vk-registry-entry-to-evm-payload-bridge-with-browser-native-keccak-ca.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T091657Z-ported-the-vk-registry-entry-to-evm-payload-bridge-with-browser-native-keccak-ca.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T091657Z-ported-the-vk-registry-entry-to-evm-payload-bridge-with-browser-native-keccak-ca.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+
