@@ -2207,3 +2207,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T034543Z-ported-the-remaining-legal-theorem-semantics-slice-with-deterministic-horn-conju.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T034543Z-ported-the-remaining-legal-theorem-semantics-slice-with-deterministic-horn-conju.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T034543Z-ported-the-remaining-legal-theorem-semantics-slice-with-deterministic-horn-conju.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 03:50:54 UTC
+
+- Target: `Task checkbox-436: Port remaining Python logic module `logic/zkp/onchain_pipeline.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Summary: Ported zkp/onchain_pipeline.py as a browser-native Groth16-to-EVM pipeline facade.
+- Impact: src/lib/logic/zkp/onchainPipeline.ts composes the existing browser-native Groth16 backup backend, EVM public-input packing, verifier calldata builder, VK registry payload builder, and injected EIP-1193 provider calls without Python, server RPC fallback, filesystem, or subprocess dependencies. The existing ZKP facade Jest suite now validates pipeline metadata, proof-to-public-input conversion, verifier read-call construction, optional VK registration calldata, successful injected-provider verification, and fail-closed missing-provider behavior.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/zkp/facade.test.ts`, `src/lib/logic/zkp/index.ts`, `src/lib/logic/zkp/onchainPipeline.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T035054Z-ported-zkp-onchain_pipeline.py-as-a-browser-native-groth16-to-evm-pipeline-facad.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T035054Z-ported-zkp-onchain_pipeline.py-as-a-browser-native-groth16-to-evm-pipeline-facad.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T035054Z-ported-zkp-onchain_pipeline.py-as-a-browser-native-groth16-to-evm-pipeline-facad.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+

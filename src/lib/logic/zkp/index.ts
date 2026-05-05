@@ -21,6 +21,7 @@ export {
   GROTH16_FFI_BACKEND_METADATA,
 } from '../groth16';
 export * from './legalTheoremSemantics';
+export * from './onchainPipeline';
 export * from './simulatedBackend';
 export * from './simulatedVerifier';
 export * from './statement';

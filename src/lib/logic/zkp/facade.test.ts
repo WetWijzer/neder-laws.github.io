@@ -1,8 +1,10 @@
 import { webcrypto } from 'node:crypto';
 import { TextEncoder } from 'node:util';
 
+import type { BrowserGroth16Backend, Groth16Proof, Groth16VerificationKey } from '../groth16';
 import { runBasicZkpDemo, run_basic_zkp_demo } from './basicDemo';
 import { ZKPProver, ZKPVerifier } from './facade';
+import { ONCHAIN_PIPELINE_METADATA, buildOnchainProofPipeline } from './onchainPipeline';
 import { ZKPError, ZKPProof } from './simulatedBackend';
 
 Object.defineProperty(globalThis, 'crypto', {
@@ -132,5 +134,63 @@ describe('ZKP prover and verifier browser-native facades', () => {
     expect(result.verified).toBe(true);
     expect(result.proof.public_inputs.theorem).toBe('Access(Alice)');
     expect(result.proof.public_inputs.ruleset_id).toBe('TDFOL_v1');
+  });
+
+  it('builds the onchain_pipeline.py browser-native proof and verifier request', async () => {
+    const verificationKey: Groth16VerificationKey = { protocol: 'groth16' };
+    const backend: BrowserGroth16Backend = {
+      prove: async () => ({
+        ok: true,
+        proof: {
+          pi_a: ['1', '2'],
+          pi_b: [
+            ['3', '4'],
+            ['5', '6'],
+          ],
+          pi_c: ['7', '8'],
+          protocol: 'groth16',
+        } as Groth16Proof,
+        publicSignals: ['Q'],
+      }),
+      verify: async () => true,
+    };
+
+    const result = await buildOnchainProofPipeline({
+      backend,
+      privateAxioms: ['P', 'P -> Q'],
+      provider: { request: async (): Promise<string> => `0x${'1'.padStart(64, '0')}` },
+      provingArtifacts: { wasm: 'wasm', zkey: 'zkey' },
+      theorem: 'Q',
+      verificationKey,
+      verifierAddress: `0x${'ab'.repeat(20)}`,
+      verifyOnchain: true,
+      vkHashHex: `0x${'cd'.repeat(32)}`,
+    });
+
+    expect(ONCHAIN_PIPELINE_METADATA).toMatchObject({
+      allowsServerRpcFallback: false,
+      pythonSource: 'logic/zkp/onchain_pipeline.py',
+      requiresPythonRuntime: false,
+    });
+    expect(result.metadata).toMatchObject({
+      circuitId: 'legal_theorem_groth16',
+      registerVkPrepared: true,
+    });
+    expect(result.evmPublicInputs).toHaveLength(4);
+    expect(result.verifierCalldata).toMatch(/^0x[0-9a-f]+$/);
+    expect(result.verifierReadCall).toMatchObject({ blockTag: 'latest' });
+    expect(result.registryPayload?.vkHashBytes32).toBe(`0x${'cd'.repeat(32)}`);
+    expect(result.registryCalldata).toMatch(/^0x[0-9a-f]+$/);
+    expect(result.onchainVerified).toBe(true);
+    await expect(
+      buildOnchainProofPipeline({
+        backend,
+        privateAxioms: ['P'],
+        provingArtifacts: { wasm: 'wasm', zkey: 'zkey' },
+        theorem: 'Q',
+        verifierAddress: `0x${'ab'.repeat(20)}`,
+        verifyOnchain: true,
+      }),
+    ).rejects.toThrow('no server RPC fallback');
   });
 });
