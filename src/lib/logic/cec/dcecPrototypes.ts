@@ -2,6 +2,27 @@ import { stripDcecWhitespace } from './dcecCleaning';
 
 export type DcecFunctionPrototype = [returnType: string, argumentTypes: string[]];
 
+export const DCEC_PROTOTYPES_METADATA = {
+  sourcePythonModule: 'logic/CEC/native/dcec_prototypes.py',
+  runtime: 'browser-native-typescript',
+  implementation: 'deterministic-dcec-prototype-namespace',
+  browserNative: true,
+  pythonRuntime: false,
+  serverRuntime: false,
+  filesystem: false,
+  subprocess: false,
+  rpc: false,
+  supportedOperations: [
+    'addSort',
+    'addFunction',
+    'addAtomic',
+    'validateAtomic',
+    'validateFunction',
+    'statistics',
+    'snapshot',
+  ],
+} as const;
+
 export interface DcecPrototypeStatistics {
   sorts: number;
   functions: number;
@@ -22,11 +43,43 @@ export interface DcecPrototypeValidationResult {
   distance?: number;
 }
 
+export type DcecPrototypeOperation =
+  | 'addSort'
+  | 'addFunction'
+  | 'addAtomic'
+  | 'validateAtomic'
+  | 'validateFunction'
+  | 'statistics'
+  | 'snapshot'
+  | (string & {});
+
+export interface DcecPrototypeRequest {
+  readonly operation: DcecPrototypeOperation;
+  readonly name?: string;
+  readonly expression?: string;
+  readonly inheritance?: Array<string>;
+  readonly returnType?: string;
+  readonly typeName?: string;
+  readonly argumentTypes?: Array<string>;
+  readonly expectedType?: string;
+  readonly expectedReturnType?: string;
+}
+
+export interface DcecPrototypeOperationResult {
+  readonly ok: boolean;
+  readonly errors: Array<string>;
+  readonly validation?: DcecPrototypeValidationResult;
+  readonly statistics?: DcecPrototypeStatistics;
+  readonly snapshot?: string;
+  readonly metadata: typeof DCEC_PROTOTYPES_METADATA;
+}
+
 export class DcecPrototypeNamespace {
   readonly functions: Record<string, DcecFunctionPrototype[]> = {};
   readonly atomics: Record<string, string> = {};
   readonly sorts: Record<string, string[]> = {};
   readonly quantMap: Record<string, number> = { TEMP: 0 };
+  readonly metadata: typeof DCEC_PROTOTYPES_METADATA = DCEC_PROTOTYPES_METADATA;
 
   addCodeSort(name: string, inheritance: string[] = []): boolean {
     if (typeof name !== 'string' || !Array.isArray(inheritance)) return false;
@@ -291,6 +344,105 @@ export class DcecPrototypeNamespace {
       ...Object.entries(this.atomics).map(([name, type]) => `${name}: ${type}`),
     ].join('\n');
   }
+}
+
+export function invokeDcecPrototypeOperation(
+  namespace: DcecPrototypeNamespace,
+  request: DcecPrototypeRequest,
+): DcecPrototypeOperationResult {
+  const success = (extras: Omit<DcecPrototypeOperationResult, 'ok' | 'errors' | 'metadata'> = {}) =>
+    prototypeResult(true, [], extras);
+  const mutation = (ok: boolean) =>
+    prototypeResult(ok, ok ? [] : [`DCEC prototype ${request.operation} operation failed.`]);
+
+  if (request.operation === 'addSort') {
+    if (request.expression !== undefined)
+      return mutation(namespace.addTextSort(request.expression));
+    return request.name === undefined
+      ? prototypeFailure('DCEC prototype addSort operation requires a name.')
+      : mutation(namespace.addCodeSort(request.name, request.inheritance ?? []));
+  }
+
+  if (request.operation === 'addFunction') {
+    if (request.expression !== undefined)
+      return mutation(namespace.addTextFunction(request.expression));
+    if (
+      request.name === undefined ||
+      request.returnType === undefined ||
+      request.argumentTypes === undefined
+    ) {
+      return prototypeFailure(
+        'DCEC prototype addFunction operation requires name, returnType, and argumentTypes.',
+      );
+    }
+    return mutation(
+      namespace.addCodeFunction(request.name, request.returnType, request.argumentTypes),
+    );
+  }
+
+  if (request.operation === 'addAtomic') {
+    if (request.expression !== undefined)
+      return mutation(namespace.addTextAtomic(request.expression));
+    return request.name === undefined || request.typeName === undefined
+      ? prototypeFailure('DCEC prototype addAtomic operation requires name and typeName.')
+      : mutation(namespace.addCodeAtomic(request.name, request.typeName));
+  }
+
+  if (request.operation === 'validateAtomic') {
+    if (request.name === undefined || request.expectedType === undefined) {
+      return prototypeFailure(
+        'DCEC prototype validateAtomic operation requires name and expectedType.',
+      );
+    }
+    const validation = namespace.validateAtomic(request.name, request.expectedType);
+    return prototypeResult(
+      validation.ok,
+      validation.ok ? [] : [`DCEC prototype ${request.operation} operation failed.`],
+      { validation },
+    );
+  }
+
+  if (request.operation === 'validateFunction') {
+    if (request.name === undefined || request.argumentTypes === undefined) {
+      return prototypeFailure(
+        'DCEC prototype validateFunction operation requires name and argumentTypes.',
+      );
+    }
+    const validation = namespace.validateFunctionCall(
+      request.name,
+      request.argumentTypes,
+      request.expectedReturnType,
+    );
+    return prototypeResult(
+      validation.ok,
+      validation.ok ? [] : [`DCEC prototype ${request.operation} operation failed.`],
+      { validation },
+    );
+  }
+
+  if (request.operation === 'statistics') return success({ statistics: namespace.getStatistics() });
+  if (request.operation === 'snapshot') return success({ snapshot: namespace.snapshot() });
+
+  return prototypeFailure(
+    `Unsupported browser-native DCEC prototype operation: ${request.operation}`,
+  );
+}
+
+function prototypeFailure(error: string): DcecPrototypeOperationResult {
+  return prototypeResult(false, [error]);
+}
+
+function prototypeResult(
+  ok: boolean,
+  errors: Array<string>,
+  extras: Omit<DcecPrototypeOperationResult, 'ok' | 'errors' | 'metadata'> = {},
+): DcecPrototypeOperationResult {
+  return {
+    ok,
+    errors,
+    metadata: DCEC_PROTOTYPES_METADATA,
+    ...extras,
+  };
 }
 
 function prototypesOverlap(

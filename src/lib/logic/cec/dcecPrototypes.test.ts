@@ -1,4 +1,8 @@
-import { DcecPrototypeNamespace } from './dcecPrototypes';
+import {
+  DCEC_PROTOTYPES_METADATA,
+  DcecPrototypeNamespace,
+  invokeDcecPrototypeOperation,
+} from './dcecPrototypes';
 
 describe('DCEC prototype namespace', () => {
   it('adds sorts from code and text with inheritance checks', () => {
@@ -171,5 +175,54 @@ describe('DCEC prototype namespace', () => {
     });
     expect(namespace.snapshot()).toContain('=== Sorts ===');
     expect(namespace.snapshot()).toContain('alice: Agent');
+  });
+
+  it('invokes browser-native prototype operations and fails closed for unsupported requests', () => {
+    const namespace = new DcecPrototypeNamespace();
+
+    expect(namespace.metadata).toBe(DCEC_PROTOTYPES_METADATA);
+    expect(DCEC_PROTOTYPES_METADATA).toMatchObject({
+      sourcePythonModule: 'logic/CEC/native/dcec_prototypes.py',
+      browserNative: true,
+      pythonRuntime: false,
+      serverRuntime: false,
+      subprocess: false,
+      rpc: false,
+    });
+
+    for (const request of [
+      { operation: 'addSort', name: 'Object' },
+      { operation: 'addSort', expression: '(typedef Agent Object)' },
+      { operation: 'addSort', expression: '(typedef Boolean Object)' },
+      { operation: 'addFunction', expression: '(Boolean believes Agent Boolean)' },
+      { operation: 'addAtomic', expression: '(Agent alice)' },
+    ] as const) {
+      expect(invokeDcecPrototypeOperation(namespace, request)).toMatchObject({
+        ok: true,
+        errors: [],
+      });
+    }
+
+    expect(
+      invokeDcecPrototypeOperation(namespace, {
+        operation: 'validateFunction',
+        name: 'believes',
+        argumentTypes: ['Agent', 'Boolean'],
+        expectedReturnType: 'Boolean',
+      }),
+    ).toMatchObject({
+      ok: true,
+      validation: {
+        ok: true,
+        returnType: 'Boolean',
+        overload: ['Boolean', ['Agent', 'Boolean']],
+      },
+      metadata: DCEC_PROTOTYPES_METADATA,
+    });
+    expect(invokeDcecPrototypeOperation(namespace, { operation: 'nativePythonBridge' })).toEqual({
+      ok: false,
+      errors: ['Unsupported browser-native DCEC prototype operation: nativePythonBridge'],
+      metadata: DCEC_PROTOTYPES_METADATA,
+    });
   });
 });

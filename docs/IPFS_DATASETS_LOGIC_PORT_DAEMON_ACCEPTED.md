@@ -2729,3 +2729,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T094839Z-completed-browser-native-dcec_parsing.py-parity-helpers-for-comments-symbol-func.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T094839Z-completed-browser-native-dcec_parsing.py-parity-helpers-for-comments-symbol-func.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T094839Z-completed-browser-native-dcec_parsing.py-parity-helpers-for-comments-symbol-func.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 09:53:03 UTC
+
+- Target: `Task checkbox-211: Port remaining Python logic module `logic/CEC/native/dcec_prototypes.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Summary: Ported the remaining DCEC prototypes surface with browser-native metadata and a local operation dispatcher.
+- Impact: src/lib/logic/cec/dcecPrototypes.ts now exposes explicit dcec_prototypes.py parity metadata and a deterministic request dispatcher for prototype registration, validation, snapshots, and fail-closed unsupported operations. src/lib/logic/cec/dcecPrototypes.test.ts validates the browser-native adapter path without Python, server, subprocess, filesystem, or RPC fallbacks.
+- Changed files: `src/lib/logic/cec/dcecPrototypes.test.ts`, `src/lib/logic/cec/dcecPrototypes.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T095303Z-ported-the-remaining-dcec-prototypes-surface-with-browser-native-metadata-and-a-.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T095303Z-ported-the-remaining-dcec-prototypes-surface-with-browser-native-metadata-and-a-.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T095303Z-ported-the-remaining-dcec-prototypes-surface-with-browser-native-metadata-and-a-.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+
