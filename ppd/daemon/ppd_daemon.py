@@ -76,10 +76,13 @@ from ipfs_datasets_py.optimizers.todo_daemon.engine import (  # noqa: E402
     workspace_artifact_payload as todo_workspace_artifact_payload,
     worktree_marker_payload as todo_worktree_marker_payload,
 )
+from ipfs_datasets_py.optimizers.todo_daemon.file_replacement import (  # noqa: E402
+    FileReplacementHooks,
+    FileReplacementTodoDaemonRunner,
+)
 from ipfs_datasets_py.optimizers.todo_daemon.runner import (  # noqa: E402
     PreTaskBlock,
     TodoDaemonHooks,
-    TodoDaemonRunner,
 )
 
 
@@ -1142,88 +1145,46 @@ def attempt_validation_repair_pass(
     return True, changed, proposal_diff_from_worktree(config, worktree, changed)
 
 
-def apply_files_with_validation(proposal: Proposal, config: Config) -> Proposal:
-    proposal_validation_commands = validation_commands_for_proposal(proposal, config)
-    preflight_errors: list[str] = []
-    for item in proposal.files:
-        preflight_errors.extend(validate_write_path(item["path"]))
-    if preflight_errors:
-        proposal.errors.extend(preflight_errors)
-        proposal.failure_kind = "preflight"
-        persist_failed_work(proposal, config, diff_text="", reason="preflight")
-        return proposal
-
-    with temporary_validation_worktree(config) as worktree:
-        changed = materialize_proposal_in_worktree(proposal, config, worktree)
-        proposal.changed_files = changed
-        if not changed:
-            proposal.errors.append("Proposal made no content changes.")
-            proposal.failure_kind = "no_change"
-            proposal.validation_results = run_validation(
-                worktree_config(config, worktree),
-                commands=proposal_validation_commands,
-            )
-            persist_failed_work(proposal, config, diff_text="", reason="no_change", transport="ephemeral_worktree")
-            return proposal
-
-        if proposal.requires_visible_source_change and not has_visible_source_change(changed):
-            proposal.errors.append(
-                "Accepted work must promote at least one visible PP&D source or fixture file; "
-                "runtime-only progress records are not sufficient."
-            )
-            proposal.failure_kind = "no_visible_source_change"
-            proposal.validation_results = run_validation(
-                worktree_config(config, worktree),
-                commands=proposal_validation_commands,
-            )
-            persist_failed_work(
-                proposal,
-                config,
-                diff_text=proposal_diff_from_worktree(config, worktree, changed),
-                reason="no_visible_source_change",
-                transport="ephemeral_worktree",
-            )
-            return proposal
-
-        diff_text = proposal_diff_from_worktree(config, worktree, changed)
-        proposal.validation_results, preflight_errors, failure_kind = validation_results_from_syntax_preflight(
-            worktree,
-            changed,
+def ppd_file_replacement_hooks() -> FileReplacementHooks:
+    return FileReplacementHooks(
+        validate_write_path=validate_write_path,
+        temporary_validation_worktree=temporary_validation_worktree,
+        materialize_proposal_in_worktree=materialize_proposal_in_worktree,
+        proposal_diff_from_worktree=proposal_diff_from_worktree,
+        validation_commands_for_proposal=validation_commands_for_proposal,
+        run_validation=lambda config, commands: run_validation(config, commands=commands),
+        worktree_config=worktree_config,
+        syntax_preflight=validation_results_from_syntax_preflight,
+        has_visible_source_change=has_visible_source_change,
+        attempt_validation_repair=attempt_validation_repair_pass,
+        proposal_files_from_worktree=proposal_files_from_worktree,
+        promote_worktree_files=promote_worktree_files,
+        verify_promoted_worktree_files=verify_promoted_worktree_files,
+        persist_failed_work=lambda proposal, config, diff_text, reason, transport: persist_failed_work(
+            proposal,
             config,
-        )
-        if preflight_errors:
-            proposal.errors.extend(preflight_errors)
-            proposal.failure_kind = failure_kind
-            persist_failed_work(proposal, config, diff_text=diff_text, reason="syntax_preflight", transport="ephemeral_worktree")
-            return proposal
+            diff_text=diff_text,
+            reason=reason,
+            transport=transport,
+        ),
+        persist_accepted_work=lambda proposal, config, diff_text, transport: persist_accepted_work(
+            proposal,
+            config,
+            diff_text=diff_text,
+            transport=transport,
+        ),
+        no_visible_source_change_message=(
+            "Accepted work must promote at least one visible PP&D source or fixture file; "
+            "runtime-only progress records are not sufficient."
+        ),
+    )
 
-        proposal.validation_results = run_validation(
-            worktree_config(config, worktree),
-            commands=proposal_validation_commands,
-        )
-        if not all(result.ok for result in proposal.validation_results):
-            repaired, changed, repair_diff = attempt_validation_repair_pass(proposal, config, worktree)
-            diff_text = repair_diff or proposal_diff_from_worktree(config, worktree, changed)
-            proposal.changed_files = changed
-            if not repaired:
-                if not proposal.failure_kind:
-                    proposal.errors.append("Validation failed in temporary worktree; candidate was not promoted.")
-                    proposal.failure_kind = "validation"
-                persist_failed_work(proposal, config, diff_text=diff_text, reason=proposal.failure_kind or "validation", transport="ephemeral_worktree")
-                return proposal
 
-        promote_worktree_files(config, worktree, proposal.changed_files)
-        promotion_errors = verify_promoted_worktree_files(config, worktree, proposal.changed_files)
-        proposal.promotion_errors = promotion_errors
-        proposal.promotion_verified = not promotion_errors
-        if promotion_errors:
-            proposal.errors.extend(promotion_errors)
-            proposal.failure_kind = "promotion"
-            persist_failed_work(proposal, config, diff_text=diff_text, reason="promotion", transport="ephemeral_worktree")
-            return proposal
-        proposal.applied = True
-        persist_accepted_work(proposal, config, diff_text=diff_text, transport="ephemeral_worktree")
-    return proposal
+def apply_files_with_validation(proposal: Proposal, config: Config) -> Proposal:
+    return ppd_file_replacement_runner(config).hooks.apply_proposal(
+        proposal,
+        config,
+    )
 
 
 def persist_accepted_work(proposal: Proposal, config: Config, *, diff_text: str, transport: str = "direct") -> None:
@@ -1664,9 +1625,21 @@ def build_ppd_daemon_hooks() -> TodoDaemonHooks:
     )
 
 
-class Daemon(TodoDaemonRunner):
+def ppd_file_replacement_runner(config: Config) -> FileReplacementTodoDaemonRunner:
+    return FileReplacementTodoDaemonRunner(
+        config,
+        build_ppd_daemon_hooks(),
+        ppd_file_replacement_hooks(),
+    )
+
+
+class Daemon(FileReplacementTodoDaemonRunner):
     def __init__(self, config: Config) -> None:
-        super().__init__(config, build_ppd_daemon_hooks())
+        super().__init__(
+            config,
+            build_ppd_daemon_hooks(),
+            ppd_file_replacement_hooks(),
+        )
 
 
 def self_test(repo_root: Path) -> int:
