@@ -17,7 +17,7 @@ import os
 import py_compile
 import re
 import sys
-from dataclasses import dataclass, replace
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Iterable, Iterator, Optional
 from urllib.parse import urlparse
@@ -48,41 +48,34 @@ from ipfs_datasets_py.optimizers.todo_daemon.engine import (  # noqa: E402
     command_results_from_objects,
     compact_message,
     cleanup_stale_validation_worktrees as cleanup_todo_validation_worktrees,
+    config_validation_commands_for_proposal,
+    dataclass_worktree_config,
     diff_for_file as todo_diff_for_file,
     extract_json as todo_extract_json,
-    materialize_proposal_files,
     normalized_relative_path as todo_normalized_relative_path,
     parse_json_proposal,
     parse_markdown_tasks,
-    proposal_diff_from_worktree as todo_proposal_diff_from_worktree,
-    proposal_files_from_worktree as todo_proposal_files_from_worktree,
-    promote_worktree_files as todo_promote_worktree_files,
     read_text,
+    run_config_validation_commands,
     run_command as todo_run_command,
-    run_validation_commands as todo_run_validation_commands,
     select_task as select_todo_task,
     temporary_validation_worktree as temporary_todo_validation_worktree,
     utc_now,
-    validation_commands_for_proposal as todo_validation_commands_for_proposal,
-    verify_promoted_worktree_files as todo_verify_promoted_worktree_files,
     worktree_marker_payload as todo_worktree_marker_payload,
 )
 from ipfs_datasets_py.optimizers.todo_daemon.artifacts import (  # noqa: E402
     DEFAULT_ACCEPTED_WORK_LEDGER_FILENAME as LEDGER_FILENAME,
     WorkSidecarPaths as AcceptedWorkArtifacts,
-    accepted_work_manifest,
-    accepted_work_workspace_payload,
-    append_accepted_work_ledger as append_accepted_work_jsonl,
-    build_proposal_accepted_work_ledger_entry,
-    failed_work_manifest,
-    failed_work_workspace_payload,
-    timestamped_artifact_base,
-    write_work_sidecars,
 )
 from ipfs_datasets_py.optimizers.todo_daemon.file_replacement import (  # noqa: E402
     FileReplacementHooks,
     FileReplacementTodoDaemonRunner,
+    attempt_file_replacement_validation_repair,
     build_file_replacement_apply_proposal,
+    build_file_replacement_validation_repair_prompt,
+    config_persist_accepted_file_replacement_work,
+    config_persist_failed_file_replacement_work,
+    config_promote_worktree_files,
 )
 from ipfs_datasets_py.optimizers.todo_daemon.app import (  # noqa: E402
     print_todo_daemon_result,
@@ -870,7 +863,7 @@ def run_command(command: tuple[str, ...], *, cwd: Path, timeout: int) -> Command
 
 
 def validation_commands_for_proposal(proposal: Proposal, config: Config) -> tuple[tuple[str, ...], ...]:
-    return todo_validation_commands_for_proposal(proposal, config.validation_commands)
+    return config_validation_commands_for_proposal(proposal, config)
 
 
 def run_validation(
@@ -878,11 +871,9 @@ def run_validation(
     *,
     commands: Optional[tuple[tuple[str, ...], ...]] = None,
 ) -> list[CommandResult]:
-    selected_commands = commands if commands is not None else config.validation_commands
-    return todo_run_validation_commands(
-        repo_root=config.repo_root,
-        commands=selected_commands,
-        timeout_seconds=config.command_timeout_seconds,
+    return run_config_validation_commands(
+        config,
+        commands=commands,
         run_command_fn=run_command,
     )
 
@@ -933,49 +924,6 @@ def temporary_validation_worktree(config: Config) -> Iterator[Path]:
         yield worktree
 
 
-def worktree_config(config: Config, worktree: Path) -> Config:
-    return replace(
-        config,
-        repo_root=worktree,
-        repair_validation_failures=False,
-        validation_repair_callback=None,
-    )
-
-
-def proposal_diff_from_worktree(config: Config, worktree: Path, changed: Iterable[str]) -> str:
-    return todo_proposal_diff_from_worktree(config.repo_root, worktree, changed)
-
-
-def workspace_artifact_payload(
-    proposal: Proposal,
-    *,
-    transport: str,
-    promoted: bool,
-    reason: str = "",
-) -> dict[str, Any]:
-    if promoted:
-        return accepted_work_workspace_payload(proposal, transport=transport)
-    return failed_work_workspace_payload(proposal, reason=reason, transport=transport)
-
-
-def materialize_proposal_in_worktree(proposal: Proposal, config: Config, worktree: Path) -> list[str]:
-    return materialize_proposal_files(proposal, worktree)
-
-
-def proposal_files_from_worktree(worktree: Path, changed: Iterable[str]) -> list[dict[str, str]]:
-    return todo_proposal_files_from_worktree(worktree, changed)
-
-
-def promote_worktree_files(config: Config, worktree: Path, changed: Iterable[str]) -> None:
-    todo_promote_worktree_files(config.repo_root, worktree, changed)
-
-
-def verify_promoted_worktree_files(config: Config, worktree: Path, changed: Iterable[str]) -> list[str]:
-    """Verify promoted files in the main worktree exactly match the accepted worktree."""
-
-    return todo_verify_promoted_worktree_files(config.repo_root, worktree, changed)
-
-
 def validation_results_from_syntax_preflight(worktree: Path, changed: list[str], config: Config) -> tuple[list[CommandResult], list[str], str]:
     syntax_preflight = run_apply_flow_syntax_preflight(
         worktree,
@@ -986,36 +934,32 @@ def validation_results_from_syntax_preflight(worktree: Path, changed: list[str],
     return results, list(syntax_preflight.errors), syntax_preflight.failure_kind
 
 
-def build_validation_repair_prompt(proposal: Proposal, config: Config) -> str:
-    failed_results = "\n".join(
-        json.dumps(result.compact(limit=1200), sort_keys=True)
-        for result in proposal.validation_results
-        if not result.ok
+def promote_worktree_files(config: Config, worktree: Path, changed: Iterable[str]) -> None:
+    """Promote accepted worktree files; kept as a PP&D test/extension hook."""
+
+    config_promote_worktree_files(config, worktree, changed)
+
+
+def validation_repair_worktree_config(config: Config, worktree: Path) -> Config:
+    return dataclass_worktree_config(
+        config,
+        worktree,
+        repair_validation_failures=False,
+        validation_repair_callback=None,
     )
-    files = "\n".join(f"- {path}" for path in proposal.changed_files)
-    return f"""
-You are repairing a PP&D daemon candidate inside an isolated temporary validation worktree.
 
-Return exactly one JSON object with complete file replacements. Do not include markdown.
 
-Original task:
-{proposal.target_task}
-
-Current failed candidate:
-- summary: {proposal.summary}
-- changed files:
-{files}
-
-Failing validation results:
-{failed_results or "No failing command output was captured."}
-
-Repair rules:
-- Edit only files under ppd/ or docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md.
-- Keep the repair smaller than the failed candidate when possible.
-- Do not create private DevHub artifacts, raw crawl output, downloaded documents, browser traces, screenshots, credentials, or payment data.
-- Return JSON in this shape:
-{{"summary":"short repair summary","impact":"why this fixes validation","files":[{{"path":"ppd/...","content":"complete replacement"}}]}}
-"""
+def build_validation_repair_prompt(proposal: Proposal, config: Config) -> str:
+    return build_file_replacement_validation_repair_prompt(
+        proposal,
+        subject="PP&D daemon candidate",
+        repair_rules=(
+            "Edit only files under ppd/ or docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md.",
+            "Keep the repair smaller than the failed candidate when possible.",
+            "Do not create private DevHub artifacts, raw crawl output, downloaded documents, browser traces, screenshots, credentials, or payment data.",
+        ),
+        response_shape='{"summary":"short repair summary","impact":"why this fixes validation","files":[{"path":"ppd/...","content":"complete replacement"}]}',
+    )
 
 
 def call_validation_repair_llm(prompt: str, config: Config) -> str:
@@ -1029,69 +973,36 @@ def attempt_validation_repair_pass(
     config: Config,
     worktree: Path,
 ) -> tuple[bool, list[str], str]:
-    if not config.repair_validation_failures or config.max_validation_repair_attempts <= 0:
-        return False, proposal.changed_files, ""
-    try:
-        raw = call_validation_repair_llm(build_validation_repair_prompt(proposal, config), config)
-        repair = parse_proposal(raw)
-    except BaseException as exc:
-        proposal.errors.append(f"Validation repair pass failed before producing JSON: {compact_message(exc)}")
-        return False, proposal.changed_files, ""
-    repair.target_task = proposal.target_task
-    repair_errors: list[str] = []
-    for item in repair.files:
-        repair_errors.extend(validate_write_path(item["path"]))
-    if repair_errors:
-        proposal.errors.extend(f"Validation repair pass rejected write path: {error}" for error in repair_errors)
-        return False, proposal.changed_files, ""
-    if not repair.files:
-        proposal.errors.append("Validation repair pass produced no file replacements.")
-        return False, proposal.changed_files, ""
-
-    changed = list(dict.fromkeys(proposal.changed_files + materialize_proposal_in_worktree(repair, config, worktree)))
-    repair_results, repair_preflight_errors, repair_failure_kind = validation_results_from_syntax_preflight(
-        worktree,
-        changed,
+    return attempt_file_replacement_validation_repair(
+        proposal,
         config,
+        worktree,
+        enabled=config.repair_validation_failures,
+        max_attempts=config.max_validation_repair_attempts,
+        build_prompt=build_validation_repair_prompt,
+        call_repair_model=call_validation_repair_llm,
+        parse_repair=parse_proposal,
+        validate_write_path=validate_write_path,
+        syntax_preflight=validation_results_from_syntax_preflight,
+        run_validation=lambda validation_config, commands: run_validation(
+            validation_config,
+            commands=commands,
+        ),
+        validation_commands_for_proposal=validation_commands_for_proposal,
+        worktree_config=validation_repair_worktree_config,
     )
-    proposal.validation_results = repair_results
-    if repair_preflight_errors:
-        proposal.errors.extend("Validation repair pass syntax preflight failed: " + error for error in repair_preflight_errors)
-        proposal.failure_kind = repair_failure_kind or "syntax_preflight"
-        return False, changed, proposal_diff_from_worktree(config, worktree, changed)
-
-    proposal.validation_results = run_validation(
-        worktree_config(config, worktree),
-        commands=validation_commands_for_proposal(proposal, config),
-    )
-    if not all(result.ok for result in proposal.validation_results):
-        proposal.errors.append("Validation repair pass failed; candidate worktree was not promoted.")
-        proposal.failure_kind = "validation"
-        return False, changed, proposal_diff_from_worktree(config, worktree, changed)
-
-    proposal.summary = repair.summary or proposal.summary
-    proposal.impact = repair.impact or proposal.impact
-    proposal.files = proposal_files_from_worktree(worktree, changed)
-    proposal.changed_files = changed
-    proposal.errors = []
-    return True, changed, proposal_diff_from_worktree(config, worktree, changed)
 
 
 def ppd_file_replacement_hooks() -> FileReplacementHooks:
     return FileReplacementHooks(
         validate_write_path=validate_write_path,
         temporary_validation_worktree=temporary_validation_worktree,
-        materialize_proposal_in_worktree=materialize_proposal_in_worktree,
-        proposal_diff_from_worktree=proposal_diff_from_worktree,
         validation_commands_for_proposal=validation_commands_for_proposal,
         run_validation=lambda config, commands: run_validation(config, commands=commands),
-        worktree_config=worktree_config,
         syntax_preflight=validation_results_from_syntax_preflight,
         has_visible_source_change=has_visible_source_change,
         attempt_validation_repair=attempt_validation_repair_pass,
-        proposal_files_from_worktree=proposal_files_from_worktree,
         promote_worktree_files=promote_worktree_files,
-        verify_promoted_worktree_files=verify_promoted_worktree_files,
         persist_failed_work=lambda proposal, config, diff_text, reason, transport: persist_failed_work(
             proposal,
             config,
@@ -1117,65 +1028,24 @@ def apply_files_with_validation(proposal: Proposal, config: Config) -> Proposal:
 
 
 def persist_accepted_work(proposal: Proposal, config: Config, *, diff_text: str, transport: str = "direct") -> None:
-    accepted_dir = config.resolve(config.accepted_dir)
-    accepted_dir.mkdir(parents=True, exist_ok=True)
-    base = timestamped_artifact_base(
-        accepted_dir,
-        summary=proposal.summary,
-        fallback="accepted-work",
-    )
-    artifacts: Optional[AcceptedWorkArtifacts] = None
-    if config.write_accepted_work_sidecars:
-        artifacts = write_work_sidecars(
-            base=base,
-            manifest=accepted_work_manifest(proposal, transport=transport),
-            workspace=accepted_work_workspace_payload(proposal, transport=transport),
-            diff_text=diff_text,
-            changed_files=proposal.changed_files,
-        )
-    append_accepted_work_ledger(
+    config_persist_accepted_file_replacement_work(
         proposal,
         config,
-        artifacts=artifacts,
-        diff_text=diff_text,
-        transport=transport,
+        diff_text,
+        transport,
+        accepted_dir_field="accepted_dir",
+        sidecars_enabled_field="write_accepted_work_sidecars",
     )
-
-
-def append_accepted_work_ledger(
-    proposal: Proposal,
-    config: Config,
-    *,
-    artifacts: Optional[AcceptedWorkArtifacts],
-    diff_text: str,
-    transport: str = "direct",
-) -> None:
-    entry = build_proposal_accepted_work_ledger_entry(
-        repo_root=config.repo_root,
-        accepted_dir=config.resolve(config.accepted_dir),
-        proposal=proposal,
-        transport=transport,
-        artifacts=artifacts,
-        diff_text=diff_text,
-    )
-    append_accepted_work_jsonl(config.resolve(config.accepted_dir), entry)
 
 
 def persist_failed_work(proposal: Proposal, config: Config, *, diff_text: str, reason: str, transport: str = "direct") -> None:
-    failed_dir = config.resolve(config.failed_dir)
-    failed_dir.mkdir(parents=True, exist_ok=True)
-    base = timestamped_artifact_base(
-        failed_dir,
-        summary=proposal.summary or reason,
-        fallback="failed-work",
-        reason=reason,
-    )
-    write_work_sidecars(
-        base=base,
-        manifest=failed_work_manifest(proposal, reason=reason, transport=transport),
-        workspace=failed_work_workspace_payload(proposal, reason=reason, transport=transport),
-        diff_text=diff_text,
-        changed_files=proposal.changed_files,
+    config_persist_failed_file_replacement_work(
+        proposal,
+        config,
+        diff_text,
+        reason,
+        transport,
+        failed_dir_field="failed_dir",
     )
 
 
