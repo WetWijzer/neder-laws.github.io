@@ -969,18 +969,18 @@ These tasks were added automatically after the daemon found no eligible unchecke
   - Review source: `src/lib/logic/pythonLogicInventory.ts` now maps accepted-work evidence for FOL/NLP, ML confidence, ZKP/verifier, CEC/DCEC/deontic, and public API/security surfaces back to runtime and validation files.
   - Missing parity tasks remain explicit from the 16-file inventory gap and retain browser-native/no-server/no-Python constraints for subsequent implementation cycles.
 - [x] Add end-to-end browser-native validation proving the converted logic runs without Python, spaCy, or server-side calls, including deterministic coverage for ML and NLP capability surfaces.
-- [ ] Audit Python ML and spaCy expectations against the TypeScript/WASM implementation and add focused parity tests or local-model artifact loading tasks for unsupported browser-native behavior.
+- [x] Audit Python ML and spaCy expectations against the TypeScript/WASM implementation and add focused parity tests or local-model artifact loading tasks for unsupported browser-native behavior.
 - [ ] Refresh the TypeScript port plan with a parity matrix mapping Python logic modules, TypeScript/WASM files, validation evidence, accepted work, and remaining browser-native tasks.
 - [ ] Compare TypeScript logic public exports against Python logic module public APIs and add missing browser-native compatibility adapters or parity tests.
 
 <!-- logic-port-daemon-task-board:start -->
 ## Daemon Task Board
 
-Last updated: 2026-05-05 04:29:57 UTC
+Last updated: 2026-05-05 04:34:12 UTC
 
 Selection policy: choose the first needed or in-progress port-plan checkbox; if none remain, revisit blocked checkboxes with `fewest-failures` strategy because blocked-task revisit mode is enabled.
 
-Current target: `Task checkbox-449: Audit Python ML and spaCy expectations against the TypeScript/WASM implementation and add focused parity tests or local-model artifact loading tasks for unsupported browser-native behavior.`
+Current target: `Task checkbox-450: Refresh the TypeScript port plan with a parity matrix mapping Python logic modules, TypeScript/WASM files, validation evidence, accepted work, and remaining browser-native tasks.`
 
 Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failing.
 
@@ -1433,18 +1433,18 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - [x] `Task checkbox-445: Audit remaining TypeScript logic 'unsupported' paths and convert feasible ones into browser-native TypeScript/WASM implementations.` - complete
 - [x] `Task checkbox-446: Reconcile the Python logic inventory (269 files) with the TypeScript/WASM implementation (253 files) and add browser-native port tasks for uncovered behavior.` - complete
 - [x] `Task checkbox-447: Review the accepted TypeScript logic changes against the original browser-native TypeScript/WASM port goal, then add or implement any missing parity tasks for Python logic behavior that lacks accepted-work evidence.` - complete
-- [x] `Task checkbox-448: Add end-to-end browser-native validation proving the converted logic runs without Python, spaCy, or server-side calls, including deterministic coverage for ML and NLP capability surfaces.` - validated by latest daemon round
-- [ ] `Task checkbox-449: Audit Python ML and spaCy expectations against the TypeScript/WASM implementation and add focused parity tests or local-model artifact loading tasks for unsupported browser-native behavior.` - needed
+- [x] `Task checkbox-448: Add end-to-end browser-native validation proving the converted logic runs without Python, spaCy, or server-side calls, including deterministic coverage for ML and NLP capability surfaces.` - complete
+- [x] `Task checkbox-449: Audit Python ML and spaCy expectations against the TypeScript/WASM implementation and add focused parity tests or local-model artifact loading tasks for unsupported browser-native behavior.` - validated by latest daemon round
 - [ ] `Task checkbox-450: Refresh the TypeScript port plan with a parity matrix mapping Python logic modules, TypeScript/WASM files, validation evidence, accepted work, and remaining browser-native tasks.` - needed
 - [ ] `Task checkbox-451: Compare TypeScript logic public exports against Python logic module public APIs and add missing browser-native compatibility adapters or parity tests.` - needed
 
 ### Latest Round
 
-- Target: `Task checkbox-448: Add end-to-end browser-native validation proving the converted logic runs without Python, spaCy, or server-side calls, including deterministic coverage for ML and NLP capability surfaces.`
+- Target: `Task checkbox-449: Audit Python ML and spaCy expectations against the TypeScript/WASM implementation and add focused parity tests or local-model artifact loading tasks for unsupported browser-native behavior.`
 - Result: `valid`
-- Summary: Add browser-native end-to-end validation for logic runtime NLP, ML confidence, and deontic conversion surfaces.
-- Impact: The new validation helper is exported from the TypeScript logic library and is directly exercised by Jest to prove deterministic FOL NLP extraction, local ML confidence scoring, local ML artifact mode, and deontic conversion all report no Python, no spaCy, and no server-call runtime paths.
-- Accepted changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/browserNativeValidation.test.ts`, `src/lib/logic/browserNativeValidation.ts`, `src/lib/logic/index.ts`
+- Summary: Add browser-native audit coverage for Python ML confidence and spaCy parity expectations.
+- Impact: The exported validation helper now checks Python ML feature-vector and heuristic confidence parity, verifies spaCy-style predicate and relation extraction fixtures, and records explicit local artifact tasks for trained model weights or full spaCy dependency behavior that cannot run directly in the browser. The focused Jest test exercises this audit through the TypeScript validation suite.
+- Accepted changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/browserNativeValidation.test.ts`, `src/lib/logic/browserNativeValidation.ts`
 
 ### Blocked Backlog
 

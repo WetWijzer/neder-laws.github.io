@@ -2324,3 +2324,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T042957Z-add-browser-native-end-to-end-validation-for-logic-runtime-nlp-ml-confidence-and.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T042957Z-add-browser-native-end-to-end-validation-for-logic-runtime-nlp-ml-confidence-and.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T042957Z-add-browser-native-end-to-end-validation-for-logic-runtime-nlp-ml-confidence-and.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 04:34:12 UTC
+
+- Target: `Task checkbox-449: Audit Python ML and spaCy expectations against the TypeScript/WASM implementation and add focused parity tests or local-model artifact loading tasks for unsupported browser-native behavior.`
+- Summary: Add browser-native audit coverage for Python ML confidence and spaCy parity expectations.
+- Impact: The exported validation helper now checks Python ML feature-vector and heuristic confidence parity, verifies spaCy-style predicate and relation extraction fixtures, and records explicit local artifact tasks for trained model weights or full spaCy dependency behavior that cannot run directly in the browser. The focused Jest test exercises this audit through the TypeScript validation suite.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/browserNativeValidation.test.ts`, `src/lib/logic/browserNativeValidation.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T043412Z-add-browser-native-audit-coverage-for-python-ml-confidence-and-spacy-parity-expe.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T043412Z-add-browser-native-audit-coverage-for-python-ml-confidence-and-spacy-parity-expe.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T043412Z-add-browser-native-audit-coverage-for-python-ml-confidence-and-spacy-parity-expe.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+

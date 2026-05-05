@@ -1,4 +1,7 @@
-import { validateBrowserNativeLogicRuntime } from './browserNativeValidation';
+import {
+  auditPythonMlSpacyExpectations,
+  validateBrowserNativeLogicRuntime,
+} from './browserNativeValidation';
 import {
   ML_CONFIDENCE_FEATURE_NAMES,
   type MLConfidenceModelArtifact,
@@ -70,5 +73,29 @@ describe('browser-native end-to-end logic validation', () => {
     expect(report.ml.deterministicScore).toBe(report.ml.repeatedScore);
     expect(report.nlp.pythonSpacy).toBe(false);
     expect(report.deontic.serverCallsAllowed).toBe(false);
+  });
+
+  it('audits Python ML and spaCy expectations against browser-native behavior', () => {
+    const audit = auditPythonMlSpacyExpectations();
+
+    expect(audit).toMatchObject({
+      valid: true,
+      browserNative: true,
+      serverCallsAllowed: false,
+      pythonRuntimeAllowed: false,
+    });
+    expect(audit.checks.map((check) => [check.expectation, check.status])).toEqual([
+      ['logic/ml_confidence.py FeatureExtractor vector', 'matched'],
+      ['logic/ml_confidence.py fallback heuristic confidence', 'matched'],
+      ['spaCy-style predicate extraction fixture', 'matched'],
+      ['spaCy-style relation extraction fixture', 'matched'],
+      ['trained Python XGBoost/LightGBM model weights', 'local_artifact_required'],
+      ['full spaCy dependency parser and model weights', 'unsupported_fail_closed'],
+    ]);
+    expect(audit.localModelArtifactLoadingTasks).toEqual([
+      'Export trained Python ML confidence weights into deterministic-linear-v1 or deterministic-logistic-v1 browser artifact metadata.',
+      'Add a browser-native token-classification or dependency artifact if exact spaCy dependency labels become required.',
+    ]);
+    expect(audit.unsupported.every((check) => check.status !== 'matched')).toBe(true);
   });
 });
