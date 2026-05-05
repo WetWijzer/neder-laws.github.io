@@ -94,12 +94,12 @@ This board is the controlling backlog for the isolated PP&D daemon. The daemon s
 <!-- ppd-daemon-task-board:start -->
 ## Generated Status
 
-Last updated: 2026-05-05T15:21:39.179730Z
+Last updated: 2026-05-05T16:58:25.345280Z
 
-- Latest target: `Task checkbox-461: Add supervisor idle-recovery validation for tranche 2 proving completed boards synthesize new goal-aligned platform tasks without sleeping, duplicate tranche reuse, or blocked-task retry churn.`
-- Latest result: `accepted`
-- Latest summary: Complete supervisor idle recovery with deterministic PP&D fallback.
-- Counts: `{"blocked": 202, "complete": 85, "in_progress": 0, "needed": 0}`
+- Latest target: `Task checkbox-472: Add DevHub form-field manifest extraction using accessible roles, labels, headings, URL/state evidence, confidence scoring, redaction policy, and mapping from redacted user facts to reversible draft fields.`
+- Latest result: `llm_termination_blocked`
+- Latest summary: Task blocked before LLM after repeated LLM termination failures.
+- Counts: `{"blocked": 213, "complete": 85, "in_progress": 0, "needed": 13}`
 
 <!-- ppd-daemon-task-board:end -->
 ## Built-In Supervisor Repair Notes
@@ -1327,3 +1327,42 @@ Last updated: 2026-05-05T15:21:39.179730Z
 
 - The supervisor found no selectable work after generated blocked-cascade tasks were already parked. It appended source-backed deterministic continuation tasks instead of opening another generated repair tranche or sleeping on a historical circuit breaker.
 - Slice policy: `source_backed_execution_continuation_2`. These tasks are matched by deterministic daemon fallbacks and keep progress inside public archival, processor handoff, attended Playwright/PDF planning, formal-logic, and idle-recovery contracts.
+
+## Manual Comprehensive PP&D Goal Handoff Tranche
+
+- [!] Task checkbox-462: Add a source-backed PP&D surface registry and taxonomy under ppd/sources that covers public Portland.gov pages, public PDFs, DevHub public entry points, authenticated read-only surfaces, reversible draft surfaces, consequential official actions, local PDF previews, and agent-facing guardrail APIs.
+- [!] Task checkbox-463: Add a PP&D source seed manifest and validation that includes the PP&D landing page, online permitting tools overview, DevHub FAQ, DevHub sign-in guide, DevHub submit-permit guide, permit applications index, Single PDF Process, file naming standards, and DevHub portal URL with crawl policy metadata.
+- [!] Task checkbox-464: Add a public crawl frontier contract that enforces Portland.gov and DevHub allowlists, robots preflight, bounded retries, content-type decisions, redirect recording, skipped reasons, and no raw body or downloaded-document persistence.
+- [!] Task checkbox-465: Add processor-suite archival integration work under ppd/crawler proving PP&D public pages and PDFs hand off to ipfs_datasets_py processor records with archive manifest IDs, content hashes, normalized document IDs, and formal-logic source evidence IDs.
+- [!] Task checkbox-466: Add a public PDF and form inventory extractor for PP&D applications, handouts, Single PDF guidance, file naming standards, checklist PDFs, and fillable form metadata without storing downloaded raw documents.
+- [!] Task checkbox-467: Add normalized PP&D process and requirement schemas for source evidence, permit process stages, required facts, required documents, fees, inspections, deadlines, exceptions, UI action gates, and formal requirement nodes.
+- [!] Task checkbox-468: Add source-backed requirement extraction fixtures that convert public PP&D guidance into obligations, prohibitions, prerequisites, permissions, exceptions, deadlines, fee triggers, license requirements, and document requirements with citation anchors.
+- [!] Task checkbox-469: Add a permit-process coverage matrix for residential, commercial, trade, sign, demolition, solar, Urban Forestry, corrections, inspections, payments, extensions, cancellations, and refunds.
+- [!] Task checkbox-470: Add a DevHub manual-login and attendance protocol that supports user-owned browser handoff while refusing credential entry, account creation, password recovery, MFA, CAPTCHA, browser-state persistence, and unattended authenticated actions.
+- [!] Task checkbox-471: Add an attended Playwright surface recorder model for DevHub Home, My Permits & Requests, Apply for a New Permit, View or Pay Fees, Upload Corrections, inspection surfaces, saved drafts, validation messages, and details pages.
+- [!] Task checkbox-472: Add DevHub form-field manifest extraction using accessible roles, labels, headings, URL/state evidence, confidence scoring, redaction policy, and mapping from redacted user facts to reversible draft fields.
+- [ ] Task checkbox-473: Add a local PDF draft-fill queue that maps public PP&D form-field manifests to redacted user facts, writes only user-controlled preview PDFs, and never uploads, submits, or persists private source documents.
+- [ ] Task checkbox-474: Add a user document-store gap-analysis model that matches known user facts and documents to PP&D requirements, identifies missing facts, stale or conflicting evidence, document placeholders, and exact-confirmation blockers.
+- [ ] Task checkbox-475: Add a formal-logic guardrail compiler pipeline that emits deontic and predicate obligations, prerequisites, stop gates, reversible-action predicates, exact-confirmation predicates, refused official-action predicates, and evidence validation status.
+- [ ] Task checkbox-476: Add an action policy engine that classifies read-only, reversible draft, local PDF preview, upload, submit, certify, cancel, inspection scheduling, payment-review, final payment, security, and unsupported DevHub actions.
+- [ ] Task checkbox-477: Add exact-confirmation and human-attendance gate tests proving consequential DevHub actions remain blocked until the user reviews the current screen, confirms the specific action, and accepts the post-action review workflow.
+- [ ] Task checkbox-478: Add commit-safe action journal and replay fixtures for public crawl events, attended DevHub draft attempts, local PDF preview fills, exact-confirmation decisions, manual handoffs, refused actions, and completion hardening.
+- [ ] Task checkbox-479: Add source-change monitoring fixtures that recrawl public PP&D sources, diff normalized documents, identify affected requirement IDs, and mark stale guardrails or process models for human review.
+- [ ] Task checkbox-480: Add end-to-end fixture scenarios for residential, commercial, trade, correction upload, and inspection workflows linking source evidence, requirement nodes, user gaps, draft actions, and blocked official actions.
+- [ ] Task checkbox-481: Add agent-facing APIs for loadPermitProcess, compareUserFacts, listMissingRequirements, validateNextAction, explainBlockedAction, and produceReviewPacket using only source-backed process models and redacted user facts.
+- [ ] Task checkbox-482: Add privacy and security validation proving no private DevHub state, credentials, selectors with values, local file paths, traces, screenshots, raw crawl bodies, downloaded documents, payment details, or unredacted user documents can be committed.
+- [ ] Task checkbox-483: Add a bounded live public crawl dry-run harness that can explicitly fetch a small PP&D public seed set through allowlist and processor preflight while persisting only metadata manifests and validation summaries.
+- [ ] Task checkbox-484: Add authenticated DevHub dry-run fixtures using mocked or user-attended Playwright pages that prove login handoff, field recording, draft fill preview, save-for-later, and manual handoff without upload, submit, payment, certification, cancellation, or inspection scheduling.
+- [ ] Task checkbox-485: Add PP&D autonomous-assistance operations documentation covering daemon handoff order, validation commands, source recrawl cadence, attended DevHub runbooks, exact-confirmation runbooks, repair escalation, and production readiness gates.
+
+## Manual Comprehensive PP&D Goal Handoff Notes
+
+- This tranche is human-authored to restart meaningful work after the deterministic continuation tranche completed. It should be preferred over generated blocked-cascade repair tasks.
+- The tasks intentionally cover every PP&D surface needed for the original goal: public scraping, processor archival, DevHub login and attended Playwright automation, local PDF draft filling, formal-logic guardrails, user document-store gap analysis, agent APIs, and operations.
+- The daemon must keep live or authenticated steps behind explicit flags, user attendance, exact confirmations, and validation fixtures until each surface is hardened.
+## Built-In Supervisor Repair Notes
+
+- Reset dead-worker in-progress task `Add a permit-process coverage matrix for residential, commercial, trade, sign, demolition, solar, Urban Forestry, corrections, inspections, payments, extensions, cancellations, and refunds.` to pending after the daemon process exited mid-cycle. The supervisor will restart the worker and let the task be selected again with a fresh timeout window.
+## Built-In Supervisor Repair Notes
+
+- Reset dead-worker in-progress task `Add a local PDF draft-fill queue that maps public PP&D form-field manifests to redacted user facts, writes only user-controlled preview PDFs, and never uploads, submits, or persists private source documents.` to pending after the daemon process exited mid-cycle. The supervisor will restart the worker and let the task be selected again with a fresh timeout window.

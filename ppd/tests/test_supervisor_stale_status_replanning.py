@@ -208,6 +208,33 @@ class SupervisorStaleStatusReplanningTest(unittest.TestCase):
         self.assertIn("- [ ] Task checkbox-160: Add supervisor task-board de-duplication coverage.", repaired)
         self.assertNotIn("- [~] Task checkbox-160", repaired)
 
+    def test_dead_worker_ready_status_clears_stale_active_target(self) -> None:
+        previous_status = {
+            "active_state": "calling_llm",
+            "active_target_task": "Task checkbox-160: Add supervisor task-board de-duplication coverage.",
+            "updated_at": "2026-05-03T00:00:00Z",
+        }
+        decision = supervisor.SupervisorDecision(
+            action="reconcile_dead_worker_and_restart",
+            reason="daemon process is not running but status is still calling_llm",
+            severity="warning",
+            should_restart_daemon=True,
+        )
+
+        ready = supervisor.build_dead_worker_ready_status(
+            "2026-05-03T00:01:00Z",
+            previous_status,
+            decision,
+            ("Add supervisor task-board de-duplication coverage.",),
+        )
+
+        self.assertEqual("ready_after_supervisor_dead_worker_repair", ready["active_state"])
+        self.assertEqual("ready_after_supervisor_dead_worker_repair", ready["state"])
+        self.assertEqual("", ready["active_target_task"])
+        self.assertEqual("calling_llm", ready["previous_state"])
+        self.assertEqual(previous_status["active_target_task"], ready["previous_target_task"])
+        self.assertEqual(["Add supervisor task-board de-duplication coverage."], ready["reset_task_labels"])
+
     def test_dead_worker_with_already_parked_active_target_restarts_on_next_task(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:
             repo = Path(tempdir)

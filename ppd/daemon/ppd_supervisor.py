@@ -20,7 +20,7 @@ import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, Iterable, Optional
 
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
@@ -2299,6 +2299,29 @@ def invoke_builtin_repair(
     return proposal
 
 
+def build_dead_worker_ready_status(
+    created_at: str,
+    previous_status: dict[str, Any],
+    decision: SupervisorDecision,
+    reset_labels: Iterable[str],
+) -> dict[str, Any]:
+    previous_target = str(previous_status.get("active_target_task") or previous_status.get("target_task") or "")
+    previous_state = str(previous_status.get("active_state") or previous_status.get("state") or "")
+    return {
+        "schemaVersion": 1,
+        "updated_at": created_at,
+        "state": "ready_after_supervisor_dead_worker_repair",
+        "active_state": "ready_after_supervisor_dead_worker_repair",
+        "active_state_started_at": created_at,
+        "active_target_task": "",
+        "previous_state": previous_state,
+        "previous_target_task": previous_target,
+        "reset_task_labels": list(reset_labels),
+        "supervisor_action": decision.action,
+        "supervisor_reason": decision.reason,
+    }
+
+
 def invoke_dead_worker_repair(config: SupervisorConfig, decision: SupervisorDecision) -> Proposal:
     board_path = config.resolve(config.task_board)
     board = read_text(board_path) if board_path.exists() else ""
@@ -2307,9 +2330,10 @@ def invoke_dead_worker_repair(config: SupervisorConfig, decision: SupervisorDeci
         board,
         str(status.get("active_target_task") or status.get("target_task") or ""),
     )
+    created_at = utc_now()
     payload = {
         "schemaVersion": 1,
-        "createdAt": utc_now(),
+        "createdAt": created_at,
         "repairKind": "dead_worker_task_reset",
         "decision": {
             "action": decision.action,
@@ -2323,7 +2347,16 @@ def invoke_dead_worker_repair(config: SupervisorConfig, decision: SupervisorDeci
         {
             "path": "ppd/daemon/builtin-repair-status.json",
             "content": json.dumps(payload, indent=2, sort_keys=True) + "\n",
-        }
+        },
+        {
+            "path": "ppd/daemon/status.json",
+            "content": json.dumps(
+                build_dead_worker_ready_status(created_at, status, decision, reset_labels),
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n",
+        },
     ]
     if repaired_board != board:
         files.append({"path": "ppd/daemon/task-board.md", "content": repaired_board})
@@ -2331,7 +2364,7 @@ def invoke_dead_worker_repair(config: SupervisorConfig, decision: SupervisorDeci
         summary="Reset dead-worker in-progress task before restart.",
         impact=(
             "The supervisor reconciles stale calling_llm/applying_files status with the dead worker process, "
-            "returns the task to pending, records the repair, and restarts the daemon without waiting for manual cleanup."
+            "returns the task to pending, clears stale runtime status, and restarts the daemon without waiting for manual cleanup."
         ),
         files=files,
     )

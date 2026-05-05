@@ -771,6 +771,82 @@ interface DevHubWorkflowState {
 - Agent loop can summarize known facts, missing gaps, and next safe action with citations.
 - Changed source pages trigger a diff report and mark affected guardrails for review.
 
+## May 5, 2026 Daemon Handoff Plan
+
+This section converts the overall goal into a todo-daemon-ready implementation program. The purpose is to give future daemon cycles source-backed work that can incrementally connect every PP&D public and authenticated surface to archival evidence, process models, formal guardrails, and attended user actions.
+
+### Current Official Source Anchors
+
+Use these public anchors as the initial source registry. They should be recrawled through allowlisted public fetches before any authenticated work begins:
+
+- PP&D bureau landing page: `https://www.portland.gov/ppd`
+- Online permitting tools overview: `https://www.portland.gov/ppd/how-use-online-permitting-tools`
+- DevHub FAQ: `https://www.portland.gov/ppd/devhub-faqs`
+- DevHub sign-in guide: `https://www.portland.gov/ppd/devhub-sign-guide`
+- DevHub submit-permit guide: `https://www.portland.gov/ppd/devhub-guide-submit-permit-application`
+- Permit applications and inspections index: `https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications`
+- Single PDF Process: `https://www.portland.gov/bds/single-pdf-process`
+- Single PDF file naming and PDF preparation standards: `https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs`
+- DevHub public portal: `https://devhub.portlandoregon.gov`
+
+The source registry should record `source_id`, canonical URL, source type, crawl policy, processor handoff policy, update cadence, evidence freshness, and whether the surface is public, authenticated read-only, reversible draft, consequential official action, payment-related, or unsupported.
+
+### Surface Coverage Model
+
+The daemon backlog should cover these surfaces as first-class system interfaces:
+
+- Public Portland.gov PP&D pages: bureau pages, service pages, permit type pages, guides, FAQs, checklists, fee guidance, inspections guidance, cancellation/refund guidance, and public news/maintenance notices.
+- Public document and PDF surfaces: permit applications, handouts, file naming standards, Single PDF Process guides, correction instructions, checklist PDFs, and form-field PDFs.
+- Public status and reference surfaces: PortlandMaps references, Daily Permit Request Queue links, license lookup references, inspection code references, and public permit-status guidance.
+- DevHub unauthenticated surface: portal landing page, availability/maintenance notices, public help links, and sign-in entry points.
+- DevHub authenticated read surfaces: My Permits & Requests, permit details, comments, status, fee notices, correction requests, attachments list, inspection results, and saved drafts.
+- DevHub reversible draft surfaces: new permit request forms, address search, permit-type selection, contact/contractor fields, fixture fields, upload staging before attach/submit, save-for-later, and draft resume.
+- DevHub consequential official surfaces: attach/upload to official record, submit permit request, purchase trade permit, pay intake or permit fees, certify, cancel/withdraw, schedule inspection, request extension/reactivation, and change account/security settings.
+- Local PDF surfaces: public fillable forms, field manifests, draft output previews, local validation, and user-controlled storage locations.
+- Agent-facing surfaces: user document stores, missing-fact questions, source-backed work orders, guardrail exports, explanation APIs, and audit ledgers.
+
+### Data Products
+
+The daemon should build these artifacts before any autonomous completion feature is treated as production-ready:
+
+- `SourceRegistry`: authoritative public source inventory with crawl policy, processor policy, freshness, and citation metadata.
+- `ArchiveManifest`: processor-backed capture records, content hashes, MIME decisions, robots decisions, redirects, normalized document IDs, and skipped reasons.
+- `DocumentRecord`: normalized public HTML/PDF/form content with citation spans and page anchors.
+- `RequirementNode`: source-backed obligations, prohibitions, prerequisites, permissions, exceptions, deadlines, fee triggers, license requirements, and document requirements.
+- `ProcessModel`: permit type, stage graph, required facts, required documents, review steps, inspection steps, fee steps, status transitions, and unsupported edges.
+- `DevHubSurfaceMap`: attended Playwright state graph with URL patterns, headings, accessible selectors, field manifests, validation messages, actions, and redaction policy.
+- `UserGapAnalysis`: known user facts, matched user documents, missing facts, stale/conflicting facts, required confirmations, and blocked action reasons.
+- `GuardrailBundle`: formal predicates, deontic rules, exact-confirmation predicates, reversible-action predicates, refused-action predicates, evidence IDs, and validation status.
+- `ActionJournal`: commit-safe audit events for public crawl, draft fill, local PDF preview, exact-confirmation gate, user review, manual handoff, and refused action.
+
+### Agentic Control Policy
+
+LLM agents may help users autonomously only within these boundaries:
+
+- They may read public PP&D guidance, normalized public documents, user-provided document-store facts, and redacted attended-worker journal facts.
+- They may ask targeted missing-fact questions and explain which source-backed requirement created the gap.
+- They may prepare reversible draft field values and local PDF preview values from redacted user facts.
+- They may not enter credentials, bypass MFA/CAPTCHA, create accounts, recover passwords, persist browser state, upload to an official record, submit, certify, cancel, schedule inspections, enter payment details, or make final payments without exact user attendance and action-specific confirmation.
+- They must fail closed when source evidence is stale, contradictory, uncited, not in the allowlist, or outside the current user case.
+- They must preserve a reviewable audit path from user goal to source evidence to requirement node to proposed action.
+
+### Handoff Epics
+
+The next todo-daemon tranche should implement the plan in epics that are broad enough to make meaningful progress but still validate in one cycle:
+
+- Source registry and surface taxonomy.
+- Public crawl frontier and processor archival integration.
+- Public PDF/form extraction and file-standard normalization.
+- Requirement extraction and process-model schemas.
+- Formal guardrail compiler and source-evidence validation.
+- DevHub attended login, Playwright surface recording, and reversible draft automation.
+- Local PDF draft-fill queue and preview validation.
+- User document-store gap analysis and missing-fact question generation.
+- Action classifier, exact-confirmation gates, and refused official-action stop gates.
+- Audit, journal replay, operations, and daemon supervision integration.
+
+These epics are represented on the PP&D daemon task board as the `Manual Comprehensive PP&D Goal Handoff Tranche`.
+
 ## Open Questions
 
 - What formal logic formats should be treated as the first production target for PP&D workflows: deterministic predicates plus deontic rules, or full TDFOL/CEC from the beginning?
@@ -784,6 +860,8 @@ interface DevHubWorkflowState {
 - DevHub public portal: https://devhub.portlandoregon.gov
 - DevHub sign-in guide: https://www.portland.gov/ppd/devhub-sign-guide
 - DevHub FAQ: https://www.portland.gov/ppd/devhub-faqs
+- Online permitting tools overview: https://www.portland.gov/ppd/how-use-online-permitting-tools
 - DevHub permit application guide: https://www.portland.gov/ppd/devhub-guide-submit-permit-application
-- Submit plans online / Single PDF Process: https://www.portland.gov/ppd/get-permit/submit-plans-online
+- Submit plans online / Single PDF Process: https://www.portland.gov/bds/single-pdf-process
+- File naming standards and preparing PDFs for Single PDF Process: https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs
 - PP&D permits and inspections applications: https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications
