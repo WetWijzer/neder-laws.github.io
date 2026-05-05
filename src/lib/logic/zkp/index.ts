@@ -9,6 +9,7 @@ export * from './ethVkRegistryPayloads';
 export * from './evmHarness';
 export * from './evmPublicInputs';
 export * from './facade';
+export * from './ipfsIntegration';
 export {
   createGroth16BackupBackend,
   createGroth16FfiBackend,

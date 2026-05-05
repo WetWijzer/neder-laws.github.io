@@ -2189,3 +2189,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T033728Z-ported-the-basic-zkp-demo-to-a-browser-native-typescript-api-using-the-existing-.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T033728Z-ported-the-basic-zkp-demo-to-a-browser-native-typescript-api-using-the-existing-.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T033728Z-ported-the-basic-zkp-demo-to-a-browser-native-typescript-api-using-the-existing-.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 03:42:39 UTC
+
+- Target: `Task checkbox-434: Port remaining Python logic module `logic/zkp/examples/zkp_ipfs_integration.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Summary: Worktree direct-edit proposal.
+- Impact: Git harvested the isolated-worktree edits for validation.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/zkp/index.ts`, `src/lib/logic/zkp/ipfsIntegration.test.ts`, `src/lib/logic/zkp/ipfsIntegration.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T034239Z-worktree-direct-edit-proposal..json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T034239Z-worktree-direct-edit-proposal..diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T034239Z-worktree-direct-edit-proposal..stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+
