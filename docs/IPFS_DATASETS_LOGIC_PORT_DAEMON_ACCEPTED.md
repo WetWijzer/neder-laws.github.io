@@ -2279,3 +2279,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T041556Z-preserved-direct-fol-browser-native-nlp-conversion-success-while-restoring-bridg.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T041556Z-preserved-direct-fol-browser-native-nlp-conversion-success-while-restoring-bridg.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T041556Z-preserved-direct-fol-browser-native-nlp-conversion-success-while-restoring-bridg.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 04:18:16 UTC
+
+- Target: `Task checkbox-444: Replace remaining `mlUnavailable` capability paths with browser-native ML confidence parity or explicit local model artifact loading.`
+- Summary: Replaced active mlUnavailable capability branches with positive browser-native ML confidence and local artifact loading state.
+- Impact: FOL and deontic conversion now decide ML readiness from browserNativeMlConfidence while parser/runtime capability outputs expose local model artifact loading and current ML confidence source. Focused Jest coverage validates heuristic and artifact-loaded capability states without server or Python runtime paths.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/deontic/converter.ts`, `src/lib/logic/deontic/parser.ts`, `src/lib/logic/fol/converter.ts`, `src/lib/logic/fol/parser.ts`, `src/lib/logic/runtimeCapabilities.test.ts`, `src/lib/logic/runtimeCapabilities.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T041816Z-replaced-active-mlunavailable-capability-branches-with-positive-browser-native-m.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T041816Z-replaced-active-mlunavailable-capability-branches-with-positive-browser-native-m.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T041816Z-replaced-active-mlunavailable-capability-branches-with-positive-browser-native-m.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+

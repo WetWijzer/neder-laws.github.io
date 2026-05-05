@@ -148,7 +148,7 @@ export class FOLConverter extends LogicConverter<string, FolFormula> {
   ): string[] {
     const capabilities = getLogicRuntimeCapabilities().fol;
     return [
-      ...(this.useMl && capabilities.mlUnavailable
+      ...(this.useMl && !capabilities.browserNativeMlConfidence
         ? ['Browser-native ML confidence is not yet complete.']
         : []),
     ];

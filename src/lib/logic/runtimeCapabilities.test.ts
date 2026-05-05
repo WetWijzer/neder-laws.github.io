@@ -3,10 +3,20 @@ import {
   getLogicRuntimeCapabilities,
   getRecommendedLocalWasmProvers,
 } from './runtimeCapabilities';
+import {
+  ML_CONFIDENCE_FEATURE_NAMES,
+  MLConfidenceModelArtifact,
+  loadMLConfidenceModelArtifact,
+  unloadMLConfidenceModel,
+} from './mlConfidence';
 import { convertLegalTextToDeontic } from './deontic';
 import { parseFolText } from './fol';
 
 describe('logic runtime capabilities', () => {
+  beforeEach(() => {
+    unloadMLConfidenceModel();
+  });
+
   it('declares browser-native mode with no server calls', () => {
     expect(getLogicRuntimeCapabilities()).toMatchObject({
       mode: 'browser_native',
@@ -18,11 +28,19 @@ describe('logic runtime capabilities', () => {
         browserNativeNlp: true,
         nlpUnavailable: false,
         mlStatus: 'complete',
+        browserNativeMlConfidence: true,
+        localModelArtifactLoading: true,
+        mlConfidenceSource: 'heuristic',
+        mlConfidenceModelLoaded: false,
         mlUnavailable: false,
       },
       deontic: {
         ruleExtractor: true,
         mlStatus: 'complete',
+        browserNativeMlConfidence: true,
+        localModelArtifactLoading: true,
+        mlConfidenceSource: 'heuristic',
+        mlConfidenceModelLoaded: false,
         mlUnavailable: false,
       },
       proving: {
@@ -68,6 +86,8 @@ describe('logic runtime capabilities', () => {
   it('surfaces browser-native FOL NLP and ML capabilities in converter outputs', () => {
     expect(parseFolText('All humans are mortal').capabilities).toEqual({
       nlpUnavailable: false,
+      browserNativeMlConfidence: true,
+      localModelArtifactLoading: true,
       mlUnavailable: false,
       serverCallsAllowed: false,
     });
@@ -80,8 +100,39 @@ describe('logic runtime capabilities', () => {
     });
 
     expect(convertLegalTextToDeontic('The tenant must pay rent.').capabilities).toEqual({
+      browserNativeMlConfidence: true,
+      localModelArtifactLoading: true,
       mlUnavailable: false,
       serverCallsAllowed: false,
     });
+  });
+
+  it('reports explicit local ML artifact loading without mlUnavailable branches', () => {
+    const artifact: MLConfidenceModelArtifact = {
+      format: 'deterministic-linear-v1',
+      version: 'runtime-capability-fixture',
+      featureNames: ML_CONFIDENCE_FEATURE_NAMES.slice(),
+      weights: ML_CONFIDENCE_FEATURE_NAMES.map((name) => (name === 'total_predicates' ? 0.1 : 0)),
+      bias: 0.4,
+    };
+
+    loadMLConfidenceModelArtifact(artifact);
+    expect(getLogicRuntimeCapabilities()).toMatchObject({
+      fol: {
+        browserNativeMlConfidence: true,
+        localModelArtifactLoading: true,
+        mlConfidenceSource: 'artifact',
+        mlConfidenceModelLoaded: true,
+        mlUnavailable: false,
+      },
+      deontic: {
+        browserNativeMlConfidence: true,
+        localModelArtifactLoading: true,
+        mlConfidenceSource: 'artifact',
+        mlConfidenceModelLoaded: true,
+        mlUnavailable: false,
+      },
+    });
+    unloadMLConfidenceModel();
   });
 });

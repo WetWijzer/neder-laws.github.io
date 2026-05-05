@@ -19,6 +19,8 @@ export interface FolParseResult {
   nlp: BrowserNativeFolNlpExtraction;
   capabilities: {
     nlpUnavailable: boolean;
+    browserNativeMlConfidence: boolean;
+    localModelArtifactLoading: boolean;
     mlUnavailable: boolean;
     serverCallsAllowed: false;
   };
@@ -94,6 +96,7 @@ export function parseFolText(text: string): FolParseResult {
   const quantifiers = parseFolQuantifiers(normalized);
   const operators = parseFolOperators(normalized);
   const formula = buildFolFormula(normalized, quantifiers, operators);
+  const capabilities = getLogicRuntimeCapabilities().fol;
 
   return {
     formula,
@@ -102,8 +105,10 @@ export function parseFolText(text: string): FolParseResult {
     validation: validateFolSyntax(formula),
     nlp,
     capabilities: {
-      nlpUnavailable: getLogicRuntimeCapabilities().fol.nlpUnavailable,
-      mlUnavailable: getLogicRuntimeCapabilities().fol.mlUnavailable,
+      nlpUnavailable: capabilities.nlpUnavailable,
+      browserNativeMlConfidence: capabilities.browserNativeMlConfidence,
+      localModelArtifactLoading: capabilities.localModelArtifactLoading,
+      mlUnavailable: false,
       serverCallsAllowed: false,
     },
   };

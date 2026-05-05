@@ -1,6 +1,9 @@
+import { getMLConfidenceModelState } from './mlConfidence';
+
 export type LogicRuntimeMode = 'browser_native';
 export type LogicPortTarget = 'full_python_logic_parity_typescript_wasm';
 export type LogicCapabilityStatus = 'complete' | 'incomplete';
+export type LogicMlConfidenceSource = 'heuristic' | 'trained' | 'artifact';
 
 export type LogicWasmProverId = 'z3' | 'cvc5' | 'tau-prolog' | 'lean' | 'coq';
 export type LogicWasmProverWorkflow =
@@ -33,12 +36,24 @@ export interface LogicRuntimeCapabilities {
     nlpUnavailable: boolean;
     mlStatus: LogicCapabilityStatus;
     browserNativeMlConfidence: boolean;
+    localModelArtifactLoading: boolean;
+    mlConfidenceSource: LogicMlConfidenceSource;
+    mlConfidenceModelLoaded: boolean;
+    /**
+     * @deprecated Use browserNativeMlConfidence/localModelArtifactLoading instead.
+     */
     mlUnavailable: boolean;
   };
   deontic: {
     ruleExtractor: true;
     mlStatus: LogicCapabilityStatus;
     browserNativeMlConfidence: boolean;
+    localModelArtifactLoading: boolean;
+    mlConfidenceSource: LogicMlConfidenceSource;
+    mlConfidenceModelLoaded: boolean;
+    /**
+     * @deprecated Use browserNativeMlConfidence/localModelArtifactLoading instead.
+     */
     mlUnavailable: boolean;
   };
   proving: {
@@ -125,6 +140,7 @@ export function getRecommendedLocalWasmProvers(
 export function getLogicRuntimeCapabilities(): LogicRuntimeCapabilities {
   const localWasmProvers = getLocalWasmProverEvaluations();
   const recommendedLocalProvers = getRecommendedLocalWasmProvers().map((prover) => prover.id);
+  const mlState = getMLConfidenceModelState();
 
   return {
     mode: 'browser_native',
@@ -137,12 +153,18 @@ export function getLogicRuntimeCapabilities(): LogicRuntimeCapabilities {
       nlpUnavailable: false,
       mlStatus: 'complete',
       browserNativeMlConfidence: true,
+      localModelArtifactLoading: true,
+      mlConfidenceSource: mlState.source,
+      mlConfidenceModelLoaded: mlState.loaded,
       mlUnavailable: false,
     },
     deontic: {
       ruleExtractor: true,
       mlStatus: 'complete',
       browserNativeMlConfidence: true,
+      localModelArtifactLoading: true,
+      mlConfidenceSource: mlState.source,
+      mlConfidenceModelLoaded: mlState.loaded,
       mlUnavailable: false,
     },
     proving: {

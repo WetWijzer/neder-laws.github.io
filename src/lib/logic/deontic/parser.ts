@@ -49,6 +49,8 @@ export interface DeonticConversionResult {
     pythonRuntime: false;
   };
   capabilities: {
+    browserNativeMlConfidence: boolean;
+    localModelArtifactLoading: boolean;
     mlUnavailable: boolean;
     serverCallsAllowed: false;
   };
@@ -141,6 +143,7 @@ export function extractNormativeElements(text: string): NormativeElement[] {
 export function convertLegalTextToDeontic(text: string): DeonticConversionResult {
   const elements = extractNormativeElements(text);
   const formulas = elements.map((element) => buildDeonticFormula(element));
+  const capabilities = getLogicRuntimeCapabilities().deontic;
   const confidence =
     elements.length > 0
       ? elements.reduce((total, element) => total + element.confidence, 0) / elements.length
@@ -153,13 +156,15 @@ export function convertLegalTextToDeontic(text: string): DeonticConversionResult
     confidence,
     warnings: [
       ...(elements.length > 0 ? [] : ['No normative indicators were detected']),
-      ...(getLogicRuntimeCapabilities().deontic.mlUnavailable
+      ...(!capabilities.browserNativeMlConfidence
         ? ['Browser-native ML confidence is not yet available.']
         : []),
     ],
     metadata: buildConversionMetadata(text, elements),
     capabilities: {
-      mlUnavailable: getLogicRuntimeCapabilities().deontic.mlUnavailable,
+      browserNativeMlConfidence: capabilities.browserNativeMlConfidence,
+      localModelArtifactLoading: capabilities.localModelArtifactLoading,
+      mlUnavailable: false,
       serverCallsAllowed: false,
     },
   };
