@@ -165,6 +165,7 @@ class SupervisorConfig:
     self_heal: bool = False
     restart_daemon: bool = False
     exception_backoff_seconds: float = 5.0
+    honor_supervisor_term: bool = False
 
     def resolve(self, path: Path) -> Path:
         return path if path.is_absolute() else self.repo_root / path
@@ -189,6 +190,14 @@ def handle_supervisor_signal(signum: int, _frame: object) -> None:
     signal_name = signal.Signals(signum).name
     if supervisor_stop_sentinel(config).exists():
         append_supervisor_runtime_event(config, "supervisor_signal_stop", signal=signal_name)
+        raise SystemExit(128 + signum)
+    if config.honor_supervisor_term:
+        append_supervisor_runtime_event(
+            config,
+            "supervisor_signal_honored",
+            signal=signal_name,
+            message="honored supervisor signal so the service manager can restart or stop the unit cleanly",
+        )
         raise SystemExit(128 + signum)
     append_supervisor_runtime_event(
         config,
@@ -2587,6 +2596,7 @@ def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
     parser.add_argument("--model", default="gpt-5.5", help="llm_router model")
     parser.add_argument("--provider", default=None, help="llm_router provider (default: auto-select with fallback)")
     parser.add_argument("--exception-backoff", type=float, default=5.0, help="Seconds to pause after a contained supervisor exception")
+    parser.add_argument("--honor-term", action="store_true", help="Exit on TERM/HUP when an external service manager owns restart policy")
     parser.add_argument("--self-test", action="store_true", help="Run supervisor self-test and exit")
     return parser.parse_args(argv)
 
@@ -2608,6 +2618,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         self_heal=bool(args.self_heal),
         restart_daemon=bool(args.restart_daemon),
         exception_backoff_seconds=max(0.0, float(args.exception_backoff)),
+        honor_supervisor_term=bool(args.honor_term or os.environ.get("PPD_SUPERVISOR_HONOR_TERM") == "1"),
     )
     if args.watch:
         install_supervisor_runtime_guards(config)

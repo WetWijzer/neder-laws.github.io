@@ -5,6 +5,7 @@ import tempfile
 import unittest
 from datetime import datetime, timezone
 import os
+import signal
 from pathlib import Path
 
 import ppd.daemon.ppd_supervisor as supervisor
@@ -438,6 +439,48 @@ class SupervisorStaleStatusReplanningTest(unittest.TestCase):
 
         self.assertEqual("observe_circuit_breaker", decision.action)
         self.assertFalse(decision.should_restart_daemon)
+
+    def test_supervisor_honors_term_when_service_manager_owns_restart_policy(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            config = SupervisorConfig(repo_root=repo, honor_supervisor_term=True)
+            original_config = supervisor._WATCH_CONFIG
+            supervisor._WATCH_CONFIG = config
+            try:
+                with self.assertRaises(SystemExit) as raised:
+                    supervisor.handle_supervisor_signal(signal.SIGTERM, None)
+            finally:
+                supervisor._WATCH_CONFIG = original_config
+
+            rows = [
+                json.loads(line)
+                for line in (repo / "ppd" / "daemon" / "supervisor-actions.jsonl")
+                .read_text(encoding="utf-8")
+                .splitlines()
+            ]
+
+        self.assertEqual(143, raised.exception.code)
+        self.assertEqual("supervisor_signal_honored", rows[0]["event"])
+
+    def test_supervisor_ignores_incidental_term_without_service_manager_policy(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            config = SupervisorConfig(repo_root=repo, honor_supervisor_term=False)
+            original_config = supervisor._WATCH_CONFIG
+            supervisor._WATCH_CONFIG = config
+            try:
+                supervisor.handle_supervisor_signal(signal.SIGTERM, None)
+            finally:
+                supervisor._WATCH_CONFIG = original_config
+
+            rows = [
+                json.loads(line)
+                for line in (repo / "ppd" / "daemon" / "supervisor-actions.jsonl")
+                .read_text(encoding="utf-8")
+                .splitlines()
+            ]
+
+        self.assertEqual("supervisor_signal_ignored", rows[0]["event"])
 
     def test_generated_blocked_cascade_budget_exhaustion_trips_breaker_without_more_tasks(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:

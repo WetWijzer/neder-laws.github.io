@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-05-04T15:48:42.454928Z",
+  "createdAt": "2026-05-05T00:58:55.851152Z",
   "decision": {
     "action": "enter_termination_storm_circuit_breaker",
     "reason": "16 recent llm_router termination diagnostics across 1 target(s) indicate a systemic termination storm; pause worker restarts and task-board growth until daemon/supervisor resource policy is hardened",

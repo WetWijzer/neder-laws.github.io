@@ -15,6 +15,8 @@ SUPERVISOR_LIFECYCLE_LOG="$ROOT/ppd/daemon/ppd-supervisor-lifecycle.jsonl"
 WATCHDOG_SCRIPT="$ROOT/ppd/daemon/watchdog.sh"
 DAEMON_UNIT="ppd-daemon.service"
 SUPERVISOR_UNIT="ppd-supervisor.service"
+SUPERVISOR_USER_UNIT_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user"
+SUPERVISOR_USER_UNIT_FILE="$SUPERVISOR_USER_UNIT_DIR/$SUPERVISOR_UNIT"
 
 systemd_available() {
   command -v systemd-run >/dev/null 2>&1 && systemctl --user list-units >/dev/null 2>&1
@@ -26,7 +28,7 @@ systemd_unit_active() {
 }
 
 supervisor_systemd_enabled() {
-  [[ "${PPD_SUPERVISOR_USE_SYSTEMD:-0}" == "1" ]] && systemd_available
+  [[ "${PPD_SUPERVISOR_DISABLE_SYSTEMD:-0}" != "1" ]] && systemd_available
 }
 
 systemd_unit_loaded() {
@@ -139,6 +141,49 @@ run_systemd_watchdog_unit() {
   fi
 
   return 1
+}
+
+write_supervisor_user_unit() {
+  local tmp_file
+  mkdir -p "$SUPERVISOR_USER_UNIT_DIR"
+  tmp_file="$(mktemp "$SUPERVISOR_USER_UNIT_FILE.tmp.XXXXXX")"
+  cat > "$tmp_file" <<EOF
+[Unit]
+Description=PP&D autonomous supervisor
+After=default.target
+
+[Service]
+Type=simple
+WorkingDirectory=$ROOT
+Environment=PYTHONPATH=ipfs_datasets_py
+Environment=PPD_LLM_BACKEND=llm_router
+Environment=IPFS_DATASETS_PY_CODEX_SANDBOX=read-only
+Environment=PPD_SUPERVISOR_HONOR_TERM=1
+ExecStartPre=/usr/bin/rm -f $SUPERVISOR_PID_FILE.stop $SUPERVISOR_CHILD_PID_FILE
+ExecStart=/usr/bin/bash -lc 'exec python3 ppd/daemon/ppd_supervisor.py --watch --interval 120 --exception-backoff 5 --termination-storm-threshold 8 --termination-storm-backoff 900 --apply --self-heal --restart-daemon --llm-timeout 300 --honor-term >> "$SUPERVISOR_OUT_FILE" 2>&1'
+Restart=always
+RestartSec=5
+StartLimitIntervalSec=0
+TimeoutStopSec=20
+KillMode=control-group
+
+[Install]
+WantedBy=default.target
+EOF
+  if [[ ! -f "$SUPERVISOR_USER_UNIT_FILE" ]] || ! cmp -s "$tmp_file" "$SUPERVISOR_USER_UNIT_FILE"; then
+    mv "$tmp_file" "$SUPERVISOR_USER_UNIT_FILE"
+    systemctl --user daemon-reload >/dev/null 2>&1 || true
+  else
+    rm -f "$tmp_file"
+  fi
+}
+
+start_persistent_supervisor_unit() {
+  write_supervisor_user_unit
+  rm -f "$SUPERVISOR_CHILD_PID_FILE" "$SUPERVISOR_PID_FILE.stop"
+  systemctl --user reset-failed "$SUPERVISOR_UNIT" >/dev/null 2>&1 || true
+  systemctl --user enable "$SUPERVISOR_UNIT" >/dev/null 2>&1 || true
+  systemctl --user start "$SUPERVISOR_UNIT"
 }
 
 collect_descendant_pids() {
@@ -404,15 +449,8 @@ supervisor_start() {
     rm -f "$SUPERVISOR_PID_FILE" "$SUPERVISOR_CHILD_PID_FILE" "$SUPERVISOR_PID_FILE.stop"
   fi
 
-  if systemd_available; then
-    stop_systemd_unit "$SUPERVISOR_UNIT"
-  fi
-
   if supervisor_systemd_enabled; then
-    rm -f "$SUPERVISOR_CHILD_PID_FILE"
-    run_systemd_watchdog_unit "$SUPERVISOR_UNIT" \
-      "cd '$ROOT'; rm -f '$SUPERVISOR_PID_FILE.stop' '$SUPERVISOR_CHILD_PID_FILE'; exec env PYTHONPATH=ipfs_datasets_py PPD_LLM_BACKEND=llm_router IPFS_DATASETS_PY_CODEX_SANDBOX=read-only python3 ppd/daemon/ppd_supervisor.py --watch --interval 120 --exception-backoff 5 --termination-storm-threshold 8 --termination-storm-backoff 900 --apply --self-heal --restart-daemon --llm-timeout 300 >> '$SUPERVISOR_OUT_FILE' 2>&1" \
-      "on-failure"
+    start_persistent_supervisor_unit
     local pid
     if ! pid="$(wait_for_systemd_main_pid "$SUPERVISOR_UNIT" 10)"; then
       echo "PP&D supervisor did not start; see $SUPERVISOR_OUT_FILE" >&2
@@ -421,6 +459,9 @@ supervisor_start() {
     fi
     echo "$pid" > "$SUPERVISOR_PID_FILE"
   else
+    if systemd_available; then
+      stop_systemd_unit "$SUPERVISOR_UNIT"
+    fi
     setsid -f bash -c "cd '$ROOT'; rm -f '$SUPERVISOR_PID_FILE.stop' '$SUPERVISOR_CHILD_PID_FILE'; echo \$\$ > '$SUPERVISOR_PID_FILE'; exec env PYTHONPATH=ipfs_datasets_py PPD_LLM_BACKEND=llm_router IPFS_DATASETS_PY_CODEX_SANDBOX=read-only python3 ppd/daemon/ppd_supervisor.py --watch --interval 120 --exception-backoff 5 --termination-storm-threshold 8 --termination-storm-backoff 900 --apply --self-heal --restart-daemon --llm-timeout 300 >> '$SUPERVISOR_OUT_FILE' 2>&1"
     local pid
     if ! pid="$(wait_for_pid_file_process "$SUPERVISOR_PID_FILE" 10)"; then
