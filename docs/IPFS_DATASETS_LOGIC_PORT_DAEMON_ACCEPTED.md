@@ -2369,3 +2369,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T044811Z-ported-logic-zkp-form_circuit.py-as-a-browser-native-tdfol_v1-form-circuit-valid.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T044811Z-ported-logic-zkp-form_circuit.py-as-a-browser-native-tdfol_v1-form-circuit-valid.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T044811Z-ported-logic-zkp-form_circuit.py-as-a-browser-native-tdfol_v1-form-circuit-valid.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 05:01:42 UTC
+
+- Target: `Task checkbox-453: Manual unblock: implement a browser-native TDFOL ZKP acceleration scheduler slice with worker-safe proof-search queues, deterministic simulated prover fallback, and tests covering parallel-search metadata without requiring server crypto.`
+- Summary: Added browser-native TDFOL ZKP proof-search scheduling with bounded parallel queue metadata and deterministic local prover fallback.
+- Impact: The TypeScript TDFOL ZKP bridge now exposes a worker-safe proof-search queue scheduler that annotates simulated ZKP proofs with parallel-search metadata and falls back to the local deterministic prover when a browser ZKP backend is unavailable. Focused Jest coverage validates simulated parallel metadata and fallback behavior without server crypto.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/tdfol/zkpIntegration.test.ts`, `src/lib/logic/tdfol/zkpIntegration.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T050142Z-added-browser-native-tdfol-zkp-proof-search-scheduling-with-bounded-parallel-que.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T050142Z-added-browser-native-tdfol-zkp-proof-search-scheduling-with-bounded-parallel-que.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T050142Z-added-browser-native-tdfol-zkp-proof-search-scheduling-with-bounded-parallel-que.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+

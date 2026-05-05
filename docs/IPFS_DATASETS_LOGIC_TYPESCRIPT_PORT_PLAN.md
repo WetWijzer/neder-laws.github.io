@@ -992,7 +992,7 @@ Last unblocked: 2026-05-05 05:00 UTC
 
 The daemon completed all currently eligible TypeScript port-plan checkboxes, then stopped with only blocked items remaining. These recovery slices intentionally create fresh task labels for capabilities that were blocked under older router, patch, or validation conditions. Each item must land a small browser-native TypeScript/WASM-compatible implementation slice with focused tests, no Python runtime dependency, and no external server-side calls. When a slice proves parity for an older blocked item, update the older item as complete or replace it with the next concrete gap.
 
-- [ ] Manual unblock: implement a browser-native TDFOL ZKP acceleration scheduler slice with worker-safe proof-search queues, deterministic simulated prover fallback, and tests covering parallel-search metadata without requiring server crypto.
+- [x] Manual unblock: implement a browser-native TDFOL ZKP acceleration scheduler slice with worker-safe proof-search queues, deterministic simulated prover fallback, and tests covering parallel-search metadata without requiring server crypto.
 - [ ] Manual unblock: complete a modal tableaux countermodel export slice that turns proof search branches into serializable visualization data and validates it against existing TDFOL/CEC examples.
 - [ ] Manual unblock: add a TDFOL security validator parity slice covering fail-closed formula, proof-cache, witness, and ZKP input checks in browser-safe TypeScript.
 - [ ] Manual unblock: port the next deterministic `ml_confidence.py` parity slice with fixture-backed scoring, calibration metadata, and local browser execution only.
@@ -1023,11 +1023,11 @@ The daemon completed all currently eligible TypeScript port-plan checkboxes, the
 <!-- logic-port-daemon-task-board:start -->
 ## Daemon Task Board
 
-Last updated: 2026-05-05 04:55:25 UTC
+Last updated: 2026-05-05 05:01:42 UTC
 
 Selection policy: choose the first needed or in-progress port-plan checkbox; if none remain, revisit blocked checkboxes with `fewest-failures` strategy because blocked-task revisit mode is enabled.
 
-Current target: `none`
+Current target: `Task checkbox-454: Manual unblock: complete a modal tableaux countermodel export slice that turns proof search branches into serializable visualization data and validates it against existing TDFOL/CEC examples.`
 
 Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failing.
 
@@ -1485,14 +1485,41 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - [x] `Task checkbox-450: Refresh the TypeScript port plan with a parity matrix mapping Python logic modules, TypeScript/WASM files, validation evidence, accepted work, and remaining browser-native tasks.` - complete
 - [x] `Task checkbox-451: Compare TypeScript logic public exports against Python logic module public APIs and add missing browser-native compatibility adapters or parity tests.` - complete
 - [x] `Task checkbox-452: Port remaining Python logic module 'logic/zkp/form_circuit.py' to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.` - complete
+- [x] `Task checkbox-453: Manual unblock: implement a browser-native TDFOL ZKP acceleration scheduler slice with worker-safe proof-search queues, deterministic simulated prover fallback, and tests covering parallel-search metadata without requiring server crypto.` - validated by latest daemon round
+- [ ] `Task checkbox-454: Manual unblock: complete a modal tableaux countermodel export slice that turns proof search branches into serializable visualization data and validates it against existing TDFOL/CEC examples.` - needed
+- [ ] `Task checkbox-455: Manual unblock: add a TDFOL security validator parity slice covering fail-closed formula, proof-cache, witness, and ZKP input checks in browser-safe TypeScript.` - needed
+- [ ] `Task checkbox-456: Manual unblock: port the next deterministic 'ml_confidence.py' parity slice with fixture-backed scoring, calibration metadata, and local browser execution only.` - needed
+- [ ] `Task checkbox-457: Manual unblock: add local model artifact manifest, cache lifecycle, version checks, and unload controls for browser-native ML/NLP parity without server calls.` - needed
+- [ ] `Task checkbox-458: Manual unblock: remove the next 'nlpUnavailable' or 'mlUnavailable' capability path by replacing it with local TypeScript/WASM, Transformers.js, ONNX/WebGPU, or deterministic fixture parity.` - needed
+- [ ] `Task checkbox-459: Manual unblock: complete an EVM public-input and verification-key registry helper slice using browser-compatible crypto abstractions and deterministic tests.` - needed
+- [ ] `Task checkbox-460: Manual unblock: add developer-panel live inspection snapshots for logic parse, proof, cache, ML/NLP, and ZKP capability state.` - needed
+- [ ] `Task checkbox-461: Manual unblock: add CLI/devtools command adapter parity for 'logic/cli.py' as browser/devtools-safe TypeScript entry points.` - needed
+- [ ] `Task checkbox-462: Manual unblock: port IPFS/IPLD proof cache semantics to browser-native storage and content-addressed cache adapters with deterministic tests.` - needed
+- [ ] `Task checkbox-463: Manual unblock: port 'logic/CEC/native/advanced_inference.py' by adding a TypeScript advanced-inference registry, rule classification helpers, and parity tests for cognitive, modal, and deontic rule selection.` - needed
+- [ ] `Task checkbox-464: Manual unblock: port 'logic/CEC/native/cec_proof_cache.py' by adding CEC proof cache keys, TTL/LRU behavior, validation metadata, and deterministic browser storage tests.` - needed
+- [ ] `Task checkbox-465: Manual unblock: port 'logic/CEC/native/cec_zkp_integration.py' by adding an educational local ZKP integration facade with simulated backend parity and fail-closed unsupported-backend results.` - needed
+- [ ] `Task checkbox-466: Manual unblock: port 'logic/CEC/native/context_manager.py' by adding discourse/context snapshots, entity bindings, temporal scopes, and deterministic merge/rollback tests.` - needed
+- [ ] `Task checkbox-467: Manual unblock: port 'logic/CEC/native/dcec_cleaning.py' by adding DCEC text/formula normalization, token cleanup, and fixture tests for malformed legal-text inputs.` - needed
+- [ ] `Task checkbox-468: Manual unblock: port 'logic/CEC/native/dcec_integration.py' by adding DCEC token/formula conversion helpers, CEC bridge metadata, and round-trip validation tests.` - needed
+- [ ] `Task checkbox-469: Manual unblock: port 'logic/CEC/native/dcec_namespace.py' by adding namespace registration, symbol statistics, validation diagnostics, and collision tests.` - needed
+- [ ] `Task checkbox-470: Manual unblock: port 'logic/CEC/native/dcec_parsing.py' by adding parser utility parity for DCEC atom, connective, quantifier, and modal/deontic forms.` - needed
+- [ ] `Task checkbox-471: Manual unblock: port 'logic/CEC/native/dcec_prototypes.py' by adding prototype/type-conflict checks and deterministic validation fixtures.` - needed
+- [ ] `Task checkbox-472: Manual unblock: port 'logic/CEC/native/dcec_types.py' by adding DCEC container helpers, type guards, serialization, and compatibility tests.` - needed
+- [ ] `Task checkbox-473: Manual unblock: port 'logic/CEC/native/enhanced_grammar_parser.py' by adding chart-parser style diagnostics, parse alternatives, and grammar fixture tests.` - needed
+- [ ] `Task checkbox-474: Manual unblock: port 'logic/CEC/native/error_handling.py' by adding fail-closed CEC error facades, recovery metadata, and validation result adapters.` - needed
+- [ ] `Task checkbox-475: Manual unblock: port 'logic/CEC/native/event_calculus.py' by adding event, fluent, happens, holds, initiates, terminates, and timeline query helpers with parity tests.` - needed
+- [ ] `Task checkbox-476: Manual unblock: port 'logic/CEC/native/grammar_engine.py' and 'grammar_loader.py' by adding deterministic in-memory grammar artifacts, loader validation, and no-network browser tests.` - needed
+- [ ] `Task checkbox-477: Manual unblock: port 'logic/CEC/native/inference_rules/base.py', 'cognitive.py', and 'modal.py' by adding rule tables, applicability checks, proof-step metadata, and focused parity tests.` - needed
+- [ ] `Task checkbox-478: Manual unblock: port 'logic/CEC/native/prover_core.py' by adding a bounded browser-native proof facade, deterministic search limits, proof summaries, and failure diagnostics.` - needed
+- [ ] `Task checkbox-479: Manual unblock: port 'logic/external_provers/interactive/coq_prover_bridge.py' by adding a local adapter contract that reports WASM-capable support when available and fail-closed unsupported-local results otherwise.` - needed
 
 ### Latest Round
 
-- Target: `none`
+- Target: `Task checkbox-453: Manual unblock: implement a browser-native TDFOL ZKP acceleration scheduler slice with worker-safe proof-search queues, deterministic simulated prover fallback, and tests covering parallel-search metadata without requiring server crypto.`
 - Result: `valid`
-- Summary: No eligible TypeScript port-plan tasks remain. Blocked tasks require plan updates or a deliberate unblock before more autonomous work can run.
-- Impact: The daemon stopped before calling the LLM because every parsed port-plan task is complete or blocked.
-- Failure kind: `no_eligible_tasks`
+- Summary: Added browser-native TDFOL ZKP proof-search scheduling with bounded parallel queue metadata and deterministic local prover fallback.
+- Impact: The TypeScript TDFOL ZKP bridge now exposes a worker-safe proof-search queue scheduler that annotates simulated ZKP proofs with parallel-search metadata and falls back to the local deterministic prover when a browser ZKP backend is unavailable. Focused Jest coverage validates simulated parallel metadata and fallback behavior without server crypto.
+- Accepted changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/tdfol/zkpIntegration.test.ts`, `src/lib/logic/tdfol/zkpIntegration.ts`
 
 ### Blocked Backlog
 

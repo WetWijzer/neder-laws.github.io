@@ -16,6 +16,42 @@ export interface TdfolZkpStatistics {
   standard_proofs: number;
 }
 
+export interface TdfolZkpProofSearchQueueItem {
+  id: string;
+  goal: TdfolFormula;
+  axioms?: TdfolFormula[];
+  proverOptions?: TdfolProverOptions;
+  preferZkp?: boolean;
+  privateAxioms?: boolean;
+}
+
+export interface TdfolZkpProofSearchMetadata {
+  queue_id: string;
+  queue_index: number;
+  search_order: number;
+  requested_parallelism: number;
+  effective_parallelism: number;
+  worker_safe: true;
+  backend: TdfolZkpBackend;
+  deterministic_fallback: 'standard-local-prover';
+  fallback_used: boolean;
+}
+
+export type TdfolZkpProofSearchResult = {
+  id: string;
+  proof: UnifiedTdfolProof;
+  metadata: TdfolZkpProofSearchMetadata;
+};
+
+export interface TdfolZkpProofSearchSchedulerOptions {
+  queueId?: string;
+  parallelism?: number;
+  zkpBackend?: TdfolZkpBackend;
+  zkpFallback?: 'standard' | 'error';
+  securityLevel?: number;
+  proverOptions?: TdfolProverOptions;
+}
+
 export class UnifiedTdfolProof {
   readonly timestamp = Date.now() / 1000;
 
@@ -130,6 +166,7 @@ export class ZkpTdfolProver {
       preferZkp?: boolean;
       privateAxioms?: boolean;
       forceStandard?: boolean;
+      zkpProofMetadata?: Record<string, unknown>;
     } = {},
   ): Promise<UnifiedTdfolProof> {
     const start = performanceNow();
@@ -142,7 +179,7 @@ export class ZkpTdfolProver {
           goal,
           axioms,
           proof.status === 'proved',
-          this.options,
+          { ...this.options, proofMetadata: options.zkpProofMetadata },
         );
         if (proof.status === 'proved') this.zkpSuccesses += 1;
         return UnifiedTdfolProof.fromZkpProof(
@@ -189,7 +226,12 @@ export async function createSimulatedTdfolZkpProof(
   goal: TdfolFormula,
   axioms: TdfolFormula[],
   isProved = true,
-  options: { backend?: TdfolZkpBackend; zkpBackend?: TdfolZkpBackend; securityLevel?: number } = {},
+  options: {
+    backend?: TdfolZkpBackend;
+    zkpBackend?: TdfolZkpBackend;
+    securityLevel?: number;
+    proofMetadata?: Record<string, unknown>;
+  } = {},
 ): Promise<ZKPProof> {
   const backend = options.backend ?? options.zkpBackend ?? 'simulated';
   if (backend !== 'simulated')
@@ -203,6 +245,7 @@ export async function createSimulatedTdfolZkpProof(
   }).generateProof(formatTdfolFormula(goal), axioms.map(formatTdfolFormula), {
     circuit_version: 2,
     is_proved: isProved,
+    ...(options.proofMetadata ?? {}),
     ruleset_id: 'TDFOL_v1',
   });
   const verified = await new ZKPVerifier({
@@ -217,6 +260,77 @@ export function createHybridTdfolProver(
   options: ConstructorParameters<typeof ZkpTdfolProver>[0] = {},
 ): ZkpTdfolProver {
   return new ZkpTdfolProver(options);
+}
+
+export async function scheduleTdfolZkpProofSearch(
+  items: Array<TdfolZkpProofSearchQueueItem>,
+  options: TdfolZkpProofSearchSchedulerOptions = {},
+): Promise<Array<TdfolZkpProofSearchResult>> {
+  const queue = normalizeTdfolZkpProofSearchQueue(items);
+  const requestedParallelism = Math.max(1, Math.floor(options.parallelism ?? 1));
+  const effectiveParallelism = Math.min(requestedParallelism, Math.max(1, queue.length));
+  const queueId = options.queueId ?? 'tdfol-zkp-queue';
+  const results: Array<TdfolZkpProofSearchResult | undefined> = new Array(queue.length);
+  let cursor = 0;
+
+  async function runNext(): Promise<void> {
+    const index = cursor;
+    cursor += 1;
+    if (index >= queue.length) return;
+
+    const item = queue[index];
+    const backend = options.zkpBackend ?? 'simulated';
+    const baseMetadata: Omit<TdfolZkpProofSearchMetadata, 'fallback_used'> = {
+      backend,
+      deterministic_fallback: 'standard-local-prover',
+      effective_parallelism: effectiveParallelism,
+      queue_id: queueId,
+      queue_index: index,
+      requested_parallelism: requestedParallelism,
+      search_order: index,
+      worker_safe: true,
+    };
+    const prover = new ZkpTdfolProver({
+      enableZkp: true,
+      proverOptions: { ...(options.proverOptions ?? {}), ...(item.proverOptions ?? {}) },
+      securityLevel: options.securityLevel,
+      zkpBackend: backend,
+      zkpFallback: options.zkpFallback ?? 'standard',
+    });
+    const proof = await prover.proveTheorem(item.goal, item.axioms ?? [], {
+      preferZkp: item.preferZkp ?? true,
+      privateAxioms: item.privateAxioms ?? true,
+      zkpProofMetadata: {
+        ...baseMetadata,
+        fallback_used: false,
+        scheduler: 'tdfol-zkp-proof-search',
+      },
+    });
+    const metadata: TdfolZkpProofSearchMetadata = {
+      ...baseMetadata,
+      fallback_used: proof.method !== 'tdfol_zkp',
+    };
+    results[index] = { id: item.id, metadata, proof };
+    await runNext();
+  }
+
+  await Promise.all(Array.from({ length: effectiveParallelism }, () => runNext()));
+  return results.filter((result): result is TdfolZkpProofSearchResult => result !== undefined);
+}
+
+function normalizeTdfolZkpProofSearchQueue(
+  items: Array<TdfolZkpProofSearchQueueItem>,
+): Array<TdfolZkpProofSearchQueueItem> {
+  return items.map((item, index) => ({
+    ...item,
+    axioms: (item.axioms ?? []).map(cloneTdfolFormula),
+    goal: cloneTdfolFormula(item.goal),
+    id: item.id || `tdfol-zkp-search-${index + 1}`,
+  }));
+}
+
+function cloneTdfolFormula(formula: TdfolFormula): TdfolFormula {
+  return JSON.parse(JSON.stringify(formula)) as TdfolFormula;
 }
 
 function tdfolZkpSecurityNote(proof: ZKPProof): string {
