@@ -2333,3 +2333,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T043412Z-add-browser-native-audit-coverage-for-python-ml-confidence-and-spacy-parity-expe.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T043412Z-add-browser-native-audit-coverage-for-python-ml-confidence-and-spacy-parity-expe.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T043412Z-add-browser-native-audit-coverage-for-python-ml-confidence-and-spacy-parity-expe.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 04:37:35 UTC
+
+- Target: `Task checkbox-450: Refresh the TypeScript port plan with a parity matrix mapping Python logic modules, TypeScript/WASM files, validation evidence, accepted work, and remaining browser-native tasks.`
+- Summary: Refreshed the TypeScript port plan with an auditable Python-to-TypeScript parity matrix.
+- Impact: The port ledger now maps Python logic module groups to browser-native TypeScript/WASM runtime files, validation evidence, accepted work, and remaining local-only tasks. The same matrix is exported by src/lib/logic/pythonLogicInventory.ts and covered by Jest so the validation suite can detect incomplete rows or non-browser-native follow-up work.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/pythonLogicInventory.test.ts`, `src/lib/logic/pythonLogicInventory.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T043735Z-refreshed-the-typescript-port-plan-with-an-auditable-python-to-typescript-parity.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T043735Z-refreshed-the-typescript-port-plan-with-an-auditable-python-to-typescript-parity.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T043735Z-refreshed-the-typescript-port-plan-with-an-auditable-python-to-typescript-parity.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+

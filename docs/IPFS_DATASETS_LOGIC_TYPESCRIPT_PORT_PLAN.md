@@ -632,6 +632,18 @@ Remaining full-port work:
 - Cryptographic proof generation and verification through browser-native libraries.
 - Python NLP/ML parity through browser-native NLP/ML implementations.
 
+## Python-To-TypeScript Parity Matrix
+
+This matrix is the current browser-native parity ledger for the Python logic tree. It maps Python module groups to TypeScript/WASM runtime files, validation evidence, accepted daemon work, and remaining local-only tasks. The machine-readable form is exported by `src/lib/logic/pythonLogicInventory.ts` through `buildLogicPortParityMatrix()` and exercised by `src/lib/logic/pythonLogicInventory.test.ts`.
+
+| Python logic modules | TypeScript/WASM runtime files | Validation evidence | Accepted work | Remaining browser-native tasks |
+| --- | --- | --- | --- | --- |
+| `logic/fol`, `logic/deontic` | `src/lib/logic/fol`, `src/lib/logic/deontic`, `src/lib/logic/mlConfidence.ts` | `src/lib/logic/fol/converter.test.ts`, `src/lib/logic/deontic/parser.test.ts`, `src/lib/logic/mlConfidence.test.ts`, `src/lib/logic/parity/parity.test.ts` | FOL and spaCy-style NLP extraction; ML confidence scoring; CEC, DCEC, and deontic reasoning | Load optional browser-native model artifacts for trained ML/spaCy-equivalent behavior. |
+| `logic/TDFOL` | `src/lib/logic/tdfol`, `src/lib/logic/modalTableaux.ts` | `src/lib/logic/tdfol/prover.test.ts`, `src/lib/logic/tdfol/modalTableaux.test.ts`, `src/lib/logic/modalTableaux.test.ts` | CEC, DCEC, and deontic reasoning | Replace remaining P2P, dashboard, and visualization helper surfaces with browser-local state and serializable exports. |
+| `logic/CEC`, `logic/integration` | `src/lib/logic/deontic`, `src/lib/logic/integration` | `src/lib/logic/integration/bridge.test.ts`, `src/lib/logic/integration/coreBridge.test.ts`, `src/lib/logic/integration/domain/deonticQueryEngine.test.ts` | CEC, DCEC, and deontic reasoning | Complete browser-native CEC grammar loading, cognitive/modal rule groups, namespace diagnostics, and selected native prover behavior. |
+| `logic/zkp` | `src/lib/logic/zkp`, `src/lib/logic/groth16.ts` | `src/lib/logic/zkp/facade.test.ts`, `src/lib/logic/zkp/witnessManager.test.ts`, `src/lib/logic/groth16.test.ts` | ZKP and verifier surfaces | Finish browser crypto and chain-library parity for Groth16, EVM public inputs, and VK registry helpers. |
+| `logic/external_provers`, top-level operational modules | `src/lib/logic/integration/proverAdapters.ts`, `src/lib/logic/cli.ts`, `src/lib/logic/monitoring.ts`, `src/lib/logic/security` | `src/lib/logic/cli.test.ts`, `src/lib/logic/monitoring.test.ts`, `src/lib/logic/security/security.test.ts` | Public API, CLI/devtools, config, monitoring, and security | Map remaining external prover routing to WASM-capable local adapters or explicit unsupported-local results; convert remaining benchmark and validation script behavior into browser/devtools TypeScript entry points. |
+
 ## Testing Strategy
 
 Unit tests:
@@ -970,17 +982,17 @@ These tasks were added automatically after the daemon found no eligible unchecke
   - Missing parity tasks remain explicit from the 16-file inventory gap and retain browser-native/no-server/no-Python constraints for subsequent implementation cycles.
 - [x] Add end-to-end browser-native validation proving the converted logic runs without Python, spaCy, or server-side calls, including deterministic coverage for ML and NLP capability surfaces.
 - [x] Audit Python ML and spaCy expectations against the TypeScript/WASM implementation and add focused parity tests or local-model artifact loading tasks for unsupported browser-native behavior.
-- [ ] Refresh the TypeScript port plan with a parity matrix mapping Python logic modules, TypeScript/WASM files, validation evidence, accepted work, and remaining browser-native tasks.
+- [x] Refresh the TypeScript port plan with a parity matrix mapping Python logic modules, TypeScript/WASM files, validation evidence, accepted work, and remaining browser-native tasks.
 - [ ] Compare TypeScript logic public exports against Python logic module public APIs and add missing browser-native compatibility adapters or parity tests.
 
 <!-- logic-port-daemon-task-board:start -->
 ## Daemon Task Board
 
-Last updated: 2026-05-05 04:34:12 UTC
+Last updated: 2026-05-05 04:37:34 UTC
 
 Selection policy: choose the first needed or in-progress port-plan checkbox; if none remain, revisit blocked checkboxes with `fewest-failures` strategy because blocked-task revisit mode is enabled.
 
-Current target: `Task checkbox-450: Refresh the TypeScript port plan with a parity matrix mapping Python logic modules, TypeScript/WASM files, validation evidence, accepted work, and remaining browser-native tasks.`
+Current target: `Task checkbox-451: Compare TypeScript logic public exports against Python logic module public APIs and add missing browser-native compatibility adapters or parity tests.`
 
 Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failing.
 
@@ -1434,17 +1446,17 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - [x] `Task checkbox-446: Reconcile the Python logic inventory (269 files) with the TypeScript/WASM implementation (253 files) and add browser-native port tasks for uncovered behavior.` - complete
 - [x] `Task checkbox-447: Review the accepted TypeScript logic changes against the original browser-native TypeScript/WASM port goal, then add or implement any missing parity tasks for Python logic behavior that lacks accepted-work evidence.` - complete
 - [x] `Task checkbox-448: Add end-to-end browser-native validation proving the converted logic runs without Python, spaCy, or server-side calls, including deterministic coverage for ML and NLP capability surfaces.` - complete
-- [x] `Task checkbox-449: Audit Python ML and spaCy expectations against the TypeScript/WASM implementation and add focused parity tests or local-model artifact loading tasks for unsupported browser-native behavior.` - validated by latest daemon round
-- [ ] `Task checkbox-450: Refresh the TypeScript port plan with a parity matrix mapping Python logic modules, TypeScript/WASM files, validation evidence, accepted work, and remaining browser-native tasks.` - needed
+- [x] `Task checkbox-449: Audit Python ML and spaCy expectations against the TypeScript/WASM implementation and add focused parity tests or local-model artifact loading tasks for unsupported browser-native behavior.` - complete
+- [x] `Task checkbox-450: Refresh the TypeScript port plan with a parity matrix mapping Python logic modules, TypeScript/WASM files, validation evidence, accepted work, and remaining browser-native tasks.` - validated by latest daemon round
 - [ ] `Task checkbox-451: Compare TypeScript logic public exports against Python logic module public APIs and add missing browser-native compatibility adapters or parity tests.` - needed
 
 ### Latest Round
 
-- Target: `Task checkbox-449: Audit Python ML and spaCy expectations against the TypeScript/WASM implementation and add focused parity tests or local-model artifact loading tasks for unsupported browser-native behavior.`
+- Target: `Task checkbox-450: Refresh the TypeScript port plan with a parity matrix mapping Python logic modules, TypeScript/WASM files, validation evidence, accepted work, and remaining browser-native tasks.`
 - Result: `valid`
-- Summary: Add browser-native audit coverage for Python ML confidence and spaCy parity expectations.
-- Impact: The exported validation helper now checks Python ML feature-vector and heuristic confidence parity, verifies spaCy-style predicate and relation extraction fixtures, and records explicit local artifact tasks for trained model weights or full spaCy dependency behavior that cannot run directly in the browser. The focused Jest test exercises this audit through the TypeScript validation suite.
-- Accepted changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/browserNativeValidation.test.ts`, `src/lib/logic/browserNativeValidation.ts`
+- Summary: Refreshed the TypeScript port plan with an auditable Python-to-TypeScript parity matrix.
+- Impact: The port ledger now maps Python logic module groups to browser-native TypeScript/WASM runtime files, validation evidence, accepted work, and remaining local-only tasks. The same matrix is exported by src/lib/logic/pythonLogicInventory.ts and covered by Jest so the validation suite can detect incomplete rows or non-browser-native follow-up work.
+- Accepted changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/pythonLogicInventory.test.ts`, `src/lib/logic/pythonLogicInventory.ts`
 
 ### Blocked Backlog
 

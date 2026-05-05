@@ -1,4 +1,8 @@
-import { reconcilePythonLogicInventory, reviewAcceptedLogicParity } from './pythonLogicInventory';
+import {
+  buildLogicPortParityMatrix,
+  reconcilePythonLogicInventory,
+  reviewAcceptedLogicParity,
+} from './pythonLogicInventory';
 
 describe('reconcilePythonLogicInventory', () => {
   it('captures the selected 269-to-253 inventory reconciliation', () => {
@@ -61,6 +65,42 @@ describe('reviewAcceptedLogicParity', () => {
       expect(evidence.validationFiles.length).toBeGreaterThan(0);
       expect(evidence.serverCallsAllowed).toBe(false);
       expect(evidence.pythonRuntimeAllowed).toBe(false);
+    }
+  });
+});
+
+describe('buildLogicPortParityMatrix', () => {
+  it('maps Python logic modules to runtime files, tests, accepted work, and remaining tasks', () => {
+    const matrix = buildLogicPortParityMatrix();
+
+    expect(matrix.length).toBeGreaterThanOrEqual(5);
+    expect(matrix.map((entry) => entry.pythonLogicModules)).toEqual(
+      expect.arrayContaining([
+        'logic/fol and logic/deontic',
+        'logic/TDFOL',
+        'logic/CEC and logic/integration',
+        'logic/zkp',
+      ]),
+    );
+
+    for (const entry of matrix) {
+      expect(entry.typescriptWasmFiles.length).toBeGreaterThan(0);
+      expect(entry.validationEvidence.some((file) => file.endsWith('.test.ts'))).toBe(true);
+      expect(entry.acceptedWork.length).toBeGreaterThan(0);
+      expect(entry.browserNative).toBe(true);
+      expect(entry.serverCallsAllowed).toBe(false);
+      expect(entry.pythonRuntimeAllowed).toBe(false);
+    }
+  });
+
+  it('keeps remaining work local to browser-native TypeScript or WASM outcomes', () => {
+    const matrix = buildLogicPortParityMatrix();
+    const remainingTasks = matrix.flatMap((entry) => entry.remainingBrowserNativeTasks);
+
+    expect(remainingTasks.length).toBeGreaterThan(0);
+    for (const task of remainingTasks) {
+      expect(task).toMatch(/browser|local|WASM|TypeScript/);
+      expect(task).not.toMatch(/server|Python runtime|subprocess|RPC/);
     }
   });
 });
