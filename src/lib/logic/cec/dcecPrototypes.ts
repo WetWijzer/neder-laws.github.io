@@ -9,6 +9,19 @@ export interface DcecPrototypeStatistics {
   function_overloads: number;
 }
 
+export interface DcecPrototypeValidationResult {
+  ok: boolean;
+  issue?:
+    | 'unknown_sort'
+    | 'unknown_symbol'
+    | 'arity_mismatch'
+    | 'type_conflict'
+    | 'ambiguous_overload';
+  returnType?: string;
+  overload?: DcecFunctionPrototype;
+  distance?: number;
+}
+
 export class DcecPrototypeNamespace {
   readonly functions: Record<string, DcecFunctionPrototype[]> = {};
   readonly atomics: Record<string, string> = {};
@@ -35,11 +48,23 @@ export class DcecPrototypeNamespace {
   }
 
   addCodeFunction(name: string, returnType: string, argumentTypes: string[]): boolean {
+    if (!this.hasSort(returnType) || argumentTypes.some((typeName) => !this.hasSort(typeName)))
+      return false;
     const item: DcecFunctionPrototype = [returnType, [...argumentTypes]];
     const overloads = this.functions[name] ?? [];
-    if (!overloads.some(([existingReturn, existingArgs]) => (
-      existingReturn === item[0] && existingArgs.join('\u0000') === item[1].join('\u0000')
-    ))) {
+    if (
+      overloads.some(
+        (overload) => prototypesOverlap(this, overload, item) && overload[0] !== item[0],
+      )
+    ) {
+      return false;
+    }
+    if (
+      !overloads.some(
+        ([existingReturn, existingArgs]) =>
+          existingReturn === item[0] && existingArgs.join('\u0000') === item[1].join('\u0000'),
+      )
+    ) {
       overloads.push(item);
     }
     this.functions[name] = overloads;
@@ -76,6 +101,7 @@ export class DcecPrototypeNamespace {
   }
 
   addCodeAtomic(name: string, typeName: string): boolean {
+    if (!this.hasSort(typeName)) return false;
     if (this.atomics[name] !== undefined) return this.atomics[name] === typeName;
     this.atomics[name] = typeName;
     return true;
@@ -167,12 +193,87 @@ export class DcecPrototypeNamespace {
     return [false, level];
   }
 
+  validateAtomic(name: string, expectedType: string): DcecPrototypeValidationResult {
+    const actualType = this.atomics[name];
+    if (actualType === undefined) return { ok: false, issue: 'unknown_symbol' };
+    if (!this.hasSort(expectedType))
+      return { ok: false, issue: 'unknown_sort', returnType: actualType };
+    const [compatible, distance] = this.noConflict(actualType, expectedType);
+    return compatible
+      ? { ok: true, returnType: actualType, distance }
+      : { ok: false, issue: 'type_conflict', returnType: actualType };
+  }
+
+  validateFunctionCall(
+    name: string,
+    argumentTypes: string[],
+    expectedReturnType?: string,
+  ): DcecPrototypeValidationResult {
+    if (argumentTypes.some((typeName) => !this.hasSort(typeName)))
+      return { ok: false, issue: 'unknown_sort' };
+    if (expectedReturnType !== undefined && !this.hasSort(expectedReturnType)) {
+      return { ok: false, issue: 'unknown_sort' };
+    }
+
+    const overloads = this.functions[name];
+    if (overloads === undefined) return { ok: false, issue: 'unknown_symbol' };
+    if (!overloads.some(([, expectedArgs]) => expectedArgs.length === argumentTypes.length)) {
+      return { ok: false, issue: 'arity_mismatch' };
+    }
+
+    const matches = overloads
+      .filter(([, expectedArgs]) => expectedArgs.length === argumentTypes.length)
+      .map((overload) => {
+        const distances: number[] = [];
+        for (let index = 0; index < argumentTypes.length; index += 1) {
+          const [compatible, distance] = this.noConflict(argumentTypes[index], overload[1][index]);
+          if (!compatible) return undefined;
+          distances.push(distance);
+        }
+        return {
+          overload,
+          distance: distances.reduce((sum, distance) => sum + distance, 0),
+        };
+      })
+      .filter(
+        (match): match is { overload: DcecFunctionPrototype; distance: number } =>
+          match !== undefined,
+      )
+      .filter(
+        (match) =>
+          expectedReturnType === undefined ||
+          this.noConflict(match.overload[0], expectedReturnType)[0],
+      )
+      .sort((left, right) => left.distance - right.distance);
+
+    if (matches.length === 0) return { ok: false, issue: 'type_conflict' };
+
+    const bestDistance = matches[0].distance;
+    const bestMatches = matches.filter((match) => match.distance === bestDistance);
+    const bestReturnTypes = new Set(bestMatches.map((match) => match.overload[0]));
+    if (bestReturnTypes.size > 1) return { ok: false, issue: 'ambiguous_overload' };
+
+    return {
+      ok: true,
+      returnType: matches[0].overload[0],
+      overload: [matches[0].overload[0], [...matches[0].overload[1]]],
+      distance: matches[0].distance,
+    };
+  }
+
+  private hasSort(typeName: string): boolean {
+    return typeName === '?' || this.sorts[typeName] !== undefined;
+  }
+
   getStatistics(): DcecPrototypeStatistics {
     return {
       sorts: Object.keys(this.sorts).length,
       functions: Object.keys(this.functions).length,
       atomics: Object.keys(this.atomics).length,
-      function_overloads: Object.values(this.functions).reduce((sum, overloads) => sum + overloads.length, 0),
+      function_overloads: Object.values(this.functions).reduce(
+        (sum, overloads) => sum + overloads.length,
+        0,
+      ),
     };
   }
 
@@ -182,7 +283,9 @@ export class DcecPrototypeNamespace {
       ...Object.entries(this.sorts).map(([name, parents]) => `${name}: ${parents.join(',')}`),
       '',
       '=== Functions ===',
-      ...Object.entries(this.functions).map(([name, overloads]) => `${name}: ${JSON.stringify(overloads)}`),
+      ...Object.entries(this.functions).map(
+        ([name, overloads]) => `${name}: ${JSON.stringify(overloads)}`,
+      ),
       '',
       '=== Atomics ===',
       ...Object.entries(this.atomics).map(([name, type]) => `${name}: ${type}`),
@@ -190,7 +293,27 @@ export class DcecPrototypeNamespace {
   }
 }
 
+function prototypesOverlap(
+  namespace: DcecPrototypeNamespace,
+  left: DcecFunctionPrototype,
+  right: DcecFunctionPrototype,
+): boolean {
+  if (left[1].length !== right[1].length) return false;
+  return left[1].every((leftType, index) => {
+    const rightType = right[1][index];
+    return (
+      namespace.noConflict(leftType, rightType)[0] || namespace.noConflict(rightType, leftType)[0]
+    );
+  });
+}
+
 function parsePrototypeExpression(expression: string): string[] {
-  const text = stripDcecWhitespace(expression.replaceAll('(', ' ').replaceAll(')', ' ')).replaceAll('`', '');
-  return text.split(',').map((arg) => arg.trim()).filter(Boolean);
+  const text = stripDcecWhitespace(expression.replaceAll('(', ' ').replaceAll(')', ' ')).replaceAll(
+    '`',
+    '',
+  );
+  return text
+    .split(',')
+    .map((arg) => arg.trim())
+    .filter(Boolean);
 }
