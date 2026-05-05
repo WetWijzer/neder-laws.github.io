@@ -5,6 +5,7 @@ import {
   UnifiedCecProof,
   ZkpCecProver,
   createHybridCecProver,
+  createCecZkpCircuitInputs,
   createSimulatedCecZkpProof,
 } from './cecZkpIntegration';
 import { parseCecExpression } from './parser';
@@ -31,7 +32,38 @@ describe('CEC ZKP integration parity helpers', () => {
     expect(first.statement.goal).toBe('q');
     expect(first.statement.rulesetId).toBe('CEC_v1');
     expect(first.statement.axiomsCommitment).toBe(second.statement.axiomsCommitment);
+    expect(first.publicInputs).toMatchObject({
+      circuit_id: 'cec_theorem_v1',
+      circuit_ref: 'cec_theorem_v1@v1',
+      ruleset_id: 'CEC_v1',
+      theorem: 'q',
+      witness_count: 2,
+      is_proved: true,
+    });
+    expect(first.publicInputs.axioms_commitment).toBe(first.statement.axiomsCommitment);
+    expect(first.publicInputs.witness_commitment).toBe(first.witnessCommitment);
     expect(first.proofDigest).toHaveLength(64);
+  });
+
+  it('builds deterministic CEC circuit public inputs without exposing private witness data', async () => {
+    const goal = parseCecExpression('q');
+    const axioms = [parseCecExpression('(implies p q)'), parseCecExpression('p')];
+
+    const first = await createCecZkpCircuitInputs(goal, axioms, true);
+    const second = await createCecZkpCircuitInputs(goal, [...axioms].reverse(), true);
+
+    expect(first.publicInputs).toEqual(second.publicInputs);
+    expect(first.publicInputs.theorem_hash).toMatch(/^[0-9a-f]{64}$/);
+    expect(first.publicInputs.axioms_hash).toBe(first.publicInputs.axioms_commitment);
+    expect(first.publicInputs.witness_commitment).toMatch(/^[0-9a-f]{64}$/);
+    expect(first.witness).toMatchObject({
+      axioms: ['(implies p q)', 'p'],
+      theorem: 'q',
+      goal: 'q',
+      rulesetId: 'CEC_v1',
+      circuitVersion: 1,
+      isProved: true,
+    });
   });
 
   it('returns private simulated ZKP proofs when preferred', async () => {
@@ -54,6 +86,11 @@ describe('CEC ZKP integration parity helpers', () => {
       axioms: ['<private>'],
       method: 'cec_zkp',
       zkp_backend: 'simulated',
+      zkp_public_inputs: {
+        circuit_ref: 'cec_theorem_v1@v1',
+        theorem: 'q',
+        witness_count: 2,
+      },
     });
   });
 

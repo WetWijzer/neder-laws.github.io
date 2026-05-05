@@ -2675,3 +2675,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T093302Z-ported-cec-proof-cache-storage-integration-for-browser-native-validated-proof-re.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T093302Z-ported-cec-proof-cache-storage-integration-for-browser-native-validated-proof-re.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T093302Z-ported-cec-proof-cache-storage-integration-for-browser-native-validated-proof-re.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 09:35:34 UTC
+
+- Target: `Task checkbox-203: Port remaining Python logic module `logic/CEC/native/cec_zkp_integration.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Summary: Extended the browser-native CEC ZKP facade with deterministic circuit public inputs and private witness shaping for cec_zkp_integration parity.
+- Impact: The TypeScript CEC ZKP integration now exposes reusable local circuit input metadata, attaches public inputs to simulated proof results and serialized dictionaries, and validates deterministic/private-witness behavior through the existing Jest CEC ZKP test suite without server or Python runtime dependencies.
+- Changed files: `docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md`, `src/lib/logic/cec/cecZkpIntegration.test.ts`, `src/lib/logic/cec/cecZkpIntegration.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T093534Z-extended-the-browser-native-cec-zkp-facade-with-deterministic-circuit-public-inp.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T093534Z-extended-the-browser-native-cec-zkp-facade-with-deterministic-circuit-public-inp.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T093534Z-extended-the-browser-native-cec-zkp-facade-with-deterministic-circuit-public-inp.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+
