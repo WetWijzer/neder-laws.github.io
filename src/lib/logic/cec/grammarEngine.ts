@@ -102,6 +102,27 @@ export interface CecGrammarValidationResult {
   issues: CecGrammarValidationIssue[];
 }
 
+export type CecParseIssueCode = 'grammar-invalid' | 'unknown-token' | 'no-start-parse';
+
+export interface CecParseIssue {
+  code: CecParseIssueCode;
+  message: string;
+  token?: string;
+  index?: number;
+  validationIssues?: CecGrammarValidationIssue[];
+}
+
+export interface CecParseResult {
+  ok: boolean;
+  input: string;
+  tokens: string[];
+  parses: CecParseNode[];
+  selected?: CecParseNode;
+  issues: CecParseIssue[];
+  runtime: 'browser-native';
+  externalResourcePolicy: 'none';
+}
+
 export interface CecGrammarSetupResult {
   lexicalEntriesAdded: number;
   rulesAdded: number;
@@ -548,6 +569,50 @@ export class CecGrammarEngine {
     }
 
     return chart[0][count].filter((node) => node.category === this.startCategory);
+  }
+
+  parseDetailed(text: string, strategy: CecAmbiguityStrategy = 'first'): CecParseResult {
+    const tokens = this.tokenize(text);
+    const issues: CecParseIssue[] = [];
+    const validation = this.validateGrammar();
+    if (!validation.valid) {
+      issues.push({
+        code: 'grammar-invalid',
+        message: 'CEC grammar validation failed before parsing.',
+        validationIssues: validation.issues,
+      });
+    }
+
+    tokens.forEach((token, index) => {
+      if (!this.lexicon.has(token)) {
+        issues.push({
+          code: 'unknown-token',
+          message: `No lexical entry is registered for token ${token}.`,
+          token,
+          index,
+        });
+      }
+    });
+
+    const parses = validation.valid ? this.parse(text) : [];
+    const selected = this.resolveAmbiguity(parses, strategy);
+    if (validation.valid && tokens.length > 0 && parses.length === 0) {
+      issues.push({
+        code: 'no-start-parse',
+        message: `No ${this.startCategory} parse was produced for the input.`,
+      });
+    }
+
+    return {
+      ok: issues.length === 0 && selected !== undefined,
+      input: text,
+      tokens,
+      parses,
+      selected,
+      issues,
+      runtime: 'browser-native',
+      externalResourcePolicy: 'none',
+    };
   }
 
   validateGrammar(): CecGrammarValidationResult {

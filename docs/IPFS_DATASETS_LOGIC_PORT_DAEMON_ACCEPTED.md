@@ -2765,3 +2765,12 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T101345Z-extended-the-browser-native-cec-event-calculus-port-with-python-compatible-const.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T101345Z-extended-the-browser-native-cec-event-calculus-port-with-python-compatible-const.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T101345Z-extended-the-browser-native-cec-event-calculus-port-with-python-compatible-const.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-05 10:16:05 UTC
+
+- Target: `Task checkbox-217: Port remaining Python logic module `logic/CEC/native/grammar_engine.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Summary: Added browser-native CEC grammar parse diagnostics for grammar validity, unknown tokens, no-start parses, and selected parse metadata.
+- Impact: The TypeScript CEC grammar engine now exposes parseDetailed() as a fail-closed browser-native facade over the existing chart parser, giving validation callers deterministic parse results without server, Python, filesystem, or network fallback dependencies. Focused Jest coverage exercises successful Python grammar_engine-style parsing, invalid grammar handling, unknown tokens, and grammar misses.
+- Changed files: `src/lib/logic/cec/grammarEngine.test.ts`, `src/lib/logic/cec/grammarEngine.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T101605Z-added-browser-native-cec-grammar-parse-diagnostics-for-grammar-validity-unknown-.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T101605Z-added-browser-native-cec-grammar-parse-diagnostics-for-grammar-validity-unknown-.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T101605Z-added-browser-native-cec-grammar-parse-diagnostics-for-grammar-validity-unknown-.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+

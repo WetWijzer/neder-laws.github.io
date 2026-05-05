@@ -223,6 +223,22 @@ describe('CEC grammar loader and engine', () => {
       type: 'compound',
       connective: 'AND',
     });
+
+    const detailed = engine.parseDetailed('Alice must appeal');
+    expect(detailed).toMatchObject({
+      ok: true,
+      input: 'Alice must appeal',
+      tokens: ['alice', 'must', 'appeal'],
+      issues: [],
+      runtime: 'browser-native',
+      externalResourcePolicy: 'none',
+    });
+    expect(detailed.selected?.semantics).toEqual({
+      type: 'deontic',
+      agent: 'alice',
+      modality: 'obligated',
+      action: 'appeal',
+    });
   });
 
   it('compiles placeholder-only Python production_rules and records unsupported literal patterns', () => {
@@ -305,6 +321,56 @@ describe('CEC grammar loader and engine', () => {
       'unreachable-start-category',
     ]);
     expect(engine.parse('Alice must appeal')).toEqual([]);
+
+    const detailed = engine.parseDetailed('Alice must appeal');
+    expect(detailed.ok).toBe(false);
+    expect(detailed.parses).toEqual([]);
+    expect(detailed.issues.map((issue) => issue.code)).toEqual([
+      'grammar-invalid',
+      'unknown-token',
+      'unknown-token',
+    ]);
+    expect(detailed.issues[0].validationIssues?.map((issue) => issue.code)).toEqual([
+      'unreachable-constituent',
+      'unreachable-start-category',
+    ]);
+  });
+
+  it('reports local parse diagnostics for unknown words and grammar misses', () => {
+    const engine = createDefaultCecGrammarEngine();
+    engine.addLexicalEntries([
+      { word: 'alice', category: 'Agent', semantics: 'alice' },
+      { word: 'appeal', category: 'ActionType', semantics: 'appeal' },
+      { word: 'ready', category: 'Fluent', semantics: 'ready' },
+      { word: 'records', category: 'N', semantics: 'records' },
+      { word: 'home', category: 'Object', semantics: 'home' },
+    ]);
+
+    const unknown = engine.parseDetailed('Alice must review');
+    expect(unknown.ok).toBe(false);
+    expect(unknown.parses).toEqual([]);
+    expect(unknown.tokens).toEqual(['alice', 'must', 'review']);
+    expect(unknown.issues).toEqual([
+      {
+        code: 'unknown-token',
+        message: 'No lexical entry is registered for token review.',
+        token: 'review',
+        index: 2,
+      },
+      {
+        code: 'no-start-parse',
+        message: 'No Utterance parse was produced for the input.',
+      },
+    ]);
+
+    const noStart = engine.parseDetailed('Alice appeal');
+    expect(noStart.ok).toBe(false);
+    expect(noStart.issues).toEqual([
+      {
+        code: 'no-start-parse',
+        message: 'No Utterance parse was produced for the input.',
+      },
+    ]);
   });
 
   it('resolves ambiguity by first, shortest, and most specific strategies', () => {
