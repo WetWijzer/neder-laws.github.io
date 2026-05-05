@@ -99,6 +99,11 @@ export interface TdfolTableauxCountermodelExport {
   explanation: string[];
 }
 
+export interface TdfolCountermodelExportValidation {
+  ok: boolean;
+  errors: string[];
+}
+
 export class TdfolKripkeStructure {
   readonly worlds = new Set<number>();
   readonly accessibility = new Map<number, Set<number>>();
@@ -571,6 +576,52 @@ export function exportTdfolTableauxCountermodelData(
   };
 }
 
+export function validateTdfolTableauxCountermodelExport(
+  payload: TdfolTableauxCountermodelExport,
+): TdfolCountermodelExportValidation {
+  const errors: string[] = [];
+  if (payload.is_valid !== false) errors.push('TDFOL countermodel export must be invalid');
+  if (payload.logic_type !== payload.countermodel.logic_type)
+    errors.push('TDFOL countermodel logic type does not match export logic type');
+  if (payload.visualization.logic_type !== payload.logic_type)
+    errors.push('TDFOL visualization logic type does not match export logic type');
+  if (payload.open_branch.is_closed)
+    errors.push('TDFOL countermodel export must contain an open branch');
+
+  const worlds = [...payload.countermodel.worlds].sort((left, right) => left - right);
+  const nodeWorlds = payload.visualization.nodes
+    .map((node) => node.world_id)
+    .sort((left, right) => left - right);
+  if (!sameNumberList(worlds, nodeWorlds))
+    errors.push('TDFOL visualization nodes do not match countermodel worlds');
+  if (payload.visualization.num_worlds !== payload.visualization.nodes.length)
+    errors.push('TDFOL visualization world count does not match nodes');
+  if (payload.visualization.num_relations !== payload.visualization.links.length)
+    errors.push('TDFOL visualization relation count does not match links');
+
+  const relationKeys = new Set(
+    Object.entries(payload.countermodel.accessibility).flatMap(([from, targets]) =>
+      targets.map((to) => `${Number(from)}>${to}`),
+    ),
+  );
+  const linkKeys = new Set(payload.visualization.links.map((link) => `${link.from}>${link.to}`));
+  if (!sameStringSet(relationKeys, linkKeys))
+    errors.push('TDFOL visualization links do not match countermodel accessibility');
+
+  for (const node of payload.visualization.nodes) {
+    const valuation = payload.countermodel.valuation[String(node.world_id)] ?? [];
+    if (!sameStringList([...valuation].sort(), [...node.atoms].sort()))
+      errors.push(`TDFOL visualization valuation mismatch at ${node.id}`);
+  }
+
+  try {
+    JSON.parse(JSON.stringify(payload));
+  } catch {
+    errors.push('TDFOL countermodel export is not JSON serializable');
+  }
+  return { ok: errors.length === 0, errors };
+}
+
 function buildDemoCountermodels(): Array<{
   id: string;
   title: string;
@@ -665,6 +716,22 @@ function serializeTdfolBranch(branch: TdfolTableauxBranchLike): TdfolTableauxBra
 
 function isMapLike<Key, Value>(value: unknown): value is Map<Key, Value> {
   return Object.prototype.toString.call(value) === '[object Map]';
+}
+
+function sameNumberList(left: number[], right: number[]): boolean {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+function sameStringList(left: string[], right: string[]): boolean {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+function sameStringSet(left: Set<string>, right: Set<string>): boolean {
+  if (left.size !== right.size) return false;
+  for (const value of left) {
+    if (!right.has(value)) return false;
+  }
+  return true;
 }
 
 function expectedModalProperties(logicType: TdfolModalLogicType): string[] {

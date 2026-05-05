@@ -7,6 +7,7 @@ import {
   CecKripkeStructure,
   exportCecTableauxCountermodelData,
   extractCecCountermodel,
+  validateCecTableauxCountermodelExport,
   visualizeCecCountermodel,
 } from './countermodels';
 
@@ -135,5 +136,28 @@ describe('CEC countermodels', () => {
     });
     expect(exported.open_branch.worlds[0].negated_formulas).toEqual(['(comply_with agent code)']);
     expect(JSON.parse(JSON.stringify(exported)).visualization.nodes[0].id).toBe('w0');
+    expect(validateCecTableauxCountermodelExport(exported)).toEqual({ ok: true, errors: [] });
+  });
+
+  it('rejects inconsistent CEC countermodel visualization exports', () => {
+    const formula = parseCecExpression(
+      '(implies (always (comply_with agent code)) (comply_with agent code))',
+    );
+    const result = proveCecModalFormula(formula, 'K');
+    const exported = exportCecTableauxCountermodelData(
+      formula,
+      result.openBranch!,
+      'K',
+      result.proofSteps,
+    );
+
+    const broken = {
+      ...JSON.parse(JSON.stringify(exported)),
+      visualization: { ...exported.visualization, nodes: [] },
+    };
+
+    expect(validateCecTableauxCountermodelExport(broken).errors).toContain(
+      'CEC visualization nodes do not match countermodel worlds',
+    );
   });
 });

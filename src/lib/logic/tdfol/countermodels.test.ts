@@ -10,6 +10,7 @@ import {
   TdfolCounterModelExtractor,
   TdfolCounterModelVisualizer,
   TdfolKripkeStructure,
+  validateTdfolTableauxCountermodelExport,
   visualizeTdfolCountermodel,
 } from './countermodels';
 import { TdfolModalTableaux } from './modalTableaux';
@@ -212,10 +213,34 @@ describe('TDFOL countermodels', () => {
       id: 'w0',
       is_initial: true,
     });
+    expect(validateTdfolTableauxCountermodelExport(tdfolExport)).toEqual({ ok: true, errors: [] });
 
     expect(Object.keys(tdfolExport).sort()).toEqual(Object.keys(cecExport).sort());
     expect(tdfolExport.open_branch.worlds[0]).toHaveProperty('formulas');
     expect(tdfolExport.open_branch.worlds[0]).toHaveProperty('negated_formulas');
     expect(cecExport.visualization.nodes[0].id).toBe(tdfolExport.visualization.nodes[0].id);
+  });
+
+  it('rejects inconsistent TDFOL countermodel visualization exports', () => {
+    const formula = parseTdfolFormula('always(Pred(x)) -> Pred(x)');
+    const result = new TdfolModalTableaux({ logicType: 'K' }).prove(formula);
+    const exported = exportTdfolTableauxCountermodelData(
+      formula,
+      result.openBranch!,
+      'K',
+      result.proofSteps,
+    );
+
+    const broken = {
+      ...JSON.parse(JSON.stringify(exported)),
+      visualization: {
+        ...exported.visualization,
+        links: [{ source: 'w0', target: 'w1', from: 0, to: 1 }],
+      },
+    };
+
+    expect(validateTdfolTableauxCountermodelExport(broken).errors).toContain(
+      'TDFOL visualization links do not match countermodel accessibility',
+    );
   });
 });

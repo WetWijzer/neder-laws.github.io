@@ -76,6 +76,11 @@ export interface CecTableauxCountermodelExport {
   explanation: string[];
 }
 
+export interface CecCountermodelExportValidation {
+  ok: boolean;
+  errors: string[];
+}
+
 export class CecKripkeStructure {
   readonly worlds = new Set<number>();
   readonly accessibility = new Map<number, Set<number>>();
@@ -498,6 +503,52 @@ export function exportCecTableauxCountermodelData(
   };
 }
 
+export function validateCecTableauxCountermodelExport(
+  payload: CecTableauxCountermodelExport,
+): CecCountermodelExportValidation {
+  const errors: string[] = [];
+  if (payload.is_valid !== false) errors.push('CEC countermodel export must be invalid');
+  if (payload.logic_type !== payload.countermodel.logic_type)
+    errors.push('CEC countermodel logic type does not match export logic type');
+  if (payload.visualization.logic_type !== payload.logic_type)
+    errors.push('CEC visualization logic type does not match export logic type');
+  if (payload.open_branch.is_closed)
+    errors.push('CEC countermodel export must contain an open branch');
+
+  const worlds = [...payload.countermodel.worlds].sort((left, right) => left - right);
+  const nodeWorlds = payload.visualization.nodes
+    .map((node) => node.world_id)
+    .sort((left, right) => left - right);
+  if (!sameNumberList(worlds, nodeWorlds))
+    errors.push('CEC visualization nodes do not match countermodel worlds');
+  if (payload.visualization.num_worlds !== payload.visualization.nodes.length)
+    errors.push('CEC visualization world count does not match nodes');
+  if (payload.visualization.num_relations !== payload.visualization.links.length)
+    errors.push('CEC visualization relation count does not match links');
+
+  const relationKeys = new Set(
+    Object.entries(payload.countermodel.accessibility).flatMap(([from, targets]) =>
+      targets.map((to) => `${Number(from)}>${to}`),
+    ),
+  );
+  const linkKeys = new Set(payload.visualization.links.map((link) => `${link.from}>${link.to}`));
+  if (!sameStringSet(relationKeys, linkKeys))
+    errors.push('CEC visualization links do not match countermodel accessibility');
+
+  for (const node of payload.visualization.nodes) {
+    const valuation = payload.countermodel.valuation[String(node.world_id)] ?? [];
+    if (!sameStringList([...valuation].sort(), [...node.atoms].sort()))
+      errors.push(`CEC visualization valuation mismatch at ${node.id}`);
+  }
+
+  try {
+    JSON.parse(JSON.stringify(payload));
+  } catch {
+    errors.push('CEC countermodel export is not JSON serializable');
+  }
+  return { ok: errors.length === 0, errors };
+}
+
 function extractPositiveAtoms(formulas: CecExpression[]): Set<string> {
   const atoms = new Set<string>();
   for (const formula of formulas) {
@@ -548,6 +599,22 @@ function serializeCecBranch(branch: CecTableauxBranchLike): CecTableauxBranchExp
 
 function isMapLike<Key, Value>(value: unknown): value is Map<Key, Value> {
   return Object.prototype.toString.call(value) === '[object Map]';
+}
+
+function sameNumberList(left: number[], right: number[]): boolean {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+function sameStringList(left: string[], right: string[]): boolean {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+function sameStringSet(left: Set<string>, right: Set<string>): boolean {
+  if (left.size !== right.size) return false;
+  for (const value of left) {
+    if (!right.has(value)) return false;
+  }
+  return true;
 }
 
 function expectedModalProperties(logicType: CecModalLogicType): string[] {
