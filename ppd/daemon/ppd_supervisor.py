@@ -26,6 +26,7 @@ if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from ppd.daemon.ppd_daemon import (  # noqa: E402
+    CommandResult,
     Config as DaemonConfig,
     Proposal,
     Task,
@@ -103,6 +104,25 @@ GENERATED_BLOCKED_CASCADE_QUARANTINE_NOTE = (
     "or a vetted human-authored task is reopened."
 )
 MAX_GENERATED_BLOCKED_CASCADE_TASKS = 16
+MANUAL_COMPREHENSIVE_GOAL_HEADING = "## Manual Comprehensive PP&D Goal Handoff Tranche"
+MANUAL_GOAL_REOPEN_LIMIT = 4
+FAST_SUPERVISOR_FOLLOWUP_SECONDS = 1.0
+ACTIVE_WORK_SUPERVISOR_FOLLOWUP_SECONDS = 5.0
+FAST_SUPERVISOR_FOLLOWUP_ACTIONS = frozenset(
+    {
+        "plan_next_tasks",
+        "restart_daemon",
+        "recover_termination_storm_and_restart",
+        "recover_termination_storm",
+        "reconcile_repeated_llm_loop_and_restart",
+        "reconcile_stalled_worker_and_restart",
+        "reconcile_dead_worker_with_recent_failures_and_restart",
+        "reconcile_blocked_cascade_and_restart",
+        "reconcile_dead_worker_and_restart",
+        "reconcile_supersession_task_board",
+        "repair_daemon_programming",
+    }
+)
 
 SANITIZED_REPLENISHMENT_TITLES = (
     "Add supervisor deterministic-replenishment sanitization coverage proving agentic planner output with duplicate tranche headings or previously completed broad titles is rewritten to the next numbered non-duplicate tranche before the daemon starts.",
@@ -177,6 +197,7 @@ class SupervisorConfig:
     supervisor_status_file: Path = Path("ppd/daemon/supervisor-status.json")
     supervisor_log: Path = Path("ppd/daemon/supervisor-actions.jsonl")
     supervisor_pid_file: Path = Path("ppd/daemon/ppd-supervisor.pid")
+    supervisor_child_pid_file: Path = Path("ppd/daemon/ppd-supervisor.child.pid")
     circuit_breaker_file: Path = Path("ppd/daemon/supervisor-circuit-breaker.json")
     control_script: Path = Path("ppd/daemon/control.sh")
     stall_seconds: int = 900
@@ -250,6 +271,34 @@ def install_supervisor_runtime_guards(config: SupervisorConfig) -> None:
     signal.signal(signal.SIGTERM, handle_supervisor_signal)
     signal.signal(signal.SIGHUP, handle_supervisor_signal)
     atexit.register(record_supervisor_watch_exit)
+
+
+def supervisor_process_is_superseded(config: SupervisorConfig) -> bool:
+    """Return true when this watch process is no longer the managed supervisor child."""
+
+    current_pid = os.getpid()
+    watchdog_pid = read_pid(config.resolve(config.supervisor_pid_file))
+    child_pid = read_pid(config.resolve(config.supervisor_child_pid_file))
+    if watchdog_pid == current_pid:
+        return False
+    if child_pid == current_pid:
+        return not process_running(watchdog_pid)
+    if child_pid is not None and process_running(child_pid):
+        return True
+    if watchdog_pid is not None and process_running(watchdog_pid):
+        return True
+    return False
+
+
+def exit_if_superseded_supervisor(config: SupervisorConfig) -> None:
+    if not supervisor_process_is_superseded(config):
+        return
+    append_supervisor_runtime_event(
+        config,
+        "supervisor_superseded_exit",
+        message="exiting because another watchdog/child pair owns the supervisor pid files",
+    )
+    raise SystemExit(0)
 
 
 @dataclass(frozen=True)
@@ -1168,6 +1217,45 @@ def builtin_source_backed_execution_continuation_task_board(markdown: str) -> tu
     return markdown.rstrip() + "\n" + "\n".join(lines) + note, labels
 
 
+def reopen_blocked_manual_goal_tasks(
+    markdown: str,
+    *,
+    limit: int = MANUAL_GOAL_REOPEN_LIMIT,
+) -> tuple[str, tuple[str, ...]]:
+    """Reopen a bounded slice from the human-authored comprehensive PP&D tranche."""
+
+    lines = markdown.splitlines(keepends=True)
+    in_manual_tranche = False
+    reopened: list[str] = []
+    repaired_lines: list[str] = []
+    for line in lines:
+        stripped = line.strip()
+        if stripped == MANUAL_COMPREHENSIVE_GOAL_HEADING:
+            in_manual_tranche = True
+        elif in_manual_tranche and stripped.startswith("## "):
+            in_manual_tranche = False
+
+        if in_manual_tranche and len(reopened) < limit and line.lstrip().startswith("- [!] Task checkbox-"):
+            checkbox = CHECKBOX_ID_RE.search(line)
+            if checkbox:
+                line = line.replace("- [!]", "- [ ]", 1)
+                reopened.append(f"checkbox-{checkbox.group(1)}")
+        repaired_lines.append(line)
+
+    if not reopened:
+        return markdown, ()
+
+    note = (
+        "\n"
+        "## Built-In Manual Goal Reopen Notes\n\n"
+        "- Reopened a bounded slice of the human-authored comprehensive PP&D goal tranche after every "
+        "selectable task was blocked. The daemon should prefer these source-backed tasks over adding "
+        "more generated continuation tranches, and consequential live DevHub actions remain gated by "
+        "user attendance and exact confirmation.\n"
+    )
+    return "".join(repaired_lines).rstrip() + note, tuple(reopened)
+
+
 def should_escalate_stale_platform_slice(markdown: str, target_task: str) -> bool:
     """Return True when old narrow platform slices should yield to execution work."""
 
@@ -1304,6 +1392,10 @@ def builtin_replenish_goal_tasks(markdown: str, rows: Optional[list[dict[str, An
     tasks = parse_tasks(markdown)
     if not tasks or any(task.status in {"needed", "in-progress"} for task in tasks):
         return markdown, ()
+
+    reopened_board, reopened_labels = reopen_blocked_manual_goal_tasks(markdown)
+    if reopened_labels:
+        return reopened_board, reopened_labels
 
     start = next_checkbox_number(markdown)
     if any(autonomous_platform_heading_number(line) is not None for line in markdown.splitlines()):
@@ -2167,6 +2259,46 @@ def run_control(config: SupervisorConfig, command: str) -> subprocess.CompletedP
     )
 
 
+def stop_daemon_if_running(config: SupervisorConfig) -> Optional[subprocess.CompletedProcess[str]]:
+    """Stop the daemon only when a live watchdog PID is recorded."""
+
+    if process_running(read_pid(config.resolve(config.pid_file))):
+        return run_control(config, "stop")
+    return None
+
+
+def control_command_result(
+    config: SupervisorConfig,
+    command: str,
+    result: subprocess.CompletedProcess[str],
+) -> CommandResult:
+    return CommandResult(
+        command=("bash", str(config.control_script), command),
+        returncode=int(result.returncode),
+        stdout=result.stdout or "",
+        stderr=result.stderr or "",
+    )
+
+
+def attach_daemon_start_result(
+    proposal: Proposal,
+    config: SupervisorConfig,
+    result: subprocess.CompletedProcess[str],
+) -> Proposal:
+    """Persist daemon start outcome so restart failures are visible in supervisor status."""
+
+    command_result = control_command_result(config, "start", result)
+    proposal.validation_results.append(command_result)
+    restart_summary = compact_message((result.stdout or "") + " " + (result.stderr or ""), limit=900).strip()
+    if result.returncode == 0:
+        if restart_summary and "daemon restart result" not in proposal.impact.lower():
+            proposal.impact = (proposal.impact.rstrip() + f" Daemon restart result: {restart_summary}").strip()
+        return proposal
+    proposal.failure_kind = proposal.failure_kind or "restart"
+    proposal.errors.append(f"daemon restart failed: {restart_summary or result.returncode}")
+    return proposal
+
+
 def supervisor_daemon_config(config: SupervisorConfig) -> DaemonConfig:
     return DaemonConfig(
         repo_root=config.repo_root,
@@ -2593,7 +2725,7 @@ def invoke_termination_storm_recovery(config: SupervisorConfig, decision: Superv
 
 def invoke_codex_repair(config: SupervisorConfig, decision: SupervisorDecision) -> Proposal:
     if config.apply:
-        run_control(config, "stop")
+        stop_daemon_if_running(config)
     try:
         raw = call_codex(build_supervisor_prompt(config, decision), config)
         proposal = parse_proposal(raw)
@@ -2621,7 +2753,7 @@ def invoke_codex_repair(config: SupervisorConfig, decision: SupervisorDecision) 
         proposal = invoke_builtin_repair(config, decision, proposal)
 
     if config.apply and config.restart_daemon:
-        run_control(config, "start")
+        attach_daemon_start_result(proposal, config, run_control(config, "start"))
     return proposal
 
 
@@ -2686,6 +2818,8 @@ def run_once_safely(config: SupervisorConfig) -> SupervisorDecision:
         return run_once(config)
     except KeyboardInterrupt:
         raise
+    except SystemExit:
+        raise
     except BaseException as exc:
         return record_supervisor_exception(config, exc)
 
@@ -2696,55 +2830,55 @@ def run_once(config: SupervisorConfig) -> SupervisorDecision:
     proposal: Optional[Proposal] = None
     if decision.action == "enter_termination_storm_circuit_breaker" and config.apply:
         if config.restart_daemon:
-            run_control(config, "stop")
+            stop_daemon_if_running(config)
         proposal = invoke_termination_storm_circuit_breaker(config, decision)
     elif decision.action == "recover_termination_storm_and_restart" and config.apply:
         if config.restart_daemon:
-            run_control(config, "stop")
+            stop_daemon_if_running(config)
         proposal = invoke_termination_storm_recovery(config, decision)
         if config.restart_daemon and proposal.valid:
-            run_control(config, "start")
+            attach_daemon_start_result(proposal, config, run_control(config, "start"))
     elif decision.action == "reconcile_repeated_llm_loop_and_restart" and config.apply:
         if config.restart_daemon:
-            run_control(config, "stop")
+            stop_daemon_if_running(config)
         proposal = invoke_builtin_repair(
             config,
             decision,
             Proposal(summary="Repeated LLM parse/runtime diagnostic loop detected.", failure_kind="llm"),
         )
         if config.restart_daemon:
-            run_control(config, "start")
+            attach_daemon_start_result(proposal, config, run_control(config, "start"))
     elif decision.action in {"reconcile_stalled_worker_and_restart", "reconcile_dead_worker_with_recent_failures_and_restart"} and config.apply:
         if config.restart_daemon:
-            run_control(config, "stop")
+            stop_daemon_if_running(config)
         proposal = invoke_stalled_worker_repair(config, decision)
         if config.restart_daemon:
-            run_control(config, "start")
+            attach_daemon_start_result(proposal, config, run_control(config, "start"))
     elif decision.action == "reconcile_blocked_cascade_and_restart" and config.apply:
         if config.restart_daemon:
-            run_control(config, "stop")
+            stop_daemon_if_running(config)
         proposal = invoke_blocked_cascade_repair(config, decision)
         if config.restart_daemon:
-            run_control(config, "start")
+            attach_daemon_start_result(proposal, config, run_control(config, "start"))
     elif decision.action == "reconcile_dead_worker_and_restart" and config.apply:
         if config.restart_daemon:
-            run_control(config, "stop")
+            stop_daemon_if_running(config)
         proposal = invoke_dead_worker_repair(config, decision)
         if config.restart_daemon:
-            run_control(config, "start")
+            attach_daemon_start_result(proposal, config, run_control(config, "start"))
     elif decision.action == "reconcile_supersession_task_board" and config.apply:
         if config.restart_daemon:
-            run_control(config, "stop")
+            stop_daemon_if_running(config)
         proposal = invoke_builtin_repair(
             config,
             decision,
             Proposal(summary="Worker returned empty task-board truncation proposal.", failure_kind="no_change"),
         )
         if config.restart_daemon:
-            run_control(config, "start")
+            attach_daemon_start_result(proposal, config, run_control(config, "start"))
     elif decision.action == "plan_next_tasks" and config.apply:
         if config.restart_daemon:
-            run_control(config, "stop")
+            stop_daemon_if_running(config)
         proposal = invoke_builtin_repair(
             config,
             decision,
@@ -2755,7 +2889,7 @@ def run_once(config: SupervisorConfig) -> SupervisorDecision:
             ),
         )
         if config.restart_daemon:
-            run_control(config, "start")
+            attach_daemon_start_result(proposal, config, run_control(config, "start"))
     elif decision.should_restart_daemon and config.apply and config.restart_daemon and not decision.should_invoke_codex:
         result = run_control(config, "start")
         proposal = Proposal(
@@ -2765,12 +2899,31 @@ def run_once(config: SupervisorConfig) -> SupervisorDecision:
             dry_run=False,
             failure_kind="" if result.returncode == 0 else "restart",
             errors=[] if result.returncode == 0 else [compact_message(result.stderr or result.stdout)],
-            validation_results=run_validation(supervisor_daemon_config(config)),
+            validation_results=[control_command_result(config, "start", result), *run_validation(supervisor_daemon_config(config))],
         )
     elif decision.should_invoke_codex and config.self_heal:
         proposal = invoke_codex_repair(config, decision)
     write_supervisor_status(config, decision, proposal)
     return decision
+
+
+def supervisor_watch_sleep_seconds(
+    decision: SupervisorDecision,
+    config: SupervisorConfig,
+    *,
+    interval_seconds: float,
+) -> float:
+    """Choose the next watch delay without idling after progress-producing work."""
+
+    if decision.action == "supervisor_exception":
+        return max(1.0, float(config.exception_backoff_seconds))
+    if decision.action in {"enter_termination_storm_circuit_breaker", "observe_circuit_breaker"}:
+        return max(1.0, float(config.termination_storm_backoff_seconds))
+    if decision.action in FAST_SUPERVISOR_FOLLOWUP_ACTIONS or decision.should_restart_daemon:
+        return FAST_SUPERVISOR_FOLLOWUP_SECONDS
+    if decision.action == "observe" and "actively working" in decision.reason:
+        return min(max(1.0, float(interval_seconds)), ACTIVE_WORK_SUPERVISOR_FOLLOWUP_SECONDS)
+    return max(1.0, float(interval_seconds))
 
 
 def self_test(repo_root: Path) -> int:
@@ -3108,21 +3261,21 @@ def main(argv: Optional[list[str]] = None) -> int:
     if args.watch:
         install_supervisor_runtime_guards(config)
         while True:
+            exit_if_superseded_supervisor(config)
             decision = run_once_safely(config)
-            sleep_seconds = (
-                config.exception_backoff_seconds
-                if decision.action == "supervisor_exception"
-                else float(config.termination_storm_backoff_seconds)
-                if decision.action in {"enter_termination_storm_circuit_breaker", "observe_circuit_breaker"}
-                else float(args.interval)
+            exit_if_superseded_supervisor(config)
+            sleep_seconds = supervisor_watch_sleep_seconds(
+                decision,
+                config,
+                interval_seconds=float(args.interval),
             )
             append_supervisor_runtime_event(
                 config,
                 "supervisor_watch_sleep",
                 action=decision.action,
-                sleep_seconds=max(1.0, sleep_seconds),
+                sleep_seconds=sleep_seconds,
             )
-            time.sleep(max(1.0, sleep_seconds))
+            time.sleep(sleep_seconds)
     decision = run_once_safely(config)
     print(json.dumps({"action": decision.action, "reason": decision.reason, "severity": decision.severity}, indent=2))
     return 1 if decision.action == "supervisor_exception" else 0

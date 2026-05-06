@@ -6,10 +6,13 @@ import unittest
 from datetime import datetime, timezone
 import os
 import signal
+import subprocess
 from pathlib import Path
 
 import ppd.daemon.ppd_supervisor as supervisor
+from ppd.daemon.deterministic_fallback import deterministic_task_fallback_kind
 from ppd.daemon.ppd_daemon import atomic_write_json
+from ppd.daemon.task_board import parse_tasks
 from ppd.daemon.ppd_supervisor import (
     AUTONOMOUS_EXECUTION_CAPABILITY_TITLES,
     CIRCUIT_BREAKER_RECOVERY_CONTINUATION_TITLES,
@@ -22,6 +25,7 @@ from ppd.daemon.ppd_supervisor import (
     build_supervisor_prompt,
     builtin_blocked_cascade_replenish_task_board,
     builtin_dead_worker_task_board,
+    builtin_replenish_goal_tasks,
     builtin_repair_task_board,
     builtin_stalled_worker_task_board,
     diagnose,
@@ -32,6 +36,134 @@ from ppd.daemon.ppd_supervisor import (
 
 
 class SupervisorStaleStatusReplanningTest(unittest.TestCase):
+    def test_daemon_start_result_is_attached_to_supervisor_proposal(self) -> None:
+        proposal = supervisor.Proposal(summary="Synthetic repair.", impact="Validated repair.")
+        result = subprocess.CompletedProcess(
+            args=["bash", "ppd/daemon/control.sh", "start"],
+            returncode=0,
+            stdout="PP&D daemon watchdog started: 123\n",
+            stderr="",
+        )
+
+        supervisor.attach_daemon_start_result(proposal, SupervisorConfig(repo_root=Path(".")), result)
+
+        self.assertIn("Daemon restart result", proposal.impact)
+        self.assertEqual(("bash", "ppd/daemon/control.sh", "start"), proposal.validation_results[-1].command)
+        self.assertEqual(0, proposal.validation_results[-1].returncode)
+
+    def test_daemon_start_failure_marks_supervisor_proposal_restart_failed(self) -> None:
+        proposal = supervisor.Proposal(summary="Synthetic repair.", impact="Validated repair.")
+        result = subprocess.CompletedProcess(
+            args=["bash", "ppd/daemon/control.sh", "start"],
+            returncode=1,
+            stdout="",
+            stderr="daemon did not start",
+        )
+
+        supervisor.attach_daemon_start_result(proposal, SupervisorConfig(repo_root=Path(".")), result)
+
+        self.assertEqual("restart", proposal.failure_kind)
+        self.assertIn("daemon restart failed", proposal.errors[-1])
+        self.assertEqual(1, proposal.validation_results[-1].returncode)
+
+    def test_stop_daemon_if_running_skips_missing_pid_file(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            (repo / "ppd" / "daemon").mkdir(parents=True)
+            calls = []
+            original = supervisor.run_control
+            supervisor.run_control = lambda config, command: calls.append(command)  # type: ignore[assignment]
+            try:
+                result = supervisor.stop_daemon_if_running(SupervisorConfig(repo_root=repo))
+            finally:
+                supervisor.run_control = original  # type: ignore[assignment]
+
+        self.assertIsNone(result)
+        self.assertEqual([], calls)
+
+    def test_watch_loop_uses_fast_followup_after_progress_actions(self) -> None:
+        config = SupervisorConfig(repo_root=Path("."), exception_backoff_seconds=7, termination_storm_backoff_seconds=900)
+        plan_decision = supervisor.SupervisorDecision(
+            action="plan_next_tasks",
+            reason="append source-backed continuation",
+            severity="warning",
+            should_invoke_codex=True,
+        )
+        restart_decision = supervisor.SupervisorDecision(
+            action="observe",
+            reason="restart requested by diagnostic",
+            severity="warning",
+            should_restart_daemon=True,
+        )
+
+        self.assertEqual(
+            1.0,
+            supervisor.supervisor_watch_sleep_seconds(plan_decision, config, interval_seconds=120),
+        )
+        self.assertEqual(
+            1.0,
+            supervisor.supervisor_watch_sleep_seconds(restart_decision, config, interval_seconds=120),
+        )
+
+    def test_watch_loop_preserves_backoff_and_short_active_observation(self) -> None:
+        config = SupervisorConfig(repo_root=Path("."), exception_backoff_seconds=7, termination_storm_backoff_seconds=900)
+        exception_decision = supervisor.SupervisorDecision(
+            action="supervisor_exception",
+            reason="contained exception",
+            severity="critical",
+        )
+        breaker_decision = supervisor.SupervisorDecision(
+            action="observe_circuit_breaker",
+            reason="storm backoff remains active",
+            severity="critical",
+        )
+        active_decision = supervisor.SupervisorDecision(
+            action="observe",
+            reason="daemon is actively working in applying_files; defer historical repair decisions",
+            severity="info",
+        )
+        quiet_decision = supervisor.SupervisorDecision(
+            action="observe",
+            reason="nothing requires repair",
+            severity="info",
+        )
+
+        self.assertEqual(
+            7.0,
+            supervisor.supervisor_watch_sleep_seconds(exception_decision, config, interval_seconds=120),
+        )
+        self.assertEqual(
+            900.0,
+            supervisor.supervisor_watch_sleep_seconds(breaker_decision, config, interval_seconds=120),
+        )
+        self.assertEqual(
+            5.0,
+            supervisor.supervisor_watch_sleep_seconds(active_decision, config, interval_seconds=120),
+        )
+        self.assertEqual(
+            120.0,
+            supervisor.supervisor_watch_sleep_seconds(quiet_decision, config, interval_seconds=120),
+        )
+
+    def test_supervisor_process_detects_stale_missing_watchdog(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            daemon_dir = repo / "ppd" / "daemon"
+            daemon_dir.mkdir(parents=True)
+            (daemon_dir / "ppd-supervisor.pid").write_text("99999999\n", encoding="utf-8")
+            (daemon_dir / "ppd-supervisor.child.pid").write_text(f"{os.getpid()}\n", encoding="utf-8")
+
+            self.assertTrue(supervisor.supervisor_process_is_superseded(SupervisorConfig(repo_root=repo)))
+
+    def test_direct_supervisor_process_is_not_superseded_when_it_owns_pid_file(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            daemon_dir = repo / "ppd" / "daemon"
+            daemon_dir.mkdir(parents=True)
+            (daemon_dir / "ppd-supervisor.pid").write_text(f"{os.getpid()}\n", encoding="utf-8")
+
+            self.assertFalse(supervisor.supervisor_process_is_superseded(SupervisorConfig(repo_root=repo)))
+
     def test_completed_board_with_no_eligible_status_plans_next_tasks(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:
             repo = Path(tempdir)
@@ -55,6 +187,46 @@ class SupervisorStaleStatusReplanningTest(unittest.TestCase):
 
         self.assertEqual("plan_next_tasks", decision.action)
         self.assertTrue(decision.should_invoke_codex)
+
+    def test_replenishment_reopens_manual_comprehensive_goal_before_generated_continuation(self) -> None:
+        board = (
+            "## Manual Comprehensive PP&D Goal Handoff Tranche\n\n"
+            "- [!] Task checkbox-462: Add a source-backed PP&D surface registry and taxonomy under ppd/sources that covers public Portland.gov pages, public PDFs, DevHub public entry points, authenticated read-only surfaces, reversible draft surfaces, consequential official actions, local PDF previews, and agent-facing guardrail APIs.\n"
+            "- [!] Task checkbox-463: Add a PP&D source seed manifest and validation that includes the PP&D landing page, online permitting tools overview, DevHub FAQ, DevHub sign-in guide, DevHub submit-permit guide, permit applications index, Single PDF Process, file naming standards, and DevHub portal URL with crawl policy metadata.\n"
+            "- [!] Task checkbox-464: Add a public crawl frontier contract that enforces Portland.gov and DevHub allowlists, robots preflight, bounded retries, content-type decisions, redirect recording, skipped reasons, and no raw body or downloaded-document persistence.\n"
+            "- [!] Task checkbox-465: Add processor-suite archival integration work under ppd/crawler proving PP&D public pages and PDFs hand off to ipfs_datasets_py processor records with archive manifest IDs, content hashes, normalized document IDs, and formal-logic source evidence IDs.\n"
+            "- [!] Task checkbox-466: Add a public PDF and form inventory extractor for PP&D applications, handouts, Single PDF guidance, file naming standards, checklist PDFs, and fillable form metadata without storing downloaded raw documents.\n"
+            "\n## Built-In Source-Backed Execution Continuation Tranche\n\n"
+            "- [x] Task checkbox-490: Add autonomous platform continuation coverage for tranche 4 proving whole-site archival, Playwright draft automation, PDF field filling, and formal-logic outputs stay connected through source evidence IDs.\n"
+        )
+
+        repaired, labels = builtin_replenish_goal_tasks(board)
+
+        self.assertEqual(("checkbox-462", "checkbox-463", "checkbox-464", "checkbox-465"), labels)
+        self.assertIn("- [ ] Task checkbox-462:", repaired)
+        self.assertIn("- [!] Task checkbox-466:", repaired)
+        self.assertIn("Built-In Manual Goal Reopen Notes", repaired)
+        self.assertNotIn("Built-In Source-Backed Execution Continuation Tranche 2", repaired)
+
+    def test_reopened_manual_comprehensive_goal_tasks_have_deterministic_fallbacks(self) -> None:
+        board = (
+            "- [ ] Task checkbox-462: Add a source-backed PP&D surface registry and taxonomy under ppd/sources that covers public Portland.gov pages, public PDFs, DevHub public entry points, authenticated read-only surfaces, reversible draft surfaces, consequential official actions, local PDF previews, and agent-facing guardrail APIs.\n"
+            "- [ ] Task checkbox-463: Add a PP&D source seed manifest and validation that includes the PP&D landing page, online permitting tools overview, DevHub FAQ, DevHub sign-in guide, DevHub submit-permit guide, permit applications index, Single PDF Process, file naming standards, and DevHub portal URL with crawl policy metadata.\n"
+            "- [ ] Task checkbox-464: Add a public crawl frontier contract that enforces Portland.gov and DevHub allowlists, robots preflight, bounded retries, content-type decisions, redirect recording, skipped reasons, and no raw body or downloaded-document persistence.\n"
+            "- [ ] Task checkbox-465: Add processor-suite archival integration work under ppd/crawler proving PP&D public pages and PDFs hand off to ipfs_datasets_py processor records with archive manifest IDs, content hashes, normalized document IDs, and formal-logic source evidence IDs.\n"
+        )
+
+        kinds = [deterministic_task_fallback_kind(task) for task in parse_tasks(board)]
+
+        self.assertEqual(
+            [
+                "surface_registry_taxonomy",
+                "source_seed_manifest",
+                "public_crawl_frontier",
+                "processor_archival_integration",
+            ],
+            kinds,
+        )
 
     def test_completed_execution_capability_board_observes_instead_of_generating_more_platform_tranches(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:
@@ -1051,6 +1223,23 @@ class SupervisorStaleStatusReplanningTest(unittest.TestCase):
         self.assertEqual("supervisor_exception", rows[0]["decision"]["action"])
         self.assertEqual("supervisor_exception", status["proposal"]["failure_kind"])
         self.assertIn("synthetic supervisor crash", status["proposal"]["errors"][0])
+
+    def test_run_once_safely_does_not_swallow_system_exit(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            original_diagnose = supervisor.diagnose
+
+            def exit_diagnose(config: SupervisorConfig) -> supervisor.SupervisorDecision:
+                raise SystemExit(143)
+
+            supervisor.diagnose = exit_diagnose  # type: ignore[assignment]
+            try:
+                with self.assertRaises(SystemExit) as raised:
+                    supervisor.run_once_safely(SupervisorConfig(repo_root=repo))
+            finally:
+                supervisor.diagnose = original_diagnose  # type: ignore[assignment]
+
+        self.assertEqual(143, raised.exception.code)
 
     def test_supervisor_validation_does_not_invoke_nested_repair_pass(self) -> None:
         config = supervisor_daemon_config(SupervisorConfig(repo_root=Path("."), self_heal=True))

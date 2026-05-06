@@ -1,22 +1,42 @@
 {
-  "createdAt": "2026-05-05T16:59:55.176662Z",
+  "createdAt": "2026-05-06T22:16:59.099885Z",
   "decision": {
-    "action": "reconcile_dead_worker_and_restart",
-    "reason": "daemon process is not running but status is still calling_llm on Task checkbox-473: Add a local PDF draft-fill queue that maps public PP&D form-field manifests to redacted user facts, writes only user-controlled preview PDFs, and never uploads, submits, or persists private source documents.; reset the in-progress task before restart",
+    "action": "plan_next_tasks",
+    "reason": "generated blocked-cascade repair budget is exhausted but all generated repair tasks are already parked; review the original PP&D goal and append source-backed deterministic continuation work instead of opening another circuit breaker",
     "severity": "warning"
   },
-  "repairKind": "dead_worker_task_reset",
-  "resetInProgressTaskLabels": [
-    "Add a local PDF draft-fill queue that maps public PP&D form-field manifests to redacted user facts, writes only user-controlled preview PDFs, and never uploads, submits, or persists private source documents."
+  "failedAgenticRepair": {
+    "changedFiles": [],
+    "errors": [],
+    "failureKind": "no_eligible_tasks",
+    "summary": "All currently planned PP&D tasks are complete.",
+    "validationResults": []
+  },
+  "fallbackActions": [
+    "preserve failed repair diagnostics without accepting the invalid patch",
+    "run full PP&D daemon validation before restarting unattended worker attempts",
+    "restart the worker with PPD_LLM_BACKEND=llm_router after fallback validation passes",
+    "keep future retry scope narrow and fixture-first"
+  ],
+  "llmBackend": "llm_router",
+  "repairKind": "builtin_supervisor_fallback",
+  "safetyBoundaries": [
+    "no private DevHub session artifacts",
+    "no raw crawl output",
+    "no downloaded documents",
+    "no browser traces or screenshots",
+    "no consequential DevHub actions"
   ],
   "schemaVersion": 1,
-  "statusBeforeRepair": {
-    "active_state": "calling_llm",
-    "active_state_started_at": "2026-05-05T16:58:25.418157Z",
-    "active_target_task": "Task checkbox-473: Add a local PDF draft-fill queue that maps public PP&D form-field manifests to redacted user facts, writes only user-controlled preview PDFs, and never uploads, submits, or persists private source documents.",
-    "pid": 2322441,
-    "state": "calling_llm",
-    "target_task": "Task checkbox-473: Add a local PDF draft-fill queue that maps public PP&D form-field manifests to redacted user facts, writes only user-controlled preview PDFs, and never uploads, submits, or persists private source documents.",
-    "updated_at": "2026-05-05T16:58:25.418157Z"
+  "taskBoardRepair": {
+    "parkedRepeatedSyntaxLoopTasks": [],
+    "replenishedGoalTaskLabels": [
+      "checkbox-8782",
+      "checkbox-8783",
+      "checkbox-8784",
+      "checkbox-8785"
+    ],
+    "supersededTaskBoardOnlyLabels": [],
+    "taskBoardUpdated": true
   }
 }

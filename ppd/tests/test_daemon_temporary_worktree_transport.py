@@ -13,6 +13,7 @@ from ppd.daemon.ppd_daemon import (
     apply_files_with_validation,
     cleanup_stale_validation_worktrees,
     temporary_validation_worktree,
+    validate_python_sources,
 )
 
 
@@ -196,6 +197,20 @@ class DaemonTemporaryWorktreeTransportTest(unittest.TestCase):
 
             self.assertEqual(["cycle-stale"], removed)
             self.assertFalse(stale.exists())
+
+    def test_python_source_validation_ignores_ephemeral_worktrees(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            make_minimal_repo(repo)
+            (repo / "ppd" / "generated").mkdir()
+            (repo / "ppd" / "generated" / "good.py").write_text("VALUE = 1\n", encoding="utf-8")
+            ephemeral = repo / "ppd" / "daemon" / "worktrees" / "cycle-live" / "ppd" / "generated"
+            ephemeral.mkdir(parents=True)
+            (ephemeral / "bad.py").write_text("if broken syntax\n", encoding="utf-8")
+
+            errors = validate_python_sources(repo)
+
+        self.assertEqual([], errors)
 
     def test_validation_worktree_exposes_processor_suite_metadata(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:

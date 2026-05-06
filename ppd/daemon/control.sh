@@ -158,6 +158,7 @@ write_supervisor_user_unit() {
 [Unit]
 Description=PP&D autonomous supervisor
 After=default.target
+StartLimitIntervalSec=0
 
 [Service]
 Type=simple
@@ -165,14 +166,12 @@ WorkingDirectory=$ROOT
 Environment=PYTHONPATH=ipfs_datasets_py
 Environment=PPD_LLM_BACKEND=llm_router
 Environment=IPFS_DATASETS_PY_CODEX_SANDBOX=read-only
-Environment=PPD_SUPERVISOR_HONOR_TERM=1
-ExecStartPre=/usr/bin/rm -f $SUPERVISOR_PID_FILE.stop $SUPERVISOR_CHILD_PID_FILE
-ExecStart=/usr/bin/bash -lc 'exec python3 ppd/daemon/ppd_supervisor.py --watch --interval 120 --exception-backoff 5 --termination-storm-threshold 8 --termination-storm-backoff 900 --apply --self-heal --restart-daemon --llm-timeout 300 --honor-term >> "$SUPERVISOR_OUT_FILE" 2>&1'
+ExecStartPre=/usr/bin/bash -lc "'$ROOT/ppd/daemon/control.sh' supervisor-cleanup-for-start"
+ExecStart=/usr/bin/bash -lc "exec bash '$WATCHDOG_SCRIPT' supervisor '$SUPERVISOR_PID_FILE' '$SUPERVISOR_CHILD_PID_FILE' '$SUPERVISOR_LIFECYCLE_LOG' 5 env PYTHONPATH=ipfs_datasets_py PPD_LLM_BACKEND=llm_router IPFS_DATASETS_PY_CODEX_SANDBOX=read-only python3 ppd/daemon/ppd_supervisor.py --watch --interval 120 --exception-backoff 5 --termination-storm-threshold 8 --termination-storm-backoff 900 --apply --self-heal --restart-daemon --llm-timeout 300 >> '$SUPERVISOR_OUT_FILE' 2>&1"
 Restart=always
 RestartSec=5
-StartLimitIntervalSec=0
 TimeoutStopSec=20
-KillMode=control-group
+KillMode=process
 
 [Install]
 WantedBy=default.target
@@ -187,7 +186,7 @@ EOF
 
 start_persistent_supervisor_unit() {
   write_supervisor_user_unit
-  rm -f "$SUPERVISOR_CHILD_PID_FILE" "$SUPERVISOR_PID_FILE.stop"
+  rm -f "$SUPERVISOR_PID_FILE.stop"
   systemctl --user reset-failed "$SUPERVISOR_UNIT" >/dev/null 2>&1 || true
   systemctl --user enable "$SUPERVISOR_UNIT" >/dev/null 2>&1 || true
   systemctl --user start "$SUPERVISOR_UNIT"
@@ -211,6 +210,29 @@ process_group_for_pid() {
 process_running() {
   local pid="${1:-}"
   [[ -n "$pid" ]] && ps -p "$pid" >/dev/null 2>&1
+}
+
+print_pid_state() {
+  local label="$1"
+  local pid_file="$2"
+  local pid=""
+
+  echo "$label:"
+  if [[ -f "$pid_file" ]]; then
+    pid="$(cat "$pid_file" 2>/dev/null || true)"
+    if process_running "$pid"; then
+      ps -p "$pid" -o pid,ppid,sid,etime,cmd || true
+    elif [[ -n "$pid" ]]; then
+      echo "  stale pid: $pid"
+    else
+      echo "  stale pid file is empty"
+    fi
+  else
+    echo "  not running; no pid file"
+  fi
+  if [[ -f "$pid_file.stop" ]]; then
+    echo "  stop sentinel present: $pid_file.stop"
+  fi
 }
 
 is_descendant_of() {
@@ -325,12 +347,10 @@ sweep_unwatched_ppd_daemon_children() {
   local pid
   while read -r pid; do
     [[ -z "$pid" ]] && continue
-    if systemd_available && is_systemd_unit_process "$pid" "$DAEMON_UNIT"; then
+    if is_current_managed_child "$pid" "$PID_FILE" "$CHILD_PID_FILE"; then
       continue
     fi
-    if ! is_current_managed_child "$pid" "$PID_FILE" "$CHILD_PID_FILE"; then
-      terminate_process_family "$pid" "Unwatched PP&D daemon"
-    fi
+    terminate_process_family "$pid" "Unwatched PP&D daemon"
   done < <(
     ps -eo pid=,args= |
       awk '/python3 ppd\/daemon\/ppd_daemon.py --apply --watch/ {print $1}'
@@ -341,16 +361,26 @@ sweep_unwatched_ppd_supervisor_children() {
   local pid
   while read -r pid; do
     [[ -z "$pid" ]] && continue
-    if systemd_available && is_systemd_unit_process "$pid" "$SUPERVISOR_UNIT"; then
+    if is_current_managed_child "$pid" "$SUPERVISOR_PID_FILE" "$SUPERVISOR_CHILD_PID_FILE"; then
       continue
     fi
-    if ! is_current_managed_child "$pid" "$SUPERVISOR_PID_FILE" "$SUPERVISOR_CHILD_PID_FILE"; then
-      terminate_process_family "$pid" "Unwatched PP&D supervisor"
-    fi
+    terminate_process_family "$pid" "Unwatched PP&D supervisor"
   done < <(
     ps -eo pid=,args= |
       awk '/python3 ppd\/daemon\/ppd_supervisor.py --watch/ {print $1}'
   )
+}
+
+supervisor_cleanup_for_start() {
+  rm -f "$SUPERVISOR_PID_FILE.stop"
+  sweep_unwatched_ppd_supervisor_children
+  if [[ -f "$SUPERVISOR_CHILD_PID_FILE" ]]; then
+    local child_pid
+    child_pid="$(cat "$SUPERVISOR_CHILD_PID_FILE" 2>/dev/null || true)"
+    if [[ -z "$child_pid" ]] || ! process_running "$child_pid"; then
+      rm -f "$SUPERVISOR_CHILD_PID_FILE"
+    fi
+  fi
 }
 
 start() {
@@ -422,22 +452,12 @@ stop() {
 }
 
 status() {
-  if [[ -f "$PID_FILE" ]]; then
-    local pid
-    pid="$(cat "$PID_FILE")"
-    echo "watchdog:"
-    ps -p "$pid" -o pid,ppid,sid,etime,cmd || true
-  fi
+  print_pid_state "watchdog" "$PID_FILE"
   if systemd_available && systemd_unit_active "$DAEMON_UNIT"; then
     echo "systemd:"
     systemctl --user --no-pager --plain status "$DAEMON_UNIT" | sed -n '1,8p' || true
   fi
-  if [[ -f "$CHILD_PID_FILE" ]]; then
-    local child_pid
-    child_pid="$(cat "$CHILD_PID_FILE")"
-    echo "child:"
-    ps -p "$child_pid" -o pid,ppid,sid,etime,cmd || true
-  fi
+  print_pid_state "child" "$CHILD_PID_FILE"
   if [[ -f "$STATUS_FILE" ]]; then
     cat "$STATUS_FILE"
   fi
@@ -526,18 +546,10 @@ supervisor_status() {
     fi
     echo "systemd:"
     systemctl --user --no-pager --plain status "$SUPERVISOR_UNIT" | sed -n '1,8p' || true
-  elif [[ -f "$SUPERVISOR_PID_FILE" ]]; then
-    local pid
-    pid="$(cat "$SUPERVISOR_PID_FILE")"
-    echo "supervisor:"
-    ps -p "$pid" -o pid,ppid,sid,etime,cmd || true
+  else
+    print_pid_state "supervisor" "$SUPERVISOR_PID_FILE"
   fi
-  if [[ -f "$SUPERVISOR_CHILD_PID_FILE" ]]; then
-    local child_pid
-    child_pid="$(cat "$SUPERVISOR_CHILD_PID_FILE")"
-    echo "child:"
-    ps -p "$child_pid" -o pid,ppid,sid,etime,cmd || true
-  fi
+  print_pid_state "child" "$SUPERVISOR_CHILD_PID_FILE"
   if [[ -f "$SUPERVISOR_STATUS_FILE" ]]; then
     cat "$SUPERVISOR_STATUS_FILE"
   fi
@@ -558,10 +570,11 @@ case "${1:-status}" in
   supervisor-start) supervisor_start ;;
   supervisor-stop) supervisor_stop ;;
   supervisor-restart) supervisor_stop; supervisor_start ;;
+  supervisor-cleanup-for-start) supervisor_cleanup_for_start ;;
   supervisor-status) supervisor_status ;;
   supervisor-logs) tail -f "$SUPERVISOR_OUT_FILE" ;;
   *)
-    echo "Usage: $0 {start|stop|restart|status|logs|doctor|supervisor-start|supervisor-stop|supervisor-restart|supervisor-status|supervisor-logs}" >&2
+    echo "Usage: $0 {start|stop|restart|status|logs|doctor|supervisor-start|supervisor-stop|supervisor-restart|supervisor-cleanup-for-start|supervisor-status|supervisor-logs}" >&2
     exit 2
     ;;
 esac

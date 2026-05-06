@@ -625,9 +625,14 @@ def validate_python_sources(repo_root: Path) -> list[str]:
     for path in sorted((repo_root / "ppd").rglob("*.py")):
         if "__pycache__" in path.parts:
             continue
+        rel_parts = path.relative_to(repo_root / "ppd").parts
+        if len(rel_parts) >= 3 and rel_parts[:2] == ("daemon", "worktrees"):
+            continue
         rel = path.relative_to(repo_root).as_posix()
         try:
             py_compile.compile(str(path), doraise=True)
+        except FileNotFoundError:
+            continue
         except py_compile.PyCompileError as exc:
             errors.append(f"{rel} failed py_compile: {compact_message(exc.msg, limit=500)}")
     return errors

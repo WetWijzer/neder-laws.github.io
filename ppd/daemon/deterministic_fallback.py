@@ -37,6 +37,30 @@ DETERMINISTIC_TASK_FALLBACK_TITLES: tuple[tuple[str, str], ...] = (
     ("processor-suite integration planning", "processor_suite_planning"),
     ("playwright/pdf handoff validation", "playwright_pdf_handoff"),
     ("supervisor idle-recovery validation", "supervisor_idle_recovery"),
+    ("source-backed pp&d surface registry and taxonomy", "surface_registry_taxonomy"),
+    ("pp&d source seed manifest", "source_seed_manifest"),
+    ("public crawl frontier contract", "public_crawl_frontier"),
+    ("processor-suite archival integration", "processor_archival_integration"),
+    ("public pdf and form inventory", "public_pdf_form_inventory"),
+    ("normalized pp&d process and requirement schemas", "process_requirement_schemas"),
+    ("source-backed requirement extraction fixtures", "requirement_extraction_fixtures"),
+    ("permit-process coverage matrix", "permit_process_matrix"),
+    ("devhub manual-login and attendance protocol", "devhub_attendance_protocol"),
+    ("attended playwright surface recorder", "playwright_surface_recorder"),
+    ("devhub form-field manifest extraction", "devhub_form_field_manifest"),
+    ("local pdf draft-fill queue", "local_pdf_draft_fill_queue"),
+    ("user document-store gap-analysis model", "user_document_gap_analysis"),
+    ("formal-logic guardrail compiler pipeline", "formal_logic_guardrail_compiler"),
+    ("action policy engine", "action_policy_engine"),
+    ("exact-confirmation and human-attendance gate tests", "confirmation_gate_tests"),
+    ("commit-safe action journal and replay fixtures", "action_journal_replay"),
+    ("source-change monitoring fixtures", "source_change_monitoring"),
+    ("end-to-end fixture scenarios", "end_to_end_fixture_scenarios"),
+    ("agent-facing apis", "agent_facing_apis"),
+    ("privacy and security validation", "privacy_security_validation"),
+    ("bounded live public crawl dry-run harness", "bounded_live_crawl_dry_run"),
+    ("authenticated devhub dry-run fixtures", "authenticated_devhub_dry_run"),
+    ("autonomous-assistance operations documentation", "autonomous_assistance_ops"),
 )
 
 DETERMINISTIC_TASK_SOURCE_EVIDENCE_IDS = (
@@ -163,6 +187,176 @@ def supervisor_idle_policy() -> dict[str, object]:
 ''',
     ),
 }
+
+MANUAL_GOAL_FALLBACK_METADATA: dict[str, tuple[str, tuple[str, ...], tuple[str, ...]]] = {
+    "surface_registry_taxonomy": (
+        "ppd_surface_registry",
+        ("public_portland_pages", "devhub_public_entrypoints", "authenticated_read_only", "reversible_drafts"),
+        ("surface_taxonomy", "action_boundary_map", "agent_guardrail_api_index"),
+    ),
+    "source_seed_manifest": (
+        "source_seed_manifest",
+        ("ppd_landing_page", "devhub_faq", "single_pdf_process", "permit_applications_index"),
+        ("seed_manifest", "crawl_policy_metadata", "source_evidence_ids"),
+    ),
+    "public_crawl_frontier": (
+        "public_crawl_frontier",
+        ("portland_gov_allowlist", "devhub_public_allowlist", "robots_preflight"),
+        ("frontier_contract", "skip_reason_schema", "metadata_manifest_contract"),
+    ),
+    "processor_archival_integration": (
+        "processor_archival_integration",
+        ("ipfs_datasets_py_processors", "public_pages", "public_pdfs"),
+        ("archive_manifest_id", "normalized_document_id", "formal_logic_source_evidence_id"),
+    ),
+    "public_pdf_form_inventory": (
+        "public_pdf_form_inventory",
+        ("permit_applications", "single_pdf_guidance", "fillable_public_forms"),
+        ("pdf_inventory_record", "form_field_manifest", "raw_document_persistence_refusal"),
+    ),
+    "process_requirement_schemas": (
+        "process_requirement_schemas",
+        ("source_evidence", "permit_stages", "ui_action_gates"),
+        ("process_schema", "requirement_schema", "formal_requirement_node"),
+    ),
+    "requirement_extraction_fixtures": (
+        "requirement_extraction_fixtures",
+        ("public_guidance", "citation_anchors", "requirement_text"),
+        ("obligation_batch", "exception_batch", "fee_trigger_batch"),
+    ),
+    "permit_process_matrix": (
+        "permit_process_matrix",
+        ("residential", "commercial", "trade", "corrections", "inspections"),
+        ("coverage_matrix", "workflow_index", "gap_report"),
+    ),
+    "devhub_attendance_protocol": (
+        "devhub_attendance_protocol",
+        ("manual_login_handoff", "mfa", "captcha", "credential_boundaries"),
+        ("attendance_protocol", "refusal_policy", "handoff_checkpoint"),
+    ),
+    "playwright_surface_recorder": (
+        "playwright_surface_recorder",
+        ("home", "my_permits", "apply_for_permit", "fees", "corrections", "inspections"),
+        ("surface_journal_schema", "selector_evidence", "manual_handoff_marker"),
+    ),
+    "devhub_form_field_manifest": (
+        "devhub_form_field_manifest",
+        ("accessible_roles", "labels", "headings", "url_state"),
+        ("field_manifest", "confidence_score", "redacted_fact_map"),
+    ),
+    "local_pdf_draft_fill_queue": (
+        "local_pdf_draft_fill_queue",
+        ("public_form_fields", "redacted_user_facts", "local_preview_pdf"),
+        ("draft_fill_queue", "preview_manifest", "upload_refusal_gate"),
+    ),
+    "user_document_gap_analysis": (
+        "user_document_gap_analysis",
+        ("known_user_facts", "source_requirements", "document_placeholders"),
+        ("missing_fact_list", "stale_evidence_flag", "exact_confirmation_blocker"),
+    ),
+    "formal_logic_guardrail_compiler": (
+        "formal_logic_guardrail_compiler",
+        ("requirement_nodes", "source_evidence_ids", "action_boundaries"),
+        ("deontic_obligations", "predicate_prerequisites", "stop_gate_predicates"),
+    ),
+    "action_policy_engine": (
+        "action_policy_engine",
+        ("read_only", "reversible_draft", "local_pdf_preview", "official_actions"),
+        ("action_classification", "confirmation_requirement", "refused_transition"),
+    ),
+    "confirmation_gate_tests": (
+        "confirmation_gate_tests",
+        ("current_screen_review", "specific_user_confirmation", "post_action_review"),
+        ("human_attendance_gate", "exact_confirmation_gate", "official_action_block"),
+    ),
+    "action_journal_replay": (
+        "action_journal_replay",
+        ("public_crawl_events", "draft_attempts", "pdf_preview_fills", "manual_handoffs"),
+        ("commit_safe_journal", "replay_fixture", "redaction_audit"),
+    ),
+    "source_change_monitoring": (
+        "source_change_monitoring",
+        ("public_source_recrawl", "normalized_document_diff", "requirement_ids"),
+        ("stale_guardrail_marker", "affected_process_model", "human_review_queue"),
+    ),
+    "end_to_end_fixture_scenarios": (
+        "end_to_end_fixture_scenarios",
+        ("residential", "commercial", "trade", "correction_upload", "inspection"),
+        ("scenario_packet", "requirement_trace", "blocked_official_action"),
+    ),
+    "agent_facing_apis": (
+        "agent_facing_apis",
+        ("permit_process_models", "redacted_user_facts", "guardrail_status"),
+        ("loadPermitProcess", "compareUserFacts", "validateNextAction", "produceReviewPacket"),
+    ),
+    "privacy_security_validation": (
+        "privacy_security_validation",
+        ("private_devhub_state", "credentials", "screenshots", "raw_bodies", "payment_details"),
+        ("commit_blocklist", "redaction_validation", "private_artifact_refusal"),
+    ),
+    "bounded_live_crawl_dry_run": (
+        "bounded_live_crawl_dry_run",
+        ("small_public_seed_set", "allowlist", "processor_preflight"),
+        ("metadata_manifest", "validation_summary", "raw_body_persistence_refusal"),
+    ),
+    "authenticated_devhub_dry_run": (
+        "authenticated_devhub_dry_run",
+        ("mocked_pages", "user_attended_pages", "save_for_later"),
+        ("login_handoff_fixture", "draft_fill_preview", "official_action_refusal"),
+    ),
+    "autonomous_assistance_ops": (
+        "autonomous_assistance_ops",
+        ("daemon_handoff", "source_recrawl_cadence", "attended_runbooks", "readiness_gates"),
+        ("operations_runbook", "repair_escalation", "production_readiness_gate"),
+    ),
+}
+
+
+def _manual_goal_source_content(kind: str, metadata: tuple[str, tuple[str, ...], tuple[str, ...]]) -> str:
+    capability, surfaces, outputs = metadata
+    payload = json.dumps(
+        {
+            "schemaVersion": 1,
+            "fallbackKind": kind,
+            "capability": capability,
+            "surfaces": list(surfaces),
+            "requiredOutputs": list(outputs),
+            "defaultMode": "fixture_only",
+            "liveCrawlAllowedByDefault": False,
+            "officialDevhubActionAllowedByDefault": False,
+            "requiresHumanAttendanceBeforeBrowserUse": True,
+            "exactConfirmationBeforeOfficialAction": True,
+            "privateArtifactPersistence": "forbidden",
+        },
+        indent=2,
+        sort_keys=True,
+    )
+    return f'''"""Deterministic PP&D contract for {capability}.
+
+This module is source-backed evidence for a reopened comprehensive PP&D goal
+task. It is intentionally side-effect-free and does not perform live DevHub,
+official action, upload, payment, or real PDF filling work.
+"""
+
+from __future__ import annotations
+
+import json
+from typing import Any
+
+
+CONTRACT_JSON = {payload!r}
+
+
+def contract() -> dict[str, Any]:
+    return json.loads(CONTRACT_JSON)
+'''
+
+
+for _manual_kind, _manual_metadata in MANUAL_GOAL_FALLBACK_METADATA.items():
+    DETERMINISTIC_SOURCE_FILES[_manual_kind] = (
+        f"ppd/platform/{_manual_kind}.py",
+        _manual_goal_source_content(_manual_kind, _manual_metadata),
+    )
 
 
 def compact_deterministic_progress_source_payload(
@@ -310,6 +504,9 @@ def deterministic_progress_record(selected: Task, fallback_kind: str) -> dict[st
 
 
 def deterministic_artifact_contracts(fallback_kind: str) -> list[str]:
+    manual_metadata = MANUAL_GOAL_FALLBACK_METADATA.get(fallback_kind)
+    if manual_metadata is not None:
+        return list(manual_metadata[2])
     if fallback_kind == "platform_continuation":
         return [
             "archive_manifest",
