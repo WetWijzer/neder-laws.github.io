@@ -18,6 +18,10 @@ mkdir -p "$(dirname "$PID_FILE")" "$(dirname "$CHILD_PID_FILE")" "$(dirname "$LI
 
 child_pid=""
 
+should_honor_signal() {
+  [[ "${PPD_WATCHDOG_HONOR_TERM:-0}" == "1" ]]
+}
+
 utc_now() {
   date -u '+%Y-%m-%dT%H:%M:%SZ'
 }
@@ -129,6 +133,10 @@ cleanup() {
 handle_signal() {
   local signal_name="$1"
   if [[ -f "$STOP_FILE" ]]; then
+    cleanup
+  fi
+  if should_honor_signal; then
+    append_event "watchdog_signal_honored" "" "" "${child_pid:-0}" 0 "" "honored ${signal_name}; managed watchdog mode enabled"
     cleanup
   fi
   append_event "watchdog_signal_ignored" "" "" "${child_pid:-0}" 0 "" "ignored ${signal_name}; stop sentinel was absent"

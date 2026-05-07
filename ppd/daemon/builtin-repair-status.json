@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-05-07T00:12:18.779012Z",
+  "createdAt": "2026-05-07T01:05:22.927418Z",
   "decision": {
     "action": "plan_next_tasks",
     "reason": "generated blocked-cascade repair budget is exhausted but all generated repair tasks are already parked; review the original PP&D goal and append source-backed deterministic continuation work instead of opening another circuit breaker",
@@ -31,10 +31,10 @@
   "taskBoardRepair": {
     "parkedRepeatedSyntaxLoopTasks": [],
     "replenishedGoalTaskLabels": [
-      "checkbox-9322",
-      "checkbox-9323",
-      "checkbox-9324",
-      "checkbox-9325"
+      "checkbox-9346",
+      "checkbox-9347",
+      "checkbox-9348",
+      "checkbox-9349"
     ],
     "supersededTaskBoardOnlyLabels": [],
     "taskBoardUpdated": true

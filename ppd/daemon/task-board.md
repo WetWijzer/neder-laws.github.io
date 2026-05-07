@@ -94,12 +94,12 @@ This board is the controlling backlog for the isolated PP&D daemon. The daemon s
 <!-- ppd-daemon-task-board:start -->
 ## Generated Status
 
-Last updated: 2026-05-07T00:12:42.286894Z
+Last updated: 2026-05-07T01:07:04.965326Z
 
-- Latest target: `Task checkbox-9323: Add processor-suite integration planning for tranche 2212 proving PP&D public documents flow through archive manifests, normalized document records, PDF metadata, and requirement batches before agents use them.`
+- Latest target: `Task checkbox-9349: Add supervisor idle-recovery validation for tranche 2218 proving completed boards synthesize new goal-aligned platform tasks without sleeping, duplicate tranche reuse, or blocked-task retry churn.`
 - Latest result: `accepted`
-- Latest summary: Complete processor suite planning with deterministic PP&D fallback.
-- Counts: `{"blocked": 202, "complete": 8947, "in_progress": 0, "needed": 2}`
+- Latest summary: Complete supervisor idle recovery with deterministic PP&D fallback.
+- Counts: `{"blocked": 202, "complete": 8973, "in_progress": 0, "needed": 0}`
 
 <!-- ppd-daemon-task-board:end -->
 ## Built-In Supervisor Repair Notes
@@ -25688,9 +25688,75 @@ Last updated: 2026-05-07T00:12:42.286894Z
 
 - [x] Task checkbox-9322: Add autonomous platform continuation coverage for tranche 2212 proving whole-site archival, Playwright draft automation, PDF field filling, and formal-logic outputs stay connected through source evidence IDs.
 - [x] Task checkbox-9323: Add processor-suite integration planning for tranche 2212 proving PP&D public documents flow through archive manifests, normalized document records, PDF metadata, and requirement batches before agents use them.
-- [~] Task checkbox-9324: Add Playwright/PDF handoff validation for tranche 2212 proving redacted user facts can fill draft fields and PDF previews while official DevHub transitions stay behind exact confirmation checkpoints.
-- [ ] Task checkbox-9325: Add supervisor idle-recovery validation for tranche 2212 proving completed boards synthesize new goal-aligned platform tasks without sleeping, duplicate tranche reuse, or blocked-task retry churn.
+- [x] Task checkbox-9324: Add Playwright/PDF handoff validation for tranche 2212 proving redacted user facts can fill draft fields and PDF previews while official DevHub transitions stay behind exact confirmation checkpoints.
+- [x] Task checkbox-9325: Add supervisor idle-recovery validation for tranche 2212 proving completed boards synthesize new goal-aligned platform tasks without sleeping, duplicate tranche reuse, or blocked-task retry churn.
 ## Built-In Supervisor Planning Notes
 
 - The supervisor found no selectable work after generated blocked-cascade tasks were already parked. It appended source-backed deterministic continuation tasks instead of opening another generated repair tranche or sleeping on a historical circuit breaker.
 - Slice policy: `source_backed_execution_continuation_2212`. These tasks are matched by deterministic daemon fallbacks and keep progress inside public archival, processor handoff, attended Playwright/PDF planning, formal-logic, and idle-recovery contracts.
+
+## Built-In Source-Backed Execution Continuation Tranche 2213
+
+- [x] Task checkbox-9326: Add autonomous platform continuation coverage for tranche 2213 proving whole-site archival, Playwright draft automation, PDF field filling, and formal-logic outputs stay connected through source evidence IDs.
+- [x] Task checkbox-9327: Add processor-suite integration planning for tranche 2213 proving PP&D public documents flow through archive manifests, normalized document records, PDF metadata, and requirement batches before agents use them.
+- [x] Task checkbox-9328: Add Playwright/PDF handoff validation for tranche 2213 proving redacted user facts can fill draft fields and PDF previews while official DevHub transitions stay behind exact confirmation checkpoints.
+- [x] Task checkbox-9329: Add supervisor idle-recovery validation for tranche 2213 proving completed boards synthesize new goal-aligned platform tasks without sleeping, duplicate tranche reuse, or blocked-task retry churn.
+## Built-In Supervisor Planning Notes
+
+- The supervisor found no selectable work after generated blocked-cascade tasks were already parked. It appended source-backed deterministic continuation tasks instead of opening another generated repair tranche or sleeping on a historical circuit breaker.
+- Slice policy: `source_backed_execution_continuation_2213`. These tasks are matched by deterministic daemon fallbacks and keep progress inside public archival, processor handoff, attended Playwright/PDF planning, formal-logic, and idle-recovery contracts.
+
+## Built-In Source-Backed Execution Continuation Tranche 2214
+
+- [x] Task checkbox-9330: Add autonomous platform continuation coverage for tranche 2214 proving whole-site archival, Playwright draft automation, PDF field filling, and formal-logic outputs stay connected through source evidence IDs.
+- [x] Task checkbox-9331: Add processor-suite integration planning for tranche 2214 proving PP&D public documents flow through archive manifests, normalized document records, PDF metadata, and requirement batches before agents use them.
+- [x] Task checkbox-9332: Add Playwright/PDF handoff validation for tranche 2214 proving redacted user facts can fill draft fields and PDF previews while official DevHub transitions stay behind exact confirmation checkpoints.
+- [x] Task checkbox-9333: Add supervisor idle-recovery validation for tranche 2214 proving completed boards synthesize new goal-aligned platform tasks without sleeping, duplicate tranche reuse, or blocked-task retry churn.
+## Built-In Supervisor Planning Notes
+
+- The supervisor found no selectable work after generated blocked-cascade tasks were already parked. It appended source-backed deterministic continuation tasks instead of opening another generated repair tranche or sleeping on a historical circuit breaker.
+- Slice policy: `source_backed_execution_continuation_2214`. These tasks are matched by deterministic daemon fallbacks and keep progress inside public archival, processor handoff, attended Playwright/PDF planning, formal-logic, and idle-recovery contracts.
+
+## Built-In Source-Backed Execution Continuation Tranche 2215
+
+- [x] Task checkbox-9334: Add autonomous platform continuation coverage for tranche 2215 proving whole-site archival, Playwright draft automation, PDF field filling, and formal-logic outputs stay connected through source evidence IDs.
+- [x] Task checkbox-9335: Add processor-suite integration planning for tranche 2215 proving PP&D public documents flow through archive manifests, normalized document records, PDF metadata, and requirement batches before agents use them.
+- [x] Task checkbox-9336: Add Playwright/PDF handoff validation for tranche 2215 proving redacted user facts can fill draft fields and PDF previews while official DevHub transitions stay behind exact confirmation checkpoints.
+- [x] Task checkbox-9337: Add supervisor idle-recovery validation for tranche 2215 proving completed boards synthesize new goal-aligned platform tasks without sleeping, duplicate tranche reuse, or blocked-task retry churn.
+## Built-In Supervisor Planning Notes
+
+- The supervisor found no selectable work after generated blocked-cascade tasks were already parked. It appended source-backed deterministic continuation tasks instead of opening another generated repair tranche or sleeping on a historical circuit breaker.
+- Slice policy: `source_backed_execution_continuation_2215`. These tasks are matched by deterministic daemon fallbacks and keep progress inside public archival, processor handoff, attended Playwright/PDF planning, formal-logic, and idle-recovery contracts.
+
+## Built-In Source-Backed Execution Continuation Tranche 2216
+
+- [x] Task checkbox-9338: Add autonomous platform continuation coverage for tranche 2216 proving whole-site archival, Playwright draft automation, PDF field filling, and formal-logic outputs stay connected through source evidence IDs.
+- [x] Task checkbox-9339: Add processor-suite integration planning for tranche 2216 proving PP&D public documents flow through archive manifests, normalized document records, PDF metadata, and requirement batches before agents use them.
+- [x] Task checkbox-9340: Add Playwright/PDF handoff validation for tranche 2216 proving redacted user facts can fill draft fields and PDF previews while official DevHub transitions stay behind exact confirmation checkpoints.
+- [x] Task checkbox-9341: Add supervisor idle-recovery validation for tranche 2216 proving completed boards synthesize new goal-aligned platform tasks without sleeping, duplicate tranche reuse, or blocked-task retry churn.
+## Built-In Supervisor Planning Notes
+
+- The supervisor found no selectable work after generated blocked-cascade tasks were already parked. It appended source-backed deterministic continuation tasks instead of opening another generated repair tranche or sleeping on a historical circuit breaker.
+- Slice policy: `source_backed_execution_continuation_2216`. These tasks are matched by deterministic daemon fallbacks and keep progress inside public archival, processor handoff, attended Playwright/PDF planning, formal-logic, and idle-recovery contracts.
+
+## Built-In Source-Backed Execution Continuation Tranche 2217
+
+- [x] Task checkbox-9342: Add autonomous platform continuation coverage for tranche 2217 proving whole-site archival, Playwright draft automation, PDF field filling, and formal-logic outputs stay connected through source evidence IDs.
+- [x] Task checkbox-9343: Add processor-suite integration planning for tranche 2217 proving PP&D public documents flow through archive manifests, normalized document records, PDF metadata, and requirement batches before agents use them.
+- [x] Task checkbox-9344: Add Playwright/PDF handoff validation for tranche 2217 proving redacted user facts can fill draft fields and PDF previews while official DevHub transitions stay behind exact confirmation checkpoints.
+- [x] Task checkbox-9345: Add supervisor idle-recovery validation for tranche 2217 proving completed boards synthesize new goal-aligned platform tasks without sleeping, duplicate tranche reuse, or blocked-task retry churn.
+## Built-In Supervisor Planning Notes
+
+- The supervisor found no selectable work after generated blocked-cascade tasks were already parked. It appended source-backed deterministic continuation tasks instead of opening another generated repair tranche or sleeping on a historical circuit breaker.
+- Slice policy: `source_backed_execution_continuation_2217`. These tasks are matched by deterministic daemon fallbacks and keep progress inside public archival, processor handoff, attended Playwright/PDF planning, formal-logic, and idle-recovery contracts.
+
+## Built-In Source-Backed Execution Continuation Tranche 2218
+
+- [x] Task checkbox-9346: Add autonomous platform continuation coverage for tranche 2218 proving whole-site archival, Playwright draft automation, PDF field filling, and formal-logic outputs stay connected through source evidence IDs.
+- [x] Task checkbox-9347: Add processor-suite integration planning for tranche 2218 proving PP&D public documents flow through archive manifests, normalized document records, PDF metadata, and requirement batches before agents use them.
+- [x] Task checkbox-9348: Add Playwright/PDF handoff validation for tranche 2218 proving redacted user facts can fill draft fields and PDF previews while official DevHub transitions stay behind exact confirmation checkpoints.
+- [x] Task checkbox-9349: Add supervisor idle-recovery validation for tranche 2218 proving completed boards synthesize new goal-aligned platform tasks without sleeping, duplicate tranche reuse, or blocked-task retry churn.
+## Built-In Supervisor Planning Notes
+
+- The supervisor found no selectable work after generated blocked-cascade tasks were already parked. It appended source-backed deterministic continuation tasks instead of opening another generated repair tranche or sleeping on a historical circuit breaker.
+- Slice policy: `source_backed_execution_continuation_2218`. These tasks are matched by deterministic daemon fallbacks and keep progress inside public archival, processor handoff, attended Playwright/PDF planning, formal-logic, and idle-recovery contracts.
