@@ -1,46 +1,87 @@
+from __future__ import annotations
+
 import json
-from datetime import datetime, timezone
+from dataclasses import dataclass
 from pathlib import Path
+from typing import Iterable, List
 
 
-FIXTURE_PATH = Path(__file__).parent / "fixtures" / "blocked_cascade" / "tranche5_item2.json"
+@dataclass(frozen=True)
+class BlockedWork:
+    item_id: str
+    blocked_by: str
+    blocked_at_generation: int
 
 
-def _parse_instant(value):
-    return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(timezone.utc)
+@dataclass(frozen=True)
+class DaemonRepair:
+    repair_id: str
+    target: str
+    issued_at_generation: int
+    validated: bool
 
 
-def _fresh_validated_daemon_repair(blocked_task, repair_attempts):
-    blocked_at = _parse_instant(blocked_task["blocked_at"])
-    for repair in repair_attempts:
-        if repair.get("kind") != "daemon-repair":
-            continue
-        if not repair.get("validated", False):
-            continue
-        if _parse_instant(repair["created_at"]) > blocked_at:
-            return repair
-    return None
+def _fixture_path() -> Path:
+    return Path(__file__).parent / "fixtures" / "blocked_cascade" / "tranche_13_item_3.json"
 
 
-def _blocked_task_state(blocked_task, repair_attempts):
-    repair = _fresh_validated_daemon_repair(blocked_task, repair_attempts)
-    if repair is None:
-        return "parked"
-    return "repair-validated"
+def _load_fixture() -> tuple[BlockedWork, List[DaemonRepair]]:
+    payload = json.loads(_fixture_path().read_text(encoding="utf-8"))
+    blocked = payload["blocked_work"]
+    repairs = payload["repairs"]
+    return (
+        BlockedWork(
+            item_id=blocked["id"],
+            blocked_by=blocked["blocked_by"],
+            blocked_at_generation=blocked["blocked_at_generation"],
+        ),
+        [
+            DaemonRepair(
+                repair_id=repair["id"],
+                target=repair["target"],
+                issued_at_generation=repair["issued_at_generation"],
+                validated=repair["validated"],
+            )
+            for repair in repairs
+        ],
+    )
 
 
-def test_blocked_ppd_work_stays_parked_without_fresh_validated_daemon_repair():
-    fixture = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
-    blocked_task = fixture["blocked_task"]
-    stale_or_failed_repairs = fixture["repair_attempts"][:2]
+def _is_fresh_validating_repair(blocked: BlockedWork, repair: DaemonRepair) -> bool:
+    return (
+        repair.target == blocked.blocked_by
+        and repair.issued_at_generation > blocked.blocked_at_generation
+        and repair.validated
+    )
 
-    assert _blocked_task_state(blocked_task, stale_or_failed_repairs) == "parked"
+
+def _is_still_parked(blocked: BlockedWork, repairs: Iterable[DaemonRepair]) -> bool:
+    return not any(_is_fresh_validating_repair(blocked, repair) for repair in repairs)
 
 
-def test_blocked_ppd_work_unparks_after_fresh_validated_daemon_repair():
-    fixture = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
-    blocked_task = fixture["blocked_task"]
-    repair_attempts = fixture["repair_attempts"]
+def test_blocked_ppd_work_stays_parked_until_fresh_daemon_repair_validates() -> None:
+    blocked, repairs = _load_fixture()
 
-    assert _blocked_task_state(blocked_task, repair_attempts) == "repair-validated"
-    assert _fresh_validated_daemon_repair(blocked_task, repair_attempts)["id"] == "repair-fresh-valid"
+    assert blocked.item_id == "ppd-work-tranche-13-item-3"
+    assert _is_still_parked(blocked, [])
+    assert _is_still_parked(blocked, repairs[:1])
+    assert _is_still_parked(blocked, repairs[:2])
+    assert not _is_still_parked(blocked, repairs)
+
+
+def test_stale_validated_repair_is_not_enough_to_unpark_blocked_work() -> None:
+    blocked, repairs = _load_fixture()
+    stale_repair = repairs[0]
+
+    assert stale_repair.validated
+    assert stale_repair.issued_at_generation == blocked.blocked_at_generation
+    assert not _is_fresh_validating_repair(blocked, stale_repair)
+
+
+def test_fresh_unvalidated_repair_is_not_enough_to_unpark_blocked_work() -> None:
+    blocked, repairs = _load_fixture()
+    failed_repair = repairs[1]
+
+    assert failed_repair.issued_at_generation > blocked.blocked_at_generation
+    assert not failed_repair.validated
+    assert not _is_fresh_validating_repair(blocked, failed_repair)

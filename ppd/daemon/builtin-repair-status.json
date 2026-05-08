@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-05-08T21:38:02.933482Z",
+  "createdAt": "2026-05-08T21:58:28.494028Z",
   "decision": {
     "action": "reconcile_blocked_cascade_and_restart",
     "reason": "all selectable PP&D tasks are blocked after repeated daemon recovery attempts; append deterministic daemon-repair tasks before retrying blocked domain work",
