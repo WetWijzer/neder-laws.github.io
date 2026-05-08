@@ -11,6 +11,7 @@ class ClientLLMWorkerService {
   private currentModel = LLM_CONFIG.CLIENT_MODEL;
   private capabilities = { webGPU: false, simd: false };
   private backgroundWarmupPromise: Promise<void> | null = null;
+  private localGenerationUnhealthy = false;
 
   constructor() {
     this.initializeWorker();
@@ -172,9 +173,11 @@ class ClientLLMWorkerService {
 
     try {
       const result = await this.sendWorkerRequest('generate', { prompt, maxTokens });
+      this.localGenerationUnhealthy = false;
       return result.text;
     } catch (error) {
       console.error('Text generation failed:', error);
+      this.localGenerationUnhealthy = true;
       if (openRouterLLMService.isConfigured()) {
         console.warn('Using OpenRouter fallback after local generation failure');
         return openRouterLLMService.generateText(prompt, {
@@ -239,6 +242,10 @@ class ClientLLMWorkerService {
     }
 
     if (this.capabilities.webGPU === false) {
+      return true;
+    }
+
+    if (this.localGenerationUnhealthy) {
       return true;
     }
 

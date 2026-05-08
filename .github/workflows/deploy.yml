@@ -42,6 +42,20 @@ jobs:
         uses: actions/configure-pages@v5
         with:
           enablement: true
+      - name: Validate OpenRouter proxy config
+        run: |
+          if [ -z "$VITE_OPENROUTER_BASE_URL" ]; then
+            echo "::error::Missing GitHub Actions repository variable VITE_OPENROUTER_BASE_URL. Set it to https://<your-vercel-app>.vercel.app/api/openrouter before deploying GitHub Pages."
+            exit 1
+          fi
+          case "$VITE_OPENROUTER_BASE_URL" in
+            *openrouter.ai*)
+              echo "::error::VITE_OPENROUTER_BASE_URL must point to the serverless proxy, not directly to OpenRouter."
+              exit 1
+              ;;
+          esac
+        env:
+          VITE_OPENROUTER_BASE_URL: ${{ vars.VITE_OPENROUTER_BASE_URL }}
       - name: Build
         run: npx vite build
         env:

@@ -18,7 +18,13 @@ from ipfs_datasets_py.optimizers.todo_daemon.task_board import (
     update_generated_status_block as update_todo_generated_status_block,
 )
 
-from ppd.daemon.failure_policy import has_llm_termination_block, pre_llm_block_decision
+from ppd.daemon.failure_policy import (
+    has_llm_termination_block_for_failures,
+    llm_termination_failure_count_from_failures,
+    pre_llm_block_decision_for_failures,
+    read_result_and_diagnostic_log,
+    recent_task_failures_from_records,
+)
 
 
 CHECKBOX_RE = re.compile(r"^(?P<prefix>\s*-\s+\[)(?P<mark>[ xX~!])(?P<suffix>\]\s+)(?P<title>.+)$")
@@ -66,26 +72,42 @@ def select_task_for_config(tasks: Iterable[Task], config: Any) -> Optional[Task]
         return selected
     if not config.revisit_blocked:
         return None
+    records = read_result_and_diagnostic_log(config.resolve(config.result_log))
+    if getattr(config, "revisit_blocked_reassess_llm_termination_gates", False):
+        reassessment_candidates = []
+        for task in task_list:
+            if task.status != "blocked":
+                continue
+            if task.checkbox_id in PROTECTED_BLOCKED_REVISIT_CHECKBOX_IDS:
+                continue
+            failures = recent_task_failures_from_records(records, task.label, limit=100)
+            llm_termination_count = llm_termination_failure_count_from_failures(failures)
+            reassessment_candidates.append((llm_termination_count, task.checkbox_id, task))
+        if reassessment_candidates:
+            return min(reassessment_candidates, key=lambda item: (item[0], item[1]))[2]
     for task in task_list:
         if task.status != "blocked":
             continue
         if task.checkbox_id in PROTECTED_BLOCKED_REVISIT_CHECKBOX_IDS:
             continue
         try:
+            failures = recent_task_failures_from_records(records, task.label, limit=100)
             if (
                 getattr(config, "revisit_blocked_ignore_failure_gates", False)
-                and has_llm_termination_block(config, task.label)
+                and not getattr(config, "revisit_blocked_reassess_llm_termination_gates", False)
+                and has_llm_termination_block_for_failures(config, failures)
             ):
                 continue
-            block_decision = pre_llm_block_decision(config, task.label)
+            block_decision = pre_llm_block_decision_for_failures(config, failures)
         except Exception:
             if getattr(config, "revisit_blocked_ignore_failure_gates", False):
                 return task
             continue
         if block_decision is not None:
-            if (
-                getattr(config, "revisit_blocked_ignore_failure_gates", False)
-                and block_decision.failure_kind != "llm_termination"
+            if getattr(config, "revisit_blocked_reassess_llm_termination_gates", False):
+                return task
+            if getattr(config, "revisit_blocked_ignore_failure_gates", False) and (
+                block_decision.failure_kind != "llm_termination"
             ):
                 return task
             continue

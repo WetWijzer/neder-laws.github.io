@@ -1,3 +1,15 @@
+function getRuntimeOpenRouterBaseUrl(): string {
+  if (import.meta.env.VITE_OPENROUTER_BASE_URL) {
+    return import.meta.env.VITE_OPENROUTER_BASE_URL;
+  }
+
+  if (typeof window !== 'undefined') {
+    return window.localStorage.getItem('PORTLAND_OPENROUTER_BASE_URL') || '';
+  }
+
+  return '';
+}
+
 // Configuration for LLM inference mode with enhanced model support
 export const LLM_CONFIG = {
   // Set to 'client' for browser-based inference, 'server' for traditional API-based inference
@@ -32,7 +44,7 @@ export const LLM_CONFIG = {
   // at a same-origin proxy so the API key is not exposed in browser bundles.
   OPENROUTER_ENABLED: import.meta.env.VITE_OPENROUTER_ENABLED !== 'false',
   OPENROUTER_API_KEY: import.meta.env.VITE_OPENROUTER_API_KEY || '',
-  OPENROUTER_BASE_URL: import.meta.env.VITE_OPENROUTER_BASE_URL || 'https://openrouter.ai/api/v1',
+  OPENROUTER_BASE_URL: getRuntimeOpenRouterBaseUrl(),
   OPENROUTER_SITE_URL: import.meta.env.VITE_OPENROUTER_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : ''),
   OPENROUTER_SITE_NAME: import.meta.env.VITE_OPENROUTER_SITE_NAME || 'Portland Laws',
   OPENROUTER_DEFAULT_MODEL: import.meta.env.VITE_OPENROUTER_DEFAULT_MODEL || 'liquid/lfm-2.5-1.2b-instruct:free',

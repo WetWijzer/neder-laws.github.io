@@ -40,6 +40,7 @@ from ppd.daemon.ppd_daemon import (  # noqa: E402
     parse_tasks,
     read_text,
     run_validation,
+    select_task_for_config,
     utc_now,
 )
 from ppd.daemon.recovery_note_compaction import compact_task_board_repair_notes
@@ -218,6 +219,7 @@ class SupervisorConfig:
     exception_backoff_seconds: float = 5.0
     honor_supervisor_term: bool = False
     revisit_blocked_tasks: bool = False
+    reassess_blocked_llm_termination_gates: bool = False
 
     def resolve(self, path: Path) -> Path:
         return path if path.is_absolute() else self.repo_root / path
@@ -1752,6 +1754,18 @@ def diagnose(config: SupervisorConfig, *, now: Optional[datetime] = None) -> Sup
     has_closed_recovery_work = has_closed_circuit_breaker_recovery_task(tasks)
     has_deterministic_work = has_open_deterministic_task_fallback(tasks)
     has_selectable_work = any(task.status in {"needed", "in-progress"} for task in tasks)
+    revisit_candidate = None
+    if config.revisit_blocked_tasks and tasks and not has_selectable_work:
+        revisit_candidate = select_task_for_config(
+            tasks,
+            DaemonConfig(
+                repo_root=config.repo_root,
+                result_log=config.result_log,
+                revisit_blocked=True,
+                revisit_blocked_ignore_failure_gates=True,
+                revisit_blocked_reassess_llm_termination_gates=config.reassess_blocked_llm_termination_gates,
+            ),
+        )
     continuation_count = source_backed_execution_continuation_count(board)
     generated_budget_parked = generated_blocked_total >= MAX_GENERATED_BLOCKED_CASCADE_TASKS and generated_blocked_open == 0
     has_source_backed_continuation_context = (
@@ -1765,7 +1779,7 @@ def diagnose(config: SupervisorConfig, *, now: Optional[datetime] = None) -> Sup
         and config.revisit_blocked_tasks
         and tasks
         and not has_selectable_work
-        and any(task.status == "blocked" for task in tasks)
+        and revisit_candidate is not None
     ):
         return SupervisorDecision(
             action="restart_daemon",
@@ -1775,6 +1789,24 @@ def diagnose(config: SupervisorConfig, *, now: Optional[datetime] = None) -> Sup
             ),
             severity="warning",
             should_restart_daemon=True,
+        )
+
+    if (
+        not running
+        and config.revisit_blocked_tasks
+        and tasks
+        and not has_selectable_work
+        and any(task.status == "blocked" for task in tasks)
+        and revisit_candidate is None
+    ):
+        return SupervisorDecision(
+            action="observe",
+            reason=(
+                "blocked PP&D tasks remain, but every blocked task is behind a fresh failure gate; "
+                "do not restart the daemon until new source-backed work is added or a task is explicitly reopened"
+            ),
+            severity="warning",
+            should_restart_daemon=False,
         )
 
     if (
@@ -3308,6 +3340,11 @@ def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
     parser.add_argument("--exception-backoff", type=float, default=5.0, help="Seconds to pause after a contained supervisor exception")
     parser.add_argument("--honor-term", action="store_true", help="Exit on TERM/HUP when an external service manager owns restart policy")
     parser.add_argument("--revisit-blocked-tasks", action="store_true", help="Restart the daemon in blocked-task revisit mode when only blocked tasks remain")
+    parser.add_argument(
+        "--reassess-blocked-llm-termination-gates",
+        action="store_true",
+        help="Treat blocked tasks with repeated LLM terminations as eligible for explicit reassessment",
+    )
     parser.add_argument("--self-test", action="store_true", help="Run supervisor self-test and exit")
     return parser.parse_args(argv)
 
@@ -3331,6 +3368,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         exception_backoff_seconds=max(0.0, float(args.exception_backoff)),
         honor_supervisor_term=bool(args.honor_term or os.environ.get("PPD_SUPERVISOR_HONOR_TERM") == "1"),
         revisit_blocked_tasks=bool(args.revisit_blocked_tasks),
+        reassess_blocked_llm_termination_gates=bool(args.reassess_blocked_llm_termination_gates),
     )
     if args.watch:
         install_supervisor_runtime_guards(config)

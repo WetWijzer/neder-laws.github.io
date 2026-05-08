@@ -336,6 +336,86 @@ class DaemonLlmResultDurabilityTest(unittest.TestCase):
 
         self.assertEqual("no_eligible_tasks", proposal.failure_kind)
 
+    def test_reassess_blocked_llm_terminations_selects_gated_task(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            daemon_dir = repo / "ppd" / "daemon"
+            daemon_dir.mkdir(parents=True)
+            target = "Task checkbox-241: Add a supervised live whole-site public crawl runner."
+            for message in ("llm_router child exited with code -15:", "143"):
+                with (daemon_dir / "ppd-daemon.jsonl").open("a", encoding="utf-8") as handle:
+                    handle.write(
+                        json.dumps(
+                            {
+                                "proposal": {
+                                    "failure_kind": "llm",
+                                    "target_task": target,
+                                    "errors": [message],
+                                }
+                            }
+                        )
+                        + "\n"
+                    )
+            board = "- [!] Task checkbox-241: Add a supervised live whole-site public crawl runner.\n"
+
+            selected = select_task_for_config(
+                parse_tasks(board),
+                Config(
+                    repo_root=repo,
+                    revisit_blocked=True,
+                    revisit_blocked_ignore_failure_gates=True,
+                    revisit_blocked_reassess_llm_termination_gates=True,
+                ),
+            )
+
+        self.assertIsNotNone(selected)
+        assert selected is not None
+        self.assertEqual(241, selected.checkbox_id)
+
+    def test_reassess_blocked_llm_terminations_spreads_attempts(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            daemon_dir = repo / "ppd" / "daemon"
+            daemon_dir.mkdir(parents=True)
+            noisy_target = "Task checkbox-241: Add a supervised live whole-site public crawl runner."
+            quieter_target = "Task checkbox-242: Add processor-suite execution integration."
+            for target, messages in (
+                (noisy_target, ("llm_router child exited with code -15:", "143", "143")),
+                (quieter_target, ("143",)),
+            ):
+                for message in messages:
+                    with (daemon_dir / "ppd-daemon.jsonl").open("a", encoding="utf-8") as handle:
+                        handle.write(
+                            json.dumps(
+                                {
+                                    "proposal": {
+                                        "failure_kind": "llm",
+                                        "target_task": target,
+                                        "errors": [message],
+                                    }
+                                }
+                            )
+                            + "\n"
+                        )
+            board = (
+                "- [!] Task checkbox-241: Add a supervised live whole-site public crawl runner.\n"
+                "- [!] Task checkbox-242: Add processor-suite execution integration.\n"
+            )
+
+            selected = select_task_for_config(
+                parse_tasks(board),
+                Config(
+                    repo_root=repo,
+                    revisit_blocked=True,
+                    revisit_blocked_ignore_failure_gates=True,
+                    revisit_blocked_reassess_llm_termination_gates=True,
+                ),
+            )
+
+        self.assertIsNotNone(selected)
+        assert selected is not None
+        self.assertEqual(242, selected.checkbox_id)
+
     def test_deterministic_platform_task_fallback_builds_progress_manifest_without_llm(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:
             repo = Path(tempdir)

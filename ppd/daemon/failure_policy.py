@@ -117,6 +117,20 @@ def recent_task_failures(config: Any, task_label: str, *, limit: int = 3) -> lis
     )
 
 
+def recent_task_failures_from_records(
+    records: list[dict[str, Any]],
+    task_label: str,
+    *,
+    limit: int = 3,
+) -> list[dict[str, Any]]:
+    return recent_proposal_failures(
+        records,
+        task_label,
+        limit=limit,
+        normalize_task_labels=False,
+    )
+
+
 def should_use_compact_prompt(failures: list[dict[str, Any]], *, threshold: int = 2) -> bool:
     return should_use_compact_prompt_for_failures(failures, threshold=threshold)
 
@@ -136,9 +150,25 @@ def task_failure_count(config: Any, task_label: str, *, kinds: Optional[set[str]
     )
 
 
+def task_failure_count_from_failures(
+    failures: list[dict[str, Any]],
+    *,
+    kinds: Optional[set[str]] = None,
+) -> int:
+    return count_recent_proposal_failures(failures, failure_kinds=kinds)
+
+
 def llm_termination_failure_count(config: Any, task_label: str) -> int:
     return count_proposal_records_with_failure_markers(
         recent_task_failures(config, task_label, limit=100),
+        failure_kind="llm",
+        markers=frozenset(LLM_TERMINATION_ERROR_MARKERS),
+    )
+
+
+def llm_termination_failure_count_from_failures(failures: list[dict[str, Any]]) -> int:
+    return count_proposal_records_with_failure_markers(
+        failures,
         failure_kind="llm",
         markers=frozenset(LLM_TERMINATION_ERROR_MARKERS),
     )
@@ -152,28 +182,46 @@ def has_llm_termination_block(config: Any, task_label: str) -> bool:
     )
 
 
-def pre_llm_block_decision(config: Any, task_label: str) -> Optional[PreLlmBlockDecision]:
-    """Return a durable stop decision for tasks that are already known-stuck."""
+def has_llm_termination_block_for_failures(config: Any, failures: list[dict[str, Any]]) -> bool:
+    termination_probe = Proposal(failure_kind="llm_termination")
+    return llm_termination_failure_count_from_failures(failures) >= failure_block_threshold(
+        termination_probe,
+        config,
+    )
 
+
+def pre_llm_block_decision_for_failures(
+    config: Any,
+    failures: list[dict[str, Any]],
+) -> Optional[PreLlmBlockDecision]:
     syntax_probe = Proposal(failure_kind="syntax_preflight")
     termination_probe = Proposal(failure_kind="llm_termination")
     return first_failure_block_decision(
         (
             FailureBlockRule(
                 failure_kind="syntax_preflight",
-                count=task_failure_count(config, task_label, kinds={"syntax_preflight"}),
+                count=task_failure_count_from_failures(failures, kinds={"syntax_preflight"}),
                 threshold=failure_block_threshold(syntax_probe, config),
                 summary="Task blocked before LLM after repeated syntax-preflight failures.",
                 result="syntax_preflight_blocked",
             ),
             FailureBlockRule(
                 failure_kind="llm_termination",
-                count=llm_termination_failure_count(config, task_label),
+                count=llm_termination_failure_count_from_failures(failures),
                 threshold=failure_block_threshold(termination_probe, config),
                 summary="Task blocked before LLM after repeated LLM termination failures.",
                 result="llm_termination_blocked",
             ),
         )
+    )
+
+
+def pre_llm_block_decision(config: Any, task_label: str) -> Optional[PreLlmBlockDecision]:
+    """Return a durable stop decision for tasks that are already known-stuck."""
+
+    return pre_llm_block_decision_for_failures(
+        config,
+        recent_task_failures(config, task_label, limit=100),
     )
 
 

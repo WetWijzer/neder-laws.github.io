@@ -145,7 +145,13 @@ Recommended setup:
 
 For the GitHub Pages workflow, add `VITE_OPENROUTER_BASE_URL` as a GitHub repository variable under
 **Settings → Secrets and variables → Actions → Variables**. The deploy workflow injects that value at build time.
-If this variable is missing, the static GitHub Pages bundle cannot discover the proxy URL and cloud fallback will not run.
+If this variable is missing, the deploy workflow fails rather than publishing a bundle that cannot use cloud fallback.
+
+For quick testing on an already-deployed static bundle, you can temporarily set the proxy URL in browser devtools and reload:
+
+```js
+localStorage.setItem('PORTLAND_OPENROUTER_BASE_URL', 'https://<your-vercel-app>.vercel.app/api/openrouter')
+```
 
 The proxy only permits the LiquidAI OpenRouter models used by the app:
 `liquid/lfm-2.5-1.2b-instruct:free` and `liquid/lfm-2.5-1.2b-thinking:free`.

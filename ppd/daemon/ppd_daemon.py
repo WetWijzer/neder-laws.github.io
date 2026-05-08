@@ -195,6 +195,7 @@ class Config:
     allow_local_fallback: bool = False
     revisit_blocked: bool = False
     revisit_blocked_ignore_failure_gates: bool = False
+    revisit_blocked_reassess_llm_termination_gates: bool = False
     max_task_failures_before_block: int = 3
     repair_validation_failures: bool = False
     max_validation_repair_attempts: int = 1
@@ -659,6 +660,11 @@ def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
         action="store_true",
         help="Retry blocked tasks in board order even when old failure gates would normally suppress them",
     )
+    parser.add_argument(
+        "--revisit-blocked-reassess-llm-termination-gates",
+        action="store_true",
+        help="Explicitly reassess blocked tasks even when repeated LLM termination gates would normally suppress them",
+    )
     parser.add_argument("--max-task-failures-before-block", type=int, default=3, help="Validation/preflight failures before marking a task blocked")
     parser.add_argument("--repair-validation-failures", action="store_true", help="Run one temporary-worktree repair pass when validation fails")
     parser.add_argument("--max-validation-repair-attempts", type=int, default=1, help="Validation repair attempts per candidate worktree")
@@ -685,6 +691,7 @@ def config_from_args(args: argparse.Namespace) -> Config:
         allow_local_fallback=bool(args.allow_local_fallback),
         revisit_blocked=bool(args.revisit_blocked),
         revisit_blocked_ignore_failure_gates=bool(args.revisit_blocked_ignore_failure_gates),
+        revisit_blocked_reassess_llm_termination_gates=bool(args.revisit_blocked_reassess_llm_termination_gates),
         max_task_failures_before_block=max(1, int(args.max_task_failures_before_block)),
         repair_validation_failures=bool(args.repair_validation_failures),
         max_validation_repair_attempts=max(0, int(args.max_validation_repair_attempts)),

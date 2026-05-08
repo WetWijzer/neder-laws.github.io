@@ -18,8 +18,19 @@ export interface OpenRouterGenerateOptions {
 }
 
 export class OpenRouterLLMService {
+  private getBaseUrl(): string {
+    if (typeof window !== 'undefined') {
+      const localOverride = window.localStorage.getItem('PORTLAND_OPENROUTER_BASE_URL');
+      if (localOverride) {
+        return localOverride;
+      }
+    }
+
+    return LLM_CONFIG.OPENROUTER_BASE_URL;
+  }
+
   getConfigurationStatus(): { configured: boolean; reason: string; baseUrl: string; directOpenRouter: boolean } {
-    const baseUrl = LLM_CONFIG.OPENROUTER_BASE_URL;
+    const baseUrl = this.getBaseUrl();
     const directOpenRouter = baseUrl.includes('openrouter.ai');
 
     if (!LLM_CONFIG.OPENROUTER_ENABLED) {
@@ -73,7 +84,7 @@ export class OpenRouterLLMService {
       throw new Error(this.getConfigurationStatus().reason);
     }
 
-    const response = await fetch(`${LLM_CONFIG.OPENROUTER_BASE_URL.replace(/\/$/, '')}/chat/completions`, {
+    const response = await fetch(`${this.getBaseUrl().replace(/\/$/, '')}/chat/completions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

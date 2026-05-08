@@ -94,12 +94,12 @@ This board is the controlling backlog for the isolated PP&D daemon. The daemon s
 <!-- ppd-daemon-task-board:start -->
 ## Generated Status
 
-Last updated: 2026-05-08T19:06:11.316240Z
+Last updated: 2026-05-08T21:45:11.443293Z
 
-- Latest target: `Task checkbox-457: Add supervisor idle-recovery validation for tranche 1 proving completed boards synthesize new goal-aligned platform tasks without sleeping, duplicate tranche reuse, or blocked-task retry churn.`
-- Latest result: `accepted`
-- Latest summary: Complete supervisor idle recovery with deterministic PP&D fallback.
-- Counts: `{"blocked": 213, "complete": 9092, "in_progress": 0, "needed": 0}`
+- Latest target: `Task checkbox-9354: Add a user document-store reconciliation contract that compares known user facts and files to PP&D guardrail bundles, identifies stale or conflicting evidence, and emits the smallest review packet needed before draft automation proceeds.`
+- Latest result: `llm`
+- Latest summary: LLM proposal failed.
+- Counts: `{"blocked": 204, "complete": 9101, "in_progress": 0, "needed": 0}`
 
 <!-- ppd-daemon-task-board:end -->
 ## Built-In Supervisor Repair Notes
@@ -217,10 +217,10 @@ Last updated: 2026-05-08T19:06:11.316240Z
 
 ## Built-In Blocked Cascade Recovery Tranche 2
 
-- [!] Task checkbox-250: Add generated blocked-cascade daemon-repair coverage for tranche 2 item 1 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
+- [x] Task checkbox-250: Add generated blocked-cascade daemon-repair coverage for tranche 2 item 1 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 - [!] Task checkbox-251: Add generated blocked-cascade daemon-repair coverage for tranche 2 item 2 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 - [!] Task checkbox-252: Add generated blocked-cascade daemon-repair coverage for tranche 2 item 3 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
-- [!] Task checkbox-253: Add generated blocked-cascade daemon-repair coverage for tranche 2 item 4 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
+- [x] Task checkbox-253: Add generated blocked-cascade daemon-repair coverage for tranche 2 item 4 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 ## Built-In Supervisor Repair Notes
 
 - Appended deterministic blocked-cascade recovery tasks because all selectable work was blocked. The supervisor avoided the LLM repair path and created daemon-repair tasks that can run independently before blocked domain work is retried.
@@ -256,7 +256,7 @@ Last updated: 2026-05-08T19:06:11.316240Z
 ## Built-In Blocked Cascade Recovery Tranche 4
 
 - [!] Task checkbox-258: Add generated blocked-cascade daemon-repair coverage for tranche 4 item 1 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
-- [!] Task checkbox-259: Add generated blocked-cascade daemon-repair coverage for tranche 4 item 2 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
+- [x] Task checkbox-259: Add generated blocked-cascade daemon-repair coverage for tranche 4 item 2 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 - [!] Task checkbox-260: Add generated blocked-cascade daemon-repair coverage for tranche 4 item 3 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 - [!] Task checkbox-261: Add generated blocked-cascade daemon-repair coverage for tranche 4 item 4 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 ## Built-In Supervisor Repair Notes
@@ -278,7 +278,7 @@ Last updated: 2026-05-08T19:06:11.316240Z
 ## Built-In Blocked Cascade Recovery Tranche 5
 
 - [!] Task checkbox-262: Add generated blocked-cascade daemon-repair coverage for tranche 5 item 1 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
-- [!] Task checkbox-263: Add generated blocked-cascade daemon-repair coverage for tranche 5 item 2 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
+- [x] Task checkbox-263: Add generated blocked-cascade daemon-repair coverage for tranche 5 item 2 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 - [!] Task checkbox-264: Add generated blocked-cascade daemon-repair coverage for tranche 5 item 3 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 - [!] Task checkbox-265: Add generated blocked-cascade daemon-repair coverage for tranche 5 item 4 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 ## Built-In Supervisor Repair Notes
@@ -322,7 +322,7 @@ Last updated: 2026-05-08T19:06:11.316240Z
 ## Built-In Blocked Cascade Recovery Tranche 7
 
 - [!] Task checkbox-270: Add generated blocked-cascade daemon-repair coverage for tranche 7 item 1 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
-- [!] Task checkbox-271: Add generated blocked-cascade daemon-repair coverage for tranche 7 item 2 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
+- [x] Task checkbox-271: Add generated blocked-cascade daemon-repair coverage for tranche 7 item 2 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 - [!] Task checkbox-272: Add generated blocked-cascade daemon-repair coverage for tranche 7 item 3 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 - [!] Task checkbox-273: Add generated blocked-cascade daemon-repair coverage for tranche 7 item 4 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 ## Built-In Supervisor Repair Notes
@@ -362,7 +362,7 @@ Last updated: 2026-05-08T19:06:11.316240Z
 
 ## Built-In Blocked Cascade Recovery Tranche 9
 
-- [!] Task checkbox-278: Add generated blocked-cascade daemon-repair coverage for tranche 9 item 1 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
+- [x] Task checkbox-278: Add generated blocked-cascade daemon-repair coverage for tranche 9 item 1 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 - [!] Task checkbox-279: Add generated blocked-cascade daemon-repair coverage for tranche 9 item 2 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 - [!] Task checkbox-280: Add generated blocked-cascade daemon-repair coverage for tranche 9 item 3 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 - [x] Task checkbox-281: Add generated blocked-cascade daemon-repair coverage for tranche 9 item 4 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
@@ -383,7 +383,7 @@ Last updated: 2026-05-08T19:06:11.316240Z
 
 - [!] Task checkbox-282: Add generated blocked-cascade daemon-repair coverage for tranche 10 item 1 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 - [!] Task checkbox-283: Add generated blocked-cascade daemon-repair coverage for tranche 10 item 2 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
-- [!] Task checkbox-284: Add generated blocked-cascade daemon-repair coverage for tranche 10 item 3 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
+- [x] Task checkbox-284: Add generated blocked-cascade daemon-repair coverage for tranche 10 item 3 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 - [!] Task checkbox-285: Add generated blocked-cascade daemon-repair coverage for tranche 10 item 4 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 ## Built-In Supervisor Repair Notes
 
@@ -426,7 +426,7 @@ Last updated: 2026-05-08T19:06:11.316240Z
 ## Built-In Blocked Cascade Recovery Tranche 12
 
 - [!] Task checkbox-290: Add generated blocked-cascade daemon-repair coverage for tranche 12 item 1 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
-- [!] Task checkbox-291: Add generated blocked-cascade daemon-repair coverage for tranche 12 item 2 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
+- [x] Task checkbox-291: Add generated blocked-cascade daemon-repair coverage for tranche 12 item 2 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 - [!] Task checkbox-292: Add generated blocked-cascade daemon-repair coverage for tranche 12 item 3 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 - [!] Task checkbox-293: Add generated blocked-cascade daemon-repair coverage for tranche 12 item 4 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 ## Built-In Supervisor Repair Notes
@@ -450,7 +450,7 @@ Last updated: 2026-05-08T19:06:11.316240Z
 
 ## Built-In Blocked Cascade Recovery Tranche 13
 
-- [!] Task checkbox-294: Add generated blocked-cascade daemon-repair coverage for tranche 13 item 1 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
+- [x] Task checkbox-294: Add generated blocked-cascade daemon-repair coverage for tranche 13 item 1 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 - [!] Task checkbox-295: Add generated blocked-cascade daemon-repair coverage for tranche 13 item 2 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 - [!] Task checkbox-296: Add generated blocked-cascade daemon-repair coverage for tranche 13 item 3 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
 - [!] Task checkbox-297: Add generated blocked-cascade daemon-repair coverage for tranche 13 item 4 proving blocked PP&D work stays parked until a fresh daemon repair task validates.
