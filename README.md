@@ -127,6 +127,25 @@ Every push to `main` automatically builds and deploys the app to GitHub Pages vi
 
 You can also trigger a deployment manually from the GitHub Actions tab.
 
+### OpenRouter fallback proxy
+
+GitHub Pages is static and cannot safely proxy OpenRouter requests with a secret key. This repo includes a Vercel-compatible proxy at `api/openrouter/chat/completions.js` so GitHub can still own the code and deployment trigger while Vercel provides request-time compute and secret storage.
+
+Recommended setup:
+
+1. Import this GitHub repo into Vercel.
+2. Add Vercel environment variables:
+   - `OPENROUTER_API_KEY`
+   - `OPENROUTER_SITE_URL=https://portland-laws.github.io`
+   - `OPENROUTER_SITE_NAME=Portland Laws`
+   - `OPENROUTER_PROXY_ALLOWED_ORIGINS=https://portland-laws.github.io,http://localhost:5173,http://127.0.0.1:5173`
+3. Configure the GitHub Pages build, or local `.env`, with:
+   - `VITE_OPENROUTER_BASE_URL=https://<your-vercel-app>.vercel.app/api/openrouter`
+   - `VITE_OPENROUTER_ENABLED=true`
+
+The proxy only permits the LiquidAI OpenRouter models used by the app:
+`liquid/lfm-2.5-1.2b-instruct:free` and `liquid/lfm-2.5-1.2b-thinking:free`.
+
 ## Documentation
 
 | Document | Description |
