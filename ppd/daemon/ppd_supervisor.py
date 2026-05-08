@@ -1734,8 +1734,9 @@ def builtin_stalled_worker_task_board(markdown: str, target_task: str) -> tuple[
 
 def diagnose(config: SupervisorConfig, *, now: Optional[datetime] = None) -> SupervisorDecision:
     pid = read_pid(config.resolve(config.pid_file))
-    running = process_running(pid)
     status = load_json(config.resolve(config.status_file))
+    status_pid = int(status.get("pid")) if str(status.get("pid") or "").isdigit() else None
+    running = process_running(pid) or process_running(status_pid)
     progress = load_json(config.resolve(config.progress_file))
     board = read_text(config.resolve(config.task_board)) if config.resolve(config.task_board).exists() else ""
     tasks = parse_tasks(board)
@@ -1773,6 +1774,22 @@ def diagnose(config: SupervisorConfig, *, now: Optional[datetime] = None) -> Sup
         or has_autonomous_execution_tranche(board)
         or any(autonomous_platform_heading_number(line) is not None for line in board.splitlines())
     )
+
+    if daemon_has_fresh_active_work(
+        running=running,
+        heartbeat_age=heartbeat_age,
+        active_state=active_state,
+        active_state_age=active_state_age,
+        config=config,
+    ):
+        return SupervisorDecision(
+            action="observe",
+            reason=(
+                f"daemon is actively working in {active_state}; defer historical repair decisions "
+                "until the worker exits, stalls, or records a fresh result"
+            ),
+            severity="info",
+        )
 
     if (
         not running
@@ -1932,22 +1949,6 @@ def diagnose(config: SupervisorConfig, *, now: Optional[datetime] = None) -> Sup
             severity="warning",
             should_invoke_codex=True,
             should_restart_daemon=True,
-        )
-
-    if daemon_has_fresh_active_work(
-        running=running,
-        heartbeat_age=heartbeat_age,
-        active_state=active_state,
-        active_state_age=active_state_age,
-        config=config,
-    ):
-        return SupervisorDecision(
-            action="observe",
-            reason=(
-                f"daemon is actively working in {active_state}; defer historical repair decisions "
-                "until the worker exits, stalls, or records a fresh result"
-            ),
-            severity="info",
         )
 
     if has_deterministic_work and not running:

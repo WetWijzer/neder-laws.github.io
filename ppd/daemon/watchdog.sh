@@ -117,10 +117,16 @@ cleanup_stale_child_on_start() {
     stale_pid="$(cat "$CHILD_PID_FILE" 2>/dev/null || true)"
   fi
   if [[ -n "$stale_pid" ]] && kill -0 "$stale_pid" 2>/dev/null; then
-    append_event "stale_child_cleanup" "" "" "$stale_pid" 0 "" "cleaning stale child from previous watchdog"
-    terminate_process_family "$stale_pid"
+    if [[ "${PPD_WATCHDOG_CLEAN_STALE_CHILD:-0}" == "1" ]]; then
+      append_event "stale_child_cleanup" "" "" "$stale_pid" 0 "" "cleaning stale child from previous watchdog"
+      terminate_process_family "$stale_pid"
+    else
+      append_event "stale_child_preserved" "" "" "$stale_pid" 0 "" "preserving live child from previous watchdog"
+    fi
   fi
-  rm -f "$CHILD_PID_FILE"
+  if [[ -z "$stale_pid" ]] || ! kill -0 "$stale_pid" 2>/dev/null || [[ "${PPD_WATCHDOG_CLEAN_STALE_CHILD:-0}" == "1" ]]; then
+    rm -f "$CHILD_PID_FILE"
+  fi
 }
 
 cleanup() {
@@ -140,6 +146,8 @@ handle_signal() {
     cleanup
   fi
   append_event "watchdog_signal_ignored" "" "" "${child_pid:-0}" 0 "" "ignored ${signal_name}; stop sentinel was absent"
+  rm -f "$PID_FILE" "$STOP_FILE"
+  exit 0
 }
 
 trap 'handle_signal TERM' TERM

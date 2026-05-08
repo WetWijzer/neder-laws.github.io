@@ -94,12 +94,12 @@ This board is the controlling backlog for the isolated PP&D daemon. The daemon s
 <!-- ppd-daemon-task-board:start -->
 ## Generated Status
 
-Last updated: 2026-05-08T22:33:29.751607Z
+Last updated: 2026-05-08T23:09:09.067739Z
 
-- Latest target: `Task checkbox-244: Add a local PDF draft-fill work queue under ppd/pdf that maps public PP&D form field manifests to redacted user facts, invokes the pypdf draft filler for previews, and never uploads, submits, or stores private source documents.`
+- Latest target: `Task checkbox-9362: Add source registry validation for public, authenticated read-only, reversible draft, consequential official, financial, and unsupported PP&D surfaces.`
 - Latest result: `llm`
 - Latest summary: LLM proposal failed.
-- Counts: `{"blocked": 185, "complete": 9120, "in_progress": 0, "needed": 0}`
+- Counts: `{"blocked": 181, "complete": 9124, "in_progress": 0, "needed": 0}`
 
 <!-- ppd-daemon-task-board:end -->
 ## Built-In Supervisor Repair Notes
@@ -1445,9 +1445,9 @@ Last updated: 2026-05-08T22:33:29.751607Z
 
 ## Manual Portland Permitting Autonomy Expansion Tranche
 
-- [!] Task checkbox-9350: Add a source-backed PP&D crawl campaign brief that groups official Portland.gov PP&D pages, public PDFs, DevHub public routes, and recrawl cadence into bounded permit-family crawl batches without widening the allowlist or storing raw bodies.
+- [x] Task checkbox-9350: Add a source-backed PP&D crawl campaign brief that groups official Portland.gov PP&D pages, public PDFs, DevHub public routes, and recrawl cadence into bounded permit-family crawl batches without widening the allowlist or storing raw bodies.
 - [!] Task checkbox-9351: Add an attended DevHub login-session contract that joins manual PortlandOregon.gov sign-in, authenticated-state detection, redacted route snapshots, and save-resume boundaries without credential capture, MFA automation, or browser-state persistence.
-- [!] Task checkbox-9352: Add a requirement-to-process review queue that turns normalized PP&D pages, forms, and PDFs into permit-family stage graphs with document rules, fee triggers, deadlines, exceptions, and source evidence IDs ready for guardrail compilation.
+- [x] Task checkbox-9352: Add a requirement-to-process review queue that turns normalized PP&D pages, forms, and PDFs into permit-family stage graphs with document rules, fee triggers, deadlines, exceptions, and source evidence IDs ready for guardrail compilation.
 - [!] Task checkbox-9353: Add a formal-logic guardrail bundle contract that compiles reviewed PP&D requirement nodes into obligations, prerequisites, temporal ordering, missing-fact prompts, exact-confirmation gates, and refused official-action predicates.
 - [!] Task checkbox-9354: Add a user document-store reconciliation contract that compares known user facts and files to PP&D guardrail bundles, identifies stale or conflicting evidence, and emits the smallest review packet needed before draft automation proceeds.
 - [x] Task checkbox-9355: Add a reversible draft-assistance orchestration slice that combines redacted user facts, DevHub field manifests, local PDF previews, and attended save-for-later actions while refusing upload, submit, certify, cancel, inspection, and payment execution by default.
@@ -25778,12 +25778,12 @@ Last updated: 2026-05-08T22:33:29.751607Z
 - [x] Task checkbox-9361: Add official PP&D source seed manifest coverage from the May 8 plan with crawl policy, source freshness metadata, and citations for the current Portland.gov and DevHub anchors.
 - [!] Task checkbox-9362: Add source registry validation for public, authenticated read-only, reversible draft, consequential official, financial, and unsupported PP&D surfaces.
 - [x] Task checkbox-9363: Add processor archival adapter contract coverage proving PP&D policy preflight delegates to the ipfs_datasets_py processor suite only after allowlist, robots, content-type, timeout, and no-raw-body decisions.
-- [!] Task checkbox-9364: Add HTML and PDF extraction fixture contracts for the May 8 official source anchors, including heading hierarchy, ordered steps, tables, PDF page anchors, and public form-field manifests.
+- [x] Task checkbox-9364: Add HTML and PDF extraction fixture contracts for the May 8 official source anchors, including heading hierarchy, ordered steps, tables, PDF page anchors, and public form-field manifests.
 - [!] Task checkbox-9365: Add RequirementNode and ProcessModel schema coverage with citation spans, confidence, human-review status, and representative residential, commercial, trade, correction, inspection, and fee workflow stages.
 - [x] Task checkbox-9366: Add formal GuardrailBundle compiler skeleton coverage for deterministic predicates, deontic rules, temporal rules, exact-confirmation predicates, refused-action predicates, and explanation support maps.
 - [!] Task checkbox-9367: Add attended DevHub manual-login Playwright scaffold coverage with mocked fixtures, authenticated-state detection, accessible selector capture, redaction policy, and no credential/session persistence.
 - [x] Task checkbox-9368: Add local PDF draft-fill queue coverage for redacted user fact mapping, user-controlled preview output, no-upload/no-submit boundaries, and commit-safe audit events.
-- [!] Task checkbox-9369: Add user document-store gap-analysis coverage for known facts, matched documents, missing facts, missing documents, stale or conflicting evidence, blocked actions, and review packets.
+- [x] Task checkbox-9369: Add user document-store gap-analysis coverage for known facts, matched documents, missing facts, missing documents, stale or conflicting evidence, blocked actions, and review packets.
 - [x] Task checkbox-9370: Add action classifier and exact-confirmation checkpoint coverage for read-only, reversible draft, official upload, submission, certification, cancellation, inspection scheduling, payment review, payment execution, and unsupported handoffs.
 - [x] Task checkbox-9371: Add operations playbook coverage for safe live public crawl dry-runs, attended DevHub sessions, validation commands, source recrawl cadence, privacy checks, and supervisor/daemon recovery gates.
 

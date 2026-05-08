@@ -308,14 +308,28 @@ class ClientLLMWorkerService {
 
   async generateText(prompt: string, maxTokens: number = 50): Promise<string> {
     const cloudConfigured = openRouterLLMService.isConfigured();
-    if (this.shouldUseOpenRouterFallback()) {
-      this.emitServiceDiagnostic('route:cloud_before_local', {
-        reason: this.getCloudFirstReason(),
+    const boundedMaxTokens = Math.min(maxTokens, LLM_CONFIG.LOCAL_MAX_NEW_TOKENS);
+
+    if (this.localGenerationUnhealthy && cloudConfigured && Date.now() < this.localRetryAfter) {
+      this.emitServiceDiagnostic('route:cloud_after_prior_local_failure', {
+        reason: this.localHealth.lastFailureReason || 'local generation is in cooldown after a prior failure',
         promptLength: prompt.length,
-        maxTokens,
+        maxTokens: boundedMaxTokens,
       });
-      this.warmLocalModelInBackground();
-      return this.generateWithOpenRouter(prompt, maxTokens);
+      return this.generateWithOpenRouter(prompt, boundedMaxTokens);
+    }
+
+    if (prompt.length > LLM_CONFIG.LOCAL_MAX_PROMPT_CHARS) {
+      const reason = `Local prompt budget exceeded: ${prompt.length} chars > ${LLM_CONFIG.LOCAL_MAX_PROMPT_CHARS} chars.`;
+      this.emitServiceDiagnostic('local:prompt_budget_exceeded', {
+        promptLength: prompt.length,
+        maxPromptChars: LLM_CONFIG.LOCAL_MAX_PROMPT_CHARS,
+        maxTokens: boundedMaxTokens,
+      });
+      if (cloudConfigured) {
+        return this.generateWithOpenRouter(prompt, boundedMaxTokens);
+      }
+      throw new Error(`${reason} Compact the GraphRAG context or configure OpenRouter as last-resort fallback.`);
     }
 
     if (!this.isInitialized) {
@@ -325,8 +339,8 @@ class ClientLLMWorkerService {
     if (!this.localHealth.proven) {
       const probeOk = await this.probeLocalInference();
       if (!probeOk && cloudConfigured) {
-        this.emitServiceDiagnostic('route:cloud_after_probe_failed', { promptLength: prompt.length, maxTokens });
-        return this.generateWithOpenRouter(prompt, maxTokens);
+        this.emitServiceDiagnostic('route:cloud_after_probe_failed', { promptLength: prompt.length, maxTokens: boundedMaxTokens });
+        return this.generateWithOpenRouter(prompt, boundedMaxTokens);
       }
       if (!probeOk) {
         const fallbackStatus = openRouterLLMService.getConfigurationStatus();
@@ -340,8 +354,8 @@ class ClientLLMWorkerService {
       const startedAt = performance.now();
       const result = await this.sendWorkerRequest(
         'generate',
-        { prompt, maxTokens },
-        cloudConfigured ? LLM_CONFIG.LOCAL_GENERATION_FALLBACK_MS : LLM_CONFIG.LOCAL_GENERATION_TIMEOUT_MS,
+        { prompt, maxTokens: boundedMaxTokens },
+        LLM_CONFIG.LOCAL_GENERATION_TIMEOUT_MS,
       );
       this.markLocalSuccess(Math.round(performance.now() - startedAt));
       return result.text;
@@ -352,10 +366,10 @@ class ClientLLMWorkerService {
         console.warn('Using OpenRouter fallback after local generation failure');
         this.emitServiceDiagnostic('route:cloud_after_local_failure', {
           promptLength: prompt.length,
-          maxTokens,
+          maxTokens: boundedMaxTokens,
           error: error instanceof Error ? error.message : String(error),
         });
-        return this.generateWithOpenRouter(prompt, maxTokens);
+        return this.generateWithOpenRouter(prompt, boundedMaxTokens);
       }
       const fallbackStatus = openRouterLLMService.getConfigurationStatus();
       console.warn('OpenRouter fallback unavailable after local generation failure:', fallbackStatus);
@@ -458,43 +472,6 @@ class ClientLLMWorkerService {
 
   getCloudFallbackStatus(): { configured: boolean; reason: string; baseUrl: string; directOpenRouter: boolean } {
     return openRouterLLMService.getConfigurationStatus();
-  }
-
-  private shouldUseOpenRouterFallback(): boolean {
-    if (!openRouterLLMService.isConfigured()) {
-      return false;
-    }
-
-    if (this.isInitializing) {
-      return true;
-    }
-
-    if (!this.isInitialized) {
-      return true;
-    }
-
-    if (!this.localHealth.proven) {
-      return true;
-    }
-
-    if (this.capabilities.webGPU === false) {
-      return true;
-    }
-
-    if (this.localGenerationUnhealthy) {
-      return true;
-    }
-
-    return false;
-  }
-
-  private getCloudFirstReason(): string {
-    if (this.isInitializing) return 'local model is still initializing';
-    if (!this.isInitialized) return 'local model is not initialized';
-    if (!this.localHealth.proven) return 'local generation has not passed a probe';
-    if (this.capabilities.webGPU === false) return 'WebGPU is unavailable';
-    if (this.localGenerationUnhealthy) return this.localHealth.lastFailureReason || 'local generation is unhealthy';
-    return 'cloud fallback is preferred by routing policy';
   }
 
   private generateWithOpenRouter(prompt: string, maxTokens: number): Promise<string> {

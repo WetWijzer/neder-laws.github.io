@@ -40,6 +40,8 @@ export const LLM_CONFIG = {
   LOCAL_PROBE_TIMEOUT_MS: parseInt(import.meta.env.VITE_LOCAL_PROBE_TIMEOUT_MS || '30000'),
   LOCAL_PROBE_MAX_TOKENS: parseInt(import.meta.env.VITE_LOCAL_PROBE_MAX_TOKENS || '8'),
   LOCAL_RETRY_COOLDOWN_MS: parseInt(import.meta.env.VITE_LOCAL_RETRY_COOLDOWN_MS || '600000'),
+  LOCAL_MAX_PROMPT_CHARS: parseInt(import.meta.env.VITE_LOCAL_MAX_PROMPT_CHARS || '2400'),
+  LOCAL_MAX_NEW_TOKENS: parseInt(import.meta.env.VITE_LOCAL_MAX_NEW_TOKENS || '96'),
 
   // Enable WebGPU acceleration when available
   ENABLE_WEBGPU: import.meta.env.VITE_ENABLE_WEBGPU !== 'false',

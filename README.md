@@ -155,7 +155,7 @@ localStorage.setItem('PORTLAND_OPENROUTER_BASE_URL', 'https://<your-vercel-app>.
 
 ### Local LLM diagnostics
 
-The app does not trust local WebGPU inference merely because the model downloaded. It now marks local inference as ready only after a tiny generation probe succeeds. Until then, configured OpenRouter fallback is used for chat requests while the local model warms in the background.
+The app does not trust local WebGPU inference merely because the model downloaded. It now marks local inference as ready only after a tiny generation probe succeeds. Legal GraphRAG prompts are compacted for the browser model, local generation is attempted first, and OpenRouter is used only as a last-resort fallback after local probe/generation failure, timeout, or an oversized prompt outside the configured local budget.
 
 Useful browser console checks:
 

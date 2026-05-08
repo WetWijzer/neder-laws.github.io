@@ -188,6 +188,75 @@ class SupervisorStaleStatusReplanningTest(unittest.TestCase):
         self.assertEqual("plan_next_tasks", decision.action)
         self.assertTrue(decision.should_invoke_codex)
 
+    def test_stale_watchdog_pid_with_fresh_active_worker_observes_before_blocked_revisit_restart(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            daemon_dir = repo / "ppd" / "daemon"
+            daemon_dir.mkdir(parents=True)
+            (daemon_dir / "task-board.md").write_text(
+                "- [!] Task checkbox-9350: Add blocked PP&D reassessment coverage.\n",
+                encoding="utf-8",
+            )
+            (daemon_dir / "ppd-daemon.pid").write_text("99999999\n", encoding="utf-8")
+            atomic_write_json(
+                daemon_dir / "status.json",
+                {
+                    "updated_at": "2026-05-08T22:36:55Z",
+                    "active_state": "calling_llm",
+                    "active_state_started_at": "2026-05-08T22:36:55Z",
+                    "active_target_task": "Task checkbox-9350: Add blocked PP&D reassessment coverage.",
+                    "pid": os.getpid(),
+                },
+            )
+            atomic_write_json(daemon_dir / "progress.json", {"latest": {"failure_kind": "llm"}})
+
+            decision = diagnose(
+                SupervisorConfig(
+                    repo_root=repo,
+                    revisit_blocked_tasks=True,
+                    reassess_blocked_llm_termination_gates=True,
+                ),
+                now=datetime(2026, 5, 8, 22, 37, 5, tzinfo=timezone.utc),
+            )
+
+        self.assertEqual("observe", decision.action)
+        self.assertFalse(decision.should_restart_daemon)
+        self.assertIn("actively working", decision.reason)
+
+    def test_fresh_active_status_without_live_daemon_restarts_blocked_revisit(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            daemon_dir = repo / "ppd" / "daemon"
+            daemon_dir.mkdir(parents=True)
+            (daemon_dir / "task-board.md").write_text(
+                "- [!] Task checkbox-9350: Add blocked PP&D reassessment coverage.\n",
+                encoding="utf-8",
+            )
+            (daemon_dir / "ppd-daemon.pid").write_text("99999999\n", encoding="utf-8")
+            atomic_write_json(
+                daemon_dir / "status.json",
+                {
+                    "updated_at": "2026-05-08T22:36:55Z",
+                    "active_state": "calling_llm",
+                    "active_state_started_at": "2026-05-08T22:36:55Z",
+                    "active_target_task": "Task checkbox-9350: Add blocked PP&D reassessment coverage.",
+                    "pid": 99999999,
+                },
+            )
+            atomic_write_json(daemon_dir / "progress.json", {"latest": {"failure_kind": "llm"}})
+
+            decision = diagnose(
+                SupervisorConfig(
+                    repo_root=repo,
+                    revisit_blocked_tasks=True,
+                    reassess_blocked_llm_termination_gates=True,
+                ),
+                now=datetime(2026, 5, 8, 22, 37, 5, tzinfo=timezone.utc),
+            )
+
+        self.assertEqual("restart_daemon", decision.action)
+        self.assertTrue(decision.should_restart_daemon)
+
     def test_replenishment_reopens_manual_comprehensive_goal_before_generated_continuation(self) -> None:
         board = (
             "## Manual Comprehensive PP&D Goal Handoff Tranche\n\n"

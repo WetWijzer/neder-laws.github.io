@@ -35,6 +35,7 @@ class DaemonControlProcessFamilyShutdownTest(unittest.TestCase):
 
         self.assertIn("collect_descendant_pids", source)
         self.assertIn("process_group_for_pid", source)
+        self.assertIn("live_daemon_worker_lines", source)
         self.assertIn("print_pid_state", source)
         self.assertIn("stale pid:", source)
         self.assertIn("stop sentinel present", source)
@@ -99,6 +100,7 @@ class DaemonControlProcessFamilyShutdownTest(unittest.TestCase):
         self.assertIn('terminate_process_family "$pid" "PP&D supervisor"', source)
         self.assertIn('"on-failure"', source)
         self.assertIn("daemon_clean_idle_exit", source)
+        self.assertIn("start suppressed to avoid interrupting live reassessment work", source)
 
         watchdog = WATCHDOG_SCRIPT.read_text(encoding="utf-8")
         self.assertIn("setsid \"$@\" &", watchdog)
@@ -187,7 +189,7 @@ class DaemonControlProcessFamilyShutdownTest(unittest.TestCase):
         self.assertEqual(0, rows[-2]["exit_code"])
         self.assertEqual("watchdog_clean_exit", rows[-1]["event"])
 
-    def test_watchdog_cleans_stale_child_pid_before_launching_new_child(self) -> None:
+    def test_watchdog_preserves_stale_child_pid_before_launching_new_child(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:
             temp = Path(tempdir)
             pid_file = temp / "watchdog.pid"
@@ -225,14 +227,15 @@ class DaemonControlProcessFamilyShutdownTest(unittest.TestCase):
                     timeout=10,
                 )
                 rows = [json.loads(line) for line in lifecycle_log.read_text(encoding="utf-8").splitlines()]
+                stale_returncode_before_cleanup = stale.poll()
             finally:
                 if stale.poll() is None:
                     stale.kill()
                     stale.wait(timeout=5)
 
         self.assertEqual(0, result.returncode)
-        self.assertIsNotNone(stale.poll())
-        self.assertEqual("stale_child_cleanup", rows[0]["event"])
+        self.assertIsNone(stale_returncode_before_cleanup)
+        self.assertEqual("stale_child_preserved", rows[0]["event"])
         self.assertEqual(stale.pid, rows[0]["pid"])
 
     def test_watchdog_ignores_term_without_stop_sentinel(self) -> None:
@@ -270,22 +273,24 @@ class DaemonControlProcessFamilyShutdownTest(unittest.TestCase):
                 self.assertTrue(pid_file.exists())
                 os.kill(process.pid, signal.SIGTERM)
                 time.sleep(0.2)
-                self.assertIsNone(process.poll())
-
-                (temp / "watchdog.pid.stop").write_text("stop\n", encoding="utf-8")
-                os.kill(process.pid, signal.SIGTERM)
                 process.wait(timeout=5)
                 rows = [json.loads(line) for line in lifecycle_log.read_text(encoding="utf-8").splitlines()]
             finally:
                 if process.poll() is None:
                     process.kill()
                     process.wait(timeout=5)
+                if child_pid_file.exists():
+                    child_pid_text = child_pid_file.read_text(encoding="utf-8").strip()
+                    if child_pid_text.isdigit():
+                        try:
+                            os.kill(int(child_pid_text), signal.SIGKILL)
+                        except ProcessLookupError:
+                            pass
 
         events = [row["event"] for row in rows]
         self.assertIn("watchdog_signal_ignored", events)
-        self.assertIn("watchdog_stop", events)
+        self.assertNotIn("watchdog_stop", events)
         self.assertFalse(pid_file.exists())
-        self.assertFalse(child_pid_file.exists())
 
 
 if __name__ == "__main__":

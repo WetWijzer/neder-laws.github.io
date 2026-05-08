@@ -214,6 +214,11 @@ process_running() {
   [[ -n "$pid" ]] && ps -p "$pid" >/dev/null 2>&1
 }
 
+live_daemon_worker_lines() {
+  ps -eo pid=,ppid=,sid=,etime=,cmd= |
+    awk '/python3 ppd\/daemon\/ppd_daemon.py --apply --watch/ {print}'
+}
+
 print_pid_state() {
   local label="$1"
   local pid_file="$2"
@@ -403,6 +408,14 @@ start() {
       echo "PP&D daemon systemd unit already running: $unit_pid"
       return 0
     fi
+  fi
+
+  local live_workers
+  live_workers="$(live_daemon_worker_lines)"
+  if [[ -n "$live_workers" ]]; then
+    echo "PP&D daemon already running; start suppressed to avoid interrupting live reassessment work."
+    echo "$live_workers" | sed -n '1,2p'
+    return 0
   fi
 
   sweep_unwatched_ppd_daemon_children
