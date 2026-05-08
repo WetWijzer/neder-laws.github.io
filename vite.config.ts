@@ -1,12 +1,21 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import path from 'node:path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/',
   plugins: [react()],
+  resolve: {
+    alias: {
+      'onnxruntime-web': path.resolve(__dirname, 'node_modules/onnxruntime-web/dist/ort.webgpu.bundle.min.mjs'),
+    },
+  },
   server: {
     allowedHosts: ['portland-laws.github.io', 'localhost', '127.0.0.1'],
+    watch: {
+      ignored: ['**/ppd/**', '**/ipfs_datasets_py/**', '**/.cache/**', '**/dist/**'],
+    },
     headers: {
       // Enable SharedArrayBuffer for WebAssembly threading
       'Cross-Origin-Embedder-Policy': 'require-corp',
@@ -22,8 +31,12 @@ export default defineConfig({
       },
     },
   },
+  worker: {
+    format: 'es',
+  },
   optimizeDeps: {
-    exclude: ['@xenova/transformers'], // Exclude transformers.js from pre-bundling to avoid issues with WASM
+    entries: ['index.html'],
+    exclude: ['@huggingface/transformers'], // Exclude transformers.js from pre-bundling to avoid issues with WASM
   },
   // define: {
   //   global: 'globalThis', // Commented out to avoid breaking module name resolution

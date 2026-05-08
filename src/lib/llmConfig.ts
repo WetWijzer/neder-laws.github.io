@@ -40,7 +40,7 @@ export const SUPPORTED_MODELS = {
     quantized: true,
     simdOptimized: true
   },
-  'onnx-community/Llama-3.2-1B-Instruct': {
+  'onnx-community/Llama-3.2-1B-Instruct-ONNX': {
     name: 'Llama 3.2 1B Instruct',
     size: '637MB', 
     requiresWebGPU: true,
@@ -50,7 +50,7 @@ export const SUPPORTED_MODELS = {
     quantized: false,
     simdOptimized: true
   },
-  'onnx-community/Llama-3.2-3B-Instruct': {
+  'onnx-community/Llama-3.2-3B-Instruct-ONNX': {
     name: 'Llama 3.2 3B Instruct',
     size: '1.9GB',
     requiresWebGPU: true,
@@ -79,38 +79,18 @@ export const SUPPORTED_MODELS = {
     type: 'conversational',
     quantized: true,
     simdOptimized: true
-  },
-  'webml-community/qwen3-webgpu': {
-    name: 'Qwen3 WebGPU',
-    size: '2.8GB',
-    requiresWebGPU: true,
-    contextLength: 4096,
-    description: 'Advanced Qwen3 model optimized for WebGPU inference',
-    type: 'instruct',
-    quantized: false,
-    simdOptimized: true
-  },
-  'webml-community/deepseek-r1-webgpu': {
-    name: 'DeepSeek R1 WebGPU',
-    size: '3.2GB',
-    requiresWebGPU: true,
-    contextLength: 4096,
-    description: 'High-performance DeepSeek R1 model with WebGPU acceleration',
-    type: 'instruct',
-    quantized: false,
-    simdOptimized: true
   }
 } as const;
 
 // Device capability requirements
 export const MODEL_REQUIREMENTS = {
-  'onnx-community/Llama-3.2-3B-Instruct': {
+  'onnx-community/Llama-3.2-3B-Instruct-ONNX': {
     minRAM: 8192, // MB
     minStorage: 2048, // MB
     requiresWebGPU: true,
     preferredCores: 8
   },
-  'onnx-community/Llama-3.2-1B-Instruct': {
+  'onnx-community/Llama-3.2-1B-Instruct-ONNX': {
     minRAM: 4096, // MB
     minStorage: 1024, // MB
     requiresWebGPU: true,
@@ -133,18 +113,6 @@ export const MODEL_REQUIREMENTS = {
     minStorage: 128, // MB
     requiresWebGPU: false,
     preferredCores: 1
-  },
-  'webml-community/qwen3-webgpu': {
-    minRAM: 6144, // MB
-    minStorage: 3072, // MB
-    requiresWebGPU: true,
-    preferredCores: 6
-  },
-  'webml-community/deepseek-r1-webgpu': {
-    minRAM: 6144, // MB
-    minStorage: 3584, // MB
-    requiresWebGPU: true,
-    preferredCores: 6
   }
 } as const;
 

@@ -31,7 +31,7 @@ export default function LLMTestComponent({ className = '' }: LLMTestComponentPro
       addTestResult(`Recommended model for this device: ${recommendedModel}`);
 
       // Test 3: Test model compatibility
-      for (const modelName of ['onnx-community/Llama-3.2-1B-Instruct', 'onnx-community/Llama-3.2-3B-Instruct']) {
+      for (const modelName of ['onnx-community/Llama-3.2-1B-Instruct-ONNX', 'onnx-community/Llama-3.2-3B-Instruct-ONNX']) {
         const compatibility = await clientLLM.validateModelCompatibility(modelName);
         addTestResult(`${modelName}: ${compatibility.compatible ? 'Compatible' : `Incompatible - ${compatibility.reason}`}`);
       }
@@ -63,11 +63,11 @@ export default function LLMTestComponent({ className = '' }: LLMTestComponentPro
       // Test 7: If WebGPU is available and we're not using a WebGPU model, try to load one
       const currentModelConfig = clientLLM.getCurrentModelConfig();
       if (!currentModelConfig?.requiresWebGPU) {
-        const webgpuCompatible = await clientLLM.validateModelCompatibility('onnx-community/Llama-3.2-1B-Instruct');
+        const webgpuCompatible = await clientLLM.validateModelCompatibility('onnx-community/Llama-3.2-1B-Instruct-ONNX');
         if (webgpuCompatible.compatible) {
           addTestResult('Device supports WebGPU models. Testing Llama 1B...');
-          await clientLLM.switchModel('onnx-community/Llama-3.2-1B-Instruct');
-          setCurrentModel('onnx-community/Llama-3.2-1B-Instruct');
+          await clientLLM.switchModel('onnx-community/Llama-3.2-1B-Instruct-ONNX');
+          setCurrentModel('onnx-community/Llama-3.2-1B-Instruct-ONNX');
           
           const webgpuResponse = await clientLLM.generateResponse('What is artificial intelligence?', 50);
           addTestResult(`Llama 1B response: "${webgpuResponse}"`);

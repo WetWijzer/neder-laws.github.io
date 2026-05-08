@@ -1,4 +1,4 @@
-import { pipeline, TextGenerationPipeline, env } from '@xenova/transformers';
+import type { TextGenerationPipeline } from '@huggingface/transformers';
 import { LLM_CONFIG, SUPPORTED_MODELS } from './llmConfig';
 import { backendDetector } from './backendDetection';
 
@@ -20,9 +20,22 @@ class ClientLLMService {
   private isLoading = false;
   private currentModel: string = LLM_CONFIG.CLIENT_MODEL;
   private supportedModels = SUPPORTED_MODELS;
+  private transformersPromise: Promise<{ pipeline: any; env: any }> | null = null;
 
   constructor() {
     // Models are now loaded from centralized config
+  }
+
+  private async getTransformers() {
+    if (!this.transformersPromise) {
+      this.transformersPromise = (async () => {
+        const transformers = await import('@huggingface/transformers');
+        transformers.env.allowLocalModels = false;
+        transformers.env.useBrowserCache = true;
+        return { pipeline: transformers.pipeline, env: transformers.env };
+      })();
+    }
+    return this.transformersPromise;
   }
 
   async initialize(modelName?: string): Promise<void> {
@@ -43,6 +56,7 @@ class ClientLLMService {
         
         if (!webgpuDiagnostics.available) {
           console.warn(`Model ${targetModel} requires WebGPU but it's not available. Falling back to DistilGPT-2.`);
+          this.isLoading = false;
           return this.initialize('Xenova/distilgpt2');
         }
         
@@ -55,9 +69,6 @@ class ClientLLMService {
             suitableForLargeModels: webgpuDiagnostics.suitableForLargeModels
           });
         }
-      } else if (!capabilities.webgpu) {
-        console.warn(`Model ${targetModel} requires WebGPU but it's not available. Falling back to DistilGPT-2.`);
-        return this.initialize('Xenova/distilgpt2');
       }
 
       // Configure transformers.js for optimal performance
@@ -68,12 +79,13 @@ class ClientLLMService {
         
         if (!webgpuInit.success) {
           console.warn(`WebGPU initialization failed: ${webgpuInit.message}. Falling back to DistilGPT-2.`);
+          this.isLoading = false;
           return this.initialize('Xenova/distilgpt2');
         }
 
         // Set execution providers for ONNX Runtime with better error handling
         try {
-          const { env } = await import('@xenova/transformers');
+          const { env } = await this.getTransformers();
           if (env.backends?.onnx) {
             // Set WebGPU as the preferred execution provider with CPU as final fallback
             (env.backends.onnx as any).executionProviders = ['webgpu', 'wasm', 'cpu'];
@@ -95,7 +107,7 @@ class ClientLLMService {
       } else {
         // Use WASM/CPU fallback
         try {
-          const { env } = await import('@xenova/transformers');
+          const { env } = await this.getTransformers();
           if (env.backends?.onnx) {
             (env.backends.onnx as any).executionProviders = ['wasm', 'cpu'];
             if (env.backends.onnx.wasm) {
@@ -108,7 +120,7 @@ class ClientLLMService {
       }
 
       // Import env for thread configuration
-      const { env } = await import('@xenova/transformers');
+      const { env, pipeline } = await this.getTransformers();
       
       // Set appropriate thread count based on device capabilities
       if (capabilities.threads && env.backends?.onnx?.wasm) {
@@ -118,22 +130,22 @@ class ClientLLMService {
       console.log(`Initializing ${modelConfig?.name || targetModel}...`);
       
       // Configure pipeline options based on available backends
-      const pipelineOptions: any = {
-        quantized: !modelConfig?.requiresWebGPU, // Use quantization for non-WebGPU models
-      };
+      const pipelineOptions: any = {};
 
       // If WebGPU is available and model requires it, configure WebGPU device
       if (capabilities.webgpu && modelConfig?.requiresWebGPU) {
         pipelineOptions.device = 'webgpu'; // Use WebGPU device
-        pipelineOptions.dtype = 'fp16'; // Use half precision for WebGPU to save memory
-        console.log('Configuring pipeline for WebGPU with FP16 precision');
+        pipelineOptions.dtype = 'q4'; // Use quantized WebGPU weights to save browser memory
+        console.log('Configuring pipeline for WebGPU with q4 precision');
       } else if (capabilities.wasm) {
         pipelineOptions.device = 'wasm'; // Explicitly use WASM
+        pipelineOptions.dtype = modelConfig?.quantized ? 'q8' : undefined;
         console.log('Configuring pipeline for WASM backend');
       }
 
+      const createPipeline = pipeline as any;
       try {
-        this.textGenerator = await pipeline('text-generation', targetModel, pipelineOptions) as TextGenerationPipeline;
+        this.textGenerator = await createPipeline('text-generation', targetModel, pipelineOptions) as TextGenerationPipeline;
         this.currentModel = targetModel;
         console.log(`Successfully loaded ${modelConfig?.name || targetModel}`);
       } catch (pipelineError) {
@@ -145,12 +157,11 @@ class ClientLLMService {
           const fallbackOptions = {
             ...pipelineOptions,
             device: 'wasm',
-            quantized: true, // Use quantization for WASM fallback
+            dtype: 'q8',
           };
-          delete fallbackOptions.dtype; // Remove WebGPU-specific options
           
           try {
-            this.textGenerator = await pipeline('text-generation', targetModel, fallbackOptions) as TextGenerationPipeline;
+            this.textGenerator = await createPipeline('text-generation', targetModel, fallbackOptions) as TextGenerationPipeline;
             this.currentModel = targetModel;
             console.log(`Successfully loaded ${modelConfig?.name || targetModel} with WASM fallback`);
           } catch (fallbackError) {
@@ -167,6 +178,7 @@ class ClientLLMService {
       // Fallback to smaller model if large model fails
       if (targetModel !== 'Xenova/distilgpt2') {
         console.log('Falling back to DistilGPT-2...');
+        this.isLoading = false;
         return this.initialize('Xenova/distilgpt2');
       }
       
@@ -191,20 +203,16 @@ class ClientLLMService {
                              modelConfig?.type === 'instruct';
       
       // Format prompt appropriately for instruction models
-      let formattedPrompt = prompt;
+      let formattedPrompt: string | Array<{ role: string; content: string }> = prompt;
       
       if (isInstructModel) {
-        // Handle different instruction model formats
-        if (this.currentModel.includes('qwen3') || this.currentModel.includes('deepseek')) {
-          // Use a more generic instruction format for WebML community models
-          formattedPrompt = `<|im_start|>user\n${prompt}<|im_end|>\n<|im_start|>assistant\n`;
-        } else {
-          // Use Llama format for Llama models
-          formattedPrompt = `<|start_header_id|>user<|end_header_id|>\n\n${prompt}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n`;
-        }
+        formattedPrompt = [
+          { role: 'system', content: 'You are a concise, helpful assistant.' },
+          { role: 'user', content: prompt },
+        ];
       }
 
-      const response = await this.textGenerator(formattedPrompt, {
+      const response = await this.textGenerator(formattedPrompt as any, {
         max_new_tokens: maxTokens,
         temperature: isInstructModel ? 0.6 : 0.7,
         do_sample: true,
@@ -214,17 +222,10 @@ class ClientLLMService {
       }) as any;
 
       // Extract the generated text, removing the input prompt
-      const fullText = Array.isArray(response) ? response[0].generated_text : response.generated_text;
-      let generatedText = fullText.substring(formattedPrompt.length).trim();
+      let generatedText = this.extractGeneratedText(response, formattedPrompt);
       
       // Clean up instruction model responses
-      if (isInstructModel) {
-        if (this.currentModel.includes('qwen3') || this.currentModel.includes('deepseek')) {
-          generatedText = generatedText.split('<|im_end|>')[0].trim();
-        } else {
-          generatedText = generatedText.split('<|eot_id|>')[0].trim();
-        }
-      }
+      generatedText = generatedText.split('<|im_end|>')[0].split('<|eot_id|>')[0].trim();
       
       return generatedText;
     } catch (error) {
@@ -268,6 +269,22 @@ class ClientLLMService {
     response = this.cleanResponse(response, characterName, otherCharacterName);
     
     return response;
+  }
+
+  private extractGeneratedText(response: any, formattedPrompt: string | Array<{ role: string; content: string }>): string {
+    const first = Array.isArray(response) ? response[0] : response;
+    const generated = first?.generated_text;
+
+    if (Array.isArray(generated)) {
+      const lastMessage = generated[generated.length - 1];
+      return String(lastMessage?.content || '').trim();
+    }
+
+    const fullText = String(generated || '');
+    if (typeof formattedPrompt === 'string' && fullText.startsWith(formattedPrompt)) {
+      return fullText.slice(formattedPrompt.length).trim();
+    }
+    return fullText.trim();
   }
 
   private cleanResponse(response: string, characterName: string, otherCharacterName?: string): string {
@@ -327,6 +344,7 @@ class ClientLLMService {
     }
 
     // Clear current generator and initialize new model
+    this.textGenerator?.dispose?.();
     this.textGenerator = null;
     await this.initialize(modelName);
   }
@@ -343,11 +361,11 @@ class ClientLLMService {
     if (capabilities.webgpu && memoryMB > 8000) {
       // High-end device: can handle 3B model
       console.log('Recommending Llama 3.2 3B for high-end device with WebGPU');
-      return 'onnx-community/Llama-3.2-3B-Instruct';
+      return 'onnx-community/Llama-3.2-3B-Instruct-ONNX';
     } else if (capabilities.webgpu && memoryMB > 4000) {
       // Mid-range device: 1B model
       console.log('Recommending Llama 3.2 1B for mid-range device with WebGPU');
-      return 'onnx-community/Llama-3.2-1B-Instruct';
+      return 'onnx-community/Llama-3.2-1B-Instruct-ONNX';
     } else if (capabilities.simd && memoryMB > 2000) {
       // SIMD-capable device: medium model
       console.log('Recommending LaMini-GPT 774M for SIMD-capable device');

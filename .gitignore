@@ -9,7 +9,7 @@ game/node_modules/
 # testing
 /coverage
 /playwright-report
-
+.cache/
 # next.js
 /.next/
 /out/

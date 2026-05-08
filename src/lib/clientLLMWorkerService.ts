@@ -31,6 +31,13 @@ class ClientLLMWorkerService {
 
   private handleWorkerMessage(event: MessageEvent): void {
     const { id, success, data, error } = event.data;
+    if (data?.diagnostic || data?.progress) {
+      const eventName = data.diagnostic ? 'clientLLMDiagnostic' : 'clientLLMProgress';
+      console.debug(`[ClientLLMWorkerService] ${eventName}`, data.diagnostic || data.progress);
+      window.dispatchEvent(new CustomEvent(eventName, { detail: data.diagnostic || data.progress }));
+      return;
+    }
+
     const pendingRequest = this.pendingRequests.get(id);
     
     if (pendingRequest) {
@@ -75,7 +82,7 @@ class ClientLLMWorkerService {
           this.pendingRequests.delete(id);
           reject(new Error('Worker request timeout'));
         }
-      }, type === 'initialize' || type === 'switchModel' ? 120000 : 45000); // 2min for init, 45s for generation
+      }, type === 'initialize' || type === 'switchModel' ? 900000 : 120000); // 15min for large model init, 2min for generation
 
       const originalResolve = resolve;
       const originalReject = reject;
@@ -134,6 +141,7 @@ class ClientLLMWorkerService {
       const result = await this.sendWorkerRequest('switchModel', { modelName });
       this.currentModel = result.modelName;
       this.capabilities = result.capabilities;
+      this.isInitialized = true;
       console.log(`Switched to model: ${result.modelName}`);
     } catch (error) {
       console.error('Failed to switch model:', error);

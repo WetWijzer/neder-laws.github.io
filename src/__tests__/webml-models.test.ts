@@ -2,14 +2,14 @@
  * @jest-environment jsdom
  */
 
-describe('WebML Community Models', () => {
-  test('should have correct model keys for Qwen3 and DeepSeek R1', () => {
-    // Test the expected model IDs exist as strings
-    const expectedQwenKey = 'webml-community/qwen3-webgpu';
-    const expectedDeepSeekKey = 'webml-community/deepseek-r1-webgpu';
+describe('WebGPU Language Models', () => {
+  test('should have correct model keys for Llama ONNX WebGPU models', () => {
+    // These model IDs correspond to live Hugging Face repos with transformers.js support.
+    const expectedLlama1BKey = 'onnx-community/Llama-3.2-1B-Instruct-ONNX';
+    const expectedLlama3BKey = 'onnx-community/Llama-3.2-3B-Instruct-ONNX';
     
-    expect(expectedQwenKey).toBe('webml-community/qwen3-webgpu');
-    expect(expectedDeepSeekKey).toBe('webml-community/deepseek-r1-webgpu');
+    expect(expectedLlama1BKey).toBe('onnx-community/Llama-3.2-1B-Instruct-ONNX');
+    expect(expectedLlama3BKey).toBe('onnx-community/Llama-3.2-3B-Instruct-ONNX');
   });
 
   test('should define expected model properties structure', () => {
@@ -33,9 +33,9 @@ describe('WebML Community Models', () => {
   });
 
   test('should validate model context length expectations', () => {
-    const expectedContextLength = 4096;
+    const expectedContextLength = 2048;
     
-    expect(expectedContextLength).toBeGreaterThanOrEqual(4096);
+    expect(expectedContextLength).toBeGreaterThanOrEqual(2048);
     expect(expectedContextLength).toBeLessThanOrEqual(32768); // Reasonable upper bound
   });
 

@@ -33,7 +33,7 @@ export default function ModelSelector({ className = '' }: ModelSelectorProps) {
       
       // Determine recommended model based on capabilities
       if (caps.webgpu) {
-        setRecommendedModel('onnx-community/Llama-3.2-1B-Instruct');
+        setRecommendedModel('onnx-community/Llama-3.2-1B-Instruct-ONNX');
       } else if (caps.simd) {
         setRecommendedModel('Xenova/LaMini-GPT-774M');
       } else {

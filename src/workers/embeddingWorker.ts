@@ -1,8 +1,3 @@
-import { env, pipeline } from '@xenova/transformers';
-
-env.allowLocalModels = false;
-env.useBrowserCache = true;
-
 type EmbeddingRequest =
   | {
       id: string;
@@ -31,6 +26,19 @@ const DEFAULT_EMBEDDING_MODEL = 'Xenova/gte-small';
 let extractor: any = null;
 let currentModelName = DEFAULT_EMBEDDING_MODEL;
 let initializePromise: Promise<void> | null = null;
+let transformersPromise: Promise<{ pipeline: any; env: any }> | null = null;
+
+async function getTransformers() {
+  if (!transformersPromise) {
+    transformersPromise = (async () => {
+      const transformers = await import('@huggingface/transformers');
+      transformers.env.allowLocalModels = false;
+      transformers.env.useBrowserCache = true;
+      return { pipeline: transformers.pipeline, env: transformers.env };
+    })();
+  }
+  return transformersPromise;
+}
 
 async function initialize(modelName = DEFAULT_EMBEDDING_MODEL) {
   if (extractor && currentModelName === modelName) {
@@ -38,9 +46,9 @@ async function initialize(modelName = DEFAULT_EMBEDDING_MODEL) {
   }
 
   if (!initializePromise) {
-    initializePromise = pipeline('feature-extraction', modelName, {
-      quantized: true,
-    }).then((pipe) => {
+    initializePromise = getTransformers().then(({ pipeline }) => pipeline('feature-extraction', modelName, {
+      dtype: 'q8',
+    })).then((pipe: any) => {
       extractor = pipe;
       currentModelName = modelName;
     });

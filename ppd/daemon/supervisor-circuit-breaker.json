@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-05-07T01:05:22.927502Z",
+  "createdAt": "2026-05-08T18:17:45.796049Z",
   "decision": {
     "action": "plan_next_tasks",
     "reason": "generated blocked-cascade repair budget is exhausted but all generated repair tasks are already parked; review the original PP&D goal and append source-backed deterministic continuation work instead of opening another circuit breaker",
@@ -7,10 +7,10 @@
   },
   "operatorAction": "The supervisor found generated blocked-cascade work already parked and converted the old circuit-breaker state into source-backed deterministic continuation tasks.",
   "recoveryTaskLabels": [
-    "checkbox-9346",
-    "checkbox-9347",
-    "checkbox-9348",
-    "checkbox-9349"
+    "checkbox-9464",
+    "checkbox-9465",
+    "checkbox-9466",
+    "checkbox-9467"
   ],
   "repairKind": "termination_storm_recovered",
   "schemaVersion": 1

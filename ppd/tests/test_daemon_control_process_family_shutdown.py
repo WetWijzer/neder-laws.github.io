@@ -239,6 +239,8 @@ class DaemonControlProcessFamilyShutdownTest(unittest.TestCase):
             pid_file = temp / "watchdog.pid"
             child_pid_file = temp / "child.pid"
             lifecycle_log = temp / "lifecycle.jsonl"
+            env = os.environ.copy()
+            env.pop("PPD_WATCHDOG_HONOR_TERM", None)
             process = subprocess.Popen(
                 [
                     "bash",
@@ -253,6 +255,7 @@ class DaemonControlProcessFamilyShutdownTest(unittest.TestCase):
                     "sleep 30",
                 ],
                 cwd=REPO_ROOT,
+                env=env,
                 text=True,
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,

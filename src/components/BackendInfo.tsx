@@ -90,7 +90,7 @@ export default function BackendInfo({ className = '' }: BackendInfoProps) {
       alert('Starting Llama 1B test. This will download ~637MB. Check console for progress...');
       
       console.log('Testing Llama 1B model with WebGPU...');
-      await clientLLM.switchModel('onnx-community/Llama-3.2-1B-Instruct');
+      await clientLLM.switchModel('onnx-community/Llama-3.2-1B-Instruct-ONNX');
       
       const testPrompt = 'Hello, how are you today?';
       console.log(`Testing with prompt: "${testPrompt}"`);
