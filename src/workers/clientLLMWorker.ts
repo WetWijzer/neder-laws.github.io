@@ -12,6 +12,7 @@ let currentModelName = '';
 let webGPUSupported = false;
 let simdSupported = false;
 let transformersPromise: Promise<{ pipeline: any; env: any }> | null = null;
+const progressMilestones = new Map<string, number>();
 
 // Global WebGPU detection cache to prevent repeated adapter requests
 let webGPUDetectionCache: { result: boolean; timestamp: number; } | null = null;
@@ -65,10 +66,22 @@ function emitProgress(info: any, requestId?: string) {
     loaded: info?.loaded,
     total: info?.total,
   };
-  if (payload.status === 'progress') {
-    console.log(`[Worker][LLM] download ${payload.file || payload.name}: ${Number(payload.progress || 0).toFixed(1)}%`);
+  const progressKey = `${requestId || 'global'}:${payload.file || payload.name || payload.status || 'unknown'}`;
+
+  if (payload.status === 'progress' || payload.status === 'progress_total') {
+    const progress = Number(payload.progress || 0);
+    const milestone = Math.min(100, Math.floor(progress / 5) * 5);
+    const lastMilestone = progressMilestones.get(progressKey);
+    if (lastMilestone === milestone && progress < 100) {
+      return;
+    }
+    progressMilestones.set(progressKey, milestone);
+    console.log(`[Worker][LLM] download ${payload.file || payload.name || 'total'}: ${progress.toFixed(1)}%`);
   } else {
     console.log(`[Worker][LLM] ${payload.status}`, payload);
+    if (payload.status === 'done' && payload.file) {
+      progressMilestones.delete(progressKey);
+    }
   }
   self.postMessage({ id: `progress_${Date.now()}_${Math.random().toString(36).slice(2)}`, success: true, data: { progress: payload } });
 }
@@ -205,7 +218,7 @@ async function configureEnvironment(modelName: string) {
           (env.backends as any).webgpu.enabled = true;
           console.log('[Worker] WebGPU backend enabled');
         } else {
-          console.log('[Worker] WebGPU not available in this Transformers.js version');
+          console.log('[Worker] WebGPU backend flag not exposed; continuing with device="webgpu"');
         }
       } catch (e) {
         console.log('[Worker] WebGPU configuration not available');
@@ -327,7 +340,7 @@ async function initializeLLM(modelName: string = 'Xenova/distilgpt2', requestId?
     // Set device preference with better error handling and large model optimizations
     if (modelConfig?.requiresWebGPU && webGPUSupported) {
       pipelineOptions.device = 'webgpu';
-      pipelineOptions.dtype = 'q4'; // Quantized WebGPU path keeps browser memory pressure manageable.
+      pipelineOptions.dtype = (modelConfig as any)?.preferredDtype || 'q4'; // Quantized WebGPU path keeps browser memory pressure manageable.
       
       // Additional WebGPU optimizations for large models
       pipelineOptions.webgpu_options = {
@@ -421,7 +434,8 @@ async function generateText(prompt: string, maxTokens: number = 50, requestId?: 
 
   try {
     const modelConfig = supportedModels[currentModelName as keyof typeof SUPPORTED_MODELS];
-    const isInstructModel = currentModelName.includes('Instruct') || 
+    const isInstructModel = currentModelName.includes('Instruct') ||
+                           currentModelName.includes('Thinking') ||
                            modelConfig?.type === 'instruct';
     
     // Format prompt appropriately for instruction models
@@ -438,14 +452,23 @@ async function generateText(prompt: string, maxTokens: number = 50, requestId?: 
     const generationConfig: any = {
       max_new_tokens: maxTokens,
       do_sample: true,
-      pad_token_id: isInstructModel ? 128001 : 50256, // Llama vs GPT-2 pad tokens
     };
+    const padTokenId = (modelConfig as any)?.padTokenId;
+    if (padTokenId !== undefined) {
+      generationConfig.pad_token_id = padTokenId;
+    } else if (!isInstructModel) {
+      generationConfig.pad_token_id = 50256;
+    } else if (currentModelName.includes('Llama')) {
+      generationConfig.pad_token_id = 128001;
+    }
 
     // Configure generation parameters based on model type
     if (isInstructModel) {
-      // Optimized settings for Llama Instruct models
-      generationConfig.temperature = 0.6;
-      generationConfig.top_p = 0.9;
+      // Optimized settings for instruction-tuned models
+      generationConfig.temperature = 0.1;
+      if (currentModelName.includes('Thinking')) {
+        generationConfig.top_p = 0.1;
+      }
       generationConfig.repetition_penalty = 1.05;
       generationConfig.top_k = 50;
     } else {
@@ -466,6 +489,8 @@ async function generateText(prompt: string, maxTokens: number = 50, requestId?: 
       maxTokens,
       isInstructModel,
       webGPU: webGPUSupported,
+      device: modelConfig?.requiresWebGPU && webGPUSupported ? 'webgpu' : 'wasm',
+      stopTokens: (modelConfig as any)?.stopTokens,
     }, requestId);
 
     const result = await textGenerator(formattedPrompt as any, generationConfig);
@@ -475,9 +500,10 @@ async function generateText(prompt: string, maxTokens: number = 50, requestId?: 
     
     // Clean up instruction model responses
     newText = newText
-      .split('<|im_end|>')[0]
-      .split('<|eot_id|>')[0]
       .trim();
+    for (const token of ((modelConfig as any)?.stopTokens || ['<|im_end|>', '<|eot_id|>'])) {
+      newText = newText.split(token)[0].trim();
+    }
     
     // Remove potential repetition or incomplete sentences for better quality
     newText = cleanGeneratedText(newText);

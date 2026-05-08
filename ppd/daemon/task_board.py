@@ -18,7 +18,7 @@ from ipfs_datasets_py.optimizers.todo_daemon.task_board import (
     update_generated_status_block as update_todo_generated_status_block,
 )
 
-from ppd.daemon.failure_policy import pre_llm_block_decision
+from ppd.daemon.failure_policy import has_llm_termination_block, pre_llm_block_decision
 
 
 CHECKBOX_RE = re.compile(r"^(?P<prefix>\s*-\s+\[)(?P<mark>[ xX~!])(?P<suffix>\]\s+)(?P<title>.+)$")
@@ -72,10 +72,22 @@ def select_task_for_config(tasks: Iterable[Task], config: Any) -> Optional[Task]
         if task.checkbox_id in PROTECTED_BLOCKED_REVISIT_CHECKBOX_IDS:
             continue
         try:
+            if (
+                getattr(config, "revisit_blocked_ignore_failure_gates", False)
+                and has_llm_termination_block(config, task.label)
+            ):
+                continue
             block_decision = pre_llm_block_decision(config, task.label)
         except Exception:
+            if getattr(config, "revisit_blocked_ignore_failure_gates", False):
+                return task
             continue
         if block_decision is not None:
+            if (
+                getattr(config, "revisit_blocked_ignore_failure_gates", False)
+                and block_decision.failure_kind != "llm_termination"
+            ):
+                return task
             continue
         return task
     return None

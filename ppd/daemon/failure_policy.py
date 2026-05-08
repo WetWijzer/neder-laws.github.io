@@ -53,7 +53,8 @@ FORBIDDEN_ABSENCE_MARKERS = (
 
 
 def exception_diagnostic(exc: BaseException, *, limit: int = 5000) -> str:
-    return todo_exception_diagnostic(exc, limit=limit)
+    detail = todo_exception_diagnostic(exc, limit=limit)
+    return f"{type(exc).__name__}: {exc}; {detail}"
 
 
 def is_retryable_failure(proposal: Proposal) -> bool:
@@ -140,6 +141,14 @@ def llm_termination_failure_count(config: Any, task_label: str) -> int:
         recent_task_failures(config, task_label, limit=100),
         failure_kind="llm",
         markers=frozenset(LLM_TERMINATION_ERROR_MARKERS),
+    )
+
+
+def has_llm_termination_block(config: Any, task_label: str) -> bool:
+    termination_probe = Proposal(failure_kind="llm_termination")
+    return llm_termination_failure_count(config, task_label) >= failure_block_threshold(
+        termination_probe,
+        config,
     )
 
 

@@ -3,7 +3,7 @@ export const LLM_CONFIG = {
   // Set to 'client' for browser-based inference, 'server' for traditional API-based inference
   INFERENCE_MODE: (import.meta.env.VITE_LLM_INFERENCE_MODE as 'client' | 'server') || 'client',
   
-  // Client-side model configuration - now supports Llama models
+  // Client-side model configuration - default stays small; WebGPU devices are recommended LiquidAI models in the selector.
   CLIENT_MODEL: import.meta.env.VITE_CLIENT_LLM_MODEL || 'Xenova/distilgpt2',
   
   // Show client LLM status in UI (development only)
@@ -26,10 +26,46 @@ export const LLM_CONFIG = {
 
   // Preferred backend order
   BACKEND_PRIORITY: ['webgpu', 'wasm', 'javascript'] as const,
+
+  // OpenRouter cloud fallback. In production, prefer pointing OPENROUTER_BASE_URL
+  // at a same-origin proxy so the API key is not exposed in browser bundles.
+  OPENROUTER_ENABLED: import.meta.env.VITE_OPENROUTER_ENABLED !== 'false',
+  OPENROUTER_API_KEY: import.meta.env.VITE_OPENROUTER_API_KEY || '',
+  OPENROUTER_BASE_URL: import.meta.env.VITE_OPENROUTER_BASE_URL || 'https://openrouter.ai/api/v1',
+  OPENROUTER_SITE_URL: import.meta.env.VITE_OPENROUTER_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : ''),
+  OPENROUTER_SITE_NAME: import.meta.env.VITE_OPENROUTER_SITE_NAME || 'Portland Laws',
+  OPENROUTER_DEFAULT_MODEL: import.meta.env.VITE_OPENROUTER_DEFAULT_MODEL || 'liquid/lfm-2.5-1.2b-instruct:free',
+  OPENROUTER_THINKING_MODEL: import.meta.env.VITE_OPENROUTER_THINKING_MODEL || 'liquid/lfm-2.5-1.2b-thinking:free',
 } as const;
 
 // Supported models with their configurations
 export const SUPPORTED_MODELS = {
+  'LiquidAI/LFM2.5-1.2B-Instruct-ONNX': {
+    name: 'LFM2.5 1.2B Instruct',
+    size: '1.1GB',
+    requiresWebGPU: true,
+    contextLength: 32768,
+    description: 'LiquidAI instruction model exported for ONNX Runtime WebGPU',
+    type: 'instruct',
+    quantized: true,
+    simdOptimized: true,
+    preferredDtype: 'q4',
+    padTokenId: undefined,
+    stopTokens: ['<|im_end|>', '<|eot_id|>']
+  },
+  'LiquidAI/LFM2.5-1.2B-Thinking-ONNX': {
+    name: 'LFM2.5 1.2B Thinking',
+    size: '1.1GB',
+    requiresWebGPU: true,
+    contextLength: 32768,
+    description: 'LiquidAI reasoning model with <think> traces, exported for WebGPU',
+    type: 'instruct',
+    quantized: true,
+    simdOptimized: true,
+    preferredDtype: 'q4',
+    padTokenId: undefined,
+    stopTokens: ['<|im_end|>', '<|eot_id|>']
+  },
   'Xenova/distilgpt2': {
     name: 'DistilGPT-2',
     size: '82MB',
@@ -84,6 +120,18 @@ export const SUPPORTED_MODELS = {
 
 // Device capability requirements
 export const MODEL_REQUIREMENTS = {
+  'LiquidAI/LFM2.5-1.2B-Instruct-ONNX': {
+    minRAM: 4096, // MB
+    minStorage: 1400, // MB
+    requiresWebGPU: true,
+    preferredCores: 4
+  },
+  'LiquidAI/LFM2.5-1.2B-Thinking-ONNX': {
+    minRAM: 4096, // MB
+    minStorage: 1400, // MB
+    requiresWebGPU: true,
+    preferredCores: 4
+  },
   'onnx-community/Llama-3.2-3B-Instruct-ONNX': {
     minRAM: 8192, // MB
     minStorage: 2048, // MB

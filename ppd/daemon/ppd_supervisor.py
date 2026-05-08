@@ -104,6 +104,7 @@ GENERATED_BLOCKED_CASCADE_QUARANTINE_NOTE = (
     "or a vetted human-authored task is reopened."
 )
 MAX_GENERATED_BLOCKED_CASCADE_TASKS = 16
+MAX_SOURCE_BACKED_EXECUTION_CONTINUATION_TRANCHES = 1
 MANUAL_COMPREHENSIVE_GOAL_HEADING = "## Manual Comprehensive PP&D Goal Handoff Tranche"
 MANUAL_GOAL_REOPEN_LIMIT = 4
 FAST_SUPERVISOR_FOLLOWUP_SECONDS = 1.0
@@ -216,6 +217,7 @@ class SupervisorConfig:
     restart_daemon: bool = False
     exception_backoff_seconds: float = 5.0
     honor_supervisor_term: bool = False
+    revisit_blocked_tasks: bool = False
 
     def resolve(self, path: Path) -> Path:
         return path if path.is_absolute() else self.repo_root / path
@@ -328,9 +330,13 @@ def append_jsonl(path: Path, payload: dict[str, Any]) -> None:
 
 def atomic_write_text(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(text, encoding="utf-8")
-    tmp.replace(path)
+    tmp = path.with_name(f".{path.name}.{os.getpid()}.{time.time_ns()}.tmp")
+    try:
+        tmp.write_text(text, encoding="utf-8")
+        tmp.replace(path)
+    finally:
+        if tmp.exists():
+            tmp.unlink()
 
 
 def exception_diagnostic(exc: BaseException, *, limit: int = 5000) -> str:
@@ -507,9 +513,9 @@ def daemon_has_fresh_active_work(
 ) -> bool:
     if not running or heartbeat_age is None or heartbeat_age > config.stall_seconds:
         return False
-    if active_state not in {"calling_llm", "applying_files", "heartbeat"}:
+    if active_state not in {"selecting_task", "calling_llm", "applying_files", "heartbeat"}:
         return False
-    if active_state in {"calling_llm", "applying_files"}:
+    if active_state in {"selecting_task", "calling_llm", "applying_files"}:
         return active_state_age is None or active_state_age <= config.active_state_timeout_seconds
     return True
 
@@ -1099,6 +1105,16 @@ def next_source_backed_execution_continuation_heading(markdown: str) -> str:
     return f"## Built-In Source-Backed Execution Continuation Tranche {max(numbers) + 1}"
 
 
+def source_backed_execution_continuation_count(markdown: str) -> int:
+    """Return how many generated source-backed continuation tranches exist."""
+
+    return sum(
+        1
+        for line in markdown.splitlines()
+        if source_backed_execution_continuation_heading_number(line) is not None
+    )
+
+
 def should_append_autonomous_platform_tranche(markdown: str) -> bool:
     """Return True when completed recovery work should advance to platform work."""
 
@@ -1200,6 +1216,9 @@ def next_source_backed_execution_continuation_templates(markdown: str) -> tuple[
 
 def builtin_source_backed_execution_continuation_task_board(markdown: str) -> tuple[str, tuple[str, ...]]:
     """Append deterministic source-backed continuation when historical repair work is parked."""
+
+    if source_backed_execution_continuation_count(markdown) >= MAX_SOURCE_BACKED_EXECUTION_CONTINUATION_TRANCHES:
+        return markdown, ()
 
     templates, tranche_number = next_source_backed_execution_continuation_templates(markdown)
     start = next_checkbox_number(markdown)
@@ -1733,12 +1752,47 @@ def diagnose(config: SupervisorConfig, *, now: Optional[datetime] = None) -> Sup
     has_closed_recovery_work = has_closed_circuit_breaker_recovery_task(tasks)
     has_deterministic_work = has_open_deterministic_task_fallback(tasks)
     has_selectable_work = any(task.status in {"needed", "in-progress"} for task in tasks)
+    continuation_count = source_backed_execution_continuation_count(board)
     generated_budget_parked = generated_blocked_total >= MAX_GENERATED_BLOCKED_CASCADE_TASKS and generated_blocked_open == 0
     has_source_backed_continuation_context = (
         has_closed_recovery_work
         or has_autonomous_execution_tranche(board)
         or any(autonomous_platform_heading_number(line) is not None for line in board.splitlines())
     )
+
+    if (
+        not running
+        and config.revisit_blocked_tasks
+        and tasks
+        and not has_selectable_work
+        and any(task.status == "blocked" for task in tasks)
+    ):
+        return SupervisorDecision(
+            action="restart_daemon",
+            reason=(
+                "no unchecked tasks remain, but blocked PP&D tasks are present; restart the daemon "
+                "with blocked-task revisiting enabled instead of appending more generated work"
+            ),
+            severity="warning",
+            should_restart_daemon=True,
+        )
+
+    if (
+        not running
+        and tasks
+        and not has_selectable_work
+        and continuation_count >= MAX_SOURCE_BACKED_EXECUTION_CONTINUATION_TRANCHES
+        and generated_budget_parked
+    ):
+        return SupervisorDecision(
+            action="plan_next_tasks",
+            reason=(
+                "source-backed deterministic continuation limit has been reached; stop appending "
+                "placeholder tranches and require agentic or human-authored PP&D work"
+            ),
+            severity="warning",
+            should_invoke_codex=True,
+        )
 
     if (
         not running
@@ -2876,6 +2930,8 @@ def run_once(config: SupervisorConfig) -> SupervisorDecision:
         )
         if config.restart_daemon:
             attach_daemon_start_result(proposal, config, run_control(config, "start"))
+    elif decision.action == "plan_next_tasks" and config.apply and config.self_heal:
+        proposal = invoke_codex_repair(config, decision)
     elif decision.action == "plan_next_tasks" and config.apply:
         if config.restart_daemon:
             stop_daemon_if_running(config)
@@ -3121,6 +3177,22 @@ def self_test(repo_root: Path) -> int:
         errors.append(f"unexpected broader replenished labels: {broad_labels}")
     if "broad_integrated_after_green_streak" not in broad_board:
         errors.append("broader replenishment should record adaptive slice policy")
+    continuation_source_board = (
+        "## Built-In Autonomous PP&D Platform Tranche\n\n"
+        "- [x] Task checkbox-1: Done.\n\n"
+        "## Built-In Autonomous PP&D Execution Capability Tranche\n\n"
+        "- [x] Task checkbox-2: Done too.\n"
+    )
+    continuation_board, continuation_labels = builtin_replenish_goal_tasks(continuation_source_board)
+    if continuation_labels != ("checkbox-3", "checkbox-4", "checkbox-5", "checkbox-6"):
+        errors.append(f"unexpected source-backed continuation labels: {continuation_labels}")
+    capped_continuation_board = continuation_board
+    capped_continuation_board = capped_continuation_board.replace("- [ ] Task checkbox-3:", "- [x] Task checkbox-3:")
+    capped_continuation_board = capped_continuation_board.replace("- [ ] Task checkbox-4:", "- [x] Task checkbox-4:")
+    capped_continuation_board = capped_continuation_board.replace("- [ ] Task checkbox-5:", "- [x] Task checkbox-5:")
+    capped_continuation_board = capped_continuation_board.replace("- [ ] Task checkbox-6:", "- [x] Task checkbox-6:")
+    if builtin_replenish_goal_tasks(capped_continuation_board)[1]:
+        errors.append("source-backed continuation fallback must be capped after one generated tranche")
     execution_board = (
         "## Built-In Autonomous PP&D Platform Tranche 2\n\n"
         "- [~] Task checkbox-225: Add autonomous platform continuation coverage for tranche 2 proving whole-site archival, Playwright draft automation, PDF field filling, and formal-logic outputs stay connected through source evidence IDs.\n"
@@ -3235,6 +3307,7 @@ def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
     parser.add_argument("--provider", default=None, help="llm_router provider (default: auto-select with fallback)")
     parser.add_argument("--exception-backoff", type=float, default=5.0, help="Seconds to pause after a contained supervisor exception")
     parser.add_argument("--honor-term", action="store_true", help="Exit on TERM/HUP when an external service manager owns restart policy")
+    parser.add_argument("--revisit-blocked-tasks", action="store_true", help="Restart the daemon in blocked-task revisit mode when only blocked tasks remain")
     parser.add_argument("--self-test", action="store_true", help="Run supervisor self-test and exit")
     return parser.parse_args(argv)
 
@@ -3257,6 +3330,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         restart_daemon=bool(args.restart_daemon),
         exception_backoff_seconds=max(0.0, float(args.exception_backoff)),
         honor_supervisor_term=bool(args.honor_term or os.environ.get("PPD_SUPERVISOR_HONOR_TERM") == "1"),
+        revisit_blocked_tasks=bool(args.revisit_blocked_tasks),
     )
     if args.watch:
         install_supervisor_runtime_guards(config)

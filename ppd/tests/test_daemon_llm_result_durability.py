@@ -262,6 +262,50 @@ class DaemonLlmResultDurabilityTest(unittest.TestCase):
         assert selected is not None
         self.assertEqual(242, selected.checkbox_id)
 
+    def test_revisit_blocked_ignore_stale_gates_still_skips_fresh_llm_terminations(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = Path(tempdir)
+            daemon_dir = repo / "ppd" / "daemon"
+            daemon_dir.mkdir(parents=True)
+            terminated = "Task checkbox-241: Add a supervised live whole-site public crawl runner."
+            syntax_stale = "Task checkbox-242: Add processor-suite execution integration."
+            for target, kind, messages in (
+                (terminated, "llm", ("llm_router child exited with code -15:", "143")),
+                (syntax_stale, "syntax_preflight", ("Syntax preflight failed.", "Syntax preflight failed.")),
+            ):
+                for message in messages:
+                    with (daemon_dir / "ppd-daemon.jsonl").open("a", encoding="utf-8") as handle:
+                        handle.write(
+                            json.dumps(
+                                {
+                                    "proposal": {
+                                        "failure_kind": kind,
+                                        "target_task": target,
+                                        "errors": [message],
+                                    }
+                                }
+                            )
+                            + "\n"
+                        )
+            board = (
+                "- [!] Task checkbox-241: Add a supervised live whole-site public crawl runner.\n"
+                "- [!] Task checkbox-242: Add processor-suite execution integration.\n"
+                "- [!] Task checkbox-243: Add attended Playwright runner.\n"
+            )
+
+            selected = select_task_for_config(
+                parse_tasks(board),
+                Config(
+                    repo_root=repo,
+                    revisit_blocked=True,
+                    revisit_blocked_ignore_failure_gates=True,
+                ),
+            )
+
+        self.assertIsNotNone(selected)
+        assert selected is not None
+        self.assertEqual(242, selected.checkbox_id)
+
     def test_revisit_blocked_returns_no_eligible_when_all_blocked_tasks_are_suppressed(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:
             repo = Path(tempdir)

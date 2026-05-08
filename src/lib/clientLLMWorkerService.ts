@@ -1,4 +1,7 @@
-// Service to manage client-side LLM processing using Web Workers with Llama model support
+import { LLM_CONFIG } from './llmConfig';
+import { openRouterLLMService } from './openRouterLLM';
+
+// Service to manage client-side LLM processing using Web Workers with WebGPU model support
 class ClientLLMWorkerService {
   private worker: Worker | null = null;
   private isInitialized = false;
@@ -7,6 +10,7 @@ class ClientLLMWorkerService {
   private pendingRequests = new Map<string, { resolve: Function; reject: Function }>();
   private currentModel = 'Xenova/distilgpt2';
   private capabilities = { webGPU: false, simd: false };
+  private backgroundWarmupPromise: Promise<void> | null = null;
 
   constructor() {
     this.initializeWorker();
@@ -23,7 +27,7 @@ class ClientLLMWorkerService {
       this.worker.onmessage = this.handleWorkerMessage.bind(this);
       this.worker.onerror = this.handleWorkerError.bind(this);
       
-      console.log('Enhanced Client LLM Worker created with Llama support');
+      console.log('Enhanced Client LLM Worker created with WebGPU model support');
     } catch (error) {
       console.error('Failed to create Client LLM Worker:', error);
     }
@@ -150,6 +154,18 @@ class ClientLLMWorkerService {
   }
 
   async generateText(prompt: string, maxTokens: number = 50): Promise<string> {
+    if (this.shouldUseOpenRouterFallback()) {
+      this.warmLocalModelInBackground();
+      return openRouterLLMService.generateText(prompt, {
+        maxTokens,
+        model: this.getOpenRouterModelForCurrentLocalModel(),
+        temperature: this.currentModel.includes('Thinking') ? 0.1 : 0.1,
+        topP: this.currentModel.includes('Thinking') ? 0.1 : undefined,
+        topK: 50,
+        repetitionPenalty: 1.05,
+      });
+    }
+
     if (!this.isInitialized) {
       await this.initialize();
     }
@@ -159,6 +175,17 @@ class ClientLLMWorkerService {
       return result.text;
     } catch (error) {
       console.error('Text generation failed:', error);
+      if (openRouterLLMService.isConfigured()) {
+        console.warn('Using OpenRouter fallback after local generation failure');
+        return openRouterLLMService.generateText(prompt, {
+          maxTokens,
+          model: this.getOpenRouterModelForCurrentLocalModel(),
+          temperature: this.currentModel.includes('Thinking') ? 0.1 : 0.1,
+          topP: this.currentModel.includes('Thinking') ? 0.1 : undefined,
+          topK: 50,
+          repetitionPenalty: 1.05,
+        });
+      }
       throw error;
     }
   }
@@ -186,6 +213,51 @@ class ClientLLMWorkerService {
     };
   }
 
+  isCloudFallbackAvailable(): boolean {
+    return openRouterLLMService.isConfigured();
+  }
+
+  private shouldUseOpenRouterFallback(): boolean {
+    if (!openRouterLLMService.isConfigured()) {
+      return false;
+    }
+
+    if (this.isInitializing) {
+      return true;
+    }
+
+    if (!this.isInitialized) {
+      return true;
+    }
+
+    if (this.capabilities.webGPU === false) {
+      return true;
+    }
+
+    return false;
+  }
+
+  private warmLocalModelInBackground(): void {
+    if (this.isInitialized || this.isInitializing || this.backgroundWarmupPromise) {
+      return;
+    }
+
+    this.backgroundWarmupPromise = this.initialize(this.currentModel || LLM_CONFIG.CLIENT_MODEL)
+      .catch((error) => {
+        console.warn('Background local LLM warmup failed; cloud fallback remains available if configured', error);
+      })
+      .finally(() => {
+        this.backgroundWarmupPromise = null;
+      });
+  }
+
+  private getOpenRouterModelForCurrentLocalModel(): string {
+    if (this.currentModel.includes('Thinking')) {
+      return LLM_CONFIG.OPENROUTER_THINKING_MODEL;
+    }
+    return LLM_CONFIG.OPENROUTER_DEFAULT_MODEL;
+  }
+
   // Enhanced conversation generation for different character types
   async generateConversationMessage(
     characterName: string,
@@ -198,7 +270,7 @@ class ClientLLMWorkerService {
     const isInstructModel = this.currentModel.includes('Instruct');
 
     if (isInstructModel) {
-      // Optimized prompt format for Llama Instruct models
+      // Optimized prompt format for instruction-tuned chat models
       prompt = `You are ${characterName}. ${identity}
 
 Character context: You are a thoughtful character in a virtual town simulation. Respond naturally and stay in character.

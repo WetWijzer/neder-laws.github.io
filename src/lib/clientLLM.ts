@@ -1,6 +1,7 @@
 import type { TextGenerationPipeline } from '@huggingface/transformers';
 import { LLM_CONFIG, SUPPORTED_MODELS } from './llmConfig';
 import { backendDetector } from './backendDetection';
+import { openRouterLLMService } from './openRouterLLM';
 
 // Model configuration interface
 export interface ModelConfig {
@@ -12,6 +13,9 @@ export interface ModelConfig {
   type: 'instruct' | 'conversational';
   quantized: boolean;
   simdOptimized: boolean;
+  preferredDtype?: 'fp32' | 'fp16' | 'q8' | 'q4';
+  padTokenId?: number;
+  stopTokens?: readonly string[];
 }
 
 // Enhanced client-side LLM service with WebGPU support for larger models
@@ -48,7 +52,7 @@ class ClientLLMService {
     try {
       // Check backend capabilities for model compatibility
       const capabilities = await backendDetector.detectCapabilities();
-      const modelConfig = this.supportedModels[targetModel as keyof typeof SUPPORTED_MODELS];
+      const modelConfig = this.supportedModels[targetModel as keyof typeof SUPPORTED_MODELS] as ModelConfig | undefined;
       
       // Enhanced WebGPU diagnostics for large model compatibility
       if (modelConfig?.requiresWebGPU) {
@@ -135,7 +139,7 @@ class ClientLLMService {
       // If WebGPU is available and model requires it, configure WebGPU device
       if (capabilities.webgpu && modelConfig?.requiresWebGPU) {
         pipelineOptions.device = 'webgpu'; // Use WebGPU device
-        pipelineOptions.dtype = 'q4'; // Use quantized WebGPU weights to save browser memory
+        pipelineOptions.dtype = modelConfig?.preferredDtype || 'q4'; // Use quantized WebGPU weights to save browser memory
         console.log('Configuring pipeline for WebGPU with q4 precision');
       } else if (capabilities.wasm) {
         pipelineOptions.device = 'wasm'; // Explicitly use WASM
@@ -189,8 +193,34 @@ class ClientLLMService {
   }
 
   async generateResponse(prompt: string, maxTokens: number = 100): Promise<string> {
+    if (this.isLoading && openRouterLLMService.isConfigured()) {
+      return openRouterLLMService.generateText(prompt, {
+        maxTokens,
+        model: this.getOpenRouterModelForCurrentModel(),
+        temperature: this.currentModel.includes('Thinking') ? 0.1 : 0.1,
+        topP: this.currentModel.includes('Thinking') ? 0.1 : undefined,
+        topK: 50,
+        repetitionPenalty: 1.05,
+      });
+    }
+
     if (!this.textGenerator) {
-      await this.initialize();
+      try {
+        await this.initialize();
+      } catch (error) {
+        if (openRouterLLMService.isConfigured()) {
+          console.warn('Local LLM initialize failed; using OpenRouter fallback', error);
+          return openRouterLLMService.generateText(prompt, {
+            maxTokens,
+            model: this.getOpenRouterModelForCurrentModel(),
+            temperature: this.currentModel.includes('Thinking') ? 0.1 : 0.1,
+            topP: this.currentModel.includes('Thinking') ? 0.1 : undefined,
+            topK: 50,
+            repetitionPenalty: 1.05,
+          });
+        }
+        throw error;
+      }
     }
 
     if (!this.textGenerator) {
@@ -198,8 +228,9 @@ class ClientLLMService {
     }
 
     try {
-      const modelConfig = this.supportedModels[this.currentModel as keyof typeof SUPPORTED_MODELS];
+      const modelConfig = this.supportedModels[this.currentModel as keyof typeof SUPPORTED_MODELS] as ModelConfig | undefined;
       const isInstructModel = this.currentModel.includes('Instruct') || 
+                             this.currentModel.includes('Thinking') ||
                              modelConfig?.type === 'instruct';
       
       // Format prompt appropriately for instruction models
@@ -212,24 +243,48 @@ class ClientLLMService {
         ];
       }
 
-      const response = await this.textGenerator(formattedPrompt as any, {
+      const generationOptions: any = {
         max_new_tokens: maxTokens,
-        temperature: isInstructModel ? 0.6 : 0.7,
+        temperature: isInstructModel ? 0.1 : 0.7,
         do_sample: true,
-        top_p: 0.9,
         repetition_penalty: isInstructModel ? 1.05 : 1.1,
-        pad_token_id: 50256, // Ensure proper padding
-      }) as any;
+      };
+      if (isInstructModel && this.currentModel.includes('Thinking')) {
+        generationOptions.top_p = 0.1;
+      } else {
+        generationOptions.top_p = 0.9;
+      }
+      if (isInstructModel) {
+        generationOptions.top_k = 50;
+      }
+      if (modelConfig?.padTokenId !== undefined) {
+        generationOptions.pad_token_id = modelConfig.padTokenId;
+      } else if (!isInstructModel) {
+        generationOptions.pad_token_id = 50256;
+      }
+
+      const response = await this.textGenerator(formattedPrompt as any, generationOptions) as any;
 
       // Extract the generated text, removing the input prompt
       let generatedText = this.extractGeneratedText(response, formattedPrompt);
       
       // Clean up instruction model responses
-      generatedText = generatedText.split('<|im_end|>')[0].split('<|eot_id|>')[0].trim();
+      generatedText = this.stripStopTokens(generatedText, modelConfig?.stopTokens);
       
       return generatedText;
     } catch (error) {
       console.error('Error generating response:', error);
+      if (openRouterLLMService.isConfigured()) {
+        console.warn('Using OpenRouter fallback after local generation failure');
+        return openRouterLLMService.generateText(prompt, {
+          maxTokens,
+          model: this.getOpenRouterModelForCurrentModel(),
+          temperature: this.currentModel.includes('Thinking') ? 0.1 : 0.1,
+          topP: this.currentModel.includes('Thinking') ? 0.1 : undefined,
+          topK: 50,
+          repetitionPenalty: 1.05,
+        });
+      }
       throw error;
     }
   }
@@ -287,6 +342,14 @@ class ClientLLMService {
     return fullText.trim();
   }
 
+  private stripStopTokens(text: string, stopTokens: readonly string[] = ['<|im_end|>', '<|eot_id|>']): string {
+    let cleaned = text;
+    for (const token of stopTokens) {
+      cleaned = cleaned.split(token)[0];
+    }
+    return cleaned.trim();
+  }
+
   private cleanResponse(response: string, characterName: string, otherCharacterName?: string): string {
     // Remove any character name prefixes that might have been generated
     response = response.replace(new RegExp(`^${characterName}:?\\s*`, 'i'), '');
@@ -327,11 +390,15 @@ class ClientLLMService {
   }
 
   getCurrentModelConfig(): ModelConfig | undefined {
-    return this.supportedModels[this.currentModel as keyof typeof SUPPORTED_MODELS];
+    return this.supportedModels[this.currentModel as keyof typeof SUPPORTED_MODELS] as ModelConfig | undefined;
   }
 
   getSupportedModels(): typeof SUPPORTED_MODELS {
     return this.supportedModels;
+  }
+
+  isCloudFallbackAvailable(): boolean {
+    return openRouterLLMService.isConfigured();
   }
 
   async switchModel(modelName: string): Promise<void> {
@@ -359,13 +426,13 @@ class ClientLLMService {
 
     // More sophisticated model selection based on actual capabilities
     if (capabilities.webgpu && memoryMB > 8000) {
-      // High-end device: can handle 3B model
-      console.log('Recommending Llama 3.2 3B for high-end device with WebGPU');
-      return 'onnx-community/Llama-3.2-3B-Instruct-ONNX';
+      // High-end device: prefer the reasoning-oriented LiquidAI model.
+      console.log('Recommending LiquidAI LFM2.5 Thinking for high-end device with WebGPU');
+      return 'LiquidAI/LFM2.5-1.2B-Thinking-ONNX';
     } else if (capabilities.webgpu && memoryMB > 4000) {
-      // Mid-range device: 1B model
-      console.log('Recommending Llama 3.2 1B for mid-range device with WebGPU');
-      return 'onnx-community/Llama-3.2-1B-Instruct-ONNX';
+      // Mid-range device: prefer the instruction-tuned LiquidAI model.
+      console.log('Recommending LiquidAI LFM2.5 Instruct for mid-range device with WebGPU');
+      return 'LiquidAI/LFM2.5-1.2B-Instruct-ONNX';
     } else if (capabilities.simd && memoryMB > 2000) {
       // SIMD-capable device: medium model
       console.log('Recommending LaMini-GPT 774M for SIMD-capable device');
@@ -381,10 +448,17 @@ class ClientLLMService {
     }
   }
 
+  private getOpenRouterModelForCurrentModel(): string {
+    if (this.currentModel.includes('Thinking')) {
+      return LLM_CONFIG.OPENROUTER_THINKING_MODEL;
+    }
+    return LLM_CONFIG.OPENROUTER_DEFAULT_MODEL;
+  }
+
   // Validate model compatibility before switching
   async validateModelCompatibility(modelName: string): Promise<{ compatible: boolean; reason?: string }> {
     const capabilities = await backendDetector.detectCapabilities();
-    const modelConfig = this.supportedModels[modelName as keyof typeof SUPPORTED_MODELS];
+    const modelConfig = this.supportedModels[modelName as keyof typeof SUPPORTED_MODELS] as ModelConfig | undefined;
     
     if (!modelConfig) {
       return { compatible: false, reason: `Model ${modelName} is not supported` };
