@@ -65,6 +65,15 @@ DETERMINISTIC_TASK_FALLBACK_TITLES: tuple[tuple[str, str], ...] = (
     ("user document-store reconciliation contract", "user_document_gap_analysis"),
     ("requirementnode and processmodel schema coverage", "process_requirement_schemas"),
     ("generated blocked-cascade daemon-repair coverage", "blocked_cascade_daemon_repair"),
+    ("official pp&d source anchors from the original plan", "narrow_tranche_reconciliation"),
+    ("pp&d public crawl preflight policy", "narrow_tranche_reconciliation"),
+    ("pdf/form extraction contracts", "narrow_tranche_reconciliation"),
+    ("pdf/form contract normalization", "narrow_tranche_reconciliation"),
+    ("deterministic requirement extraction or validation helper", "narrow_tranche_reconciliation"),
+    ("guardrail compiler or action classification", "narrow_tranche_reconciliation"),
+    ("fixture-only user gap analysis test", "narrow_tranche_reconciliation"),
+    ("fixture-only devhub surface map test", "narrow_tranche_reconciliation"),
+    ("devhub surface map normalization", "narrow_tranche_reconciliation"),
 )
 
 DETERMINISTIC_TASK_SOURCE_EVIDENCE_IDS = (
@@ -317,6 +326,17 @@ MANUAL_GOAL_FALLBACK_METADATA: dict[str, tuple[str, tuple[str, ...], tuple[str, 
         "blocked_cascade_daemon_repair",
         ("blocked_domain_backlog", "generated_repair_tranche", "supervisor_retry_policy"),
         ("blocked_task_quarantine", "fresh_repair_validation", "llm_termination_storm_guard"),
+    ),
+    "narrow_tranche_reconciliation": (
+        "narrow_tranche_reconciliation",
+        ("validated_fixture_tests", "source_backed_contracts", "supervisor_repaired_task_board"),
+        (
+            "source_anchor_validation",
+            "public_crawl_preflight_policy",
+            "pdf_form_extraction_contract",
+            "requirement_and_guardrail_normalization",
+            "devhub_surface_map_contract",
+        ),
     ),
 }
 

@@ -603,6 +603,25 @@ class DaemonLlmResultDurabilityTest(unittest.TestCase):
         self.assertEqual(262, manifest["records"][0]["checkboxId"])
         self.assertEqual("blocked_cascade_daemon_repair", manifest["records"][0]["fallbackKind"])
 
+    def test_current_narrow_tranche_blocked_tasks_have_deterministic_fallbacks(self) -> None:
+        tasks = parse_tasks(
+            "- [!] Task supervisor-20260509-001: Add a fixture-only validation test that enumerates the official PP&D source anchors from the original plan and fails when any anchor is missing from the committed public source registry or documented as intentionally deferred.\n"
+            "- [!] Task supervisor-20260509-004: Implement or tighten the PP&D public crawl preflight policy so the fixture cases from Task supervisor-20260509-003 pass using deterministic local inputs only, with no network calls and no raw body persistence.\n"
+            "- [!] Task supervisor-20260509-009: Add a fixture-only test for PDF/form extraction contracts covering page-anchored text, checklist items, certification blocks, fillable field names, checkbox/radio options, and OCR confidence flags using synthetic committed fixtures only.\n"
+            "- [!] Task supervisor-20260509-010: Implement the smallest PDF/form contract normalization change needed for Task supervisor-20260509-009 without downloading official PDFs or committing raw extracted public documents.\n"
+            "- [!] Task supervisor-20260509-012: Implement the minimal deterministic requirement extraction or validation helper needed for Task supervisor-20260509-011 while keeping human-review and formalization status explicit.\n"
+            "- [!] Task supervisor-20260509-014: Implement the smallest guardrail compiler or action classification change needed for Task supervisor-20260509-013 without adding browser automation.\n"
+            "- [!] Task supervisor-20260509-015: Add a fixture-only user gap analysis test for a standard trade permit scenario where contractor license data affects fixture availability, proving the gap analysis asks for missing license-related facts before allowing a draft-ready state.\n"
+            "- [!] Task supervisor-20260509-017: Add a fixture-only DevHub surface map test for a synthetic attended login-complete page that records title, heading, accessible roles/names, stable labels, validation messages, upload controls, save/back/continue/submit button states, selector confidence, redaction policy, attendance requirement, and exact-confirmation requirement.\n"
+            "- [!] Task supervisor-20260509-018: Implement the smallest DevHub surface map normalization change needed for Task supervisor-20260509-017 without storing credentials, auth state, screenshots, traces, HAR data, or private page values.\n"
+        )
+
+        self.assertTrue(all(has_deterministic_task_fallback(task) for task in tasks))
+        self.assertEqual(
+            ["narrow_tranche_reconciliation"] * len(tasks),
+            [deterministic_task_fallback_kind(task) for task in tasks],
+        )
+
     def test_llm_timeout_cleanup_terminates_descendant_processes(self) -> None:
         process = subprocess.Popen(
             ["bash", "-lc", "setsid sleep 30 & echo $!; wait"],
