@@ -94,12 +94,12 @@ This board is the controlling backlog for the isolated PP&D daemon. The daemon s
 <!-- ppd-daemon-task-board:start -->
 ## Generated Status
 
-Last updated: 2026-05-08T23:32:54.069504Z
+Last updated: 2026-05-09T03:36:24.605288Z
 
-- Latest target: `Task checkbox-9367: Add attended DevHub manual-login Playwright scaffold coverage with mocked fixtures, authenticated-state detection, accessible selector capture, redaction policy, and no credential/session persistence.`
+- Latest target: `Task checkbox-241: Add a supervised live whole-site public crawl runner under ppd/crawler that resumes an allowlisted PP&D frontier, delegates archival capture to the ipfs_datasets_py processor suite, records robots and content-type decisions, and persists metadata manifests instead of raw bodies or downloaded documents.`
 - Latest result: `llm`
 - Latest summary: LLM proposal failed.
-- Counts: `{"blocked": 178, "complete": 9127, "in_progress": 0, "needed": 0}`
+- Counts: `{"blocked": 173, "complete": 9132, "in_progress": 0, "needed": 0}`
 
 <!-- ppd-daemon-task-board:end -->
 ## Built-In Supervisor Repair Notes
@@ -163,8 +163,8 @@ Last updated: 2026-05-08T23:32:54.069504Z
 
 - [!] Task checkbox-241: Add a supervised live whole-site public crawl runner under ppd/crawler that resumes an allowlisted PP&D frontier, delegates archival capture to the ipfs_datasets_py processor suite, records robots and content-type decisions, and persists metadata manifests instead of raw bodies or downloaded documents.
 - [x] Task checkbox-242: Add processor-suite execution integration under ppd/crawler proving public PP&D pages and PDFs flow through archive manifests, normalized document records, PDF metadata, requirement batches, and formal-logic source evidence IDs before agent reuse.
-- [!] Task checkbox-243: Add an attended Playwright DevHub worker runner under ppd/devhub that supports manual login handoff, journal replay, reversible draft field fills from redacted facts, and mandatory pauses before upload, submit, certification, cancellation, inspection, security, or payment transitions.
-- [!] Task checkbox-244: Add a local PDF draft-fill work queue under ppd/pdf that maps public PP&D form field manifests to redacted user facts, invokes the pypdf draft filler for previews, and never uploads, submits, or stores private source documents.
+- [x] Task checkbox-243: Add an attended Playwright DevHub worker runner under ppd/devhub that supports manual login handoff, journal replay, reversible draft field fills from redacted facts, and mandatory pauses before upload, submit, certification, cancellation, inspection, security, or payment transitions.
+- [x] Task checkbox-244: Add a local PDF draft-fill work queue under ppd/pdf that maps public PP&D form field manifests to redacted user facts, invokes the pypdf draft filler for previews, and never uploads, submits, or stores private source documents.
 - [x] Task checkbox-245: Add a formal-logic guardrail extraction pipeline under ppd/logic that converts processor-backed requirement batches into obligations, prerequisites, missing-fact questions, reversible-action predicates, exact-confirmation predicates, and refused official-action stop gates.
 - [x] Task checkbox-246: Add supervisor execution-capability recovery coverage proving stale calling_llm or applying_files status on old platform slices parks the stale tranche, appends this comprehensive execution tranche, validates the daemon, and restarts with PPD_LLM_BACKEND=llm_router.
 
@@ -1280,7 +1280,7 @@ Last updated: 2026-05-08T23:32:54.069504Z
 
 ## Built-In Circuit Breaker Recovery Tranche
 
-- [!] Task checkbox-446: Add supervisor circuit-breaker recovery coverage proving expired termination storms append vetted non-generated recovery tasks and restart without reopening generated blocked-cascade work.
+- [x] Task checkbox-446: Add supervisor circuit-breaker recovery coverage proving expired termination storms append vetted non-generated recovery tasks and restart without reopening generated blocked-cascade work.
 - [x] Task checkbox-447: Add daemon circuit-breaker resume coverage proving blocked generated cascade tasks stay skipped while a fresh vetted recovery task is selected first.
 - [x] Task checkbox-448: Add PP&D supervisor operations documentation for persistent user-unit recovery, explicit daemon resume gates, and no live DevHub or official-action side effects.
 - [x] Task checkbox-449: Add a fixture-only circuit-breaker status scenario proving paused daemon state records quarantine, restart eligibility, and source-safe recovery boundaries before autonomous work resumes.
@@ -1446,7 +1446,7 @@ Last updated: 2026-05-08T23:32:54.069504Z
 ## Manual Portland Permitting Autonomy Expansion Tranche
 
 - [x] Task checkbox-9350: Add a source-backed PP&D crawl campaign brief that groups official Portland.gov PP&D pages, public PDFs, DevHub public routes, and recrawl cadence into bounded permit-family crawl batches without widening the allowlist or storing raw bodies.
-- [!] Task checkbox-9351: Add an attended DevHub login-session contract that joins manual PortlandOregon.gov sign-in, authenticated-state detection, redacted route snapshots, and save-resume boundaries without credential capture, MFA automation, or browser-state persistence.
+- [x] Task checkbox-9351: Add an attended DevHub login-session contract that joins manual PortlandOregon.gov sign-in, authenticated-state detection, redacted route snapshots, and save-resume boundaries without credential capture, MFA automation, or browser-state persistence.
 - [x] Task checkbox-9352: Add a requirement-to-process review queue that turns normalized PP&D pages, forms, and PDFs into permit-family stage graphs with document rules, fee triggers, deadlines, exceptions, and source evidence IDs ready for guardrail compilation.
 - [x] Task checkbox-9353: Add a formal-logic guardrail bundle contract that compiles reviewed PP&D requirement nodes into obligations, prerequisites, temporal ordering, missing-fact prompts, exact-confirmation gates, and refused official-action predicates.
 - [!] Task checkbox-9354: Add a user document-store reconciliation contract that compares known user facts and files to PP&D guardrail bundles, identifies stale or conflicting evidence, and emits the smallest review packet needed before draft automation proceeds.
@@ -25781,7 +25781,7 @@ Last updated: 2026-05-08T23:32:54.069504Z
 - [x] Task checkbox-9364: Add HTML and PDF extraction fixture contracts for the May 8 official source anchors, including heading hierarchy, ordered steps, tables, PDF page anchors, and public form-field manifests.
 - [!] Task checkbox-9365: Add RequirementNode and ProcessModel schema coverage with citation spans, confidence, human-review status, and representative residential, commercial, trade, correction, inspection, and fee workflow stages.
 - [x] Task checkbox-9366: Add formal GuardrailBundle compiler skeleton coverage for deterministic predicates, deontic rules, temporal rules, exact-confirmation predicates, refused-action predicates, and explanation support maps.
-- [!] Task checkbox-9367: Add attended DevHub manual-login Playwright scaffold coverage with mocked fixtures, authenticated-state detection, accessible selector capture, redaction policy, and no credential/session persistence.
+- [x] Task checkbox-9367: Add attended DevHub manual-login Playwright scaffold coverage with mocked fixtures, authenticated-state detection, accessible selector capture, redaction policy, and no credential/session persistence.
 - [x] Task checkbox-9368: Add local PDF draft-fill queue coverage for redacted user fact mapping, user-controlled preview output, no-upload/no-submit boundaries, and commit-safe audit events.
 - [x] Task checkbox-9369: Add user document-store gap-analysis coverage for known facts, matched documents, missing facts, missing documents, stale or conflicting evidence, blocked actions, and review packets.
 - [x] Task checkbox-9370: Add action classifier and exact-confirmation checkpoint coverage for read-only, reversible draft, official upload, submission, certification, cancellation, inspection scheduling, payment review, payment execution, and unsupported handoffs.

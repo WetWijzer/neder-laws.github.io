@@ -1,2 +1,1 @@
-"""PDF helpers for PP&D draft artifacts."""
-
+"""Local PDF preview helpers for Portland PP&D workflows."""
