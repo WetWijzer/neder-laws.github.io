@@ -172,6 +172,56 @@ If local generation or the probe times out, the worker is terminated and recreat
 The proxy only permits the LiquidAI OpenRouter models used by the app:
 `liquid/lfm-2.5-1.2b-instruct:free` and `liquid/lfm-2.5-1.2b-thinking:free`.
 
+### DigitalOcean proxy setup
+
+On a DigitalOcean droplet after cloning this repo:
+
+```bash
+cd portland-laws.github.io
+OPENROUTER_API_KEY=sk-or-... sudo -E bash scripts/setup-openrouter-proxy-digitalocean.sh
+```
+
+The script installs dependencies, writes `/etc/portland-openrouter-proxy.env`, and starts a systemd service on port `8787`. Point the frontend at:
+
+```bash
+VITE_OPENROUTER_BASE_URL=http://YOUR_DROPLET_IP:8787/api/openrouter
+```
+
+For production, put a TLS reverse proxy in front of the droplet service and use an `https://.../api/openrouter` URL.
+
+### Configure GitHub Pages to use the proxy
+
+After the proxy is reachable from the browser, configure the GitHub Pages build with the proxy base URL:
+
+1. Open the GitHub repository.
+2. Go to **Settings → Secrets and variables → Actions → Variables**.
+3. Add or update this repository variable:
+   - Name: `VITE_OPENROUTER_BASE_URL`
+   - Value: `https://YOUR_PROXY_DOMAIN/api/openrouter`
+4. Confirm `VITE_OPENROUTER_ENABLED` is not set to `false`. The deploy workflow already builds with fallback enabled.
+5. Rerun the GitHub Pages deploy workflow from **Actions**, or push a new commit to `main`.
+6. Hard refresh the live page after deployment.
+
+The value must be the proxy base path, not the full chat endpoint. The app appends `/chat/completions` itself.
+
+For a quick browser-only test before rebuilding GitHub Pages, open DevTools on the live site and run:
+
+```js
+localStorage.setItem(
+  'PORTLAND_OPENROUTER_BASE_URL',
+  'https://YOUR_PROXY_DOMAIN/api/openrouter'
+)
+location.reload()
+```
+
+Then verify the app sees the proxy:
+
+```js
+__PORTLAND_LLM__.getCloudFallbackStatus()
+```
+
+It should report `configured: true` and a `baseUrl` pointing at your proxy, not `https://openrouter.ai/api/v1`.
+
 ## Documentation
 
 | Document | Description |
