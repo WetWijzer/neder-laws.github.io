@@ -13,6 +13,7 @@ import {
 import { clientEmbeddingWorkerService } from '../lib/clientEmbeddingWorkerService';
 import { clientLLMWorkerService } from '../lib/clientLLMWorkerService';
 import { answerWithGraphRag } from '../lib/portlandGraphRag';
+import { buildChatPromptStarters, DEFAULT_CHAT_PROMPTS } from '../lib/chatPromptStarters';
 import {
   LogicProofSummary,
   NormType,
@@ -49,11 +50,7 @@ const INITIAL_RESULT_LIMIT = 6;
 const RESULT_INCREMENT = 6;
 const GRAPH_ENTITY_LIMIT = 14;
 const GRAPH_RELATIONSHIP_LIMIT = 14;
-const CHAT_PROMPTS = [
-  'What does this section require?',
-  'Who is affected by this section?',
-  'What evidence supports this answer?',
-];
+const CHAT_PROMPTS = DEFAULT_CHAT_PROMPTS;
 
 const TITLE_LABELS: Record<string, string> = {
   '1': 'General Provisions',
@@ -1253,6 +1250,10 @@ function WorkspacePanel({
         {selected && activeTab === 'chat' && (
           <div id="panel-chat" role="tabpanel" aria-labelledby="tab-chat" tabIndex={0}>
           <GraphRagChat
+            section={selected}
+            proof={proof}
+            relatedEntities={relatedEntities}
+            relatedRelationships={relatedRelationships}
             question={chatQuestion}
             answer={chatAnswer}
             evidence={chatEvidence}
@@ -1560,6 +1561,10 @@ function formatNormTypeLabel(norm: NormType) {
 }
 
 function GraphRagChat({
+  section,
+  proof,
+  relatedEntities,
+  relatedRelationships,
   question,
   answer,
   evidence,
@@ -1571,6 +1576,10 @@ function GraphRagChat({
   onQuestionChange,
   onSubmit,
 }: {
+  section: CorpusSection;
+  proof: LogicProofSummary | null;
+  relatedEntities: CorpusEntity[];
+  relatedRelationships: CorpusRelationship[];
   question: string;
   answer: string;
   evidence: GraphRagEvidence | null;
@@ -1589,6 +1598,10 @@ function GraphRagChat({
   const [localProven, setLocalProven] = useState(false);
   const [performanceProven, setPerformanceProven] = useState(false);
   const [tokensPerSecond, setTokensPerSecond] = useState<number | null>(null);
+  const promptStarters = useMemo(
+    () => buildChatPromptStarters(section, proof, relatedEntities, relatedRelationships),
+    [section, proof, relatedEntities, relatedRelationships],
+  );
 
   useEffect(() => {
     const refresh = () => {
@@ -1693,7 +1706,7 @@ function GraphRagChat({
       )}
       {!answer && !error && (
         <div className="mt-4" aria-label="Chat empty state">
-          <ChatPromptStarters onQuestionChange={onQuestionChange} />
+          <ChatPromptStarters prompts={promptStarters} onQuestionChange={onQuestionChange} />
         </div>
       )}
       {evidenceSections.length > 0 && (
@@ -1722,12 +1735,18 @@ function GraphRagChat({
   );
 }
 
-function ChatPromptStarters({ onQuestionChange }: { onQuestionChange: (question: string) => void }) {
+function ChatPromptStarters({
+  prompts,
+  onQuestionChange,
+}: {
+  prompts: string[];
+  onQuestionChange: (question: string) => void;
+}) {
   return (
     <div className="rounded-md border border-dashed border-[#aebba9] bg-white/70 px-4 py-5" role="status">
       <p className="text-center text-sm font-semibold text-[#26343a]">No answer yet</p>
       <div className="mt-3 flex flex-wrap justify-center gap-2" aria-label="Suggested chat questions">
-        {CHAT_PROMPTS.map((prompt) => (
+        {prompts.map((prompt) => (
           <button
             key={prompt}
             type="button"
@@ -1741,6 +1760,7 @@ function ChatPromptStarters({ onQuestionChange }: { onQuestionChange: (question:
     </div>
   );
 }
+
 
 function CitedAnswer({ text }: { text: string }) {
   const blocks = text.split(/\n{2,}/).map((block) => block.trim()).filter(Boolean);
