@@ -282,6 +282,34 @@ class ClientLLMWorkerService {
     return !this.localHealth.proven || !this.localHealth.performanceProven;
   }
 
+  private async tryCloudThenLocal(prompt: string, maxTokens: number): Promise<string> {
+    try {
+      return await this.generateWithOpenRouter(prompt, maxTokens);
+    } catch (error) {
+      this.emitServiceDiagnostic('route:cloud_failed_try_local', {
+        promptLength: prompt.length,
+        maxTokens,
+        error: error instanceof Error ? error.message : String(error),
+      });
+    }
+
+    if (!this.isInitialized) {
+      await this.initialize();
+    }
+
+    const startedAt = performance.now();
+    const result = await this.sendWorkerRequest(
+      'generate',
+      { prompt, maxTokens },
+      LLM_CONFIG.LOCAL_GENERATION_TIMEOUT_MS,
+    );
+    const durationMs = Math.round(performance.now() - startedAt);
+    this.markLocalSuccess(durationMs);
+    this.recordThroughputSample(String(result?.text || ''), durationMs, 'generate');
+    this.lastGenerationSource = 'local';
+    return result.text;
+  }
+
   private async benchmarkLocalThroughput(): Promise<void> {
     if (!this.worker || !this.isInitialized) {
       return;
@@ -394,7 +422,7 @@ class ClientLLMWorkerService {
         promptLength: prompt.length,
         maxTokens: boundedMaxTokens,
       });
-      return this.generateWithOpenRouter(prompt, boundedMaxTokens);
+      return this.tryCloudThenLocal(prompt, boundedMaxTokens);
     }
 
     if (prompt.length > LLM_CONFIG.LOCAL_MAX_PROMPT_CHARS) {
@@ -405,7 +433,7 @@ class ClientLLMWorkerService {
         maxTokens: boundedMaxTokens,
       });
       if (cloudConfigured) {
-        return this.generateWithOpenRouter(prompt, boundedMaxTokens);
+        return this.tryCloudThenLocal(prompt, boundedMaxTokens);
       }
       throw new Error(`${reason} Compact the GraphRAG context or configure OpenRouter as last-resort fallback.`);
     }
@@ -421,7 +449,7 @@ class ClientLLMWorkerService {
         measuredTokensPerSecond: this.localHealth.lastMeasuredTokensPerSecond,
       });
       this.warmLocalModelInBackground();
-      return this.generateWithOpenRouter(prompt, boundedMaxTokens);
+      return this.tryCloudThenLocal(prompt, boundedMaxTokens);
     }
 
     if (!this.isInitialized) {
@@ -432,7 +460,7 @@ class ClientLLMWorkerService {
       const probeOk = await this.probeLocalInference();
       if (!probeOk && cloudConfigured) {
         this.emitServiceDiagnostic('route:cloud_after_probe_failed', { promptLength: prompt.length, maxTokens: boundedMaxTokens });
-        return this.generateWithOpenRouter(prompt, boundedMaxTokens);
+        return this.tryCloudThenLocal(prompt, boundedMaxTokens);
       }
       if (!probeOk) {
         const fallbackStatus = openRouterLLMService.getConfigurationStatus();
@@ -482,7 +510,7 @@ class ClientLLMWorkerService {
           maxTokens: boundedMaxTokens,
           error: error instanceof Error ? error.message : String(error),
         });
-        return this.generateWithOpenRouter(prompt, boundedMaxTokens);
+        return this.tryCloudThenLocal(prompt, boundedMaxTokens);
       }
       const fallbackStatus = openRouterLLMService.getConfigurationStatus();
       console.warn('OpenRouter fallback unavailable after local generation failure:', fallbackStatus);
