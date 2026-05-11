@@ -191,10 +191,17 @@ cd portland-laws.github.io
 OPENROUTER_API_KEY=sk-or-... sudo -E bash scripts/setup-openrouter-proxy-digitalocean.sh
 ```
 
-The script installs dependencies, writes `/etc/portland-openrouter-proxy.env`, and starts a systemd service on port `8787`. Point the frontend at:
+The script writes `/etc/portland-openrouter-proxy.env` and starts a systemd service on port `8787`. It does not need a full `npm install` because the proxy uses only built-in Node modules. Point the frontend at:
 
 ```bash
 VITE_OPENROUTER_BASE_URL=https://animegf.chat:8787/api/openrouter
+```
+
+By default the proxy allows browser requests from:
+
+```bash
+https://portland-laws.github.io
+https://211-ai.github.io
 ```
 
 Because the GitHub Pages app is served over HTTPS, the proxy URL used by the browser must also be HTTPS. If OpenVPN owns port `443`, keep the Node service on `127.0.0.1:8787` and terminate TLS on public port `8787` with Caddy or Nginx.
@@ -238,6 +245,41 @@ After the proxy is reachable from the browser, configure the GitHub Pages build 
 3. Optionally add or update this repository variable to override the workflow default:
    - Name: `VITE_OPENROUTER_BASE_URL`
    - Value: `https://animegf.chat:8787/api/openrouter`
+
+### Voice proxy setup
+
+If you have a private voice inference service reachable from the VPS, for example:
+
+```bash
+curl -X POST \
+   -H "x-api-key: ..." \
+   -F "audio=@test_input.wav;type=audio/wav" \
+   http://10.8.0.99:8000/infer \
+   -o reply.wav
+```
+
+you can install a dedicated browser-safe proxy on a separate port:
+
+```bash
+sudo -E bash scripts/setup-voice-proxy-digitalocean.sh
+```
+
+The voice proxy listens on port `8790` by default and forwards multipart uploads to `http://10.8.0.99:8000/infer` unless you override `VOICE_PROXY_UPSTREAM_URL`. It also avoids a full `npm install` because the proxy uses only built-in Node modules. Set `VOICE_PROXY_API_KEY` only if your upstream service actually requires an `x-api-key` header.
+
+After terminating TLS for that port, call it from the browser at:
+
+```bash
+https://animegf.chat:8790/api/voice/infer
+```
+
+Example browser-compatible curl against the proxy:
+
+```bash
+curl -X POST \
+   -F "audio=@test_input.wav;type=audio/wav" \
+   https://animegf.chat:8790/api/voice/infer \
+   -o reply.wav
+```
 4. Confirm `VITE_OPENROUTER_ENABLED` is not set to `false`. The deploy workflow already builds with fallback enabled.
 5. Rerun the GitHub Pages deploy workflow from **Actions**, or push a new commit to `main`.
 6. Hard refresh the live page after deployment.

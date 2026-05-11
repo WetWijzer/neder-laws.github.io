@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import http from 'node:http';
-import handler from '../api/openrouter/chat/completions.js';
+import handler from '../api/voice/infer.js';
 
-const port = Number(process.env.PORT || process.env.OPENROUTER_PROXY_PORT || 8787);
-const host = process.env.HOST || process.env.OPENROUTER_PROXY_HOST || '0.0.0.0';
+const port = Number(process.env.PORT || process.env.VOICE_PROXY_PORT || 8790);
+const host = process.env.HOST || process.env.VOICE_PROXY_HOST || '127.0.0.1';
 
 function createResponseAdapter(res) {
   return {
@@ -30,18 +30,21 @@ function createResponseAdapter(res) {
 }
 
 const server = http.createServer(async (req, res) => {
-  if (req.url === '/health' || req.url === '/api/openrouter/health') {
+  const pathname = new URL(req.url || '/', `http://${req.headers.host || 'localhost'}`).pathname;
+
+  if (pathname === '/health' || pathname === '/api/voice/health') {
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({
       ok: true,
-      service: 'openrouter-proxy',
-      configured: Boolean(process.env.OPENROUTER_API_KEY),
+      service: 'voice-proxy',
+      configured: true,
+      requiresApiKey: Boolean(process.env.VOICE_PROXY_API_KEY),
+      upstream: process.env.VOICE_PROXY_UPSTREAM_URL || 'http://10.8.0.99:8000/infer',
     }));
     return;
   }
 
-  const pathname = new URL(req.url || '/', `http://${req.headers.host || 'localhost'}`).pathname;
-  if (pathname !== '/api/openrouter/chat/completions' && pathname !== '/chat/completions') {
+  if (pathname !== '/api/voice/infer' && pathname !== '/infer') {
     res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({ error: 'Not found' }));
     return;
@@ -54,14 +57,13 @@ const server = http.createServer(async (req, res) => {
       res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
     }
     res.end(JSON.stringify({
-      error: 'OpenRouter proxy crashed',
+      error: 'Voice proxy crashed',
       message: error instanceof Error ? error.message : String(error),
     }));
   }
 });
 
 server.listen(port, host, () => {
-  console.log(`OpenRouter proxy listening on http://${host}:${port}`);
-  console.log(`Chat endpoint: /api/openrouter/chat/completions`);
-  console.log(`Allowed origins: ${process.env.OPENROUTER_PROXY_ALLOWED_ORIGINS || 'default'}`);
+  console.log(`Voice proxy listening on http://${host}:${port}`);
+  console.log('Voice endpoint: /api/voice/infer');
 });
