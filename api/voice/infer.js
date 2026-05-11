@@ -19,6 +19,20 @@ const ROUTE_RULES = {
   },
 };
 
+function getUpstreamUrlForRoute(routeIntent) {
+  const inferUrl = process.env.VOICE_PROXY_UPSTREAM_URL || 'http://10.8.0.99:8000/infer';
+  const ttsUrl = process.env.VOICE_PROXY_TTS_UPSTREAM_URL || 'http://10.8.0.99:8000/tts';
+  const sttUrl = process.env.VOICE_PROXY_STT_UPSTREAM_URL || 'http://10.8.0.99:8000/stt';
+
+  if (routeIntent === 'tts') {
+    return ttsUrl;
+  }
+  if (routeIntent === 'stt') {
+    return sttUrl;
+  }
+  return inferUrl;
+}
+
 function parseAllowedOrigins() {
   return (process.env.VOICE_PROXY_ALLOWED_ORIGINS || process.env.OPENROUTER_PROXY_ALLOWED_ORIGINS || DEFAULT_ALLOWED_ORIGINS.join(','))
     .split(',')
@@ -78,7 +92,7 @@ function buildRouteDiagnostic(req, contentType) {
     requestContentType: contentType || null,
     expectedContentType: routeRule.expectedContentType || null,
     routeDescription: routeRule.description,
-    upstream: process.env.VOICE_PROXY_UPSTREAM_URL || 'http://10.8.0.99:8000/infer',
+    upstream: getUpstreamUrlForRoute(routeIntent),
   };
 }
 
@@ -95,9 +109,9 @@ export default async function handler(req, res) {
     return;
   }
 
-  const upstreamUrl = process.env.VOICE_PROXY_UPSTREAM_URL || 'http://10.8.0.99:8000/infer';
   const apiKey = process.env.VOICE_PROXY_API_KEY;
   const routeIntent = getRouteIntent(req);
+  const upstreamUrl = getUpstreamUrlForRoute(routeIntent);
 
   try {
     const body = await readRawBody(req);

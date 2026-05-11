@@ -5,6 +5,14 @@ import handler from '../api/voice/infer.js';
 const port = Number(process.env.PORT || process.env.VOICE_PROXY_PORT || 8790);
 const host = process.env.HOST || process.env.VOICE_PROXY_HOST || '127.0.0.1';
 
+function getVoiceRouteUpstreams() {
+  return {
+    infer: process.env.VOICE_PROXY_UPSTREAM_URL || 'http://10.8.0.99:8000/infer',
+    tts: process.env.VOICE_PROXY_TTS_UPSTREAM_URL || 'http://10.8.0.99:8000/tts',
+    stt: process.env.VOICE_PROXY_STT_UPSTREAM_URL || 'http://10.8.0.99:8000/stt',
+  };
+}
+
 function parseAllowedOrigins() {
   return (process.env.VOICE_PROXY_ALLOWED_ORIGINS || process.env.OPENROUTER_PROXY_ALLOWED_ORIGINS || 'https://portland-laws.github.io,https://211-ai.github.io,http://localhost:5173,http://127.0.0.1:5173')
     .split(',')
@@ -61,25 +69,29 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (pathname === '/health' || pathname === '/api/voice/health') {
+    const upstreams = getVoiceRouteUpstreams();
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({
       ok: true,
       service: 'voice-proxy',
       configured: true,
       requiresApiKey: Boolean(process.env.VOICE_PROXY_API_KEY),
-      upstream: process.env.VOICE_PROXY_UPSTREAM_URL || 'http://10.8.0.99:8000/infer',
+      upstream: upstreams.infer,
       routes: {
         infer: {
           paths: ['/api/voice/infer', '/infer'],
           expectedContentType: 'any upstream-supported content-type',
+          upstream: upstreams.infer,
         },
         tts: {
           paths: ['/api/voice/tts', '/tts'],
           expectedContentType: 'application/x-www-form-urlencoded',
+          upstream: upstreams.tts,
         },
         stt: {
           paths: ['/api/voice/stt', '/stt'],
           expectedContentType: 'multipart/form-data',
+          upstream: upstreams.stt,
         },
       },
     }));
