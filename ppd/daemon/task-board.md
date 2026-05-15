@@ -61,7 +61,7 @@ Last supervisor tranche: 2026-05-15
 - [x] Task supervisor-20260515-040: Add a local PDF draft-preview fixture that maps synthetic user facts to synthetic fillable field metadata and reports missing facts, blocked certification fields, and preview-only status without reading or writing PDF binaries.
 - [x] Task supervisor-20260515-041: Add a narrow daemon diagnostics regression test that records repeated syntax-preflight failures with the target task, failing file, validation command, and smaller-next-attempt guidance; do not change worker task selection semantics.
 - [x] Task supervisor-20260515-042: Add an end-to-end synthetic readiness fixture that links source registry, archive manifest, extracted requirements, process model, user gap analysis, guardrail bundle, and next-safe-action output for one narrow PP&D workflow without live crawling or authenticated automation.
-- [!] Task supervisor-20260515-043: Add a fixture-first citation integrity validator that verifies every requirement, process-model rule, guardrail predicate, and next-safe-action explanation traces back to committed synthetic source evidence IDs and citation spans; do not crawl live sources or broaden contracts.
+- [x] Task supervisor-20260515-043: Add a fixture-first citation integrity validator that verifies every requirement, process-model rule, guardrail predicate, and next-safe-action explanation traces back to committed synthetic source evidence IDs and citation spans; do not crawl live sources or broaden contracts.
 - [x] Task supervisor-20260515-044: Add a deterministic stale-or-changed-source impact report fixture that maps changed synthetic source hashes to affected requirement IDs, process IDs, guardrail bundle IDs, and blocked readiness statuses before any recommendation is marked current.
 - [x] Task supervisor-20260515-045: Add a narrow permit-type taxonomy fixture for DevHub-supported, DevHub-unsupported, email/manual, and public-reference-only paths, and validate that unsupported paths always produce manual handoff rather than browser automation.
 - [x] Task supervisor-20260515-046: Add a fixture-only conflict-resolution readiness check for contradictory requirement nodes, proving conflicts block formalization and produce cited missing-information or human-review prompts without choosing a winner automatically.
@@ -69,16 +69,26 @@ Last supervisor tranche: 2026-05-15
 - [x] Task supervisor-20260515-048: Add a guarded reversible-draft execution plan fixture that separates local preview, draft field-fill, save-for-later, and consequential submit/certify/upload/payment actions, requiring attendance and exact confirmation only at the appropriate boundaries.
 - [x] Task supervisor-20260515-049: Add a synthetic processor-capability adapter fixture that records which ipfs_datasets_py processor capabilities would be used for HTML, PDF, WARC, and metadata capture, without importing network-dependent processors or writing raw archives.
 - [x] Task supervisor-20260515-050: Add a daemon validation regression that rejects task-board proposals which mark application/domain work complete without a visible committed source change, while still allowing supervisor-only backlog updates under `plan_next_tasks`.
+- [x] Task supervisor-20260515-051: Add a fixture-first source-index export that loads existing synthetic SourceRegistry, ArchiveManifest, DocumentRecord, and citation-integrity fixtures into one deterministic metadata-only index; edit one narrow helper/test pair plus one JSON fixture if needed, and reject raw bodies, private URLs, local private paths, and invented hashes.
+- [!] Task supervisor-20260515-052: Add deterministic source-index readiness validation that blocks requirement extraction when freshness status, citation spans, owning surface, or processor metadata are missing or stale; use committed synthetic fixtures only and do not crawl.
+- [x] Task supervisor-20260515-053: Add a fixture-first agent bundle loader for one synthetic permit process that assembles source index references, requirement nodes, process model stages, guardrail bundle IDs, unsupported-path taxonomy, and next-safe-action IDs into a cited loadable bundle; keep changes to one helper/test pair.
+- [x] Task supervisor-20260515-054: Add validation that the agent bundle loader rejects uncited process stages, unsupported actions without manual-handoff outcomes, guardrail predicates without evidence IDs, and next-safe-action explanations without citation spans.
+- [!] Task supervisor-20260515-055: Add a redacted synthetic user case store adapter that accepts fixture case facts and document metadata, normalizes fact freshness/confidence, and rejects credentials, payment details, auth state, screenshots, traces, HAR data, raw private values, and local private paths.
+- [x] Task supervisor-20260515-056: Add a deterministic case-to-process gap report that combines the user case store, process bundle, document compliance, source freshness, and citation integrity outputs to return only missing, stale, ambiguous, or conflicting prompts plus safe next actions; use fixtures only.
+- [x] Task supervisor-20260515-057: Add a local dry-run public crawl plan generator that converts official seed metadata into ordered fetch intentions with allowlist decision, robots/preflight status, crawl frequency, processor capability choice, rate-limit bucket, and `no_raw_body_persisted`; do not make network requests or create crawl output.
+- [x] Task supervisor-20260515-058: Add validation for dry-run crawl plans that rejects private/authenticated DevHub URLs, over-broad host expansion, unsupported schemes, missing rate-limit or freshness policy, and any output path that would persist raw bodies or downloaded documents.
+- [x] Task supervisor-20260515-059: Add an attended DevHub capture readiness manifest validator that requires manual login handoff, attendance, redaction policy, accessible-structure-only capture scope, and exact-confirmation boundary notices while rejecting session state, cookies, credentials, screenshots, traces, HAR data, uploads, submissions, scheduling, and payment actions.
+- [x] Task supervisor-20260515-060: Add an agent-facing action decision API fixture that classifies read-only review, reversible draft, save-for-later, manual handoff, refused consequential action, and financial boundary outcomes with cited explanations and required confirmations; do not automate browser actions.
 
 
 <!-- ppd-daemon-task-board:start -->
 ## Generated Status
 
-Last updated: 2026-05-15T07:06:05.052141Z
+Last updated: 2026-05-15T15:19:41.132110Z
 
-- Latest target: `Task checkbox-42: Task supervisor-20260515-043: Add a fixture-first citation integrity validator that verifies every requirement, process-model rule, guardrail predicate, and next-safe-action explanation traces back to committed synthetic source evidence IDs and citation spans; do not crawl live sources or broaden contracts.`
+- Latest target: `Task checkbox-51: Task supervisor-20260515-052: Add deterministic source-index readiness validation that blocks requirement extraction when freshness status, citation spans, owning surface, or processor metadata are missing or stale; use committed synthetic fixtures only and do not crawl.`
 - Latest result: `syntax_preflight`
-- Latest summary: Add a fixture-first PP&D citation integrity validator with deterministic synthetic fixtures and narrow unit tests.
-- Counts: `{"blocked": 1, "complete": 48, "in_progress": 0, "needed": 0}`
+- Latest summary: Adds a deterministic source-index readiness gate with synthetic fixture coverage for stale freshness, missing citation spans, missing owning surface, and missing processor metadata.
+- Counts: `{"blocked": 2, "complete": 57, "in_progress": 0, "needed": 0}`
 
 <!-- ppd-daemon-task-board:end -->
