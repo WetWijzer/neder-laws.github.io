@@ -1,0 +1,26 @@
+{
+  "freshness": {
+    "status": "fresh",
+    "checked_at": "2026-05-14T12:00:00Z"
+  },
+  "owning_surface": "portland-permitting-and-development",
+  "processor": {
+    "name": "synthetic-ppd-source-index-processor",
+    "version": "1.0.0",
+    "processed_at": "2026-05-14T12:05:00Z"
+  },
+  "sources": [
+    {
+      "id": "synthetic-ppd-zoning-code-page",
+      "url": "https://www.portland.gov/synthetic/ppd/zoning-code-page",
+      "title": "Synthetic PP&D Zoning Code Page",
+      "citation_spans": [
+        {
+          "start": 0,
+          "end": 72,
+          "text": "Synthetic citation span for deterministic PP&D readiness validation."
+        }
+      ]
+    }
+  ]
+}
