@@ -1,0 +1,61 @@
+{
+  "reversible_draft_fill": {
+    "action_type": "reversible_draft_fill",
+    "source_evidence": [
+      {
+        "source_id": "ppd-devhub-guide-submit-permit-application",
+        "citation": "DevHub permit application guidance describes save-for-later behavior and dynamic application questions."
+      }
+    ],
+    "user_case_facts": {
+      "case_id": "fixture-case-001",
+      "permit_type": "building permit",
+      "property_address": "1120 SW 5th Ave, Portland, OR"
+    },
+    "selector_confidence": 0.94,
+    "attendance": true,
+    "preview": {
+      "fields": [
+        {
+          "selector": "input[name='ProjectDescription']",
+          "proposed_value": "Replace existing deck boards in kind",
+          "evidence_id": "ppd-devhub-guide-submit-permit-application"
+        }
+      ]
+    }
+  },
+  "save_draft": {
+    "action_type": "save_draft",
+    "source_evidence": [
+      {
+        "source_id": "ppd-devhub-guide-submit-permit-application",
+        "citation": "Official guidance identifies save-for-later behavior before final submission."
+      }
+    ],
+    "user_case_facts": {
+      "case_id": "fixture-case-001",
+      "permit_type": "building permit"
+    },
+    "selector_confidence": 0.91,
+    "attendance": true,
+    "preview": {
+      "fields": [
+        {
+          "selector": "button[data-action='save-draft']",
+          "proposed_value": "save current reversible draft"
+        }
+      ]
+    }
+  },
+  "fail_closed_action_types": [
+    "official_upload",
+    "certification",
+    "submission",
+    "payment",
+    "cancellation",
+    "inspection_scheduling",
+    "mfa",
+    "captcha",
+    "account_creation"
+  ]
+}

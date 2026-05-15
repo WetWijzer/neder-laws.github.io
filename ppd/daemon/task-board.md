@@ -1,85 +1,84 @@
 # PP&D Daemon Task Board
 
-Status: supervisor-repaired backlog
-Last supervisor update: 2026-05-09T04:22:57Z
+Status: active
+Last supervisor tranche: 2026-05-15
 
-## Preserved Completion State
+## Worker Rules
 
-The prior daemon run reported 9305 completed tasks, 0 blocked tasks, 0 in-progress tasks, and 0 eligible needed tasks before this supervisor repair. Those completed tasks remain treated as closed work by the daemon progress ledger and should not be recreated as generated placeholder tranches.
+- Work one unchecked task per daemon cycle, in order from top to bottom.
+- Preserve completed tasks and append new work instead of rewriting history.
+- Keep every proposal narrow and deterministic.
+- Do not implement live DevHub login, CAPTCHA, MFA, account creation, payment, submission, certification, cancellation, official upload, or inspection scheduling.
+- Use committed synthetic fixtures before any live or authenticated automation.
+- Do not create private DevHub session files, auth state, traces, HAR files, screenshots, raw crawl output, downloaded documents, or local private document artifacts.
+- For every changed Python file, include `python3 -m py_compile ` in validation or rely on `python3 ppd/tests/validate_ppd.py` when it covers the file.
+- For every changed TypeScript file, include strict `tsc --noEmit` validation when TypeScript exists.
+- After recent syntax preflight failures, prefer one core file plus one narrow fixture/test per task instead of broad multi-contract rewrites.
 
-Recent completed work established deterministic daemon fallback and blocked-cascade repair coverage in `ppd/platform/deterministic_fallback_progress.py`, `ppd/platform/blocked_cascade_daemon_repair.py`, and `ppd/daemon/deterministic-progress.json`. The supervisor diagnosis requires stopping generated placeholder tranche creation and returning to agentic or human-authored PP&D work.
+## Completed Work
 
-## Current Narrow Tranche
+- [x] Task supervisor-20260514-001: Establish the PP&D daemon task board and operations boundary for autonomous cycles.
+- [x] Task supervisor-20260514-002: Add deterministic daemon validation for PP&D proposals and task-board state.
+- [x] Task supervisor-20260514-003: Add PP&D source registry contracts for official public source anchors and policy metadata.
+- [x] Task supervisor-20260514-004: Add public crawl allowlist and robots/policy preflight fixtures for official PP&D sources.
+- [x] Task supervisor-20260514-005: Add archive manifest and normalized public document record fixtures without committing raw bodies.
+- [x] Task supervisor-20260514-006: Add requirement extraction fixtures for source-backed obligations, prohibitions, deadlines, fees, and action gates.
+- [x] Task supervisor-20260514-007: Add process model fixtures for a narrow synthetic PP&D permit workflow.
+- [x] Task supervisor-20260514-008: Add guardrail bundle compiler fixtures and deterministic predicate validation.
+- [x] Task supervisor-20260514-009: Add DevHub action classification and consequential-action blocking fixtures.
+- [x] Task supervisor-20260514-010: Add attended DevHub surface-map fixture validation without authenticated session artifacts.
+- [x] Task supervisor-20260514-011: Add user gap analysis fixtures for missing facts, stale evidence, conflicting evidence, blocked actions, and next safe actions.
+- [x] Task supervisor-20260514-013: Add fixture-first file preparation compliance planning for Single PDF and upload-boundary rules.
+- [x] Task supervisor-20260514-014: Implement the minimal file-preparation compliance helper using synthetic PDF/document metadata fixtures only; do not read private files, download documents, persist raw PDFs, or perform upload staging.
 
-These tasks are ordered. Each task is intentionally small enough for one daemon cycle. Do not automate CAPTCHA, MFA, account creation, payment, submission, certification, cancellation, official upload, inspection scheduling, or private DevHub session capture.
+## Next Ordered Tranche
 
-- [x] Task supervisor-20260509-001: Add a fixture-only validation test that enumerates the official PP&D source anchors from the original plan and fails when any anchor is missing from the committed public source registry or documented as intentionally deferred.
-- [x] Task supervisor-20260509-002: Add the minimal committed fixture or registry metadata needed for the PP&D bureau landing page, online permitting tools overview, DevHub FAQ, DevHub sign-in guide, apply-for-permits page, DevHub permit application guide, submit-plans-online page, forms index, file naming standards page, fee payment guide, DevHub portal, and Portland Maps public reference anchor to satisfy the source-anchor validation without fetching live pages.
-- [x] Task supervisor-20260509-003: Add a fixture-first unit test for public crawl preflight decisions covering allowlisted `www.portland.gov`, `devhub.portlandoregon.gov`, `www.portlandoregon.gov`, and linked public `www.portlandmaps.com` URLs, plus skipped outside-allowlist, unsupported-scheme, private/authenticated, raw-download-not-permitted, and unsupported-content-type cases.
-- [x] Task supervisor-20260509-004: Implement or tighten the PP&D public crawl preflight policy so the fixture cases from Task supervisor-20260509-003 pass using deterministic local inputs only, with no network calls and no raw body persistence.
-- [x] Task supervisor-20260509-005: Add fixture-first tests for `ArchiveManifest` records proving skipped captures preserve URL, skip reason, source id, content type when known, processor policy, and `no_raw_body_persisted` semantics.
-- [x] Task supervisor-20260509-006: Implement the smallest manifest normalization change needed for skipped public crawl records to satisfy Task supervisor-20260509-005 while preserving existing archive and processor handoff behavior.
-- [x] Task supervisor-20260509-007: Add a fixture-only test for public HTML extraction ordering that verifies headings, ordered steps, callouts, tables, related links, and visible updated dates remain in document order for a synthetic PP&D guidance page.
-- [x] Task supervisor-20260509-008: Implement the smallest public HTML extraction normalization change needed for the ordering fixture from Task supervisor-20260509-007, without adding live crawl behavior or storing raw downloaded pages.
-- [x] Task supervisor-20260509-009: Add a fixture-only test for PDF/form extraction contracts covering page-anchored text, checklist items, certification blocks, fillable field names, checkbox/radio options, and OCR confidence flags using synthetic committed fixtures only.
-- [x] Task supervisor-20260509-010: Implement the smallest PDF/form contract normalization change needed for Task supervisor-20260509-009 without downloading official PDFs or committing raw extracted public documents.
-- [x] Task supervisor-20260509-011: Add a fixture-first test for requirement extraction that maps synthetic PP&D guidance text into obligation, prohibition, permission, precondition, deadline, fee_trigger, license_requirement, document_requirement, and action_gate nodes with source evidence ids.
-- [x] Task supervisor-20260509-012: Implement the minimal deterministic requirement extraction or validation helper needed for Task supervisor-20260509-011 while keeping human-review and formalization status explicit.
-- [x] Task supervisor-20260509-013: Add a fixture-only guardrail compiler test proving financial actions, official submission, certification, correction upload, inspection scheduling, cancellation, extension/reactivation requests, CAPTCHA, MFA, account creation, and password recovery all require refusal, exact confirmation, attended handoff, or manual handling as appropriate.
-- [x] Task supervisor-20260509-014: Implement the smallest guardrail compiler or action classification change needed for Task supervisor-20260509-013 without adding browser automation.
-- [x] Task supervisor-20260509-015: Add a fixture-only user gap analysis test for a standard trade permit scenario where contractor license data affects fixture availability, proving the gap analysis asks for missing license-related facts before allowing a draft-ready state.
-- [x] Task supervisor-20260509-016: Implement the smallest user gap analysis rule needed for Task supervisor-20260509-015 using source evidence ids and deterministic local facts only.
-- [x] Task supervisor-20260509-017: Add a fixture-only DevHub surface map test for a synthetic attended login-complete page that records title, heading, accessible roles/names, stable labels, validation messages, upload controls, save/back/continue/submit button states, selector confidence, redaction policy, attendance requirement, and exact-confirmation requirement.
-- [x] Task supervisor-20260509-018: Implement the smallest DevHub surface map normalization change needed for Task supervisor-20260509-017 without storing credentials, auth state, screenshots, traces, HAR data, or private page values.
-- [x] Task supervisor-20260509-019: Add daemon diagnostics coverage proving `no_eligible_tasks` after placeholder exhaustion triggers supervisor planning guidance instead of appending generated deterministic tranches.
-- [x] Task supervisor-20260509-020: Implement the smallest daemon or supervisor task-selection diagnostic change needed for Task supervisor-20260509-019, keeping retries bounded and validation-first.
-
-## Validation
-
-Each completed task must pass the PP&D validation entry point before being marked complete:
-
-- `python3 ppd/tests/validate_ppd.py`
+- [x] Task supervisor-20260514-015: Add a synthetic file-preparation-to-guardrail fixture that maps document metadata compliance findings into blocked actions and next safe actions; edit only one narrow helper/test pair plus committed synthetic JSON if needed.
+- [x] Task supervisor-20260514-016: Add validation that noncompliant synthetic document metadata blocks upload staging, certification, and submission while still allowing local preview and missing-information prompts.
+- [x] Task supervisor-20260514-017: Add a source-evidence freshness fixture for file naming and Single PDF rules that marks stale or missing evidence before any document-preparation recommendation can be considered ready.
+- [x] Task supervisor-20260514-018: Add a deterministic requirement-to-process-model consistency check for required documents, file rules, fee triggers, and unsupported paths using existing synthetic public-source fixtures only.
+- [x] Task supervisor-20260514-019: Add an action-journal redaction fixture for local PDF preview, reversible draft plan, refused action, and exact-confirmation checkpoint events; ensure credentials, cookies, auth state, screenshots, traces, HAR data, private values, payment details, and local private paths are rejected.
+- [x] Task supervisor-20260514-020: Add a DevHub attended-preflight fixture that proves login/MFA/CAPTCHA/account creation are manual handoff states and that authenticated browser state is never committed.
+- [x] Task supervisor-20260514-021: Add a synthetic surface-map selector-confidence check that blocks draft-fill actions when labels, headings, or route evidence are ambiguous.
+- [x] Task supervisor-20260514-022: Add a reversible draft-fill planning fixture that requires source evidence IDs, user case facts for every filled value, attendance, and a preview before any DevHub field-fill action is allowed.
+- [x] Task supervisor-20260514-023: Add exact-confirmation checkpoint fixtures for acknowledgement/certification, official upload, submission, scheduling, cancellation, extension/reactivation, and payment boundaries without automating those actions.
+- [x] Task supervisor-20260514-024: Add a change-monitoring fixture that reports changed source hashes and affected requirement/process/guardrail IDs without crawling live sites or storing raw page bodies.
+- [x] Task supervisor-20260514-025: Add a fixture-only public source discovery index that records canonical URLs, source page, link text, content type hints, allow/skip decisions, and skip reason codes for official PP&D seed pages; do not crawl live sites or store raw page bodies.
+- [x] Task supervisor-20260514-026: Add deterministic validation for public source discovery records covering allowed hosts, unsupported schemes, private/authenticated paths, outside-allowlist links, and public Portland Maps references linked from PP&D guidance.
+- [x] Task supervisor-20260514-027: Add a processor-handoff manifest fixture that records PP&D-local policy preflight, processor name/version, redirect metadata, content hash, MIME type, normalized document reference, and `no_raw_body_persisted` for synthetic public captures only.
+- [x] Task supervisor-20260514-028: Add validation that archive manifests reject raw body persistence, private/authenticated DevHub URLs, missing processor metadata, missing source IDs, and invented hashes for skipped captures.
+- [x] Task supervisor-20260514-029: Add a normalized HTML extraction fixture for one synthetic PP&D guidance page with title, breadcrumbs, headings, ordered steps, warnings, tables, contacts, related links, update dates, and citation spans preserved in source order.
+- [x] Task supervisor-20260514-030: Add a normalized PDF/form extraction fixture for synthetic public form metadata covering page anchors, checklist items, fillable field names, signature/certification blocks, file-preparation instructions, and OCR confidence flags without storing PDF binaries.
+- [x] Task supervisor-20260514-031: Add a requirement extraction review fixture that marks low-confidence, OCR-derived, stale, conflicting, and unsupported-path requirements for human review before formalization.
+- [x] Task supervisor-20260514-032: Add a process dependency graph fixture that links required facts, required documents, deadlines, fee triggers, exceptions, unsupported paths, and DevHub action gates for one narrow synthetic permit process.
+- [x] Task supervisor-20260514-033: Add a guardrail explanation fixture that turns blocked action predicates and missing-information predicates into cited, user-facing explanations without exposing private values or raw authenticated page data.
+- [x] Task supervisor-20260514-034: Add an agent-facing next-safe-action fixture that combines user gap analysis, process dependency graph state, action classification, and guardrail bundle results into read-only, reversible-draft, manual-handoff, and refused-action recommendations.
+- [x] Task supervisor-20260515-035: Add a source-freshness readiness fixture that blocks guardrail readiness when official source evidence is stale, missing, or hash-changed; use synthetic registry/change-monitor records only, and keep the change to one helper/test pair plus one fixture if needed.
+- [x] Task supervisor-20260515-036: Add deterministic requirement formalization readiness validation proving only fresh, supported, human-reviewed requirement nodes can feed a guardrail bundle; do not add broad new contracts or live source reads.
+- [x] Task supervisor-20260515-037: Add a process-model coverage fixture for permit paths that PP&D guidance says are unsupported by DevHub or require manual/email handling, and validate that next-safe-action output becomes manual handoff rather than DevHub automation.
+- [x] Task supervisor-20260515-038: Add a synthetic DevHub surface-recorder redaction fixture that permits accessible structure metadata while rejecting screenshots, traces, HAR data, auth state, cookies, credentials, private values, and local private paths.
+- [x] Task supervisor-20260515-039: Add an attended-worker journal sequence fixture requiring preflight, action classification, preview, exact-confirmation checkpoint, and post-action review evidence before any DevHub action can be marked complete; do not automate or simulate final official actions.
+- [x] Task supervisor-20260515-040: Add a local PDF draft-preview fixture that maps synthetic user facts to synthetic fillable field metadata and reports missing facts, blocked certification fields, and preview-only status without reading or writing PDF binaries.
+- [x] Task supervisor-20260515-041: Add a narrow daemon diagnostics regression test that records repeated syntax-preflight failures with the target task, failing file, validation command, and smaller-next-attempt guidance; do not change worker task selection semantics.
+- [x] Task supervisor-20260515-042: Add an end-to-end synthetic readiness fixture that links source registry, archive manifest, extracted requirements, process model, user gap analysis, guardrail bundle, and next-safe-action output for one narrow PP&D workflow without live crawling or authenticated automation.
+- [!] Task supervisor-20260515-043: Add a fixture-first citation integrity validator that verifies every requirement, process-model rule, guardrail predicate, and next-safe-action explanation traces back to committed synthetic source evidence IDs and citation spans; do not crawl live sources or broaden contracts.
+- [x] Task supervisor-20260515-044: Add a deterministic stale-or-changed-source impact report fixture that maps changed synthetic source hashes to affected requirement IDs, process IDs, guardrail bundle IDs, and blocked readiness statuses before any recommendation is marked current.
+- [x] Task supervisor-20260515-045: Add a narrow permit-type taxonomy fixture for DevHub-supported, DevHub-unsupported, email/manual, and public-reference-only paths, and validate that unsupported paths always produce manual handoff rather than browser automation.
+- [x] Task supervisor-20260515-046: Add a fixture-only conflict-resolution readiness check for contradictory requirement nodes, proving conflicts block formalization and produce cited missing-information or human-review prompts without choosing a winner automatically.
+- [x] Task supervisor-20260515-047: Add an agent-facing missing-information API fixture that returns only missing, stale, ambiguous, or conflicting user facts for one synthetic case, with private values redacted and no local file paths.
+- [x] Task supervisor-20260515-048: Add a guarded reversible-draft execution plan fixture that separates local preview, draft field-fill, save-for-later, and consequential submit/certify/upload/payment actions, requiring attendance and exact confirmation only at the appropriate boundaries.
+- [x] Task supervisor-20260515-049: Add a synthetic processor-capability adapter fixture that records which ipfs_datasets_py processor capabilities would be used for HTML, PDF, WARC, and metadata capture, without importing network-dependent processors or writing raw archives.
+- [x] Task supervisor-20260515-050: Add a daemon validation regression that rejects task-board proposals which mark application/domain work complete without a visible committed source change, while still allowing supervisor-only backlog updates under `plan_next_tasks`.
 
 
 <!-- ppd-daemon-task-board:start -->
 ## Generated Status
 
-Last updated: 2026-05-09T05:18:30Z
+Last updated: 2026-05-15T06:18:44.142759Z
 
-- Latest target: `Task supervisor-20260509-017: Add a fixture-only DevHub surface map test for a synthetic attended login-complete page that records title, heading, accessible roles/names, stable labels, validation messages, upload controls, save/back/continue/submit button states, selector confidence, redaction policy, attendance requirement, and exact-confirmation requirement.`
-- Latest result: `manual_reconciliation_after_validation`
-- Latest summary: Completed the narrow continuation tranche after deterministic fallback coverage and the full fixture suite passed.
-- Counts: `{"blocked": 0, "complete": 20, "in_progress": 0, "needed": 0}`
+- Latest target: `Task checkbox-42: Task supervisor-20260515-043: Add a fixture-first citation integrity validator that verifies every requirement, process-model rule, guardrail predicate, and next-safe-action explanation traces back to committed synthetic source evidence IDs and citation spans; do not crawl live sources or broaden contracts.`
+- Latest result: `syntax_preflight`
+- Latest summary: Adds a narrow fixture-first citation integrity validator with deterministic synthetic PP&D evidence fixtures and tests.
+- Counts: `{"blocked": 1, "complete": 48, "in_progress": 0, "needed": 0}`
 
 <!-- ppd-daemon-task-board:end -->
-## Built-In Supervisor Repair Notes
-
-- Reset dead-worker in-progress task `Task supervisor-20260509-003: Add a fixture-first unit test for public crawl preflight decisions covering allowlisted `www.portland.gov`, `devhub.portlandoregon.gov`, `www.portlandoregon.gov`, and linked public `www.portlandmaps.com` URLs, plus skipped outside-allowlist, unsupported-scheme, private/authenticated, raw-download-not-permitted, and unsupported-content-type cases.` to pending after the daemon process exited mid-cycle. The supervisor will restart the worker and let the task be selected again with a fresh timeout window.
-## Built-In Supervisor Repair Notes
-
-- Reset dead-worker in-progress task `Task supervisor-20260509-005: Add fixture-first tests for `ArchiveManifest` records proving skipped captures preserve URL, skip reason, source id, content type when known, processor policy, and `no_raw_body_persisted` semantics.` to pending after the daemon process exited mid-cycle. The supervisor will restart the worker and let the task be selected again with a fresh timeout window.
-## Built-In Supervisor Repair Notes
-
-- Reset dead-worker in-progress task `Task supervisor-20260509-008: Implement the smallest public HTML extraction normalization change needed for the ordering fixture from Task supervisor-20260509-007, without adding live crawl behavior or storing raw downloaded pages.` to pending after the daemon process exited mid-cycle. The supervisor will restart the worker and let the task be selected again with a fresh timeout window.
-## Built-In Supervisor Repair Notes
-
-- Reset dead-worker in-progress task `Task supervisor-20260509-010: Implement the smallest PDF/form contract normalization change needed for Task supervisor-20260509-009 without downloading official PDFs or committing raw extracted public documents.` to pending after the daemon process exited mid-cycle. The supervisor will restart the worker and let the task be selected again with a fresh timeout window.
-## Built-In Supervisor Repair Notes
-
-- Reset dead-worker in-progress task `Task supervisor-20260509-012: Implement the minimal deterministic requirement extraction or validation helper needed for Task supervisor-20260509-011 while keeping human-review and formalization status explicit.` to pending after the daemon process exited mid-cycle. The supervisor will restart the worker and let the task be selected again with a fresh timeout window.
-## Built-In Supervisor Repair Notes
-
-- Reset dead-worker in-progress task `Task supervisor-20260509-014: Implement the smallest guardrail compiler or action classification change needed for Task supervisor-20260509-013 without adding browser automation.` to pending after the daemon process exited mid-cycle. The supervisor will restart the worker and let the task be selected again with a fresh timeout window.
-## Built-In Supervisor Repair Notes
-
-- Reset dead-worker in-progress task `Task supervisor-20260509-016: Implement the smallest user gap analysis rule needed for Task supervisor-20260509-015 using source evidence ids and deterministic local facts only.` to pending after the daemon process exited mid-cycle. The supervisor will restart the worker and let the task be selected again with a fresh timeout window.
-## Built-In Supervisor Repair Notes
-
-- Reset dead-worker in-progress task `Task supervisor-20260509-018: Implement the smallest DevHub surface map normalization change needed for Task supervisor-20260509-017 without storing credentials, auth state, screenshots, traces, HAR data, or private page values.` to pending after the daemon process exited mid-cycle. The supervisor will restart the worker and let the task be selected again with a fresh timeout window.
-## Built-In Supervisor Repair Notes
-
-- Reset dead-worker in-progress task `Task supervisor-20260509-020: Implement the smallest daemon or supervisor task-selection diagnostic change needed for Task supervisor-20260509-019, keeping retries bounded and validation-first.` to pending after the daemon process exited mid-cycle. The supervisor will restart the worker and let the task be selected again with a fresh timeout window.
-
-## Narrow Tranche Reconciliation Notes
-
-- Completed the two remaining blocked narrow-tranche tasks after `python3 ppd/tests/validate_ppd.py` and full unittest discovery passed with the deterministic reconciliation fallback in place. The generated blocked-cascade recovery tranche appended after the mid-apply termination was removed so the daemon does not retry unrelated recovery work through the LLM path.

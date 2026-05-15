@@ -1,0 +1,101 @@
+{
+  "fixture_id": "devhub-attended-preflight-valid-v1",
+  "fixture_only": true,
+  "uses_live_devhub": false,
+  "stores_private_session_artifacts": false,
+  "manual_login_handoff": {
+    "required": true,
+    "requires_user_attendance": true,
+    "actor": "user",
+    "credential_storage": "forbidden",
+    "session_state_storage": "forbidden",
+    "account_creation_allowed": false,
+    "handoff_reason": "User must complete PortlandOregon.gov sign-in outside automation before any attended DevHub workflow is planned."
+  },
+  "refused_action_policies": {
+    "mfa": {
+      "decision": "refuse",
+      "automate": false,
+      "requires_user_handoff": true
+    },
+    "captcha": {
+      "decision": "refuse",
+      "automate": false,
+      "requires_user_handoff": true
+    },
+    "account_creation": {
+      "decision": "refuse",
+      "automate": false,
+      "requires_user_handoff": true
+    }
+  },
+  "surface_map": [
+    {
+      "surface_id": "devhub.dashboard.permit_requests",
+      "auth_scope": "authenticated_user_owned_session",
+      "url_pattern": "https://devhub.portlandoregon.gov/*",
+      "page_heading": "DevHub",
+      "requires_attendance": true,
+      "requires_exact_confirmation": true,
+      "selector_confidence": 0.94,
+      "selectors": {
+        "permit_requests_link": {
+          "strategy": "role_and_accessible_name",
+          "value": "link:Permit Requests"
+        }
+      }
+    },
+    {
+      "surface_id": "devhub.application.review_checkpoint",
+      "auth_scope": "authenticated_user_owned_session",
+      "url_pattern": "https://devhub.portlandoregon.gov/*",
+      "page_heading": "Review",
+      "requires_attendance": true,
+      "requires_exact_confirmation": true,
+      "selector_confidence": 0.91,
+      "selectors": {
+        "continue_button": {
+          "strategy": "role_and_accessible_name",
+          "value": "button:Continue"
+        }
+      }
+    }
+  ],
+  "exact_confirmation_checkpoints": [
+    {
+      "checkpoint_id": "confirm-open-permit-requests",
+      "requires_user_presence": true,
+      "before_browser_action_plan": true,
+      "exact_confirmation_text": "Open my DevHub permit requests dashboard."
+    },
+    {
+      "checkpoint_id": "confirm-review-only-no-submit",
+      "requires_user_presence": true,
+      "before_browser_action_plan": true,
+      "exact_confirmation_text": "Review this page only; do not upload, certify, submit, pay, schedule, cancel, or create an account."
+    }
+  ],
+  "candidate_browser_action_plan": {
+    "fixture_only": true,
+    "uses_live_devhub": false,
+    "browser_launch_allowed": false,
+    "actions": [
+      {
+        "action_id": "fixture-open-permit-requests-link",
+        "surface_id": "devhub.dashboard.permit_requests",
+        "selector_key": "permit_requests_link",
+        "selector_confidence": 0.94,
+        "exact_confirmation_checkpoint_id": "confirm-open-permit-requests",
+        "automates_consequential_action": false
+      },
+      {
+        "action_id": "fixture-review-continue-button",
+        "surface_id": "devhub.application.review_checkpoint",
+        "selector_key": "continue_button",
+        "selector_confidence": 0.91,
+        "exact_confirmation_checkpoint_id": "confirm-review-only-no-submit",
+        "automates_consequential_action": false
+      }
+    ]
+  }
+}

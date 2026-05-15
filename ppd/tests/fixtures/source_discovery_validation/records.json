@@ -1,0 +1,60 @@
+[
+  {
+    "record_id": "ppd-landing",
+    "url": "https://www.portland.gov/ppd",
+    "source_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+    "expected_decision": "allow",
+    "expected_reason_code": "allowed_public_source"
+  },
+  {
+    "record_id": "unsupported-mailto",
+    "url": "mailto:ppd@example.invalid",
+    "source_url": "https://www.portland.gov/ppd",
+    "expected_decision": "skip",
+    "expected_reason_code": "invalid_url"
+  },
+  {
+    "record_id": "unsupported-ftp",
+    "url": "ftp://www.portland.gov/ppd/archive.zip",
+    "source_url": "https://www.portland.gov/ppd",
+    "expected_decision": "skip",
+    "expected_reason_code": "unsupported_scheme"
+  },
+  {
+    "record_id": "devhub-login",
+    "url": "https://devhub.portlandoregon.gov/login",
+    "source_url": "https://www.portland.gov/ppd/devhub-sign-guide",
+    "expected_decision": "skip",
+    "expected_reason_code": "private_authenticated"
+  },
+  {
+    "record_id": "outside-host",
+    "url": "https://example.com/permit-guide",
+    "source_url": "https://www.portland.gov/ppd",
+    "expected_decision": "skip",
+    "expected_reason_code": "outside_allowlist"
+  },
+  {
+    "record_id": "maps-from-ppd",
+    "url": "https://www.portlandmaps.com/",
+    "source_url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+    "link_text": "Portland Maps",
+    "expected_decision": "allow",
+    "expected_reason_code": "allowed_public_source"
+  },
+  {
+    "record_id": "maps-not-from-ppd",
+    "url": "https://www.portlandmaps.com/",
+    "source_url": "https://www.portland.gov/bps",
+    "link_text": "Portland Maps",
+    "expected_decision": "skip",
+    "expected_reason_code": "portland_maps_not_from_ppd_guidance"
+  },
+  {
+    "record_id": "tokenized-url",
+    "url": "https://www.portland.gov/ppd?token=secret",
+    "source_url": "https://www.portland.gov/ppd",
+    "expected_decision": "skip",
+    "expected_reason_code": "private_authenticated"
+  }
+]

@@ -1,21 +1,16 @@
 {
-  "createdAt": "2026-05-09T05:17:48.682676Z",
+  "createdAt": "2026-05-13T10:05:20.213473Z",
   "decision": {
-    "action": "reconcile_dead_worker_and_restart",
-    "reason": "daemon process is not running but status is still calling_llm on Task checkbox-18: Add supervisor recovery-note compaction coverage proving repeated repair notes are summarized before future prompt construction so task-board context stays bounded.; reset the in-progress task before restart",
+    "action": "reconcile_blocked_cascade_and_restart",
+    "reason": "all selectable PP&D tasks are blocked after repeated daemon recovery attempts; append deterministic daemon-repair tasks before retrying blocked domain work",
     "severity": "warning"
   },
-  "repairKind": "dead_worker_task_reset",
-  "resetInProgressTaskLabels": [
-    "Add supervisor recovery-note compaction coverage proving repeated repair notes are summarized before future prompt construction so task-board context stays bounded."
+  "repairKind": "blocked_cascade_replenishment",
+  "replenishedTaskLabels": [
+    "checkbox-62",
+    "checkbox-63",
+    "checkbox-64",
+    "checkbox-65"
   ],
-  "schemaVersion": 1,
-  "statusBeforeRepair": {
-    "active_state": "calling_llm",
-    "active_state_started_at": "2026-05-09T05:17:36.336324Z",
-    "active_target_task": "Task checkbox-18: Add supervisor recovery-note compaction coverage proving repeated repair notes are summarized before future prompt construction so task-board context stays bounded.",
-    "pid": 2602814,
-    "state": "heartbeat",
-    "updated_at": "2026-05-09T05:17:41.156176Z"
-  }
+  "schemaVersion": 1
 }
