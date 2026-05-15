@@ -94,11 +94,11 @@ Last supervisor tranche: 2026-05-15
 <!-- ppd-daemon-task-board:start -->
 ## Generated Status
 
-Last updated: 2026-05-15T20:49:59.195813Z
+Last updated: 2026-05-15T23:27:43.528933Z
 
 - Latest target: `Task checkbox-65: Task supervisor-20260515-066: Add validation that normalized public-capture assembly blocks requirement extraction when citation spans, section order, extraction confidence, content hash, source freshness, or owning surface metadata is missing or stale.`
 - Latest result: `syntax_preflight`
-- Latest summary: Add a deterministic public-capture requirement extraction gate and focused tests for missing or stale normalized assembly metadata.
+- Latest summary: Add a narrow deterministic validation gate for normalized public-capture assemblies before requirement extraction.
 - Counts: `{"blocked": 2, "complete": 67, "in_progress": 0, "needed": 0}`
 
 <!-- ppd-daemon-task-board:end -->
