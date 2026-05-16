@@ -86,6 +86,7 @@ export class BrowserNativeDocumentConsistencyChecker {
   check(document: ConsistencyDocument): DocumentConsistencyResult {
     const issues = validate(document);
     const text = norm(document.text ?? '');
+    const citationText = normCitation(document.text ?? '');
     const fields = document.extractedFields ?? [];
     const citations = document.citations ?? [];
     let matchedFields = 0;
@@ -93,10 +94,11 @@ export class BrowserNativeDocumentConsistencyChecker {
 
     for (const field of fields) {
       const value = field.value.trim();
+      const normalizedValue = norm(value);
+      const evidence = norm(field.evidence ?? '');
       const supported =
         value.length > 0 &&
-        (text.includes(norm(value)) ||
-          text.includes(norm(`${value} ${field.evidence ?? ''}`.trim())));
+        (text.includes(normalizedValue) || (evidence.length > 0 && text.includes(evidence)));
       if (field.required === true && value.length === 0)
         issues.push(
           issue(
@@ -132,8 +134,10 @@ export class BrowserNativeDocumentConsistencyChecker {
         issue('citation_missing', 'warning', 'no citations supplied for consistency check'),
       );
     for (const citation of citations) {
-      if (text.includes(normCitation(citation))) matchedCitations += 1;
-      else
+      const normalizedCitation = normCitation(citation);
+      if (normalizedCitation.length > 0 && citationText.includes(normalizedCitation)) {
+        matchedCitations += 1;
+      } else {
         issues.push({
           ...issue(
             'citation_not_in_text',
@@ -142,6 +146,7 @@ export class BrowserNativeDocumentConsistencyChecker {
           ),
           citation,
         });
+      }
     }
     for (const [left, right, message] of CONTRADICTIONS) {
       if (left.test(document.text) && right.test(document.text))
@@ -177,9 +182,9 @@ export const check_document_consistency = checkDocumentConsistency;
 
 function validate(document: ConsistencyDocument): DocumentConsistencyIssue[] {
   const issues: DocumentConsistencyIssue[] = [];
-  if (!document || document.id.trim().length === 0)
+  if (!document || typeof document.id !== 'string' || document.id.trim().length === 0)
     issues.push(issue('document_required', 'error', 'document id is required'));
-  if (!document || document.text.trim().length === 0)
+  if (!document || typeof document.text !== 'string' || document.text.trim().length === 0)
     issues.push(issue('text_required', 'error', 'document text is required'));
   return issues;
 }
@@ -198,5 +203,10 @@ function norm(text: string): string {
 }
 
 function normCitation(citation: string): string {
-  return norm(citation.replace(/\bPCC\b/i, 'Portland City Code'));
+  return norm(
+    citation
+      .replace(/§/g, ' ')
+      .replace(/\bP\.?\s*C\.?\s*C\.?\b/gi, 'Portland City Code')
+      .replace(/\bPCC\b/gi, 'Portland City Code'),
+  );
 }

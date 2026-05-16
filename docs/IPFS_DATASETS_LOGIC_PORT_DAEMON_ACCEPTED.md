@@ -2819,3 +2819,30 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260505T125741Z-ported-the-interactive-coq-prover-bridge-session-surface-to-browser-native-types.json`, `ipfs_datasets_py/.daemon/accepted-work/20260505T125741Z-ported-the-interactive-coq-prover-bridge-session-surface-to-browser-native-types.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260505T125741Z-ported-the-interactive-coq-prover-bridge-session-surface-to-browser-native-types.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
 
+## 2026-05-16 09:38:05 UTC
+
+- Target: `Task checkbox-232: Port remaining Python logic module `logic/CEC/native/prover_core.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Summary: Recreated missing CEC prover-core TypeScript port files and fixed the TS2352 type-conversion failure by using a safe object-shape narrowing path in `inferSuccess`.
+- Impact: Restores the browser-native `prover_core.py` TypeScript facade (`src/lib/logic/cec/proverCore.ts`) and its focused Jest validation (`src/lib/logic/cec/proverCore.test.ts`), directly enabling `tsc --noEmit` and the logic-port validation suite without Python/server dependencies.
+- Changed files: `src/lib/logic/cec/proverCore.test.ts`, `src/lib/logic/cec/proverCore.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260516T093805Z-recreated-missing-cec-prover-core-typescript-port-files-and-fixed-the-ts2352-typ.json`, `ipfs_datasets_py/.daemon/accepted-work/20260516T093805Z-recreated-missing-cec-prover-core-typescript-port-files-and-fixed-the-ts2352-typ.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260516T093805Z-recreated-missing-cec-prover-core-typescript-port-files-and-fixed-the-ts2352-typ.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+
+## 2026-05-16 14:05:35 UTC
+
+- Target: `Task checkbox-482: Port remaining Python logic module `logic/external_provers/lazy_installer.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Summary: Added a browser-native lazy external prover installer contract with fail-closed validation-only behavior and focused Jest parity coverage.
+- Impact: The new `externalProverLazyInstaller` runtime module ports `logic/external_provers/lazy_installer.py` as a deterministic TypeScript/WASM-safe adapter gate (no Python/server/subprocess fallback), and the paired test validates metadata constraints plus ready/unsupported/validation-failed outcomes against the existing browser-native external prover bridge.
+- Changed files: `src/lib/logic/integration/externalProverLazyInstaller.test.ts`, `src/lib/logic/integration/externalProverLazyInstaller.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260516T140535Z-added-a-browser-native-lazy-external-prover-installer-contract-with-fail-closed.json`, `ipfs_datasets_py/.daemon/accepted-work/20260516T140535Z-added-a-browser-native-lazy-external-prover-installer-contract-with-fail-closed.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260516T140535Z-added-a-browser-native-lazy-external-prover-installer-contract-with-fail-closed.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+
+## 2026-05-16 14:18:58 UTC
+
+- Target: `Task checkbox-483: Port remaining Python logic module `logic/integration/document_consistency_checker.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
+- Summary: Improved browser-native document consistency parity by making field evidence matching deterministic and citation matching resilient to PCC alias formats.
+- Impact: Updates src/lib/logic/integration/domain/documentConsistencyChecker.ts with stricter local consistency checks (evidence-snippet support and PCC citation alias normalization) and extends src/lib/logic/integration/domain/documentConsistencyChecker.test.ts to validate these parity behaviors through the existing Jest logic-port suite.
+- Changed files: `src/lib/logic/integration/domain/documentConsistencyChecker.test.ts`, `src/lib/logic/integration/domain/documentConsistencyChecker.ts`
+- Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260516T141858Z-improved-browser-native-document-consistency-parity-by-making-field-evidence-mat.json`, `ipfs_datasets_py/.daemon/accepted-work/20260516T141858Z-improved-browser-native-document-consistency-parity-by-making-field-evidence-mat.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260516T141858Z-improved-browser-native-document-consistency-parity-by-making-field-evidence-mat.stat.txt`
+- Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
+

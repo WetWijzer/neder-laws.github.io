@@ -32,6 +32,33 @@ describe('browser-native document consistency checker', () => {
     expect(result.metadata).toBe(DOCUMENT_CONSISTENCY_CHECKER_METADATA);
   });
 
+  it('matches evidence snippets and normalizes PCC citation aliases deterministically', () => {
+    const result = checkDocumentConsistency({
+      id: 'pcc-3.04.010',
+      text: 'Per P.C.C. § 3.04.010, permits may be granted by the planning director.',
+      citations: ['Portland City Code 3.04.010'],
+      extractedFields: [
+        {
+          name: 'permit_authority',
+          value: 'director approval',
+          evidence: 'planning director',
+          required: true,
+        },
+      ],
+    });
+
+    expect(result).toMatchObject({
+      accepted: true,
+      summary: {
+        checkedFields: 1,
+        matchedFields: 1,
+        checkedCitations: 1,
+        matchedCitations: 1,
+      },
+    });
+    expect(result.issues).toEqual([]);
+  });
+
   it('fails closed on missing evidence, missing citations, and contradictory terms', () => {
     const result = new BrowserNativeDocumentConsistencyChecker().check({
       id: 'permit-rule',
