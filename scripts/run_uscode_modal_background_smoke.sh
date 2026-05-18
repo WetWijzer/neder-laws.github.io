@@ -26,6 +26,10 @@ PARALLEL_SCOPES="${USCODE_MODAL_CODEX_PARALLEL_SCOPES:-compiler_parser,ir_decomp
 if [[ -n "$PARALLEL_SCOPES" ]]; then
   EXTRA_CODEX_ARGS+=(--codex-parallel-scopes "$PARALLEL_SCOPES")
 fi
+CODEX_SCOPE_WORKERS="${USCODE_MODAL_CODEX_SCOPE_WORKERS:-1}"
+if [[ -n "$CODEX_SCOPE_WORKERS" ]]; then
+  EXTRA_CODEX_ARGS+=(--codex-scope-workers "$CODEX_SCOPE_WORKERS")
+fi
 
 mkdir -p "$ROOT/workspace/test-logs"
 {
