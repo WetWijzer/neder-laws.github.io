@@ -84,7 +84,7 @@ Last supervisor tranche: 2026-05-15
 - [x] Task supervisor-20260515-063: Add an injectable fake public-capture transport fixture that turns approved synthetic crawl intentions into ArchiveManifest-style metadata records with redirect chains, HTTP status, MIME type, content hash, processor metadata, and `no_raw_body_persisted`; do not make network requests.
 - [x] Task supervisor-20260515-064: Add validation for the fake public-capture transport that rejects private/authenticated URLs, missing source IDs, missing processor metadata, invented hashes for skipped captures, raw body fields, downloaded PDF paths, and local private paths.
 - [x] Task supervisor-20260515-065: Add a normalized public-capture assembler fixture that combines synthetic archive manifests with HTML and PDF/form extraction fixtures into ordered DocumentRecord candidates with source IDs, section order, form-field metadata, citation spans, extraction confidence, and content hashes only.
-- [!] Task supervisor-20260515-066: Add validation that normalized public-capture assembly blocks requirement extraction when citation spans, section order, extraction confidence, content hash, source freshness, or owning surface metadata is missing or stale.
+- [x] Task supervisor-20260515-066: Add validation that normalized public-capture assembly blocks requirement extraction when citation spans, section order, extraction confidence, content hash, source freshness, or owning surface metadata is missing or stale.
 - [x] Task supervisor-20260515-067: Add a fixture-first requirement delta review queue that reports added, removed, or changed synthetic requirements from changed source hashes and maps each delta to affected process IDs, guardrail bundle IDs, human-review status, and blocked readiness status.
 - [x] Task supervisor-20260515-068: Add a synthetic DevHub accessible-tree normalizer that converts redacted role/name/heading/route/validation-message fixtures into DevHubSurfaceMap candidates while rejecting screenshots, traces, HAR data, auth state, cookies, credentials, private values, uploads, submissions, scheduling, and payment actions.
 - [!] Task supervisor-20260515-069: Add validation for DevHubSurfaceMap candidates that blocks reversible draft actions when selector confidence is low, route or heading evidence is missing, required labels are ambiguous, or upload/submit/certify/schedule/cancel/payment controls are classified as reversible.
@@ -94,11 +94,11 @@ Last supervisor tranche: 2026-05-15
 <!-- ppd-daemon-task-board:start -->
 ## Generated Status
 
-Last updated: 2026-05-16T15:43:31.777811Z
+Last updated: 2026-05-18T18:57:09.556046Z
 
-- Latest target: `Task checkbox-65: Task supervisor-20260515-066: Add validation that normalized public-capture assembly blocks requirement extraction when citation spans, section order, extraction confidence, content hash, source freshness, or owning surface metadata is missing or stale.`
+- Latest target: `Task checkbox-68: Task supervisor-20260515-069: Add validation for DevHubSurfaceMap candidates that blocks reversible draft actions when selector confidence is low, route or heading evidence is missing, required labels are ambiguous, or upload/submit/certify/schedule/cancel/payment controls are classified as reversible.`
 - Latest result: `syntax_preflight`
-- Latest summary: Add a syntax-safe readiness gate for normalized public-capture assemblies before requirement extraction.
-- Counts: `{"blocked": 2, "complete": 67, "in_progress": 0, "needed": 0}`
+- Latest summary: Add deterministic DevHubSurfaceMap candidate validation for unsafe reversible draft classifications.
+- Counts: `{"blocked": 1, "complete": 68, "in_progress": 0, "needed": 0}`
 
 <!-- ppd-daemon-task-board:end -->
