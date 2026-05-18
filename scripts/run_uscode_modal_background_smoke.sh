@@ -42,7 +42,7 @@ mkdir -p "$ROOT/workspace/test-logs"
     --learning-rate "${USCODE_MODAL_LEARNING_RATE:-0.35}" \
     --poll-seconds "${USCODE_MODAL_POLL_SECONDS:-5}" \
     --test-every-cycles "${USCODE_MODAL_TEST_EVERY_CYCLES:-12}" \
-    --codex-exec-mode codex_cli \
+    --codex-exec-mode "${USCODE_MODAL_CODEX_EXEC_MODE:-codex_cli}" \
     --codex-command "${CODEX_BIN:-codex}" \
     --codex-model "${USCODE_MODAL_CODEX_MODEL:-gpt-5.3-codex}" \
     --codex-apply-mode "${USCODE_MODAL_CODEX_APPLY_MODE:-apply_to_main}" \
