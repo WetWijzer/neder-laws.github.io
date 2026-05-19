@@ -22,11 +22,12 @@
   "codex_vector_min_bundle_size": 2,
   "codex_vector_min_similarity": 0.5,
   "codex_worktree_count": 1,
-  "cycles": 4674,
-  "elapsed_seconds": 24328.173,
-  "final": false,
+  "cycles": 5900,
+  "elapsed_seconds": 30597.083,
+  "final": true,
+  "finished_at": "2026-05-19T17:40:25+00:00",
   "latest_codex_vector_claim_report": {
-    "active_target_file_lane_count": 3,
+    "active_target_file_lane_count": 0,
     "available_candidate_count": 0,
     "candidate_count": 0,
     "max_bundle_wait_seconds": 120.0,
@@ -41,35 +42,33 @@
     "target_file_lane_locked_count": 0
   },
   "latest_queue_counts": {
-    "claimed": 2,
-    "completed": 719,
-    "failed_validation": 2392,
-    "pending": 2224
+    "completed": 815,
+    "failed_validation": 2741,
+    "pending": 2540
   },
   "latest_role_queue_counts": {
     "autoencoder_sgd": {
-      "completed": 514,
-      "failed_validation": 2318,
-      "pending": 2220
+      "completed": 580,
+      "failed_validation": 2660,
+      "pending": 2540
     },
     "program_synthesis": {
-      "claimed": 2,
-      "completed": 205,
-      "failed_validation": 74,
-      "pending": 4
+      "completed": 235,
+      "failed_validation": 81
     }
   },
-  "latest_stop_reason": "waiting_for_program_synthesis_todos",
+  "latest_stop_reason": "signal_15",
   "log_path": "/home/barberb/portland-laws.github.io/workspace/test-logs/uscode-modal-hardened-4codex-gpu-8h-20260519T091017Z-codex-ir_decompiler.jsonl",
   "loop_role": "codex",
-  "program_synthesis_claimed": 2,
-  "program_synthesis_completed": 205,
-  "program_synthesis_pending": 4,
+  "program_synthesis_claimed": 0,
+  "program_synthesis_completed": 235,
+  "program_synthesis_pending": 0,
   "queue_path": "/home/barberb/portland-laws.github.io/workspace/todo-queues/uscode-modal-hardened-4codex-gpu-8h-20260519T091017Z-autoencoder.jsonl",
   "queue_run_id": "uscode-modal-hardened-4codex-gpu-8h-20260519T091017Z-autoencoder",
   "run_id": "uscode-modal-hardened-4codex-gpu-8h-20260519T091017Z-codex-ir_decompiler",
   "started_at": "2026-05-19T09:10:28+00:00",
-  "updated_at": "2026-05-19T15:55:56+00:00",
+  "stopped_by_signal": 15,
+  "updated_at": "2026-05-19T17:40:25+00:00",
   "work_dir": "/home/barberb/portland-laws.github.io/workspace/codex-work/uscode-modal-hardened-4codex-gpu-8h-20260519T091017Z-codex-ir_decompiler",
   "worker_id": "codex-ir_decompiler"
 }
