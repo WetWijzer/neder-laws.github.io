@@ -94,11 +94,11 @@ Last supervisor tranche: 2026-05-15
 <!-- ppd-daemon-task-board:start -->
 ## Generated Status
 
-Last updated: 2026-05-19T18:44:53.314676Z
+Last updated: 2026-05-22T06:01:45.260427Z
 
 - Latest target: `Task checkbox-68: Task supervisor-20260515-069: Add validation for DevHubSurfaceMap candidates that blocks reversible draft actions when selector confidence is low, route or heading evidence is missing, required labels are ambiguous, or upload/submit/certify/schedule/cancel/payment controls are classified as reversible.`
-- Latest result: `syntax_preflight`
-- Latest summary: Add a narrow deterministic validator for DevHubSurfaceMap candidate draft-action safety gates, plus fixtures-based tests for low confidence, missing evidence, ambiguous labels, and forbidden reversible control classes.
+- Latest result: `llm`
+- Latest summary: LLM proposal failed.
 - Counts: `{"blocked": 1, "complete": 68, "in_progress": 0, "needed": 0}`
 
 <!-- ppd-daemon-task-board:end -->
