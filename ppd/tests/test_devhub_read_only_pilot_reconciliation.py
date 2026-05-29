@@ -3,148 +3,101 @@ from __future__ import annotations
 from copy import deepcopy
 from pathlib import Path
 
-import pytest
-
-from ppd.devhub.read_only_pilot_operator_checklist import load_operator_checklist
 from ppd.devhub.read_only_pilot_reconciliation import (
-    REQUIRED_PACKET_ID,
+    REQUIRED_PACKET_TYPE,
     assert_valid_reconciliation_packet,
-    load_reconciliation_packet,
+    build_post_observation_reconciliation_packet,
+    load_json_packet,
     validate_reconciliation_packet,
 )
-from ppd.devhub.read_only_pilot_result_intake import load_pilot_result_intake
-from ppd.release_gate_status import load_release_gate_status_packet
 
 
-FIXTURE_DIR = Path(__file__).parent / "fixtures"
-PACKET_PATH = FIXTURE_DIR / "devhub" / "read_only_pilot_reconciliation_packet.json"
-OPERATOR_CHECKLIST_PATH = FIXTURE_DIR / "devhub" / "read_only_pilot_operator_checklist.json"
-PILOT_RESULT_INTAKE_PATH = FIXTURE_DIR / "devhub" / "read_only_pilot_result_intake.json"
-RELEASE_GATE_STATUS_PATH = FIXTURE_DIR / "release_gate_status" / "status_packet.json"
+FIXTURE = Path(__file__).parent / "fixtures" / "devhub_read_only_pilot_reconciliation" / "input_packets.json"
 
 
-def _inputs() -> tuple[dict[str, object], dict[str, object], dict[str, object], dict[str, object]]:
-    return (
-        load_reconciliation_packet(PACKET_PATH),
-        load_operator_checklist(OPERATOR_CHECKLIST_PATH),
-        load_pilot_result_intake(PILOT_RESULT_INTAKE_PATH),
-        load_release_gate_status_packet(RELEASE_GATE_STATUS_PATH),
+def _inputs() -> dict[str, object]:
+    return load_json_packet(FIXTURE)
+
+
+def _packet() -> dict[str, object]:
+    inputs = _inputs()
+    return build_post_observation_reconciliation_packet(
+        inputs["operator_transcript_packet"],
+        inputs["surface_registry_reviewer_approval_packet"],
+        inputs["observation_redaction_review_packet"],
     )
 
 
-def _errors(packet: dict[str, object]) -> tuple[str, ...]:
-    _, operator_checklist, pilot_result_intake, release_gate_status = _inputs()
-    return validate_reconciliation_packet(packet, operator_checklist, pilot_result_intake, release_gate_status).errors
+def test_builds_fixture_first_post_observation_reconciliation_packet() -> None:
+    packet = _packet()
+
+    assert packet["packet_type"] == REQUIRED_PACKET_TYPE
+    assert packet["fixture_first"] is True
+    assert packet["offline_only"] is True
+    assert packet["read_only_only"] is True
+    assert packet["launches_devhub"] is False
+    assert packet["launches_playwright"] is False
+    assert packet["stores_browser_artifacts"] is False
+    assert packet["writes_surface_registry"] is False
+    assert packet["mutates_active_surface_registry"] is False
+    assert packet["mutates_agent_state"] is False
+    assert validate_reconciliation_packet(packet).ok is True
+    assert_valid_reconciliation_packet(packet)
 
 
-def test_read_only_pilot_reconciliation_fixture_is_valid() -> None:
-    packet, operator_checklist, pilot_result_intake, release_gate_status = _inputs()
+def test_packet_contains_cited_deltas_decisions_followups_and_owner_fields() -> None:
+    packet = _packet()
 
-    result = validate_reconciliation_packet(packet, operator_checklist, pilot_result_intake, release_gate_status)
+    assert packet["observed_surface_deltas"]
+    assert packet["observed_surface_deltas"][0]["decision"] == "keep_as_redacted_observation_delta"
+    assert packet["observed_surface_deltas"][0]["citations"]
+    assert all(row["active_registry_mutation"] is False for row in packet["observed_surface_deltas"])
+    assert all(row["agent_state_mutation"] is False for row in packet["observed_surface_deltas"])
 
-    assert result.packet_id == REQUIRED_PACKET_ID
-    assert result.ok is True
-    assert result.errors == ()
-    assert_valid_reconciliation_packet(packet, operator_checklist, pilot_result_intake, release_gate_status)
+    assert packet["kept_decisions"]
+    assert all(row["status"] == "kept_for_reviewer_packet_only" for row in packet["kept_decisions"])
+    assert all(row["citations"] for row in packet["kept_decisions"])
 
+    assert packet["manual_handoff_decisions"]
+    assert all(row["decision"] == "manual_handoff_required" for row in packet["manual_handoff_decisions"])
+    assert all(row["attended_operator_required"] is True for row in packet["manual_handoff_decisions"])
+    assert all(row["live_devhub_launch_allowed_by_packet"] is False for row in packet["manual_handoff_decisions"])
 
-def test_reconciliation_consumes_required_source_packets() -> None:
-    packet, operator_checklist, pilot_result_intake, release_gate_status = _inputs()
+    assert packet["redaction_follow_ups"]
+    assert all(row["status"] == "open_for_reviewer_follow_up" for row in packet["redaction_follow_ups"])
+    assert all(row["citations"] for row in packet["redaction_follow_ups"])
 
-    packet["source_packets"]["operator_checklist"]["consumed"] = False
-
-    errors = validate_reconciliation_packet(packet, operator_checklist, pilot_result_intake, release_gate_status).errors
-    assert "source_packets.operator_checklist.consumed must be true" in errors
-
-
-def test_reconciliation_rejects_devhub_or_playwright_launch() -> None:
-    packet, _, _, _ = _inputs()
-    packet["launches_devhub"] = True
-    packet["launches_playwright"] = True
-
-    errors = _errors(packet)
-
-    assert "launches_devhub must be false" in errors
-    assert "launches_playwright must be false" in errors
+    assert packet["reviewer_owner_fields"]
+    assert all(row["owner_id"] for row in packet["reviewer_owner_fields"])
+    assert all(row["reviewer_id"] for row in packet["reviewer_owner_fields"])
+    assert all(row["approval_required_before_live_use"] is True for row in packet["reviewer_owner_fields"])
 
 
-def test_reconciliation_records_only_redacted_observed_surfaces() -> None:
-    packet, _, _, _ = _inputs()
-    observed = packet["redacted_observed_surfaces"]
-    assert isinstance(observed, list)
-    observed[0]["redacted_heading"] = "Applicant email person@example.test"
+def test_packet_records_no_registry_and_no_agent_state_mutation_attestations() -> None:
+    packet = _packet()
+    attestations = packet["no_active_surface_registry_no_agent_state_mutation_attestations"]
 
-    errors = _errors(packet)
-
-    assert "redacted_observed_surfaces[0].redacted_heading must be a redacted token" in errors
-    assert any("private value" in error for error in errors)
-
-
-def test_reconciliation_requires_safe_read_only_coverage_gaps() -> None:
-    packet, _, _, _ = _inputs()
-    gaps = packet["safe_read_only_coverage_gaps"]
-    assert isinstance(gaps, list)
-    gaps[0]["safe_to_follow_up_read_only"] = False
-
-    errors = _errors(packet)
-
-    assert "safe_read_only_coverage_gaps[0].safe_to_follow_up_read_only must be true" in errors
+    assert all(attestations.values())
+    assert attestations["no_active_surface_registry_read_or_write"] is True
+    assert attestations["no_active_surface_registry_mutation"] is True
+    assert attestations["no_agent_state_read_or_write"] is True
+    assert attestations["no_agent_state_mutation"] is True
 
 
-def test_reconciliation_requires_manual_handoff_notes_to_stay_non_launching() -> None:
-    packet, _, _, _ = _inputs()
-    notes = packet["manual_handoff_notes"]
-    assert isinstance(notes, list)
-    notes[0]["launches_devhub"] = True
+def test_validator_rejects_private_artifacts_enabled_consequential_controls_and_mutations() -> None:
+    packet = _packet()
+    unsafe = deepcopy(packet)
+    unsafe["trace_path"] = "trace.zip"
+    unsafe["controls"] = [{"control_id": "submit-application", "label": "Submit application", "enabled": True}]
+    unsafe["writes_surface_registry"] = True
+    unsafe["mutates_agent_state"] = True
+    unsafe["observed_surface_deltas"][0]["citations"] = []
 
-    errors = _errors(packet)
+    result = validate_reconciliation_packet(unsafe)
 
-    assert "manual_handoff_notes[0].launches_devhub must be false" in errors
-
-
-def test_reconciliation_requires_abort_reason_coverage() -> None:
-    packet, _, _, _ = _inputs()
-    packet["abort_reasons"] = [
-        {
-            "reason_id": "abort-too-small",
-            "trigger": "Abort on credential handling only.",
-            "operator_response": "Stop.",
-            "records_only_redacted_metadata": True,
-        }
-    ]
-
-    errors = _errors(packet)
-
-    assert "abort_reasons missing required term: mfa" in errors
-    assert "abort_reasons missing required term: upload" in errors
-    assert "abort_reasons missing required term: browser artifact" in errors
-
-
-def test_reconciliation_requires_next_attended_session_prerequisites_to_block_launch() -> None:
-    packet, _, _, _ = _inputs()
-    prereqs = packet["next_attended_session_prerequisites"]
-    assert isinstance(prereqs, list)
-    prereqs[0]["live_devhub_launch_allowed"] = True
-
-    errors = _errors(packet)
-
-    assert "next_attended_session_prerequisites[0].live_devhub_launch_allowed must be false" in errors
-
-
-def test_reconciliation_rejects_private_or_session_keys_anywhere() -> None:
-    packet, _, _, _ = _inputs()
-    packet = deepcopy(packet)
-    packet["redacted_observed_surfaces"][0]["screenshot_path"] = "redacted-token-only"
-
-    errors = _errors(packet)
-
-    assert "redacted_observed_surfaces[0] contains disallowed field(s): screenshot_path" in errors
-    assert any("forbidden private/session field" in error for error in errors)
-
-
-def test_assert_valid_reconciliation_packet_raises_stable_error() -> None:
-    packet, operator_checklist, pilot_result_intake, release_gate_status = _inputs()
-    packet["official_actions_enabled"] = True
-
-    with pytest.raises(AssertionError, match="official_actions_enabled must be false"):
-        assert_valid_reconciliation_packet(packet, operator_checklist, pilot_result_intake, release_gate_status)
+    assert result.ok is False
+    assert any("trace_path contains forbidden private/session field" in error for error in result.errors)
+    assert any("must not enable consequential DevHub controls" in error for error in result.errors)
+    assert any("writes_surface_registry must be false" in error for error in result.errors)
+    assert any("mutates_agent_state must be false" in error for error in result.errors)
+    assert any("observed_surface_deltas[0].citations must be non-empty" in error for error in result.errors)
