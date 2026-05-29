@@ -4,7 +4,23 @@
   "created_at": "2026-05-14T00:00:00Z",
   "browser_launched": false,
   "auth_state_saved": false,
+  "authenticated_evidence_captured": false,
   "artifacts": [],
+  "review_controls": [],
+  "redaction_attestation": {
+    "attested": true,
+    "automation_login_mfa_captcha_absent": true,
+    "credential_prompts_absent": true,
+    "credentials_absent": true,
+    "cookies_absent": true,
+    "auth_state_absent": true,
+    "screenshots_absent": true,
+    "traces_absent": true,
+    "har_absent": true,
+    "private_field_values_redacted": true,
+    "consequential_controls_absent": true,
+    "live_authenticated_evidence_captured": false
+  },
   "events": [
     {
       "event_type": "manual_handoff_plan",

@@ -1,8 +1,8 @@
-"""Validation for PP&D processor handoff packets.
+"""Validation for PP&D processor handoff dry-run packets.
 
-The processor handoff boundary must stay metadata-only and replayable.  This
-module intentionally accepts plain dictionaries so callers can validate decoded
-JSON before constructing richer contracts.
+The processor handoff boundary must stay metadata-only, policy-preflighted,
+and replayable. This module intentionally accepts plain dictionaries so callers
+can validate decoded JSON before constructing richer contracts.
 """
 
 from __future__ import annotations
@@ -26,16 +26,45 @@ _CONTRACT_ID_KEYS = (
     "contract_id",
 )
 
-_LIVE_NETWORK_KEYS = {
+_CONTRACT_VERSION_KEYS = (
+    "processor_contract_version",
+    "processorContractVersion",
+    "contract_version",
+    "contractVersion",
+    "processor_version",
+    "processorVersion",
+)
+
+_LIVE_EXECUTION_KEYS = {
+    "allow_live_execution",
     "allow_live_network",
     "allow_network",
+    "execute_live",
+    "execution_enabled",
+    "live_execution",
     "live_network",
     "network_enabled",
+    "perform_execution",
+    "run_live",
     "use_live_network",
-    "liveNetwork",
+    "allowLiveExecution",
     "allowLiveNetwork",
+    "allowNetwork",
+    "executeLive",
+    "executionEnabled",
+    "liveExecution",
+    "liveNetwork",
     "networkEnabled",
+    "performExecution",
+    "runLive",
     "useLiveNetwork",
+}
+
+_DRY_RUN_KEYS = {
+    "dry_run",
+    "dryRun",
+    "metadata_only_dry_run",
+    "metadataOnlyDryRun",
 }
 
 _RAW_BODY_KEYS = {
@@ -51,7 +80,27 @@ _RAW_BODY_KEYS = {
     "text",
 }
 
+_RAW_PERSISTENCE_KEYS = {
+    "archive_raw_body",
+    "commit_raw_archive",
+    "persist_archive",
+    "persist_raw_archive",
+    "persist_raw_body",
+    "persistRawArchive",
+    "persistRawBody",
+    "raw_archive_persistence",
+    "rawArchivePersistence",
+    "save_raw_archive",
+    "saveRawArchive",
+    "store_raw_body",
+    "storeRawBody",
+}
+
 _LOCAL_PATH_KEYS = {
+    "download_path",
+    "downloadPath",
+    "downloaded_document_path",
+    "downloadedDocumentPath",
     "downloaded_path",
     "downloadedPath",
     "file_path",
@@ -61,6 +110,51 @@ _LOCAL_PATH_KEYS = {
     "local_path",
     "localPath",
     "path",
+}
+
+_NORMALIZED_DOCUMENT_KEYS = {
+    "normalized_document_id",
+    "normalizedDocumentId",
+    "normalized_document_ref",
+    "normalizedDocumentRef",
+    "normalized_document_reference",
+    "normalizedDocumentReference",
+}
+
+_SOURCE_REGISTRY_KEYS = {
+    "source_registry_id",
+    "sourceRegistryId",
+    "source_id",
+    "sourceId",
+}
+
+_SKIP_FLAG_KEYS = {"skipped", "skip", "is_skipped", "isSkipped"}
+_SKIP_REASON_KEYS = {"skip_reason", "skipReason", "skipped_reason", "skippedReason", "reason"}
+_UNACTIONABLE_SKIP_REASONS = {
+    "",
+    "n/a",
+    "na",
+    "none",
+    "null",
+    "other",
+    "skip",
+    "skipped",
+    "todo",
+    "tbd",
+    "unknown",
+    "unspecified",
+}
+_ACTIONABLE_SKIP_REASONS = {
+    "outside_allowlist",
+    "unsupported_scheme",
+    "private_authenticated",
+    "disallowed_by_robots",
+    "disallowed_by_policy",
+    "raw_download_not_permitted",
+    "too_large",
+    "unsupported_content_type",
+    "policy_preflight_failed",
+    "missing_source_registry_id",
 }
 
 _ARTIFACT_KEYS = ("artifacts", "artifact_references", "artifactReferences")
@@ -81,18 +175,22 @@ _AUTH_QUERY_KEYS = {
 
 
 def validate_processor_handoff_packet(packet: dict[str, Any]) -> list[str]:
-    """Return validation errors for an unsafe processor handoff packet."""
+    """Return validation errors for an unsafe processor handoff dry-run packet."""
 
     errors: list[str] = []
     if not isinstance(packet, dict):
         return ["handoff packet must be an object"]
 
-    if not _first_present(packet, _POLICY_EVIDENCE_KEYS):
+    if not _has_policy_preflight_evidence(packet):
         errors.append("missing policy preflight evidence")
 
     contract_id = _first_present(packet, _CONTRACT_ID_KEYS)
     if not isinstance(contract_id, str) or not contract_id.strip():
         errors.append("missing processor contract identifier")
+
+    contract_version = _first_present(packet, _CONTRACT_VERSION_KEYS)
+    if not isinstance(contract_version, str) or not contract_version.strip():
+        errors.append("missing processor contract version")
 
     rate_limit = _first_present(packet, _RATE_LIMIT_KEYS)
     if not _has_bounded_rate_limit(rate_limit):
@@ -118,6 +216,13 @@ def _first_present(packet: dict[str, Any], keys: tuple[str, ...]) -> Any:
     return None
 
 
+def _has_policy_preflight_evidence(packet: dict[str, Any]) -> bool:
+    evidence = _first_present(packet, _POLICY_EVIDENCE_KEYS)
+    if not isinstance(evidence, dict) or not evidence:
+        return False
+    return any(isinstance(value, str) and value.strip() for value in evidence.values())
+
+
 def _has_bounded_rate_limit(value: Any) -> bool:
     if isinstance(value, str):
         return value.strip().lower() not in _UNBOUNDED_VALUES
@@ -127,12 +232,8 @@ def _has_bounded_rate_limit(value: Any) -> bool:
     if str(value.get("mode", "")).strip().lower() in _UNBOUNDED_VALUES:
         return False
 
-    request_limit = _positive_number(
-        value.get("max_requests", value.get("requests", value.get("limit")))
-    )
-    window = _positive_number(
-        value.get("per_seconds", value.get("window_seconds", value.get("seconds")))
-    )
+    request_limit = _positive_number(value.get("max_requests", value.get("requests", value.get("limit"))))
+    window = _positive_number(value.get("per_seconds", value.get("window_seconds", value.get("seconds"))))
     return request_limit and window
 
 
@@ -147,15 +248,21 @@ def _positive_number(value: Any) -> bool:
 
 def _scan_value(value: Any, location: str, errors: list[str]) -> None:
     if isinstance(value, dict):
+        _validate_skipped_object(value, location, errors)
+        _validate_normalized_document_reference(value, location, errors)
         for key, item in value.items():
             key_text = str(key)
             item_location = f"{location}.{key_text}"
-            if key_text in _LIVE_NETWORK_KEYS and bool(item):
-                errors.append(f"live network flag is not allowed at {item_location}")
+            if key_text in _LIVE_EXECUTION_KEYS and bool(item):
+                errors.append(f"live execution flag is not allowed at {item_location}")
+            if key_text in _DRY_RUN_KEYS and item is not True:
+                errors.append(f"dry-run packet cannot disable dry-run mode at {item_location}")
             if key_text in _RAW_BODY_KEYS and _has_payload(item):
                 errors.append(f"raw archive/body field is not allowed at {item_location}")
+            if key_text in _RAW_PERSISTENCE_KEYS and bool(item):
+                errors.append(f"raw archive persistence is not allowed at {item_location}")
             if key_text in _LOCAL_PATH_KEYS and _looks_like_local_path(item):
-                errors.append(f"local downloaded path is not allowed at {item_location}")
+                errors.append(f"local downloaded document path is not allowed at {item_location}")
             if isinstance(item, str) and _is_private_or_authenticated_url(item):
                 errors.append(f"private or authenticated URL is not allowed at {item_location}")
             _scan_value(item, item_location, errors)
@@ -164,6 +271,34 @@ def _scan_value(value: Any, location: str, errors: list[str]) -> None:
             _scan_value(item, f"{location}[{index}]", errors)
     elif isinstance(value, str) and _is_private_or_authenticated_url(value):
         errors.append(f"private or authenticated URL is not allowed at {location}")
+
+
+def _validate_skipped_object(value: dict[str, Any], location: str, errors: list[str]) -> None:
+    status = str(value.get("status", "")).strip().lower()
+    skipped = status == "skipped" or any(value.get(key) is True for key in _SKIP_FLAG_KEYS)
+    if not skipped:
+        return
+    reason = _first_text(value, _SKIP_REASON_KEYS)
+    normalized = reason.strip().lower().replace("-", "_").replace(" ", "_")
+    if normalized in _UNACTIONABLE_SKIP_REASONS or normalized not in _ACTIONABLE_SKIP_REASONS:
+        errors.append(f"unactionable skip reason is not allowed at {location}")
+
+
+def _validate_normalized_document_reference(value: dict[str, Any], location: str, errors: list[str]) -> None:
+    has_normalized_reference = any(_has_payload(value.get(key)) for key in _NORMALIZED_DOCUMENT_KEYS)
+    if not has_normalized_reference:
+        return
+    has_source_registry_id = any(isinstance(value.get(key), str) and value.get(key, "").strip() for key in _SOURCE_REGISTRY_KEYS)
+    if not has_source_registry_id:
+        errors.append(f"normalized document reference requires source registry id at {location}")
+
+
+def _first_text(value: dict[str, Any], keys: set[str]) -> str:
+    for key in keys:
+        item = value.get(key)
+        if isinstance(item, str):
+            return item
+    return ""
 
 
 def _has_payload(value: Any) -> bool:

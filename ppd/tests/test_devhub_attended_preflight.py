@@ -25,6 +25,8 @@ def test_fixture_only_attended_preflight_passes_without_browser_launch() -> None
     assert result.issues == ()
     assert "devhub.dashboard.permit_requests" in result.matched_surfaces
     assert "devhub.application.review_checkpoint" in result.matched_surfaces
+    assert "automated_login" in result.refused_action_policies
+    assert "authenticated_session_capture" in result.refused_action_policies
 
 
 def test_manual_login_handoff_is_required_before_plan_is_allowed() -> None:
@@ -34,7 +36,10 @@ def test_manual_login_handoff_is_required_before_plan_is_allowed() -> None:
         "requires_user_attendance": False,
         "actor": "automation",
         "credential_storage": "allowed",
+        "credential_prompt_capture": True,
         "session_state_storage": "allowed",
+        "cookie_storage": "allowed",
+        "automated_login": True,
         "account_creation_allowed": True,
     }
 
@@ -45,9 +50,10 @@ def test_manual_login_handoff_is_required_before_plan_is_allowed() -> None:
     assert any("manual login handoff" in issue for issue in result.issues)
     assert any("credential storage" in issue for issue in result.issues)
     assert any("account creation" in issue for issue in result.issues)
+    assert any("automated login" in issue for issue in result.issues)
 
 
-def test_mfa_captcha_and_account_creation_refusals_are_mandatory() -> None:
+def test_pilot_preflight_requires_all_sensitive_refusal_policies() -> None:
     fixture = _valid_fixture()
     fixture["refused_action_policies"] = {
         "mfa": {
@@ -63,7 +69,59 @@ def test_mfa_captcha_and_account_creation_refusals_are_mandatory() -> None:
     assert result.browser_action_plan_allowed is False
     assert any("mfa policy must refuse automation" in issue for issue in result.issues)
     assert any("captcha policy must refuse automation" in issue for issue in result.issues)
-    assert any("account_creation policy must refuse automation" in issue for issue in result.issues)
+    assert any("automated_login policy must refuse automation" in issue for issue in result.issues)
+    assert any("auth_state policy must refuse automation" in issue for issue in result.issues)
+    assert any("authenticated_session_capture policy must refuse automation" in issue for issue in result.issues)
+
+
+def test_pilot_safety_assertions_reject_sensitive_capture_claims() -> None:
+    fixture = _valid_fixture()
+    fixture["pilot_safety_assertions"]["cookie_capture"] = True
+    fixture["pilot_safety_assertions"].pop("har_capture")
+
+    result = validate_attended_preflight_fixture(fixture)
+
+    assert result.preflight_passed is False
+    assert any("cookie_capture must be explicitly false" in issue for issue in result.issues)
+    assert any("har_capture must be explicitly false" in issue for issue in result.issues)
+
+
+def test_packet_text_rejects_automated_login_and_captured_session_claims() -> None:
+    fixture = _valid_fixture()
+    fixture["unsafe_notes"] = [
+        "The login was automated for the pilot.",
+        "The authenticated session was captured for reuse.",
+    ]
+
+    result = validate_attended_preflight_fixture(fixture)
+
+    assert result.preflight_passed is False
+    assert any("automated login is prohibited" in issue for issue in result.issues)
+    assert any("authenticated session was captured" in issue for issue in result.issues)
+
+
+def test_packet_rejects_private_artifact_and_private_value_claims() -> None:
+    fixture = _valid_fixture()
+    fixture["artifact_claims"] = {
+        "cookies_captured": True,
+        "auth_state_capture": True,
+        "screenshot_capture": True,
+        "trace_capture": True,
+        "har_capture": True,
+        "private_field_value_capture": True,
+        "credential_prompt_capture": True,
+    }
+
+    result = validate_attended_preflight_fixture(fixture)
+
+    assert result.preflight_passed is False
+    assert any("cookie capture is prohibited" in issue for issue in result.issues)
+    assert any("auth state capture is prohibited" in issue for issue in result.issues)
+    assert any("screenshot capture is prohibited" in issue for issue in result.issues)
+    assert any("trace capture is prohibited" in issue for issue in result.issues)
+    assert any("HAR data capture is prohibited" in issue for issue in result.issues)
+    assert any("private field values are prohibited" in issue for issue in result.issues)
+    assert any("credential prompts are prohibited" in issue for issue in result.issues)
 
 
 def test_surface_map_matching_is_required_for_planned_actions() -> None:
@@ -80,7 +138,7 @@ def test_surface_map_matching_is_required_for_planned_actions() -> None:
 def test_selector_confidence_thresholds_block_low_confidence_surfaces_and_actions() -> None:
     fixture = _valid_fixture()
     fixture["surface_map"][0]["selector_confidence"] = 0.84
-    fixture["candidate_browser_action_plan"][1]["selector_confidence"] = 0.8
+    fixture["candidate_browser_action_plan"]["actions"][1]["selector_confidence"] = 0.8
 
     result = validate_attended_preflight_fixture(fixture)
 
@@ -112,3 +170,16 @@ def test_browser_launch_remains_blocked_even_if_fixture_requests_it() -> None:
     assert result.browser_action_plan_allowed is False
     assert result.browser_launch_allowed is False
     assert any("must not allow browser launch" in issue for issue in result.issues)
+
+
+def test_consequential_controls_are_rejected_even_inside_read_only_action() -> None:
+    fixture = _valid_fixture()
+    fixture["candidate_browser_action_plan"]["actions"][0]["controls"] = [
+        {"kind": "submit", "automates": True}
+    ]
+
+    result = validate_attended_preflight_fixture(fixture)
+
+    assert result.preflight_passed is False
+    assert result.browser_action_plan_allowed is False
+    assert any("must not automate consequential control 'submit'" in issue for issue in result.issues)

@@ -1,76 +1,84 @@
+from __future__ import annotations
+
 from pathlib import Path
 
-from ppd.logic.requirement_review_queue import (
-    HUMAN_REVIEW_REQUIRED,
-    LOW_CONFIDENCE,
-    MISSING_FORMALIZATION,
-    OCR_DERIVED_EVIDENCE,
-    STALE_SOURCE,
-    load_requirement_nodes,
-    partition_requirements_for_guardrails,
+import pytest
+
+from ppd.requirement_review_queue import (
+    build_human_review_queue_packet,
+    load_review_queue_fixture,
 )
 
 
-FIXTURE_PATH = (
-    Path(__file__).parent
-    / "fixtures"
-    / "requirement_review_queue"
-    / "requirement_nodes.json"
-)
+FIXTURE_PATH = Path(__file__).parent / "fixtures" / "requirement_review_queue" / "synthetic_public_records.json"
 
 
-def test_requirement_review_queue_groups_promotion_blockers_deterministically() -> None:
-    nodes = load_requirement_nodes(FIXTURE_PATH)
+def test_builds_fixture_first_review_queue_packet_without_extraction_or_raw_text_storage() -> None:
+    fixture = load_review_queue_fixture(FIXTURE_PATH)
 
-    partition = partition_requirements_for_guardrails(
-        nodes,
-        confidence_threshold=0.75,
-        stale_source_ids={"SRC-STALE-FEE-GUIDE"},
-    )
+    packet = build_human_review_queue_packet(fixture)
 
-    review_queue = partition["review_queue"]
-    assert [item["requirement_id"] for item in review_queue] == [
-        "REQ-001-LOW-CONFIDENCE",
-        "REQ-002-OCR-STALE",
-        "REQ-003-MISSING-FORMALIZATION",
-        "REQ-004-HUMAN-REVIEW",
-    ]
-    assert review_queue == [
-        {
-            "requirement_id": "REQ-001-LOW-CONFIDENCE",
-            "blocker_codes": [LOW_CONFIDENCE],
-            "source_evidence_ids": ["EV-001"],
-            "subject": "applicant",
-            "action": "prepare",
-            "object": "single PDF drawing plan set",
-        },
-        {
-            "requirement_id": "REQ-002-OCR-STALE",
-            "blocker_codes": [OCR_DERIVED_EVIDENCE, STALE_SOURCE],
-            "source_evidence_ids": ["EV-002"],
-            "subject": "applicant",
-            "action": "upload",
-            "object": "supporting calculation PDF",
-        },
-        {
-            "requirement_id": "REQ-003-MISSING-FORMALIZATION",
-            "blocker_codes": [MISSING_FORMALIZATION],
-            "source_evidence_ids": ["EV-003"],
-            "subject": "applicant",
-            "action": "pay",
-            "object": "permit fees",
-        },
-        {
-            "requirement_id": "REQ-004-HUMAN-REVIEW",
-            "blocker_codes": [HUMAN_REVIEW_REQUIRED],
-            "source_evidence_ids": ["EV-004"],
-            "subject": "applicant",
-            "action": "certify",
-            "object": "permit application acknowledgement",
-        },
-    ]
+    assert packet["generated_from_fixture"] is True
+    assert packet["extraction_executed"] is False
+    assert packet["requirements_changed"] is False
+    assert packet["raw_source_text_stored"] is False
+    assert packet["packet_id"].startswith("ppd-review-queue-")
+    assert len(packet["candidate_requirement_nodes"]) == 3
 
-    promotable_ids = [
-        node["requirement_id"] for node in partition["promotable_requirement_nodes"]
-    ]
-    assert promotable_ids == ["REQ-005-PROMOTABLE"]
+    for candidate in packet["candidate_requirement_nodes"]:
+        assert candidate["human_review_status"] == "queued"
+        assert candidate["formalization_status"] == "deferred_pending_human_review"
+        assert candidate["citations"]
+        assert candidate["reviewer_owner"].startswith("ppd-")
+        assert "Do not compile" in candidate["deferred_formalization_note"]
+        for citation in candidate["citations"]:
+            assert citation["canonical_url"].startswith("https://")
+            assert "content_hash" in citation
+            assert "location_ref" in citation
+
+
+def test_confidence_bands_review_reasons_and_owners_are_deterministic() -> None:
+    fixture = load_review_queue_fixture(FIXTURE_PATH)
+
+    first = build_human_review_queue_packet(fixture)
+    second = build_human_review_queue_packet(fixture)
+
+    assert first == second
+    candidates = {item["requirement_id"]: item for item in first["candidate_requirement_nodes"]}
+
+    document_candidate = candidates["candidate-single-pdf-document-requirement"]
+    assert document_candidate["confidence_band"] == "high"
+    assert document_candidate["reviewer_owner"] == "ppd-document-reviewer"
+    assert document_candidate["review_reasons"] == ["confirm cited candidate before formalization"]
+
+    upload_candidate = candidates["candidate-devhub-upload-action-gate"]
+    assert upload_candidate["confidence_band"] == "medium"
+    assert upload_candidate["reviewer_owner"] == "ppd-guardrails-reviewer"
+    assert "candidate requires human interpretation before formalization" in upload_candidate["review_reasons"]
+
+    payment_candidate = candidates["candidate-fee-payment-action-gate"]
+    assert payment_candidate["confidence_band"] == "medium"
+    assert payment_candidate["reviewer_owner"] == "ppd-fee-reviewer"
+    assert "source evidence evidence-fee-payment-guide has stale freshness badge" in payment_candidate["review_reasons"]
+
+
+def test_deferred_formalization_notes_match_candidate_requirements() -> None:
+    fixture = load_review_queue_fixture(FIXTURE_PATH)
+
+    packet = build_human_review_queue_packet(fixture)
+
+    candidate_ids = {item["requirement_id"] for item in packet["candidate_requirement_nodes"]}
+    note_ids = {item["requirement_id"] for item in packet["deferred_formalization_notes"]}
+    assert note_ids == candidate_ids
+    for note in packet["deferred_formalization_notes"]:
+        assert note["formalization_status"] == "deferred_pending_human_review"
+        assert note["reviewer_owner"].startswith("ppd-")
+        assert "until a human reviewer accepts" in note["note"]
+
+
+def test_rejects_raw_source_text_fields() -> None:
+    fixture = load_review_queue_fixture(FIXTURE_PATH)
+    fixture["synthetic_public_document_records"][0]["raw_source_text"] = "not allowed"
+
+    with pytest.raises(ValueError, match="raw source text field"):
+        build_human_review_queue_packet(fixture)

@@ -41,19 +41,44 @@ REVIEWED_STATUSES = frozenset(
     }
 )
 
+LOW_CONFIDENCE_REVIEW_STATUSES = frozenset(
+    {
+        "needs_human_review",
+        "pending_human_review",
+        "review_queue",
+        "blocked_pending_review",
+    }
+)
+
+PRODUCTION_READY_STATUSES = frozenset(
+    {
+        "production",
+        "production_ready",
+        "ready_for_production",
+        "promoted",
+    }
+)
+
 RAW_DOCUMENT_BODY_KEYS = frozenset(
     {
         "body",
         "body_html",
         "body_text",
         "document_body",
+        "full_html",
         "full_text",
         "html",
+        "html_body",
         "page_body",
+        "pdf_body",
+        "pdf_html",
         "pdf_text",
         "raw_body",
         "raw_document_body",
         "raw_html",
+        "raw_html_body",
+        "raw_pdf",
+        "raw_pdf_body",
         "raw_text",
     }
 )
@@ -100,6 +125,26 @@ PRIVATE_STRING_MARKERS = (
     "trace.zip",
 )
 
+ANCHOR_KEYS = frozenset(
+    {
+        "anchor",
+        "page",
+        "page_anchor",
+        "page_number",
+        "section",
+        "section_anchor",
+        "section_id",
+    }
+)
+
+OCR_MARKER_KEYS = frozenset(
+    {
+        "ocr_derived",
+        "ocr_only",
+        "ocr_text",
+    }
+)
+
 
 @dataclass(frozen=True)
 class RequirementExtractionReviewFinding:
@@ -138,10 +183,31 @@ def validate_requirement_extraction_review_packet(
 
     findings: list[RequirementExtractionReviewFinding] = []
     supported_types = {_text(item) for item in supported_requirement_types if _text(item)}
+    requirements = _requirements(packet)
 
     findings.extend(_privacy_findings(packet))
 
-    for index, requirement in enumerate(_requirements(packet)):
+    if _packet_production_ready_with_low_confidence_review_items(packet, requirements, low_confidence_threshold):
+        findings.append(
+            RequirementExtractionReviewFinding(
+                "production_ready_with_low_confidence_review_items",
+                "packet",
+                "$",
+                "packet cannot be marked production-ready while low-confidence review items remain",
+            )
+        )
+
+    if _has_reordered_step_evidence(packet):
+        findings.append(
+            RequirementExtractionReviewFinding(
+                "reordered_step_evidence",
+                "packet",
+                "$",
+                "extraction review packets must preserve source step evidence order",
+            )
+        )
+
+    for index, requirement in enumerate(requirements):
         path = f"$.requirements[{index}]"
         requirement_id = _requirement_id(requirement)
 
@@ -152,6 +218,15 @@ def validate_requirement_extraction_review_packet(
                     requirement_id,
                     path,
                     "requirement review nodes must include source evidence or citation spans",
+                )
+            )
+        elif not _has_page_or_section_anchor(requirement):
+            findings.append(
+                RequirementExtractionReviewFinding(
+                    "missing_page_or_section_anchor",
+                    requirement_id,
+                    path,
+                    "cited extraction evidence must include a page or section anchor",
                 )
             )
 
@@ -206,6 +281,16 @@ def validate_requirement_extraction_review_packet(
                 )
             )
 
+        if _has_unsupported_ocr_confidence_escalation(requirement):
+            findings.append(
+                RequirementExtractionReviewFinding(
+                    "unsupported_ocr_confidence_escalation",
+                    requirement_id,
+                    path,
+                    "OCR-derived extraction confidence cannot exceed OCR confidence without explicit support",
+                )
+            )
+
     return RequirementExtractionReviewValidation(ok=not findings, findings=tuple(findings))
 
 
@@ -243,6 +328,10 @@ def _text(value: object) -> str:
     return str(value).strip()
 
 
+def _normalized(value: object) -> str:
+    return _text(value).lower().replace("-", "_").replace(" ", "_")
+
+
 def _sequence(value: object) -> tuple[str, ...]:
     if value is None:
         return ()
@@ -266,23 +355,127 @@ def _has_citation(requirement: Mapping[str, object]) -> bool:
     return False
 
 
+def _has_page_or_section_anchor(requirement: Mapping[str, object]) -> bool:
+    for source_id in _sequence(requirement.get("source_evidence_ids") or requirement.get("sourceEvidenceIds")):
+        normalized = _normalized(source_id)
+        if "page" in normalized or "section" in normalized:
+            return True
+
+    for key in ("citation_spans", "citations", "source_evidence", "evidence_records"):
+        value = requirement.get(key)
+        if not isinstance(value, Sequence) or isinstance(value, (str, bytes, bytearray)):
+            continue
+        for item in value:
+            if isinstance(item, Mapping) and _mapping_has_anchor(item):
+                return True
+    return False
+
+
+def _mapping_has_anchor(value: Mapping[str, object]) -> bool:
+    for key, child in value.items():
+        normalized_key = _normalize_key(str(key))
+        if normalized_key in ANCHOR_KEYS and _text(child):
+            return True
+        if normalized_key == "locator":
+            locator = _normalized(child)
+            if "page" in locator or "section" in locator:
+                return True
+    return False
+
+
 def _low_confidence_without_human_review(requirement: Mapping[str, object], threshold: float) -> bool:
-    try:
-        confidence = float(requirement.get("confidence"))
-    except (TypeError, ValueError):
-        return True
-    if confidence >= threshold:
+    confidence = _number(requirement.get("confidence"))
+    if confidence is not None and confidence >= threshold:
         return False
-    review_status = _text(requirement.get("human_review_status") or requirement.get("review_status")).lower()
+    review_status = _normalized(requirement.get("human_review_status") or requirement.get("review_status"))
     return review_status not in HUMAN_REVIEW_STATUSES
 
 
 def _formalization_ready_before_review(requirement: Mapping[str, object]) -> bool:
-    formalization_status = _text(requirement.get("formalization_status") or requirement.get("formalizationStatus")).lower()
+    formalization_status = _normalized(requirement.get("formalization_status") or requirement.get("formalizationStatus"))
     if formalization_status != "ready":
         return False
-    review_status = _text(requirement.get("human_review_status") or requirement.get("review_status")).lower()
+    review_status = _normalized(requirement.get("human_review_status") or requirement.get("review_status"))
     return review_status not in REVIEWED_STATUSES
+
+
+def _packet_production_ready_with_low_confidence_review_items(
+    packet: Mapping[str, object],
+    requirements: Sequence[Mapping[str, object]],
+    threshold: float,
+) -> bool:
+    packet_status = _normalized(
+        packet.get("review_status")
+        or packet.get("validation_status")
+        or packet.get("promotion_status")
+        or packet.get("status")
+    )
+    if packet_status not in PRODUCTION_READY_STATUSES:
+        return False
+    return any(_is_low_confidence_review_item(requirement, threshold) for requirement in requirements)
+
+
+def _is_low_confidence_review_item(requirement: Mapping[str, object], threshold: float) -> bool:
+    confidence = _number(requirement.get("confidence"))
+    if confidence is not None and confidence >= threshold:
+        return False
+    review_status = _normalized(requirement.get("human_review_status") or requirement.get("review_status"))
+    formalization_status = _normalized(requirement.get("formalization_status") or requirement.get("formalizationStatus"))
+    return review_status in LOW_CONFIDENCE_REVIEW_STATUSES or formalization_status in LOW_CONFIDENCE_REVIEW_STATUSES
+
+
+def _has_reordered_step_evidence(packet: Mapping[str, object]) -> bool:
+    expected = _sequence(packet.get("expected_step_evidence_order") or packet.get("source_step_order"))
+    observed = _sequence(packet.get("extracted_step_evidence_order") or packet.get("observed_step_order"))
+    if expected and observed and expected != observed:
+        return True
+
+    for requirement in _requirements(packet):
+        records = requirement.get("evidence_records")
+        if not isinstance(records, Sequence) or isinstance(records, (str, bytes, bytearray)):
+            continue
+        source_order = tuple(
+            _text(record.get("source_order"))
+            for record in records
+            if isinstance(record, Mapping) and _text(record.get("source_order"))
+        )
+        extracted_order = tuple(
+            _text(record.get("extracted_order"))
+            for record in records
+            if isinstance(record, Mapping) and _text(record.get("extracted_order"))
+        )
+        if source_order and extracted_order and source_order != extracted_order:
+            return True
+    return False
+
+
+def _has_unsupported_ocr_confidence_escalation(requirement: Mapping[str, object]) -> bool:
+    if requirement.get("ocr_confidence_escalation_supported") is True:
+        return False
+    if not _is_ocr_derived(requirement):
+        return False
+    confidence = _number(requirement.get("confidence") or requirement.get("extraction_confidence"))
+    ocr_confidence = _number(requirement.get("ocr_confidence"))
+    if confidence is None or ocr_confidence is None:
+        return False
+    return confidence > ocr_confidence
+
+
+def _is_ocr_derived(requirement: Mapping[str, object]) -> bool:
+    for key in OCR_MARKER_KEYS:
+        if requirement.get(key) is True or _text(requirement.get(key)):
+            return True
+    method = _normalized(requirement.get("extraction_method") or requirement.get("evidence_derivation"))
+    return "ocr" in method
+
+
+def _number(value: object) -> float | None:
+    if isinstance(value, bool) or value is None:
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
 
 
 def _privacy_findings(value: object, path: str = "$", requirement_id: str = "packet") -> tuple[RequirementExtractionReviewFinding, ...]:
@@ -299,7 +492,7 @@ def _privacy_findings(value: object, path: str = "$", requirement_id: str = "pac
                         "raw_document_body_present",
                         current_requirement_id,
                         child_path,
-                        "review packets must carry citations and excerpts, not raw document bodies",
+                        "review packets must carry citations and excerpts, not raw PDF or HTML document bodies",
                     )
                 )
             if normalized_key in PRIVATE_VALUE_KEYS:

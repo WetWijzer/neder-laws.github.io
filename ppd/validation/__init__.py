@@ -1,1 +1,1 @@
-"""Validation helpers for PP&D automation safety gates."""
+"""Validation helpers for PP&D automation workflows."""

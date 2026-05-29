@@ -1,0 +1,157 @@
+{
+  "packet_id": "devhub-attended-read-only-pilot-runbook-v1",
+  "packet_type": "devhub_attended_read_only_pilot_runbook",
+  "mode": "fixture_first",
+  "read_only_only": true,
+  "launches_playwright": false,
+  "stores_browser_artifacts": false,
+  "stores_private_session_state": false,
+  "source_inputs": {
+    "attended_pilot_preflight": "devhub-attended-pilot-synthetic-readonly-review-v1",
+    "read_only_observation_checklist": "devhub_read_only_observation_checklist"
+  },
+  "operator_steps": [
+    {
+      "step_id": "prepare_fixture_packet",
+      "operator_action": "Open the committed runbook fixture and confirm the packet is for an attended read-only pilot only.",
+      "automated": false,
+      "playwright_allowed": false,
+      "stores_browser_artifacts": false
+    },
+    {
+      "step_id": "manual_login_handoff",
+      "operator_action": "The human operator opens DevHub in their own browser and completes PortlandOregon.gov login, MFA, CAPTCHA, or security prompts manually.",
+      "automated": false,
+      "playwright_allowed": false,
+      "stores_browser_artifacts": false
+    },
+    {
+      "step_id": "confirm_read_only_scope",
+      "operator_action": "Before observing, confirm the intended pages are DevHub home, account summary, synthetic record list, or synthetic record detail views with no upload, payment, scheduling, cancellation, certification, or submission step in scope.",
+      "automated": false,
+      "playwright_allowed": false,
+      "stores_browser_artifacts": false
+    },
+    {
+      "step_id": "capture_redacted_observation",
+      "operator_action": "Record only stable surface ids, headings, accessible landmark summaries, synthetic status labels, operator decision codes, and redacted timestamps.",
+      "automated": false,
+      "playwright_allowed": false,
+      "stores_browser_artifacts": false
+    },
+    {
+      "step_id": "monitor_abort_conditions",
+      "operator_action": "Stop immediately if an abort condition appears, refuse the action, and write only the redacted refused-action journal event.",
+      "automated": false,
+      "playwright_allowed": false,
+      "stores_browser_artifacts": false
+    },
+    {
+      "step_id": "write_commit_safe_journal",
+      "operator_action": "Write the matching journal template using commit-safe fields only, with no credentials, cookies, auth state, screenshots, traces, HAR files, raw DOM, raw authenticated text, or private values.",
+      "automated": false,
+      "playwright_allowed": false,
+      "stores_browser_artifacts": false
+    },
+    {
+      "step_id": "post_action_hardening_review",
+      "operator_action": "Confirm no official state changed, no browser artifact was created for storage, and next actions remain limited to read-only review or local preview.",
+      "automated": false,
+      "playwright_allowed": false,
+      "stores_browser_artifacts": false
+    },
+    {
+      "step_id": "close_without_artifacts",
+      "operator_action": "Close the browser manually and do not save session files, downloads, screenshots, traces, HAR files, auth state, or raw crawl output.",
+      "automated": false,
+      "playwright_allowed": false,
+      "stores_browser_artifacts": false
+    }
+  ],
+  "redacted_observation_capture": {
+    "allowed_fields": [
+      "stable_surface_id",
+      "page_heading",
+      "accessible_landmark_summary",
+      "synthetic_record_status_label",
+      "operator_decision_code",
+      "redacted_timestamp"
+    ],
+    "forbidden_fields": [
+      "credentials",
+      "cookies",
+      "auth_state",
+      "screenshot",
+      "trace",
+      "har",
+      "raw_dom",
+      "raw_authenticated_text",
+      "private_field_value",
+      "payment_details",
+      "local_private_file_path"
+    ],
+    "raw_values_allowed": false,
+    "screenshots_allowed": false,
+    "dom_capture_allowed": false,
+    "redaction_tokens": [
+      "[REDACTED_PRIVATE_VALUE]",
+      "[REDACTED_ACCOUNT_REFERENCE]",
+      "[REDACTED_LOCAL_PATH]"
+    ]
+  },
+  "abort_conditions": [
+    "Any credential prompt, password recovery prompt, MFA challenge, or CAPTCHA requires manual operator handling only and stops observation capture.",
+    "Any payment workflow, payment detail field, fee checkout, or submit-payment control stops the pilot.",
+    "Any submit, final submit, certify, acknowledgement submission, upload, document attach, schedule, cancel, withdraw, extension, or reactivation control stops the pilot.",
+    "Unexpected private account data outside the synthetic review scope stops the pilot and must be summarized only as private account data appeared.",
+    "Any request to save a browser artifact, screenshot, trace, HAR, cookie, auth state, session file, raw DOM, raw authenticated text, download, or local private file path stops the pilot.",
+    "A timeout stops the pilot and records only a redacted timeout decision code."
+  ],
+  "journal_templates": {
+    "DevHub attended preflight": {
+      "event_type": "DevHub attended preflight",
+      "commit_safe": true,
+      "stores_private_values": false,
+      "stores_browser_artifacts": false,
+      "fields": ["packet_id", "operator_decision_code", "redacted_timestamp"]
+    },
+    "manual handoff": {
+      "event_type": "manual handoff",
+      "commit_safe": true,
+      "stores_private_values": false,
+      "stores_browser_artifacts": false,
+      "fields": ["handoff_reason", "operator_present", "redacted_timestamp"]
+    },
+    "redacted read-only observation": {
+      "event_type": "redacted read-only observation",
+      "commit_safe": true,
+      "stores_private_values": false,
+      "stores_browser_artifacts": false,
+      "fields": ["stable_surface_id", "page_heading", "accessible_landmark_summary", "synthetic_record_status_label", "operator_decision_code", "redacted_timestamp"]
+    },
+    "refused action": {
+      "event_type": "refused action",
+      "commit_safe": true,
+      "stores_private_values": false,
+      "stores_browser_artifacts": false,
+      "fields": ["abort_condition", "refusal_reason", "operator_decision_code", "redacted_timestamp"]
+    },
+    "post-action hardening review": {
+      "event_type": "post-action hardening review",
+      "commit_safe": true,
+      "stores_private_values": false,
+      "stores_browser_artifacts": false,
+      "fields": ["official_state_changed", "artifacts_created", "next_actions_limited_to", "redacted_timestamp"]
+    }
+  },
+  "post_action_hardening_review": {
+    "required": true,
+    "official_state_changed": false,
+    "next_actions_limited_to": ["read_only", "local_preview"],
+    "review_questions": [
+      "Did the operator avoid upload, submit, certify, payment, scheduling, cancellation, and account security actions?",
+      "Were all observations reduced to commit-safe redacted fields before journaling?",
+      "Were browser artifacts, private session state, screenshots, traces, HAR files, downloads, and raw authenticated text left unstored?"
+    ]
+  }
+}
