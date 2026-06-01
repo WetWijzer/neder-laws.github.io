@@ -1,126 +1,176 @@
 from __future__ import annotations
 
 import copy
+import json
 import unittest
 from pathlib import Path
-from typing import Any
 
 from ppd.agent_readiness.inactive_release_smoke_replay_packet_v1 import (
     EXACT_OFFLINE_VALIDATION_COMMANDS,
     InactiveReleaseSmokeReplayPacketV1Error,
     assert_valid_inactive_release_smoke_replay_packet_v1,
+    build_packet_from_fixture,
     load_inactive_release_smoke_replay_packet_v1,
     validate_inactive_release_smoke_replay_packet_v1,
 )
 
-FIXTURE = Path(__file__).parent / "fixtures" / "inactive_release_smoke_replay_packet_v1" / "packet.json"
+FIXTURE_DIR = Path(__file__).parent / "fixtures" / "inactive_release_smoke_replay_packet_v1"
+SOURCE_FIXTURE = FIXTURE_DIR / "source_rows.json"
+PACKET_FIXTURE = FIXTURE_DIR / "packet.json"
 
 
 class InactiveReleaseSmokeReplayPacketV1Tests(unittest.TestCase):
-    def test_fixture_replays_required_agent_facing_scenarios(self) -> None:
-        packet = load_inactive_release_smoke_replay_packet_v1(FIXTURE)
+    def test_builder_consumes_only_synthetic_decision_and_readiness_rows(self) -> None:
+        packet = build_packet_from_fixture(SOURCE_FIXTURE)
 
         self.assertEqual(validate_inactive_release_smoke_replay_packet_v1(packet), [])
+        self.assertEqual(packet["source_kind"], "synthetic_inactive_release_decision_rows_and_post_recompile_agent_readiness_replay_rows")
         self.assertEqual(packet["validation_commands"], EXACT_OFFLINE_VALIDATION_COMMANDS)
+        self.assertEqual(packet["exact_offline_validation_commands"], EXACT_OFFLINE_VALIDATION_COMMANDS)
         self.assertEqual(
-            {scenario["scenario_type"] for scenario in packet["replay_scenarios"]},
-            {"missing_information", "blocked_action", "next_safe_action", "reversible_draft", "exact_confirmation"},
+            set(scenario["scenario_kind"] for scenario in packet["smoke_scenarios"]),
+            {"missing_information", "blocked_action", "reversible_draft", "exact_confirmation", "citation_placeholder"},
         )
-        self.assertEqual({scenario["outcome"] for scenario in packet["replay_scenarios"]}, {"pass", "hold", "reject"})
 
-    def test_fixture_is_inactive_offline_and_non_mutating(self) -> None:
-        packet = load_inactive_release_smoke_replay_packet_v1(FIXTURE)
+    def test_committed_packet_lists_expected_smoke_replay_outputs(self) -> None:
+        packet = load_inactive_release_smoke_replay_packet_v1(PACKET_FIXTURE)
 
-        self.assertTrue(all(packet["boundaries"].values()))
-        self.assertEqual(
-            packet["inactive_release_candidate_manifest"]["candidate_status"],
-            "inactive_pending_reviewer_signoff",
-        )
-        self.assertTrue(packet["inactive_release_candidate_manifest"]["manifest_id"])
-        self.assertFalse(packet["inactive_release_candidate_manifest"]["release_activation_enabled"])
-        self.assertFalse(packet["inactive_release_candidate_manifest"]["release_promotion_enabled"])
-        for scenario in packet["replay_scenarios"]:
+        self.assertEqual(validate_inactive_release_smoke_replay_packet_v1(packet), [])
+        self.assertEqual(packet["smoke_scenario_ids"], [scenario["smoke_scenario_id"] for scenario in packet["smoke_scenarios"]])
+        for scenario in packet["smoke_scenarios"]:
+            self.assertTrue(scenario["source_inactive_release_decision_row_id"])
+            self.assertTrue(scenario["source_post_recompile_readiness_row_id"])
+            self.assertTrue(scenario["expected_missing_information_prompts"])
+            self.assertTrue(scenario["expected_blocked_action_outcomes"])
+            self.assertTrue(scenario["expected_reversible_draft_outcomes"])
+            self.assertTrue(scenario["expected_exact_confirmation_warnings"])
+            self.assertTrue(scenario["citation_placeholder_checks"])
+            self.assertTrue(scenario["rollback_notes"])
+            self.assertTrue(scenario["reviewer_holds"])
             self.assertEqual(scenario["offline_validation_commands"], EXACT_OFFLINE_VALIDATION_COMMANDS)
-            self.assertTrue(scenario["citation_references"])
-            self.assertTrue(scenario["agent_facing_prompt"])
-            self.assertTrue(scenario["expected_agent_response"])
-            self.assertFalse(any(scenario["action_controls"].values()))
 
-    def test_rejects_missing_candidate_manifest_reference(self) -> None:
-        packet = load_inactive_release_smoke_replay_packet_v1(FIXTURE)
+    def test_boundaries_deny_release_promotion_live_devhub_private_artifacts_and_official_actions(self) -> None:
+        packet = load_inactive_release_smoke_replay_packet_v1(PACKET_FIXTURE)
+
+        self.assertTrue(packet["boundaries"]["fixture_first"])
+        self.assertTrue(packet["boundaries"]["synthetic_rows_only"])
+        self.assertTrue(packet["boundaries"]["inactive_release_only"])
+        self.assertFalse(packet["boundaries"]["release_promotion_enabled"])
+        self.assertFalse(packet["boundaries"]["live_crawling_enabled"])
+        self.assertFalse(packet["boundaries"]["devhub_opened"])
+        self.assertFalse(packet["boundaries"]["private_artifact_storage_enabled"])
+        self.assertFalse(packet["boundaries"]["official_action_enabled"])
+
+    def test_rejects_missing_required_scenario_coverage_and_lists(self) -> None:
+        packet = load_inactive_release_smoke_replay_packet_v1(PACKET_FIXTURE)
         unsafe = copy.deepcopy(packet)
-        unsafe["inactive_release_candidate_manifest"].pop("manifest_id")
-
-        errors = validate_inactive_release_smoke_replay_packet_v1(unsafe)
-
-        self.assertTrue(any("manifest_id must be a non-empty candidate manifest reference" in error for error in errors))
-
-    def test_rejects_missing_required_replay_rows_and_outcomes(self) -> None:
-        packet = load_inactive_release_smoke_replay_packet_v1(FIXTURE)
-        unsafe = copy.deepcopy(packet)
-        unsafe["replay_scenarios"] = [
-            scenario
-            for scenario in unsafe["replay_scenarios"]
-            if scenario["scenario_type"] not in {"missing_information", "blocked_action", "next_safe_action", "reversible_draft"}
-        ]
+        unsafe["smoke_scenarios"] = unsafe["smoke_scenarios"][:1]
+        unsafe["smoke_scenario_ids"] = [unsafe["smoke_scenarios"][0]["smoke_scenario_id"]]
+        unsafe["smoke_scenarios"][0]["expected_missing_information_prompts"] = []
 
         errors = validate_inactive_release_smoke_replay_packet_v1(unsafe)
         joined = "; ".join(errors)
 
-        self.assertIn("missing_information", joined)
-        self.assertIn("blocked_action", joined)
-        self.assertIn("next_safe_action", joined)
-        self.assertIn("reversible_draft", joined)
-        self.assertIn("missing required replay outcomes", joined)
+        self.assertIn("missing required smoke scenario kinds", joined)
+        self.assertIn("expected_missing_information_prompts must be a non-empty list of text", joined)
 
-    def test_rejects_missing_citations_and_validation_commands(self) -> None:
-        packet = load_inactive_release_smoke_replay_packet_v1(FIXTURE)
+    def test_rejects_missing_release_decision_readiness_replay_and_smoke_scenario_ids(self) -> None:
+        packet = load_inactive_release_smoke_replay_packet_v1(PACKET_FIXTURE)
         unsafe = copy.deepcopy(packet)
+        unsafe["smoke_scenario_ids"] = []
+        unsafe["consumed_inactive_release_decision_row_ids"] = []
+        unsafe["consumed_post_recompile_readiness_row_ids"] = []
+        unsafe["smoke_scenarios"][0]["smoke_scenario_id"] = ""
+        unsafe["smoke_scenarios"][0]["source_inactive_release_decision_row_id"] = ""
+        unsafe["smoke_scenarios"][0]["source_post_recompile_readiness_row_id"] = ""
+
+        errors = validate_inactive_release_smoke_replay_packet_v1(unsafe)
+        joined = "; ".join(errors)
+
+        self.assertIn("smoke_scenario_ids must be a non-empty list of text", joined)
+        self.assertIn("smoke_scenario_id must be non-empty", joined)
+        self.assertIn("source_inactive_release_decision_row_id must be non-empty", joined)
+        self.assertIn("source_post_recompile_readiness_row_id must be non-empty", joined)
+        self.assertIn("consumed_inactive_release_decision_row_ids must be non-empty", joined)
+        self.assertIn("consumed_post_recompile_readiness_row_ids must be non-empty", joined)
+
+    def test_rejects_missing_expected_outcomes_rollbacks_holds_citations_and_commands(self) -> None:
+        packet = load_inactive_release_smoke_replay_packet_v1(PACKET_FIXTURE)
+        unsafe = copy.deepcopy(packet)
+        scenario = unsafe["smoke_scenarios"][0]
+        scenario["expected_missing_information_prompts"] = []
+        scenario["expected_blocked_action_outcomes"] = []
+        scenario["expected_reversible_draft_outcomes"] = []
+        scenario["expected_exact_confirmation_warnings"] = []
+        scenario["citation_placeholder_checks"] = []
+        scenario["citation_placeholder_ids"] = []
+        scenario["rollback_notes"] = []
+        scenario["reviewer_holds"] = []
+        scenario["offline_validation_commands"] = []
         unsafe["validation_commands"] = []
-        unsafe["replay_scenarios"][0]["citation_references"] = []
-        unsafe["replay_scenarios"][0]["offline_validation_commands"] = [["curl", "https://devhub.portlandoregon.gov"]]
 
         errors = validate_inactive_release_smoke_replay_packet_v1(unsafe)
         joined = "; ".join(errors)
 
-        self.assertIn("validation_commands must contain only the exact offline self-test command", joined)
-        self.assertIn("citation_references must be a non-empty list", joined)
-        self.assertIn("offline_validation_commands must contain only the exact offline self-test command", joined)
+        self.assertIn("expected_missing_information_prompts must be a non-empty list of text", joined)
+        self.assertIn("expected_blocked_action_outcomes must be a non-empty list of text", joined)
+        self.assertIn("expected_reversible_draft_outcomes must be a non-empty list of text", joined)
+        self.assertIn("expected_exact_confirmation_warnings must be a non-empty list of text", joined)
+        self.assertIn("citation_placeholder_checks must be a non-empty list of text", joined)
+        self.assertIn("citation_placeholder_ids must be non-empty", joined)
+        self.assertIn("rollback_notes must be a non-empty list of text", joined)
+        self.assertIn("reviewer_holds must be a non-empty list of text", joined)
+        self.assertIn("offline_validation_commands must contain only the daemon self-test command", joined)
+        self.assertIn("validation_commands must contain only the daemon self-test command", joined)
 
-    def test_validator_rejects_unknown_citation_live_artifact_and_enabled_action(self) -> None:
-        packet = load_inactive_release_smoke_replay_packet_v1(FIXTURE)
+    def test_rejects_wrong_validation_commands_and_consumed_row_mismatch(self) -> None:
+        packet = load_inactive_release_smoke_replay_packet_v1(PACKET_FIXTURE)
         unsafe = copy.deepcopy(packet)
-        unsafe["replay_scenarios"][0]["citation_references"] = ["ev:ppd-fixture:unknown:sha256:aaaaaaaa"]
-        unsafe["replay_scenarios"][0]["action_controls"]["requires_devhub"] = True
-        unsafe["replay_scenarios"][0]["browser_state_path"] = "state.json"
+        unsafe["validation_commands"] = [["python3", "-m", "pytest"]]
+        unsafe["smoke_scenarios"][0]["offline_validation_commands"] = [["python3", "-m", "pytest"]]
+        unsafe["consumed_inactive_release_decision_row_ids"] = ["different-row"]
 
         errors = validate_inactive_release_smoke_replay_packet_v1(unsafe)
+        joined = "; ".join(errors)
 
-        self.assertTrue(any("unknown inactive manifest evidence id" in error for error in errors))
-        self.assertTrue(any("requires_devhub must be false" in error for error in errors))
-        self.assertTrue(any("forbidden private, session, browser, raw, or downloaded artifact key" in error for error in errors))
+        self.assertIn("validation_commands must contain only the daemon self-test command", joined)
+        self.assertIn("offline_validation_commands must contain only the daemon self-test command", joined)
+        self.assertIn("consumed_inactive_release_decision_row_ids must match scenario source decision rows in order", joined)
+
+    def test_rejects_live_private_official_release_legal_guarantee_and_active_mutation_claims(self) -> None:
+        packet = load_inactive_release_smoke_replay_packet_v1(PACKET_FIXTURE)
+        unsafe = copy.deepcopy(packet)
+        unsafe["boundaries"]["devhub_opened"] = True
+        unsafe["active_prompt_mutation"] = True
+        unsafe["active_surface_registry_mutation"] = True
+        unsafe["notes"] = [
+            "opened DevHub",
+            "live crawl completed",
+            "downloaded document retained",
+            "official action completed",
+            "release promoted",
+            "approval is guaranteed",
+            "permit will be issued",
+        ]
+        unsafe["browser_state_path"] = "state.json"
+        unsafe["raw_pdf_artifact"] = "raw.pdf"
+
+        errors = validate_inactive_release_smoke_replay_packet_v1(unsafe)
+        joined = "; ".join(errors)
+
+        self.assertIn("boundaries must exactly keep the replay fixture-only", joined)
+        self.assertIn("forbidden live/private/official/release/legal guarantee claim", joined)
+        self.assertIn("forbidden private/session/browser/raw artifact field", joined)
+        self.assertIn("forbidden active/live/private/official true flag", joined)
+        self.assertIn("forbidden active mutation flag", joined)
         with self.assertRaises(InactiveReleaseSmokeReplayPacketV1Error):
             assert_valid_inactive_release_smoke_replay_packet_v1(unsafe)
 
-    def test_rejects_live_devhub_completion_activation_and_mutation_claims(self) -> None:
-        cases: list[tuple[str, Any, str]] = [
-            ("claim", "live crawl completed against public source", "live crawl or DevHub execution claim"),
-            ("claim", "DevHub accessed for the replay", "live crawl or DevHub execution claim"),
-            ("claim", "application submitted and fee paid", "official-action completion claim"),
-            ("claim", "release activated for users", "release activation or promotion claim"),
-            ("active_prompt_mutation", True, "active mutation or release activation flag"),
-            ("downloaded_document_path", "permit.pdf", "forbidden private, session, browser, raw, or downloaded artifact key"),
-            ("note", "raw crawl output was saved", "forbidden private, session, browser, raw, or downloaded artifact content"),
-        ]
+    def test_committed_packet_matches_builder_output(self) -> None:
+        built = build_packet_from_fixture(SOURCE_FIXTURE)
+        committed = json.loads(PACKET_FIXTURE.read_text(encoding="utf-8"))
 
-        for key, value, expected in cases:
-            packet = load_inactive_release_smoke_replay_packet_v1(FIXTURE)
-            unsafe = copy.deepcopy(packet)
-            unsafe[key] = value
-
-            errors = validate_inactive_release_smoke_replay_packet_v1(unsafe)
-
-            self.assertTrue(any(expected in error for error in errors), f"missing {expected!r} for {key!r}: {errors}")
+        self.assertEqual(committed, built)
 
 
 if __name__ == "__main__":

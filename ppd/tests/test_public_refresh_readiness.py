@@ -1,256 +1,109 @@
 from __future__ import annotations
 
-from copy import deepcopy
+import json
 from pathlib import Path
 
-from ppd.public_refresh.readiness import build_readiness_packet, build_readiness_packet_from_files
+import pytest
 
-FIXTURES = Path(__file__).parent / "fixtures" / "public_refresh_readiness"
-
-
-def test_public_refresh_readiness_packet_is_ready_for_metadata_only_fixture() -> None:
-    packet = build_readiness_packet_from_files(
-        ingestion_outputs_path=FIXTURES / "ingestion_outputs.json",
-        requirement_delta_status_path=FIXTURES / "requirement_delta_status.json",
-        process_model_versions_path=FIXTURES / "process_model_versions.json",
-        source_freshness_path=FIXTURES / "source_freshness.json",
-        human_review_state_path=FIXTURES / "human_review_state.json",
-        generated_at="2026-05-27T00:00:00Z",
-    )
-
-    assert packet["packet_type"] == "ppd_public_refresh_promotion_readiness"
-    assert packet["status"] == "ready"
-    assert packet["metadata_only"] is True
-    assert packet["live_crawl_performed"] is False
-    assert packet["raw_bodies_persisted"] is False
-    assert packet["blockers"] == []
-    assert {gate["gate"] for gate in packet["gates"]} == {
-        "public_refresh_ingestion_metadata",
-        "requirement_delta_formalization",
-        "process_model_versions",
-        "source_freshness",
-        "human_review_state",
-        "guardrail_process_version_evidence",
-    }
-    assert packet["inputs"]["source_ids"] == ["ppd-devhub-faq", "ppd-submit-plans-online"]
+from ppd.extraction.public_refresh_readiness import ReadinessInputError, build_readiness_packet
 
 
-def test_public_refresh_readiness_blocks_raw_body_like_ingestion_metadata() -> None:
+FIXTURE_PATH = Path(__file__).parent / "fixtures" / "public_refresh_readiness_v1" / "synthetic_rows.json"
+
+
+def _load_fixture() -> dict:
+    return json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
+
+
+def test_builds_fixture_first_readiness_packet_without_live_permissions() -> None:
+    fixture = _load_fixture()
+
     packet = build_readiness_packet(
-        ingestion_outputs={
-            "refresh_id": "raw-body-regression",
-            "outputs": [
-                {
-                    "source_id": "ppd-devhub-faq",
-                    "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
-                    "content_hash": "sha256:fixture",
-                    "normalized_document_id": "doc-devhub-faq",
-                    "no_raw_body_persisted": True,
-                    "metadata_only": True,
-                    "raw_body": "this must never be promotion metadata",
-                }
-            ],
-        },
-        requirement_delta_status={
-            "deltas": [
-                {
-                    "delta_id": "delta-001",
-                    "requirement_id": "req-001",
-                    "formalization_status": "formalized",
-                    "human_review_status": "approved",
-                    "affected_process_ids": ["building-permit-application"],
-                    "affected_guardrail_ids": ["guardrail-building-permit-fixture"],
-                    "source_evidence_ids": ["doc-devhub-faq"],
-                }
-            ]
-        },
-        process_model_versions={
-            "process_models": [
-                {
-                    "process_id": "building-permit-application",
-                    "version": "2026.05.27-fixture",
-                    "guardrail_bundle_id": "guardrail-building-permit-fixture",
-                    "validation_status": "valid",
-                    "source_evidence_ids": ["doc-devhub-faq"],
-                }
-            ]
-        },
-        source_freshness={
-            "sources": [
-                {
-                    "source_id": "ppd-devhub-faq",
-                    "freshness_status": "current",
-                    "last_seen_at": "2026-05-27T00:00:00Z",
-                    "content_hash": "sha256:fixture",
-                }
-            ]
-        },
-        human_review_state={
-            "reviews": [
-                {
-                    "review_id": "review-001",
-                    "subject_id": "delta-001",
-                    "subject_type": "requirement_delta",
-                    "status": "approved",
-                }
-            ]
-        },
+        fixture["archive_patch_preview_rows"],
+        fixture["citation_impact_queue_rows"],
     )
 
-    assert packet["status"] == "blocked"
-    assert any("raw body-like" in blocker for blocker in packet["blockers"])
-
-
-def _ready_inputs() -> dict[str, dict[str, object]]:
-    return {
-        "ingestion_outputs": {
-            "refresh_id": "fixture-refresh",
-            "outputs": [
-                {
-                    "source_id": "ppd-devhub-faq",
-                    "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
-                    "content_hash": "sha256:fixture",
-                    "normalized_document_id": "doc-devhub-faq",
-                    "no_raw_body_persisted": True,
-                    "metadata_only": True,
-                }
-            ],
-        },
-        "requirement_delta_status": {
-            "deltas": [
-                {
-                    "delta_id": "delta-001",
-                    "requirement_id": "req-001",
-                    "formalization_status": "formalized",
-                    "human_review_status": "approved",
-                    "affected_process_ids": ["process-001"],
-                    "affected_guardrail_ids": ["guardrail-001"],
-                    "source_evidence_ids": ["doc-devhub-faq"],
-                }
-            ]
-        },
-        "process_model_versions": {
-            "process_models": [
-                {
-                    "process_id": "process-001",
-                    "version": "2026.05.27-fixture",
-                    "guardrail_bundle_id": "guardrail-001",
-                    "validation_status": "valid",
-                    "source_evidence_ids": ["doc-devhub-faq"],
-                }
-            ]
-        },
-        "source_freshness": {
-            "sources": [
-                {
-                    "source_id": "ppd-devhub-faq",
-                    "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
-                    "freshness_status": "current",
-                    "last_seen_at": "2026-05-27T00:00:00Z",
-                    "content_hash": "sha256:fixture",
-                }
-            ]
-        },
-        "human_review_state": {
-            "reviews": [
-                {
-                    "review_id": "review-001",
-                    "subject_id": "delta-001",
-                    "subject_type": "requirement_delta",
-                    "status": "approved",
-                }
-            ]
-        },
+    assert packet["schema_version"] == "public-refresh-normalized-document-extraction-readiness-v1"
+    assert packet["input_policy"] == {
+        "accepted_archive_rows": "synthetic inactive archive patch preview rows only",
+        "accepted_citation_rows": "synthetic inactive citation impact queue rows only",
+        "live_extraction": False,
+        "live_crawling": False,
+        "document_downloads": False,
+        "raw_output_storage": False,
+        "devhub_opened": False,
+        "active_document_record_mutation": False,
+        "official_actions": False,
     }
+    assert [item[0] for item in packet["offline_validation_commands"]] == ["python3", "python3", "python3"]
+    assert len(packet["planned_documents"]) == 3
 
 
-def _packet_with(inputs: dict[str, dict[str, object]]) -> dict[str, object]:
-    return build_readiness_packet(
-        ingestion_outputs=inputs["ingestion_outputs"],
-        requirement_delta_status=inputs["requirement_delta_status"],
-        process_model_versions=inputs["process_model_versions"],
-        source_freshness=inputs["source_freshness"],
-        human_review_state=inputs["human_review_state"],
+def test_plans_routes_placeholders_and_review_holds() -> None:
+    fixture = _load_fixture()
+
+    packet = build_readiness_packet(
+        fixture["archive_patch_preview_rows"],
+        fixture["citation_impact_queue_rows"],
     )
 
+    by_source = {item["source_id"]: item for item in packet["planned_documents"]}
+    html_plan = by_source["src-ppd-html-apply-permits-preview"]
+    pdf_plan = by_source["src-ppd-pdf-file-standards-preview"]
+    form_plan = by_source["src-ppd-form-permit-application-preview"]
 
-def test_public_refresh_readiness_rejects_stale_or_missing_citations() -> None:
-    inputs = _ready_inputs()
-    delta = inputs["requirement_delta_status"]["deltas"][0]
-    delta["source_evidence_ids"] = ["doc-stale"]
-
-    packet = _packet_with(inputs)
-
-    assert packet["status"] == "blocked"
-    assert any("cites stale or missing evidence ids" in blocker for blocker in packet["blockers"])
-
-    inputs = _ready_inputs()
-    del inputs["requirement_delta_status"]["deltas"][0]["source_evidence_ids"]
-
-    packet = _packet_with(inputs)
-
-    assert packet["status"] == "blocked"
-    assert any("lacks citation evidence" in blocker for blocker in packet["blockers"])
-
-
-def test_public_refresh_readiness_rejects_incomplete_human_review() -> None:
-    inputs = _ready_inputs()
-    inputs["requirement_delta_status"]["deltas"][0]["human_review_status"] = "pending_human_review"
-    inputs["human_review_state"]["reviews"] = []
-
-    packet = _packet_with(inputs)
-
-    assert packet["status"] == "blocked"
-    assert any("human_review_status is pending_human_review" in blocker for blocker in packet["blockers"])
-    assert any("human review state records are missing" in blocker for blocker in packet["blockers"])
+    assert html_plan["normalized_document_placeholder_id"].startswith("normdoc-placeholder-v1-")
+    assert html_plan["extraction_route"]["route_name"] == "html_structure_and_links"
+    assert pdf_plan["extraction_route"]["route_name"] == "pdf_text_tables_and_fields"
+    assert form_plan["extraction_route"]["route_name"] == "pdf_text_tables_and_fields"
+    assert pdf_plan["stale_source_hold"] is True
+    assert pdf_plan["human_review_status"] == "hold_for_stale_source"
+    assert packet["stale_source_holds"] == [
+        {
+            "source_id": "src-ppd-pdf-file-standards-preview",
+            "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+            "hold_reason": "synthetic fixture marks source freshness unverified",
+            "release_condition": "fresh synthetic inactive preview row with reviewed source freshness metadata",
+        }
+    ]
 
 
-def test_public_refresh_readiness_rejects_missing_affected_process_or_guardrail_ids() -> None:
-    inputs = _ready_inputs()
-    delta = inputs["requirement_delta_status"]["deltas"][0]
-    delta["affected_process_ids"] = []
-    delta["affected_guardrail_ids"] = []
+def test_citation_span_acceptance_and_unmatched_queue_routing() -> None:
+    fixture = _load_fixture()
 
-    packet = _packet_with(inputs)
+    packet = build_readiness_packet(
+        fixture["archive_patch_preview_rows"],
+        fixture["citation_impact_queue_rows"],
+    )
 
-    assert packet["status"] == "blocked"
-    assert any("lacks affected_process_ids" in blocker for blocker in packet["blockers"])
-    assert any("lacks affected_guardrail_ids" in blocker for blocker in packet["blockers"])
+    by_source = {item["source_id"]: item for item in packet["planned_documents"]}
+    html_checks = by_source["src-ppd-html-apply-permits-preview"]["citation_span_acceptance_checks"]
+    pdf_checks = by_source["src-ppd-pdf-file-standards-preview"]["citation_span_acceptance_checks"]
 
-
-def test_public_refresh_readiness_rejects_ready_guardrails_without_process_version_evidence() -> None:
-    inputs = _ready_inputs()
-    inputs["process_model_versions"]["process_models"][0]["source_evidence_ids"] = []
-
-    packet = _packet_with(inputs)
-
-    assert packet["status"] == "blocked"
-    assert any("lacks refreshed process-version evidence" in blocker for blocker in packet["blockers"])
-
-
-def test_public_refresh_readiness_rejects_downloaded_paths_private_and_authenticated_urls() -> None:
-    inputs = _ready_inputs()
-    output = inputs["ingestion_outputs"]["outputs"][0]
-    output["downloaded_document_path"] = "/tmp/private/download.pdf"
-    output["requested_url"] = "https://user:secret@www.portland.gov/ppd/devhub-faqs"
-    output["canonical_url"] = "https://devhub.portlandoregon.gov/dashboard"
-    inputs["source_freshness"]["sources"][0]["canonical_url"] = "https://example.com/not-ppd"
-
-    packet = _packet_with(inputs)
-    blockers = packet["blockers"]
-
-    assert packet["status"] == "blocked"
-    assert any("downloaded document path" in blocker for blocker in blockers)
-    assert any("must not include credentials" in blocker for blocker in blockers)
-    assert any("appears to require authentication" in blocker for blocker in blockers)
-    assert any("outside the PP&D public allowlist" in blocker for blocker in blockers)
+    assert html_checks[0]["accepted_for_planning"] is True
+    assert pdf_checks[0]["accepted_for_planning"] is True
+    assert packet["unmatched_citation_queue_rows"] == [
+        {
+            "source_id": "src-ppd-missing-preview",
+            "impacted_requirement_id": "req-unmatched-citation-001",
+            "accepted_for_planning": False,
+            "reason": "source_not_in_inactive_archive_preview",
+            "routing": "human_review_required",
+        }
+    ]
+    assert packet["human_review_routing"]["citation_queue_triage"] == ["req-unmatched-citation-001"]
 
 
-def test_ready_inputs_fixture_remains_isolated_between_mutations() -> None:
-    first = _ready_inputs()
-    second = deepcopy(first)
+def test_rejects_non_synthetic_or_live_like_rows() -> None:
+    fixture = _load_fixture()
+    bad_archive_rows = list(fixture["archive_patch_preview_rows"])
+    bad_archive_rows[0] = dict(bad_archive_rows[0], synthetic=False)
 
-    first["requirement_delta_status"]["deltas"][0]["source_evidence_ids"] = []
+    with pytest.raises(ReadinessInputError, match="not marked synthetic"):
+        build_readiness_packet(bad_archive_rows, fixture["citation_impact_queue_rows"])
 
-    assert second["requirement_delta_status"]["deltas"][0]["source_evidence_ids"] == ["doc-devhub-faq"]
-    assert FIXTURES == Path(__file__).parent / "fixtures" / "public_refresh_readiness"
+    bad_citation_rows = list(fixture["citation_impact_queue_rows"])
+    bad_citation_rows[0] = dict(bad_citation_rows[0], raw_output_ref="raw/live/output.html")
+
+    with pytest.raises(ReadinessInputError, match="raw_output_ref"):
+        build_readiness_packet(fixture["archive_patch_preview_rows"], bad_citation_rows)

@@ -8,7 +8,7 @@
       "canonical_url": "https://example.com/private",
       "official_anchor_citation": "uncited anchor",
       "robots_decision_placeholder": "",
-      "policy_decision_placeholder": "",
+      "allowlist_decision_placeholder": "",
       "processor_handoff_dry_run_prerequisites": [],
       "raw_body_persistence_exclusion_check": "",
       "download_exclusion_check": "",

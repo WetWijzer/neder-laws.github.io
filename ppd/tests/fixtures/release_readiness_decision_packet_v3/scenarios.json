@@ -5,6 +5,14 @@
     "release-rejected"
   ],
   "required_sections": [
+    "agent_impact_replay_references",
+    "inactive_promotion_recommendation",
+    "reviewer_signoff_placeholders",
+    "stale_evidence_holds",
+    "activation_prerequisites",
+    "rollback_plan",
+    "post_decision_smoke_checks",
+    "validation_commands",
     "inactive_process_model_gate_recommendations",
     "inactive_guardrail_gate_recommendations",
     "agent_readiness_replay",

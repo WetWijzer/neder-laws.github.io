@@ -24,6 +24,11 @@ class PublicSourceRecrawlReviewerDispositionPacketV1Tests(unittest.TestCase):
     def test_builder_emits_valid_packet(self) -> None:
         self.assertEqual([], validate_public_source_recrawl_reviewer_disposition_packet_v1(self.packet))
 
+    def test_rejects_missing_handoff_packet_refs(self) -> None:
+        packet = copy.deepcopy(self.packet)
+        packet['handoff_packet_refs'] = []
+        self.assertIn('missing_handoff_packet_refs', self.issue_codes(packet))
+
     def test_rejects_missing_reviewer_decisions(self) -> None:
         packet = copy.deepcopy(self.packet)
         packet['reviewer_decisions'] = []
@@ -36,6 +41,26 @@ class PublicSourceRecrawlReviewerDispositionPacketV1Tests(unittest.TestCase):
         codes = self.issue_codes(packet)
         self.assertIn('missing_approve_reason_code', codes)
         self.assertIn('missing_hold_reason_code', codes)
+
+    def test_rejects_missing_disposition_sections(self) -> None:
+        packet = copy.deepcopy(self.packet)
+        packet['reviewer_disposition_states'] = []
+        packet['citation_refresh_priority_dispositions'] = []
+        packet['stale_source_hold_outcomes'] = []
+        codes = self.issue_codes(packet)
+        self.assertIn('missing_reviewer_disposition_states', codes)
+        self.assertIn('missing_citation_refresh_priority_dispositions', codes)
+        self.assertIn('missing_stale_source_hold_outcomes', codes)
+
+    def test_rejects_missing_owner_sequencing_and_rollback_sections(self) -> None:
+        packet = copy.deepcopy(self.packet)
+        packet['owner_signoff_placeholders'] = []
+        packet['dependency_sequencing'] = []
+        packet['rollback_checkpoints'] = []
+        codes = self.issue_codes(packet)
+        self.assertIn('missing_owner_signoff_placeholders', codes)
+        self.assertIn('missing_dependency_sequencing', codes)
+        self.assertIn('missing_rollback_checkpoints', codes)
 
     def test_rejects_missing_metadata_expectations_skipped_explanations_and_freshness(self) -> None:
         packet = copy.deepcopy(self.packet)
@@ -66,6 +91,22 @@ class PublicSourceRecrawlReviewerDispositionPacketV1Tests(unittest.TestCase):
         self.assertIn('raw_or_downloaded_data_claim', codes)
         self.assertIn('legal_or_permitting_outcome_guarantee', codes)
         self.assertIn('consequential_devhub_action_language', codes)
+        self.assertIn('unsafe_execution_or_mutation_flag', codes)
+
+    def test_rejects_promotion_release_activation_official_action_and_devhub_claims(self) -> None:
+        packet = copy.deepcopy(self.packet)
+        packet['promotion_claim'] = 'Source archive promoted and archive manifest promoted.'
+        packet['release_claim'] = 'Release activated and release is active.'
+        packet['completion_claim'] = 'Official action completed and submission completed.'
+        packet['devhub_claim'] = 'DevHub was accessed during review.'
+        packet['source_archive_promoted'] = True
+        packet['release_activated'] = True
+        packet['official_action_completed'] = True
+        codes = self.issue_codes(packet)
+        self.assertIn('source_archive_promotion_claim', codes)
+        self.assertIn('release_activation_claim', codes)
+        self.assertIn('official_action_completion_claim', codes)
+        self.assertIn('live_execution_claim', codes)
         self.assertIn('unsafe_execution_or_mutation_flag', codes)
 
 

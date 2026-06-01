@@ -28,6 +28,27 @@ REQUIRED_FORBIDDEN_ARTIFACTS = (
     'devhub_session_state',
     'raw_crawl_outputs',
 )
+REQUIRED_HANDOFF_REF_TYPES = (
+    'dry_run_manifest',
+    'reviewer_queue',
+    'operator_runbook',
+)
+REQUIRED_OWNER_SIGNOFF_ROLES = (
+    'public_refresh_reviewer',
+    'citation_refresh_owner',
+    'release_owner',
+)
+REQUIRED_DEPENDENCY_STEPS = (
+    'reviewer_disposition_states',
+    'citation_refresh_priority_dispositions',
+    'stale_source_hold_outcomes',
+    'rollback_checkpoints',
+    'offline_validation_commands',
+)
+REQUIRED_ROLLBACK_CHECKPOINTS = (
+    'pre_release_noop_checkpoint',
+    'active_artifact_no_mutation_checkpoint',
+)
 OFFLINE_VALIDATION_COMMANDS = (
     ('python3', 'ppd/daemon/ppd_daemon.py', '--self-test'),
     ('python3', '-m', 'unittest', 'ppd.tests.test_public_source_recrawl_reviewer_disposition_packet_v1'),
@@ -45,11 +66,17 @@ FALSE_SAFETY_FLAGS = (
     'browser_artifacts_created',
     'active_artifacts_mutated',
     'active_source_artifacts_mutated',
+    'active_archive_artifacts_mutated',
     'active_process_artifacts_mutated',
     'active_prompt_artifacts_mutated',
     'active_release_state_mutated',
     'active_release_artifacts_mutated',
     'active_guardrail_artifacts_mutated',
+    'source_archive_promoted',
+    'source_index_promoted',
+    'archive_manifest_promoted',
+    'release_activated',
+    'official_action_completed',
     'prompt_mutation_requested',
     'release_state_mutation_requested',
     'guardrail_mutation_requested',
@@ -67,6 +94,7 @@ UNSAFE_ARTIFACT_KEYS = frozenset(
         'downloaded_pdf_ref',
         'har_artifact_ref',
         'private_artifact_ref',
+        'raw_archive_ref',
         'raw_crawl_artifact_ref',
         'raw_crawl_output_ref',
         'raw_download_ref',
@@ -76,9 +104,12 @@ UNSAFE_ARTIFACT_KEYS = frozenset(
     }
 )
 UNSAFE_TEXT_PATTERNS = (
-    ('private_or_session_artifact_claim', ('authenticated session', 'auth state', 'browser trace', 'cookie jar', 'devhub session', 'har file', 'session storage')),
-    ('raw_or_downloaded_data_claim', ('downloaded document', 'downloaded pdf', 'pdf payload', 'raw crawl output', 'raw downloaded', 'raw response body')),
-    ('live_execution_claim', ('crawl was executed', 'live crawl completed', 'live network was invoked', 'network request executed', 'recrawl was executed')),
+    ('private_or_session_artifact_claim', ('authenticated session', 'auth state', 'browser trace', 'cookie jar', 'devhub session', 'har file', 'private artifact', 'session storage')),
+    ('raw_or_downloaded_data_claim', ('downloaded document', 'downloaded pdf', 'pdf payload', 'raw archive', 'raw crawl output', 'raw downloaded', 'raw response body')),
+    ('live_execution_claim', ('crawl was executed', 'devhub was accessed', 'live crawl completed', 'live network was invoked', 'network request executed', 'recrawl was executed')),
+    ('source_archive_promotion_claim', ('archive manifest promoted', 'archive promotion complete', 'promoted source archive', 'source archive promoted', 'source index promoted')),
+    ('release_activation_claim', ('activated release', 'release activated', 'release is active', 'release went live')),
+    ('official_action_completion_claim', ('official action completed', 'official action is complete', 'permit submitted', 'submission completed')),
     ('legal_or_permitting_outcome_guarantee', ('approval is guaranteed', 'guarantee permit approval', 'legal determination', 'permit will be approved', 'will pass inspection')),
     ('consequential_devhub_action_language', ('cancel inspection', 'certify acknowledgement', 'final payment', 'pay fee', 'purchase permit', 'schedule inspection', 'submit application', 'submit permit', 'upload correction')),
     ('active_mutation_claim', ('active artifact mutation', 'active guardrail mutation', 'active prompt mutation', 'active release-state mutation', 'mutate active artifact', 'mutate guardrail', 'mutate prompt', 'mutate release state')),
@@ -111,6 +142,9 @@ def build_public_source_recrawl_reviewer_disposition_packet_v1(dry_run_manifest:
     reviewer_decisions: list[dict[str, Any]] = []
     skipped_source_explanations: list[dict[str, str]] = []
     freshness_placeholders: list[dict[str, str]] = []
+    disposition_states: list[dict[str, str]] = []
+    citation_dispositions: list[dict[str, str]] = []
+    stale_hold_outcomes: list[dict[str, str]] = []
 
     for index, source in enumerate(sources, start=1):
         source_id = _text(source.get('source_id')) or f'public-source-{index:03d}'
@@ -139,6 +173,21 @@ def build_public_source_recrawl_reviewer_disposition_packet_v1(dry_run_manifest:
                 'source_freshness_update_placeholder_id': f'freshness-placeholder-{source_id}',
             }
         )
+        disposition_states.append(
+            {
+                'source_id': source_id,
+                'reviewer_disposition_state': 'held_for_reviewer_followup' if is_hold else 'approved_for_metadata_only_refresh',
+                'state_owner_placeholder_id': 'signoff-public-refresh-reviewer',
+            }
+        )
+        citation_dispositions.append(
+            {
+                'source_id': source_id,
+                'citation_refresh_priority': 'deferred' if is_hold else 'normal',
+                'citation_refresh_disposition': 'hold_until_source_reviewed' if is_hold else 'refresh_citations_after_metadata_review',
+                'owner_placeholder_id': 'signoff-citation-refresh-owner',
+            }
+        )
         if is_hold:
             skipped_source_explanations.append(
                 {
@@ -146,6 +195,13 @@ def build_public_source_recrawl_reviewer_disposition_packet_v1(dry_run_manifest:
                     'canonical_url': canonical_url,
                     'skip_reason_code': skip_reason or 'MISSING_PUBLIC_SOURCE_METADATA',
                     'reviewer_explanation_placeholder': f'Reviewer to document whether {source_id} remains skipped, deferred, or revised in a later dry-run manifest.',
+                }
+            )
+            stale_hold_outcomes.append(
+                {
+                    'source_id': source_id,
+                    'hold_outcome': 'held_pending_reviewer_disposition',
+                    'owner_placeholder_id': 'signoff-public-refresh-reviewer',
                 }
             )
         freshness_placeholders.append(
@@ -164,7 +220,31 @@ def build_public_source_recrawl_reviewer_disposition_packet_v1(dry_run_manifest:
             'manifest_id': manifest_id,
             'manifest_version': manifest_version or DRY_RUN_MANIFEST_VERSION,
         },
+        'handoff_packet_refs': [
+            {'ref_type': 'dry_run_manifest', 'ref_id': manifest_id, 'ref_version': manifest_version or DRY_RUN_MANIFEST_VERSION},
+            {'ref_type': 'reviewer_queue', 'ref_id': 'public_source_refresh_reviewer_queue_v1', 'ref_version': 'v1'},
+            {'ref_type': 'operator_runbook', 'ref_id': 'fixture_first_source_refresh_candidate', 'ref_version': 'v1'},
+        ],
         'reviewer_decisions': reviewer_decisions,
+        'reviewer_disposition_states': disposition_states,
+        'citation_refresh_priority_dispositions': citation_dispositions,
+        'stale_source_hold_outcomes': stale_hold_outcomes,
+        'owner_signoff_placeholders': [
+            {'role': 'public_refresh_reviewer', 'placeholder_id': 'signoff-public-refresh-reviewer'},
+            {'role': 'citation_refresh_owner', 'placeholder_id': 'signoff-citation-refresh-owner'},
+            {'role': 'release_owner', 'placeholder_id': 'signoff-release-owner'},
+        ],
+        'dependency_sequencing': [
+            {'step_id': 'reviewer_disposition_states', 'depends_on': []},
+            {'step_id': 'citation_refresh_priority_dispositions', 'depends_on': ['reviewer_disposition_states']},
+            {'step_id': 'stale_source_hold_outcomes', 'depends_on': ['reviewer_disposition_states']},
+            {'step_id': 'rollback_checkpoints', 'depends_on': ['citation_refresh_priority_dispositions', 'stale_source_hold_outcomes']},
+            {'step_id': 'offline_validation_commands', 'depends_on': ['rollback_checkpoints']},
+        ],
+        'rollback_checkpoints': [
+            {'checkpoint_id': 'pre_release_noop_checkpoint', 'owner_placeholder_id': 'signoff-release-owner', 'requires_no_active_mutation': True},
+            {'checkpoint_id': 'active_artifact_no_mutation_checkpoint', 'owner_placeholder_id': 'signoff-release-owner', 'requires_no_active_mutation': True},
+        ],
         'metadata_only_artifact_expectations': {
             'expected_artifacts': REQUIRED_METADATA_ARTIFACTS,
             'forbidden_artifacts': REQUIRED_FORBIDDEN_ARTIFACTS,
@@ -191,11 +271,13 @@ def validate_public_source_recrawl_reviewer_disposition_packet_v1(packet: Mappin
         issues.append(PublicSourceRecrawlReviewerDispositionIssue('not_metadata_only', '$.metadata_only', 'packet must describe metadata-only artifacts'))
     for flag in FALSE_SAFETY_FLAGS:
         if packet.get(flag) is not False:
-            issues.append(PublicSourceRecrawlReviewerDispositionIssue('unsafe_execution_or_mutation_flag', f'$.{flag}', 'execution, DevHub access, download, storage, session, and mutation flags must be false'))
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('unsafe_execution_or_mutation_flag', f'$.{flag}', 'execution, DevHub access, download, storage, session, promotion, release, official-action, and mutation flags must be false'))
 
     manifest_ref = packet.get('dry_run_manifest_ref')
     if not isinstance(manifest_ref, Mapping) or not _text(manifest_ref.get('manifest_id')) or not _text(manifest_ref.get('manifest_version')):
         issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_manifest_ref', '$.dry_run_manifest_ref', 'dry-run manifest id and version are required'))
+
+    _validate_handoff_packet_refs(packet.get('handoff_packet_refs'), issues)
 
     decisions = packet.get('reviewer_decisions')
     if not isinstance(decisions, Sequence) or isinstance(decisions, (str, bytes)) or not decisions:
@@ -243,6 +325,12 @@ def validate_public_source_recrawl_reviewer_disposition_packet_v1(packet: Mappin
         else:
             freshness_ref_ids.add(freshness_id)
 
+    signoff_ids = _validate_owner_signoff_placeholders(packet.get('owner_signoff_placeholders'), issues)
+    _validate_reviewer_disposition_states(packet.get('reviewer_disposition_states'), decision_source_ids, signoff_ids, issues)
+    _validate_citation_refresh_priority_dispositions(packet.get('citation_refresh_priority_dispositions'), decision_source_ids, signoff_ids, issues)
+    _validate_stale_source_hold_outcomes(packet.get('stale_source_hold_outcomes'), hold_source_ids, signoff_ids, issues)
+    _validate_dependency_sequencing(packet.get('dependency_sequencing'), issues)
+    _validate_rollback_checkpoints(packet.get('rollback_checkpoints'), signoff_ids, issues)
     _validate_metadata_expectations(packet.get('metadata_only_artifact_expectations'), metadata_expectation_ids, issues)
 
     skipped = packet.get('skipped_source_explanations')
@@ -266,6 +354,175 @@ def require_valid_public_source_recrawl_reviewer_disposition_packet_v1(packet: M
     issues = validate_public_source_recrawl_reviewer_disposition_packet_v1(packet)
     if issues:
         raise PublicSourceRecrawlReviewerDispositionError(issues)
+
+
+def _validate_handoff_packet_refs(value: Any, issues: list[PublicSourceRecrawlReviewerDispositionIssue]) -> None:
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)) or not value:
+        issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_handoff_packet_refs', '$.handoff_packet_refs', 'handoff packet references are required'))
+        return
+    ref_types: set[str] = set()
+    for index, item in enumerate(value):
+        path = f'$.handoff_packet_refs[{index}]'
+        if not isinstance(item, Mapping):
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('invalid_handoff_packet_ref', path, 'handoff packet reference must be an object'))
+            continue
+        ref_type = _text(item.get('ref_type'))
+        if ref_type:
+            ref_types.add(ref_type)
+        if not ref_type or not _text(item.get('ref_id')) or not _text(item.get('ref_version')):
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('invalid_handoff_packet_ref', path, 'ref_type, ref_id, and ref_version are required'))
+    missing = sorted(set(REQUIRED_HANDOFF_REF_TYPES) - ref_types)
+    if missing:
+        issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_handoff_packet_refs', '$.handoff_packet_refs', f'missing handoff ref types: {", ".join(missing)}'))
+
+
+def _validate_owner_signoff_placeholders(value: Any, issues: list[PublicSourceRecrawlReviewerDispositionIssue]) -> set[str]:
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)) or not value:
+        issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_owner_signoff_placeholders', '$.owner_signoff_placeholders', 'owner signoff placeholders are required'))
+        return set()
+    roles: set[str] = set()
+    placeholder_ids: set[str] = set()
+    for index, item in enumerate(value):
+        path = f'$.owner_signoff_placeholders[{index}]'
+        if not isinstance(item, Mapping):
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('invalid_owner_signoff_placeholder', path, 'owner signoff placeholder must be an object'))
+            continue
+        role = _text(item.get('role'))
+        placeholder_id = _text(item.get('placeholder_id'))
+        if role:
+            roles.add(role)
+        if placeholder_id:
+            placeholder_ids.add(placeholder_id)
+        if not role or not placeholder_id:
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('invalid_owner_signoff_placeholder', path, 'role and placeholder_id are required'))
+    missing = sorted(set(REQUIRED_OWNER_SIGNOFF_ROLES) - roles)
+    if missing:
+        issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_owner_signoff_placeholders', '$.owner_signoff_placeholders', f'missing owner signoff roles: {", ".join(missing)}'))
+    return placeholder_ids
+
+
+def _validate_reviewer_disposition_states(value: Any, source_ids: set[str], signoff_ids: set[str], issues: list[PublicSourceRecrawlReviewerDispositionIssue]) -> None:
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)) or not value:
+        issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_reviewer_disposition_states', '$.reviewer_disposition_states', 'reviewer disposition states are required'))
+        return
+    seen: set[str] = set()
+    for index, item in enumerate(value):
+        path = f'$.reviewer_disposition_states[{index}]'
+        if not isinstance(item, Mapping):
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('invalid_reviewer_disposition_state', path, 'reviewer disposition state must be an object'))
+            continue
+        source_id = _text(item.get('source_id'))
+        state = _text(item.get('reviewer_disposition_state'))
+        owner = _text(item.get('state_owner_placeholder_id'))
+        if source_id:
+            seen.add(source_id)
+        if state not in {'approved_for_metadata_only_refresh', 'held_for_reviewer_followup'}:
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('invalid_reviewer_disposition_state', f'{path}.reviewer_disposition_state', 'state must be approved_for_metadata_only_refresh or held_for_reviewer_followup'))
+        if owner not in signoff_ids:
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_owner_signoff_placeholder_ref', f'{path}.state_owner_placeholder_id', 'state owner must reference an owner signoff placeholder'))
+    missing = sorted(source_ids - seen)
+    if missing:
+        issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_reviewer_disposition_states', '$.reviewer_disposition_states', f'missing reviewer states for sources: {", ".join(missing)}'))
+
+
+def _validate_citation_refresh_priority_dispositions(value: Any, source_ids: set[str], signoff_ids: set[str], issues: list[PublicSourceRecrawlReviewerDispositionIssue]) -> None:
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)) or not value:
+        issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_citation_refresh_priority_dispositions', '$.citation_refresh_priority_dispositions', 'citation refresh priority dispositions are required'))
+        return
+    seen: set[str] = set()
+    for index, item in enumerate(value):
+        path = f'$.citation_refresh_priority_dispositions[{index}]'
+        if not isinstance(item, Mapping):
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('invalid_citation_refresh_priority_disposition', path, 'citation disposition must be an object'))
+            continue
+        source_id = _text(item.get('source_id'))
+        priority = _text(item.get('citation_refresh_priority'))
+        disposition = _text(item.get('citation_refresh_disposition'))
+        owner = _text(item.get('owner_placeholder_id'))
+        if source_id:
+            seen.add(source_id)
+        if priority not in {'deferred', 'normal', 'high'}:
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('invalid_citation_refresh_priority', f'{path}.citation_refresh_priority', 'citation priority must be deferred, normal, or high'))
+        if not disposition:
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_citation_refresh_disposition', f'{path}.citation_refresh_disposition', 'citation refresh disposition is required'))
+        if owner not in signoff_ids:
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_owner_signoff_placeholder_ref', f'{path}.owner_placeholder_id', 'citation owner must reference an owner signoff placeholder'))
+    missing = sorted(source_ids - seen)
+    if missing:
+        issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_citation_refresh_priority_dispositions', '$.citation_refresh_priority_dispositions', f'missing citation dispositions for sources: {", ".join(missing)}'))
+
+
+def _validate_stale_source_hold_outcomes(value: Any, hold_source_ids: set[str], signoff_ids: set[str], issues: list[PublicSourceRecrawlReviewerDispositionIssue]) -> None:
+    if not hold_source_ids:
+        return
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)) or not value:
+        issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_stale_source_hold_outcomes', '$.stale_source_hold_outcomes', 'stale-source hold outcomes are required for held sources'))
+        return
+    seen: set[str] = set()
+    for index, item in enumerate(value):
+        path = f'$.stale_source_hold_outcomes[{index}]'
+        if not isinstance(item, Mapping):
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('invalid_stale_source_hold_outcome', path, 'hold outcome must be an object'))
+            continue
+        source_id = _text(item.get('source_id'))
+        outcome = _text(item.get('hold_outcome'))
+        owner = _text(item.get('owner_placeholder_id'))
+        if source_id:
+            seen.add(source_id)
+        if outcome not in {'held_pending_reviewer_disposition', 'deferred_until_source_metadata_complete'}:
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('invalid_stale_source_hold_outcome', f'{path}.hold_outcome', 'hold outcome must be a non-promoting stale-source hold outcome'))
+        if owner not in signoff_ids:
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_owner_signoff_placeholder_ref', f'{path}.owner_placeholder_id', 'hold outcome owner must reference an owner signoff placeholder'))
+    missing = sorted(hold_source_ids - seen)
+    if missing:
+        issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_stale_source_hold_outcomes', '$.stale_source_hold_outcomes', f'missing hold outcomes for sources: {", ".join(missing)}'))
+
+
+def _validate_dependency_sequencing(value: Any, issues: list[PublicSourceRecrawlReviewerDispositionIssue]) -> None:
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)) or not value:
+        issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_dependency_sequencing', '$.dependency_sequencing', 'dependency sequencing is required'))
+        return
+    seen: set[str] = set()
+    for index, item in enumerate(value):
+        path = f'$.dependency_sequencing[{index}]'
+        if not isinstance(item, Mapping):
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('invalid_dependency_sequence_step', path, 'dependency step must be an object'))
+            continue
+        step_id = _text(item.get('step_id'))
+        depends_on = _string_list(item.get('depends_on'))
+        if not step_id:
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('invalid_dependency_sequence_step', f'{path}.step_id', 'step_id is required'))
+            continue
+        missing_prior = sorted(set(depends_on) - seen)
+        if missing_prior:
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('invalid_dependency_sequence_order', f'{path}.depends_on', f'dependencies must appear before step: {", ".join(missing_prior)}'))
+        seen.add(step_id)
+    missing = sorted(set(REQUIRED_DEPENDENCY_STEPS) - seen)
+    if missing:
+        issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_dependency_sequencing', '$.dependency_sequencing', f'missing dependency steps: {", ".join(missing)}'))
+
+
+def _validate_rollback_checkpoints(value: Any, signoff_ids: set[str], issues: list[PublicSourceRecrawlReviewerDispositionIssue]) -> None:
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)) or not value:
+        issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_rollback_checkpoints', '$.rollback_checkpoints', 'rollback checkpoints are required'))
+        return
+    seen: set[str] = set()
+    for index, item in enumerate(value):
+        path = f'$.rollback_checkpoints[{index}]'
+        if not isinstance(item, Mapping):
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('invalid_rollback_checkpoint', path, 'rollback checkpoint must be an object'))
+            continue
+        checkpoint_id = _text(item.get('checkpoint_id'))
+        owner = _text(item.get('owner_placeholder_id'))
+        if checkpoint_id:
+            seen.add(checkpoint_id)
+        if item.get('requires_no_active_mutation') is not True:
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('invalid_rollback_checkpoint', f'{path}.requires_no_active_mutation', 'rollback checkpoint must require no active mutation'))
+        if owner not in signoff_ids:
+            issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_owner_signoff_placeholder_ref', f'{path}.owner_placeholder_id', 'rollback owner must reference an owner signoff placeholder'))
+    missing = sorted(set(REQUIRED_ROLLBACK_CHECKPOINTS) - seen)
+    if missing:
+        issues.append(PublicSourceRecrawlReviewerDispositionIssue('missing_rollback_checkpoints', '$.rollback_checkpoints', f'missing rollback checkpoints: {", ".join(missing)}'))
 
 
 def _validate_metadata_expectations(value: Any, referenced_ids: set[str], issues: list[PublicSourceRecrawlReviewerDispositionIssue]) -> None:
@@ -354,7 +611,7 @@ def _validate_no_unsafe_artifacts_or_claims(value: Any, path: str, issues: list[
         lowered = ' '.join(value.lower().split())
         for code, patterns in UNSAFE_TEXT_PATTERNS:
             if any(pattern in lowered for pattern in patterns):
-                issues.append(PublicSourceRecrawlReviewerDispositionIssue(code, path, 'packet text must not claim unsafe artifacts, execution, outcomes, consequential DevHub action, or active mutation'))
+                issues.append(PublicSourceRecrawlReviewerDispositionIssue(code, path, 'packet text must not claim unsafe artifacts, execution, promotion, release activation, official action, outcomes, consequential DevHub action, or active mutation'))
 
 
 def _skip_text_scan(path: str) -> bool:
