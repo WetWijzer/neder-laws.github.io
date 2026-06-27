@@ -77,7 +77,7 @@ def test_sensitive_packet_artifacts_are_rejected() -> None:
         ("screenshot", {"screenshot_path": "/tmp/devhub.png"}, "screenshot"),
         ("trace", {"trace_path": "/tmp/trace.zip"}, "trace"),
         ("har", {"har_path": "/tmp/devhub.har"}, "har_data"),
-        ("authenticated live url", {"handoff": {"url": "https://devhub.portlandoregon.gov/account", "requires_auth": True}}, "authenticated_live_url"),
+        ("authenticated live url", {"handoff": {"url": "https://wetten.overheid.nl/account", "requires_auth": True}}, "authenticated_live_url"),
     ]
 
     for name, patch, expected_code in cases:

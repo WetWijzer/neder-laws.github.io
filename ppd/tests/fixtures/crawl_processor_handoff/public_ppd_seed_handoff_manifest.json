@@ -7,8 +7,8 @@
     {
       "id": "ppd-handoff-job-001",
       "seedId": "ppd-seed-landing",
-      "sourceUrl": "https://www.portland.gov/ppd",
-      "canonicalUrl": "https://www.portland.gov/ppd",
+      "sourceUrl": "https://wetten.overheid.nl/ppd",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd",
       "operation": "capture_url",
       "processor": {
         "name": "web_archive_capture",
@@ -18,7 +18,7 @@
         "backendPath": "ipfs_datasets_py/ipfs_datasets_py/processors"
       },
       "arguments": {
-        "url": "https://www.portland.gov/ppd",
+        "url": "https://wetten.overheid.nl/ppd",
         "captureMode": "metadata_and_archive_reference",
         "respectRobots": true,
         "noPersistRawBody": true,
@@ -41,8 +41,8 @@
     {
       "id": "ppd-handoff-job-002",
       "seedId": "ppd-seed-applications-forms",
-      "sourceUrl": "https://www.portland.gov/ppd/permits/applications-forms",
-      "canonicalUrl": "https://www.portland.gov/ppd/permits/applications-forms",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/applications-forms",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/applications-forms",
       "operation": "legal_archive_url",
       "processor": {
         "name": "parallel_web_archiver",
@@ -52,8 +52,8 @@
         "backendPath": "ipfs_datasets_py/ipfs_datasets_py/processors"
       },
       "arguments": {
-        "url": "https://www.portland.gov/ppd/permits/applications-forms",
-        "jurisdiction": "portland-or-ppd",
+        "url": "https://wetten.overheid.nl/ppd/permits/applications-forms",
+        "jurisdiction": "wetwijzer-or-ppd",
         "captureMode": "metadata_and_archive_reference",
         "respectRobots": true,
         "noPersistRawBody": true,
@@ -76,8 +76,8 @@
     {
       "id": "ppd-handoff-job-003",
       "seedId": "ppd-seed-devhub-public",
-      "sourceUrl": "https://devhub.portlandoregon.gov",
-      "canonicalUrl": "https://devhub.portlandoregon.gov",
+      "sourceUrl": "https://wetten.overheid.nl",
+      "canonicalUrl": "https://wetten.overheid.nl",
       "operation": "capture_url",
       "processor": {
         "name": "url_archive_cache",
@@ -87,7 +87,7 @@
         "backendPath": "ipfs_datasets_py/ipfs_datasets_py/processors"
       },
       "arguments": {
-        "url": "https://devhub.portlandoregon.gov",
+        "url": "https://wetten.overheid.nl",
         "captureMode": "metadata_and_archive_reference",
         "respectRobots": true,
         "noPersistRawBody": true,

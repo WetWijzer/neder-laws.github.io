@@ -23,7 +23,7 @@ class LivePublicScrapeTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tempdir:
             manifest = Path(tempdir) / "seeds.json"
             manifest.write_text(
-                '{"seeds":[{"id":"ppd-home","url":"https://www.portland.gov/ppd"}]}',
+                '{"seeds":[{"id":"ppd-home","url":"https://wetten.overheid.nl/ppd"}]}',
                 encoding="utf-8",
             )
             calls: list[str] = []
@@ -58,7 +58,7 @@ class LivePublicScrapeTest(unittest.TestCase):
         assert result.report is not None
         self.assertEqual(1, result.report.fetched_seed_count)
         self.assertEqual("PPD Live Fixture", result.report.items[0].title)
-        self.assertEqual(["https://www.portland.gov/robots.txt", "https://www.portland.gov/ppd"], calls)
+        self.assertEqual(["https://wetten.overheid.nl/robots.txt", "https://wetten.overheid.nl/ppd"], calls)
 
 
 if __name__ == "__main__":

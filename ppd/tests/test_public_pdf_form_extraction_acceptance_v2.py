@@ -134,7 +134,7 @@ def test_packet_does_not_reference_live_or_private_artifacts():
     raw_packet = FIXTURE_PATH.read_text(encoding="utf-8").lower()
 
     forbidden_fragments = [
-        "devhub.portlandoregon.gov",
+        "wetten.overheid.nl",
         "sessionstorage",
         "localstorage",
         "cookie",

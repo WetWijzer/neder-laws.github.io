@@ -13,8 +13,8 @@ class FixtureShapeDiagnosticsTest(unittest.TestCase):
         synthetic = {
             "schemaVersion": 1,
             "seeds": [
-                {"id": "seed-a", "url": "https://www.portland.gov/ppd", "kind": "public"},
-                {"id": "seed-b", "url": "https://www.portland.gov/ppd/permits", "extra": "ignored"},
+                {"id": "seed-a", "url": "https://wetten.overheid.nl/ppd", "kind": "public"},
+                {"id": "seed-b", "url": "https://wetten.overheid.nl/ppd/permits", "extra": "ignored"},
             ],
             "policy": {"robots": "respect", "timeoutSeconds": 20},
             "emptyList": [],
@@ -33,7 +33,7 @@ class FixtureShapeDiagnosticsTest(unittest.TestCase):
 
     def test_accepts_repository_relative_fixture_path(self) -> None:
         synthetic = {
-            "records": [{"id": "record-a", "sourceUrl": "https://www.portland.gov/ppd"}],
+            "records": [{"id": "record-a", "sourceUrl": "https://wetten.overheid.nl/ppd"}],
             "generatedAt": "2026-05-02T00:00:00Z",
         }
         with tempfile.TemporaryDirectory() as tmpdir:

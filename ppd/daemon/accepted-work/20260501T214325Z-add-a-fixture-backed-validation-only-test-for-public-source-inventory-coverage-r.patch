@@ -9,7 +9,7 @@
 +      "id": "missing-authority-label",
 +      "coverageReport": {
 +        "category": "permit_application_pages",
-+        "canonicalUrl": "https://www.portland.gov/ppd/permits",
++        "canonicalUrl": "https://wetten.overheid.nl/ppd/permits",
 +        "authorityLabels": [],
 +        "recrawlCadence": "weekly",
 +        "sourceInventoryIds": ["public-source-permit-applications"]
@@ -20,8 +20,8 @@
 +      "id": "missing-recrawl-cadence",
 +      "coverageReport": {
 +        "category": "forms_and_handouts",
-+        "canonicalUrl": "https://www.portland.gov/ppd/documents",
-+        "authorityLabels": ["Portland Permitting & Development"],
++        "canonicalUrl": "https://wetten.overheid.nl/ppd/documents",
++        "authorityLabels": ["Netherlands Permitting & Development"],
 +        "sourceInventoryIds": ["public-source-forms-handouts"]
 +      },
 +      "expectedFindings": ["missing_recrawl_cadence"]
@@ -30,8 +30,8 @@
 +      "id": "private-devhub-path",
 +      "coverageReport": {
 +        "category": "devhub_private_case_state",
-+        "canonicalUrl": "https://devhub.portlandoregon.gov/secure/my-permits/12345",
-+        "authorityLabels": ["Development Hub PDX"],
++        "canonicalUrl": "https://wetten.overheid.nl/secure/my-permits/12345",
++        "authorityLabels": ["Development Hub Netherlands"],
 +        "recrawlCadence": "never",
 +        "sourceInventoryIds": ["private-devhub-case-state"]
 +      },
@@ -41,8 +41,8 @@
 +      "id": "raw-response-body",
 +      "coverageReport": {
 +        "category": "fee_pages",
-+        "canonicalUrl": "https://www.portland.gov/ppd/fees",
-+        "authorityLabels": ["Portland Permitting & Development"],
++        "canonicalUrl": "https://wetten.overheid.nl/ppd/fees",
++        "authorityLabels": ["Netherlands Permitting & Development"],
 +        "recrawlCadence": "weekly",
 +        "sourceInventoryIds": ["public-source-fees"],
 +        "rawResponseBody": "raw live crawl body must not be committed"
@@ -53,8 +53,8 @@
 +      "id": "credential-material",
 +      "coverageReport": {
 +        "category": "devhub_guides",
-+        "canonicalUrl": "https://www.portland.gov/ppd/devhub",
-+        "authorityLabels": ["Development Hub PDX"],
++        "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub",
++        "authorityLabels": ["Development Hub Netherlands"],
 +        "recrawlCadence": "weekly",
 +        "sourceInventoryIds": ["public-source-devhub-guides"],
 +        "credentialMaterial": "username=fixture-user password=fixture-secret"
@@ -65,8 +65,8 @@
 +      "id": "trace-artifact",
 +      "coverageReport": {
 +        "category": "devhub_guides",
-+        "canonicalUrl": "https://www.portland.gov/ppd/devhub-faq",
-+        "authorityLabels": ["Development Hub PDX"],
++        "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub-faq",
++        "authorityLabels": ["Development Hub Netherlands"],
 +        "recrawlCadence": "weekly",
 +        "sourceInventoryIds": ["public-source-devhub-faq"],
 +        "traceArtifact": "ppd/data/private/devhub/session.trace.zip"
@@ -77,8 +77,8 @@
 +      "id": "screenshot-artifact",
 +      "coverageReport": {
 +        "category": "devhub_guides",
-+        "canonicalUrl": "https://www.portland.gov/ppd/devhub-help",
-+        "authorityLabels": ["Development Hub PDX"],
++        "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub-help",
++        "authorityLabels": ["Development Hub Netherlands"],
 +        "recrawlCadence": "weekly",
 +        "sourceInventoryIds": ["public-source-devhub-help"],
 +        "screenshotArtifact": "ppd/data/private/devhub/account-screen.png"
@@ -89,8 +89,8 @@
 +      "id": "downloaded-document",
 +      "coverageReport": {
 +        "category": "downloaded_public_forms",
-+        "canonicalUrl": "https://www.portland.gov/ppd/documents/building-permit-application",
-+        "authorityLabels": ["Portland Permitting & Development"],
++        "canonicalUrl": "https://wetten.overheid.nl/ppd/documents/building-permit-application",
++        "authorityLabels": ["Netherlands Permitting & Development"],
 +        "recrawlCadence": "monthly",
 +        "sourceInventoryIds": ["public-source-building-permit-form"],
 +        "downloadedDocumentPath": "ppd/data/raw/building-permit-application.pdf"
@@ -248,7 +248,7 @@
 +    if not isinstance(value, str):
 +        return False
 +    parsed = urlparse(value)
-+    if parsed.netloc.lower() != "devhub.portlandoregon.gov":
++    if parsed.netloc.lower() != "wetten.overheid.nl":
 +        return False
 +    path = parsed.path.lower()
 +    return any(part in path for part in PRIVATE_DEVHUB_PATH_PARTS)

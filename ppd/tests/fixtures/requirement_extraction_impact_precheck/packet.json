@@ -6,7 +6,7 @@
       {
         "delta_id": "delta-devhub-faqs-account-services",
         "source_id": "ppd-devhub-faqs",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
         "delta_summary": "DevHub FAQ account-scoped service language changed in metadata review.",
         "source_evidence_ids": [
           "source:devhub-faqs:account-scoped-services",
@@ -32,7 +32,7 @@
       {
         "delta_id": "delta-spp-file-naming-supporting-documents",
         "source_id": "ppd-spp-file-naming-standards",
-        "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+        "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
         "delta_summary": "Single PDF preparation metadata changed for supporting documents.",
         "source_evidence_ids": [
           "source:spp-file-naming:pdf-preparation",
@@ -162,7 +162,7 @@
         "scope_id": "candidate-extraction-rerun-scope-ppd-devhub-faqs-1",
         "source_id": "ppd-devhub-faqs",
         "delta_id": "delta-devhub-faqs-account-services",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
         "candidate_rerun_reason": "DevHub FAQ account-scoped service language changed in metadata review.",
         "source_evidence_ids": [
           "source:devhub-faqs:account-scoped-services",
@@ -201,7 +201,7 @@
         "scope_id": "candidate-extraction-rerun-scope-ppd-spp-file-naming-standards-2",
         "source_id": "ppd-spp-file-naming-standards",
         "delta_id": "delta-spp-file-naming-supporting-documents",
-        "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+        "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
         "candidate_rerun_reason": "Single PDF preparation metadata changed for supporting documents.",
         "source_evidence_ids": [
           "source:spp-file-naming:pdf-preparation",

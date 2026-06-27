@@ -14,10 +14,10 @@ from urllib.parse import urlparse
 
 
 DEFAULT_ALLOWED_HOSTS = (
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 )
 
 _AUTH_URL_MARKERS = (

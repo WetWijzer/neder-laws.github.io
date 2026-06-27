@@ -33,13 +33,13 @@ OFFLINE_VALIDATION_COMMANDS = [
 ]
 
 _ALLOWED_URL_HOSTS = {
-    'www.portland.gov',
-    'portland.gov',
-    'devhub.portlandoregon.gov',
-    'www.portlandoregon.gov',
-    'portlandoregon.gov',
-    'www.portlandmaps.com',
-    'portlandmaps.com',
+    'wetten.overheid.nl',
+    'wetten.overheid.nl',
+    'wetten.overheid.nl',
+    'wetten.overheid.nl',
+    'wetten.overheid.nl',
+    'repository.overheid.nl',
+    'repository.overheid.nl',
 }
 
 _PROHIBITED_KEYS = {

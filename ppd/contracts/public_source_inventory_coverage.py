@@ -15,18 +15,18 @@ from urllib.parse import urlparse
 MODULE_PURPOSE = "fixture_only_public_source_inventory_coverage"
 
 ALLOWED_HOSTS = {
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 
 SOURCE_LANDSCAPE = {
-    "ppd_landing_public_guidance": "PP&D landing and public guidance under https://www.portland.gov/ppd",
+    "ppd_landing_public_guidance": "PP&D landing and public guidance under https://wetten.overheid.nl/ppd",
     "applications_forms_index": "Public applications and forms, including the Permits and Inspections Applications index",
-    "devhub_public_portal": "DevHub public portal at https://devhub.portlandoregon.gov",
-    "devhub_signin_account_guidance": "DevHub sign-in and account guidance on Portland.gov",
-    "devhub_faq_process_guides": "DevHub FAQ and process guides on Portland.gov",
+    "devhub_public_portal": "DevHub public portal at https://wetten.overheid.nl",
+    "devhub_signin_account_guidance": "DevHub sign-in and account guidance on wetten.overheid.nl",
+    "devhub_faq_process_guides": "DevHub FAQ and process guides on wetten.overheid.nl",
     "permit_submission_guidance": "Permit submission guidance pages",
     "plan_upload_guidance": "Plan upload guidance pages",
     "correction_upload_guidance": "Correction upload guidance pages",
@@ -34,7 +34,7 @@ SOURCE_LANDSCAPE = {
     "inspection_guidance": "Inspection guidance pages",
     "extension_cancellation_guidance": "Extension and cancellation guidance pages",
     "linked_pdf_handout_checklist_documents": "Linked PDFs, image-guided how-tos, handouts, and checklist documents",
-    "portland_maps_references": "Portland Maps public permit, case, and property references",
+    "bwb_metadata_references": "BWB metadata public permit, case, and property references",
 }
 
 REQUIRED_REPORT_KEYS = {
@@ -240,7 +240,7 @@ def _validate_public_url(url: str, context: str, errors: list[str]) -> None:
     if parsed.netloc not in ALLOWED_HOSTS:
         errors.append(f"{context} URL host is not allowlisted: {url}")
     lowered_path = parsed.path.lower()
-    if parsed.netloc == "devhub.portlandoregon.gov" and any(
+    if parsed.netloc == "wetten.overheid.nl" and any(
         marker in lowered_path for marker in ("/login", "/signin", "/account", "/dashboard", "/my-permits", "/cart", "/payment")
     ):
         errors.append(f"{context} URL is a private DevHub path: {url}")

@@ -16,10 +16,10 @@ from urllib.parse import urlparse
 REVIEW_DECISIONS = {"changed", "new", "missing", "conflict"}
 STALE_BADGE_STATUSES = {"stale", "expired", "conflicting", "unknown"}
 ALLOWED_PUBLIC_HOSTS = {
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 PRIVATE_SOURCE_TYPES = {"devhub_authenticated", "private", "authenticated"}
 ABORT_FLAGS = (

@@ -15,7 +15,7 @@ def _base_packet() -> dict:
         "prerequisites": [
             {
                 "label": "Confirm permit type guidance",
-                "source_url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+                "source_url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
             }
         ],
         "claims": [

@@ -37,7 +37,7 @@ def test_rejects_uncited_queue_items() -> None:
 def test_rejects_non_allowlisted_and_authenticated_urls() -> None:
     payload = _load_fixture("valid_queue.json")
     payload["items"][0]["source_url"] = "https://example.com/ppd"
-    payload["items"][0]["citations"][0]["url"] = "https://devhub.portlandoregon.gov/account/my-permits?token=secret"
+    payload["items"][0]["citations"][0]["url"] = "https://wetten.overheid.nl/account/my-permits?token=secret"
 
     codes = _codes(payload)
 

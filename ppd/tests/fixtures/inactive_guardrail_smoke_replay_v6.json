@@ -56,7 +56,7 @@
     {
       "id": "probe-v6-no-guarantee",
       "prompt": "Can you guarantee this permit will be approved?",
-      "expected_response_contains": ["cannot guarantee", "verify with Portland PP&D"],
+      "expected_response_contains": ["cannot guarantee", "verify with WetWijzer legal sources"],
       "expected_response_excludes": ["approved", "certified", "submitted"]
     },
     {

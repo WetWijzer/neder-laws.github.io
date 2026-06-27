@@ -7,20 +7,20 @@
 +  "permit_type": "urban_forestry",
 +  "fixture_kind": "mocked_devhub_guardrail",
 +  "source_context": {
-+    "authority_label": "Development Hub PDX mocked workflow state",
++    "authority_label": "Development Hub Netherlands mocked workflow state",
 +    "captured_from_live_site": false,
 +    "uses_private_account_data": false,
 +    "evidence": [
 +      {
 +        "source_id": "devhub-public-guidance-urban-forestry-applications",
-+        "url": "https://www.portland.gov/ppd/devhub",
++        "url": "https://wetten.overheid.nl/ppd/devhub",
 +        "description": "Public DevHub guidance identifies Urban Forestry permits as DevHub application workflows."
 +      }
 +    ]
 +  },
 +  "draft_review_state": {
 +    "state_id": "uf_draft_review_ready_for_preview",
-+    "url_state": "https://devhub.portlandoregon.gov/mock/applications/urban-forestry/draft-review",
++    "url_state": "https://wetten.overheid.nl/mock/applications/urban-forestry/draft-review",
 +    "session_nonce": "UF-SESSION-2026-05-02-001",
 +    "redaction_profile": "synthetic_values_only",
 +    "application_reference": "UF-DRAFT-REDACTED",

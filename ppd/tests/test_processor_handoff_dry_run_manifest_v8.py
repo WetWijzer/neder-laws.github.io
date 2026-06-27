@@ -25,7 +25,7 @@ def valid_manifest() -> dict[str, object]:
         "planned_processor_invocation_rows": [
             {
                 "source_id": "ppd-public-guide",
-                "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+                "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
                 "processor_name": "ipfs_datasets_py.public_html_archive_processor",
                 "processor_version": "placeholder:offline-dry-run",
                 "dry_run": True,

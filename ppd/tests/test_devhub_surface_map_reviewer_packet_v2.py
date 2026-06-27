@@ -89,7 +89,7 @@ def test_reviewer_packet_validation_rejects_private_browser_artifacts() -> None:
 
 def test_reviewer_packet_validation_rejects_online_validation_commands() -> None:
     packet = _valid_packet()
-    packet["offline_validation_commands"] = [["python3", "-m", "playwright", "open", "https://devhub.portlandoregon.gov"]]
+    packet["offline_validation_commands"] = [["python3", "-m", "playwright", "open", "https://wetten.overheid.nl"]]
 
     errors = validate_surface_map_reviewer_packet_v2(packet)
 

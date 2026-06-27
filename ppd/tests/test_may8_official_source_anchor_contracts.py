@@ -14,14 +14,14 @@ def test_fixture_has_may8_public_source_contracts():
 
     assert data["fixture_id"] == "may8_official_source_anchor_contracts"
     assert data["fixture_date"] == "2026-05-08"
-    assert data["jurisdiction"] == "portland_or_ppd"
+    assert data["jurisdiction"] == "wetwijzer_or_ppd"
     assert data["sources"]
 
     source_types = {source["source_type"] for source in data["sources"]}
     assert {"html", "pdf"}.issubset(source_types)
 
     for source in data["sources"]:
-        assert source["official_url"].startswith("https://www.portland.gov/")
+        assert source["official_url"].startswith("https://wetten.overheid.nl/")
         assert source["retrieved_anchor_date"] == "2026-05-08"
         assert "expected_contract" in source
 

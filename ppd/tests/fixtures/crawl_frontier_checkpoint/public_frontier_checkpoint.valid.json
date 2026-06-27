@@ -5,7 +5,7 @@
   "frontier": [
     {
       "id": "frontier-public-ppd-home",
-      "url": "https://www.portland.gov/ppd",
+      "url": "https://wetten.overheid.nl/ppd",
       "status": "planned",
       "depth": 0
     },
@@ -17,14 +17,14 @@
     },
     {
       "id": "frontier-devhub-public",
-      "url": "https://devhub.portlandoregon.gov/",
+      "url": "https://wetten.overheid.nl/",
       "status": "processor_handoff",
       "processor_handoff": {
         "processor_family": "web_archiving",
         "manifest_only": true,
         "provenance": {
-          "source_url": "https://devhub.portlandoregon.gov/",
-          "canonical_url": "https://devhub.portlandoregon.gov/",
+          "source_url": "https://wetten.overheid.nl/",
+          "canonical_url": "https://wetten.overheid.nl/",
           "captured_at": "2026-05-01T12:00:00Z",
           "content_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
           "policy_decision": "allow_public_manifest_only",

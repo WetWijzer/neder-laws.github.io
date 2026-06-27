@@ -387,9 +387,9 @@ def _owning_surface(canonical_url: str, source_type: str) -> str:
     host = urlparse(canonical_url).hostname or ""
     if "devhub" in host or source_type == "devhub_public":
         return "devhub_public"
-    if "portlandmaps" in host:
-        return "portlandmaps_public_reference"
-    return "portland_ppd_public"
+    if "wetwijzermaps" in host:
+        return "wetwijzermaps_public_reference"
+    return "wetwijzer_ppd_public"
 
 
 def _crawl_frequency(source_type: str) -> str:

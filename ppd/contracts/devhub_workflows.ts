@@ -115,7 +115,7 @@ export function validateDevHubWorkflowState(state: DevHubWorkflowState): string[
   const errors: string[] = [];
   if (!state.id.trim()) errors.push("state id is required");
   if (!state.workflow.trim()) errors.push(`state ${state.id} workflow is required`);
-  if (!state.urlPattern.startsWith("https://devhub.portlandoregon.gov/")) {
+  if (!state.urlPattern.startsWith("https://wetten.overheid.nl/")) {
     errors.push(`state ${state.id} urlPattern must be a DevHub HTTPS URL pattern`);
   }
   if (!state.heading.trim()) errors.push(`state ${state.id} heading is required`);

@@ -22,11 +22,11 @@ def test_normalizes_minimal_attended_handoff_packet() -> None:
         "task_id": "supervisor-20260512-029",
         "handoff_reason": "User must complete DevHub sign-in and review the next account-scoped page before automation continues.",
         "attendance_required": True,
-        "source_url": "https://devhub.portlandoregon.gov/",
+        "source_url": "https://wetten.overheid.nl/",
         "page_title": "DevHub",
         "visible_headings": ["DevHub"],
         "required_user_actions": [
-            "Complete PortlandOregon.gov sign-in manually if prompted",
+            "Complete wetten.overheid.nl sign-in manually if prompted",
             "Confirm the visible DevHub page before any draft assistance continues",
         ],
         "safe_next_actions": [
@@ -40,8 +40,8 @@ def test_normalizes_minimal_attended_handoff_packet() -> None:
             "Do not enter or submit payment details",
         ],
         "evidence_refs": [
-            "https://www.portland.gov/ppd/devhub-sign-guide",
-            "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+            "https://wetten.overheid.nl/ppd/devhub-sign-guide",
+            "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
         ],
         "warnings": [
             "No credentials, cookies, screenshots, traces, HAR files, browser storage, or private form values may be stored."

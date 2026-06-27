@@ -4,7 +4,7 @@
   "changed_sources": [
     {
       "source_id": "src-ppd-devhub-faq",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "old_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       "new_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
       "content_hash_changed": true,
@@ -14,7 +14,7 @@
   "skipped_sources": [
     {
       "source_id": "src-devhub-account-dashboard",
-      "canonical_url": "https://devhub.portlandoregon.gov/",
+      "canonical_url": "https://wetten.overheid.nl/",
       "skipped_reason": "private_authenticated"
     }
   ],
@@ -41,7 +41,7 @@
       "source_id": "src-ppd-devhub-faq",
       "source_type": "public_html",
       "privacy_classification": "public",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "manifest_id": "manifest-devhub-faq-20260528"
     }
   ]

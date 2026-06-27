@@ -8,19 +8,19 @@
 +  "requirementEvidence": [
 +    {
 +      "id": "src-devhub-application-guidance",
-+      "sourceUrl": "https://www.portland.gov/ppd/devhub/apply-permit",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/apply-permit",
 +      "title": "DevHub permit application guidance",
 +      "capturedAt": "2026-05-01T00:00:00Z"
 +    },
 +    {
 +      "id": "src-devhub-fee-guidance",
-+      "sourceUrl": "https://www.portland.gov/ppd/devhub/pay-fees",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/pay-fees",
 +      "title": "DevHub fee payment guidance",
 +      "capturedAt": "2026-05-01T00:00:00Z"
 +    },
 +    {
 +      "id": "src-devhub-corrections-guidance",
-+      "sourceUrl": "https://www.portland.gov/ppd/devhub/upload-corrections",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/upload-corrections",
 +      "title": "DevHub correction upload guidance",
 +      "capturedAt": "2026-05-01T00:00:00Z"
 +    }

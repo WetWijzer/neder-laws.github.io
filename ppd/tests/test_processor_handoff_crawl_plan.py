@@ -16,10 +16,10 @@ from urllib.parse import urlparse
 FIXTURE_PATH = Path(__file__).parent / "fixtures" / "crawler" / "processor_handoff_crawl_plan.json"
 EXPECTED_BACKEND_ROOT = "ipfs_datasets_py/ipfs_datasets_py/processors"
 ALLOWED_HOSTS = {
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 ALLOWED_METADATA_KINDS = {"backend_directory", "python_module"}
 ALLOWED_HANDOFF_MODE = "manifest_only"

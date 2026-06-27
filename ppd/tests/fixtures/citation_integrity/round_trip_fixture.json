@@ -2,14 +2,14 @@
   "source_registry": [
     {
       "source_id": "source-devhub-guide-submit-permit-application",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "source_type": "devhub_public",
       "owning_surface": "ppd_public_guidance",
       "privacy_classification": "public"
     },
     {
       "source_id": "source-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "source_type": "public_html",
       "owning_surface": "ppd_public_guidance",
       "privacy_classification": "public"
@@ -19,8 +19,8 @@
     {
       "manifest_id": "manifest-devhub-guide-submit-permit-application-2026-05-08",
       "source_id": "source-devhub-guide-submit-permit-application",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
-      "requested_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
+      "requested_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "redirect_chain": [],
       "http_status": 200,
       "content_type": "text/html",
@@ -37,8 +37,8 @@
     {
       "manifest_id": "manifest-submit-plans-online-2026-05-08",
       "source_id": "source-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
-      "requested_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
+      "requested_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "redirect_chain": [],
       "http_status": 200,
       "content_type": "text/html",

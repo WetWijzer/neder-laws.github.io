@@ -10,8 +10,8 @@
     {
       "requestId": "reviewed-request-001",
       "sourceId": "ppd-online-tools",
-      "url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
-      "canonicalUrl": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "owningSurface": "public_ppd_guidance",
       "reviewedAt": "2026-05-28T15:00:00Z",
       "reviewer": "ppd-fixture-review",
@@ -23,8 +23,8 @@
     {
       "requestId": "reviewed-request-002",
       "sourceId": "ppd-devhub-faq",
-      "url": "https://www.portland.gov/ppd/devhub-faqs",
-      "canonicalUrl": "https://www.portland.gov/ppd/devhub-faqs",
+      "url": "https://wetten.overheid.nl/ppd/devhub-faqs",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "owningSurface": "public_devhub_guidance",
       "reviewedAt": "2026-05-28T15:01:00Z",
       "reviewer": "ppd-fixture-review",

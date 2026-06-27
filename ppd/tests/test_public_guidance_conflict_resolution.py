@@ -41,7 +41,7 @@ class PublicGuidanceConflictResolutionFixtureTest(unittest.TestCase):
             url = _required_text(source, "url")
             parsed = urlparse(url)
             self.assertEqual(parsed.scheme, "https")
-            self.assertEqual(parsed.netloc, "www.portland.gov")
+            self.assertEqual(parsed.netloc, "wetten.overheid.nl")
             self.assertTrue(parsed.path.startswith("/ppd/"))
 
             citation = _required_mapping(source, "citation")

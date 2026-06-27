@@ -2,33 +2,33 @@
   "schema": "ppd.public_source_registry_promotion_preview.v3",
   "promotion_preview": [
     {
-      "source_id": "portland-zoning-code",
+      "source_id": "wetwijzer-zoning-code",
       "promotion_action": "metadata-recrawl-candidate",
       "reviewer_owner": {
         "team": "ppd-source-registry-review",
         "review_required": true
       },
       "rollback_checkpoint": {
-        "checkpoint_id": "registry-preview-before-portland-zoning-code",
+        "checkpoint_id": "registry-preview-before-wetwijzer-zoning-code",
         "fixture": "source_registry_fixtures.json"
       },
       "citations": [
         {
-          "label": "promotion-preview-v3:portland-zoning-code",
+          "label": "promotion-preview-v3:wetwijzer-zoning-code",
           "field": "promotion_action"
         }
       ]
     },
     {
-      "source_id": "portland-building-code",
+      "source_id": "wetwijzer-building-code",
       "promotion_action": "defer-until-owner-review",
       "rollback_checkpoint": {
-        "checkpoint_id": "registry-preview-before-portland-building-code",
+        "checkpoint_id": "registry-preview-before-wetwijzer-building-code",
         "fixture": "source_registry_fixtures.json"
       },
       "citations": [
         {
-          "label": "promotion-preview-v3:portland-building-code",
+          "label": "promotion-preview-v3:wetwijzer-building-code",
           "field": "promotion_action"
         }
       ]

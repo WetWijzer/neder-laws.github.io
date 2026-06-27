@@ -20,7 +20,7 @@
       "id": "devhub-boundary",
       "subject": "DevHub and official action boundary",
       "disposition": "approved",
-      "citations": ["docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md"],
+      "citations": ["docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md"],
       "rationale": "Reviewer confirms no live, private, or official workflow is promoted."
     }
   ]

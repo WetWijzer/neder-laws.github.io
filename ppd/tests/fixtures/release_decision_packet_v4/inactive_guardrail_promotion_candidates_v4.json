@@ -14,7 +14,7 @@
         }
       ],
       "source_freshness_caveats": [
-        "Fixture data is suitable for offline packet assembly only and does not prove current Portland PP&D source freshness."
+        "Fixture data is suitable for offline packet assembly only and does not prove current WetWijzer legal sources source freshness."
       ],
       "agent_api_compatibility_notes": [
         "Packet consumers must treat this as reviewer guidance data, not as an activation contract.",
@@ -32,7 +32,7 @@
       "guardrails_active": false,
       "unresolved_holds": [],
       "source_freshness_caveats": [
-        "Fixture data is suitable for offline packet assembly only and does not prove current Portland PP&D source freshness."
+        "Fixture data is suitable for offline packet assembly only and does not prove current WetWijzer legal sources source freshness."
       ],
       "agent_api_compatibility_notes": [
         "Post-decision smoke replay must remain offline unless a separate approved task authorizes live access."

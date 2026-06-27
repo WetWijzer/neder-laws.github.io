@@ -75,7 +75,7 @@ def test_each_example_is_cited_from_reviewed_source_registry_metadata() -> None:
     for example in packet["api_examples"]:
         assert example["citations"]
         for citation in example["citations"]:
-            assert citation["canonical_url"].startswith("https://www.portland.gov/ppd/")
+            assert citation["canonical_url"].startswith("https://wetten.overheid.nl/ppd/")
             assert citation["review_status"] == "reviewed_promotable"
             assert citation["no_raw_body_persisted"] is True
 

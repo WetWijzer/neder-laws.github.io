@@ -51,7 +51,7 @@
     "Before certification, acknowledgement, payment, scheduling, upload, or submission."
   ],
   "manual_handoff_surfaces": [
-    "DevHub login and PortlandOregon.gov sign-in.",
+    "DevHub login and wetten.overheid.nl sign-in.",
     "MFA, CAPTCHA, security prompt, or password recovery.",
     "Certification and acknowledgement review.",
     "Payment details and final payment execution.",

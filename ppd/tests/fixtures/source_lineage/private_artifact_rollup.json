@@ -7,7 +7,7 @@
       "review_needed": false,
       "evidence": [
         {
-          "citation_url": "https://www.portland.gov/ppd/permits/residential-permits",
+          "citation_url": "https://wetten.overheid.nl/ppd/permits/residential-permits",
           "public_identifier": "private_devhub/raw_crawl/session-12345.json",
           "observed_at": "2026-04-20"
         }

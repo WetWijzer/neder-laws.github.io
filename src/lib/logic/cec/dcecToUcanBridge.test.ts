@@ -6,7 +6,7 @@ import {
 
 describe('DCEC to UCAN bridge', () => {
   it('maps permission formulas to browser-native UCAN capabilities', () => {
-    const result = dcecToUcan('(P (always (comply_with agent portland_city_code_1_01_010)))');
+    const result = dcecToUcan('(P (always (comply_with agent netherlands_law_article_1_01_010)))');
 
     expect(result.ok).toBe(true);
     expect(result.metadata).toMatchObject({
@@ -15,10 +15,10 @@ describe('DCEC to UCAN bridge', () => {
       serverRuntime: false,
     });
     expect(result.capabilities[0]).toMatchObject({
-      with: 'urn:dcec:portland_city_code_1_01_010',
+      with: 'urn:dcec:netherlands_law_article_1_01_010',
       can: 'dcec/comply_with',
       nb: {
-        arguments: ['agent', 'portland_city_code_1_01_010'],
+        arguments: ['agent', 'netherlands_law_article_1_01_010'],
         predicate: 'comply_with',
         requirement: 'PERMISSION',
       },

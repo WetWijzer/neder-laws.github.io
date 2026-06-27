@@ -1,11 +1,11 @@
 {
   "packet_id": "freshness-watchlist-valid",
   "citations": [
-    {"id": "src-portland-permits", "url": "https://www.portland.gov/ppd/permits"},
-    {"id": "req-offline-review", "url": "https://www.portland.gov/ppd"},
-    {"id": "guardrail-public-only", "url": "https://www.portland.gov/ppd"}
+    {"id": "src-wetwijzer-permits", "url": "https://wetten.overheid.nl/ppd/permits"},
+    {"id": "req-offline-review", "url": "https://wetten.overheid.nl/ppd"},
+    {"id": "guardrail-public-only", "url": "https://wetten.overheid.nl/ppd"}
   ],
-  "source_refs": ["src-portland-permits"],
+  "source_refs": ["src-wetwijzer-permits"],
   "requirement_refs": ["req-offline-review"],
   "guardrail_refs": ["guardrail-public-only"],
   "offline_review_triggers": ["source freshness changed since last reviewed packet"],
@@ -15,7 +15,7 @@
   "evidence": [
     {
       "label": "PPD permits landing page",
-      "url": "https://www.portland.gov/ppd/permits",
+      "url": "https://wetten.overheid.nl/ppd/permits",
       "notes": "Offline review required before relying on freshness status."
     }
   ],

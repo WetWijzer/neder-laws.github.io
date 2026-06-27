@@ -37,7 +37,7 @@ MUTATION_FLAGS = (
 
 DISALLOWED_PATH_PREFIXES = (
     "src/lib/logic/",
-    "public/corpus/portland-or/current/",
+    "public/corpus/wetwijzer-or/current/",
     "ipfs_datasets_py/.daemon/",
     "ppd/prompts/",
     "ppd/daemon/agent-state/",
@@ -316,7 +316,7 @@ def _unchanged_file_inventory(patch_manifest: Sequence[Mapping[str, Any]]) -> li
             }
         )
     for path in (
-        "public/corpus/portland-or/current/",
+        "public/corpus/wetwijzer-or/current/",
         "src/lib/logic/",
         "ppd/daemon/release-state/",
         "ppd/daemon/agent-state/",

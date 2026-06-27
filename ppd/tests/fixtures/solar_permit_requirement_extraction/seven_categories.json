@@ -4,32 +4,32 @@
   "sourceEvidence": [
     {
       "id": "solar-public-guide",
-      "sourceUrl": "https://www.portland.gov/ppd/residential-permitting/residential-solar-permits",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/residential-permitting/residential-solar-permits",
       "label": "PP&D residential solar permit public guidance"
     },
     {
       "id": "solar-devhub-application-guide",
-      "sourceUrl": "https://www.portland.gov/ppd/development-hub-pdx/apply-permit-devhub",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/development-hub-netherlands/apply-permit-devhub",
       "label": "DevHub permit request application guidance"
     },
     {
       "id": "solar-single-pdf-process",
-      "sourceUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
       "label": "Single PDF Process guidance"
     },
     {
       "id": "solar-fee-payment-guide",
-      "sourceUrl": "https://www.portland.gov/ppd/pay-permit-fees",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/pay-permit-fees",
       "label": "Permit fee payment guidance"
     },
     {
       "id": "solar-correction-upload-guide",
-      "sourceUrl": "https://www.portland.gov/ppd/development-hub-pdx/upload-corrections-devhub",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/development-hub-netherlands/upload-corrections-devhub",
       "label": "DevHub correction upload guidance"
     },
     {
       "id": "solar-inspection-guide",
-      "sourceUrl": "https://www.portland.gov/ppd/schedule-inspection",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/schedule-inspection",
       "label": "Inspection scheduling guidance"
     }
   ],

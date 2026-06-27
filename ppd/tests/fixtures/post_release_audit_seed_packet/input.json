@@ -58,14 +58,14 @@
         "live_schedule_mutated": false
       },
       "allowlisted_source_ids": ["source:ppd-devhub-faq", "source:submit-plans-online"],
-      "robots_policy_prerequisite_ids": ["robots:portland.gov:metadata-preflight"],
+      "robots_policy_prerequisite_ids": ["robots:wetten.overheid.nl:metadata-preflight"],
       "cadence_recommendations": [
         {
           "source_id": "source:ppd-devhub-faq",
           "recommended_cadence": "daily",
           "metadata_only": true,
           "reviewer_owner": "source_monitor_reviewer",
-          "robots_policy_prerequisite_ids": ["robots:portland.gov:metadata-preflight"]
+          "robots_policy_prerequisite_ids": ["robots:wetten.overheid.nl:metadata-preflight"]
         }
       ],
       "citations": ["ev-monitoring-schedule-candidate"]
@@ -78,14 +78,14 @@
       "prerequisite_links": [
         {
           "source_id": "source:ppd-home",
-          "url": "https://www.portland.gov/ppd",
+          "url": "https://wetten.overheid.nl/ppd",
           "policy": "public_metadata_preflight"
         }
       ],
       "targets": [
         {
           "source_id": "source:devhub-faq",
-          "url": "https://www.portland.gov/ppd/devhub-faqs",
+          "url": "https://wetten.overheid.nl/ppd/devhub-faqs",
           "public": true,
           "authenticated": false
         }

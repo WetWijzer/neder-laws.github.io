@@ -1,0 +1,86 @@
+[
+  {
+    "id": "bafywetwijzer000000000000000000000000000000000000000000000001:part_of:BWBR0001854",
+    "source": "bafywetwijzer000000000000000000000000000000000000000000000001",
+    "target": "netherlands_law:BWBR0001854",
+    "type": "part_of_law",
+    "properties": {
+      "article": "Artikel 1"
+    }
+  },
+  {
+    "id": "bafywetwijzer000000000000000000000000000000000000000000000001:status:current",
+    "source": "bafywetwijzer000000000000000000000000000000000000000000000001",
+    "target": "netherlands_status:current",
+    "type": "has_law_status",
+    "properties": {
+      "status_source": "wetten.overheid.nl /informatie and official BWB metadata",
+      "status_confidence": "high"
+    }
+  },
+  {
+    "id": "bafywetwijzer000000000000000000000000000000000000000000000001:source:wetten",
+    "source": "bafywetwijzer000000000000000000000000000000000000000000000001",
+    "target": "netherlands_source:wetten_overheid_nl",
+    "type": "sourced_from",
+    "properties": {
+      "url": "https://wetten.overheid.nl/BWBR0001854"
+    }
+  },
+  {
+    "id": "bafywetwijzer000000000000000000000000000000000000000000000002:part_of:BWBR0002656",
+    "source": "bafywetwijzer000000000000000000000000000000000000000000000002",
+    "target": "netherlands_law:BWBR0002656",
+    "type": "part_of_law",
+    "properties": {
+      "article": "Artikel 1"
+    }
+  },
+  {
+    "id": "bafywetwijzer000000000000000000000000000000000000000000000002:status:current",
+    "source": "bafywetwijzer000000000000000000000000000000000000000000000002",
+    "target": "netherlands_status:current",
+    "type": "has_law_status",
+    "properties": {
+      "status_source": "wetten.overheid.nl /informatie and official BWB metadata",
+      "status_confidence": "high"
+    }
+  },
+  {
+    "id": "bafywetwijzer000000000000000000000000000000000000000000000002:source:wetten",
+    "source": "bafywetwijzer000000000000000000000000000000000000000000000002",
+    "target": "netherlands_source:wetten_overheid_nl",
+    "type": "sourced_from",
+    "properties": {
+      "url": "https://wetten.overheid.nl/BWBR0002656"
+    }
+  },
+  {
+    "id": "bafywetwijzer000000000000000000000000000000000000000000000003:part_of:BWBR0001827",
+    "source": "bafywetwijzer000000000000000000000000000000000000000000000003",
+    "target": "netherlands_law:BWBR0001827",
+    "type": "part_of_law",
+    "properties": {
+      "article": "Artikel 1"
+    }
+  },
+  {
+    "id": "bafywetwijzer000000000000000000000000000000000000000000000003:status:current",
+    "source": "bafywetwijzer000000000000000000000000000000000000000000000003",
+    "target": "netherlands_status:current",
+    "type": "has_law_status",
+    "properties": {
+      "status_source": "wetten.overheid.nl /informatie and official BWB metadata",
+      "status_confidence": "high"
+    }
+  },
+  {
+    "id": "bafywetwijzer000000000000000000000000000000000000000000000003:source:wetten",
+    "source": "bafywetwijzer000000000000000000000000000000000000000000000003",
+    "target": "netherlands_source:wetten_overheid_nl",
+    "type": "sourced_from",
+    "properties": {
+      "url": "https://wetten.overheid.nl/BWBR0001827"
+    }
+  }
+]

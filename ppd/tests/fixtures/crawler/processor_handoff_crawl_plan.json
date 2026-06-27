@@ -8,8 +8,8 @@
   "plannedPublicFetches": [
     {
       "id": "ppd-public-guidance-html",
-      "sourceUrl": "https://www.portland.gov/ppd",
-      "canonicalUrl": "https://www.portland.gov/ppd",
+      "sourceUrl": "https://wetten.overheid.nl/ppd",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd",
       "contentType": "text/html",
       "decision": "fetch",
       "policyPreflight": {
@@ -28,8 +28,8 @@
     },
     {
       "id": "ppd-public-legal-archive-cache",
-      "sourceUrl": "https://www.portland.gov/ppd/permits",
-      "canonicalUrl": "https://www.portland.gov/ppd/permits",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/permits",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits",
       "contentType": "text/html",
       "decision": "fetch",
       "policyPreflight": {
@@ -48,8 +48,8 @@
     },
     {
       "id": "ppd-public-forms-pdf",
-      "sourceUrl": "https://www.portland.gov/ppd/permits-and-inspections-applications",
-      "canonicalUrl": "https://www.portland.gov/ppd/permits-and-inspections-applications",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/permits-and-inspections-applications",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits-and-inspections-applications",
       "contentType": "text/html",
       "decision": "fetch",
       "policyPreflight": {
@@ -68,8 +68,8 @@
     },
     {
       "id": "ppd-public-devhub-guidance",
-      "sourceUrl": "https://www.portland.gov/ppd/devhub",
-      "canonicalUrl": "https://www.portland.gov/ppd/devhub",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub",
       "contentType": "text/html",
       "decision": "fetch",
       "policyPreflight": {

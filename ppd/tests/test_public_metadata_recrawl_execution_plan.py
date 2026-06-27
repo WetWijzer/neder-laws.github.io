@@ -51,7 +51,7 @@ class PublicMetadataRecrawlExecutionPlanTests(unittest.TestCase):
     def test_includes_host_rate_limits_and_robots_policy_checkpoints(self) -> None:
         plan = self.build_plan()
 
-        self.assertEqual(plan["hostRateLimitWindows"][0]["host"], "www.portland.gov")
+        self.assertEqual(plan["hostRateLimitWindows"][0]["host"], "wetten.overheid.nl")
         self.assertEqual(plan["hostRateLimitWindows"][0]["minDelaySeconds"], 10)
         self.assertEqual(plan["hostRateLimitWindows"][0]["maxRequestsPerWindow"], 6)
         self.assertEqual(plan["hostRateLimitWindows"][0]["networkInvoked"], False)
@@ -116,8 +116,8 @@ class PublicMetadataRecrawlExecutionPlanTests(unittest.TestCase):
 
     def test_rejects_authenticated_or_private_urls(self) -> None:
         plan = self.build_plan()
-        plan["processorHandoffInputs"][0]["requestedUrl"] = "https://devhub.portlandoregon.gov/permits/123"
-        plan["robotsPolicyCheckpoints"][0]["canonicalUrl"] = "https://www.portland.gov/ppd?token=private"
+        plan["processorHandoffInputs"][0]["requestedUrl"] = "https://wetten.overheid.nl/permits/123"
+        plan["robotsPolicyCheckpoints"][0]["canonicalUrl"] = "https://wetten.overheid.nl/ppd?token=private"
 
         errors = validate_public_metadata_recrawl_execution_plan(plan)
 

@@ -1,6 +1,6 @@
 {
   "fixture_version": 1,
-  "description": "Synthetic public-capture assembler fixture for Portland PP&D document candidate normalization.",
+  "description": "Synthetic public-capture assembler fixture for WetWijzer legal sources document candidate normalization.",
   "archive_manifests": [
     {
       "source_id": "archive:ppd-zoning-2026-05",
@@ -9,7 +9,7 @@
       "items": [
         {
           "capture_id": "html:zoning-code-guide",
-          "url": "https://www.portland.gov/ppd/zoning-code-guide",
+          "url": "https://wetten.overheid.nl/ppd/zoning-code-guide",
           "media_type": "text/html",
           "title": "Zoning Code Guide",
           "section_order": 10,
@@ -17,7 +17,7 @@
         },
         {
           "capture_id": "pdf:building-permit-application",
-          "url": "https://www.portland.gov/ppd/forms/building-permit-application.pdf",
+          "url": "https://wetten.overheid.nl/ppd/forms/building-permit-application.pdf",
           "media_type": "application/pdf",
           "title": "Building Permit Application",
           "section_order": 20,
@@ -83,7 +83,7 @@
       "record_id": "candidate:archive-ppd-zoning-2026-05:html-zoning-code-guide",
       "source_id": "archive:ppd-zoning-2026-05",
       "capture_id": "html:zoning-code-guide",
-      "source_url": "https://www.portland.gov/ppd/zoning-code-guide",
+      "source_url": "https://wetten.overheid.nl/ppd/zoning-code-guide",
       "media_type": "text/html",
       "title": "Zoning Code Guide",
       "section_order": 10,
@@ -106,7 +106,7 @@
       "record_id": "candidate:archive-ppd-zoning-2026-05:pdf-building-permit-application",
       "source_id": "archive:ppd-zoning-2026-05",
       "capture_id": "pdf:building-permit-application",
-      "source_url": "https://www.portland.gov/ppd/forms/building-permit-application.pdf",
+      "source_url": "https://wetten.overheid.nl/ppd/forms/building-permit-application.pdf",
       "media_type": "application/pdf",
       "title": "Building Permit Application",
       "section_order": 20,

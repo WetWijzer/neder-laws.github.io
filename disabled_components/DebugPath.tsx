@@ -2,7 +2,7 @@ import { Graphics } from '@pixi/react';
 import { Graphics as PixiGraphics } from 'pixi.js';
 import { useCallback } from 'react';
 import { Doc } from '../../convex/_generated/dataModel';
-import { Player } from '../../convex/aiTown/player';
+import { Player } from '../../convex/wetwijzer/player';
 import { unpackPathComponent } from '../../convex/util/types';
 
 export function DebugPath({ player, tileDim }: { player: Player; tileDim: number }) {

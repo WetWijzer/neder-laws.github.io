@@ -14,9 +14,9 @@
       {
         "order": 1,
         "source_id": "ppd-online-tools",
-        "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
-        "allowlist_evidence_refs": ["fixture://allowlist/www.portland.gov"],
-        "robots_evidence_refs": ["fixture://robots/www.portland.gov/ppd"],
+        "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
+        "allowlist_evidence_refs": ["fixture://allowlist/wetten.overheid.nl"],
+        "robots_evidence_refs": ["fixture://robots/wetten.overheid.nl/ppd"],
         "abort_checks": [
           "Abort if canonical URL host is outside the PP&D public allowlist.",
           "Abort if robots evidence is missing or stale.",
@@ -26,9 +26,9 @@
       {
         "order": 2,
         "source_id": "devhub-faq",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
-        "allowlist_evidence_refs": ["fixture://allowlist/www.portland.gov"],
-        "robots_evidence_refs": ["fixture://robots/www.portland.gov/ppd"],
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
+        "allowlist_evidence_refs": ["fixture://allowlist/wetten.overheid.nl"],
+        "robots_evidence_refs": ["fixture://robots/wetten.overheid.nl/ppd"],
         "abort_checks": [
           "Abort if the source redirects to an authenticated DevHub account surface.",
           "Abort if the candidate asks for processor execution.",

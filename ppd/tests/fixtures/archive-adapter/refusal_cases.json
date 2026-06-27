@@ -34,8 +34,8 @@
       "expectedErrorContains": "private DevHub path",
       "record": {
         "id": "refuse-private-devhub-path",
-        "sourceUrl": "https://devhub.portlandoregon.gov/secure/permits/REDACTED",
-        "canonicalUrl": "https://devhub.portlandoregon.gov/secure/permits/REDACTED",
+        "sourceUrl": "https://wetten.overheid.nl/secure/permits/REDACTED",
+        "canonicalUrl": "https://wetten.overheid.nl/secure/permits/REDACTED",
         "contentHash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
         "processor": {
           "name": "web_archive_adapter",
@@ -59,8 +59,8 @@
       "expectedErrorContains": "raw response body",
       "record": {
         "id": "refuse-raw-response-body",
-        "sourceUrl": "https://www.portland.gov/ppd/public-guidance",
-        "canonicalUrl": "https://www.portland.gov/ppd/public-guidance",
+        "sourceUrl": "https://wetten.overheid.nl/ppd/public-guidance",
+        "canonicalUrl": "https://wetten.overheid.nl/ppd/public-guidance",
         "contentHash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
         "responseBody": "raw fixture body must not be persisted",
         "processor": {
@@ -85,8 +85,8 @@
       "expectedErrorContains": "credential field",
       "record": {
         "id": "refuse-credentials",
-        "sourceUrl": "https://www.portland.gov/ppd/public-guidance",
-        "canonicalUrl": "https://www.portland.gov/ppd/public-guidance",
+        "sourceUrl": "https://wetten.overheid.nl/ppd/public-guidance",
+        "canonicalUrl": "https://wetten.overheid.nl/ppd/public-guidance",
         "contentHash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
         "headers": {
           "authorization": "REDACTED_TOKEN_SHOULD_NOT_BE_IN_ARCHIVE_MANIFEST"
@@ -113,8 +113,8 @@
       "expectedErrorContains": "browser trace path",
       "record": {
         "id": "refuse-browser-trace",
-        "sourceUrl": "https://www.portland.gov/ppd/public-guidance",
-        "canonicalUrl": "https://www.portland.gov/ppd/public-guidance",
+        "sourceUrl": "https://wetten.overheid.nl/ppd/public-guidance",
+        "canonicalUrl": "https://wetten.overheid.nl/ppd/public-guidance",
         "contentHash": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
         "trace_path": "ppd/devhub/traces/trace.zip",
         "processor": {
@@ -139,8 +139,8 @@
       "expectedErrorContains": "screenshot path",
       "record": {
         "id": "refuse-private-screenshot",
-        "sourceUrl": "https://www.portland.gov/ppd/public-guidance",
-        "canonicalUrl": "https://www.portland.gov/ppd/public-guidance",
+        "sourceUrl": "https://wetten.overheid.nl/ppd/public-guidance",
+        "canonicalUrl": "https://wetten.overheid.nl/ppd/public-guidance",
         "contentHash": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
         "screenshot_path": "ppd/devhub/screenshots/private-screenshot.png",
         "processor": {
@@ -165,8 +165,8 @@
       "expectedErrorContains": "downloaded document",
       "record": {
         "id": "refuse-downloaded-private-document",
-        "sourceUrl": "https://www.portland.gov/ppd/public-guidance",
-        "canonicalUrl": "https://www.portland.gov/ppd/public-guidance",
+        "sourceUrl": "https://wetten.overheid.nl/ppd/public-guidance",
+        "canonicalUrl": "https://wetten.overheid.nl/ppd/public-guidance",
         "contentHash": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
         "document_path": "ppd/data/private/devhub/downloads/private-plan.pdf",
         "processor": {
@@ -191,8 +191,8 @@
       "expectedErrorContains": "",
       "record": {
         "id": "allow-public-ppd-control",
-        "sourceUrl": "https://www.portland.gov/ppd/public-guidance",
-        "canonicalUrl": "https://www.portland.gov/ppd/public-guidance",
+        "sourceUrl": "https://wetten.overheid.nl/ppd/public-guidance",
+        "canonicalUrl": "https://wetten.overheid.nl/ppd/public-guidance",
         "contentHash": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
         "processor": {
           "name": "web_archive_adapter",

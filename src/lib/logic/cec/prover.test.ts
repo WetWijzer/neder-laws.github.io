@@ -75,14 +75,14 @@ describe('CEC prover', () => {
     expect(result.steps.map((step) => step.rule)).toEqual(['CecTemporalT', 'CecModusPonens']);
   });
 
-  it('derives quantified Portland-style DCEC facts without Python delegation', () => {
+  it('derives quantified WetWijzer-style DCEC facts without Python delegation', () => {
     const result = proveCec(
-      parseCecExpression('(P (always (comply_with ada portland_city_code_1_05_040)))'),
+      parseCecExpression('(P (always (comply_with ada netherlands_law_article_1_05_040)))'),
       {
         axioms: [
-          parseCecExpression('(subject_to ada portland_city_code_1_05_040)'),
+          parseCecExpression('(subject_to ada netherlands_law_article_1_05_040)'),
           parseCecExpression(
-            '(forall agent (implies (subject_to agent portland_city_code_1_05_040) (P (always (comply_with agent portland_city_code_1_05_040)))))',
+            '(forall agent (implies (subject_to agent netherlands_law_article_1_05_040) (P (always (comply_with agent netherlands_law_article_1_05_040)))))',
           ),
         ],
       },
@@ -144,7 +144,7 @@ describe('CEC prover', () => {
 
   it('matches Python-captured CEC/DCEC parser and prover parity fixtures', () => {
     expect(PYTHON_CEC_DCEC_PARITY_FIXTURES.map((fixture) => fixture.id)).toEqual([
-      'dcec_quantified_portland_obligation',
+      'dcec_quantified_netherlands_obligation',
       'cec_cognitive_perception_to_belief',
       'dcec_obligation_distribution_capture',
     ]);

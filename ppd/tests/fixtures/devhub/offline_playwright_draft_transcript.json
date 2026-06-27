@@ -15,7 +15,7 @@
   "pageSnapshot": {
     "snapshotId": "mock-devhub-building-permit-draft-page",
     "source": "redacted_fixture_state",
-    "urlTemplate": "https://devhub.portland.gov/mock/redacted-draft",
+    "urlTemplate": "https://devhub.wetten.overheid.nl/mock/redacted-draft",
     "fields": [
       {
         "fieldId": "field-project-site-address",

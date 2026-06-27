@@ -14,7 +14,7 @@ def issue_codes(candidate: dict) -> set[str]:
 
 def valid_candidate() -> dict:
     return {
-        "source_url": "https://www.portland.gov/ppd/public-notices",
+        "source_url": "https://wetten.overheid.nl/ppd/public-notices",
         "robots_txt_checked": True,
         "source_policy_reviewed": True,
         "reviewer_owners": ["ppd-reviewer"],
@@ -34,9 +34,9 @@ def test_accepts_minimal_public_allowlisted_candidate() -> None:
         "http://localhost:8000/public-notices",
         "https://127.0.0.1/public-notices",
         "https://10.0.0.5/public-notices",
-        "https://user:pass@www.portland.gov/public-notices",
+        "https://user:pass@wetten.overheid.nl/public-notices",
         "file:///tmp/source.html",
-        "https://www.portland.gov/public-notices?token=secret",
+        "https://wetten.overheid.nl/public-notices?token=secret",
     ],
 )
 def test_rejects_private_or_authenticated_urls(url: str) -> None:
@@ -47,18 +47,18 @@ def test_rejects_private_or_authenticated_urls(url: str) -> None:
 
 def test_rejects_non_allowlisted_hosts() -> None:
     candidate = valid_candidate()
-    candidate["source_url"] = "https://example.com/portland/public-notices"
+    candidate["source_url"] = "https://example.com/wetwijzer/public-notices"
     assert "non_allowlisted_host" in issue_codes(candidate)
 
 
 @pytest.mark.parametrize(
     "url",
     [
-        "https://www.portland.gov/public-notices/download/report",
-        "https://www.portland.gov/public-notices/archive/2025",
-        "https://www.portland.gov/public-notices/raw/body",
-        "https://www.portland.gov/public-notices/report.pdf",
-        "https://www.portland.gov/public-notices/export/results.zip",
+        "https://wetten.overheid.nl/public-notices/download/report",
+        "https://wetten.overheid.nl/public-notices/archive/2025",
+        "https://wetten.overheid.nl/public-notices/raw/body",
+        "https://wetten.overheid.nl/public-notices/report.pdf",
+        "https://wetten.overheid.nl/public-notices/export/results.zip",
     ],
 )
 def test_rejects_raw_body_download_archive_and_artifact_paths(url: str) -> None:

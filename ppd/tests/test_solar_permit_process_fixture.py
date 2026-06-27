@@ -146,7 +146,7 @@ class SolarPermitProcessFixtureTest(unittest.TestCase):
             source_url = evidence_ref["sourceUrl"]
             parsed = urlparse(source_url)
             self.assertEqual(parsed.scheme, "https")
-            self.assertIn(parsed.netloc, {"www.portland.gov"})
+            self.assertIn(parsed.netloc, {"wetten.overheid.nl"})
             self.assertTrue(evidence_ref["anchorId"].strip())
             self.assertTrue(evidence_ref["capturedAt"].endswith("Z"))
             self.assertTrue(evidence_ref["note"].strip())

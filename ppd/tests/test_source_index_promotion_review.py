@@ -40,7 +40,7 @@ def test_builds_reviewed_source_archive_and_document_candidates_from_fixture_sum
     assert registry["source_type"] == "devhub_public"
     assert registry["owning_surface"] == "devhub_public"
     assert registry["freshness_status"] == "content_hash_changed"
-    assert registry["citation_links"][0]["url"] == "https://www.portland.gov/ppd/devhub-faqs"
+    assert registry["citation_links"][0]["url"] == "https://wetten.overheid.nl/ppd/devhub-faqs"
     assert archive["manifest_id"] == "archive-manifest:fake:devhub-faqs"
     assert archive["archive_artifact_ref"].startswith("metadata-only:")
     assert archive["redirect_chain"][0]["status"] == 301
@@ -153,21 +153,21 @@ def test_rejects_private_and_authenticated_urls() -> None:
         (
             lambda fixture: fixture["source_index_update_candidates"][0].__setitem__(
                 "canonical_url",
-                "https://user:secret@www.portland.gov/ppd/devhub-faqs",
+                "https://user:secret@wetten.overheid.nl/ppd/devhub-faqs",
             ),
             "private/authenticated URL",
         ),
         (
             lambda fixture: fixture["source_index_update_candidates"][0].__setitem__(
                 "canonical_url",
-                "https://www.portland.gov/ppd/devhub-faqs?token=secret",
+                "https://wetten.overheid.nl/ppd/devhub-faqs?token=secret",
             ),
             "private/authenticated URL",
         ),
         (
             lambda fixture: fixture["source_index_update_candidates"][0].__setitem__(
                 "canonical_url",
-                "https://devhub.portlandoregon.gov/account/permits",
+                "https://wetten.overheid.nl/account/permits",
             ),
             "private/authenticated URL",
         ),

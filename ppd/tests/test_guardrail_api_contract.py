@@ -75,7 +75,7 @@ def test_each_agent_response_is_cited_from_committed_current_evidence() -> None:
         assert response["citations"]
         for citation in response["citations"]:
             assert citation["evidence_id"].startswith("ev-")
-            assert citation["canonical_url"].startswith("https://www.portland.gov/ppd/")
+            assert citation["canonical_url"].startswith("https://wetten.overheid.nl/ppd/")
             assert citation["last_verified_at"] == "2026-05-08T00:00:00Z"
             assert citation["freshness_status"] == "current"
 

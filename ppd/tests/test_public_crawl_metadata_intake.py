@@ -27,7 +27,7 @@ def test_accepts_public_allowlisted_dry_run_metadata_packet() -> None:
 
 def test_rejects_private_or_authenticated_urls() -> None:
     packet = load_fixture("valid_packet.json")
-    packet["requested_url"] = "https://devhub.portlandoregon.gov/account/my-permits?token=secret"
+    packet["requested_url"] = "https://wetten.overheid.nl/account/my-permits?token=secret"
 
     assert "private_or_authenticated_url" in codes(packet)
 

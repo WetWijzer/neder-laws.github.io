@@ -50,7 +50,7 @@ def test_packet_contains_normalized_document_refs_consistency_notes_attestations
     packet = _packet()
 
     source_ids = {row["source_id"] for row in packet["syntheticMetadataOnlyManifestReadinessChecks"]}
-    assert source_ids == {"source-portland-ppd", "source-devhub-faqs"}
+    assert source_ids == {"source-wetwijzer-ppd", "source-devhub-faqs"}
     assert all(row["metadataOnly"] is True for row in packet["syntheticMetadataOnlyManifestReadinessChecks"])
     assert all(row["manifestPromotionAllowed"] is False for row in packet["syntheticMetadataOnlyManifestReadinessChecks"])
     assert all(row["archiveArtifactWritten"] is False for row in packet["syntheticMetadataOnlyManifestReadinessChecks"])

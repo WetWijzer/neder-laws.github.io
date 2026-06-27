@@ -7,7 +7,7 @@
       "requires": [],
       "outputs": {
         "manifest_id": "fixture-manifest-001",
-        "source_url": "https://www.portland.gov/ppd/example-public-guidance.pdf",
+        "source_url": "https://wetten.overheid.nl/ppd/example-public-guidance.pdf",
         "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000001",
         "retrieved_at": "2026-05-05T00:00:00Z"
       }
@@ -19,7 +19,7 @@
         "document_id": "ppd-doc-fixture-001",
         "manifest_id": "fixture-manifest-001",
         "title": "Example Public PP&D Guidance",
-        "public_url": "https://www.portland.gov/ppd/example-public-guidance.pdf"
+        "public_url": "https://wetten.overheid.nl/ppd/example-public-guidance.pdf"
       }
     },
     {

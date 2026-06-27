@@ -226,8 +226,8 @@
 +      "id": "processor-archive-ppd-home-20260501",
 +      "archiveRecordId": "ipfs-processor-web-archive-ppd-home-fixture",
 +      "sourceIndexRecordId": "ppd-home",
-+      "sourceUrl": "https://www.portland.gov/ppd",
-+      "canonicalUrl": "https://www.portland.gov/ppd",
++      "sourceUrl": "https://wetten.overheid.nl/ppd",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd",
 +      "contentHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
 +      "processorProvenance": {
 +        "backendPath": "ipfs_datasets_py/ipfs_datasets_py/processors",
@@ -257,8 +257,8 @@
 +      "id": "processor-archive-devhub-faq-20260501",
 +      "archiveRecordId": "ipfs-processor-web-archive-devhub-faq-fixture",
 +      "sourceIndexRecordId": "devhub-faq-not-modified",
-+      "sourceUrl": "https://www.portland.gov/ppd/devhub-faq",
-+      "canonicalUrl": "https://www.portland.gov/ppd/devhub-faq",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-faq",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub-faq",
 +      "contentHash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
 +      "processorProvenance": {
 +        "backendPath": "ipfs_datasets_py/ipfs_datasets_py/processors",
@@ -336,7 +336,7 @@
 +        manifest = _load_json(MANIFEST_PATH)
 +        source_index = _load_source_index_records()
 +        mutated = copy.deepcopy(manifest)
-+        mutated["records"][0]["normalizedDocument"]["id"] = "https://www.portland.gov/ppd"
++        mutated["records"][0]["normalizedDocument"]["id"] = "https://wetten.overheid.nl/ppd"
 +
 +        errors = validate_processor_archive_manifest(mutated, source_index)
 +

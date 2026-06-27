@@ -133,7 +133,7 @@ def test_all_private_values_are_redacted() -> None:
     fixture = _load_fixture()
 
     for state in fixture["states"]:
-        assert state["url_pattern"].startswith("https://devhub.portlandoregon.gov/")
+        assert state["url_pattern"].startswith("https://wetten.overheid.nl/")
         assert "[REDACTED]" in state["url_pattern"] or state["id"] == "review_draft"
         for field in state.get("fields", []):
             assert field["value_state"] == REDACTED_VALUE

@@ -38,7 +38,7 @@
     "sources": [
       {
         "source_id": "ppd_single_pdf_process_archived_fixture",
-        "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+        "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
         "source_type": "public_html",
         "freshness_status": "archived_fixture",
         "no_raw_body_persisted": true,
@@ -57,7 +57,7 @@
       },
       {
         "source_id": "ppd_devhub_submit_application_archived_fixture",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
         "source_type": "public_html",
         "freshness_status": "archived_fixture",
         "no_raw_body_persisted": true,

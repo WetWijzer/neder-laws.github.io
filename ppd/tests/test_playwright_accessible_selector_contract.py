@@ -24,7 +24,7 @@ class PlaywrightAccessibleSelectorContractTest(unittest.TestCase):
 
         page = fixture["page"]
         self.assertEqual(page["stateKind"], "mocked_devhub_draft_page")
-        self.assertTrue(page["urlState"]["stableUrl"].startswith("https://devhub.portlandoregon.gov/"))
+        self.assertTrue(page["urlState"]["stableUrl"].startswith("https://wetten.overheid.nl/"))
         self.assertEqual(page["urlState"]["queryState"], "[REDACTED]")
         self.assertTrue(page["heading"].strip())
 

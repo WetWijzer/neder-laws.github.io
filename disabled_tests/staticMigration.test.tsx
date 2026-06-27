@@ -58,7 +58,7 @@ const ConvexReplacementTest: React.FC = () => {
 
   return (
     <div>
-      <h1 data-testid="title">Static AI Town</h1>
+      <h1 data-testid="title">Static WetWijzer</h1>
       
       <div data-testid="worlds-list">
         {worlds?.map((world: any) => (
@@ -194,7 +194,7 @@ describe('Static Migration Integration Tests', () => {
 
       // App should still work offline
       await waitFor(() => {
-        expect(screen.getByTestId('title')).toHaveTextContent('Static AI Town');
+        expect(screen.getByTestId('title')).toHaveTextContent('Static WetWijzer');
       });
 
       // Data should still load from static sources
@@ -371,7 +371,7 @@ describe('Static Migration Integration Tests', () => {
       });
 
       // Should render without external API calls
-      expect(screen.getByTestId('title')).toHaveTextContent('Static AI Town');
+      expect(screen.getByTestId('title')).toHaveTextContent('Static WetWijzer');
     });
   });
 });

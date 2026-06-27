@@ -60,7 +60,7 @@ class AuditExportFixtureTest(unittest.TestCase):
         evidence_ids = {item.get("evidence_id") for item in evidence}
         for item in evidence:
             self.assertTrue(item.get("public_source"), item)
-            self.assertTrue(str(item.get("source_url", "")).startswith("https://www.portland.gov/ppd"), item)
+            self.assertTrue(str(item.get("source_url", "")).startswith("https://wetten.overheid.nl/ppd"), item)
             self.assertTrue(str(item.get("captured_at", "")).endswith("Z"), item)
             self.assertGreater(len(item.get("supports", [])), 0, item)
         for section_name in (

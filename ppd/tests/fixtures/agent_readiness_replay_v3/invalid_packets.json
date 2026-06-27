@@ -4,7 +4,7 @@
     "expected_asks": ["Ask for missing address."],
     "holds_or_refusals": ["Hold on CAPTCHA."],
     "next_safe_action_rows": [{"trigger": "captcha", "action": "stop"}],
-    "citation_references": [{"url": "https://www.portland.gov/"}],
+    "citation_references": [{"url": "https://wetten.overheid.nl/"}],
     "reviewer_dispositions": [{"disposition": "reject"}],
     "validation_commands": [["python3", "ppd/daemon/ppd_daemon.py", "--self-test"]]
   },
@@ -13,7 +13,7 @@
     "workflow_coverage": ["lookup"],
     "holds_or_refusals": ["Hold on auth."],
     "next_safe_action_rows": [{"trigger": "auth", "action": "stop"}],
-    "citation_references": [{"url": "https://www.portland.gov/"}],
+    "citation_references": [{"url": "https://wetten.overheid.nl/"}],
     "reviewer_dispositions": [{"disposition": "reject"}],
     "validation_commands": [["python3", "ppd/daemon/ppd_daemon.py", "--self-test"]]
   },
@@ -22,7 +22,7 @@
     "workflow_coverage": ["lookup"],
     "expected_asks": ["Ask for missing permit number."],
     "next_safe_action_rows": [{"trigger": "payment", "action": "stop"}],
-    "citation_references": [{"url": "https://www.portland.gov/"}],
+    "citation_references": [{"url": "https://wetten.overheid.nl/"}],
     "reviewer_dispositions": [{"disposition": "reject"}],
     "validation_commands": [["python3", "ppd/daemon/ppd_daemon.py", "--self-test"]]
   },
@@ -31,7 +31,7 @@
     "workflow_coverage": ["lookup"],
     "expected_asks": ["Ask for missing permit number."],
     "holds_or_refusals": ["Hold on payment."],
-    "citation_references": [{"url": "https://www.portland.gov/"}],
+    "citation_references": [{"url": "https://wetten.overheid.nl/"}],
     "reviewer_dispositions": [{"disposition": "reject"}],
     "validation_commands": [["python3", "ppd/daemon/ppd_daemon.py", "--self-test"]]
   },
@@ -50,7 +50,7 @@
     "expected_asks": ["Ask for missing permit number."],
     "holds_or_refusals": ["Hold on payment."],
     "next_safe_action_rows": [{"trigger": "payment", "action": "stop"}],
-    "citation_references": [{"url": "https://www.portland.gov/"}],
+    "citation_references": [{"url": "https://wetten.overheid.nl/"}],
     "validation_commands": [["python3", "ppd/daemon/ppd_daemon.py", "--self-test"]]
   },
   "missing_validation_commands": {
@@ -59,7 +59,7 @@
     "expected_asks": ["Ask for missing permit number."],
     "holds_or_refusals": ["Hold on payment."],
     "next_safe_action_rows": [{"trigger": "payment", "action": "stop"}],
-    "citation_references": [{"url": "https://www.portland.gov/"}],
+    "citation_references": [{"url": "https://wetten.overheid.nl/"}],
     "reviewer_dispositions": [{"disposition": "reject"}]
   },
   "prohibited_artifacts_claims_and_mutation": {
@@ -68,7 +68,7 @@
     "expected_asks": ["Ask for missing permit number."],
     "holds_or_refusals": ["Hold on payment."],
     "next_safe_action_rows": [{"trigger": "payment", "action": "stop"}],
-    "citation_references": [{"url": "https://www.portland.gov/"}],
+    "citation_references": [{"url": "https://wetten.overheid.nl/"}],
     "reviewer_dispositions": [{"disposition": "reject"}],
     "validation_commands": [["python3", "ppd/daemon/ppd_daemon.py", "--self-test"]],
     "artifacts": [{"kind": "downloaded", "path": "private/session/browser/raw/devhub.pdf"}],

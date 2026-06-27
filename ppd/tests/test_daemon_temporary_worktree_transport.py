@@ -29,7 +29,7 @@ def make_minimal_repo(root: Path) -> None:
         encoding="utf-8",
     )
     (root / "docs").mkdir()
-    (root / "docs" / "PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md").write_text(
+    (root / "docs" / "WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md").write_text(
         "Synthetic plan\n",
         encoding="utf-8",
     )

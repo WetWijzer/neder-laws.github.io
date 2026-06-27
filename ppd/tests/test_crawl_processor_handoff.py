@@ -39,9 +39,9 @@ def test_public_ppd_seed_handoff_manifest_maps_seeds_to_ipfs_processors() -> Non
         "ppd-seed-devhub-public",
     }
     assert {job.source_url for job in manifest.jobs} == {
-        "https://www.portland.gov/ppd",
-        "https://www.portland.gov/ppd/permits/applications-forms",
-        "https://devhub.portlandoregon.gov",
+        "https://wetten.overheid.nl/ppd",
+        "https://wetten.overheid.nl/ppd/permits/applications-forms",
+        "https://wetten.overheid.nl",
     }
     assert all(job.manifest_only for job in manifest.jobs)
     assert all(
@@ -61,8 +61,8 @@ def test_handoff_manifest_rejects_ppd_processor_forks() -> None:
 
 def test_handoff_manifest_rejects_private_devhub_paths() -> None:
     data = _fixture()
-    data["processorJobs"][2]["sourceUrl"] = "https://devhub.portlandoregon.gov/account/permits"
-    data["processorJobs"][2]["arguments"]["url"] = "https://devhub.portlandoregon.gov/account/permits"
+    data["processorJobs"][2]["sourceUrl"] = "https://wetten.overheid.nl/account/permits"
+    data["processorJobs"][2]["arguments"]["url"] = "https://wetten.overheid.nl/account/permits"
 
     with pytest.raises(ValueError, match="private DevHub"):
         assert_valid_crawl_processor_handoff_manifest(data)

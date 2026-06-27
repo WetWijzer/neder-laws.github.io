@@ -3,21 +3,21 @@
   "sources": [
     {
       "source_id": "src-devhub-guide",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "owning_surface": "public_ppd_guidance",
       "last_verified_at": "2026-05-08",
       "freshness_status": "fresh"
     },
     {
       "source_id": "src-single-pdf",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "owning_surface": "public_ppd_guidance",
       "last_verified_at": "2026-05-08",
       "freshness_status": "fresh"
     },
     {
       "source_id": "src-fee-payment",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "owning_surface": "public_ppd_guidance",
       "last_verified_at": "2026-05-08",
       "freshness_status": "fresh"
@@ -27,19 +27,19 @@
     {
       "evidence_id": "ev-devhub-application-save",
       "source_id": "src-devhub-guide",
-      "citation": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application#application-data-entry",
+      "citation": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application#application-data-entry",
       "quote": "Permit applications can include dynamic questions and save-for-later behavior."
     },
     {
       "evidence_id": "ev-single-pdf-separate-supporting",
       "source_id": "src-single-pdf",
-      "citation": "https://www.portland.gov/ppd/get-permit/submit-plans-online#single-pdf-process",
+      "citation": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online#single-pdf-process",
       "quote": "Drawing plans are prepared as one PDF and applications, calculations, and other supporting documents are uploaded separately."
     },
     {
       "evidence_id": "ev-fee-payment-final-submit",
       "source_id": "src-fee-payment",
-      "citation": "https://www.portland.gov/ppd/documents/how-pay-fees/download#payment-submit",
+      "citation": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download#payment-submit",
       "quote": "Fee payment includes payment detail entry and a final submit-payment action."
     }
   ],

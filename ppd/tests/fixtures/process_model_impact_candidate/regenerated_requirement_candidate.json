@@ -23,7 +23,7 @@
       "summary": "Regenerated obligation clarifies that property information must be checked before application data entry.",
       "citations": [
         {
-          "url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+          "url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
           "source_type": "public_html",
           "privacy_classification": "public",
           "captured_at": "2026-05-20"
@@ -49,7 +49,7 @@
       "summary": "Regenerated file rule keeps drawing plans together and supporting documents separate.",
       "citations": [
         {
-          "url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+          "url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
           "source_type": "public_html",
           "privacy_classification": "public",
           "captured_at": "2026-05-20"
@@ -75,7 +75,7 @@
       "summary": "Regenerated deadline candidate changes the review prompt for correction response timing.",
       "citations": [
         {
-          "url": "https://www.portland.gov/ppd/devhub-faqs",
+          "url": "https://wetten.overheid.nl/ppd/devhub-faqs",
           "source_type": "public_html",
           "privacy_classification": "public",
           "captured_at": "2026-05-20"
@@ -100,7 +100,7 @@
       "summary": "Regenerated fee candidate affects when payment review appears in the process model.",
       "citations": [
         {
-          "url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+          "url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
           "source_type": "public_pdf",
           "privacy_classification": "public",
           "captured_at": "2026-05-20"
@@ -124,7 +124,7 @@
       "summary": "Regenerated action gate keeps submission blocked until attended exact confirmation.",
       "citations": [
         {
-          "url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+          "url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
           "source_type": "public_html",
           "privacy_classification": "public",
           "captured_at": "2026-05-20"

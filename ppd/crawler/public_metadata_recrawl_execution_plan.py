@@ -22,10 +22,10 @@ from ppd.crawler.public_crawl_readiness import validate_public_crawl_readiness
 
 _ALLOWED_PUBLIC_HOSTS = frozenset(
     {
-        "www.portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
-        "www.portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
     }
 )
 
@@ -628,7 +628,7 @@ def _public_url_error(value: Any, path: str) -> str | None:
     query_keys = {key.strip().lower() for key, _ in parse_qsl(parsed.query, keep_blank_values=True)}
     if query_keys.intersection(_PRIVATE_QUERY_KEYS):
         return f"{path} must not include authenticated or private query parameters"
-    if host == "devhub.portlandoregon.gov":
+    if host == "wetten.overheid.nl":
         url_path = "/" + parsed.path.strip("/").lower()
         if any(url_path == prefix or url_path.startswith(prefix + "/") for prefix in _PRIVATE_DEVHUB_PREFIXES):
             return f"{path} must not reference private DevHub account paths"

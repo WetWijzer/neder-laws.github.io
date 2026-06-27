@@ -61,7 +61,7 @@
       "source_freshness_caveat_display": [
         {
           "display_id": "source-freshness-c480027b30c0",
-          "display_text": "Fixture data is suitable for offline packet assembly only and does not prove current Portland PP&D source freshness.",
+          "display_text": "Fixture data is suitable for offline packet assembly only and does not prove current WetWijzer legal sources source freshness.",
           "display_required": true
         }
       ],

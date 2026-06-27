@@ -1,5 +1,5 @@
 const DEFAULT_ALLOWED_ORIGINS = [
-  'https://portland-laws.github.io',
+  'https://wetwijzer.github.io',
   'https://211-ai.github.io',
   'http://localhost:5173',
   'http://127.0.0.1:5173',

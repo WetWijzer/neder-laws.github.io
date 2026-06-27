@@ -13,16 +13,16 @@
       "check_id": "run-monitor-title-33-metadata-first",
       "backlog_work_item_id": "monitor-title-33-metadata-first",
       "title": "Build metadata-only freshness check for Title 33 anchor",
-      "source_anchor_ids": ["anchor-portland-zoning-code-title-33"],
+      "source_anchor_ids": ["anchor-wetwijzer-zoning-code-title-33"],
       "source_anchors": [
         {
-          "id": "anchor-portland-zoning-code-title-33",
-          "label": "Portland Title 33 Planning and Zoning Code",
-          "official_url": "https://www.portland.gov/code/33",
+          "id": "anchor-wetwijzer-zoning-code-title-33",
+          "label": "Netherlands Title 33 Planning and Zoning Code",
+          "official_url": "https://wetten.overheid.nl/code/33",
           "crawl_policy": "metadata_only_no_body_persistence",
           "citation": {
-            "label": "Portland Title 33 Planning and Zoning Code",
-            "url": "https://www.portland.gov/code/33",
+            "label": "Netherlands Title 33 Planning and Zoning Code",
+            "url": "https://wetten.overheid.nl/code/33",
             "verified_on": "2026-05-30"
           }
         }
@@ -84,16 +84,16 @@
       "check_id": "run-monitor-land-use-fees-link-inventory",
       "backlog_work_item_id": "monitor-land-use-fees-link-inventory",
       "title": "Build fixture replay for land use fee and review type link inventory changes",
-      "source_anchor_ids": ["anchor-portland-bds-land-use-review-fees"],
+      "source_anchor_ids": ["anchor-wetwijzer-bds-land-use-review-fees"],
       "source_anchors": [
         {
-          "id": "anchor-portland-bds-land-use-review-fees",
+          "id": "anchor-wetwijzer-bds-land-use-review-fees",
           "label": "BDS Land Use Review fees and forms landing page",
-          "official_url": "https://www.portland.gov/bds/land-use-review-fees-and-types",
+          "official_url": "https://wetten.overheid.nl/bds/land-use-review-fees-and-types",
           "crawl_policy": "metadata_only_no_body_persistence",
           "citation": {
             "label": "BDS Land Use Review fees and forms landing page",
-            "url": "https://www.portland.gov/bds/land-use-review-fees-and-types",
+            "url": "https://wetten.overheid.nl/bds/land-use-review-fees-and-types",
             "verified_on": "2026-05-30"
           }
         }
@@ -149,16 +149,16 @@
       "check_id": "run-monitor-permit-forms-link-inventory",
       "backlog_work_item_id": "monitor-permit-forms-link-inventory",
       "title": "Build fixture replay for permit application form link changes",
-      "source_anchor_ids": ["anchor-portland-permit-forms"],
+      "source_anchor_ids": ["anchor-wetwijzer-permit-forms"],
       "source_anchors": [
         {
-          "id": "anchor-portland-permit-forms",
-          "label": "Portland permit forms and applications landing page",
-          "official_url": "https://www.portland.gov/bds/permit-review-process/applications",
+          "id": "anchor-wetwijzer-permit-forms",
+          "label": "Netherlands permit forms and applications landing page",
+          "official_url": "https://wetten.overheid.nl/bds/permit-review-process/applications",
           "crawl_policy": "metadata_only_no_body_persistence",
           "citation": {
-            "label": "Portland permit forms and applications landing page",
-            "url": "https://www.portland.gov/bds/permit-review-process/applications",
+            "label": "Netherlands permit forms and applications landing page",
+            "url": "https://wetten.overheid.nl/bds/permit-review-process/applications",
             "verified_on": "2026-05-30"
           }
         }

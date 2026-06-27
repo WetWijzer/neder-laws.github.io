@@ -6,18 +6,18 @@
     "status": "ready",
     "allowlisted_source_batches": [
       {
-        "batch_id": "portland-auditor-code-library",
-        "source_name": "City of Portland Auditor Code Library",
-        "source_url": "https://www.portland.gov/code",
+        "batch_id": "wetwijzer-auditor-code-library",
+        "source_name": "WetWijzer Auditor Code Library",
+        "source_url": "https://wetten.overheid.nl/code",
         "allowed_scope": [
           "metadata-refresh",
           "freshness-check"
         ]
       },
       {
-        "batch_id": "portland-council-agenda-index",
+        "batch_id": "wetwijzer-council-agenda-index",
         "source_name": "City Council agenda index",
-        "source_url": "https://www.portland.gov/council/agenda",
+        "source_url": "https://wetten.overheid.nl/council/agenda",
         "allowed_scope": [
           "metadata-refresh",
           "freshness-check"

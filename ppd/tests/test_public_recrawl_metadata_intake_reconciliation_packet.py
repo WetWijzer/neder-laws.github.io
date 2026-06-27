@@ -26,7 +26,7 @@ class PublicRecrawlMetadataIntakeReconciliationPacketTest(unittest.TestCase):
         self.assertEqual(1, packet['reconciliationSummary']['freshnessBadgeUpdateCandidateCount'])
         self.assertGreaterEqual(packet['reconciliationSummary']['abortNoteCount'], 3)
         intake_source_ids = {row['source_id'] for row in packet['syntheticMetadataOnlyIntakeRows']}
-        self.assertEqual({'source-portland-ppd', 'source-devhub-faqs'}, intake_source_ids)
+        self.assertEqual({'source-wetwijzer-ppd', 'source-devhub-faqs'}, intake_source_ids)
         for row in packet['syntheticMetadataOnlyIntakeRows']:
             self.assertTrue(row['metadataOnly'])
             self.assertTrue(row['fixtureSynthetic'])
@@ -43,10 +43,10 @@ class PublicRecrawlMetadataIntakeReconciliationPacketTest(unittest.TestCase):
 
     def test_rejects_raw_download_archive_and_private_url_references(self) -> None:
         packet = _valid_packet()
-        packet['syntheticMetadataOnlyIntakeRows'][0]['raw_body_ref'] = 'raw_body://source-portland-ppd'
+        packet['syntheticMetadataOnlyIntakeRows'][0]['raw_body_ref'] = 'raw_body://source-wetwijzer-ppd'
         packet['syntheticMetadataOnlyIntakeRows'][0]['download_url'] = 'file:///tmp/downloaded_documents/source.pdf'
         packet['expectedManifestReferences'][0]['archive_ref'] = 's3://ppd-private-archive/object'
-        packet['expectedManifestReferences'][0]['canonical_url'] = 'https://devhub.portlandoregon.gov/account/permits'
+        packet['expectedManifestReferences'][0]['canonical_url'] = 'https://wetten.overheid.nl/account/permits'
         result = validate_public_recrawl_metadata_intake_reconciliation_packet(packet)
         self.assertFalse(result.valid)
         joined = '\n'.join(result.errors)

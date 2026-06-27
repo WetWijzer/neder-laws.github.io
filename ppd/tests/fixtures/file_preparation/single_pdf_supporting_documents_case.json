@@ -3,13 +3,13 @@
   "source_evidence": [
     {
       "evidence_id": "single_pdf_guidance_drawings_001",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "title": "Submit Plans Online / Single PDF Process",
       "quote": "Drawing plans must be combined into one PDF for the Single PDF process. Applications, calculations, and other supporting documents are uploaded separately."
     },
     {
       "evidence_id": "file_standards_pdf_001",
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "title": "File naming standards and preparing PDFs",
       "quote": "Files must be PDFs and named to identify the document type, project, and revision or date."
     }

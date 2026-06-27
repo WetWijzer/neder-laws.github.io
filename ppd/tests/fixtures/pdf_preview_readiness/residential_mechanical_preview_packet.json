@@ -41,7 +41,7 @@
     }
   ],
   "synthetic_user_facts": {
-    "property.site_address": "1234 SE Fixture Ave, Portland, OR 97214",
+    "property.site_address": "1234 SE Fixture Ave, Netherlands, OR 97214",
     "owner.legal_name": "Synthetic Owner Example",
     "applicant.email": "preview.applicant@example.invalid",
     "work.mechanical_fixture_scope": "Replace one existing residential furnace without plan review"
@@ -58,28 +58,28 @@
     {
       "citation_id": "evidence_apply_permits",
       "source_title": "Apply for permits",
-      "url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+      "url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
       "evidence_text": "PP&D public guidance directs permit applicants to apply for permits and identify the relevant permit path before submitting materials.",
       "evidence_type": "public_guidance_summary"
     },
     {
       "citation_id": "evidence_devhub_account",
       "source_title": "DevHub account and sign-in guide",
-      "url": "https://www.portland.gov/ppd/devhub-sign-guide",
-      "evidence_text": "DevHub online permitting services require a user account using PortlandOregon.gov credentials.",
+      "url": "https://wetten.overheid.nl/ppd/devhub-sign-guide",
+      "evidence_text": "DevHub online permitting services require a user account using wetten.overheid.nl credentials.",
       "evidence_type": "public_guidance_summary"
     },
     {
       "citation_id": "evidence_devhub_standard_trade",
       "source_title": "How to use online permitting tools",
-      "url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "evidence_text": "Official online permitting guidance distinguishes standard trade permits from permit requests that require plan review, and related fixture options can depend on contractor license information.",
       "evidence_type": "public_guidance_summary"
     },
     {
       "citation_id": "evidence_certification_gate",
       "source_title": "DevHub permit application guide",
-      "url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "evidence_text": "Permit application workflows can include acknowledgements, certification, uploads, save-for-later behavior, and final submission steps.",
       "evidence_type": "public_guidance_summary"
     }

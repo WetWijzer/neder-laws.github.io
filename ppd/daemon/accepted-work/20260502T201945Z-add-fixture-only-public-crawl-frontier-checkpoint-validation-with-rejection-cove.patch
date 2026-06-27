@@ -17,10 +17,10 @@
 +
 +
 +ALLOWED_PUBLIC_HOSTS = {
-+    "www.portland.gov",
-+    "devhub.portlandoregon.gov",
-+    "www.portlandoregon.gov",
-+    "www.portlandmaps.com",
++    "wetten.overheid.nl",
++    "wetten.overheid.nl",
++    "wetten.overheid.nl",
++    "repository.overheid.nl",
 +}
 +
 +SKIPPED_STATUSES = {"skipped", "blocked", "deferred"}
@@ -166,7 +166,7 @@
 +        findings.append(FrontierCheckpointFinding(path, "frontier URL host must be PP&D allowlisted"))
 +
 +    lowered_path = parsed.path.lower()
-+    if parsed.hostname == "devhub.portlandoregon.gov":
++    if parsed.hostname == "wetten.overheid.nl":
 +        for marker in AUTHENTICATED_PATH_MARKERS:
 +            if lowered_path.startswith(marker):
 +                findings.append(FrontierCheckpointFinding(path, "live authenticated DevHub URLs are not allowed in public checkpoint fixtures"))
@@ -226,7 +226,7 @@
 +  "frontier": [
 +    {
 +      "id": "frontier-public-ppd-home",
-+      "url": "https://www.portland.gov/ppd",
++      "url": "https://wetten.overheid.nl/ppd",
 +      "status": "planned",
 +      "depth": 0
 +    },
@@ -238,14 +238,14 @@
 +    },
 +    {
 +      "id": "frontier-devhub-public",
-+      "url": "https://devhub.portlandoregon.gov/",
++      "url": "https://wetten.overheid.nl/",
 +      "status": "processor_handoff",
 +      "processor_handoff": {
 +        "processor_family": "web_archiving",
 +        "manifest_only": true,
 +        "provenance": {
-+          "source_url": "https://devhub.portlandoregon.gov/",
-+          "canonical_url": "https://devhub.portlandoregon.gov/",
++          "source_url": "https://wetten.overheid.nl/",
++          "canonical_url": "https://wetten.overheid.nl/",
 +          "captured_at": "2026-05-01T12:00:00Z",
 +          "content_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
 +          "policy_decision": "allow_public_manifest_only",
@@ -289,7 +289,7 @@
 +        "frontier": [
 +          {
 +            "id": "bad-auth-url",
-+            "url": "https://devhub.portlandoregon.gov/account/permits",
++            "url": "https://wetten.overheid.nl/account/permits",
 +            "status": "planned"
 +          }
 +        ]
@@ -305,7 +305,7 @@
 +        "frontier": [
 +          {
 +            "id": "bad-missing-skip-reason",
-+            "url": "https://www.portland.gov/ppd/unsupported-file",
++            "url": "https://wetten.overheid.nl/ppd/unsupported-file",
 +            "status": "skipped"
 +          }
 +        ]
@@ -321,7 +321,7 @@
 +        "frontier": [
 +          {
 +            "id": "bad-raw-body",
-+            "url": "https://www.portland.gov/ppd",
++            "url": "https://wetten.overheid.nl/ppd",
 +            "status": "planned",
 +            "raw_body": "raw crawl output must not be committed"
 +          }
@@ -338,7 +338,7 @@
 +        "frontier": [
 +          {
 +            "id": "bad-handoff",
-+            "url": "https://www.portland.gov/ppd",
++            "url": "https://wetten.overheid.nl/ppd",
 +            "status": "processor_handoff",
 +            "processor_handoff": {
 +              "processor_family": "web_archiving",

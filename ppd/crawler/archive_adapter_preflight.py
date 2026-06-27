@@ -22,10 +22,10 @@ from ppd.contracts.crawl_manifest_privacy import validate_crawl_manifest_privacy
 
 ALLOWED_ARCHIVE_HOSTS = frozenset(
     {
-        "www.portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
-        "www.portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
     }
 )
 
@@ -145,7 +145,7 @@ def _validate_public_archive_url(value: str, field: str) -> list[str]:
     host = parsed.hostname or ""
     if host not in ALLOWED_ARCHIVE_HOSTS:
         errors.append(f"{field} host is not PP&D archive allowlisted: {host or ''}")
-    if host == "devhub.portlandoregon.gov" and _is_private_devhub_path(parsed.path):
+    if host == "wetten.overheid.nl" and _is_private_devhub_path(parsed.path):
         errors.append(f"{field} is a private DevHub path and cannot be archived: {parsed.path}")
     return errors
 

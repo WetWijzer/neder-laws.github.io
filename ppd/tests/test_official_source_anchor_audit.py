@@ -18,7 +18,7 @@ def valid_packet() -> dict[str, object]:
         "anchors": [
             {
                 "source_id": "ppd-online-tools",
-                "url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+                "url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
                 "citation_ids": ["cite-online-tools-2026-05-08"],
                 "anchor_label": "Online permitting tools overview",
             }
@@ -58,7 +58,7 @@ class OfficialSourceAnchorAuditPacketV1Tests(unittest.TestCase):
         assert isinstance(anchors, list)
         anchor = anchors[0]
         assert isinstance(anchor, dict)
-        anchor["url"] = "https://devhub.portlandoregon.gov/account/permits?token=secret"
+        anchor["url"] = "https://wetten.overheid.nl/account/permits?token=secret"
         self.assertIn("authenticated_or_private_url", self.codes_for(packet))
 
     def test_rejects_raw_page_bodies_and_downloaded_documents(self) -> None:

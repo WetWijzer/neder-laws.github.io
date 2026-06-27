@@ -5,7 +5,7 @@
   "surface": {
     "title": "DevHub read-only status review fixture",
     "page_heading": "My Permits and Requests",
-    "url_pattern": "https://devhub.portlandoregon.gov/**/requests/**"
+    "url_pattern": "https://wetten.overheid.nl/**/requests/**"
   },
   "accessible_landmarks": [
     {

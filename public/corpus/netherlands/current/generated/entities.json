@@ -1,0 +1,79 @@
+[
+  {
+    "id": "netherlands_source:wetten_overheid_nl",
+    "type": "official_source",
+    "label": "wetten.overheid.nl",
+    "properties": {
+      "url": "https://wetten.overheid.nl",
+      "role": "official Dutch law source"
+    }
+  },
+  {
+    "id": "netherlands_status:current",
+    "type": "law_status",
+    "label": "current",
+    "properties": {
+      "definition": "Current according to parsed official metadata when retrieved."
+    }
+  },
+  {
+    "id": "bafywetwijzer000000000000000000000000000000000000000000000001",
+    "type": "article",
+    "label": "Wetboek van Strafrecht, Artikel 1",
+    "properties": {
+      "identifier": "BWBR0001854 Artikel 1",
+      "law_status": "current",
+      "source_url": "https://wetten.overheid.nl/BWBR0001854"
+    }
+  },
+  {
+    "id": "netherlands_law:BWBR0001854",
+    "type": "law",
+    "label": "Wetboek van Strafrecht",
+    "properties": {
+      "law_id": "BWBR0001854",
+      "law_status": "current",
+      "source_url": "https://wetten.overheid.nl/BWBR0001854"
+    }
+  },
+  {
+    "id": "bafywetwijzer000000000000000000000000000000000000000000000002",
+    "type": "article",
+    "label": "Burgerlijk Wetboek Boek 1, Artikel 1",
+    "properties": {
+      "identifier": "BWBR0002656 Artikel 1",
+      "law_status": "current",
+      "source_url": "https://wetten.overheid.nl/BWBR0002656"
+    }
+  },
+  {
+    "id": "netherlands_law:BWBR0002656",
+    "type": "law",
+    "label": "Burgerlijk Wetboek Boek 1",
+    "properties": {
+      "law_id": "BWBR0002656",
+      "law_status": "current",
+      "source_url": "https://wetten.overheid.nl/BWBR0002656"
+    }
+  },
+  {
+    "id": "bafywetwijzer000000000000000000000000000000000000000000000003",
+    "type": "article",
+    "label": "Wetboek van Burgerlijke Rechtsvordering, Artikel 1",
+    "properties": {
+      "identifier": "BWBR0001827 Artikel 1",
+      "law_status": "current",
+      "source_url": "https://wetten.overheid.nl/BWBR0001827"
+    }
+  },
+  {
+    "id": "netherlands_law:BWBR0001827",
+    "type": "law",
+    "label": "Wetboek van Burgerlijke Rechtsvordering",
+    "properties": {
+      "law_id": "BWBR0001827",
+      "law_status": "current",
+      "source_url": "https://wetten.overheid.nl/BWBR0001827"
+    }
+  }
+]

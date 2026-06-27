@@ -2,7 +2,7 @@
   "index_id": "source-to-requirement-dependency-index-2026-05-28",
   "sources": {
     "ppd-devhub-application-guide": {
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "requirement_ids": [
         "req-devhub-dynamic-questions",
         "req-devhub-acknowledgement-gate"
@@ -20,7 +20,7 @@
       "required_synthetic_fixtures": []
     },
     "ppd-spp-file-naming-standards": {
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "requirement_ids": [
         "req-spp-file-naming",
         "req-single-pdf-file-composition"

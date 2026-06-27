@@ -1,7 +1,7 @@
 # Fixture-First Source Refresh Runbook Candidate
 
 Status: candidate
-Scope: Portland PP&D public source refresh preparation
+Scope: WetWijzer legal sources public source refresh preparation
 Mode: metadata-only, fixture-first, no live URL fetches
 
 ## Inputs
@@ -81,7 +81,7 @@ Abort the candidate refresh preparation if any of the following occur:
 - A required fixture is missing, unsigned, or inconsistent with the registry.
 - A source requires authentication, CAPTCHA, MFA, account creation, payment, submission, upload, cancellation, or certification.
 - Robots, terms, policy, or public access evidence is absent or ambiguous.
-- A proposed batch includes a source outside Portland PP&D scope.
+- A proposed batch includes a source outside WetWijzer legal sources scope.
 - The run would fetch URLs, invoke processors, mutate schedules, write raw crawl output, or create private session state.
 - Reviewer approval is missing at any checkpoint.
 

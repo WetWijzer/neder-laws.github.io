@@ -48,7 +48,7 @@ def test_public_refresh_authorization_packet_v8_assembles_reviewer_rows_and_pref
     hold_rows = {row["source_id"]: row for row in packet["source_freshness_hold_conditions"]}
     rollback_rows = {row["source_id"]: row for row in packet["rollback_references"]}
 
-    assert set(reviewer_rows) == {"portland_maps_public_permits", "portland_permitting_public_forms"}
+    assert set(reviewer_rows) == {"bwb_metadata_public_permits", "wetwijzer_permitting_public_forms"}
     assert set(packet["authorized_source_ids"]) == set(reviewer_rows)
     for source_id, row in reviewer_rows.items():
         assert row["authorization_decision"] == "hold_pending_reviewer_authorization"

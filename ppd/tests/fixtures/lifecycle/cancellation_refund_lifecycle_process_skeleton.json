@@ -21,9 +21,9 @@
       "evidenceId": "ppd_lifecycle_cancellation_public_guidance",
       "categoryId": "permit_cancellation_guidance",
       "title": "Cancel a permit guidance",
-      "sourceUrl": "https://www.portland.gov/ppd/permits/cancel-permit",
-      "canonicalUrl": "https://www.portland.gov/ppd/permits/cancel-permit",
-      "authorityLabel": "Portland Permitting & Development public permit lifecycle guidance",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/cancel-permit",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/cancel-permit",
+      "authorityLabel": "Netherlands Permitting & Development public permit lifecycle guidance",
       "recrawlCadence": "monthly",
       "capturedAt": "2026-05-01T00:00:00Z"
     },
@@ -31,9 +31,9 @@
       "evidenceId": "ppd_lifecycle_refund_public_guidance",
       "categoryId": "permit_refund_guidance",
       "title": "Permit refund guidance",
-      "sourceUrl": "https://www.portland.gov/ppd/permits/permit-refunds",
-      "canonicalUrl": "https://www.portland.gov/ppd/permits/permit-refunds",
-      "authorityLabel": "Portland Permitting & Development public fee and refund guidance",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/permit-refunds",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/permit-refunds",
+      "authorityLabel": "Netherlands Permitting & Development public fee and refund guidance",
       "recrawlCadence": "monthly",
       "capturedAt": "2026-05-01T00:00:00Z"
     }

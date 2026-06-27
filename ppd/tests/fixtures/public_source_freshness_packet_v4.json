@@ -6,7 +6,7 @@
     {
       "source_id": "bds-permit-application-html",
       "source_type": "html",
-      "public_url": "https://www.portland.gov/ppd/permits/building-permits",
+      "public_url": "https://wetten.overheid.nl/ppd/permits/building-permits",
       "freshness_status": "changed",
       "previous_fingerprint": "sha256:old-html-fixture",
       "current_fingerprint": "sha256:new-html-fixture",
@@ -18,7 +18,7 @@
     {
       "source_id": "commercial-permit-application-pdf",
       "source_type": "pdf",
-      "public_url": "https://www.portland.gov/ppd/documents/commercial-building-permit-application/download",
+      "public_url": "https://wetten.overheid.nl/ppd/documents/commercial-building-permit-application/download",
       "freshness_status": "stale",
       "previous_fingerprint": "sha256:old-pdf-fixture",
       "current_fingerprint": "sha256:old-pdf-fixture",
@@ -30,7 +30,7 @@
     {
       "source_id": "intake-form-public-form",
       "source_type": "form",
-      "public_url": "https://www.portland.gov/ppd/permits/apply",
+      "public_url": "https://wetten.overheid.nl/ppd/permits/apply",
       "freshness_status": "review_required",
       "previous_fingerprint": null,
       "current_fingerprint": "sha256:form-fixture",
@@ -42,7 +42,7 @@
     {
       "source_id": "unchanged-public-checklist",
       "source_type": "html",
-      "public_url": "https://www.portland.gov/ppd/permits/checklists",
+      "public_url": "https://wetten.overheid.nl/ppd/permits/checklists",
       "freshness_status": "unchanged",
       "previous_fingerprint": "sha256:same",
       "current_fingerprint": "sha256:same",
@@ -54,7 +54,7 @@
     {
       "source_id": "gis-layer",
       "source_type": "map",
-      "public_url": "https://www.portlandmaps.com/",
+      "public_url": "https://repository.overheid.nl/",
       "freshness_status": "changed",
       "previous_fingerprint": "sha256:old-map",
       "current_fingerprint": "sha256:new-map",

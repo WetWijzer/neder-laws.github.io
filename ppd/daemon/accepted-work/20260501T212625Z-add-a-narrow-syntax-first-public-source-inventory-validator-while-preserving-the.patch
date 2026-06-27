@@ -50,7 +50,7 @@
          parsed = urlparse(url)
          if parsed.scheme != "https" or parsed.netloc not in ALLOWED_PUBLIC_HOSTS:
              return "non_allowlisted_host", field
-         if parsed.netloc == "devhub.portlandoregon.gov" and _is_private_devhub_path(parsed.path):
+         if parsed.netloc == "wetten.overheid.nl" and _is_private_devhub_path(parsed.path):
              return "private_devhub_path", field
 +    if not any(field in entry for field in ("canonicalUrl", "sourceUrl", "url")):
 +        return "non_allowlisted_host", "canonicalUrl"

@@ -32,7 +32,7 @@ class PublicPdfExtractionContractTest(unittest.TestCase):
         source = data["source"]
         parsed_source_url = urlparse(source["sourceUrl"])
         self.assertEqual(parsed_source_url.scheme, "https")
-        self.assertEqual(parsed_source_url.netloc, "www.portland.gov")
+        self.assertEqual(parsed_source_url.netloc, "wetten.overheid.nl")
         self.assertEqual(source["access"], "public")
         self.assertEqual(source["retrievalMode"], "metadata_and_text_snippet_fixture_only")
 

@@ -137,7 +137,7 @@ def _build_scenarios(
         smoke_scenarios = [
             {
                 "scenario_id": "consumer-smoke-default",
-                "user_scenario": "Consumer asks the released agent to summarize a Portland permitting status from fixture evidence.",
+                "user_scenario": "Consumer asks the released agent to summarize a Netherlands permitting status from fixture evidence.",
                 "missing_facts": ["current permit status", "source citation date"],
             }
         ]

@@ -3,15 +3,15 @@
   "permit_process_id": "synthetic-residential-alteration",
   "source_index_references": [
     {
-      "id": "src-portland-devhub-permits",
-      "title": "Portland DevHub permits landing page",
-      "url": "https://devhub.portland.gov/",
+      "id": "src-wetwijzer-devhub-permits",
+      "title": "Netherlands DevHub permits landing page",
+      "url": "https://devhub.wetten.overheid.nl/",
       "retrieved_date": "2026-05-08"
     },
     {
-      "id": "src-portland-residential-permits",
-      "title": "City of Portland residential permits information",
-      "url": "https://www.portland.gov/bds/residential-permitting/residential-building-permits",
+      "id": "src-wetwijzer-residential-permits",
+      "title": "WetWijzer residential permits information",
+      "url": "https://wetten.overheid.nl/bds/residential-permitting/residential-building-permits",
       "retrieved_date": "2026-05-08"
     }
   ],
@@ -19,13 +19,13 @@
     {
       "id": "req-work-description",
       "text": "Applicant must identify the proposed residential alteration scope before any assisted preparation continues.",
-      "source_index_ref": "src-portland-residential-permits",
+      "source_index_ref": "src-wetwijzer-residential-permits",
       "citation": "Synthetic fixture citation for residential alteration permit scope requirements."
     },
     {
       "id": "req-plan-set",
       "text": "Applicant must provide a plan set suitable for staff review when the alteration changes regulated building elements.",
-      "source_index_ref": "src-portland-residential-permits",
+      "source_index_ref": "src-wetwijzer-residential-permits",
       "citation": "Synthetic fixture citation for plan review materials."
     }
   ],
@@ -33,19 +33,19 @@
     {
       "id": "stage-triage",
       "label": "Triage applicant intent",
-      "source_index_ref": "src-portland-devhub-permits",
+      "source_index_ref": "src-wetwijzer-devhub-permits",
       "citation": "Synthetic fixture citation for starting permit research in DevHub."
     },
     {
       "id": "stage-document-check",
       "label": "Check supporting documents",
-      "source_index_ref": "src-portland-residential-permits",
+      "source_index_ref": "src-wetwijzer-residential-permits",
       "citation": "Synthetic fixture citation for residential permit document expectations."
     },
     {
       "id": "stage-ready-for-applicant-review",
       "label": "Prepare applicant review summary",
-      "source_index_ref": "src-portland-residential-permits",
+      "source_index_ref": "src-wetwijzer-residential-permits",
       "citation": "Synthetic fixture citation for review-before-action workflow."
     }
   ],
@@ -58,13 +58,13 @@
     {
       "id": "unsupported-fire-life-safety",
       "label": "Fire and life safety review",
-      "source_index_ref": "src-portland-residential-permits",
+      "source_index_ref": "src-wetwijzer-residential-permits",
       "citation": "Synthetic fixture citation marking fire and life safety determinations as unsupported for autonomous action."
     },
     {
       "id": "unsupported-field-inspection-scheduling",
       "label": "Inspection scheduling or cancellation",
-      "source_index_ref": "src-portland-devhub-permits",
+      "source_index_ref": "src-wetwijzer-devhub-permits",
       "citation": "Synthetic fixture citation marking scheduling, cancellation, and certification paths as unsupported."
     }
   ],

@@ -1,12 +1,12 @@
 # PP&D Supervisor Operations
 
-This document defines the operator-facing recovery rules for the isolated Portland Permitting & Development daemon workspace. It is intentionally scoped to supervisor and daemon recovery. It does not authorize live DevHub actions, authenticated scraping, official submissions, payments, uploads, cancellations, certifications, or account-management automation.
+This document defines the operator-facing recovery rules for the isolated Netherlands Permitting & Development daemon workspace. It is intentionally scoped to supervisor and daemon recovery. It does not authorize live DevHub actions, authenticated scraping, official submissions, payments, uploads, cancellations, certifications, or account-management automation.
 
 ## Operating Boundary
 
 The PP&D daemon and supervisor may only recover work inside the PP&D implementation boundary. Recovery actions must preserve these invariants:
 
-- Source-controlled changes stay under `ppd/` unless the active task explicitly permits updating `docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md`.
+- Source-controlled changes stay under `ppd/` unless the active task explicitly permits updating `docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md`.
 - Private DevHub session files, browser storage state, traces, screenshots, raw crawl responses, downloaded documents, and user-specific artifacts are never created as committed fixtures.
 - Public crawler work prefers deterministic fixtures and metadata manifests before any live network request.
 - DevHub automation remains attended, user-authorized, and reversible until an explicit gate says otherwise.

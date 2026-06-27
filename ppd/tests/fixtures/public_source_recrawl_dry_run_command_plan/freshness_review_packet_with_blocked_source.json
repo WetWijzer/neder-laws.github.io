@@ -6,13 +6,13 @@
   "sources": [
     {
       "source_id": "ppd-online-tools",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "owning_surface": "ppd_public_guidance",
       "freshness_status": "stale",
       "allowlisted": true,
       "robots_policy": "allowed",
       "robots_policy_evidence_ids": [
-        "robots-portland-gov-2026-05-08"
+        "robots-wetwijzer-gov-2026-05-08"
       ],
       "source_evidence_ids": [
         "freshness-online-tools-2026-05-28"
@@ -21,24 +21,24 @@
       "minimum_pause_seconds": 5
     },
     {
-      "source_id": "portlandmaps-public-reference",
-      "canonical_url": "https://www.portlandmaps.com",
+      "source_id": "wetwijzermaps-public-reference",
+      "canonical_url": "https://repository.overheid.nl",
       "owning_surface": "public_property_reference",
       "freshness_status": "due",
       "allowlisted": true,
       "robots_policy": "allowed",
       "robots_policy_evidence_ids": [
-        "robots-portlandmaps-2026-05-08"
+        "robots-wetwijzermaps-2026-05-08"
       ],
       "source_evidence_ids": [
-        "freshness-portlandmaps-2026-05-28"
+        "freshness-wetwijzermaps-2026-05-28"
       ],
       "privacy_classification": "public",
       "minimum_pause_seconds": 10
     },
     {
       "source_id": "devhub-auth-private",
-      "canonical_url": "https://devhub.portlandoregon.gov/private/account",
+      "canonical_url": "https://wetten.overheid.nl/private/account",
       "owning_surface": "devhub_authenticated",
       "freshness_status": "due",
       "allowlisted": false,

@@ -27,7 +27,7 @@ def test_source_discovery_findings_are_serializable() -> None:
 
     assert serialized[0] == {
         "record_id": "ppd-landing",
-        "url": "https://www.portland.gov/ppd",
+        "url": "https://wetten.overheid.nl/ppd",
         "decision": "allow",
         "reason_code": "allowed_public_source",
         "message": "Discovery URL is within the deterministic PP&D public source policy.",

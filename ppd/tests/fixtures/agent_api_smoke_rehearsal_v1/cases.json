@@ -18,42 +18,42 @@
     {
       "source_id": "fixture-ppd-apply-permits",
       "title": "Apply for permits fixture excerpt",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
       "last_verified_at": "2026-05-08",
       "fixture_text": "Permit requests that require plan review need project facts, application information, and supporting documents before submission."
     },
     {
       "source_id": "fixture-devhub-tools",
       "title": "Online permitting tools fixture excerpt",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "last_verified_at": "2026-05-08",
-      "fixture_text": "DevHub is the City of Portland online permitting system for account-based permitting services."
+      "fixture_text": "DevHub is the WetWijzer online permitting system for account-based permitting services."
     },
     {
       "source_id": "fixture-devhub-faq",
       "title": "DevHub FAQ fixture excerpt",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "last_verified_at": "2026-05-08",
       "fixture_text": "DevHub supports purchasing some standard permits, submitting requests, uploading corrections, scheduling inspections, and paying fees."
     },
     {
       "source_id": "fixture-submit-plans-online",
       "title": "Submit Plans Online fixture excerpt",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "last_verified_at": "2026-05-08",
       "fixture_text": "Drawing plans are prepared together in one PDF, while applications, calculations, and other supporting documents are separate PDFs."
     },
     {
       "source_id": "fixture-devhub-submit-guide",
       "title": "DevHub submit permit application guide fixture excerpt",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "last_verified_at": "2026-05-08",
       "fixture_text": "DevHub request types include building, solar, trade, trade with plan review, demolition, signs, wireless, and other guided request paths."
     },
     {
       "source_id": "fixture-corrections-guide",
       "title": "Upload corrections fixture excerpt",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-upload-corrections",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-upload-corrections",
       "last_verified_at": "2026-05-08",
       "fixture_text": "Correction upload is an authenticated DevHub workflow tied to a permit or application number and review status."
     }

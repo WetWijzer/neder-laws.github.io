@@ -24,7 +24,7 @@
 +      "evidence": [
 +        {
 +          "requirementId": "residential-required-fact-property-identifier",
-+          "sourceUrl": "https://www.portland.gov/ppd/residential-permitting",
++          "sourceUrl": "https://wetten.overheid.nl/ppd/residential-permitting",
 +          "sourceTitle": "Residential Permitting",
 +          "retrievedAt": "2026-05-01T00:00:00Z",
 +          "summary": "Residential permit intake requires project property information before application review."
@@ -42,7 +42,7 @@
 +      "evidence": [
 +        {
 +          "requirementId": "residential-required-document-construction-plans",
-+          "sourceUrl": "https://www.portland.gov/ppd/development-services/apply-permit-or-request-plan-review",
++          "sourceUrl": "https://wetten.overheid.nl/ppd/development-services/apply-permit-or-request-plan-review",
 +          "sourceTitle": "Apply for a permit or request plan review",
 +          "retrievedAt": "2026-05-01T00:00:00Z",
 +          "summary": "Plan-review workflows require drawing plans and supporting submittal documents before submission."
@@ -60,7 +60,7 @@
 +      "evidence": [
 +        {
 +          "requirementId": "single-pdf-process-acknowledgment",
-+          "sourceUrl": "https://www.portland.gov/ppd/development-services/single-pdf-process",
++          "sourceUrl": "https://wetten.overheid.nl/ppd/development-services/single-pdf-process",
 +          "sourceTitle": "Single PDF Process",
 +          "retrievedAt": "2026-05-01T00:00:00Z",
 +          "summary": "Public guidance describes the Single PDF Process file organization for plans and supporting documents."
@@ -78,8 +78,8 @@
 +      "evidence": [
 +        {
 +          "requirementId": "devhub-submit-explicit-confirmation-gate",
-+          "sourceUrl": "https://www.portland.gov/ppd/devhub",
-+          "sourceTitle": "DevHub PDX",
++          "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
++          "sourceTitle": "DevHub Netherlands",
 +          "retrievedAt": "2026-05-01T00:00:00Z",
 +          "summary": "DevHub is the online permitting system, so official submission must remain gated by explicit user confirmation."
 +        }

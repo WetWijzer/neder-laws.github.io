@@ -64,7 +64,7 @@
       "synthetic_inputs": {
         "process_id": "fixture_residential_building_permit",
         "source_evidence_id": "fixture-source-devhub-guide-2024-01-15",
-        "source_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+        "source_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
         "source_last_verified_at": "2024-01-15",
         "packet_evaluated_at": "2026-05-31",
         "freshness_policy_days": 30

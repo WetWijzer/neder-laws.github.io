@@ -1,6 +1,6 @@
 {
   "packet_id": "synthetic-ppd-public-page-html-extraction-review",
-  "source_url": "https://www.portland.gov/ppd/synthetic-public-permit-guide",
+  "source_url": "https://wetten.overheid.nl/ppd/synthetic-public-permit-guide",
   "fixture_file": "synthetic_ppd_public_page.html",
   "review_status": "fixture_first_review_required",
   "source_order": [
@@ -16,7 +16,7 @@
       "id": "breadcrumbs",
       "items": [
         "Home",
-        "Portland Permitting & Development",
+        "Netherlands Permitting & Development",
         "Get a Permit",
         "Synthetic PP&D Public Permit Guide"
       ]
@@ -51,7 +51,7 @@
       "order": 7,
       "kind": "image_alt_text",
       "id": "image-synthetic-permit-workflow",
-      "src": "https://www.portland.gov/ppd/images/synthetic-permit-workflow.png",
+      "src": "https://wetten.overheid.nl/ppd/images/synthetic-permit-workflow.png",
       "alt": "Diagram showing address lookup, document preparation, and permit review stages"
     },
     {
@@ -145,11 +145,11 @@
       "links": [
         {
           "text": "Apply for permits",
-          "href": "https://www.portland.gov/ppd/get-permit/apply-permits"
+          "href": "https://wetten.overheid.nl/ppd/get-permit/apply-permits"
         },
         {
           "text": "Submit plans online",
-          "href": "https://www.portland.gov/ppd/get-permit/submit-plans-online"
+          "href": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online"
         }
       ]
     }
@@ -177,7 +177,7 @@
       "citation_id": "cite-breadcrumbs",
       "block_id": "breadcrumbs",
       "source_order": 2,
-      "text": "Home > Portland Permitting & Development > Get a Permit > Synthetic PP&D Public Permit Guide"
+      "text": "Home > Netherlands Permitting & Development > Get a Permit > Synthetic PP&D Public Permit Guide"
     },
     {
       "citation_id": "cite-heading-before-you-apply",

@@ -10,7 +10,7 @@ import {
 function norm(overrides: Partial<ExportLegalNormLike> = {}): ExportLegalNormLike {
   return {
     source_id: 'sec-2',
-    canonical_citation: 'PCC 1.02',
+    canonical_citation: 'netherlands law 1.02',
     norm_type: 'obligation',
     actor: 'Tenant',
     modality: 'O',

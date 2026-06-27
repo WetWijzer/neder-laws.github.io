@@ -1,9 +1,9 @@
 /**
- * AI Town Visual Asset Integration Test - Basic Configuration Validation
+ * WetWijzer Visual Asset Integration Test - Basic Configuration Validation
  * Tests that the visual asset integration is properly configured
  */
 
-describe('AI Town Visual Assets', () => {
+describe('WetWijzer Visual Assets', () => {
   it('should have basic asset integration ready', () => {
     // Test that essential constants are defined
     expect(typeof window !== 'undefined' || typeof global !== 'undefined').toBe(true);

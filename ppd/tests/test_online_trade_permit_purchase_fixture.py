@@ -33,7 +33,7 @@ class OnlineTradePermitPurchaseFixtureTest(unittest.TestCase):
         sources = {source["sourceId"]: source for source in self.fixture["authoritySources"]}
         self.assertGreaterEqual(len(sources), 3)
         for source in sources.values():
-            self.assertTrue(source["canonicalUrl"].startswith("https://www.portland.gov/ppd"))
+            self.assertTrue(source["canonicalUrl"].startswith("https://wetten.overheid.nl/ppd"))
             self.assertTrue(source["authorityLabel"].startswith("PP&D"))
             self.assertTrue(source["fixtureEvidenceOnly"])
 

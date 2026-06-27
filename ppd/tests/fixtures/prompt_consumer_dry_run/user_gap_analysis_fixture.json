@@ -5,7 +5,7 @@
   "missing_facts": [
     {
       "citation_id": "missing-property-address",
-      "label": "property address or Portland Maps property identifier"
+      "label": "property address or BWB metadata property identifier"
     },
     {
       "citation_id": "missing-contractor-license",

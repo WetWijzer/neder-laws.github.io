@@ -11,12 +11,12 @@ from collections.abc import Iterable, Mapping, Sequence
 from urllib.parse import parse_qsl, urlparse
 
 ALLOWED_PUBLIC_HOSTS = {
-    "www.portland.gov",
-    "portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
-    "portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
+    "repository.overheid.nl",
 }
 
 AUTH_QUERY_KEYS = {

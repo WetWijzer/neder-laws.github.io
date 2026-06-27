@@ -33,7 +33,7 @@
     "rollback_checkpoints": ["checkpoint-001"],
     "preview_rows": [
       {
-        "citations": [{"source_id": "src-ppd-devhub", "url": "https://www.portland.gov/bds"}],
+        "citations": [{"source_id": "src-ppd-devhub", "url": "https://wetten.overheid.nl/bds"}],
         "before_metadata": {"observed_at": "2026-05-29T00:00:00Z"},
         "after_metadata": {"observed_at": "2026-05-29T00:00:00Z"},
         "affected_source_ids": ["src-ppd-devhub"],

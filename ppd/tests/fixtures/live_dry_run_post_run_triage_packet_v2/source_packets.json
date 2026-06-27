@@ -15,7 +15,7 @@
         "source_id": "ppd-home",
         "metadata_only": true,
         "observed_value": {
-          "seed_url": "https://www.portland.gov/ppd"
+          "seed_url": "https://wetten.overheid.nl/ppd"
         },
         "citations": [
           "public_recrawl_dry_run_evidence_envelope_v2.observation_slots.seed_url"

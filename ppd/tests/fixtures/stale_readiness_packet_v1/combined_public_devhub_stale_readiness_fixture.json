@@ -27,19 +27,19 @@
   "synthetic_public_monitoring_outcomes": [
     {
       "source_id": "public-synthetic-index-pass",
-      "canonical_url": "https://www.portland.gov/ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
       "outcome": "current",
       "summary": "Synthetic monitor saw no public source freshness hold in the committed fixture."
     },
     {
       "source_id": "public-devhub-faq-stale",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "outcome": "stale",
       "summary": "Synthetic monitor marks DevHub FAQ evidence stale pending reviewer disposition."
     },
     {
       "source_id": "public-payment-guide-failed",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "outcome": "failed",
       "summary": "Synthetic monitor cannot reconcile payment guide freshness from offline fixtures."
     }

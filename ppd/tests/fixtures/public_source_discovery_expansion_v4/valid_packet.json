@@ -2,21 +2,21 @@
   "packet_version": 4,
   "sources": [
     {
-      "canonical_url": "https://www.portland.gov/ppd/permits",
-      "source_page": "https://www.portland.gov/ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd/permits",
+      "source_page": "https://wetten.overheid.nl/ppd",
       "link_text": "Permits",
       "allowlist_decision": "allow"
     }
   ],
   "duplicate_normalization": [
     {
-      "input_url": "https://www.portland.gov/ppd/permits?utm_source=test",
-      "normalized_url": "https://www.portland.gov/ppd/permits"
+      "input_url": "https://wetten.overheid.nl/ppd/permits?utm_source=test",
+      "normalized_url": "https://wetten.overheid.nl/ppd/permits"
     }
   ],
   "skipped_urls": [
     {
-      "url": "https://www.portland.gov/devhub/session-only",
+      "url": "https://wetten.overheid.nl/devhub/session-only",
       "reason": "outside public source allowlist and requires a private session"
     }
   ],

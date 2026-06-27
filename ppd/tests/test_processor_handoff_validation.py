@@ -20,7 +20,7 @@ def valid_packet() -> dict[str, object]:
                 "id": "ordinance-index",
                 "kind": "metadata",
                 "metadata_only": True,
-                "source_url": "https://www.portland.gov/code/1",
+                "source_url": "https://wetten.overheid.nl/code/1",
                 "normalized_document_ref": "normalized_documents/ordinance-index.json",
                 "source_registry_id": "ppd-code-title-1",
             }

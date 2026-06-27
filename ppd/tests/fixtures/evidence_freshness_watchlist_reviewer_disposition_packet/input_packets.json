@@ -226,7 +226,7 @@
       }
     ],
     "allowlist_evidence_refs": ["fixture://allowlist/ppd-public-sources.json"],
-    "robots_evidence_refs": ["fixture://robots/portland-gov-ppd.txt"],
+    "robots_evidence_refs": ["fixture://robots/wetwijzer-gov-ppd.txt"],
     "abort_or_rollback_checkpoints": [
       {"checkpoint": "missing-review-citation", "operator_action": "abort before any source interaction"},
       {"checkpoint": "mutation-requested", "operator_action": "rollback transcript draft and return to offline review"}

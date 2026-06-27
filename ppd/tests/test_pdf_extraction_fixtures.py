@@ -22,7 +22,7 @@ class PdfExtractionFixtureTests(unittest.TestCase):
         self.assertTrue(policy["no_live_fetch_required"])
         self.assertTrue(policy["no_downloaded_documents"])
         self.assertTrue(policy["no_private_devhub_session"])
-        self.assertEqual(policy["authoritative_discovery_source"], "https://www.portland.gov/ppd/applications-forms")
+        self.assertEqual(policy["authoritative_discovery_source"], "https://wetten.overheid.nl/ppd/applications-forms")
 
     def test_each_fixture_has_required_contract_fields(self) -> None:
         required_document_fields = set(self.payload["normalization_contract"]["required_document_fields"])
@@ -32,7 +32,7 @@ class PdfExtractionFixtureTests(unittest.TestCase):
             with self.subTest(fixture_id=fixture.get("fixture_id")):
                 self.assertLessEqual(required_document_fields, set(fixture))
                 self.assertLessEqual(required_expected_fields, set(fixture["expected_extraction"]))
-                self.assertEqual(fixture["source"]["expected_host"], "www.portland.gov")
+                self.assertEqual(fixture["source"]["expected_host"], "wetten.overheid.nl")
                 self.assertEqual(fixture["source"]["expected_content_type"], "application/pdf")
                 self.assertEqual(fixture["source"]["public_access"], "unauthenticated")
                 self.assertTrue(fixture["source"]["future_capture_required"])
@@ -65,7 +65,7 @@ class PdfExtractionFixtureTests(unittest.TestCase):
     def test_fixtures_do_not_embed_private_or_live_artifacts(self) -> None:
         raw = FIXTURE_PATH.read_text(encoding="utf-8").lower()
         forbidden_terms = [
-            "devhub.portlandoregon.gov/login",
+            "wetten.overheid.nl/login",
             "storage-state",
             "auth-state",
             "session cookie",

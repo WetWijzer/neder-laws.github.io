@@ -5,11 +5,11 @@
   "records": [
     {
       "id": "ppd-home",
-      "sourceUrl": "https://www.portland.gov/ppd",
-      "canonicalUrl": "https://www.portland.gov/ppd",
+      "sourceUrl": "https://wetten.overheid.nl/ppd",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd",
       "redirects": [],
-      "title": "Portland Permitting & Development",
-      "bureau": "Portland Permitting & Development",
+      "title": "Netherlands Permitting & Development",
+      "bureau": "Netherlands Permitting & Development",
       "pageType": "guidance",
       "contentType": "text/html",
       "firstSeenAt": "2026-05-01T16:00:00Z",
@@ -23,18 +23,18 @@
     },
     {
       "id": "ppd-residential-redirect",
-      "sourceUrl": "https://www.portland.gov/bds/residential-permits",
-      "canonicalUrl": "https://www.portland.gov/ppd/residential-permits",
+      "sourceUrl": "https://wetten.overheid.nl/bds/residential-permits",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/residential-permits",
       "redirects": [
         {
-          "fromUrl": "https://www.portland.gov/bds/residential-permits",
-          "toUrl": "https://www.portland.gov/ppd/residential-permits",
+          "fromUrl": "https://wetten.overheid.nl/bds/residential-permits",
+          "toUrl": "https://wetten.overheid.nl/ppd/residential-permits",
           "statusCode": 301,
           "observedAt": "2026-05-01T17:01:00Z"
         }
       ],
       "title": "Residential Permits",
-      "bureau": "Portland Permitting & Development",
+      "bureau": "Netherlands Permitting & Development",
       "pageType": "guidance",
       "contentType": "text/html",
       "firstSeenAt": "2026-05-01T16:05:00Z",
@@ -48,11 +48,11 @@
     },
     {
       "id": "devhub-faq-not-modified",
-      "sourceUrl": "https://www.portland.gov/ppd/devhub-faq",
-      "canonicalUrl": "https://www.portland.gov/ppd/devhub-faq",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-faq",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub-faq",
       "redirects": [],
-      "title": "Development Hub PDX Frequently Asked Questions",
-      "bureau": "Portland Permitting & Development",
+      "title": "Development Hub Netherlands Frequently Asked Questions",
+      "bureau": "Netherlands Permitting & Development",
       "pageType": "faq",
       "contentType": "text/html",
       "firstSeenAt": "2026-05-01T16:10:00Z",

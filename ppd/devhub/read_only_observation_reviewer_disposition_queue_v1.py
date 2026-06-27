@@ -73,7 +73,7 @@ PRIVATE_TEXT_RE = re.compile(
     re.IGNORECASE,
 )
 
-ONLINE_COMMAND_MARKERS = ("curl", "wget", "playwright", "devhub.portlandoregon.gov", "http://", "https://")
+ONLINE_COMMAND_MARKERS = ("curl", "wget", "playwright", "wetten.overheid.nl", "http://", "https://")
 BLOCKED_ACTION_RE = re.compile(
     r"\b(upload|submit|submission|certify|certification|pay|payment|schedule|scheduling|cancel|cancellation|withdraw|purchase|account creation|password recovery|mfa|captcha)\b",
     re.IGNORECASE,

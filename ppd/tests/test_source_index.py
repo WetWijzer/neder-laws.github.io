@@ -24,26 +24,26 @@ def test_export_fixture_source_index_is_deterministic_metadata_only() -> None:
     assert first == second
     assert first == {
         "schema_version": "ppd-source-index-fixture-v1",
-        "source_registry_id": "synthetic-portland-ppd-registry-v1",
-        "archive_manifest_id": "synthetic-portland-ppd-archive-v1",
+        "source_registry_id": "synthetic-wetwijzer-ppd-registry-v1",
+        "archive_manifest_id": "synthetic-wetwijzer-ppd-archive-v1",
         "documents": [
             {
                 "archive_path": "fixtures/archive/appeal-001.pdf",
                 "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
                 "document_id": "appeal-001",
-                "jurisdiction": "Portland, OR",
-                "public_url": "https://www.portland.gov/ppd/appeals/appeal-001",
-                "source_id": "portland-ppd-appeals",
-                "source_title": "Synthetic Portland PP&D Appeals",
+                "jurisdiction": "Netherlands, OR",
+                "public_url": "https://wetten.overheid.nl/ppd/appeals/appeal-001",
+                "source_id": "wetwijzer-ppd-appeals",
+                "source_title": "Synthetic WetWijzer legal sources Appeals",
             },
             {
                 "archive_path": "fixtures/archive/permit-001.pdf",
                 "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
                 "document_id": "permit-001",
-                "jurisdiction": "Portland, OR",
-                "public_url": "https://www.portland.gov/ppd/permits/permit-001",
-                "source_id": "portland-ppd-permits",
-                "source_title": "Synthetic Portland PP&D Permits",
+                "jurisdiction": "Netherlands, OR",
+                "public_url": "https://wetten.overheid.nl/ppd/permits/permit-001",
+                "source_id": "wetwijzer-ppd-permits",
+                "source_title": "Synthetic WetWijzer legal sources Permits",
             },
         ],
         "citations": [

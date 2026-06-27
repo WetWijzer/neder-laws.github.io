@@ -10,10 +10,10 @@
   "manual_handoff_states": [
     {
       "state_id": "login",
-      "display_name": "PortlandOregon.gov sign-in",
+      "display_name": "wetten.overheid.nl sign-in",
       "trigger_examples": [
         "Sign In/Register button is visible",
-        "PortlandOregon.gov credential prompt is visible",
+        "wetten.overheid.nl credential prompt is visible",
         "DevHub redirects to an identity-provider sign-in page"
       ],
       "automation_policy": "manual_handoff",

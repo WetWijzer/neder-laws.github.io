@@ -30,7 +30,7 @@ import { describeTemporalSummary, summarizeTemporalOperators } from './temporal'
 describe('lightweight reasoning', () => {
   it('runs bounded forward chaining with proof trace output', () => {
     const kb = createLogicKnowledgeBase(
-      [makeFact('SubjectTo', ['auditor', 'Portland City Code 1.01.010'], ['cid-1'])],
+      [makeFact('SubjectTo', ['auditor', 'Dutch legal corpus 1.01.010'], ['cid-1'])],
       [
         createImplication(
           'requires_compliance',
@@ -48,17 +48,17 @@ describe('lightweight reasoning', () => {
     expect(result.exhausted).toBe(true);
     expect(result.inferredFacts).toEqual([
       {
-        id: 'ComplyWith(auditor,Portland City Code 1.01.010)',
+        id: 'ComplyWith(auditor,Dutch legal corpus 1.01.010)',
         predicate: 'ComplyWith',
-        args: ['auditor', 'Portland City Code 1.01.010'],
+        args: ['auditor', 'Dutch legal corpus 1.01.010'],
         sourceIds: ['cid-1', 'rule-1'],
       },
     ]);
     expect(result.trace).toMatchObject([
       {
         rule: 'requires_compliance',
-        premises: ['SubjectTo(auditor,Portland City Code 1.01.010)'],
-        conclusion: 'ComplyWith(auditor,Portland City Code 1.01.010)',
+        premises: ['SubjectTo(auditor,Dutch legal corpus 1.01.010)'],
+        conclusion: 'ComplyWith(auditor,Dutch legal corpus 1.01.010)',
         sourceIds: ['cid-1', 'rule-1'],
       },
     ]);

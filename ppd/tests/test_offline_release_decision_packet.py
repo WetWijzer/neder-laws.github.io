@@ -104,12 +104,12 @@ def test_build_rejects_live_execution_raw_private_artifacts_and_mutation_flags()
 
 def test_build_rejects_private_authenticated_urls_and_archive_download_references() -> None:
     fixture = _load_fixture()
-    fixture["offline_release_readiness_packet"]["validation_evidence_references"][0]["download_url"] = "https://www.portland.gov/ppd/documents/raw/download"
+    fixture["offline_release_readiness_packet"]["validation_evidence_references"][0]["download_url"] = "https://wetten.overheid.nl/ppd/documents/raw/download"
     with pytest.raises(ValueError, match="download, archive, or raw"):
         build_offline_release_decision_packet(fixture)
 
     fixture = _load_fixture()
-    fixture["offline_release_readiness_packet"]["validation_evidence_references"][0]["authenticated_url"] = "https://devhub.portlandoregon.gov/private/case?token=redacted"
+    fixture["offline_release_readiness_packet"]["validation_evidence_references"][0]["authenticated_url"] = "https://wetten.overheid.nl/private/case?token=redacted"
     with pytest.raises(ValueError, match="private, authenticated"):
         build_offline_release_decision_packet(fixture)
 

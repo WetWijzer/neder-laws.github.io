@@ -26,8 +26,8 @@ def test_builds_ordered_fixture_first_preflight_rows() -> None:
 
     rows = packet["ordered_candidate_preflight_rows"]
     assert [row["source_id"] for row in rows] == [
-        "portland-permits-home-page",
-        "portland-permits-zoning-code",
+        "wetwijzer-permits-home-page",
+        "wetwijzer-permits-zoning-code",
     ]
     assert rows[0]["row_id"] == "preflight-001"
     assert rows[0]["official_anchor_citations"][0]["citation_id"] == "A1.1"

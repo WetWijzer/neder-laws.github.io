@@ -1,4 +1,4 @@
-"""Fixture-first document extraction task packet v1 for Portland PP&D.
+"""Fixture-first document extraction task packet v1 for WetWijzer legal sources.
 
 The builder consumes a coverage gap prioritization packet fixture and committed
 DocumentRecord fixtures, then emits offline-only extraction work items for one

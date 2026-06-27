@@ -3,7 +3,7 @@
   "fixture_type": "normalized_pdf_form_extraction",
   "source": {
     "source_id": "synthetic_ppd_public_form_001",
-    "canonical_url": "https://www.portland.gov/ppd/documents/synthetic-public-form-fixture/download",
+    "canonical_url": "https://wetten.overheid.nl/ppd/documents/synthetic-public-form-fixture/download",
     "source_type": "public_form",
     "owning_surface": "ppd_public_forms",
     "privacy_classification": "public_synthetic",

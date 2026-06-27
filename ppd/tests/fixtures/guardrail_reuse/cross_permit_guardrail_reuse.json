@@ -83,7 +83,7 @@
   "sourceEvidence": [
     {
       "sourceEvidenceId": "src-residential-building-single-pdf",
-      "sourceUrl": "https://www.portland.gov/ppd/residential-building-permits",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/residential-building-permits",
       "citation": {
         "locator": "fixture-residential-single-pdf",
         "paraphrase": "Residential building permit guidance can require plan documents before official application actions."
@@ -91,7 +91,7 @@
     },
     {
       "sourceEvidenceId": "src-residential-building-plan-review",
-      "sourceUrl": "https://www.portland.gov/ppd/residential-permit-inspections",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/residential-permit-inspections",
       "citation": {
         "locator": "fixture-residential-plan-review",
         "paraphrase": "Residential plan review evidence remains bound only to residential requirements."
@@ -99,7 +99,7 @@
     },
     {
       "sourceEvidenceId": "src-trade-permit-plan-review",
-      "sourceUrl": "https://www.portland.gov/ppd/trade-permits",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/trade-permits",
       "citation": {
         "locator": "fixture-trade-plan-review",
         "paraphrase": "Trade permit guidance can require project details before plan-review submission."
@@ -107,7 +107,7 @@
     },
     {
       "sourceEvidenceId": "src-trade-permit-fixture-count",
-      "sourceUrl": "https://www.portland.gov/ppd/trade-permit-applications",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/trade-permit-applications",
       "citation": {
         "locator": "fixture-trade-fixture-count",
         "paraphrase": "Trade fixture details remain bound only to trade permit requirements."

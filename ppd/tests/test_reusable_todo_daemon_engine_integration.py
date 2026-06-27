@@ -32,7 +32,7 @@ class ReusableTodoDaemonEngineIntegrationTests(unittest.TestCase):
         self.assertIsInstance(task, EngineTask)
         self.assertEqual("Task checkbox-450: Reusable engine wiring.", task.label)
 
-    def test_ppd_path_policy_keeps_portland_specific_guardrails(self) -> None:
+    def test_ppd_path_policy_keeps_wetwijzer_specific_guardrails(self) -> None:
         self.assertEqual([], ppd_daemon.validate_write_path("ppd/platform/reusable_contract.py"))
         self.assertTrue(
             any(

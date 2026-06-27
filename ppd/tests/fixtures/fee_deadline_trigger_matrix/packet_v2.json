@@ -27,7 +27,7 @@
     {
       "placeholder_id": "fee-guide-public-placeholder",
       "expected_public_source": "PP&D public fee payment guide or fee schedule page",
-      "source_url_placeholder": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "source_url_placeholder": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "evidence_gap": "Confirm current public language for when fee balances are created, displayed, adjusted, or due.",
       "human_review_status": "pending_official_source_review",
       "stale_source_hold_note": "Hold any formal rule extraction if the public source has not been verified during the current validation window."
@@ -35,7 +35,7 @@
     {
       "placeholder_id": "devhub-faq-public-placeholder",
       "expected_public_source": "PP&D DevHub FAQ or online permitting tools guidance",
-      "source_url_placeholder": "https://www.portland.gov/ppd/devhub-faqs",
+      "source_url_placeholder": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "evidence_gap": "Confirm public descriptions of fee payment, upload, inspection, and status-check workflows.",
       "human_review_status": "pending_official_source_review",
       "stale_source_hold_note": "Do not infer authenticated DevHub behavior from stale public FAQ text."
@@ -43,7 +43,7 @@
     {
       "placeholder_id": "permit-application-guide-placeholder",
       "expected_public_source": "PP&D public permit application guide",
-      "source_url_placeholder": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "source_url_placeholder": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "evidence_gap": "Confirm current public language for application submission, plan review, corrections, and post-submission status cues.",
       "human_review_status": "pending_official_source_review",
       "stale_source_hold_note": "Hold deadline and expiration claims until the guide is freshly checked."

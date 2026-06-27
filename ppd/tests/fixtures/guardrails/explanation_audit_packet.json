@@ -16,7 +16,7 @@
     "case_id": "synthetic-ppd-preview-001",
     "description": "Synthetic residential permit preview request used only to audit guardrail explanations.",
     "requested_action": "prepare_local_preview",
-    "jurisdiction": "Portland, Oregon",
+    "jurisdiction": "Netherlands, Netherlands",
     "facts": {
       "property_address": "1234 SW Fixture Ave",
       "permit_type": "residential alteration",

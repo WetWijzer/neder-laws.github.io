@@ -61,7 +61,7 @@ class AutonomousAssistanceDryRunTranscriptTest(unittest.TestCase):
         self.assertFalse(boundary["privateArtifactStored"])
 
         for source in self.fixture["sourceEvidence"]:
-            self.assertTrue(source["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
+            self.assertTrue(source["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
             self.assertTrue(source["citation"]["locator"])
             self.assertTrue(source["citation"]["paraphrase"])
 

@@ -20,7 +20,7 @@ def ready_assembly() -> dict[str, object]:
         "extraction_confidence": 0.91,
         "content_hash": "sha256:0123456789abcdef",
         "source_captured_at": "2026-05-01T00:00:00Z",
-        "owning_surface": {"id": "portland-zoning-code", "kind": "code"},
+        "owning_surface": {"id": "wetwijzer-zoning-code", "kind": "code"},
     }
 
 
@@ -54,7 +54,7 @@ def test_stale_source_low_confidence_and_bad_surface_block_extraction() -> None:
     assembly = ready_assembly()
     assembly["source_captured_at"] = "2026-02-01T00:00:00Z"
     assembly["extraction_confidence"] = 0.5
-    assembly["owning_surface"] = {"id": "portland-zoning-code"}
+    assembly["owning_surface"] = {"id": "wetwijzer-zoning-code"}
 
     assert issue_codes(assembly) == [
         "low_extraction_confidence",

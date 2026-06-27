@@ -3,8 +3,8 @@
   "metadata_targets": [
     {
       "source_id": "ppd-devhub-faq",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
-      "host": "www.portland.gov",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
+      "host": "wetten.overheid.nl",
       "source_type": "public_html",
       "expected_archive_manifest_id": "archive-manifest.ppd-devhub-faq.20260528T000000Z"
     }

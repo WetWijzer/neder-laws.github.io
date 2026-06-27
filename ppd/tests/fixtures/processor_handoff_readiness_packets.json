@@ -3,13 +3,13 @@
     "packet_id": "fixture-valid-public-readiness",
     "prerequisite_links": [
       {
-        "url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+        "url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
         "relation": "official_public_source"
       }
     ],
     "targets": [
       {
-        "url": "https://www.portland.gov/ppd/devhub-faqs",
+        "url": "https://wetten.overheid.nl/ppd/devhub-faqs",
         "source_type": "devhub_public"
       }
     ],
@@ -29,7 +29,7 @@
   "invalid_cases": {
     "missing_prerequisite_links": {
       "targets": [
-        "https://www.portland.gov/ppd"
+        "https://wetten.overheid.nl/ppd"
       ],
       "attestations": {
         "no_raw_body_persisted": true
@@ -37,11 +37,11 @@
     },
     "private_authenticated_target": {
       "prerequisite_links": [
-        "https://www.portland.gov/ppd"
+        "https://wetten.overheid.nl/ppd"
       ],
       "targets": [
         {
-          "url": "https://devhub.portlandoregon.gov/account/my-permits",
+          "url": "https://wetten.overheid.nl/account/my-permits",
           "authenticated": true
         }
       ],
@@ -51,10 +51,10 @@
     },
     "non_allowlisted_target": {
       "prerequisite_links": [
-        "https://www.portland.gov/ppd"
+        "https://wetten.overheid.nl/ppd"
       ],
       "targets": [
-        "https://records.example.org/portland-permits"
+        "https://records.example.org/wetwijzer-permits"
       ],
       "attestations": {
         "no_raw_body_persisted": true
@@ -62,10 +62,10 @@
     },
     "raw_download_reference": {
       "prerequisite_links": [
-        "https://www.portland.gov/ppd"
+        "https://wetten.overheid.nl/ppd"
       ],
       "targets": [
-        "https://www.portland.gov/ppd/documents/how-pay-fees/download"
+        "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download"
       ],
       "raw_download_ref": "tmp/raw/how-pay-fees.pdf",
       "attestations": {
@@ -74,10 +74,10 @@
     },
     "live_processor_execution_flag": {
       "prerequisite_links": [
-        "https://www.portland.gov/ppd"
+        "https://wetten.overheid.nl/ppd"
       ],
       "targets": [
-        "https://www.portland.gov/ppd/devhub-faqs"
+        "https://wetten.overheid.nl/ppd/devhub-faqs"
       ],
       "processor_execute": true,
       "attestations": {
@@ -86,18 +86,18 @@
     },
     "missing_no_raw_body_attestation": {
       "prerequisite_links": [
-        "https://www.portland.gov/ppd"
+        "https://wetten.overheid.nl/ppd"
       ],
       "targets": [
-        "https://www.portland.gov/ppd/devhub-faqs"
+        "https://wetten.overheid.nl/ppd/devhub-faqs"
       ]
     },
     "missing_skipped_target_reason": {
       "prerequisite_links": [
-        "https://www.portland.gov/ppd"
+        "https://wetten.overheid.nl/ppd"
       ],
       "targets": [
-        "https://www.portland.gov/ppd/devhub-faqs"
+        "https://wetten.overheid.nl/ppd/devhub-faqs"
       ],
       "skipped_targets": [
         {
@@ -110,10 +110,10 @@
     },
     "archive_artifact_claim": {
       "prerequisite_links": [
-        "https://www.portland.gov/ppd"
+        "https://wetten.overheid.nl/ppd"
       ],
       "targets": [
-        "https://www.portland.gov/ppd/devhub-faqs"
+        "https://wetten.overheid.nl/ppd/devhub-faqs"
       ],
       "archive_artifact_ref": "ipfs://bafy-placeholder",
       "attestations": {

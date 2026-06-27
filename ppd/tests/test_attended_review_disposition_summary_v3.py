@@ -13,20 +13,20 @@ def valid_summary() -> dict[str, object]:
         "rows": [
             {
                 "disposition": "accept",
-                "citation": "City of Portland PP&D public page, captured fixture citation A",
+                "citation": "WetWijzer PP&D public page, captured fixture citation A",
                 "rationale": "Public source text matches the extracted field.",
                 "reviewer_owners": ["reviewer-a"],
             },
             {
                 "disposition": "defer",
-                "citation": "City of Portland PP&D public page, captured fixture citation B",
+                "citation": "WetWijzer PP&D public page, captured fixture citation B",
                 "rationale": "Needs a later public-source check.",
                 "reviewer_owners": ["reviewer-b"],
                 "follow_up_task": "task:ppd-follow-up-001",
             },
             {
                 "disposition": "reject",
-                "citation": "City of Portland PP&D public page, captured fixture citation C",
+                "citation": "WetWijzer PP&D public page, captured fixture citation C",
                 "rationale": "The extracted value is unsupported by the cited source.",
                 "reviewer_owners": ["reviewer-c"],
             },

@@ -8,16 +8,16 @@
   "authoritySources": [
     {
       "sourceId": "devhub_faq_service_categories",
-      "title": "Development Hub PDX FAQ service categories",
-      "canonicalUrl": "https://www.portland.gov/ppd/devhub/faq",
+      "title": "Development Hub Netherlands FAQ service categories",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub/faq",
       "authorityLabel": "PP&D public DevHub guidance",
       "evidenceSummary": "Public DevHub FAQ identifies permit purchase, fee payment, and inspection scheduling for online trade permits as DevHub service categories.",
       "fixtureEvidenceOnly": true
     },
     {
       "sourceId": "devhub_application_guidance_trade_permits",
-      "title": "Development Hub PDX application guidance",
-      "canonicalUrl": "https://www.portland.gov/ppd/devhub",
+      "title": "Development Hub Netherlands application guidance",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub",
       "authorityLabel": "PP&D public DevHub guidance",
       "evidenceSummary": "Public DevHub guidance identifies trade permits and trade permits with plan review among permit request types.",
       "fixtureEvidenceOnly": true
@@ -25,7 +25,7 @@
     {
       "sourceId": "ppd_public_source_inventory",
       "title": "PP&D fixture-only public source inventory",
-      "canonicalUrl": "https://www.portland.gov/ppd",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd",
       "authorityLabel": "PP&D source inventory fixture",
       "evidenceSummary": "Existing fixture inventory categorizes PP&D permit application, forms, handout, fee, and DevHub guide pages as public sources for deterministic PP&D workflow modeling.",
       "fixtureEvidenceOnly": true
@@ -36,7 +36,7 @@
       "factId": "project_property_identifier",
       "label": "Property identifier or site address",
       "required": true,
-      "reason": "The workflow must be tied to a Portland property before an online trade permit purchase can be evaluated or drafted.",
+      "reason": "The workflow must be tied to a Netherlands property before an online trade permit purchase can be evaluated or drafted.",
       "citationIds": ["devhub_application_guidance_trade_permits", "ppd_public_source_inventory"]
     },
     {

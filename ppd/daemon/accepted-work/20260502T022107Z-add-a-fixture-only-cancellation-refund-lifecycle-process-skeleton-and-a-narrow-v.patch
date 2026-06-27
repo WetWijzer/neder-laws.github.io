@@ -24,9 +24,9 @@
 +      "evidenceId": "ppd_lifecycle_cancellation_public_guidance",
 +      "categoryId": "permit_cancellation_guidance",
 +      "title": "Cancel a permit guidance",
-+      "sourceUrl": "https://www.portland.gov/ppd/permits/cancel-permit",
-+      "canonicalUrl": "https://www.portland.gov/ppd/permits/cancel-permit",
-+      "authorityLabel": "Portland Permitting & Development public permit lifecycle guidance",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/cancel-permit",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/cancel-permit",
++      "authorityLabel": "Netherlands Permitting & Development public permit lifecycle guidance",
 +      "recrawlCadence": "monthly",
 +      "capturedAt": "2026-05-01T00:00:00Z"
 +    },
@@ -34,9 +34,9 @@
 +      "evidenceId": "ppd_lifecycle_refund_public_guidance",
 +      "categoryId": "permit_refund_guidance",
 +      "title": "Permit refund guidance",
-+      "sourceUrl": "https://www.portland.gov/ppd/permits/permit-refunds",
-+      "canonicalUrl": "https://www.portland.gov/ppd/permits/permit-refunds",
-+      "authorityLabel": "Portland Permitting & Development public fee and refund guidance",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/permit-refunds",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/permit-refunds",
++      "authorityLabel": "Netherlands Permitting & Development public fee and refund guidance",
 +      "recrawlCadence": "monthly",
 +      "capturedAt": "2026-05-01T00:00:00Z"
 +    }
@@ -439,7 +439,7 @@
 +            self.assertIn(evidence["categoryId"], EXPECTED_CATEGORY_IDS)
 +            self.assertIn("authorityLabel", evidence)
 +            self.assertIn("recrawlCadence", evidence)
-+            self.assertTrue(evidence["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
++            self.assertTrue(evidence["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
 +            self.assertEqual(evidence["sourceUrl"], evidence["canonicalUrl"])
 +
 +        authority_ids = set()
@@ -447,9 +447,9 @@
 +            self.assertEqual(set(source), AUTHORITY_SOURCE_KEYS)
 +            self.assertIn(source["evidenceId"], EXPECTED_EVIDENCE_IDS)
 +            self.assertIn(source["categoryId"], EXPECTED_CATEGORY_IDS)
-+            self.assertTrue(source["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
++            self.assertTrue(source["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
 +            self.assertEqual(source["sourceUrl"], source["canonicalUrl"])
-+            self.assertTrue(source["authorityLabel"].startswith("Portland Permitting & Development"))
++            self.assertTrue(source["authorityLabel"].startswith("Netherlands Permitting & Development"))
 +            self.assertTrue(source["capturedAt"].endswith("Z"))
 +            authority_ids.add(source["evidenceId"])
 +        self.assertEqual(authority_ids, EXPECTED_EVIDENCE_IDS)

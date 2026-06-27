@@ -143,10 +143,10 @@ _REDACTED_TEXT_VALUES = {
 }
 
 _ALLOWED_URL_HOSTS = {
-    'devhub.portlandoregon.gov',
-    'www.portland.gov',
-    'www.portlandoregon.gov',
-    'www.portlandmaps.com',
+    'wetten.overheid.nl',
+    'wetten.overheid.nl',
+    'wetten.overheid.nl',
+    'repository.overheid.nl',
 }
 
 
@@ -181,7 +181,7 @@ def validate_surface_state_packet(packet: Mapping[str, Any]) -> SurfaceStatePack
 
     url_pattern = _first_present(packet, ('url_pattern', 'surface.url_pattern'))
     if not _is_actionable_url_pattern(url_pattern):
-        errors.append('url_pattern must be a concrete HTTPS DevHub or Portland public URL pattern')
+        errors.append('url_pattern must be a concrete HTTPS DevHub or Netherlands public URL pattern')
 
     for path, key, value in _walk_mapping(packet):
         if _path_is_under_redaction_policy(path):

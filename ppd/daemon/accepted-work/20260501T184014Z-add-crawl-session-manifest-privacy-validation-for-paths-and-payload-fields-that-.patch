@@ -318,24 +318,24 @@
 +  },
 +  "planned_fetches": [
 +    {
-+      "url": "https://www.portland.gov/ppd",
-+      "canonical_url": "https://www.portland.gov/ppd",
++      "url": "https://wetten.overheid.nl/ppd",
++      "canonical_url": "https://wetten.overheid.nl/ppd",
 +      "decision": "allow",
 +      "policy_reasons": ["allowed_domain", "public_guidance", "no_persist_raw_body"],
 +      "expected_content_type": "html",
 +      "content_hash": "sha256:planned-only-no-body"
 +    },
 +    {
-+      "url": "https://www.portland.gov/ppd/permits/forms",
-+      "canonical_url": "https://www.portland.gov/ppd/permits/forms",
++      "url": "https://wetten.overheid.nl/ppd/permits/forms",
++      "canonical_url": "https://wetten.overheid.nl/ppd/permits/forms",
 +      "decision": "allow",
 +      "policy_reasons": ["allowed_domain", "public_forms_index", "no_download_fixture"],
 +      "expected_content_type": "html",
 +      "content_hash": "sha256:planned-only-no-document"
 +    },
 +    {
-+      "url": "https://www.portland.gov/ppd/documents/example-public-form/download",
-+      "canonical_url": "https://www.portland.gov/ppd/documents/example-public-form/download",
++      "url": "https://wetten.overheid.nl/ppd/documents/example-public-form/download",
++      "canonical_url": "https://wetten.overheid.nl/ppd/documents/example-public-form/download",
 +      "decision": "allow",
 +      "policy_reasons": ["allowed_domain", "public_document_url_only", "no_local_download_path"],
 +      "expected_content_type": "pdf",
@@ -365,7 +365,7 @@
 +  },
 +  "planned_fetches": [
 +    {
-+      "url": "https://www.portland.gov/ppd",
++      "url": "https://wetten.overheid.nl/ppd",
 +      "decision": "allow",
 +      "response_body": "Raw response bodies do not belong in manifests.",
 +      "headers": {

@@ -20,11 +20,11 @@
     {
       "manifest_id": "fixture-manifest-1",
       "source_id": "fixture-source-1",
-      "canonical_url": "https://www.portland.gov/ppd",
-      "requested_url": "https://www.portland.gov/ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
+      "requested_url": "https://wetten.overheid.nl/ppd",
       "redirect_chain": [
         {
-          "url": "https://www.portland.gov/ppd",
+          "url": "https://wetten.overheid.nl/ppd",
           "status": 200
         }
       ],

@@ -4,11 +4,11 @@
   "rows": [
     {
       "seed_id": "ppd-permit-search-index-placeholder",
-      "seed_url": "https://www.portland.gov/ppd/permits/placeholder-search-index",
-      "robots_user_agent": "PortlandPolicyDocsFixtureBot",
+      "seed_url": "https://wetten.overheid.nl/ppd/permits/placeholder-search-index",
+      "robots_user_agent": "NetherlandsPolicyDocsFixtureBot",
       "robots_expected": "review robots allowance from fixture placeholder before any future public refresh",
       "allowlist_decision": "allow",
-      "canonical_url_expectation": "https://www.portland.gov/ppd/permits/placeholder-search-index",
+      "canonical_url_expectation": "https://wetten.overheid.nl/ppd/permits/placeholder-search-index",
       "request_methods": ["GET", "HEAD"],
       "rate_limit_note": "Use one synthetic planning row only; any future live request must be separately approved and rate limited outside this checklist.",
       "archive_manifest_expectation": {
@@ -22,19 +22,19 @@
       "source_anchor_placeholders": [
         {
           "kind": "official_source_anchor_placeholder",
-          "title": "Portland PP&D permits landing page placeholder",
-          "url_placeholder": "https://www.portland.gov/ppd/permits",
+          "title": "WetWijzer legal sources permits landing page placeholder",
+          "url_placeholder": "https://wetten.overheid.nl/ppd/permits",
           "expected_use": "Anchor the seed to an official PP&D public permits source without fetching it during validation."
         }
       ]
     },
     {
       "seed_id": "ppd-code-guide-placeholder",
-      "seed_url": "https://www.portland.gov/ppd/code-guide/placeholder",
-      "robots_user_agent": "PortlandPolicyDocsFixtureBot",
+      "seed_url": "https://wetten.overheid.nl/ppd/code-guide/placeholder",
+      "robots_user_agent": "NetherlandsPolicyDocsFixtureBot",
       "robots_expected": "review robots allowance from fixture placeholder before any future public refresh",
       "allowlist_decision": "skip",
-      "canonical_url_expectation": "https://www.portland.gov/ppd/code-guide/placeholder",
+      "canonical_url_expectation": "https://wetten.overheid.nl/ppd/code-guide/placeholder",
       "request_methods": ["HEAD"],
       "rate_limit_note": "No request is made by this checklist; HEAD is the maximum future method if separately approved.",
       "archive_manifest_expectation": {
@@ -48,8 +48,8 @@
       "source_anchor_placeholders": [
         {
           "kind": "official_source_anchor_placeholder",
-          "title": "Portland PP&D code and rules placeholder",
-          "url_placeholder": "https://www.portland.gov/ppd/code-rules",
+          "title": "WetWijzer legal sources code and rules placeholder",
+          "url_placeholder": "https://wetten.overheid.nl/ppd/code-rules",
           "expected_use": "Anchor the skipped seed to an official PP&D source category without opening the source during validation."
         }
       ]

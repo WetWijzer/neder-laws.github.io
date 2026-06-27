@@ -11,8 +11,8 @@
     "Defer live crawl unless a reviewer approves a bounded source group."
   ],
   "allowlisted_source_groups": [
-    "portland_public_permitting_indexes",
-    "portland_public_code_pages"
+    "wetwijzer_public_permitting_indexes",
+    "wetwijzer_public_code_pages"
   ],
   "robots_policy_preflight_checklist_rows": [
     "Confirm robots handling for each source group.",

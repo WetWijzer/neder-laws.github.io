@@ -77,7 +77,7 @@ def test_rows_include_owner_affected_ids_reasons_checks_and_attestations() -> No
 
 def test_validation_outcome_errors_become_review_reasons_without_private_url_leakage() -> None:
     scheduler_packet = deepcopy(_fixture()["scheduler_rehearsal_v4_packet"])
-    scheduler_packet["cited_metadata_only_recrawl_schedule_candidates"][0]["canonical_url"] = "https://devhub.portlandoregon.gov/account/my-permits?token=secret"
+    scheduler_packet["cited_metadata_only_recrawl_schedule_candidates"][0]["canonical_url"] = "https://wetten.overheid.nl/account/my-permits?token=secret"
     validation_outcome = validate_public_freshness_scheduler_rehearsal_v4_safety(scheduler_packet)
 
     packet = build_public_freshness_reviewer_handoff_v1(

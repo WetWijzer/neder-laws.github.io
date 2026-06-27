@@ -4,13 +4,13 @@ function getRuntimeOpenRouterBaseUrl(): string {
   }
 
   if (typeof window !== 'undefined') {
-    const localOverride = window.localStorage.getItem('PORTLAND_OPENROUTER_BASE_URL');
+    const localOverride = window.localStorage.getItem('WETWIJZER_OPENROUTER_BASE_URL');
     if (localOverride) {
       return localOverride;
     }
 
     // Production safety net for GitHub Pages builds that missed env injection.
-    if (window.location.hostname === 'portland-laws.github.io') {
+    if (window.location.hostname === 'wetwijzer.github.io') {
       return 'https://animegf.chat:8787/api/openrouter';
     }
   }
@@ -72,7 +72,7 @@ export const LLM_CONFIG = {
   OPENROUTER_API_KEY: import.meta.env.VITE_OPENROUTER_API_KEY || '',
   OPENROUTER_BASE_URL: getRuntimeOpenRouterBaseUrl(),
   OPENROUTER_SITE_URL: import.meta.env.VITE_OPENROUTER_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : ''),
-  OPENROUTER_SITE_NAME: import.meta.env.VITE_OPENROUTER_SITE_NAME || 'Portland Laws',
+  OPENROUTER_SITE_NAME: import.meta.env.VITE_OPENROUTER_SITE_NAME || 'WetWijzer Laws',
   OPENROUTER_DEFAULT_MODEL: import.meta.env.VITE_OPENROUTER_DEFAULT_MODEL || 'liquid/lfm-2.5-1.2b-instruct:free',
   OPENROUTER_THINKING_MODEL: import.meta.env.VITE_OPENROUTER_THINKING_MODEL || 'liquid/lfm-2.5-1.2b-thinking:free',
 } as const;

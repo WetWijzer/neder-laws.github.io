@@ -43,7 +43,7 @@ ABORT_DECISION_EXAMPLES: tuple[dict[str, str], ...] = (
 
 DEFERRED_LIVE_SESSION_PREREQUISITES: tuple[str, ...] = (
     "Attended user-visible browser session approved for the specific operator and account.",
-    "Manual PortlandOregon.gov sign-in, MFA, and CAPTCHA handling by the user if presented.",
+    "Manual wetten.overheid.nl sign-in, MFA, and CAPTCHA handling by the user if presented.",
     "Gitignored ephemeral browser profile and trace/HAR/screenshot capture disabled by default.",
     "Operator review of exact abort conditions before opening DevHub.",
     "Post-session review confirming no browser artifacts or private values were committed.",

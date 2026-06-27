@@ -11,7 +11,7 @@
       ],
       "seeds": [
         {
-          "url": "https://www.portland.gov/ppd",
+          "url": "https://wetten.overheid.nl/ppd",
           "source_evidence_ids": [
             "ppd-plan-official-source-anchors-20260508"
           ],
@@ -21,7 +21,7 @@
           }
         },
         {
-          "url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+          "url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
           "source_evidence_ids": [
             "ppd-plan-official-source-anchors-20260508"
           ],

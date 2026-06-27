@@ -35,9 +35,9 @@ def test_builds_ordered_no_network_run_queue_from_backlog_packet() -> None:
     assert validate_public_source_freshness_run_queue_v1(queue) == []
     assert [row["order"] for row in queue["run_queue_rows"]] == [1, 2, 3]
     assert [row["source_anchor_ids"] for row in queue["run_queue_rows"]] == [
-        ["anchor-portland-zoning-code-title-33"],
-        ["anchor-portland-bds-land-use-review-fees"],
-        ["anchor-portland-permit-forms"],
+        ["anchor-wetwijzer-zoning-code-title-33"],
+        ["anchor-wetwijzer-bds-land-use-review-fees"],
+        ["anchor-wetwijzer-permit-forms"],
     ]
     assert [row["expected_freshness_cadence"] for row in queue["run_queue_rows"]] == [
         ["monthly"],

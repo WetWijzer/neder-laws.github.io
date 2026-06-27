@@ -68,8 +68,8 @@ class ArchivedRequirementGuardrailBundleTest(unittest.TestCase):
 
         for item in evidence.values():
             self.assertIn(item["processorHandoffId"], self.bundle["processorHandoffIds"])
-            self.assertTrue(item["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
-            self.assertTrue(item["canonicalUrl"].startswith("https://www.portland.gov/ppd/"))
+            self.assertTrue(item["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
+            self.assertTrue(item["canonicalUrl"].startswith("https://wetten.overheid.nl/ppd/"))
             self.assertRegex(item["contentHashPlaceholder"], SHA256_RE)
             self.assertFalse(item["stale"])
             self.assertTrue(item["citation"]["title"])

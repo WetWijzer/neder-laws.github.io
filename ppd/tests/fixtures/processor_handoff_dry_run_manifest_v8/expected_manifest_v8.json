@@ -9,8 +9,8 @@
       "invocation_id": "processor-handoff-dry-run-v8::001::ppd-landing-page",
       "source_queue_order": 1,
       "source_id": "ppd-landing-page",
-      "canonical_url": "https://www.portland.gov/ppd",
-      "requested_url_placeholder": "https://www.portland.gov/ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
+      "requested_url_placeholder": "https://wetten.overheid.nl/ppd",
       "source_type": "public_html",
       "processor_name": "ipfs_datasets_py.web_archive_html_processor",
       "processor_version_placeholder": "fixture_pending_no_processor_invocation",
@@ -47,8 +47,8 @@
       "invocation_id": "processor-handoff-dry-run-v8::002::ppd-submit-plans-online",
       "source_queue_order": 2,
       "source_id": "ppd-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
-      "requested_url_placeholder": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
+      "requested_url_placeholder": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "source_type": "public_html",
       "processor_name": "ipfs_datasets_py.web_archive_html_processor",
       "processor_version_placeholder": "fixture_pending_no_processor_invocation",
@@ -169,7 +169,7 @@
   "skipped_source_rows": [
     {
       "source_id": "skipped-preflight-placeholder-001",
-      "canonical_url": "https://www.portland.gov/ppd/private-policy-placeholder",
+      "canonical_url": "https://wetten.overheid.nl/ppd/private-policy-placeholder",
       "source_type": "preflight_skip_placeholder",
       "skipped_reason": "disallowed_by_robots_or_policy",
       "source_queue_order": null,
@@ -185,7 +185,7 @@
     },
     {
       "source_id": "skipped-preflight-placeholder-003",
-      "canonical_url": "https://devhub.portlandoregon.gov/private-placeholder",
+      "canonical_url": "https://wetten.overheid.nl/private-placeholder",
       "source_type": "preflight_skip_placeholder",
       "skipped_reason": "private_authenticated",
       "source_queue_order": null,
@@ -193,7 +193,7 @@
     },
     {
       "source_id": "skipped-preflight-placeholder-004",
-      "canonical_url": "https://www.portland.gov/ppd/documents/raw-download-placeholder",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/raw-download-placeholder",
       "source_type": "preflight_skip_placeholder",
       "skipped_reason": "raw_download_not_permitted",
       "source_queue_order": null,
@@ -201,7 +201,7 @@
     },
     {
       "source_id": "skipped-preflight-placeholder-005",
-      "canonical_url": "https://www.portland.gov/ppd/documents/too-large-placeholder",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/too-large-placeholder",
       "source_type": "preflight_skip_placeholder",
       "skipped_reason": "too_large",
       "source_queue_order": null,
@@ -209,7 +209,7 @@
     },
     {
       "source_id": "skipped-preflight-placeholder-006",
-      "canonical_url": "https://www.portland.gov/ppd/downloads/archive-placeholder.zip",
+      "canonical_url": "https://wetten.overheid.nl/ppd/downloads/archive-placeholder.zip",
       "source_type": "preflight_skip_placeholder",
       "skipped_reason": "unsupported_content_type",
       "source_queue_order": null,

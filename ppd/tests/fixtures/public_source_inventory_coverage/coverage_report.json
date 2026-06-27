@@ -8,57 +8,57 @@
       "inventoryCategoryId": "permit_application_pages",
       "inventoryCategoryLabel": "Permit application pages",
       "sourceLandscapeIds": ["applications_forms_index", "permit_submission_guidance"],
-      "authorityLabels": ["Portland Permitting & Development public guidance"],
-      "canonicalUrls": ["https://www.portland.gov/ppd/permits"],
+      "authorityLabels": ["Netherlands Permitting & Development public guidance"],
+      "canonicalUrls": ["https://wetten.overheid.nl/ppd/permits"],
       "recrawlCadenceHint": "weekly"
     },
     {
       "inventoryCategoryId": "forms_and_applications",
       "inventoryCategoryLabel": "Forms and applications",
       "sourceLandscapeIds": ["applications_forms_index"],
-      "authorityLabels": ["Portland Permitting & Development forms index"],
-      "canonicalUrls": ["https://www.portland.gov/ppd/forms"],
+      "authorityLabels": ["Netherlands Permitting & Development forms index"],
+      "canonicalUrls": ["https://wetten.overheid.nl/ppd/forms"],
       "recrawlCadenceHint": "weekly"
     },
     {
       "inventoryCategoryId": "handouts_and_checklists",
       "inventoryCategoryLabel": "Handouts and checklists",
       "sourceLandscapeIds": ["linked_pdf_handout_checklist_documents", "plan_upload_guidance"],
-      "authorityLabels": ["Portland Permitting & Development handouts and checklists"],
-      "canonicalUrls": ["https://www.portland.gov/ppd/documents"],
+      "authorityLabels": ["Netherlands Permitting & Development handouts and checklists"],
+      "canonicalUrls": ["https://wetten.overheid.nl/ppd/documents"],
       "recrawlCadenceHint": "monthly"
     },
     {
       "inventoryCategoryId": "fees_and_payment_guidance",
       "inventoryCategoryLabel": "Fees and payment guidance",
       "sourceLandscapeIds": ["payment_guidance"],
-      "authorityLabels": ["Portland Permitting & Development fee guidance"],
-      "canonicalUrls": ["https://www.portland.gov/ppd/fees"],
+      "authorityLabels": ["Netherlands Permitting & Development fee guidance"],
+      "canonicalUrls": ["https://wetten.overheid.nl/ppd/fees"],
       "recrawlCadenceHint": "weekly"
     },
     {
       "inventoryCategoryId": "devhub_public_guides",
       "inventoryCategoryLabel": "DevHub public guides",
       "sourceLandscapeIds": ["devhub_faq_process_guides", "correction_upload_guidance"],
-      "authorityLabels": ["Portland.gov DevHub public guidance"],
-      "canonicalUrls": ["https://www.portland.gov/ppd/devhub"],
+      "authorityLabels": ["wetten.overheid.nl DevHub public guidance"],
+      "canonicalUrls": ["https://wetten.overheid.nl/ppd/devhub"],
       "recrawlCadenceHint": "weekly"
     }
   ],
   "missingCategories": [
     {
       "sourceLandscapeId": "ppd_landing_public_guidance",
-      "description": "PP&D landing and public guidance under https://www.portland.gov/ppd",
+      "description": "PP&D landing and public guidance under https://wetten.overheid.nl/ppd",
       "status": "missing_from_fixture_inventory"
     },
     {
       "sourceLandscapeId": "devhub_public_portal",
-      "description": "DevHub public portal at https://devhub.portlandoregon.gov",
+      "description": "DevHub public portal at https://wetten.overheid.nl",
       "status": "missing_from_fixture_inventory"
     },
     {
       "sourceLandscapeId": "devhub_signin_account_guidance",
-      "description": "DevHub sign-in and account guidance on Portland.gov",
+      "description": "DevHub sign-in and account guidance on wetten.overheid.nl",
       "status": "missing_from_fixture_inventory"
     },
     {
@@ -72,8 +72,8 @@
       "status": "missing_from_fixture_inventory"
     },
     {
-      "sourceLandscapeId": "portland_maps_references",
-      "description": "Portland Maps public permit, case, and property references",
+      "sourceLandscapeId": "bwb_metadata_references",
+      "description": "BWB metadata public permit, case, and property references",
       "status": "missing_from_fixture_inventory"
     }
   ]

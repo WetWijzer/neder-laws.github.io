@@ -13,7 +13,7 @@
   "changedEvidence": [
     {
       "sourceEvidenceId": "src-ppd-public-checklist",
-      "sourceUrl": "https://www.portland.gov/ppd/building-permit-forms",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/building-permit-forms",
       "previousCapturedAt": "2026-04-01T00:00:00Z",
       "currentCapturedAt": "2026-05-01T00:00:00Z",
       "previousHashPlaceholder": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",

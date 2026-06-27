@@ -7,10 +7,10 @@ from ppd.crawler.public_crawl_readiness import validate_public_crawl_readiness
 
 def test_public_crawl_readiness_accepts_minimal_safe_packet() -> None:
     packet = {
-        "url": "https://www.portland.gov/code/33",
+        "url": "https://wetten.overheid.nl/code/33",
         "source_anchors": [
             {
-                "url": "https://www.portland.gov/code/33",
+                "url": "https://wetten.overheid.nl/code/33",
                 "observed_at": "2026-05-20T00:00:00Z",
             }
         ],

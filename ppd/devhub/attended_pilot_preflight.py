@@ -91,7 +91,7 @@ def validate_preflight_packet(packet: dict[str, Any]) -> PreflightValidationResu
     handoff = _mapping(packet.get("manual_login_handoff"))
     _require(errors, handoff.get("required") is True, "manual login handoff must be required")
     _require(errors, handoff.get("operator_present") is True, "operator presence must be required")
-    _require_contains(errors, _string_list(handoff.get("steps")), "user opens DevHub and completes PortlandOregon.gov login manually", "manual handoff must keep login fully manual")
+    _require_contains(errors, _string_list(handoff.get("steps")), "user opens DevHub and completes wetten.overheid.nl login manually", "manual handoff must keep login fully manual")
     _require_contains(errors, _string_list(handoff.get("blocked_steps")), "agent does not enter credentials, solve MFA, or persist session state", "manual handoff must block credential, MFA, and session persistence handling")
 
     scope = _mapping(packet.get("allowed_observation_scope"))

@@ -4,7 +4,7 @@
   "coverage_gaps": [
     {
       "source_id": "ppd-devhub-faqs",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "gap_type": "missing_registry_row",
       "gap_reason": "Official DevHub FAQ anchor was present in source anchors but absent from active registry coverage.",
       "source_type": "devhub_public",
@@ -14,7 +14,7 @@
     },
     {
       "source_id": "ppd-outside-social-link",
-      "canonical_url": "https://www.portland.gov/social",
+      "canonical_url": "https://wetten.overheid.nl/social",
       "gap_type": "outside_ppd_source_scope",
       "skip_reason": "outside ppd source scope",
       "reviewer_owner": "public-source-registry-reviewer"

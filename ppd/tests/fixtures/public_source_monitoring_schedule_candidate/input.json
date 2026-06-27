@@ -37,34 +37,34 @@
   "public_crawl_metadata_dry_run_intake": {
     "packet_id": "public-crawl-metadata-intake-20260528-fixture",
     "dry_run": true,
-    "promotion_manifest_url": "https://www.portland.gov/ppd/fixture-public-crawl-promotion-manifest",
-    "requested_url": "https://www.portland.gov/ppd/devhub-faqs",
+    "promotion_manifest_url": "https://wetten.overheid.nl/ppd/fixture-public-crawl-promotion-manifest",
+    "requested_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
     "discovered_urls": [
-      "https://www.portland.gov/ppd/devhub-faqs",
-      "https://www.portland.gov/ppd/get-permit/submit-plans-online"
+      "https://wetten.overheid.nl/ppd/devhub-faqs",
+      "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online"
     ],
-    "robots_evidence": ["robots-prereq-portland-gov-20260528"],
+    "robots_evidence": ["robots-prereq-wetwijzer-gov-20260528"],
     "policy_evidence": ["policy-prereq-ppd-public-metadata-only-20260528"],
     "prerequisite_evidence_ids": [
-      "robots-prereq-portland-gov-20260528",
+      "robots-prereq-wetwijzer-gov-20260528",
       "policy-prereq-ppd-public-metadata-only-20260528"
     ],
     "selected_allowlisted_targets": [
       {
         "source_id": "ppd-devhub-faq",
         "target_id": "target-devhub-faq",
-        "public_metadata_url": "https://www.portland.gov/ppd/devhub-faqs",
+        "public_metadata_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
         "robots_policy_prerequisite_ids": [
-          "robots-prereq-portland-gov-20260528",
+          "robots-prereq-wetwijzer-gov-20260528",
           "policy-prereq-ppd-public-metadata-only-20260528"
         ]
       },
       {
         "source_id": "ppd-submit-plans-online",
         "target_id": "target-submit-plans-online",
-        "public_metadata_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+        "public_metadata_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
         "robots_policy_prerequisite_ids": [
-          "robots-prereq-portland-gov-20260528",
+          "robots-prereq-wetwijzer-gov-20260528",
           "policy-prereq-ppd-public-metadata-only-20260528"
         ]
       }

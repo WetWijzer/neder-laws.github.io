@@ -7,7 +7,7 @@
     {
       "id": "devhub-request-type",
       "workflow": "mock_plan_review_request",
-      "urlPattern": "https://devhub.portlandoregon.gov/permits/request-type*",
+      "urlPattern": "https://wetten.overheid.nl/permits/request-type*",
       "heading": "Start a permit request",
       "capturedAt": "2026-05-01T18:20:00Z",
       "fields": [
@@ -116,7 +116,7 @@
     {
       "id": "devhub-document-upload",
       "workflow": "mock_plan_review_request",
-      "urlPattern": "https://devhub.portlandoregon.gov/permits/documents*",
+      "urlPattern": "https://wetten.overheid.nl/permits/documents*",
       "heading": "Upload documents",
       "capturedAt": "2026-05-01T18:20:00Z",
       "fields": [
@@ -270,7 +270,7 @@
     {
       "id": "devhub-review-and-certify",
       "workflow": "mock_plan_review_request",
-      "urlPattern": "https://devhub.portlandoregon.gov/permits/review*",
+      "urlPattern": "https://wetten.overheid.nl/permits/review*",
       "heading": "Review and certify",
       "capturedAt": "2026-05-01T18:20:00Z",
       "fields": [

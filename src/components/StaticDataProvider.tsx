@@ -120,7 +120,7 @@ export default function StaticDataProvider({ children }: StaticDataProviderProps
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400 mx-auto mb-4"></div>
           <h2 className="text-2xl font-semibold">Initializing Static Database...</h2>
-          <p className="text-gray-300 mt-2">Setting up your local AI Town instance</p>
+          <p className="text-gray-300 mt-2">Setting up your local WetWijzer instance</p>
         </div>
       </div>
     );

@@ -19,7 +19,7 @@
   "publicSources": [
     {
       "sourceEvidenceId": "src-ppd-building-permit-guide",
-      "sourceUrl": "https://www.portland.gov/ppd/residential-building-permits",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/residential-building-permits",
       "canonicalDocumentId": "ppd-public-residential-building-permits",
       "contentHashPlaceholder": "sha256:[PUBLIC_ARCHIVE_HASH_PLACEHOLDER_1]",
       "processorHandoffId": "processor-handoff-ppd-residential-building-permits",
@@ -31,7 +31,7 @@
     },
     {
       "sourceEvidenceId": "src-ppd-devhub-apply-guide",
-      "sourceUrl": "https://www.portland.gov/ppd/devhub/how-apply-permit-devhub",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/how-apply-permit-devhub",
       "canonicalDocumentId": "ppd-public-devhub-apply-guide",
       "contentHashPlaceholder": "sha256:[PUBLIC_ARCHIVE_HASH_PLACEHOLDER_2]",
       "processorHandoffId": "processor-handoff-ppd-devhub-apply-guide",

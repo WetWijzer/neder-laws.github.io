@@ -12,14 +12,14 @@
 +    {
 +      "id": "src-sign-devhub-guidance",
 +      "label": "Public DevHub sign permit application guidance fixture",
-+      "canonicalUrl": "https://www.portland.gov/ppd/devhub/apply-sign-permit-fixture",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub/apply-sign-permit-fixture",
 +      "retrievedAt": "2026-05-01T00:00:00Z",
 +      "contentHash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 +    },
 +    {
 +      "id": "src-sign-submittal-checklist",
 +      "label": "Public PP&D sign permit submittal checklist fixture",
-+      "canonicalUrl": "https://www.portland.gov/ppd/forms/sign-permit-checklist-fixture",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/forms/sign-permit-checklist-fixture",
 +      "retrievedAt": "2026-05-01T00:00:00Z",
 +      "contentHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
 +    }
@@ -247,7 +247,7 @@
 +
 +
 +FIXTURE_PATH = Path(__file__).parent / "fixtures" / "guardrails" / "sign_permit_workflow_guardrails.json"
-+_ALLOWED_HOSTS = {"www.portland.gov", "devhub.portlandoregon.gov", "www.portlandoregon.gov", "www.portlandmaps.com"}
++_ALLOWED_HOSTS = {"wetten.overheid.nl", "wetten.overheid.nl", "wetten.overheid.nl", "repository.overheid.nl"}
 +_PRIVATE_MARKERS = (
 +    "password",
 +    "credential",

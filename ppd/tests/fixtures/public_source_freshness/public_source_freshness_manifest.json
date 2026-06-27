@@ -10,9 +10,9 @@
   "sources": [
     {
       "sourceId": "ppd-devhub-faq-public-guidance",
-      "sourceUrl": "https://www.portland.gov/ppd/development-hub-pdx/devhub-faq",
-      "canonicalUrl": "https://www.portland.gov/ppd/development-hub-pdx/devhub-faq",
-      "title": "Development Hub PDX FAQ",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/development-hub-netherlands/devhub-faq",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/development-hub-netherlands/devhub-faq",
+      "title": "Development Hub Netherlands FAQ",
       "sourceEvidenceId": "src-devhub-faq-guidance",
       "lastSeenAt": "2026-05-01T00:00:00Z",
       "recrawlCadenceDays": 7,
@@ -37,8 +37,8 @@
     },
     {
       "sourceId": "ppd-permit-forms-index",
-      "sourceUrl": "https://www.portland.gov/ppd/permits/permits-and-inspections-applications",
-      "canonicalUrl": "https://www.portland.gov/ppd/permits/permits-and-inspections-applications",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/permits-and-inspections-applications",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/permits-and-inspections-applications",
       "title": "Permit applications and forms index",
       "sourceEvidenceId": "src-ppd-permit-forms-index",
       "lastSeenAt": "2026-04-25T00:00:00Z",
@@ -105,7 +105,7 @@
     {
       "caseId": "private-devhub-artifact",
       "payload": {
-        "sourceUrl": "https://devhub.portlandoregon.gov/secure/permits/123",
+        "sourceUrl": "https://wetten.overheid.nl/secure/permits/123",
         "authState": "[REDACTED:AUTH_STATE]"
       },
       "expectedReason": "private DevHub artifacts are not allowed"

@@ -1,33 +1,33 @@
 {
   "seeds": [
     {
-      "url": "https://www.portland.gov/ppd",
+      "url": "https://wetten.overheid.nl/ppd",
       "label": "PP&D bureau landing page",
       "source_kind": "official_anchor"
     },
     {
-      "url": "https://www.portland.gov/ppd/",
+      "url": "https://wetten.overheid.nl/ppd/",
       "label": "Duplicate PP&D bureau landing page",
       "source_kind": "official_anchor"
     },
     {
-      "url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "label": "Online permitting tools overview",
       "source_kind": "official_anchor"
     },
     {
-      "url": "https://devhub.portlandoregon.gov",
+      "url": "https://wetten.overheid.nl",
       "label": "DevHub public portal",
       "source_kind": "official_anchor"
     },
     {
-      "url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "label": "Fee payment guide PDF link",
       "source_kind": "official_anchor"
     },
     {
-      "url": "https://www.portlandmaps.com/detail/property/1234",
-      "label": "Portland Maps public reference",
+      "url": "https://repository.overheid.nl/detail/property/1234",
+      "label": "BWB metadata public reference",
       "source_kind": "official_anchor"
     },
     {
@@ -36,17 +36,17 @@
       "source_kind": "negative_fixture"
     },
     {
-      "url": "ftp://www.portland.gov/ppd/file.pdf",
+      "url": "ftp://wetten.overheid.nl/ppd/file.pdf",
       "label": "Unsupported scheme example",
       "source_kind": "negative_fixture"
     },
     {
-      "url": "https://devhub.portlandoregon.gov/login",
+      "url": "https://wetten.overheid.nl/login",
       "label": "Private DevHub login path",
       "source_kind": "negative_fixture"
     },
     {
-      "url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application?b=2&a=1#steps",
+      "url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application?b=2&a=1#steps",
       "label": "Canonical query and fragment handling",
       "source_kind": "official_anchor"
     }

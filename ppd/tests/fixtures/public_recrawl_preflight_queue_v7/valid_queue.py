@@ -4,8 +4,8 @@ VALID_PUBLIC_RECRAWL_PREFLIGHT_QUEUE_V7 = [
     {
         "queue_id": "public-recrawl-preflight-v7-001",
         "source_id": "ppd-online-tools-overview",
-        "requested_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
-        "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+        "requested_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
+        "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
         "authorization_packet_ref": "ppd/tests/fixtures/public_recrawl_preflight_queue_v7/authorization_packet.json",
         "allowlist_fixture_ref": "ppd/tests/fixtures/public_recrawl_preflight_queue_v7/allowlist.json",
         "robots_policy_fixture_ref": "ppd/tests/fixtures/public_recrawl_preflight_queue_v7/robots_policy.json",

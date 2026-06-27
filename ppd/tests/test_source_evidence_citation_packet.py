@@ -65,7 +65,7 @@ class SourceEvidenceCitationPacketTest(unittest.TestCase):
     def test_rejects_non_synthetic_source_id_missing_anchor_and_bad_hash(self) -> None:
         packet = build_source_evidence_citation_packet(self.queue)
         packet["reviews"][0]["synthetic_source_id"] = "official-source-id"
-        packet["reviews"][0]["citation_span_anchor"] = "https://www.portland.gov/ppd"
+        packet["reviews"][0]["citation_span_anchor"] = "https://wetten.overheid.nl/ppd"
         packet["reviews"][0]["document_hash"] = "not-a-sha256"
 
         errors = validate_source_evidence_citation_packet(packet)
@@ -118,7 +118,7 @@ class SourceEvidenceCitationPacketTest(unittest.TestCase):
 
     def test_rejects_private_authenticated_urls_raw_bodies_and_downloaded_paths(self) -> None:
         packet = build_source_evidence_citation_packet(self.queue)
-        packet["normalized_records"][0]["document_ref"] = "https://devhub.portlandoregon.gov/account/permits?token=secret"
+        packet["normalized_records"][0]["document_ref"] = "https://wetten.overheid.nl/account/permits?token=secret"
         packet["normalized_records"][1]["raw_html_body"] = "private body"
         packet["normalized_records"][2]["document_ref"] = "/home/user/Downloads/devhub-document.pdf"
 

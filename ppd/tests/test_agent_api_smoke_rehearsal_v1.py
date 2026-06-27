@@ -86,7 +86,7 @@ def validate_packet(packet: dict) -> None:
     sources = {source["source_id"]: source for source in packet["committed_sources"]}
     assert sources
     for source in sources.values():
-        assert source["canonical_url"].startswith("https://www.portland.gov/ppd/")
+        assert source["canonical_url"].startswith("https://wetten.overheid.nl/ppd/")
         assert source["last_verified_at"] == "2026-05-08"
         assert source["fixture_text"].strip()
 

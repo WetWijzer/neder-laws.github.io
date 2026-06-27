@@ -13,7 +13,7 @@
   "promotion_targets": [
     {
       "source_id": "ppd-online-tools",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "selected_for_promotion": true,
       "dry_run_only": true,
       "no_raw_body_persistence": true,
@@ -22,7 +22,7 @@
     },
     {
       "source_id": "devhub-public-portal",
-      "canonical_url": "https://devhub.portlandoregon.gov/",
+      "canonical_url": "https://wetten.overheid.nl/",
       "selected_for_promotion": true,
       "dry_run_only": true,
       "no_raw_body_persistence": true,

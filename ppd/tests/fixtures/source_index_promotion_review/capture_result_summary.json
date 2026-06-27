@@ -5,8 +5,8 @@
       "candidate_id": "source-index-candidate:devhub-faqs",
       "manifest_id": "archive-manifest:fake:devhub-faqs",
       "source_id": "ppd-devhub-faqs",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
-      "requested_url": "http://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
+      "requested_url": "http://wetten.overheid.nl/ppd/devhub-faqs",
       "title": "DevHub FAQs",
       "page_type": "devhub_public",
       "content_type": "text/html; charset=utf-8",
@@ -20,19 +20,19 @@
       "archive_artifact_ref": "metadata-only:fixture:ppd-devhub-faqs",
       "redirect_chain": [
         {
-          "url": "http://www.portland.gov/ppd/devhub-faqs",
+          "url": "http://wetten.overheid.nl/ppd/devhub-faqs",
           "status": 301,
-          "location": "https://www.portland.gov/ppd/devhub-faqs"
+          "location": "https://wetten.overheid.nl/ppd/devhub-faqs"
         },
         {
-          "url": "https://www.portland.gov/ppd/devhub-faqs",
+          "url": "https://wetten.overheid.nl/ppd/devhub-faqs",
           "status": 200
         }
       ],
       "citation_links": [
         {
           "label": "DevHub FAQs",
-          "url": "https://www.portland.gov/ppd/devhub-faqs",
+          "url": "https://wetten.overheid.nl/ppd/devhub-faqs",
           "source_id": "ppd-devhub-faqs",
           "content_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
           "freshness_status": "content_hash_changed"
@@ -48,8 +48,8 @@
       "candidate_id": "source-index-candidate:file-naming",
       "manifest_id": "archive-manifest:fake:file-naming",
       "source_id": "ppd-spp-file-naming-standards",
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
-      "requested_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
+      "requested_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "title": "Single PDF Process File Naming Standards",
       "page_type": "public_pdf",
       "content_type": "application/pdf",
@@ -63,7 +63,7 @@
       "archive_artifact_ref": "metadata-only:fixture:ppd-spp-file-naming-standards",
       "redirect_chain": [
         {
-          "url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+          "url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
           "status": 304
         }
       ],
@@ -79,7 +79,7 @@
       "work_item_id": "extraction-work:devhub-faqs",
       "source_id": "ppd-devhub-faqs",
       "normalized_document_id": "document-fixture-ppd-devhub-faqs",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "content_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
       "extraction_kind": "html_metadata_and_requirement_extraction",
       "allowed_inputs": ["capture_metadata", "normalized_document_reference"],
@@ -90,7 +90,7 @@
       "work_item_id": "extraction-work:file-naming",
       "source_id": "ppd-spp-file-naming-standards",
       "normalized_document_id": "document-fixture-ppd-spp-file-naming-standards",
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "content_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
       "extraction_kind": "pdf_metadata_and_requirement_extraction",
       "allowed_inputs": ["capture_metadata", "normalized_document_reference"],
@@ -103,7 +103,7 @@
     {
       "freshness_change_id": "freshness-change:devhub-faqs",
       "source_id": "ppd-devhub-faqs",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "previous_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
       "current_content_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
       "status": "content_hash_changed",
@@ -113,7 +113,7 @@
     {
       "freshness_change_id": "freshness-change:file-naming",
       "source_id": "ppd-spp-file-naming-standards",
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "previous_content_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
       "current_content_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
       "status": "metadata_refreshed",
@@ -141,14 +141,14 @@
     {
       "prompt_id": "review:devhub-faqs",
       "source_id": "ppd-devhub-faqs",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "reason": "content_hash_changed",
       "prompt": "Review metadata-only capture before promoting source-index or requirement changes."
     },
     {
       "prompt_id": "review:file-naming",
       "source_id": "ppd-spp-file-naming-standards",
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "reason": "document_extraction_review",
       "prompt": "Confirm extracted PDF/form requirements from normalized document references only."
     }

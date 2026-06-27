@@ -14,8 +14,8 @@ _FIXTURES = Path(__file__).parent / "fixtures" / "dry_run_crawl_plans"
 def _valid_plan():
     return {
         "dry_run": True,
-        "start_urls": ["https://www.portland.gov/ppd/permits"],
-        "allowed_hosts": ["www.portland.gov", "devhub.portlandoregon.gov"],
+        "start_urls": ["https://wetten.overheid.nl/ppd/permits"],
+        "allowed_hosts": ["wetten.overheid.nl", "wetten.overheid.nl"],
         "rate_limit_policy": {"requests_per_second": 0.2},
         "freshness_policy": {"max_age_days": 30},
         "output_path": "ppd/tests/fixtures/dry_run_crawl_plans/normalized_index.json",
@@ -32,7 +32,7 @@ def test_valid_public_dry_run_plan_passes():
 
 def test_rejects_private_authenticated_devhub_urls():
     plan = _valid_plan()
-    plan["start_urls"] = ["https://devhub.portlandoregon.gov/login"]
+    plan["start_urls"] = ["https://wetten.overheid.nl/login"]
 
     with pytest.raises(CrawlPlanValidationError) as exc_info:
         validate_dry_run_crawl_plan(plan)
@@ -42,14 +42,14 @@ def test_rejects_private_authenticated_devhub_urls():
 
 def test_rejects_over_broad_host_expansion():
     plan = _valid_plan()
-    plan["allowed_hosts"] = ["*.portland.gov"]
+    plan["allowed_hosts"] = ["*.wetten.overheid.nl"]
 
     assert "over-broad-host-expansion" in _codes(plan)
 
 
 def test_rejects_unsupported_url_schemes():
     plan = _valid_plan()
-    plan["start_urls"] = ["file:///tmp/devhub.html", "ftp://www.portland.gov/pub/file.pdf"]
+    plan["start_urls"] = ["file:///tmp/devhub.html", "ftp://wetten.overheid.nl/pub/file.pdf"]
 
     assert "unsupported-url-scheme" in _codes(plan)
 

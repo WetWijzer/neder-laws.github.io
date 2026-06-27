@@ -62,7 +62,7 @@
       "fixture://allowlist/ppd-public-sources.json"
     ],
     "robots_evidence_refs": [
-      "fixture://robots/portland-gov-ppd.txt"
+      "fixture://robots/wetwijzer-gov-ppd.txt"
     ],
     "ordered_simulated_operator_steps": [
       {
@@ -79,7 +79,7 @@
         "simulation_only": true,
         "observation_citations": [
           "fixture://allowlist/ppd-public-sources.json",
-          "fixture://robots/portland-gov-ppd.txt"
+          "fixture://robots/wetwijzer-gov-ppd.txt"
         ]
       }
     ],

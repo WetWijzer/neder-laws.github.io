@@ -1,6 +1,6 @@
 {
   "fixture_id": "synthetic_ppd_guidance_page_v1",
-  "canonical_url": "https://www.portland.gov/ppd/synthetic-guidance-fixture",
+  "canonical_url": "https://wetten.overheid.nl/ppd/synthetic-guidance-fixture",
   "source_type": "public_html",
   "document_id": "ppd-synthetic-guidance-fixture",
   "title": "Apply for a Synthetic Residential Permit",
@@ -20,19 +20,19 @@
   "breadcrumbs": [
     {
       "text": "Home",
-      "url": "https://www.portland.gov/"
+      "url": "https://wetten.overheid.nl/"
     },
     {
-      "text": "Portland Permitting & Development",
-      "url": "https://www.portland.gov/ppd"
+      "text": "Netherlands Permitting & Development",
+      "url": "https://wetten.overheid.nl/ppd"
     },
     {
       "text": "Get a Permit",
-      "url": "https://www.portland.gov/ppd/get-permit"
+      "url": "https://wetten.overheid.nl/ppd/get-permit"
     },
     {
       "text": "Apply for a Synthetic Residential Permit",
-      "url": "https://www.portland.gov/ppd/synthetic-guidance-fixture"
+      "url": "https://wetten.overheid.nl/ppd/synthetic-guidance-fixture"
     }
   ],
   "source_order": [
@@ -57,7 +57,7 @@
       "id": "breadcrumbs-primary",
       "items": [
         "Home",
-        "Portland Permitting & Development",
+        "Netherlands Permitting & Development",
         "Get a Permit",
         "Apply for a Synthetic Residential Permit"
       ],
@@ -67,7 +67,7 @@
           "source_order": 2,
           "start": 0,
           "end": 108,
-          "text": "Home > Portland Permitting & Development > Get a Permit > Apply for a Synthetic Residential Permit"
+          "text": "Home > Netherlands Permitting & Development > Get a Permit > Apply for a Synthetic Residential Permit"
         }
       ]
     },
@@ -311,11 +311,11 @@
       "links": [
         {
           "text": "DevHub public portal",
-          "url": "https://devhub.portlandoregon.gov"
+          "url": "https://wetten.overheid.nl"
         },
         {
           "text": "Apply for permits",
-          "url": "https://www.portland.gov/ppd/get-permit/apply-permits"
+          "url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits"
         }
       ],
       "citation_spans": [
@@ -354,7 +354,7 @@
       "citation_id": "cite-002",
       "source_order": 2,
       "block_id": "breadcrumbs-primary",
-      "text": "Home > Portland Permitting & Development > Get a Permit > Apply for a Synthetic Residential Permit"
+      "text": "Home > Netherlands Permitting & Development > Get a Permit > Apply for a Synthetic Residential Permit"
     },
     {
       "citation_id": "cite-003",

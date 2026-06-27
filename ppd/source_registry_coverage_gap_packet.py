@@ -26,10 +26,10 @@ SCHEMA_VERSION = 1
 SOURCE_MODE = "fixture_first_no_crawl_no_registry_mutation"
 
 _ALLOWED_HOSTS = {
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 
 _ALLOWED_SKIP_REASONS = {

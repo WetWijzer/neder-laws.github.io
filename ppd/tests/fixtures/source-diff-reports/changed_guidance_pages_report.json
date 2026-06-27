@@ -4,12 +4,12 @@
   "source_scope": {
     "description": "Curated deterministic fixture for changed public PP&D and DevHub guidance pages.",
     "source_families": [
-      "portland_gov_ppd",
-      "portland_gov_devhub_guidance"
+      "wetwijzer_gov_ppd",
+      "wetwijzer_gov_devhub_guidance"
     ],
     "seed_urls": [
-      "https://www.portland.gov/ppd",
-      "https://www.portland.gov/ppd/development-hub-pdx-devhub"
+      "https://wetten.overheid.nl/ppd",
+      "https://wetten.overheid.nl/ppd/development-hub-netherlands-devhub"
     ],
     "compliance_notes": [
       "Fixture is hand-curated from public guidance facts and does not perform a live crawl.",
@@ -31,9 +31,9 @@
   },
   "changed_pages": [
     {
-      "page_id": "portland-gov-ppd-devhub-guidance",
-      "canonical_url": "https://www.portland.gov/ppd/development-hub-pdx-devhub",
-      "title": "Development Hub PDX guidance",
+      "page_id": "wetwijzer-gov-ppd-devhub-guidance",
+      "canonical_url": "https://wetten.overheid.nl/ppd/development-hub-netherlands-devhub",
+      "title": "Development Hub Netherlands guidance",
       "page_type": "portal_reference",
       "previous_hash": "sha256:fixture-prev-devhub-guidance-001",
       "current_hash": "sha256:fixture-current-devhub-guidance-001",
@@ -69,7 +69,7 @@
       ],
       "evidence": [
         {
-          "source_url": "https://www.portland.gov/ppd/development-hub-pdx-devhub",
+          "source_url": "https://wetten.overheid.nl/ppd/development-hub-netherlands-devhub",
           "captured_at": "2026-05-01T00:00:00Z",
           "source_kind": "public_guidance_page",
           "note": "Public DevHub guidance fixture; no authenticated session data."
@@ -77,8 +77,8 @@
       ]
     },
     {
-      "page_id": "portland-gov-ppd-single-pdf-process",
-      "canonical_url": "https://www.portland.gov/ppd/permits/single-pdf-process",
+      "page_id": "wetwijzer-gov-ppd-single-pdf-process",
+      "canonical_url": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
       "title": "Single PDF Process guidance",
       "page_type": "guidance",
       "previous_hash": "sha256:fixture-prev-single-pdf-001",
@@ -107,7 +107,7 @@
       ],
       "evidence": [
         {
-          "source_url": "https://www.portland.gov/ppd/permits/single-pdf-process",
+          "source_url": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
           "captured_at": "2026-05-01T00:00:00Z",
           "source_kind": "public_guidance_page",
           "note": "Curated public guidance fixture with short normalized excerpts only."
@@ -119,9 +119,9 @@
   "removed_pages": [],
   "unchanged_pages": [
     {
-      "page_id": "portland-gov-ppd-landing",
-      "canonical_url": "https://www.portland.gov/ppd",
-      "title": "Portland Permitting & Development",
+      "page_id": "wetwijzer-gov-ppd-landing",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
+      "title": "Netherlands Permitting & Development",
       "content_hash": "sha256:fixture-unchanged-ppd-landing-001",
       "last_seen_at": "2026-05-01T00:00:00Z"
     }

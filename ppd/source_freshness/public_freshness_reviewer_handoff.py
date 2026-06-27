@@ -18,10 +18,10 @@ MODE = "fixture_first_public_freshness_reviewer_handoff"
 SCHEDULER_SCHEMA = "ppd.public_freshness_scheduler_rehearsal.v4"
 
 _ALLOWED_PUBLIC_HOSTS = {
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 
 _FORBIDDEN_KEYS = {

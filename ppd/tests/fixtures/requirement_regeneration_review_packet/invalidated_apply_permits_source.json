@@ -1,6 +1,6 @@
 {
   "source_id": "ppd_public_apply_permits_fixture",
-  "canonical_url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+  "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
   "invalidation_reason": "source_content_hash_changed_after_public_recrawl",
   "old_content_hash": "sha256:old-apply-permits-synthetic-fixture",
   "new_content_hash": "sha256:new-apply-permits-synthetic-fixture",

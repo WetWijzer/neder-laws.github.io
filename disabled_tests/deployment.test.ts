@@ -66,7 +66,7 @@ describe('Build and Deployment Verification', () => {
       
       // Should reference the main app entry point
       expect(indexHtml).toMatch(/main\.tsx/);
-      expect(indexHtml).toMatch(/Static AI Town/i);
+      expect(indexHtml).toMatch(/Static WetWijzer/i);
     });
   });
 
@@ -109,7 +109,7 @@ describe('Build and Deployment Verification', () => {
       expect(content).toMatch(/<meta name="viewport"/i);
       
       // Should have proper title
-      expect(content).toMatch(/<title>.*AI Town.*<\/title>/i);
+      expect(content).toMatch(/<title>.*WetWijzer.*<\/title>/i);
     });
 
     it('should use relative paths for assets', () => {

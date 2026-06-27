@@ -23,10 +23,10 @@
 +
 +ALLOWED_PUBLIC_HOSTS = frozenset(
 +    {
-+        "www.portland.gov",
-+        "devhub.portlandoregon.gov",
-+        "www.portlandoregon.gov",
-+        "www.portlandmaps.com",
++        "wetten.overheid.nl",
++        "wetten.overheid.nl",
++        "wetten.overheid.nl",
++        "repository.overheid.nl",
 +    }
 +)
 +
@@ -247,7 +247,7 @@
 +
 +
 +def _is_private_devhub_path(host: str, path: str) -> bool:
-+    if host != "devhub.portlandoregon.gov":
++    if host != "wetten.overheid.nl":
 +        return False
 +    private_prefixes = (
 +        "/account",
@@ -302,8 +302,8 @@
 +    {
 +      "id": "ppd-handoff-job-001",
 +      "seedId": "ppd-seed-landing",
-+      "sourceUrl": "https://www.portland.gov/ppd",
-+      "canonicalUrl": "https://www.portland.gov/ppd",
++      "sourceUrl": "https://wetten.overheid.nl/ppd",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd",
 +      "operation": "capture_url",
 +      "processor": {
 +        "name": "web_archive_capture",
@@ -313,7 +313,7 @@
 +        "backendPath": "ipfs_datasets_py/ipfs_datasets_py/processors"
 +      },
 +      "arguments": {
-+        "url": "https://www.portland.gov/ppd",
++        "url": "https://wetten.overheid.nl/ppd",
 +        "captureMode": "metadata_and_archive_reference",
 +        "respectRobots": true,
 +        "noPersistRawBody": true,
@@ -336,8 +336,8 @@
 +    {
 +      "id": "ppd-handoff-job-002",
 +      "seedId": "ppd-seed-applications-forms",
-+      "sourceUrl": "https://www.portland.gov/ppd/permits/applications-forms",
-+      "canonicalUrl": "https://www.portland.gov/ppd/permits/applications-forms",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/applications-forms",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/applications-forms",
 +      "operation": "legal_archive_url",
 +      "processor": {
 +        "name": "parallel_web_archiver",
@@ -347,8 +347,8 @@
 +        "backendPath": "ipfs_datasets_py/ipfs_datasets_py/processors"
 +      },
 +      "arguments": {
-+        "url": "https://www.portland.gov/ppd/permits/applications-forms",
-+        "jurisdiction": "portland-or-ppd",
++        "url": "https://wetten.overheid.nl/ppd/permits/applications-forms",
++        "jurisdiction": "wetwijzer-or-ppd",
 +        "captureMode": "metadata_and_archive_reference",
 +        "respectRobots": true,
 +        "noPersistRawBody": true,
@@ -371,8 +371,8 @@
 +    {
 +      "id": "ppd-handoff-job-003",
 +      "seedId": "ppd-seed-devhub-public",
-+      "sourceUrl": "https://devhub.portlandoregon.gov",
-+      "canonicalUrl": "https://devhub.portlandoregon.gov",
++      "sourceUrl": "https://wetten.overheid.nl",
++      "canonicalUrl": "https://wetten.overheid.nl",
 +      "operation": "capture_url",
 +      "processor": {
 +        "name": "url_archive_cache",
@@ -382,7 +382,7 @@
 +        "backendPath": "ipfs_datasets_py/ipfs_datasets_py/processors"
 +      },
 +      "arguments": {
-+        "url": "https://devhub.portlandoregon.gov",
++        "url": "https://wetten.overheid.nl",
 +        "captureMode": "metadata_and_archive_reference",
 +        "respectRobots": true,
 +        "noPersistRawBody": true,
@@ -448,9 +448,9 @@
 +        "ppd-seed-devhub-public",
 +    }
 +    assert {job.source_url for job in manifest.jobs} == {
-+        "https://www.portland.gov/ppd",
-+        "https://www.portland.gov/ppd/permits/applications-forms",
-+        "https://devhub.portlandoregon.gov",
++        "https://wetten.overheid.nl/ppd",
++        "https://wetten.overheid.nl/ppd/permits/applications-forms",
++        "https://wetten.overheid.nl",
 +    }
 +    assert all(job.manifest_only for job in manifest.jobs)
 +    assert all(
@@ -470,8 +470,8 @@
 +
 +def test_handoff_manifest_rejects_private_devhub_paths() -> None:
 +    data = _fixture()
-+    data["processorJobs"][2]["sourceUrl"] = "https://devhub.portlandoregon.gov/account/permits"
-+    data["processorJobs"][2]["arguments"]["url"] = "https://devhub.portlandoregon.gov/account/permits"
++    data["processorJobs"][2]["sourceUrl"] = "https://wetten.overheid.nl/account/permits"
++    data["processorJobs"][2]["arguments"]["url"] = "https://wetten.overheid.nl/account/permits"
 +
 +    with pytest.raises(ValueError, match="private DevHub"):
 +        assert_valid_crawl_processor_handoff_manifest(data)

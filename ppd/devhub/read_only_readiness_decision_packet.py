@@ -201,8 +201,8 @@ def _manual_login_prerequisites(checklist_citations: list[str], surface_citation
             "citations": citations,
         },
         {
-            "prerequisite_id": "manual-login-portlandoregon-credentials",
-            "description": "The user manually completes PortlandOregon.gov sign-in, MFA, CAPTCHA, and account prompts if a future attended pilot is separately approved.",
+            "prerequisite_id": "manual-login-wetwijzernetherlands-credentials",
+            "description": "The user manually completes wetten.overheid.nl sign-in, MFA, CAPTCHA, and account prompts if a future attended pilot is separately approved.",
             "manual_only": True,
             "credential_storage_allowed": False,
             "citations": citations,

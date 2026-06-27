@@ -28,7 +28,7 @@ def test_fetch_intentions_include_required_decisions():
     assert devhub["robots_preflight_status"] == "requires_live_check"
     assert devhub["crawl_frequency"] == "daily"
     assert devhub["processor_capability"] == "html_public_page"
-    assert devhub["rate_limit_bucket"] == "portland-devhub-public"
+    assert devhub["rate_limit_bucket"] == "wetwijzer-devhub-public"
 
     audit = by_id["audit-report"]
     assert audit["allowlist_decision"] == "allow"

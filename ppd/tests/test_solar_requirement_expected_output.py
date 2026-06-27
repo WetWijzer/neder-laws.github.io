@@ -27,10 +27,10 @@ EXPECTED_CATEGORIES = [
 ]
 
 ALLOWED_SOURCE_HOSTS = {
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 
 PRIVATE_VALUE_PATTERNS = [
@@ -95,7 +95,7 @@ class SolarRequirementExpectedOutputTest(unittest.TestCase):
         source_url = str(source.get("source_url", ""))
         self.assertTrue(source_url)
         if source_url.startswith("docs/"):
-            self.assertEqual("docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md", source_url)
+            self.assertEqual("docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md", source_url)
         else:
             parsed = urlparse(source_url)
             self.assertEqual("https", parsed.scheme)

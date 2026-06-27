@@ -15,8 +15,8 @@
 +      "id": "archive-record-devhub-single-pdf-process",
 +      "processorName": "ipfs_datasets_py.web_archiving.fixture_manifest",
 +      "processorVersion": "fixture-only",
-+      "sourceUrl": "https://www.portland.gov/ppd/devhub",
-+      "canonicalUrl": "https://www.portland.gov/ppd/devhub",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub",
 +      "contentHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
 +      "policyDecision": "allow",
 +      "policyReasons": [
@@ -30,18 +30,18 @@
 +  "sourceEvidence": [
 +    {
 +      "id": "evidence-devhub-public-services",
-+      "sourceUrl": "https://www.portland.gov/ppd/devhub",
-+      "canonicalUrl": "https://www.portland.gov/ppd/devhub",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub",
 +      "documentId": "normalized-devhub-public-guidance",
 +      "anchor": "#devhub-services",
 +      "capturedAt": "2026-05-01T00:00:00Z",
 +      "contentHash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
-+      "excerpt": "DevHub is Portland's online permitting system for permit requests, plan review, corrections, inspections, and payments."
++      "excerpt": "DevHub is Netherlands's online permitting system for permit requests, plan review, corrections, inspections, and payments."
 +    },
 +    {
 +      "id": "evidence-single-pdf-process",
-+      "sourceUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
-+      "canonicalUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +      "documentId": "normalized-single-pdf-process-guidance",
 +      "anchor": "#single-pdf-process",
 +      "capturedAt": "2026-05-01T00:00:00Z",
@@ -53,7 +53,7 @@
 +    {
 +      "id": "normalized-devhub-public-guidance",
 +      "documentRole": "public_guidance",
-+      "title": "Development Hub PDX public guidance",
++      "title": "Development Hub Netherlands public guidance",
 +      "fixturePath": "ppd/tests/fixtures/normalized-documents/devhub_public_guidance.fixture.json",
 +      "processorArchiveRecordId": "archive-record-devhub-single-pdf-process",
 +      "sourceEvidenceIds": [
@@ -297,8 +297,8 @@
 +
 +    def test_source_evidence_is_public_and_hash_backed(self) -> None:
 +        for evidence in self.manifest["sourceEvidence"]:
-+            self.assertTrue(evidence["sourceUrl"].startswith("https://www.portland.gov/ppd"))
-+            self.assertTrue(evidence["canonicalUrl"].startswith("https://www.portland.gov/ppd"))
++            self.assertTrue(evidence["sourceUrl"].startswith("https://wetten.overheid.nl/ppd"))
++            self.assertTrue(evidence["canonicalUrl"].startswith("https://wetten.overheid.nl/ppd"))
 +            self.assertTrue(evidence["capturedAt"].endswith("Z"))
 +            self.assertRegex(evidence["contentHash"], SHA256_RE)
 +            self.assertIn(evidence["documentId"], {doc["id"] for doc in self.manifest["normalizedDocuments"]})

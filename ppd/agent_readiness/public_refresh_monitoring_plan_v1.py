@@ -20,7 +20,7 @@ REQUIRED_COVERAGE = {
     "file_preparation_or_fee_payment_guidance_coverage": "file preparation or fee/payment guidance",
     "devhub_public_guidance_coverage": "DevHub public guidance",
     "forms_index_coverage": "forms index",
-    "linked_portland_maps_coverage": "linked Portland Maps guidance",
+    "linked_bwb_metadata_coverage": "linked BWB metadata guidance",
 }
 
 _COVERAGE_ALIASES = {
@@ -48,11 +48,11 @@ _COVERAGE_ALIASES = {
         "forms_index_coverage",
         "permit_applications_and_forms_index",
     },
-    "linked_portland_maps_coverage": {
-        "linked_portland_maps",
-        "linked_portland_maps_coverage",
-        "portland_maps",
-        "portland_maps_linked_reference",
+    "linked_bwb_metadata_coverage": {
+        "linked_bwb_metadata",
+        "linked_bwb_metadata_coverage",
+        "bwb_metadata",
+        "bwb_metadata_linked_reference",
     },
 }
 

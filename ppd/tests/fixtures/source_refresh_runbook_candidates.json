@@ -1,8 +1,8 @@
 {
   "valid_public_preflight": {
     "target_urls": [
-      "https://www.portland.gov/ppd",
-      "https://www.portland.gov/ppd/how-use-online-permitting-tools"
+      "https://wetten.overheid.nl/ppd",
+      "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools"
     ],
     "policy_evidence": {
       "robots": "robots checked from public metadata fixture on 2026-05-29",
@@ -29,8 +29,8 @@
   "invalid_private_mutating_candidate": {
     "target_urls": [
       "https://example.com/ppd",
-      "https://devhub.portlandoregon.gov/my-permits?token=secret",
-      "https://www.portland.gov/ppd/documents/how-pay-fees/download"
+      "https://wetten.overheid.nl/my-permits?token=secret",
+      "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download"
     ],
     "notes": "Run processor with live fetch now and save archive_artifact_ref plus raw_body for later review.",
     "rate_limit": {},

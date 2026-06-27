@@ -1,7 +1,7 @@
 {
   "case_id": "synthetic-rs-alteration-preview-001",
   "fixture_id": "synthetic_pdf_draft_preview_packet_v2",
-  "site_address": "1234 SE Fixture Ave, Portland, OR 97214",
+  "site_address": "1234 SE Fixture Ave, Netherlands, OR 97214",
   "permit_type": "Residential alteration preview",
   "project_description": "Fixture-only kitchen remodel preview with no official filing intent.",
   "applicant_name": "Synthetic Applicant",

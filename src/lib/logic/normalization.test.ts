@@ -1,14 +1,14 @@
 import {
-  normalizePortlandIdentifier,
+  normalizeWetWijzerIdentifier,
   normalizePredicateName,
   normalizeWhitespace,
-  objectIdToPortlandIdentifier,
-  portlandIdentifierToObjectId,
+  objectIdToWetWijzerIdentifier,
+  netherlandsIdentifierToObjectId,
 } from './normalization';
 
 describe('logic normalization helpers', () => {
   it('normalizes whitespace', () => {
-    expect(normalizeWhitespace('  Portland   City\nCode  ')).toBe('Portland City Code');
+    expect(normalizeWhitespace('  Dutch   law\narticle  ')).toBe('Dutch law article');
   });
 
   it('normalizes predicate names for generated formulas', () => {
@@ -18,20 +18,19 @@ describe('logic normalization helpers', () => {
     expect(normalizePredicateName(' *** ')).toBe('unknown');
   });
 
-  it('normalizes Portland identifiers and aliases', () => {
-    expect(normalizePortlandIdentifier('pcc 1.01.010')).toBe('Portland City Code 1.01.010');
-    expect(normalizePortlandIdentifier('Portland Code 9.01.050')).toBe('Portland City Code 9.01.050');
-    expect(normalizePortlandIdentifier('Some Other Citation')).toBe('Some Other Citation');
+  it('normalizes WetWijzer identifiers and aliases', () => {
+    expect(normalizeWetWijzerIdentifier('netherlands law 1.01.010')).toBe('Dutch legal corpus 1.01.010');
+    expect(normalizeWetWijzerIdentifier('WetWijzer Article 9.01.050')).toBe('Dutch legal corpus 9.01.050');
+    expect(normalizeWetWijzerIdentifier('Some Other Citation')).toBe('Some Other Citation');
   });
 
-  it('converts Portland identifiers to generated object IDs and back', () => {
-    expect(portlandIdentifierToObjectId('Portland City Code 1.01.010')).toBe(
-      'portland_city_code_1_01_010',
+  it('converts WetWijzer identifiers to generated object IDs and back', () => {
+    expect(netherlandsIdentifierToObjectId('Dutch legal corpus 1.01.010')).toBe(
+      'netherlands_law_article_1_01_010',
     );
-    expect(objectIdToPortlandIdentifier('portland_city_code_9_01_050')).toBe(
-      'Portland City Code 9.01.050',
+    expect(objectIdToWetWijzerIdentifier('netherlands_law_article_9_01_050')).toBe(
+      'Dutch legal corpus 9.01.050',
     );
-    expect(objectIdToPortlandIdentifier('not_a_portland_section')).toBeNull();
+    expect(objectIdToWetWijzerIdentifier('not_a_netherlands_section')).toBeNull();
   });
 });
-

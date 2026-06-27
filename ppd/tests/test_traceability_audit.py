@@ -12,7 +12,7 @@ def _valid_packet() -> dict[str, object]:
         "sources": [
             {
                 "source_id": "src-ppd-tools",
-                "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+                "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
                 "source_type": "public_html",
                 "freshness_status": "current",
             }
@@ -115,7 +115,7 @@ def test_rejects_private_urls_raw_references_live_fetch_claims_and_mutation_flag
     packet["sources"] = [
         {
             "source_id": "src-private",
-            "canonical_url": "https://devhub.portlandoregon.gov/Account/Login?token=secret",
+            "canonical_url": "https://wetten.overheid.nl/Account/Login?token=secret",
             "source_type": "devhub_authenticated",
             "privacy_classification": "authenticated",
             "freshness_status": "current",
@@ -126,7 +126,7 @@ def test_rejects_private_urls_raw_references_live_fetch_claims_and_mutation_flag
         {
             "requirement_id": "req-private",
             "source_evidence_ids": ["src-private"],
-            "download_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+            "download_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
         }
     ]
     packet["guardrail_bundle"] = {

@@ -20,7 +20,7 @@ export interface OpenRouterGenerateOptions {
 export class OpenRouterLLMService {
   private getBaseUrl(): string {
     if (typeof window !== 'undefined') {
-      const localOverride = window.localStorage.getItem('PORTLAND_OPENROUTER_BASE_URL');
+      const localOverride = window.localStorage.getItem('WETWIJZER_OPENROUTER_BASE_URL');
       if (localOverride) {
         return localOverride;
       }

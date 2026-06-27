@@ -25,16 +25,16 @@
     "reviewer_owner": "PP&D consumer smoke reviewer",
     "offline_user_scenarios": [
       {
-        "scenario_id": "portland-permit-status-missing-date",
-        "user_scenario": "Portland homeowner asks whether a permit status is current enough to rely on for a remodel decision.",
+        "scenario_id": "wetwijzer-permit-status-missing-date",
+        "user_scenario": "Netherlands homeowner asks whether a permit status is current enough to rely on for a remodel decision.",
         "missing_facts": [
           "Ask for the permit record timestamp before treating the status as current.",
           "Ask for the cited permit identifier before summarizing the next step."
         ]
       },
       {
-        "scenario_id": "portland-appeal-draft-blocked-filing",
-        "user_scenario": "Portland small business owner asks the agent to draft and file an appeal from offline fixture notes.",
+        "scenario_id": "wetwijzer-appeal-draft-blocked-filing",
+        "user_scenario": "Netherlands small business owner asks the agent to draft and file an appeal from offline fixture notes.",
         "missing_facts": [
           "Ask for the appeal deadline and cited notice date before drafting.",
           "Ask for reviewer approval before any filing or notification step."

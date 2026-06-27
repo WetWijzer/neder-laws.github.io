@@ -37,7 +37,7 @@
   },
   "attendance_prerequisites": [
     {
-      "prerequisite_id": "portlandoregon_gov_login_manual_only",
+      "prerequisite_id": "wetwijzernetherlands_gov_login_manual_only",
       "description": "Operator completes DevHub login and security prompts manually while the launch packet records only cited readiness metadata.",
       "required_before_launch": true,
       "operator_present": true,

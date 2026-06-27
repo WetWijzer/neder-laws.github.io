@@ -44,7 +44,7 @@
       "source_type": "official_devhub_guidance_placeholder",
       "placeholder_status": "placeholder_only",
       "live_fetch_performed": false,
-      "canonical_url": "https://www.portland.gov/ppd/devhub-sign-guide",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-sign-guide",
       "note": "Placeholder for official account and sign-in guidance; no live fetch performed."
     },
     {
@@ -52,7 +52,7 @@
       "source_type": "official_devhub_guidance_placeholder",
       "placeholder_status": "placeholder_only",
       "live_fetch_performed": false,
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "note": "Placeholder for official DevHub services guidance; no live fetch performed."
     }
   ],

@@ -1,4 +1,4 @@
-"""Local dry-run public crawl plan generation for Portland PP&D seeds.
+"""Local dry-run public crawl plan generation for WetWijzer legal sources seeds.
 
 This module is intentionally offline-only. It converts official seed metadata into
 fetch intentions and never performs network requests or writes crawl output.

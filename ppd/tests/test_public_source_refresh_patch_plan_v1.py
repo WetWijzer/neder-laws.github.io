@@ -54,14 +54,14 @@ def test_builds_non_executing_patch_rows_from_approved_dispositions_only() -> No
     assert row["citations"] == [
         {
             "source_id": "src-ppd-apply-permits",
-            "url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+            "url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
             "queue_item_id": "queue-apply-permits-001",
             "disposition_id": "disp-001",
         }
     ]
     assert row["source_freshness_metadata"]["source_id"] == "src-ppd-apply-permits"
     assert row["source_freshness_metadata"]["canonical_url"] == (
-        "https://www.portland.gov/ppd/get-permit/apply-permits"
+        "https://wetten.overheid.nl/ppd/get-permit/apply-permits"
     )
     assert row["visible_page_review_notes"]["title"] == "Apply for permits"
     assert row["visible_page_review_notes"]["visible_date_text"] == "Last updated May 2026"
@@ -112,7 +112,7 @@ def test_validation_rejects_non_allowlisted_and_authenticated_urls() -> None:
     plan = _valid_plan()
     row = plan["proposed_patch_rows"][0]
     row["source_freshness_metadata"]["canonical_url"] = "https://example.com/ppd"
-    row["citations"][0]["url"] = "https://www.portland.gov/account?token=secret"
+    row["citations"][0]["url"] = "https://wetten.overheid.nl/account?token=secret"
 
     codes = _codes(plan)
     assert "url_not_allowlisted" in codes

@@ -3,12 +3,12 @@
   "packet_id": "public-refresh-auth-v8-fixture-001",
   "public_fixture_only": true,
   "authorized_source_ids": [
-    "portland_maps_public_permits",
-    "portland_public_bds"
+    "bwb_metadata_public_permits",
+    "wetwijzer_public_bds"
   ],
   "source_order": [
-    "portland_public_bds",
-    "portland_maps_public_permits",
+    "wetwijzer_public_bds",
+    "bwb_metadata_public_permits",
     "missing_authorized_source"
   ],
   "offline_validation_commands": [

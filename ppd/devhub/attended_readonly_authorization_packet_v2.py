@@ -388,7 +388,7 @@ def _is_offline_command(command: Any) -> bool:
 
     joined = " ".join(command).lower()
     blocked_terms = (
-        "devhub.portlandoregon.gov",
+        "wetten.overheid.nl",
         "playwright",
         "browser",
         "crawl",

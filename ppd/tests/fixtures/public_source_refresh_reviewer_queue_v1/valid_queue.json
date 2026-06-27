@@ -3,11 +3,11 @@
   "items": [
     {
       "queue_item_id": "psr-review-20260530-001",
-      "source_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "source_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "citations": [
         {
           "source_id": "ppd-devhub-faqs",
-          "url": "https://www.portland.gov/ppd/devhub-faqs",
+          "url": "https://wetten.overheid.nl/ppd/devhub-faqs",
           "title": "DevHub FAQs"
         }
       ],

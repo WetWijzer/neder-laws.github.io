@@ -12,7 +12,7 @@ def safe_packet() -> dict[str, object]:
     return {
         "surface_id": "devhub-permit-dashboard",
         "auth_scope": "authenticated_attended",
-        "url_pattern": "https://devhub.portlandoregon.gov/permit/*",
+        "url_pattern": "https://wetten.overheid.nl/permit/*",
         "page_heading": "Permits",
         "redaction_policy": {
             "private_values": "redact",
@@ -105,7 +105,7 @@ class DevHubSurfaceStatePacketValidationTest(unittest.TestCase):
         self.assertTrue(any("selector_confidence" in error for error in result.errors))
 
     def test_rejects_unactionable_url_patterns(self) -> None:
-        for pattern in ("*", "http://devhub.portlandoregon.gov/*", "https://example.test/*"):
+        for pattern in ("*", "http://wetten.overheid.nl/*", "https://example.test/*"):
             packet = safe_packet()
             packet["url_pattern"] = pattern
 

@@ -41,7 +41,7 @@
     "surface_id": "devhub.synthetic.application.review.redacted",
     "auth_scope": "authenticated_attended",
     "page_title": "DevHub - Permit Application Review",
-    "url_pattern": "https://devhub.portlandoregon.gov/permits/applications/{redacted_application_id}/review",
+    "url_pattern": "https://wetten.overheid.nl/permits/applications/{redacted_application_id}/review",
     "page_heading": "Review permit application",
     "heading_hierarchy": [
       {

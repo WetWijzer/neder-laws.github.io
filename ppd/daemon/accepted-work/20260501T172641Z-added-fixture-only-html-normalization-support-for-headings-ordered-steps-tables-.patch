@@ -193,7 +193,7 @@
 +    normalized_at: str,
 +    canonical_url: Optional[str] = None,
 +    document_role: str = "guidance",
-+    source_family: str = "portland_gov_ppd",
++    source_family: str = "wetwijzer_gov_ppd",
 +) -> dict[str, Any]:
 +    """Convert a supplied HTML fixture into a normalized-document dictionary."""
 +    parser = _PpdHtmlParser(source_url=source_url)
@@ -256,9 +256,9 @@
 +        return "contact"
 +    if lower.endswith(".pdf"):
 +        return "download"
-+    if lower.startswith("https://devhub.portlandoregon.gov"):
++    if lower.startswith("https://wetten.overheid.nl"):
 +        return "portal_action"
-+    if lower.startswith("http") and "portland.gov" not in lower:
++    if lower.startswith("http") and "wetten.overheid.nl" not in lower:
 +        return "external_reference"
 +    return "same_site"
 +
@@ -279,16 +279,16 @@
 +  "generatedAt": "2026-05-01T17:30:00Z",
 +  "input": {
 +    "documentId": "ppd-single-pdf-process-html-fixture",
-+    "sourceUrl": "https://www.portland.gov/ppd/single-pdf-process-fixture",
-+    "canonicalUrl": "https://www.portland.gov/ppd/single-pdf-process-fixture",
++    "sourceUrl": "https://wetten.overheid.nl/ppd/single-pdf-process-fixture",
++    "canonicalUrl": "https://wetten.overheid.nl/ppd/single-pdf-process-fixture",
 +    "fetchedAt": "2026-05-01T17:25:00Z",
 +    "normalizedAt": "2026-05-01T17:30:00Z",
 +    "html": "Single PDF Process FixtureSingle PDF ProcessLast updated: May 1, 2026Prepare filesUse one searchable PDF for drawing plans and separate PDFs for applications, calculations, and supporting documents.Review the project requirements.Combine drawing sheets into one searchable PDF.Upload applications and supporting documents as separate PDFs.Fixture file groupsDocument groupExpected formatDrawing plansOne searchable PDFApplicationsSeparate PDFPermits and inspections applicationsOpen DevHubSample checklist PDF"
 +  },
 +  "expected": {
 +    "id": "ppd-single-pdf-process-html-fixture",
-+    "sourceUrl": "https://www.portland.gov/ppd/single-pdf-process-fixture",
-+    "canonicalUrl": "https://www.portland.gov/ppd/single-pdf-process-fixture",
++    "sourceUrl": "https://wetten.overheid.nl/ppd/single-pdf-process-fixture",
++    "canonicalUrl": "https://wetten.overheid.nl/ppd/single-pdf-process-fixture",
 +    "contentType": "html",
 +    "title": "Single PDF Process Fixture",
 +    "fetchedAt": "2026-05-01T17:25:00Z",
@@ -300,7 +300,7 @@
 +    ],
 +    "documentRole": "guidance",
 +    "normalizedAt": "2026-05-01T17:30:00Z",
-+    "sourceFamily": "portland_gov_ppd",
++    "sourceFamily": "wetwijzer_gov_ppd",
 +    "sections": [
 +      {
 +        "id": "single-pdf-process",
@@ -354,19 +354,19 @@
 +    ],
 +    "links": [
 +      {
-+        "url": "https://www.portland.gov/ppd/applications-forms",
++        "url": "https://wetten.overheid.nl/ppd/applications-forms",
 +        "label": "Permits and inspections applications",
 +        "relation": "same_site",
 +        "contentTypeHint": "html"
 +      },
 +      {
-+        "url": "https://devhub.portlandoregon.gov/",
++        "url": "https://wetten.overheid.nl/",
 +        "label": "Open DevHub",
 +        "relation": "portal_action",
 +        "contentTypeHint": "html"
 +      },
 +      {
-+        "url": "https://www.portland.gov/ppd/sample-checklist.pdf",
++        "url": "https://wetten.overheid.nl/ppd/sample-checklist.pdf",
 +        "label": "Sample checklist PDF",
 +        "relation": "download",
 +        "contentTypeHint": "pdf"
@@ -479,7 +479,7 @@
  export interface ScrapedDocument {
 @@ -71,7 +86,9 @@
    normalizedAt: string;
-   sourceFamily?: "portland_gov_ppd" | "portland_gov_devhub_guidance" | "devhub_public_portal" | "portlandoregon_legacy_reference" | "portland_maps_public_reference" | "unknown";
+   sourceFamily?: "wetwijzer_gov_ppd" | "wetwijzer_gov_devhub_guidance" | "devhub_public_portal" | "wetwijzernetherlands_legacy_reference" | "bwb_metadata_public_reference" | "unknown";
    sections: DocumentSection[];
 +  orderedSteps?: DocumentOrderedStep[];
    tables: DocumentTable[];

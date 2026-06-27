@@ -13,14 +13,14 @@ interface GeneratedLogicProofSummary {
 
 const fixturePath = resolve(
   process.cwd(),
-  'public/corpus/portland-or/current/generated/logic-proof-summaries.json',
+  'public/corpus/netherlands/current/generated/logic-proof-summaries.json',
 );
 
 function loadGeneratedSummaries(): GeneratedLogicProofSummary[] {
   return JSON.parse(readFileSync(fixturePath, 'utf8')) as GeneratedLogicProofSummary[];
 }
 
-describe('TDFOL generated Portland fixtures', () => {
+describe('TDFOL generated WetWijzer fixtures', () => {
   it('parses representative generated norm formulas', () => {
     const summaries = loadGeneratedSummaries();
     const samples = ['obligation', 'permission', 'prohibition'].map((normType) => {
@@ -32,9 +32,9 @@ describe('TDFOL generated Portland fixtures', () => {
     });
 
     expect(samples.map((sample) => sample.identifier)).toEqual([
-      'Portland City Code 1.01.020',
-      'Portland City Code 1.01.010',
-      'Portland City Code 1.01.090',
+      'Wetboek van Strafrecht, Artikel 1',
+      'Burgerlijk Wetboek Boek 1, Artikel 1',
+      'Wetboek van Burgerlijke Rechtsvordering, Artikel 1',
     ]);
 
     for (const sample of samples) {

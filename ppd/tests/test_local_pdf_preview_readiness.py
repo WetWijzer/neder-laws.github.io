@@ -20,7 +20,7 @@ def ready_packet() -> dict:
         'source_evidence': [
             {
                 'evidence_id': 'evidence-apply-permits',
-                'url': 'https://www.portland.gov/ppd/get-permit/apply-permits',
+                'url': 'https://wetten.overheid.nl/ppd/get-permit/apply-permits',
                 'observed_on': '2026-05-01',
                 'title': 'Apply for permits',
             }

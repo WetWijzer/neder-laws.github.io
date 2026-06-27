@@ -45,7 +45,7 @@ class UrbanForestryPermitProcessFixtureTest(unittest.TestCase):
         self.assertIn("uf-src-005", evidence_ids)
 
         for source in self.fixture["authoritySources"]:
-            self.assertTrue(source["canonicalUrl"].startswith("https://www.portland.gov/"))
+            self.assertTrue(source["canonicalUrl"].startswith("https://wetten.overheid.nl/"))
             self.assertTrue(source["authorityLabel"].strip())
             self.assertTrue(source["sourceInventoryCategory"].strip())
             self.assertTrue(source["sourceIndexRef"].startswith("fixture_public_source_inventory_"))

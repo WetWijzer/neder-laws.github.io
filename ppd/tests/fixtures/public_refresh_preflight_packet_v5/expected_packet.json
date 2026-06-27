@@ -15,13 +15,13 @@
     {
       "seed_id": "seed-permit-applications-index-metadata",
       "source_registry_placeholder_id": "src-placeholder-permit-applications-index",
-      "source_registry_ref": "source-registry-placeholder://portland-ppd/permit-applications-index",
+      "source_registry_ref": "source-registry-placeholder://wetwijzer-ppd/permit-applications-index",
       "owning_surface": "public_ppd_forms_index",
       "allowed_public_hosts": [
-        "www.portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
-        "www.portlandmaps.com"
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl"
       ],
       "fixture_decision": "allowlist_placeholder_ready",
       "skip_reason": "not_skipped",
@@ -30,13 +30,13 @@
     {
       "seed_id": "seed-file-standards-review-hold",
       "source_registry_placeholder_id": "src-placeholder-file-standards",
-      "source_registry_ref": "source-registry-placeholder://portland-ppd/file-standards",
+      "source_registry_ref": "source-registry-placeholder://wetwijzer-ppd/file-standards",
       "owning_surface": "public_ppd_file_guidance",
       "allowed_public_hosts": [
-        "www.portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
-        "www.portlandmaps.com"
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl"
       ],
       "fixture_decision": "skip_before_allowlist_handoff",
       "skip_reason": "robots_or_policy_disallowed",

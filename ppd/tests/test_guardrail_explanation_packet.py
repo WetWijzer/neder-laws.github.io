@@ -48,14 +48,14 @@ def test_renderer_is_deterministic_and_cited() -> None:
                 "evidence_id": "ev-address",
                 "source_id": "source-devhub-guide",
                 "title": "DevHub guide",
-                "url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+                "url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
                 "quote": "Applications require project information.",
             },
             {
                 "evidence_id": "ev-submit",
                 "source_id": "source-devhub-guide",
                 "title": "DevHub guide",
-                "url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+                "url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
                 "quote": "Submission is an official workflow step.",
             },
         ]

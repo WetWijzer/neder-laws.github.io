@@ -29,7 +29,7 @@
         "frontier": [
           {
             "id": "bad-auth-url",
-            "url": "https://devhub.portlandoregon.gov/account/permits",
+            "url": "https://wetten.overheid.nl/account/permits",
             "status": "planned"
           }
         ]
@@ -45,7 +45,7 @@
         "frontier": [
           {
             "id": "bad-missing-skip-reason",
-            "url": "https://www.portland.gov/ppd/unsupported-file",
+            "url": "https://wetten.overheid.nl/ppd/unsupported-file",
             "status": "skipped"
           }
         ]
@@ -61,7 +61,7 @@
         "frontier": [
           {
             "id": "bad-raw-body",
-            "url": "https://www.portland.gov/ppd",
+            "url": "https://wetten.overheid.nl/ppd",
             "status": "planned",
             "raw_body": "raw crawl output must not be committed"
           }
@@ -78,7 +78,7 @@
         "frontier": [
           {
             "id": "bad-handoff",
-            "url": "https://www.portland.gov/ppd",
+            "url": "https://wetten.overheid.nl/ppd",
             "status": "processor_handoff",
             "processor_handoff": {
               "processor_family": "web_archiving",

@@ -5,12 +5,12 @@
   "process": {
     "id": "trade_permit_with_plan_review",
     "permit_type": "PP&D trade permit with plan review",
-    "description": "Fixture-only process model for Portland Permitting & Development trade permit requests that require plan review before permit issuance.",
+    "description": "Fixture-only process model for Netherlands Permitting & Development trade permit requests that require plan review before permit issuance.",
     "authority_sources": [
       {
         "id": "devhub_faq_service_categories",
-        "title": "Development Hub PDX FAQ",
-        "url": "https://www.portland.gov/ppd/development-hub-pdx-devhub/devhub-faq",
+        "title": "Development Hub Netherlands FAQ",
+        "url": "https://wetten.overheid.nl/ppd/development-hub-netherlands-devhub/devhub-faq",
         "retrieved_at": "2026-05-01T00:00:00Z",
         "supports": [
           "DevHub service categories include permit requests that require plan review, inspection scheduling for online trade permits, correction uploads, and fee payments."
@@ -18,8 +18,8 @@
       },
       {
         "id": "devhub_application_guidance_request_types",
-        "title": "Apply for permits online using Development Hub PDX",
-        "url": "https://www.portland.gov/ppd/apply-permits-online-using-development-hub-pdx",
+        "title": "Apply for permits online using Development Hub Netherlands",
+        "url": "https://wetten.overheid.nl/ppd/apply-permits-online-using-development-hub-netherlands",
         "retrieved_at": "2026-05-01T00:00:00Z",
         "supports": [
           "DevHub application guidance lists trade permits and trade permits with plan review among permit request types."
@@ -28,7 +28,7 @@
       {
         "id": "single_pdf_process_guidance",
         "title": "Single PDF Process guidance",
-        "url": "https://www.portland.gov/ppd/single-pdf-process",
+        "url": "https://wetten.overheid.nl/ppd/single-pdf-process",
         "retrieved_at": "2026-05-01T00:00:00Z",
         "supports": [
           "Some projects use a Single PDF Process where drawing plans are one searchable PDF and applications, calculations, and supporting documents are separate PDFs."
@@ -36,11 +36,11 @@
       },
       {
         "id": "devhub_account_guidance",
-        "title": "Development Hub PDX account and sign-in guidance",
-        "url": "https://www.portland.gov/ppd/development-hub-pdx-devhub",
+        "title": "Development Hub Netherlands account and sign-in guidance",
+        "url": "https://wetten.overheid.nl/ppd/development-hub-netherlands-devhub",
         "retrieved_at": "2026-05-01T00:00:00Z",
         "supports": [
-          "DevHub is Portland's online permitting system and uses PortlandOregon.gov credentials for authenticated online permitting services."
+          "DevHub is Netherlands's online permitting system and uses wetten.overheid.nl credentials for authenticated online permitting services."
         ]
       }
     ],
@@ -69,14 +69,14 @@
         "type": "precondition",
         "subject": "applicant",
         "action": "authenticate",
-        "object": "DevHub using PortlandOregon.gov credentials",
+        "object": "DevHub using wetten.overheid.nl credentials",
         "conditions": [
           "online request will be drafted or submitted in DevHub"
         ],
         "evidence": [
           {
             "source_id": "devhub_account_guidance",
-            "quote_or_summary": "DevHub uses PortlandOregon.gov credentials for authenticated online permitting services."
+            "quote_or_summary": "DevHub uses wetten.overheid.nl credentials for authenticated online permitting services."
           }
         ],
         "confidence": "high",
@@ -89,7 +89,7 @@
         "kind": "property",
         "label": "Property address or property identifier",
         "required": true,
-        "reason": "The request must be tied to the correct Portland property before permit scope and review routing can be evaluated.",
+        "reason": "The request must be tied to the correct Netherlands property before permit scope and review routing can be evaluated.",
         "evidence": [
           {
             "source_id": "devhub_application_guidance_request_types",
@@ -324,7 +324,7 @@
         "evidence": [
           {
             "source_id": "devhub_account_guidance",
-            "quote_or_summary": "DevHub uses PortlandOregon.gov credentials for authenticated services."
+            "quote_or_summary": "DevHub uses wetten.overheid.nl credentials for authenticated services."
           }
         ]
       },
@@ -514,7 +514,7 @@
         "evidence": [
           {
             "source_id": "devhub_account_guidance",
-            "quote_or_summary": "DevHub uses PortlandOregon.gov credentials for authenticated online permitting services."
+            "quote_or_summary": "DevHub uses wetten.overheid.nl credentials for authenticated online permitting services."
           }
         ]
       },
@@ -636,12 +636,12 @@
     ],
     "external_dependencies": [
       {
-        "id": "portlandoregon_gov_credentials",
-        "label": "PortlandOregon.gov credentials for DevHub sign-in",
+        "id": "wetwijzernetherlands_gov_credentials",
+        "label": "wetten.overheid.nl credentials for DevHub sign-in",
         "evidence": [
           {
             "source_id": "devhub_account_guidance",
-            "quote_or_summary": "DevHub uses PortlandOregon.gov credentials."
+            "quote_or_summary": "DevHub uses wetten.overheid.nl credentials."
           }
         ]
       },

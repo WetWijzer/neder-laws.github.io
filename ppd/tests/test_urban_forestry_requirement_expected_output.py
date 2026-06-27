@@ -93,8 +93,8 @@ class UrbanForestryRequirementExpectedOutputTest(unittest.TestCase):
                 self.assertTrue(source.get("title"))
                 self.assertTrue(source.get("url"))
                 self.assertTrue(
-                    source["url"].startswith("https://www.portland.gov/")
-                    or source["url"].startswith("docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md")
+                    source["url"].startswith("https://wetten.overheid.nl/")
+                    or source["url"].startswith("docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md")
                 )
                 self.assertTrue(source.get("captured_at", "").endswith("Z"))
                 self.assertTrue(source.get("evidence_summary"))

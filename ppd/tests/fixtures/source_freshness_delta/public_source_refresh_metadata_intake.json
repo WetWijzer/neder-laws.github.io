@@ -5,7 +5,7 @@
   "sources": [
     {
       "source_id": "ppd-devhub-faq",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "previous_content_hash": "sha256:faq-old",
       "content_hash": "sha256:faq-new",
       "http_status": 200,
@@ -17,7 +17,7 @@
     },
     {
       "source_id": "ppd-file-naming-standards",
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "previous_content_hash": "sha256:file-rules-stable",
       "content_hash": "sha256:file-rules-stable",
       "http_status": 200,
@@ -29,7 +29,7 @@
     },
     {
       "source_id": "ppd-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "previous_content_hash": "sha256:single-pdf",
       "content_hash": "sha256:single-pdf",
       "http_status": 200,

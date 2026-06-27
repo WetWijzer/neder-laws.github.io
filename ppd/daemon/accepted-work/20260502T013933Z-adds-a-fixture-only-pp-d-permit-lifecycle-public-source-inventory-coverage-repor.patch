@@ -56,10 +56,10 @@
 +)
 +
 +ALLOWED_PUBLIC_HOSTS = {
-+    "www.portland.gov",
-+    "devhub.portlandoregon.gov",
-+    "www.portlandoregon.gov",
-+    "www.portlandmaps.com",
++    "wetten.overheid.nl",
++    "wetten.overheid.nl",
++    "wetten.overheid.nl",
++    "repository.overheid.nl",
 +}
 +
 +PRIVATE_DEVHUB_PATH_PARTS = (
@@ -188,7 +188,7 @@
 +    parsed = urlparse(source_url)
 +    if parsed.scheme != "https" or parsed.netloc not in ALLOWED_PUBLIC_HOSTS:
 +        errors.append(f"{prefix}.sourceUrl must be an allowed public HTTPS PP&D source")
-+    if parsed.netloc == "devhub.portlandoregon.gov" and any(part in parsed.path.lower() for part in PRIVATE_DEVHUB_PATH_PARTS):
++    if parsed.netloc == "wetten.overheid.nl" and any(part in parsed.path.lower() for part in PRIVATE_DEVHUB_PATH_PARTS):
 +        errors.append(f"{prefix}.sourceUrl must not be a private DevHub workflow path")
 +
 +    citation = str(item.get("citation", "")).strip()
@@ -232,7 +232,7 @@
 +  "liveCrawlingUsed": false,
 +  "authenticatedAutomationUsed": false,
 +  "scope": {
-+    "bureau": "Portland Permitting & Development",
++    "bureau": "Netherlands Permitting & Development",
 +    "coverageGoal": "Inventory committed public fixture and source-inventory evidence for permit extension, permit reactivation, cancellation, refund, and inspection-result guidance categories.",
 +    "excludedArtifacts": [
 +      "private DevHub session state",
@@ -260,15 +260,15 @@
 +          "evidenceId": "source-inventory-permit-lifecycle-guidance",
 +          "evidenceType": "source_inventory_record",
 +          "fixtureRef": "ppd/tests/fixtures/source_inventory/public_ppd_source_inventory.json",
-+          "sourceUrl": "https://www.portland.gov/ppd",
-+          "citation": "PP&D public guidance source inventory record for Portland.gov PP&D pages.",
++          "sourceUrl": "https://wetten.overheid.nl/ppd",
++          "citation": "PP&D public guidance source inventory record for wetten.overheid.nl PP&D pages.",
 +          "fixtureCapturedAt": "2026-05-01T00:00:00Z"
 +        },
 +        {
 +          "evidenceId": "normalized-guidance-devhub-processes",
 +          "evidenceType": "normalized_public_guidance_fixture",
 +          "fixtureRef": "ppd/tests/fixtures/extraction/devhub_public_guidance_normalized.json",
-+          "sourceUrl": "https://www.portland.gov/ppd/devhub",
++          "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
 +          "citation": "Normalized public DevHub guidance fixture covering public process help before authenticated workflow use.",
 +          "fixtureCapturedAt": "2026-05-01T00:00:00Z"
 +        }
@@ -301,15 +301,15 @@
 +          "evidenceId": "source-inventory-permit-lifecycle-guidance",
 +          "evidenceType": "source_inventory_record",
 +          "fixtureRef": "ppd/tests/fixtures/source_inventory/public_ppd_source_inventory.json",
-+          "sourceUrl": "https://www.portland.gov/ppd",
-+          "citation": "PP&D public guidance source inventory record for Portland.gov PP&D pages.",
++          "sourceUrl": "https://wetten.overheid.nl/ppd",
++          "citation": "PP&D public guidance source inventory record for wetten.overheid.nl PP&D pages.",
 +          "fixtureCapturedAt": "2026-05-01T00:00:00Z"
 +        },
 +        {
 +          "evidenceId": "normalized-guidance-devhub-processes",
 +          "evidenceType": "normalized_public_guidance_fixture",
 +          "fixtureRef": "ppd/tests/fixtures/extraction/devhub_public_guidance_normalized.json",
-+          "sourceUrl": "https://www.portland.gov/ppd/devhub",
++          "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
 +          "citation": "Normalized public DevHub guidance fixture covering public process help before authenticated workflow use.",
 +          "fixtureCapturedAt": "2026-05-01T00:00:00Z"
 +        }
@@ -342,15 +342,15 @@
 +          "evidenceId": "source-inventory-permit-lifecycle-guidance",
 +          "evidenceType": "source_inventory_record",
 +          "fixtureRef": "ppd/tests/fixtures/source_inventory/public_ppd_source_inventory.json",
-+          "sourceUrl": "https://www.portland.gov/ppd",
-+          "citation": "PP&D public guidance source inventory record for Portland.gov PP&D pages.",
++          "sourceUrl": "https://wetten.overheid.nl/ppd",
++          "citation": "PP&D public guidance source inventory record for wetten.overheid.nl PP&D pages.",
 +          "fixtureCapturedAt": "2026-05-01T00:00:00Z"
 +        },
 +        {
 +          "evidenceId": "normalized-guidance-devhub-processes",
 +          "evidenceType": "normalized_public_guidance_fixture",
 +          "fixtureRef": "ppd/tests/fixtures/extraction/devhub_public_guidance_normalized.json",
-+          "sourceUrl": "https://www.portland.gov/ppd/devhub",
++          "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
 +          "citation": "Normalized public DevHub guidance fixture covering public process help before authenticated workflow use.",
 +          "fixtureCapturedAt": "2026-05-01T00:00:00Z"
 +        }
@@ -383,7 +383,7 @@
 +          "evidenceId": "source-inventory-fee-payment-guidance",
 +          "evidenceType": "source_inventory_record",
 +          "fixtureRef": "ppd/tests/fixtures/source_inventory/public_ppd_source_inventory.json",
-+          "sourceUrl": "https://www.portland.gov/ppd",
++          "sourceUrl": "https://wetten.overheid.nl/ppd",
 +          "citation": "PP&D public source inventory record for fee, payment, and lifecycle guidance pages.",
 +          "fixtureCapturedAt": "2026-05-01T00:00:00Z"
 +        },
@@ -391,7 +391,7 @@
 +          "evidenceId": "normalized-guidance-devhub-processes",
 +          "evidenceType": "normalized_public_guidance_fixture",
 +          "fixtureRef": "ppd/tests/fixtures/extraction/devhub_public_guidance_normalized.json",
-+          "sourceUrl": "https://www.portland.gov/ppd/devhub",
++          "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
 +          "citation": "Normalized public DevHub guidance fixture covering fee payment guidance before authenticated workflow use.",
 +          "fixtureCapturedAt": "2026-05-01T00:00:00Z"
 +        }
@@ -424,7 +424,7 @@
 +          "evidenceId": "source-inventory-inspection-guidance",
 +          "evidenceType": "source_inventory_record",
 +          "fixtureRef": "ppd/tests/fixtures/source_inventory/public_ppd_source_inventory.json",
-+          "sourceUrl": "https://www.portland.gov/ppd",
++          "sourceUrl": "https://wetten.overheid.nl/ppd",
 +          "citation": "PP&D public source inventory record for inspection-related guidance pages.",
 +          "fixtureCapturedAt": "2026-05-01T00:00:00Z"
 +        },
@@ -432,7 +432,7 @@
 +          "evidenceId": "normalized-guidance-devhub-inspections",
 +          "evidenceType": "normalized_public_guidance_fixture",
 +          "fixtureRef": "ppd/tests/fixtures/extraction/devhub_public_guidance_normalized.json",
-+          "sourceUrl": "https://www.portland.gov/ppd/devhub",
++          "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
 +          "citation": "Normalized public DevHub guidance fixture covering inspection-related public help before authenticated workflow use.",
 +          "fixtureCapturedAt": "2026-05-01T00:00:00Z"
 +        }
@@ -513,7 +513,7 @@
 -                    "label": "Fees",
 -                    "sourceLandscapeIds": ["payment_guidance"],
 -                    "authorityLabels": ["PP&D fee guidance"],
--                    "canonicalUrls": ["https://www.portland.gov/ppd/fees"],
+-                    "canonicalUrls": ["https://wetten.overheid.nl/ppd/fees"],
 -                    "recrawlCadenceHint": "weekly",
 -                }
 -            ],
@@ -544,7 +544,7 @@
 -
 -    def test_assert_valid_coverage_report_raises_on_invalid_report(self):
 -        report = self.load_report()
--        report["coverageEntries"][0]["canonicalUrls"] = ["https://devhub.portlandoregon.gov/account"]
+-        report["coverageEntries"][0]["canonicalUrls"] = ["https://wetten.overheid.nl/account"]
 -        with self.assertRaises(ValueError):
 -            assert_valid_coverage_report(report)
 +    assert set(claims) == set(REQUIRED_GUIDANCE_CATEGORIES)
@@ -575,7 +575,7 @@
 +    bad_report = dict(report)
 +    bad_categories = [dict(category) for category in report["categories"]]
 +    bad_evidence = dict(bad_categories[0]["publicSourceEvidence"][0])
-+    bad_evidence["sourceUrl"] = "https://devhub.portlandoregon.gov/dashboard/my-permits"
++    bad_evidence["sourceUrl"] = "https://wetten.overheid.nl/dashboard/my-permits"
 +    bad_categories[0] = dict(bad_categories[0], publicSourceEvidence=[bad_evidence])
 +    bad_report["categories"] = bad_categories
 +

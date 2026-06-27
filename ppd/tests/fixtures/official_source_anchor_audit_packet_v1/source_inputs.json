@@ -1,16 +1,16 @@
 {
   "original_official_source_anchors": [
-    "https://www.portland.gov/ppd",
-    "https://www.portland.gov/ppd/how-use-online-permitting-tools",
-    "https://devhub.portlandoregon.gov",
-    "https://www.portland.gov/ppd/devhub-faqs"
+    "https://wetten.overheid.nl/ppd",
+    "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
+    "https://wetten.overheid.nl",
+    "https://wetten.overheid.nl/ppd/devhub-faqs"
   ],
   "committed_source_registry_fixtures": {
     "fixture_id": "source_anchor_coverage_matrix_subset",
     "anchors": [
       {
         "source_id": "ppd-public-landing",
-        "canonical_url": "https://www.portland.gov/ppd",
+        "canonical_url": "https://wetten.overheid.nl/ppd",
         "processor_policy": "metadata-only fixture seed; future public HTML extraction after policy preflight",
         "freshness_status": "synthetic_unverified",
         "robots_policy_status": "not_checked_fixture_only",
@@ -18,7 +18,7 @@
       },
       {
         "source_id": "ppd-online-permitting-tools",
-        "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+        "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
         "processor_policy": "metadata-only fixture seed; future public HTML extraction after policy preflight",
         "freshness_status": "synthetic_unverified",
         "robots_policy_status": "not_checked_fixture_only",
@@ -31,7 +31,7 @@
     "records": [
       {
         "id": "ppd-home",
-        "canonicalUrl": "https://www.portland.gov/ppd",
+        "canonicalUrl": "https://wetten.overheid.nl/ppd",
         "lastSeenAt": "2026-05-01T17:00:00Z",
         "crawlStatus": "fetched",
         "fixture_ref": "source-index:ppd-home"

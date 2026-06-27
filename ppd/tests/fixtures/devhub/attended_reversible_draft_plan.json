@@ -9,13 +9,13 @@
     {
       "evidence_id": "src-devhub-account-sign-in-guide",
       "source_type": "public_guidance_fixture",
-      "source_url": "https://www.portland.gov/ppd/devhub-sign-guide",
+      "source_url": "https://wetten.overheid.nl/ppd/devhub-sign-guide",
       "summary": "Public guidance fixture for DevHub account sign-in and manual-login handoff."
     },
     {
       "evidence_id": "src-devhub-submit-permit-application-guide",
       "source_type": "public_guidance_fixture",
-      "source_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "source_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "summary": "Public guidance fixture for permit request flow, address/property lookup, permit type choice, draft questions, and save-for-later behavior."
     },
     {

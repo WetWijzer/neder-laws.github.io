@@ -45,8 +45,8 @@ class SourceFreshnessChangeReportTests(unittest.TestCase):
         citation_ids = {item["citationId"] for item in report["citationReferences"]}
 
         self.assertEqual(requirement_ids, {"single-pdf-plan-package", "trade-plan-review-correction-upload"})
-        self.assertIn("https://www.portland.gov/ppd/forms/single-pdf-process-checklist", linked_urls)
-        self.assertIn("https://www.portland.gov/ppd/old-correction-upload-guide", linked_urls)
+        self.assertIn("https://wetten.overheid.nl/ppd/forms/single-pdf-process-checklist", linked_urls)
+        self.assertIn("https://wetten.overheid.nl/ppd/old-correction-upload-guide", linked_urls)
         self.assertEqual(
             fixture_paths,
             {

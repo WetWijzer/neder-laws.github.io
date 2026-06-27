@@ -61,7 +61,7 @@
       {
         "requirement_id": "REQ-DEVHUB-ACCOUNT",
         "citation": "official-source-anchor:DevHub account and sign-in guide",
-        "evidence_summary": "DevHub online permitting services require account-scoped sign-in with PortlandOregon.gov credentials."
+        "evidence_summary": "DevHub online permitting services require account-scoped sign-in with wetten.overheid.nl credentials."
       },
       {
         "requirement_id": "REQ-SINGLE-PDF",

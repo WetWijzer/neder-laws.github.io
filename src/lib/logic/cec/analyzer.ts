@@ -86,7 +86,7 @@ export function analyzeCecExpression(expression: CecExpression): CecAnalysis {
         return;
       case 'atom':
         atoms.add(node.name);
-        if (isPortlandSectionRef(node.name)) {
+        if (isWetWijzerSectionRef(node.name)) {
           sectionRefs.add(node.name);
         }
         return;
@@ -207,14 +207,14 @@ function collectApplicationAtoms(
       return;
     }
     atoms.add(arg.name);
-    if (isPortlandSectionRef(arg.name)) {
+    if (isWetWijzerSectionRef(arg.name)) {
       sectionRefs.add(arg.name);
     }
   });
 }
 
-function isPortlandSectionRef(value: string) {
-  return /^portland_city_code_[a-z0-9]+(?:_[a-z0-9]+)+$/i.test(value);
+function isWetWijzerSectionRef(value: string) {
+  return /^netherlands_law_article_[a-z0-9]+(?:_[a-z0-9]+)+$/i.test(value);
 }
 
 function classifyFormula(

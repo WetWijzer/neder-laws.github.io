@@ -17,8 +17,8 @@
 +  "source_evidence": [
 +    {
 +      "evidence_id": "src-devhub-faq-plan-review",
-+      "source_url": "https://www.portland.gov/ppd/devhub/faqs",
-+      "source_title": "Development Hub PDX FAQ",
++      "source_url": "https://wetten.overheid.nl/ppd/devhub/faqs",
++      "source_title": "Development Hub Netherlands FAQ",
 +      "captured_at": "2026-05-01T00:00:00Z",
 +      "anchor": "permit-requests-requiring-plan-review",
 +      "supports": [
@@ -29,7 +29,7 @@
 +    },
 +    {
 +      "evidence_id": "src-single-pdf-guidance",
-+      "source_url": "https://www.portland.gov/ppd/permits/single-pdf-process",
++      "source_url": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +      "source_title": "Single PDF Process guidance",
 +      "captured_at": "2026-05-01T00:00:00Z",
 +      "anchor": "separate-application-and-supporting-documents",
@@ -251,7 +251,7 @@
 +        evidence_ids = {item.get("evidence_id") for item in evidence}
 +        for item in evidence:
 +            self.assertTrue(item.get("public_source"), item)
-+            self.assertTrue(str(item.get("source_url", "")).startswith("https://www.portland.gov/ppd"), item)
++            self.assertTrue(str(item.get("source_url", "")).startswith("https://wetten.overheid.nl/ppd"), item)
 +            self.assertTrue(str(item.get("captured_at", "")).endswith("Z"), item)
 +            self.assertGreater(len(item.get("supports", [])), 0, item)
 +        for section_name in (

@@ -10,7 +10,7 @@ def test_accepts_matrix_with_required_safety_gates() -> None:
         "recommendations": [
             {
                 "text": "Use the public permit checklist.",
-                "citations": [{"url": "https://www.portland.gov/example/checklist"}],
+                "citations": [{"url": "https://wetten.overheid.nl/example/checklist"}],
             }
         ],
         "process_evidence": [{"observed_on": "2026-05-20", "source": "public page"}],

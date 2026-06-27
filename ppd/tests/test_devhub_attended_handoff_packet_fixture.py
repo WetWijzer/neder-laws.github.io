@@ -71,9 +71,9 @@ def test_manual_login_prerequisites_and_attendance_are_explicit():
     prerequisites = packet["manual_login_prerequisites"]
     attendance = packet["attendance_requirement"]
 
-    assert prerequisites["start_url"] == "https://devhub.portlandoregon.gov"
+    assert prerequisites["start_url"] == "https://wetten.overheid.nl"
     assert prerequisites["browser_requirement"] == "user_visible_browser"
-    assert prerequisites["credential_handling"] == "user_enters_portlandoregon_gov_credentials_manually"
+    assert prerequisites["credential_handling"] == "user_enters_wetwijzernetherlands_gov_credentials_manually"
     assert prerequisites["mfa_or_captcha_handling"] == "user_completes_any_mfa_captcha_or_security_prompt_manually"
     assert prerequisites["worker_must_not_request_credentials"] is True
     assert prerequisites["worker_must_not_store_credentials"] is True

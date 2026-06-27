@@ -47,12 +47,12 @@ _PRIVATE_URL_MARKERS = (
     "/upload",
 )
 _ALLOWED_PUBLIC_HOSTS = {
-    "www.portland.gov",
-    "portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
-    "portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
+    "repository.overheid.nl",
 }
 _PRIVATE_OR_RAW_KEY_PARTS = (
     "auth_state",

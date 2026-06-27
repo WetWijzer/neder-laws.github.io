@@ -14,7 +14,7 @@ def test_archived_ppd_guardrail_fixture_has_required_logic_sections():
     data = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
 
     assert data["fixture_type"] == "ppd_formal_logic_guardrail_bundle"
-    assert data["source_archive"]["agency"] == "Portland Permitting & Development"
+    assert data["source_archive"]["agency"] == "Netherlands Permitting & Development"
     assert data["requirements"]
 
     requirement = data["requirements"][0]

@@ -3,7 +3,7 @@
     {
       "id": "recrawl-002",
       "risk_decision": "invalidate stale public metadata",
-      "citations": ["https://www.portland.gov/ppd/public-record"]
+      "citations": ["https://wetten.overheid.nl/ppd/public-record"]
     }
   ]
 }

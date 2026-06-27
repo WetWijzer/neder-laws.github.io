@@ -24,7 +24,7 @@ class PublicCrawlReportTests(unittest.TestCase):
         self.assertFalse(report["raw_response_bodies_included"])
 
         titles = [item["title"] for item in report["items"]]
-        self.assertEqual(titles, ["Portland Permitting & Development", "Single PDF Process"])
+        self.assertEqual(titles, ["Netherlands Permitting & Development", "Single PDF Process"])
         serialized = json.dumps(report, sort_keys=True).lower()
         self.assertNotIn("<html", serialized)
         self.assertNotIn("raw_body", serialized)

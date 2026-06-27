@@ -4,28 +4,28 @@
     "prerequisite_links": [
       {
         "source_id": "ppd-bureau-landing",
-        "url": "https://www.portland.gov/ppd"
+        "url": "https://wetten.overheid.nl/ppd"
       }
     ],
     "targets": [
       {
         "source_id": "devhub-faqs",
-        "url": "https://www.portland.gov/ppd/devhub-faqs"
+        "url": "https://wetten.overheid.nl/ppd/devhub-faqs"
       },
       {
         "source_id": "submit-plans-online",
-        "url": "https://www.portland.gov/ppd/get-permit/submit-plans-online"
+        "url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online"
       }
     ],
     "skipped_targets": [
       {
         "source_id": "devhub-private-permit-dashboard",
-        "url": "https://devhub.portlandoregon.gov/permits/private-dashboard",
+        "url": "https://wetten.overheid.nl/permits/private-dashboard",
         "skipped_reason": "private authenticated account surface; do not include in public processor handoff"
       },
       {
         "source_id": "fee-payment-download",
-        "url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+        "url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
         "skipped_reason": "direct download target held until metadata-only processor runner confirms no raw body persistence"
       }
     ],
@@ -39,13 +39,13 @@
     "reviewed_sources": [
       {
         "source_id": "devhub-faqs",
-        "url": "https://www.portland.gov/ppd/devhub-faqs",
+        "url": "https://wetten.overheid.nl/ppd/devhub-faqs",
         "freshness_status": "fresh",
         "reviewed_at": "2026-05-28T00:00:00Z"
       },
       {
         "source_id": "submit-plans-online",
-        "url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+        "url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
         "freshness_status": "fresh",
         "reviewed_at": "2026-05-28T00:00:00Z"
       }

@@ -19,8 +19,8 @@
   },
   "records": [
     {
-      "sourceUrl": "https://www.portland.gov/ppd",
-      "canonicalUrl": "https://www.portland.gov/ppd",
+      "sourceUrl": "https://wetten.overheid.nl/ppd",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd",
       "sourceType": "public_html",
       "owningSurface": "ppd_public_website",
       "sourceEvidenceId": "src-ppd-bureau-landing-page",
@@ -51,8 +51,8 @@
       ]
     },
     {
-      "sourceUrl": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
-      "canonicalUrl": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "sourceType": "public_html",
       "owningSurface": "ppd_public_website",
       "sourceEvidenceId": "src-ppd-online-permitting-tools",
@@ -83,8 +83,8 @@
       ]
     },
     {
-      "sourceUrl": "https://devhub.portlandoregon.gov",
-      "canonicalUrl": "https://devhub.portlandoregon.gov",
+      "sourceUrl": "https://wetten.overheid.nl",
+      "canonicalUrl": "https://wetten.overheid.nl",
       "sourceType": "devhub_public",
       "owningSurface": "devhub_public_portal",
       "sourceEvidenceId": "src-devhub-public-portal",
@@ -115,8 +115,8 @@
       ]
     },
     {
-      "sourceUrl": "https://www.portland.gov/ppd/devhub-faqs",
-      "canonicalUrl": "https://www.portland.gov/ppd/devhub-faqs",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-faqs",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "sourceType": "public_html",
       "owningSurface": "ppd_public_website",
       "sourceEvidenceId": "src-ppd-devhub-faqs",
@@ -147,8 +147,8 @@
       ]
     },
     {
-      "sourceUrl": "https://www.portland.gov/ppd/devhub-sign-guide",
-      "canonicalUrl": "https://www.portland.gov/ppd/devhub-sign-guide",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-sign-guide",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub-sign-guide",
       "sourceType": "public_html",
       "owningSurface": "ppd_public_website",
       "sourceEvidenceId": "src-ppd-devhub-sign-guide",
@@ -179,8 +179,8 @@
       ]
     },
     {
-      "sourceUrl": "https://www.portland.gov/ppd/get-permit/apply-permits",
-      "canonicalUrl": "https://www.portland.gov/ppd/get-permit/apply-permits",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
       "sourceType": "public_html",
       "owningSurface": "ppd_public_website",
       "sourceEvidenceId": "src-ppd-apply-permits",
@@ -211,8 +211,8 @@
       ]
     },
     {
-      "sourceUrl": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
-      "canonicalUrl": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "sourceType": "public_html",
       "owningSurface": "ppd_public_website",
       "sourceEvidenceId": "src-ppd-devhub-submit-permit-application-guide",
@@ -243,8 +243,8 @@
       ]
     },
     {
-      "sourceUrl": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
-      "canonicalUrl": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "sourceType": "public_html",
       "owningSurface": "ppd_public_website",
       "sourceEvidenceId": "src-ppd-submit-plans-online",
@@ -275,8 +275,8 @@
       ]
     },
     {
-      "sourceUrl": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
-      "canonicalUrl": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
       "sourceType": "public_form",
       "owningSurface": "ppd_public_website",
       "sourceEvidenceId": "src-ppd-permits-inspections-applications-index",
@@ -307,8 +307,8 @@
       ]
     },
     {
-      "sourceUrl": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
-      "canonicalUrl": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "sourceType": "public_html",
       "owningSurface": "ppd_public_website",
       "sourceEvidenceId": "src-ppd-spp-file-naming-standards-preparing-pdfs",
@@ -339,8 +339,8 @@
       ]
     },
     {
-      "sourceUrl": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
-      "canonicalUrl": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "sourceType": "public_pdf",
       "owningSurface": "ppd_public_website",
       "sourceEvidenceId": "src-ppd-how-pay-fees-download",

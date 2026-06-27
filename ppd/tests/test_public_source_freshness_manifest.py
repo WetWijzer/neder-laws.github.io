@@ -27,7 +27,7 @@ FORBIDDEN_KEYS = {
 }
 
 FORBIDDEN_FRAGMENTS = (
-    "devhub.portlandoregon.gov/secure",
+    "wetten.overheid.nl/secure",
     "/data/private/",
     "/data/raw/",
     "storage_state",
@@ -61,9 +61,9 @@ class PublicSourceFreshnessManifestTest(unittest.TestCase):
             parsed_source = urlparse(source["sourceUrl"])
             parsed_canonical = urlparse(source["canonicalUrl"])
             self.assertEqual("https", parsed_source.scheme, source_id)
-            self.assertEqual("www.portland.gov", parsed_source.netloc, source_id)
+            self.assertEqual("wetten.overheid.nl", parsed_source.netloc, source_id)
             self.assertEqual("https", parsed_canonical.scheme, source_id)
-            self.assertEqual("www.portland.gov", parsed_canonical.netloc, source_id)
+            self.assertEqual("wetten.overheid.nl", parsed_canonical.netloc, source_id)
             self.assertTrue(_has_hash_or_cache_placeholder(source), source_id)
 
     def test_rejection_cases_fail_closed_before_live_crawl_planning(self) -> None:
@@ -115,10 +115,10 @@ def validate_manifest(manifest: dict[str, Any]) -> list[str]:
             errors.append("lastSeenAt timestamp is required")
         if not source.get("sourceEvidenceId"):
             errors.append("sourceEvidenceId is required")
-        if not _is_public_portland_url(source.get("sourceUrl")):
-            errors.append("sourceUrl must be a public Portland.gov HTTPS URL")
-        if not _is_public_portland_url(source.get("canonicalUrl")):
-            errors.append("canonicalUrl must be a public Portland.gov HTTPS URL")
+        if not _is_public_wetwijzer_url(source.get("sourceUrl")):
+            errors.append("sourceUrl must be a public wetten.overheid.nl HTTPS URL")
+        if not _is_public_wetwijzer_url(source.get("canonicalUrl")):
+            errors.append("canonicalUrl must be a public wetten.overheid.nl HTTPS URL")
         if not _has_hash_or_cache_placeholder(source):
             errors.append("content hash or HTTP cache placeholder is required")
         if not isinstance(source.get("reviewNeeded"), bool):
@@ -152,11 +152,11 @@ def _has_hash_or_cache_placeholder(source: dict[str, Any]) -> bool:
     return any(cache.get(key) for key in ("etag", "lastModified", "cacheControl"))
 
 
-def _is_public_portland_url(value: Any) -> bool:
+def _is_public_wetwijzer_url(value: Any) -> bool:
     if not isinstance(value, str):
         return False
     parsed = urlparse(value)
-    return parsed.scheme == "https" and parsed.netloc == "www.portland.gov"
+    return parsed.scheme == "https" and parsed.netloc == "wetten.overheid.nl"
 
 
 def _contains_forbidden_artifact(value: Any, *, allow_rejection_cases: bool, path: str = "root") -> bool:

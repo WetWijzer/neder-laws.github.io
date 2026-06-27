@@ -3,7 +3,7 @@
   "sources": [
     {
       "source_id": "SRC-DEVHUB-FAQ",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "source_type": "devhub_public",
       "owning_surface": "devhub_public_help",
       "allowlist_policy": "allowed_public",
@@ -20,7 +20,7 @@
     },
     {
       "source_id": "SRC-FILE-STANDARDS",
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "source_type": "public_html",
       "owning_surface": "public_guidance",
       "allowlist_policy": "allowed_public",
@@ -37,7 +37,7 @@
     },
     {
       "source_id": "SRC-FEE-PAYMENT-GUIDE",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "source_type": "public_pdf",
       "owning_surface": "public_guidance",
       "allowlist_policy": "allowed_public",

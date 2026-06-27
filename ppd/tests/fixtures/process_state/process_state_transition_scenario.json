@@ -6,7 +6,7 @@
   "stateSources": [
     {
       "sourceEvidenceId": "src-public-process-guidance",
-      "sourceUrl": "https://www.portland.gov/ppd/permits",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/permits",
       "sourceType": "public_guidance"
     },
     {

@@ -45,7 +45,7 @@ class DevHubDraftFormStateContractTest(unittest.TestCase):
         for page in pages:
             self.assertEqual(page.get("stateKind"), "devhub_draft_page")
             self.assertEqual(page.get("valuePolicy"), "redacted_values_only")
-            self.assertTrue(str(page.get("url", "")).startswith("https://devhub.portlandoregon.gov/"))
+            self.assertTrue(str(page.get("url", "")).startswith("https://wetten.overheid.nl/"))
             self.assertNotIn("storage_state", json.dumps(page).lower())
             self.assertNotIn("cookie", json.dumps(page).lower())
 

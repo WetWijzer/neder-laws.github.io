@@ -67,12 +67,12 @@ CURRENT_CACHE_STATUSES = frozenset(
 REVIEWED_STATUSES = frozenset({"reviewed", "approved", "accepted", "human_reviewed"})
 PUBLIC_HOSTS = frozenset(
     {
-        "www.portland.gov",
-        "portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
-        "www.portlandmaps.com",
-        "portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
+        "repository.overheid.nl",
     }
 )
 PRIVATE_PATH_MARKERS = (
@@ -363,7 +363,7 @@ def _is_private_or_authenticated_url(url: str) -> bool:
     if host not in PUBLIC_HOSTS:
         return True
     path = parsed.path.lower()
-    if host == "devhub.portlandoregon.gov" and path not in {"", "/"}:
+    if host == "wetten.overheid.nl" and path not in {"", "/"}:
         return True
     if any(marker in path for marker in PRIVATE_PATH_MARKERS):
         return True

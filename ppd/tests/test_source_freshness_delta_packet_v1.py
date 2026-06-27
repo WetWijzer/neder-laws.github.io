@@ -47,8 +47,8 @@ def test_compares_hashes_visible_dates_missing_rows_and_links() -> None:
     assert by_kind["visible_updated_date_changed"][0]["current_value"] == "2026-05-20"
     assert by_kind["missing_source_row"][0]["source_id"] == "ppd-retired-handout"
     assert by_kind["new_source_row"][0]["source_id"] == "ppd-new-devhub-guide"
-    assert by_kind["new_official_link"][0]["current_value"] == "https://www.portland.gov/ppd/devhub-faqs"
-    assert by_kind["removed_official_link"][0]["previous_value"] == "https://www.portland.gov/ppd/old-fee-help"
+    assert by_kind["new_official_link"][0]["current_value"] == "https://wetten.overheid.nl/ppd/devhub-faqs"
+    assert by_kind["removed_official_link"][0]["previous_value"] == "https://wetten.overheid.nl/ppd/old-fee-help"
 
 
 def test_requires_prior_current_hash_date_and_link_comparison_rows() -> None:
@@ -133,7 +133,7 @@ def test_rejects_live_devhub_guarantee_official_action_and_active_mutation_claim
 def test_rejects_private_or_authenticated_urls() -> None:
     packet = _packet()
     packet["source_deltas"][0]["canonical_url"] = "https://example.com/private"
-    packet["source_deltas"][1]["current_value"] = "https://www.portland.gov/login?token=secret"
+    packet["source_deltas"][1]["current_value"] = "https://wetten.overheid.nl/login?token=secret"
 
     codes = _codes(packet)
 

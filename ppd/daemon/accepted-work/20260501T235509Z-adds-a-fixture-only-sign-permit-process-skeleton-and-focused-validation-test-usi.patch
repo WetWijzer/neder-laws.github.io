@@ -13,7 +13,7 @@
 +    {
 +      "sourceId": "source_inventory_ppd_permit_guidance_signs",
 +      "authorityLabel": "PP&D public permit guidance",
-+      "canonicalUrl": "https://www.portland.gov/ppd/permits/sign-permits",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/sign-permits",
 +      "category": "permit_guidance",
 +      "recrawlCadenceHint": "monthly",
 +      "evidenceUse": "Identifies sign permits as a public PP&D permit workflow category."
@@ -21,7 +21,7 @@
 +    {
 +      "sourceId": "source_inventory_devhub_application_guidance",
 +      "authorityLabel": "DevHub public application guidance",
-+      "canonicalUrl": "https://www.portland.gov/ppd/devhub/apply-permit",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub/apply-permit",
 +      "category": "devhub_guide",
 +      "recrawlCadenceHint": "weekly",
 +      "evidenceUse": "Lists sign permits among public DevHub permit request types and supports account/request-type stages."
@@ -29,7 +29,7 @@
 +    {
 +      "sourceId": "source_inventory_single_pdf_process",
 +      "authorityLabel": "PP&D Single PDF Process guidance",
-+      "canonicalUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +      "category": "submittal_guidance",
 +      "recrawlCadenceHint": "monthly",
 +      "evidenceUse": "Supports file rules for one searchable drawing-plan PDF and separate supporting PDFs when the Single PDF Process applies."
@@ -37,7 +37,7 @@
 +    {
 +      "sourceId": "source_inventory_devhub_faq",
 +      "authorityLabel": "DevHub public FAQ",
-+      "canonicalUrl": "https://www.portland.gov/ppd/devhub/faq",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub/faq",
 +      "category": "devhub_guide",
 +      "recrawlCadenceHint": "weekly",
 +      "evidenceUse": "Supports fee payment, permit request, upload, correction, and inspection service categories."
@@ -45,7 +45,7 @@
 +    {
 +      "sourceId": "source_inventory_ppd_permit_applications_forms",
 +      "authorityLabel": "PP&D permits and inspections applications index",
-+      "canonicalUrl": "https://www.portland.gov/ppd/permits/inspections-applications",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/inspections-applications",
 +      "category": "forms_index",
 +      "recrawlCadenceHint": "monthly",
 +      "evidenceUse": "Supports application-form and supporting-document inventory checks."
@@ -484,7 +484,7 @@
 +        self.assertGreaterEqual(len(self.fixture["authoritySources"]), 5)
 +        for source in self.fixture["authoritySources"]:
 +            self.assertTrue(source["sourceId"].startswith("source_inventory_"))
-+            self.assertTrue(source["canonicalUrl"].startswith("https://www.portland.gov/ppd"))
++            self.assertTrue(source["canonicalUrl"].startswith("https://wetten.overheid.nl/ppd"))
 +            self.assertIn("authorityLabel", source)
 +            self.assertIn("recrawlCadenceHint", source)
 +            self.assertIn("evidenceUse", source)

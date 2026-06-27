@@ -123,7 +123,7 @@
   "sourceEvidence": [
     {
       "sourceEvidenceId": "src-devhub-apply-guide",
-      "sourceUrl": "https://www.portland.gov/ppd/devhub/how-apply-permit-devhub",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/how-apply-permit-devhub",
       "citation": {
         "locator": "fixture-devhub-apply-guide-draft-planning",
         "paraphrase": "Public DevHub guidance can inform reversible draft planning, while official actions remain gated."

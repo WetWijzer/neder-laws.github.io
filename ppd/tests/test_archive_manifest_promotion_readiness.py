@@ -11,9 +11,9 @@ from ppd.archive_manifest_promotion_readiness import (
 def valid_packet() -> dict[str, object]:
     return {
         "manifest_id": "manifest-2026-05-29",
-        "source_id": "portland-code-source",
+        "source_id": "wetwijzer-code-source",
         "known_manifest_ids": ["manifest-2026-05-29"],
-        "known_source_ids": ["portland-code-source"],
+        "known_source_ids": ["wetwijzer-code-source"],
         "evidence": {
             "checksum": {"algorithm": "sha256", "value": "0" * 64},
             "freshness": {"observed_at": "2026-05-29T00:00:00Z"},

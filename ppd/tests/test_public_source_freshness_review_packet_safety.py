@@ -40,12 +40,12 @@ def test_accepts_fixture_built_public_source_freshness_review_packet() -> None:
 @pytest.mark.parametrize(
     "url",
     [
-        "https://user:pass@www.portland.gov/ppd/devhub-faqs",
-        "https://www.portland.gov/ppd/devhub-faqs?token=secret",
+        "https://user:pass@wetten.overheid.nl/ppd/devhub-faqs",
+        "https://wetten.overheid.nl/ppd/devhub-faqs?token=secret",
         "https://localhost/ppd/devhub-faqs",
         "https://127.0.0.1/ppd/devhub-faqs",
-        "https://www.portland.gov/account/permits",
-        "https://www.portland.gov/login",
+        "https://wetten.overheid.nl/account/permits",
+        "https://wetten.overheid.nl/login",
     ],
 )
 def test_rejects_private_or_authenticated_urls(url: str) -> None:
@@ -65,11 +65,11 @@ def test_rejects_non_allowlisted_hosts() -> None:
 @pytest.mark.parametrize(
     "url",
     [
-        "https://www.portland.gov/ppd/devhub-faqs/download/report",
-        "https://www.portland.gov/ppd/devhub-faqs/archive/2025",
-        "https://www.portland.gov/ppd/devhub-faqs/raw/body",
-        "https://www.portland.gov/ppd/devhub-faqs/export/results.zip",
-        "https://www.portland.gov/ppd/devhub-faqs/report.pdf",
+        "https://wetten.overheid.nl/ppd/devhub-faqs/download/report",
+        "https://wetten.overheid.nl/ppd/devhub-faqs/archive/2025",
+        "https://wetten.overheid.nl/ppd/devhub-faqs/raw/body",
+        "https://wetten.overheid.nl/ppd/devhub-faqs/export/results.zip",
+        "https://wetten.overheid.nl/ppd/devhub-faqs/report.pdf",
     ],
 )
 def test_rejects_raw_body_download_archive_and_document_paths(url: str) -> None:
@@ -95,9 +95,9 @@ def test_rejects_missing_decision_source_id() -> None:
 
 def test_rejects_missing_robots_or_policy_prerequisites() -> None:
     packet = build_packet()
-    packet["packet_level_prerequisite_evidence_ids"] = ["robots-prereq-portland-gov-20260528"]
+    packet["packet_level_prerequisite_evidence_ids"] = ["robots-prereq-wetwijzer-gov-20260528"]
     packet["reviewer_owned_source_freshness_decisions"][0]["prerequisite_robots_policy_evidence_ids"] = [
-        "robots-prereq-portland-gov-20260528"
+        "robots-prereq-wetwijzer-gov-20260528"
     ]
 
     errors = safety_errors(packet)

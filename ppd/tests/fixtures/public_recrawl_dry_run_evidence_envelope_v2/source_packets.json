@@ -10,15 +10,15 @@
     "seed_batches": [
       {
         "batch_id": "fixture-seed-batch-v2-001",
-        "source_id": "portland-council-agendas",
-        "seed_url": "https://www.portland.gov/council/agenda",
+        "source_id": "wetwijzer-council-agendas",
+        "seed_url": "https://wetten.overheid.nl/council/agenda",
         "selection_basis": "allowlisted public source with approved readiness and allowed robots fixture",
         "rate_limit_decision": {
           "delay_seconds": 60,
           "basis": "max(operator default delay, robots crawl-delay fixture)",
           "citations": [
             "public_recrawl_operator_packet_v2.default_rate_limit_delay_seconds",
-            "source_allowlist_robots_fixtures_v2.sources.portland-council-agendas.robots.crawl_delay_seconds"
+            "source_allowlist_robots_fixtures_v2.sources.wetwijzer-council-agendas.robots.crawl_delay_seconds"
           ]
         },
         "robots_decision": {
@@ -26,7 +26,7 @@
           "user_agent": "PPD-FixtureDryRun",
           "fixture_status": "allowed",
           "citations": [
-            "source_allowlist_robots_fixtures_v2.sources.portland-council-agendas.robots"
+            "source_allowlist_robots_fixtures_v2.sources.wetwijzer-council-agendas.robots"
           ]
         },
         "expected_capture": {
@@ -42,7 +42,7 @@
         "citations": [
           "live_readiness_authorization_checklist_packet_v2.approved_for_fixture_dry_run",
           "public_recrawl_operator_packet_v2.mode",
-          "source_allowlist_robots_fixtures_v2.sources.portland-council-agendas"
+          "source_allowlist_robots_fixtures_v2.sources.wetwijzer-council-agendas"
         ]
       }
     ],

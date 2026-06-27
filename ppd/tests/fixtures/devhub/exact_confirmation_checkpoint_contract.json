@@ -8,15 +8,15 @@
   "sourceEvidence": [
     {
       "id": "src-devhub-submit-guidance",
-      "title": "Development Hub PDX public application guidance",
-      "url": "https://www.portland.gov/ppd/development-hub-pdx/apply-permits-devhub",
+      "title": "Development Hub Netherlands public application guidance",
+      "url": "https://wetten.overheid.nl/ppd/development-hub-netherlands/apply-permits-devhub",
       "retrievedAt": "2026-05-01T00:00:00Z",
       "supports": "DevHub accepts permit requests and related application workflow actions."
     },
     {
       "id": "src-devhub-fee-guidance",
-      "title": "Development Hub PDX public FAQ and fee payment guidance",
-      "url": "https://www.portland.gov/ppd/development-hub-pdx/devhub-faq",
+      "title": "Development Hub Netherlands public FAQ and fee payment guidance",
+      "url": "https://wetten.overheid.nl/ppd/development-hub-netherlands/devhub-faq",
       "retrievedAt": "2026-05-01T00:00:00Z",
       "supports": "Public DevHub guidance describes fee payment as an online service category."
     }

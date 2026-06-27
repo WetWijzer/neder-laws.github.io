@@ -54,11 +54,11 @@ class SourceRefreshResultReconciliationValidationTest(unittest.TestCase):
 
     def test_rejects_authenticated_urls(self):
         packet = copy.deepcopy(self.packet)
-        packet["source_decisions"][0]["citations"][0]["href"] = "https://user:pass@www.portland.gov/code/33"
+        packet["source_decisions"][0]["citations"][0]["href"] = "https://user:pass@wetten.overheid.nl/code/33"
         self.assertInvalid(packet, "authenticated URL credentials")
 
         packet = copy.deepcopy(self.packet)
-        packet["source_decisions"][0]["citations"][0]["href"] = "https://www.portland.gov/code/33?token=secret"
+        packet["source_decisions"][0]["citations"][0]["href"] = "https://wetten.overheid.nl/code/33?token=secret"
         self.assertInvalid(packet, "authenticated URL query parameters")
 
     def test_rejects_raw_body_download_archive_references(self):

@@ -3,7 +3,7 @@
   "processors": [
     {
       "processor_name": "public-html-normalizer",
-      "rate_limit_note": "Respect Portland.gov public crawl pacing: one request every 10 seconds."
+      "rate_limit_note": "Respect wetten.overheid.nl public crawl pacing: one request every 10 seconds."
     },
     {
       "processor_name": "public-pdf-metadata-prober",
@@ -14,7 +14,7 @@
     {
       "target_id": "ppd-landing",
       "crawl_frequency": "weekly",
-      "rate_limit_note": "Respect Portland.gov public crawl pacing: one request every 10 seconds."
+      "rate_limit_note": "Respect wetten.overheid.nl public crawl pacing: one request every 10 seconds."
     },
     {
       "target_id": "devhub-faq",

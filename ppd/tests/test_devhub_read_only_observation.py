@@ -19,7 +19,7 @@ def test_accepts_attended_read_only_structural_observation() -> None:
         },
         "surface": {
             "name": "My Permits & Requests",
-            "url_host": "devhub.portlandoregon.gov",
+            "url_host": "wetten.overheid.nl",
             "heading": "My Permits & Requests",
         },
         "visible_structure": {

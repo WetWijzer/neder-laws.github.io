@@ -1,8 +1,8 @@
-import { GameId } from '../../convex/aiTown/ids.ts';
-import { AgentDescription } from '../../convex/aiTown/agentDescription.ts';
-import { PlayerDescription } from '../../convex/aiTown/playerDescription.ts';
-import { World } from '../../convex/aiTown/world.ts';
-import { WorldMap } from '../../convex/aiTown/worldMap.ts';
+import { GameId } from '../../convex/wetwijzer/ids.ts';
+import { AgentDescription } from '../../convex/wetwijzer/agentDescription.ts';
+import { PlayerDescription } from '../../convex/wetwijzer/playerDescription.ts';
+import { World } from '../../convex/wetwijzer/world.ts';
+import { WorldMap } from '../../convex/wetwijzer/worldMap.ts';
 import { Id } from '../../convex/_generated/dataModel';
 import { useMemo } from 'react';
 import { useQuery, api } from '../lib/staticConvexReplaceSimple.tsx';

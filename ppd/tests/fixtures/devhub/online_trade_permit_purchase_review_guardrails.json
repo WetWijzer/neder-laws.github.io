@@ -4,7 +4,7 @@
     "sessionId": "session-2026-05-02-online-trade-review",
     "requiredConfirmationPhrase": "CONFIRM session-2026-05-02-online-trade-review online trade permit purchase review exact action",
     "permitType": "online_trade_permit",
-    "sourceUrl": "https://www.portland.gov/ppd/devhub",
+    "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
     "reviewSteps": [
       {
         "id": "review-permit-type",

@@ -10,19 +10,19 @@
       {
         "evidence_id": "ev-submit-plans-online-single-pdf",
         "title": "Submit Plans Online / Single PDF Process",
-        "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+        "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
         "freshness_status": "current"
       },
       {
         "evidence_id": "ev-devhub-submit-application-guide",
         "title": "DevHub permit application guide",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
         "freshness_status": "current"
       },
       {
         "evidence_id": "ev-devhub-fee-payment-guide",
         "title": "How to pay fees",
-        "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+        "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
         "freshness_status": "current"
       }
     ],
@@ -222,7 +222,7 @@
         "event_id": "aj-v1-user-gap-analysis-001",
         "event_type": "user_gap_analysis",
         "source_fixture": "ppd/tests/fixtures/user_gap_analysis/sample_gap_analysis.json",
-        "citations": [{"label": "PP&D public permit guidance", "url": "https://www.portland.gov/ppd"}],
+        "citations": [{"label": "PP&D public permit guidance", "url": "https://wetten.overheid.nl/ppd"}],
         "redacted_evidence_summary": {
           "summary": "Synthetic gap categories are replayed without user-specific values.",
           "redactions_applied": ["site_placeholder", "owner_placeholder"],
@@ -234,7 +234,7 @@
         "event_id": "aj-v1-reversible-draft-preview-001",
         "event_type": "reversible_draft_preview",
         "source_fixture": "ppd/tests/fixtures/reversible_draft_preview/sample_preview.json",
-        "citations": [{"label": "DevHub public guide", "url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application"}],
+        "citations": [{"label": "DevHub public guide", "url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application"}],
         "redacted_evidence_summary": {
           "summary": "Local draft preview replay contains no official-action payload.",
           "redactions_applied": ["applicant_placeholder", "parcel_placeholder"],
@@ -246,7 +246,7 @@
         "event_id": "aj-v1-refusal-001",
         "event_type": "refusal",
         "source_fixture": "ppd/tests/fixtures/refusal/sample_refusal.json",
-        "citations": [{"label": "PP&D public services", "url": "https://www.portland.gov/ppd"}],
+        "citations": [{"label": "PP&D public services", "url": "https://wetten.overheid.nl/ppd"}],
         "redacted_evidence_summary": {
           "summary": "Restricted attended or consequential requests are represented as policy categories only.",
           "redactions_applied": ["request_placeholder"],

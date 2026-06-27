@@ -27,17 +27,17 @@
 +  "documents": [
 +    {
 +      "source_id": "ppd_public_devhub_application_guidance_sample",
-+      "source_url": "https://www.portland.gov/ppd/devhub/apply-permit-devhub",
-+      "canonical_url": "https://www.portland.gov/ppd/devhub/apply-permit-devhub",
++      "source_url": "https://wetten.overheid.nl/ppd/devhub/apply-permit-devhub",
++      "canonical_url": "https://wetten.overheid.nl/ppd/devhub/apply-permit-devhub",
 +      "content_type": "html",
-+      "title": "Apply for permits online using Development Hub PDX",
++      "title": "Apply for permits online using Development Hub Netherlands",
 +      "captured_at": "2026-05-01T00:00:00Z",
 +      "fixture_note": "Curated public-guidance excerpt based on verified PP&D/DevHub facts. This is not raw crawl output.",
 +      "sections": [
 +        {
 +          "anchor_id": "devhub-account-required",
 +          "heading": "Before you apply online",
-+          "text": "Applicants use Development Hub PDX with PortlandOregon.gov credentials. A user must have a DevHub account before preparing or submitting online permit requests."
++          "text": "Applicants use Development Hub Netherlands with wetten.overheid.nl credentials. A user must have a DevHub account before preparing or submitting online permit requests."
 +        },
 +        {
 +          "anchor_id": "devhub-permit-types",
@@ -53,8 +53,8 @@
 +    },
 +    {
 +      "source_id": "ppd_public_single_pdf_process_sample",
-+      "source_url": "https://www.portland.gov/ppd/single-pdf-process",
-+      "canonical_url": "https://www.portland.gov/ppd/single-pdf-process",
++      "source_url": "https://wetten.overheid.nl/ppd/single-pdf-process",
++      "canonical_url": "https://wetten.overheid.nl/ppd/single-pdf-process",
 +      "content_type": "html",
 +      "title": "Single PDF Process guidance",
 +      "captured_at": "2026-05-01T00:00:00Z",
@@ -74,10 +74,10 @@
 +    },
 +    {
 +      "source_id": "ppd_public_devhub_faq_sample",
-+      "source_url": "https://www.portland.gov/ppd/devhub/devhub-faq",
-+      "canonical_url": "https://www.portland.gov/ppd/devhub/devhub-faq",
++      "source_url": "https://wetten.overheid.nl/ppd/devhub/devhub-faq",
++      "canonical_url": "https://wetten.overheid.nl/ppd/devhub/devhub-faq",
 +      "content_type": "html",
-+      "title": "Development Hub PDX FAQ",
++      "title": "Development Hub Netherlands FAQ",
 +      "captured_at": "2026-05-01T00:00:00Z",
 +      "fixture_note": "Curated public-guidance excerpt based on verified DevHub FAQ service categories. This is not raw crawl output.",
 +      "sections": [
@@ -100,8 +100,8 @@
 +      "type": "precondition",
 +      "subject": "applicant",
 +      "action": "have_account",
-+      "object": "Development Hub PDX account using PortlandOregon.gov credentials",
-+      "natural_language": "An applicant must have a DevHub account with PortlandOregon.gov credentials before preparing or submitting online permit requests.",
++      "object": "Development Hub Netherlands account using wetten.overheid.nl credentials",
++      "natural_language": "An applicant must have a DevHub account with wetten.overheid.nl credentials before preparing or submitting online permit requests.",
 +      "conditions": [
 +        "online_permit_request",
 +        "workflow_uses_devhub"
@@ -110,7 +110,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd_public_devhub_application_guidance_sample",
-+          "source_url": "https://www.portland.gov/ppd/devhub/apply-permit-devhub",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub/apply-permit-devhub",
 +          "anchor_id": "devhub-account-required",
 +          "captured_at": "2026-05-01T00:00:00Z",
 +          "excerpt": "A user must have a DevHub account before preparing or submitting online permit requests."
@@ -134,7 +134,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd_public_single_pdf_process_sample",
-+          "source_url": "https://www.portland.gov/ppd/single-pdf-process",
++          "source_url": "https://wetten.overheid.nl/ppd/single-pdf-process",
 +          "anchor_id": "single-pdf-plan-file",
 +          "captured_at": "2026-05-01T00:00:00Z",
 +          "excerpt": "For projects using the Single PDF Process, drawing plans must be provided as one searchable PDF."
@@ -159,7 +159,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd_public_single_pdf_process_sample",
-+          "source_url": "https://www.portland.gov/ppd/single-pdf-process",
++          "source_url": "https://wetten.overheid.nl/ppd/single-pdf-process",
 +          "anchor_id": "single-pdf-plan-file",
 +          "captured_at": "2026-05-01T00:00:00Z",
 +          "excerpt": "Applications, calculations, and supporting documents are separate PDFs."
@@ -184,7 +184,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd_public_single_pdf_process_sample",
-+          "source_url": "https://www.portland.gov/ppd/single-pdf-process",
++          "source_url": "https://wetten.overheid.nl/ppd/single-pdf-process",
 +          "anchor_id": "single-pdf-before-upload",
 +          "captured_at": "2026-05-01T00:00:00Z",
 +          "excerpt": "Applicants should prepare the drawing plan PDF, application PDF, calculations, and supporting documents before uploading files to DevHub."
@@ -209,7 +209,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd_public_devhub_faq_sample",
-+          "source_url": "https://www.portland.gov/ppd/devhub/devhub-faq",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub/devhub-faq",
 +          "anchor_id": "faq-correction-upload",
 +          "captured_at": "2026-05-01T00:00:00Z",
 +          "excerpt": "When corrections are requested for a permit in plan review, the applicant may upload corrected documents through the correction upload path."
@@ -234,7 +234,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd_public_devhub_application_guidance_sample",
-+          "source_url": "https://www.portland.gov/ppd/devhub/apply-permit-devhub",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub/apply-permit-devhub",
 +          "anchor_id": "devhub-user-confirmation",
 +          "captured_at": "2026-05-01T00:00:00Z",
 +          "excerpt": "Automation must stop before submitting an application unless the user explicitly confirms that exact action."
@@ -260,7 +260,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd_public_devhub_faq_sample",
-+          "source_url": "https://www.portland.gov/ppd/devhub/devhub-faq",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub/devhub-faq",
 +          "anchor_id": "faq-service-categories",
 +          "captured_at": "2026-05-01T00:00:00Z",
 +          "excerpt": "DevHub supports permit purchase, permit requests requiring plan review, inspection scheduling for online trade permits, correction uploads, and fee payments."

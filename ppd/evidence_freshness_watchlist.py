@@ -13,9 +13,9 @@ from urllib.parse import urlparse
 
 
 ALLOWLISTED_HOSTS = {
-    "portland.gov",
-    "www.portland.gov",
-    "efiles.portlandoregon.gov",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 
 AUTH_QUERY_MARKERS = {

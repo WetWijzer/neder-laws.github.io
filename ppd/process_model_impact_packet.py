@@ -306,7 +306,7 @@ def _committed_source_evidence(source_evidence: Any) -> dict[str, Mapping[str, A
             raise ProcessModelImpactPacketError("source_evidence entries must be objects")
         evidence_id = _required_text(evidence, "evidence_id")
         canonical_url = _required_text(evidence, "canonical_url")
-        if not canonical_url.startswith(("https://www.portland.gov/", "https://devhub.portlandoregon.gov/")):
+        if not canonical_url.startswith(("https://wetten.overheid.nl/", "https://wetten.overheid.nl/")):
             raise ProcessModelImpactPacketError(f"{evidence_id} must cite an official PP&D or DevHub URL")
         status = _text(evidence.get("freshness_status") or "fixture_current").lower()
         if status in STALE_SOURCE_STATUSES:
@@ -340,7 +340,7 @@ def _validate_source_references(source_references: Any) -> set[str]:
             raise ProcessModelImpactPacketError("source_references entries must be objects")
         evidence_id = _required_text(reference, "evidence_id")
         canonical_url = _required_text(reference, "canonical_url")
-        if not canonical_url.startswith(("https://www.portland.gov/", "https://devhub.portlandoregon.gov/")):
+        if not canonical_url.startswith(("https://wetten.overheid.nl/", "https://wetten.overheid.nl/")):
             raise ProcessModelImpactPacketError(f"{evidence_id} must cite an official PP&D or DevHub URL")
         status = _text(reference.get("freshness_status") or "fixture_current").lower()
         if status in STALE_SOURCE_STATUSES:

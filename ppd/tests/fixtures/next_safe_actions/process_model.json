@@ -6,35 +6,35 @@
     {
       "evidence_id": "ev-standard-trade-license",
       "source_id": "ppd-devhub-standard-trade-guide",
-      "url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "title": "Online permitting tools overview",
       "quote": "Contractor license information can affect available DevHub options."
     },
     {
       "evidence_id": "ev-single-pdf-guidance",
       "source_id": "ppd-single-pdf-guidance",
-      "url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "title": "Submit plans online",
       "quote": "Drawing plans are prepared as one PDF while supporting documents are separate PDFs."
     },
     {
       "evidence_id": "ev-devhub-save-later",
       "source_id": "ppd-devhub-application-guide",
-      "url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "title": "DevHub permit application guide",
       "quote": "Applications may be saved before final review and submission."
     },
     {
       "evidence_id": "ev-devhub-submit-certify",
       "source_id": "ppd-devhub-application-guide",
-      "url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "title": "DevHub permit application guide",
       "quote": "Submission and acknowledgement steps require applicant review."
     },
     {
       "evidence_id": "ev-upload-corrections",
       "source_id": "ppd-devhub-upload-corrections",
-      "url": "https://www.portland.gov/ppd/devhub-faqs",
+      "url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "title": "DevHub FAQs",
       "quote": "Uploading corrections changes the official permit record."
     }

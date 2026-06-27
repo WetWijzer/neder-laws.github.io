@@ -24,7 +24,7 @@ def test_build_change_impact_rows_from_committed_fixtures() -> None:
 
     assert len(rows) == 2
     validate_change_impact_rows(rows)
-    assert rows[0]["affected_source_ids"] == ["PPD-SRC-PORTLAND-ZONING-001"]
+    assert rows[0]["affected_source_ids"] == ["PPD-SRC-NETHERLANDS-ZONING-001"]
     assert "33.110.220" in rows[0]["document_sections"]
     assert "PPD-REQ-ZONING-SETBACKS" in rows[0]["requirement_ids"]
     assert "requirement-mapping" in rows[0]["process_stages"]

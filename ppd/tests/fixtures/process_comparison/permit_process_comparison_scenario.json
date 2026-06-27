@@ -94,7 +94,7 @@
   "sourceEvidence": [
     {
       "sourceEvidenceId": "src-ppd-residential-building-guidance",
-      "sourceUrl": "https://www.portland.gov/ppd/residential-permits",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/residential-permits",
       "capturedAt": "2026-05-01T00:00:00Z",
       "citation": {
         "locator": "fixture-residential-building-requirements",
@@ -103,7 +103,7 @@
     },
     {
       "sourceEvidenceId": "src-ppd-trade-permit-guidance",
-      "sourceUrl": "https://www.portland.gov/ppd/trade-permits",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/trade-permits",
       "capturedAt": "2026-05-01T00:00:00Z",
       "citation": {
         "locator": "fixture-trade-permit-requirements",

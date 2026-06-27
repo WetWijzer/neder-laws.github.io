@@ -15,13 +15,13 @@ from urllib.parse import parse_qs, urlparse
 
 ALLOWLISTED_HOSTS = frozenset(
     {
-        "devhub.portlandoregon.gov",
-        "efiles.portlandoregon.gov",
-        "portland.gov",
-        "publicnotices.portland.gov",
-        "www.portland.gov",
-        "www.portlandmaps.com",
-        "www.portlandoregon.gov",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
+        "wetten.overheid.nl",
+        "officielebekendmakingen.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
+        "wetten.overheid.nl",
     }
 )
 

@@ -5,14 +5,14 @@
     {
       "evidence_id": "evidence-single-pdf-guidance",
       "source_id": "ppd-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "title": "Submit Plans Online / Single PDF Process",
       "citation": "Single PDF guidance fixture citation for plan drawing preparation."
     },
     {
       "evidence_id": "evidence-separate-plan-files-guidance",
       "source_id": "ppd-file-standards",
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "title": "File naming standards and preparing PDFs",
       "citation": "Separate upload guidance fixture citation for plan drawing preparation."
     }

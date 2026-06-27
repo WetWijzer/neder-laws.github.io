@@ -233,9 +233,9 @@ def validate_crawl_campaign_brief() -> None:
 
     from ppd.crawler.crawl_campaign_brief import campaign_batch_summary, load_campaign_brief, validate_campaign_brief
 
-    brief_path = PPD_ROOT / "crawl_campaigns" / "portland_ppd_campaign_brief.json"
+    brief_path = PPD_ROOT / "crawl_campaigns" / "wetwijzer_ppd_campaign_brief.json"
     if not brief_path.exists():
-        fail("crawl campaign brief is required at ppd/crawl_campaigns/portland_ppd_campaign_brief.json")
+        fail("crawl campaign brief is required at ppd/crawl_campaigns/wetwijzer_ppd_campaign_brief.json")
 
     brief = load_campaign_brief(brief_path)
     errors = validate_campaign_brief(brief)
@@ -265,7 +265,7 @@ def validate_devhub_attended_login_contract() -> None:
     save_resume_html = save_resume_fixture.read_text(encoding="utf-8")
 
     manual_state = contract.state_from_observation(
-        "https://www.portlandoregon.gov/DevHub/Account/Login",
+        "https://wetten.overheid.nl/DevHub/Account/Login",
         manual_html,
         200,
     )
@@ -273,7 +273,7 @@ def validate_devhub_attended_login_contract() -> None:
         fail("manual_sign_in fixture must classify as MANUAL_SIGN_IN_REQUIRED")
 
     save_resume_state = contract.state_from_observation(
-        "https://www.portlandoregon.gov/DevHub/Permits/Draft?id=123",
+        "https://wetten.overheid.nl/DevHub/Permits/Draft?id=123",
         save_resume_html,
         200,
     )
@@ -289,7 +289,7 @@ def validate_devhub_attended_login_contract() -> None:
         fail("external route snapshots must not preserve raw URL details")
 
     redacted_snapshot = contract.redacted_route_snapshot(
-        "https://www.portlandoregon.gov/DevHub/Callback?code=abc123&recordId=RSW-1#token=hidden",
+        "https://wetten.overheid.nl/DevHub/Callback?code=abc123&recordId=RSW-1#token=hidden",
         method="post",
         html_text=save_resume_html,
         status_code=200,
@@ -318,8 +318,8 @@ def validate_contract_schemas() -> None:
 
     document = NormalizedDocument(
         id="fixture-doc",
-        source_url="https://www.portland.gov/ppd/example",
-        canonical_url="https://www.portland.gov/ppd/example",
+        source_url="https://wetten.overheid.nl/ppd/example",
+        canonical_url="https://wetten.overheid.nl/ppd/example",
         content_type=PpdContentType.HTML,
         title="Fixture Document",
         fetched_at="2026-05-01T00:00:00Z",
@@ -327,7 +327,7 @@ def validate_contract_schemas() -> None:
         text="Public PP&D fixture text.",
         document_role=PpdDocumentRole.GUIDANCE,
         normalized_at="2026-05-01T00:00:00Z",
-        source_family="portland_gov_ppd",
+        source_family="wetwijzer_gov_ppd",
     )
     document_errors = document.validate()
     if document_errors:
@@ -389,18 +389,18 @@ def validate_contract_schemas() -> None:
 
     source_index_record = SourceIndexRecord(
         id="fixture-source-index-record",
-        source_url="https://www.portland.gov/bds/example",
-        canonical_url="https://www.portland.gov/ppd/example",
+        source_url="https://wetten.overheid.nl/bds/example",
+        canonical_url="https://wetten.overheid.nl/ppd/example",
         redirects=(
             RedirectHop(
-                from_url="https://www.portland.gov/bds/example",
-                to_url="https://www.portland.gov/ppd/example",
+                from_url="https://wetten.overheid.nl/bds/example",
+                to_url="https://wetten.overheid.nl/ppd/example",
                 status_code=301,
                 observed_at="2026-05-01T00:00:00Z",
             ),
         ),
         title="Fixture Source Index Record",
-        bureau="Portland Permitting & Development",
+        bureau="Netherlands Permitting & Development",
         page_type=SourcePageType.GUIDANCE,
         content_type="text/html",
         first_seen_at="2026-05-01T00:00:00Z",

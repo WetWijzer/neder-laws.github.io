@@ -43,7 +43,7 @@ def test_each_recommendation_is_cited_to_fixture_evidence() -> None:
         assert recommendation["citations"], recommendation["kind"]
         for citation in recommendation["citations"]:
             assert citation["evidence_id"].startswith("ppd-")
-            assert citation["url"].startswith("https://www.portland.gov/ppd")
+            assert citation["url"].startswith("https://wetten.overheid.nl/ppd")
             assert citation["accessed_at"] == "2026-05-08"
 
 

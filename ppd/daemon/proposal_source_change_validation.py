@@ -303,7 +303,7 @@ def _is_fixture_path(path: str) -> bool:
 
 
 def _is_docs_plan_path(path: str) -> bool:
-    return path == "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md"
+    return path == "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md"
 
 
 def _is_supervisor_only_backlog_update(

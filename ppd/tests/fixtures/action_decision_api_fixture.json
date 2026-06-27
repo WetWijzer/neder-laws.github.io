@@ -1,7 +1,7 @@
 {
   "fixture_name": "agent_action_decision_api_guardrails",
   "version": 1,
-  "scope": "Portland PP&D isolated implementation workspace",
+  "scope": "WetWijzer legal sources isolated implementation workspace",
   "browser_automation": {
     "allowed": false,
     "reason": "This fixture is for deterministic decision classification only; it must not drive browser actions."

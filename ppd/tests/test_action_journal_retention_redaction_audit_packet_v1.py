@@ -138,7 +138,7 @@ class ActionJournalRetentionRedactionAuditPacketV1Test(unittest.TestCase):
 
     def test_rejects_live_devhub_official_and_guarantee_claims(self) -> None:
         cases = (
-            ("Live crawl performed against Portland.gov." , "live crawl claim"),
+            ("Live crawl performed against wetten.overheid.nl." , "live crawl claim"),
             ("Opened DevHub and authenticated DevHub session." , "DevHub access claim"),
             ("The permit application was submitted." , "official completion claim"),
             ("Permit approval is certain and legally valid." , "legal or permitting guarantee"),

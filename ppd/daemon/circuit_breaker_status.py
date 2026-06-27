@@ -15,7 +15,7 @@ from typing import Any, Mapping, Sequence
 
 _FORBIDDEN_ARTIFACT_PREFIXES = (
     "src/lib/logic/",
-    "public/corpus/portland-or/current/",
+    "public/corpus/wetwijzer-or/current/",
     "ipfs_datasets_py/.daemon/",
     "ppd/data/private/",
     "ppd/data/raw/",
@@ -26,7 +26,7 @@ _FORBIDDEN_ARTIFACT_PREFIXES = (
 _REQUIRED_FORBIDDEN_BOUNDARIES = frozenset(
     {
         "src/lib/logic/",
-        "public/corpus/portland-or/current/",
+        "public/corpus/wetwijzer-or/current/",
         "ipfs_datasets_py/.daemon/",
     }
 )

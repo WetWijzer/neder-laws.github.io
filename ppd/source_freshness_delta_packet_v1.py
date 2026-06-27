@@ -17,11 +17,11 @@ PACKET_VERSION = "source_freshness_delta_packet_v1"
 
 _ALLOWED_HOSTS = frozenset(
     {
-        "devhub.portlandoregon.gov",
-        "portland.gov",
-        "www.portland.gov",
-        "portlandmaps.com",
-        "www.portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
+        "repository.overheid.nl",
     }
 )
 

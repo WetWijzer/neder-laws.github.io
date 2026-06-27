@@ -1,1 +1,1 @@
-"""Local PDF preview helpers for Portland PP&D workflows."""
+"""Local PDF preview helpers for WetWijzer legal sources workflows."""

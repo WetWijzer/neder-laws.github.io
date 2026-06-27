@@ -4,7 +4,7 @@
   "registry_records": [
     {
       "source_id": "ppd-devhub-faq",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "source_type": "devhub_public",
       "owning_surface": "ppd_public_guidance",
       "last_seen_at": "2026-05-14T12:00:00Z",
@@ -13,7 +13,7 @@
     },
     {
       "source_id": "ppd-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "source_type": "public_html",
       "owning_surface": "ppd_public_guidance",
       "last_seen_at": "2026-05-13T08:30:00Z",
@@ -22,7 +22,7 @@
     },
     {
       "source_id": "ppd-stale-fee-guide",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "source_type": "public_pdf",
       "owning_surface": "ppd_public_guidance",
       "last_seen_at": "2026-04-15T00:00:00Z",
@@ -31,7 +31,7 @@
     },
     {
       "source_id": "ppd-apply-permits",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
       "source_type": "public_html",
       "owning_surface": "ppd_public_guidance",
       "last_seen_at": "2026-05-14T09:00:00Z",

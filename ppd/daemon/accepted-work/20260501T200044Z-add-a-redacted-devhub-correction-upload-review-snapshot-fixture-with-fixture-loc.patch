@@ -7,10 +7,10 @@
 +  "capturedAt": "2026-05-01T20:20:00Z",
 +  "fixtureOnly": true,
 +  "source": {
-+    "system": "DevHub PDX",
++    "system": "DevHub Netherlands",
 +    "workflow": "correction_upload_review",
 +    "pageState": "review_corrections_before_official_upload",
-+    "urlState": "https://devhub.portlandoregon.gov/mock/permits/[REDACTED_PERMIT_ID]/corrections/review",
++    "urlState": "https://wetten.overheid.nl/mock/permits/[REDACTED_PERMIT_ID]/corrections/review",
 +    "captureMethod": "mocked_fixture",
 +    "liveAutomationPerformed": false
 +  },

@@ -3,7 +3,7 @@
 @@ -0,0 +1,111 @@
 +# PP&D Daemon Operations
 +
-+This document describes how to start, stop, and inspect the isolated PP&D daemon from the repository root. The daemon is scoped to the `ppd/` workspace and should not write to the Portland legal corpus, TypeScript logic daemon ledgers, `ipfs_datasets_py/.daemon/`, private DevHub session storage, or live crawl output directories.
++This document describes how to start, stop, and inspect the isolated PP&D daemon from the repository root. The daemon is scoped to the `ppd/` workspace and should not write to the Netherlands legal corpus, TypeScript logic daemon ledgers, `ipfs_datasets_py/.daemon/`, private DevHub session storage, or live crawl output directories.
 +
 +## Scope
 +

@@ -62,8 +62,8 @@
       "reviewer": "ppd-reviewer",
       "citations": [
         {
-          "label": "Portland Permitting and Development public permit resources",
-          "url": "https://www.portland.gov/ppd"
+          "label": "Netherlands Permitting and Development public permit resources",
+          "url": "https://wetten.overheid.nl/ppd"
         }
       ],
       "redacted_evidence_summary": {
@@ -81,8 +81,8 @@
       "reviewer": "ppd-policy-reviewer",
       "citations": [
         {
-          "label": "Portland residential permits public overview",
-          "url": "https://www.portland.gov/ppd/residential-permits"
+          "label": "Netherlands residential permits public overview",
+          "url": "https://wetten.overheid.nl/ppd/residential-permits"
         }
       ],
       "redacted_evidence_summary": {
@@ -100,8 +100,8 @@
       "reviewer": "ppd-reviewer",
       "citations": [
         {
-          "label": "Portland Development Services permit guidance",
-          "url": "https://www.portland.gov/ppd/permits"
+          "label": "Netherlands Development Services permit guidance",
+          "url": "https://wetten.overheid.nl/ppd/permits"
         }
       ],
       "redacted_evidence_summary": {
@@ -119,8 +119,8 @@
       "reviewer": "ppd-policy-reviewer",
       "citations": [
         {
-          "label": "Portland permit application guidance",
-          "url": "https://www.portland.gov/ppd/permits/apply-permit"
+          "label": "Netherlands permit application guidance",
+          "url": "https://wetten.overheid.nl/ppd/permits/apply-permit"
         }
       ],
       "redacted_evidence_summary": {
@@ -138,8 +138,8 @@
       "reviewer": "ppd-reviewer",
       "citations": [
         {
-          "label": "Portland DevHub public entry point",
-          "url": "https://devhub.portlandoregon.gov/"
+          "label": "Netherlands DevHub public entry point",
+          "url": "https://wetten.overheid.nl/"
         }
       ],
       "redacted_evidence_summary": {
@@ -157,8 +157,8 @@
       "reviewer": "ppd-policy-reviewer",
       "citations": [
         {
-          "label": "Portland Development Services public services",
-          "url": "https://www.portland.gov/ppd"
+          "label": "Netherlands Development Services public services",
+          "url": "https://wetten.overheid.nl/ppd"
         }
       ],
       "redacted_evidence_summary": {

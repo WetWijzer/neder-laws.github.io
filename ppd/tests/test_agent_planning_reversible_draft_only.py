@@ -62,7 +62,7 @@ class AgentPlanningReversibleDraftOnlyFixtureTest(unittest.TestCase):
         self.assertEqual(referenced_ids, self.evidence_ids)
         for evidence in self.fixture["sourceEvidence"]:
             self.assertTrue(evidence["publicOnly"])
-            self.assertTrue(evidence["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
+            self.assertTrue(evidence["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
             self.assertTrue(evidence["capturedAt"].endswith("Z"))
             self.assertGreater(len(evidence["supports"]), 0)
 

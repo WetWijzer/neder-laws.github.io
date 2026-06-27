@@ -7,7 +7,7 @@
       "source_id": "ppd-official-anchors",
       "evidence_id": "ev-public-source-anchors",
       "title": "Official PP&D public source anchors from implementation plan",
-      "canonical_url": "https://www.portland.gov/ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
       "capture_verified_at": "2026-05-08T00:00:00Z",
       "freshness_basis": "Plan source facts verified against official public sources on 2026-05-08",
       "contains_raw_body": false
@@ -17,9 +17,9 @@
       "source_id": "ppd-online-permitting-tools",
       "evidence_id": "ev-devhub-tools-overview",
       "title": "Online permitting tools overview fixture summary",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "capture_verified_at": "2026-05-08T00:00:00Z",
-      "freshness_basis": "Plan notes identify DevHub as the City of Portland online permitting system and enumerate account-scoped guides",
+      "freshness_basis": "Plan notes identify DevHub as the WetWijzer online permitting system and enumerate account-scoped guides",
       "contains_raw_body": false
     },
     {
@@ -27,7 +27,7 @@
       "source_id": "ppd-submit-plans-online",
       "evidence_id": "ev-submit-plans-online",
       "title": "Submit Plans Online and Single PDF guidance fixture summary",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "capture_verified_at": "2026-05-08T00:00:00Z",
       "freshness_basis": "Plan source facts summarize Single PDF process and separate supporting PDF uploads",
       "contains_raw_body": false
@@ -37,7 +37,7 @@
       "source_id": "ppd-devhub-application-guide",
       "evidence_id": "ev-devhub-application-guide",
       "title": "DevHub permit application guide fixture summary",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "capture_verified_at": "2026-05-08T00:00:00Z",
       "freshness_basis": "Plan source facts list DevHub request types, dynamic questions, save-for-later behavior, uploads, and acknowledgement steps",
       "contains_raw_body": false
@@ -47,7 +47,7 @@
       "source_id": "ppd-devhub-faq",
       "evidence_id": "ev-devhub-faq",
       "title": "DevHub FAQ fixture summary",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "capture_verified_at": "2026-05-08T00:00:00Z",
       "freshness_basis": "Plan source facts list account-scoped DevHub services including status, corrections, inspections, and fees",
       "contains_raw_body": false
@@ -57,9 +57,9 @@
       "source_id": "ppd-devhub-signin-guide",
       "evidence_id": "ev-devhub-signin-guide",
       "title": "DevHub account and sign-in fixture summary",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-sign-guide",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-sign-guide",
       "capture_verified_at": "2026-05-08T00:00:00Z",
-      "freshness_basis": "Plan source facts state that DevHub online permitting services require PortlandOregon.gov credentials",
+      "freshness_basis": "Plan source facts state that DevHub online permitting services require wetten.overheid.nl credentials",
       "contains_raw_body": false
     },
     {
@@ -67,7 +67,7 @@
       "source_id": "ppd-fee-payment-guide",
       "evidence_id": "ev-fee-payment-guide",
       "title": "Fee payment guide fixture summary",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "capture_verified_at": "2026-05-08T00:00:00Z",
       "freshness_basis": "Plan source facts classify payment detail entry and final payment submission as financial workflows requiring separate guardrails",
       "contains_raw_body": false

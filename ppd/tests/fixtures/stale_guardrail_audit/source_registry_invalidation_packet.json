@@ -62,7 +62,7 @@
     "sources": [
       {
         "source_id": "src-submit-plans-online",
-        "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+        "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
         "freshness_status": "changed",
         "previous_content_hash": "sha256:single-pdf-old",
         "current_content_hash": "sha256:single-pdf-new",
@@ -70,7 +70,7 @@
       },
       {
         "source_id": "src-fee-payment-guide",
-        "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+        "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
         "freshness_status": "changed",
         "previous_content_hash": "sha256:fee-guide-old",
         "current_content_hash": "sha256:fee-guide-new",
@@ -78,7 +78,7 @@
       },
       {
         "source_id": "src-devhub-application-guide",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
         "freshness_status": "current",
         "previous_content_hash": "sha256:application-guide-current",
         "current_content_hash": "sha256:application-guide-current",

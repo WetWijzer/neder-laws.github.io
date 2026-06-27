@@ -84,7 +84,7 @@ class PublicCrawlExecutionGateTest(unittest.TestCase):
 
     def test_gate_refuses_private_or_authenticated_urls(self) -> None:
         packet = copy.deepcopy(_fixture())
-        packet["urls"].append("https://devhub.portlandoregon.gov/login")
+        packet["urls"].append("https://wetten.overheid.nl/login")
 
         decision = _decision(packet)
 

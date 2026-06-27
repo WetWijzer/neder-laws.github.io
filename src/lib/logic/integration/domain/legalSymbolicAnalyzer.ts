@@ -49,7 +49,7 @@ const REFERENCE_PATTERNS: readonly [LegalSymbolicReference['kind'], RegExp][] = 
     'citation',
     /\b\d{1,4}\s+(?:U\.S\.|S\. Ct\.|F\.\d+d|F\. Supp\. \d+d|P\.\d+d|Or\.|Or\. App\.)\s+\d{1,5}\b/g,
   ],
-  ['section', /\b(?:PCC|ORS|USC|U\.S\.C\.|§)\s*[\w.-]+(?:\([\w-]+\))*/gi],
+  ['section', /\b(?:netherlands law|ORS|USC|U\.S\.C\.|§)\s*[\w.-]+(?:\([\w-]+\))*/gi],
   [
     'case',
     /\b[A-Z][\w.'&-]*(?:\s+[A-Z][\w.'&-]*){0,4}\s+v\.\s+[A-Z][\w.'&-]*(?:\s+[A-Z][\w.'&-]*){0,4}\b/g,

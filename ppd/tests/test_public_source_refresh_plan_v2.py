@@ -13,8 +13,8 @@ def _valid_plan() -> dict[str, object]:
         "source_refresh_candidates": [
             {
                 "source_id": "ppd-permits",
-                "public_url": "https://www.portland.gov/ppd/permits",
-                "citations": [{"url": "https://www.portland.gov/ppd/permits", "title": "Permits"}],
+                "public_url": "https://wetten.overheid.nl/ppd/permits",
+                "citations": [{"url": "https://wetten.overheid.nl/ppd/permits", "title": "Permits"}],
                 "affected_requirement_ids": ["REQ-PPD-PERMIT-001"],
                 "affected_process_ids": ["PROC-PPD-REVIEW-001"],
                 "affected_guardrail_ids": ["GR-PPD-PUBLIC-SOURCES-001"],

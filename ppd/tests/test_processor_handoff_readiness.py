@@ -54,8 +54,8 @@ def test_invalid_readiness_packets_report_policy_issue(case_name, expected_code)
 
 def test_nested_forbidden_fields_are_rejected():
     packet = {
-        "prerequisite_links": ["https://www.portland.gov/ppd"],
-        "targets": ["https://www.portland.gov/ppd/devhub-faqs"],
+        "prerequisite_links": ["https://wetten.overheid.nl/ppd"],
+        "targets": ["https://wetten.overheid.nl/ppd/devhub-faqs"],
         "attestations": {"no_raw_body_persisted": True},
         "processor": {
             "options": {

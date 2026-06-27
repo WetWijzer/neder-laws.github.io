@@ -11,7 +11,7 @@
         "citations": [
           {
             "sourceEvidenceId": "ppd-public-devhub-single-pdf-guidance",
-            "url": "https://www.portland.gov/ppd/devhub"
+            "url": "https://wetten.overheid.nl/ppd/devhub"
           }
         ],
         "failClosed": true
@@ -23,7 +23,7 @@
         "citations": [
           {
             "sourceEvidenceId": "ppd-public-devhub-application-guidance",
-            "url": "https://www.portland.gov/ppd/devhub"
+            "url": "https://wetten.overheid.nl/ppd/devhub"
           }
         ],
         "failClosed": true
@@ -36,7 +36,7 @@
         "citations": [
           {
             "sourceEvidenceId": "ppd-public-devhub-application-guidance",
-            "url": "https://www.portland.gov/ppd/devhub"
+            "url": "https://wetten.overheid.nl/ppd/devhub"
           }
         ],
         "failClosed": true
@@ -51,7 +51,7 @@
         "citations": [
           {
             "sourceEvidenceId": "ppd-plan-authenticated-devhub-guarded-action-executor",
-            "url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md"
+            "url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md"
           }
         ],
         "failClosed": true
@@ -66,7 +66,7 @@
         "citations": [
           {
             "sourceEvidenceId": "ppd-plan-authenticated-devhub-guarded-action-executor",
-            "url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md"
+            "url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md"
           }
         ],
         "failClosed": true
@@ -81,7 +81,7 @@
         "citations": [
           {
             "sourceEvidenceId": "ppd-public-devhub-single-pdf-guidance",
-            "url": "https://www.portland.gov/ppd/devhub"
+            "url": "https://wetten.overheid.nl/ppd/devhub"
           }
         ],
         "failClosed": true
@@ -94,7 +94,7 @@
         "citations": [
           {
             "sourceEvidenceId": "ppd-public-devhub-application-guidance",
-            "url": "https://www.portland.gov/ppd/devhub"
+            "url": "https://wetten.overheid.nl/ppd/devhub"
           }
         ],
         "failClosed": true
@@ -107,7 +107,7 @@
         "citations": [
           {
             "sourceEvidenceId": "ppd-plan-authenticated-devhub-guarded-action-executor",
-            "url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md"
+            "url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md"
           }
         ],
         "failClosed": true
@@ -120,7 +120,7 @@
         "citations": [
           {
             "sourceEvidenceId": "ppd-plan-authenticated-devhub-guarded-action-executor",
-            "url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md"
+            "url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md"
           }
         ],
         "failClosed": true
@@ -140,7 +140,7 @@
             "citations": [
               {
                 "sourceEvidenceId": "ppd-public-devhub-single-pdf-guidance",
-                "url": "https://www.portland.gov/ppd/devhub"
+                "url": "https://wetten.overheid.nl/ppd/devhub"
               }
             ],
             "failClosed": true

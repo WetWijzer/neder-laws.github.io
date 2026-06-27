@@ -3,16 +3,16 @@
   "targets": [
     {
       "target_id": "ppd-landing",
-      "canonical_url": "https://www.portland.gov/ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
       "processor_name": "public-html-normalizer",
       "expected_manifest_id": "archive-manifest-ppd-landing-dry-run",
       "no_raw_body_persisted": true,
-      "rate_limit_note": "Respect Portland.gov public crawl pacing: one request every 10 seconds.",
+      "rate_limit_note": "Respect wetten.overheid.nl public crawl pacing: one request every 10 seconds.",
       "operator_abort_prompt": "Abort if robots or policy preflight changes before processor promotion."
     },
     {
       "target_id": "devhub-faq",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "processor_name": "public-html-normalizer",
       "expected_manifest_id": "archive-manifest-devhub-faq-dry-run",
       "no_raw_body_persisted": true,
@@ -20,7 +20,7 @@
     },
     {
       "target_id": "fee-guide-pdf",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "processor_name": "public-pdf-metadata-prober",
       "expected_manifest_id": "archive-manifest-fee-guide-pdf-dry-run",
       "no_raw_body_persisted": true,

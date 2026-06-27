@@ -38,12 +38,12 @@ _CURRENT_STATUS_RE = re.compile(
 )
 
 _PUBLIC_HOSTS = {
-    "www.portland.gov",
-    "portland.gov",
-    "www.portlandoregon.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandmaps.com",
-    "portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
+    "repository.overheid.nl",
 }
 
 

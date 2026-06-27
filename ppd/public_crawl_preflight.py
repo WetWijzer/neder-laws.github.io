@@ -12,13 +12,13 @@ from urllib.parse import urlparse
 
 PUBLIC_ALLOWLIST_HOSTS = frozenset(
     {
-        "www.portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
     }
 )
 
-LINKED_PUBLIC_ALLOWLIST_HOSTS = frozenset({"www.portlandmaps.com"})
+LINKED_PUBLIC_ALLOWLIST_HOSTS = frozenset({"repository.overheid.nl"})
 SUPPORTED_SCHEMES = frozenset({"http", "https"})
 SUPPORTED_CONTENT_TYPES = frozenset({"text/html", "application/xhtml+xml"})
 

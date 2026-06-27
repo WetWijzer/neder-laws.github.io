@@ -12,7 +12,7 @@ def _valid_plan() -> dict[str, object]:
     return {
         "seed_selections": [
             {
-                "url": "https://www.portland.gov/bds/permit-review-process",
+                "url": "https://wetten.overheid.nl/bds/permit-review-process",
                 "citations": ["public fixture citation"],
             }
         ],
@@ -35,8 +35,8 @@ def test_valid_public_dry_run_plan_has_no_issues() -> None:
     ("field", "value", "expected_code"),
     [
         ("raw_body", "raw", "raw_artifact_reference"),
-        ("download_url", "https://www.portland.gov/file.pdf", "raw_artifact_reference"),
-        ("archive_url", "https://www.portland.gov/archive/page", "raw_artifact_reference"),
+        ("download_url", "https://wetten.overheid.nl/file.pdf", "raw_artifact_reference"),
+        ("archive_url", "https://wetten.overheid.nl/archive/page", "raw_artifact_reference"),
         ("live_crawl_completed", True, "completion_claim"),
         ("processor_completed", True, "completion_claim"),
         ("guarantees_outcome", True, "outcome_guarantee"),
@@ -60,17 +60,17 @@ def test_rejects_unsafe_claims_references_and_mutation_flags(field: str, value: 
 
 def test_rejects_uncited_seed_selection() -> None:
     plan = _valid_plan()
-    plan["seed_selections"] = [{"url": "https://www.portland.gov/bds"}]
+    plan["seed_selections"] = [{"url": "https://wetten.overheid.nl/bds"}]
     assert "uncited_seed_selection" in _codes(plan)
 
 
 @pytest.mark.parametrize(
     ("url", "expected_code"),
     [
-        ("http://www.portland.gov/bds", "non_https_url"),
+        ("http://wetten.overheid.nl/bds", "non_https_url"),
         ("https://example.com/bds", "non_allowlisted_url"),
-        ("https://www.portland.gov/login", "authenticated_url"),
-        ("https://www.portland.gov/admin", "authenticated_url"),
+        ("https://wetten.overheid.nl/login", "authenticated_url"),
+        ("https://wetten.overheid.nl/admin", "authenticated_url"),
     ],
 )
 def test_rejects_non_public_or_non_allowlisted_seed_urls(url: str, expected_code: str) -> None:

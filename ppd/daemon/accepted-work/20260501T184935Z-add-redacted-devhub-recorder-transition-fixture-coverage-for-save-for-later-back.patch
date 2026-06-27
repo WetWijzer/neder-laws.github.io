@@ -5,7 +5,7 @@
 +  "fixture_id": "devhub_recorder_transition_states_redacted_v1",
 +  "fixture_version": 1,
 +  "captured_mode": "mocked_redacted_fixture_only",
-+  "source_system": "Development Hub PDX mocked workflow recorder",
++  "source_system": "Development Hub Netherlands mocked workflow recorder",
 +  "redaction_policy": {
 +    "private_values": "all user-entered, account, property, and file-specific values are replaced with [REDACTED]",
 +    "disallowed_artifacts": [
@@ -23,7 +23,7 @@
 +    {
 +      "id": "project_info",
 +      "state_type": "form_step",
-+      "url_pattern": "https://devhub.portlandoregon.gov/permits/draft/[REDACTED]/project-info",
++      "url_pattern": "https://wetten.overheid.nl/permits/draft/[REDACTED]/project-info",
 +      "heading": "Project information",
 +      "captured_at": "2026-05-01T00:00:00Z",
 +      "fields": [
@@ -97,7 +97,7 @@
 +    {
 +      "id": "document_upload",
 +      "state_type": "form_step",
-+      "url_pattern": "https://devhub.portlandoregon.gov/permits/draft/[REDACTED]/documents",
++      "url_pattern": "https://wetten.overheid.nl/permits/draft/[REDACTED]/documents",
 +      "heading": "Upload documents",
 +      "captured_at": "2026-05-01T00:00:00Z",
 +      "fields": [],
@@ -183,7 +183,7 @@
 +    {
 +      "id": "document_upload_validation",
 +      "state_type": "validation_state",
-+      "url_pattern": "https://devhub.portlandoregon.gov/permits/draft/[REDACTED]/documents",
++      "url_pattern": "https://wetten.overheid.nl/permits/draft/[REDACTED]/documents",
 +      "heading": "Upload documents",
 +      "captured_at": "2026-05-01T00:00:00Z",
 +      "fields": [],
@@ -292,7 +292,7 @@
 +    {
 +      "id": "draft_saved",
 +      "state_type": "save_for_later_confirmation",
-+      "url_pattern": "https://devhub.portlandoregon.gov/permits/draft/[REDACTED]/saved",
++      "url_pattern": "https://wetten.overheid.nl/permits/draft/[REDACTED]/saved",
 +      "heading": "Draft saved",
 +      "captured_at": "2026-05-01T00:00:00Z",
 +      "fields": [
@@ -333,7 +333,7 @@
 +    {
 +      "id": "review_draft",
 +      "state_type": "review_step",
-+      "url_pattern": "https://devhub.portlandoregon.gov/permits/draft/[REDACTED]/review",
++      "url_pattern": "https://wetten.overheid.nl/permits/draft/[REDACTED]/review",
 +      "heading": "Review draft",
 +      "captured_at": "2026-05-01T00:00:00Z",
 +      "fields": [],
@@ -547,7 +547,7 @@
 +    fixture = _load_fixture()
 +
 +    for state in fixture["states"]:
-+        assert state["url_pattern"].startswith("https://devhub.portlandoregon.gov/")
++        assert state["url_pattern"].startswith("https://wetten.overheid.nl/")
 +        assert "[REDACTED]" in state["url_pattern"] or state["id"] == "review_draft"
 +        for field in state.get("fields", []):
 +            assert field["value_state"] == REDACTED_VALUE

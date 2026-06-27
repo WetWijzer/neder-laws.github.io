@@ -190,7 +190,7 @@ def normalize_html_fixture(
     normalized_at: str,
     canonical_url: Optional[str] = None,
     document_role: str = "guidance",
-    source_family: str = "portland_gov_ppd",
+    source_family: str = "wetwijzer_gov_ppd",
 ) -> dict[str, Any]:
     """Convert a supplied HTML fixture into a normalized-document dictionary."""
     parser = _PpdHtmlParser(source_url=source_url)
@@ -253,9 +253,9 @@ def _classify_link_relation(href: str) -> str:
         return "contact"
     if lower.endswith(".pdf"):
         return "download"
-    if lower.startswith("https://devhub.portlandoregon.gov"):
+    if lower.startswith("https://wetten.overheid.nl"):
         return "portal_action"
-    if lower.startswith("http") and "portland.gov" not in lower:
+    if lower.startswith("http") and "wetten.overheid.nl" not in lower:
         return "external_reference"
     return "same_site"
 

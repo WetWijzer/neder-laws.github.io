@@ -8,12 +8,12 @@ from urllib.parse import urlparse
 
 
 ALLOWLISTED_HOSTS = {
-    "portland.gov",
-    "www.portland.gov",
-    "api.portland.gov",
-    "efiles.portlandoregon.gov",
-    "www.portlandmaps.com",
-    "portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "api.wetten.overheid.nl",
+    "repository.overheid.nl",
+    "repository.overheid.nl",
+    "repository.overheid.nl",
 }
 
 AUTH_QUERY_TOKENS = {

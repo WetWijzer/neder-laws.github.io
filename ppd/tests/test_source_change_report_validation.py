@@ -23,7 +23,7 @@ def valid_report() -> dict[str, object]:
             {
                 "evidence_id": "ev-prev",
                 "source_id": "src-devhub-faq",
-                "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+                "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
                 "source_type": "public_html",
                 "privacy_classification": "public",
                 "content_hash": "sha256:previous",
@@ -31,7 +31,7 @@ def valid_report() -> dict[str, object]:
             {
                 "evidence_id": "ev-current",
                 "source_id": "src-devhub-faq",
-                "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+                "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
                 "source_type": "public_html",
                 "privacy_classification": "public",
                 "content_hash": "sha256:current",
@@ -85,7 +85,7 @@ def test_valid_source_change_report_is_accepted() -> None:
         ),
         (
             lambda report: report["source_evidence"][1].update(  # type: ignore[index, union-attr]
-                {"canonical_url": "https://devhub.portlandoregon.gov/my-permits?token=secret"}
+                {"canonical_url": "https://wetten.overheid.nl/my-permits?token=secret"}
             ),
             "private_or_authenticated_url",
         ),

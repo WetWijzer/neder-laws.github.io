@@ -13,26 +13,26 @@
   },
   "allowlisted_public_metadata_targets": [
     {
-      "target_id": "portland-code-title-33-metadata",
-      "label": "Portland Zoning Code Title 33 public metadata",
-      "public_metadata_url": "https://www.portland.gov/code/33",
+      "target_id": "wetwijzer-code-title-33-metadata",
+      "label": "Netherlands Zoning Code Title 33 public metadata",
+      "public_metadata_url": "https://wetten.overheid.nl/code/33",
       "metadata_only": true,
-      "allowlist_basis": "Public City of Portland code landing page metadata only; no authenticated access and no document body fetch.",
+      "allowlist_basis": "Public WetWijzer code landing page metadata only; no authenticated access and no document body fetch.",
       "expected_processor_handoff_id": "handoff-public-metadata-index"
     },
     {
-      "target_id": "portland-code-title-18-metadata",
-      "label": "Portland Noise Control Code Title 18 public metadata",
-      "public_metadata_url": "https://www.portland.gov/code/18",
+      "target_id": "wetwijzer-code-title-18-metadata",
+      "label": "Netherlands Noise Control Code Title 18 public metadata",
+      "public_metadata_url": "https://wetten.overheid.nl/code/18",
       "metadata_only": true,
-      "allowlist_basis": "Public City of Portland code landing page metadata only; no authenticated access and no document body fetch.",
+      "allowlist_basis": "Public WetWijzer code landing page metadata only; no authenticated access and no document body fetch.",
       "expected_processor_handoff_id": "handoff-public-metadata-index"
     }
   ],
   "robots_policy_prerequisites": [
     {
       "evidence_id": "robots-policy-title-33-20260528",
-      "target_id": "portland-code-title-33-metadata",
+      "target_id": "wetwijzer-code-title-33-metadata",
       "robots_txt_reviewed": true,
       "policy_reviewed": true,
       "evidence_reference": "public recrawl execution rehearsal plan robots/policy checklist entry title-33",
@@ -40,7 +40,7 @@
     },
     {
       "evidence_id": "robots-policy-title-18-20260528",
-      "target_id": "portland-code-title-18-metadata",
+      "target_id": "wetwijzer-code-title-18-metadata",
       "robots_txt_reviewed": true,
       "policy_reviewed": true,
       "evidence_reference": "public recrawl execution rehearsal plan robots/policy checklist entry title-18",

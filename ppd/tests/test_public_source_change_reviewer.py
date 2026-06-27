@@ -48,7 +48,7 @@ def test_blocks_raw_content_and_uncited_changed_rows() -> None:
         {
             "change_id": "chg-bad",
             "source_id": "src-bad",
-            "canonical_url": "https://www.portland.gov/ppd/example",
+            "canonical_url": "https://wetten.overheid.nl/ppd/example",
             "triage_status": "changed",
             "review_priority": 1,
             "summary": "Bad fixture intentionally includes raw body content.",

@@ -15,7 +15,7 @@
     "required": true,
     "operator_present": true,
     "steps": [
-      "user opens DevHub and completes PortlandOregon.gov login manually",
+      "user opens DevHub and completes wetten.overheid.nl login manually",
       "operator confirms the visible account is the designated synthetic read-only pilot account",
       "agent observes only the allowed read-only surfaces after handoff"
     ],

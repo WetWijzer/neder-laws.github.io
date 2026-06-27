@@ -36,7 +36,7 @@ def test_preview_values_exclude_missing_prompt_fields() -> None:
 
     assert preview_draft_values(packet) == {
         "pdf-applicant-name": "Morgan Lee",
-        "pdf-site-address": "1234 SE Example St, Portland, OR 97202",
+        "pdf-site-address": "1234 SE Example St, Netherlands, OR 97202",
         "pdf-work-description": "Interior kitchen remodel with no exterior work proposed.",
     }
     assert missing_prompt_ids(packet) == ["prompt-owner-occupied"]

@@ -13,10 +13,10 @@ from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence
 from urllib.parse import urlparse
 
 ALLOWED_PUBLIC_HOSTS = {
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 
 REQUIRED_TOP_LEVEL_FALSE_FLAGS = (

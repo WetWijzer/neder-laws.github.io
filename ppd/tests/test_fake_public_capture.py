@@ -32,15 +32,15 @@ def test_fake_public_capture_transport_builds_archive_manifest_metadata() -> Non
 
     assert first["manifest_id"].startswith("archive-manifest:fake:")
     assert first["source_id"] == "ppd-devhub-faqs"
-    assert first["requested_url"] == "http://www.portland.gov/ppd/devhub-faqs"
-    assert first["canonical_url"] == "https://www.portland.gov/ppd/devhub-faqs"
+    assert first["requested_url"] == "http://wetten.overheid.nl/ppd/devhub-faqs"
+    assert first["canonical_url"] == "https://wetten.overheid.nl/ppd/devhub-faqs"
     assert first["redirect_chain"] == [
         {
-            "url": "http://www.portland.gov/ppd/devhub-faqs",
+            "url": "http://wetten.overheid.nl/ppd/devhub-faqs",
             "status": 301,
-            "location": "https://www.portland.gov/ppd/devhub-faqs",
+            "location": "https://wetten.overheid.nl/ppd/devhub-faqs",
         },
-        {"url": "https://www.portland.gov/ppd/devhub-faqs", "status": 200},
+        {"url": "https://wetten.overheid.nl/ppd/devhub-faqs", "status": 200},
     ]
     assert first["http_status"] == 200
     assert first["content_type"] == "text/html; charset=utf-8"
@@ -71,7 +71,7 @@ def test_fake_public_capture_respects_explicit_content_hash_without_raw_body() -
     assert manifest["content_hash"] == "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     assert manifest["redirect_chain"] == [
         {
-            "url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+            "url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
             "status": 200,
         }
     ]
@@ -83,7 +83,7 @@ def test_fake_public_capture_respects_explicit_content_hash_without_raw_body() -
 def test_fake_public_capture_rejects_unapproved_or_live_intentions() -> None:
     base_intention = {
         "source_id": "ppd-unapproved",
-        "requested_url": "https://www.portland.gov/ppd/unapproved",
+        "requested_url": "https://wetten.overheid.nl/ppd/unapproved",
         "synthetic": True,
         "approval": {"status": "denied"},
         "http_status": 200,

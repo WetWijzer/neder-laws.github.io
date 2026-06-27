@@ -11,12 +11,12 @@ import {
 } from './parser';
 import { TDFOL_CORE_METADATA, getBoundVariables, getFreeVariables, substituteFormula } from './ast';
 
-const portlandFormula =
-  '∀a:Agent (SubjectTo(a,portland_city_code_1_01_010) → P(□(ComplyWith(a,portland_city_code_1_01_010))))';
+const netherlandsFormula =
+  '∀a:Agent (SubjectTo(a,netherlands_law_article_1_01_010) → P(□(ComplyWith(a,netherlands_law_article_1_01_010))))';
 
 describe('TDFOL lexer', () => {
-  it('tokenizes Portland generated formulas', () => {
-    const tokens = lexTdfol(portlandFormula);
+  it('tokenizes WetWijzer generated formulas', () => {
+    const tokens = lexTdfol(netherlandsFormula);
 
     expect(tokens.map((token) => token.type).slice(0, 8)).toEqual([
       'FORALL',
@@ -35,8 +35,8 @@ describe('TDFOL lexer', () => {
 });
 
 describe('TDFOL parser', () => {
-  it('parses generated Portland deontic temporal formulas', () => {
-    const formula = parseTdfolFormula(portlandFormula);
+  it('parses generated WetWijzer deontic temporal formulas', () => {
+    const formula = parseTdfolFormula(netherlandsFormula);
 
     expect(formula).toMatchObject({
       kind: 'quantified',
@@ -163,8 +163,8 @@ describe('TDFOL parser', () => {
   it('ports tdfol_dcec_parser.py prefix quantifier and modal functor parsing', () => {
     const dcec = [
       'forall(a, Agent,',
-      'implies(SubjectTo(a, portland_city_code_1_01_010),',
-      'permission(always(ComplyWith(a, portland_city_code_1_01_010)))))',
+      'implies(SubjectTo(a, netherlands_law_article_1_01_010),',
+      'permission(always(ComplyWith(a, netherlands_law_article_1_01_010)))))',
     ].join(' ');
     const formula = parseTdfolDcecFormula(dcec);
 
@@ -172,7 +172,7 @@ describe('TDFOL parser', () => {
       sourcePythonModule: 'logic/TDFOL/tdfol_dcec_parser.py',
     });
     expect(formatTdfolFormula(formula)).toBe(
-      '∀a:Agent ((SubjectTo(a, portland_city_code_1_01_010)) → (P(□(ComplyWith(a, portland_city_code_1_01_010)))))',
+      '∀a:Agent ((SubjectTo(a, netherlands_law_article_1_01_010)) → (P(□(ComplyWith(a, netherlands_law_article_1_01_010)))))',
     );
     expect([...getFreeVariables(formula)]).toEqual([]);
   });

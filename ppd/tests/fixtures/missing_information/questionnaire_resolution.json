@@ -13,8 +13,8 @@
     {
       "evidenceId": "src-devhub-application-guidance",
       "sourceType": "public_guidance",
-      "title": "Development Hub PDX application guidance",
-      "url": "https://www.portland.gov/ppd/development-hub-pdx/apply-permit",
+      "title": "Development Hub Netherlands application guidance",
+      "url": "https://wetten.overheid.nl/ppd/development-hub-netherlands/apply-permit",
       "capturedAt": "2026-05-01T00:00:00Z",
       "redaction": "public_source_only"
     },
@@ -22,7 +22,7 @@
       "evidenceId": "src-single-pdf-process-guidance",
       "sourceType": "public_guidance",
       "title": "Single PDF Process guidance",
-      "url": "https://www.portland.gov/ppd/permits/single-pdf-process",
+      "url": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
       "capturedAt": "2026-05-01T00:00:00Z",
       "redaction": "public_source_only"
     }

@@ -29,10 +29,10 @@ DISALLOWED_LIVE_RECORD_FIELDS = {
 }
 
 PUBLIC_HOSTS = {
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 
 PRIVATE_URL_MARKERS = (

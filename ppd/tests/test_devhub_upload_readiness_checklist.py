@@ -55,7 +55,7 @@ class DevhubUploadReadinessChecklistTest(unittest.TestCase):
         inventory_ids = {item["fileInventoryId"] for item in self.fixture["redactedUserFileInventory"]}
 
         for item in self.fixture["publicEvidence"]:
-            self.assertTrue(item["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
+            self.assertTrue(item["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
             self.assertTrue(item["citation"]["locator"])
             self.assertTrue(item["citation"]["paraphrase"])
 

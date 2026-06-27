@@ -13,7 +13,7 @@
   "privateDevhubDataIncluded": false,
   "archivedPublicSources": [
     {
-      "sourceUrl": "https://www.portland.gov/ppd",
+      "sourceUrl": "https://wetten.overheid.nl/ppd",
       "canonicalDocumentId": "doc-ppd-bureau-landing-page",
       "archiveArtifactRef": "metadata_only_archive_manifests/archive-ppd-bureau-landing-page.json",
       "contentHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",

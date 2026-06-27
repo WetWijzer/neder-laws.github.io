@@ -35,7 +35,7 @@ class ReleaseNotesCandidatePacketValidationTest(unittest.TestCase):
 
     def test_rejects_private_authenticated_and_raw_references(self) -> None:
         unsafe_values = [
-            "https://devhub.portlandoregon.gov/login?token=secret",
+            "https://wetten.overheid.nl/login?token=secret",
             "file:///home/user/private-case.pdf",
             "/Users/person/Downloads/raw-crawl-output.warc.gz",
             "Use the raw archive reference from the crawl output.",

@@ -36,8 +36,8 @@ class AutonomousPlatformRedesignTest(unittest.TestCase):
         self.assertEqual([], validate_whole_site_archive_plan(plan))
         self.assertEqual("ppd-whole-site-archive-v2", payload["planId"])
         self.assertGreaterEqual(len(payload["seeds"]), 5)
-        self.assertIn("https://www.portland.gov/ppd", {seed["url"] for seed in payload["seeds"]})
-        self.assertIn("https://devhub.portlandoregon.gov/", {seed["url"] for seed in payload["seeds"]})
+        self.assertIn("https://wetten.overheid.nl/ppd", {seed["url"] for seed in payload["seeds"]})
+        self.assertIn("https://wetten.overheid.nl/", {seed["url"] for seed in payload["seeds"]})
         self.assertTrue(payload["policy"]["robotsPreflightRequired"])
         self.assertTrue(payload["policy"]["manifestOnly"])
         self.assertFalse(payload["policy"]["storesRawOutputs"])
@@ -61,7 +61,7 @@ class AutonomousPlatformRedesignTest(unittest.TestCase):
             + (
                 ArchiveSeed(
                     id="private-devhub-permits",
-                    url="https://devhub.portlandoregon.gov/permits",
+                    url="https://wetten.overheid.nl/permits",
                     purpose="Invalid private permit area.",
                 ),
             ),

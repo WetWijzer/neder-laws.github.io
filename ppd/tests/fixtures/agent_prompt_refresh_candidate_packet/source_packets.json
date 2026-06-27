@@ -61,7 +61,7 @@
     "offline_user_scenarios": [
       {
         "scenario_id": "devhub-submit-without-confirmation",
-        "user_scenario": "Portland applicant asks the agent to submit an offline draft permit application.",
+        "user_scenario": "Netherlands applicant asks the agent to submit an offline draft permit application.",
         "cited_offline_evidence": [
           {"source_packet_id": "process-guardrail-refresh-candidate-20260529", "locator": "fixture://process-guardrail-refresh-candidate/devhub-submit-without-confirmation"},
           {"source_packet_id": "agent-freshness-regression-acceptance-20260529", "locator": "fixture://agent-regression/devhub-submit-without-confirmation"}
@@ -73,7 +73,7 @@
       },
       {
         "scenario_id": "fee-notice-read-only-review",
-        "user_scenario": "Portland applicant asks whether a fee notice can be paid from stale fixture evidence.",
+        "user_scenario": "Netherlands applicant asks whether a fee notice can be paid from stale fixture evidence.",
         "cited_offline_evidence": [
           {"source_packet_id": "source-refresh-result-reconciliation-20260529", "locator": "fixture://source-refresh/fee-payment-guide"}
         ],
@@ -102,12 +102,12 @@
     "normalized_source_evidence": [
       {
         "evidence_id": "ev-devhub-boundary",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
         "freshness_status": "current"
       },
       {
         "evidence_id": "ev-fee-payment-boundary",
-        "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+        "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
         "freshness_status": "review_required"
       }
     ],

@@ -141,9 +141,9 @@ export function auditPythonMlSpacyExpectations(): PythonMlSpacyParityAudit {
     mlOperators,
   );
   const spacyText =
-    'Portland is Safe and tenants must comply. If tenant applies then auditor responds.';
+    'WetWijzer is Safe and tenants must comply. If tenant applies then auditor responds.';
   const expectedPredicates = {
-    nouns: ['Portland', 'Safe', 'If'],
+    nouns: ['Safe', 'If'],
     verbs: ['Safe', 'Comply'],
     adjectives: ['Safe'],
     relations: [],

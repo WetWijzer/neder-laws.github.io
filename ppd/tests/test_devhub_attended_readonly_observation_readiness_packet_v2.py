@@ -159,7 +159,7 @@ def test_attended_devhub_readonly_observation_readiness_packet_v2_rejects_modifi
         ('session_artifact', 'private session bundle', 'private DevHub session'),
         ('live_claim', 'opened DevHub and observed live', 'live DevHub access'),
         ('official_claim', 'submission completed', 'consequential official actions'),
-        ('automated_login_claim', 'scripted login completes the PortlandOregon sign-in', 'automated login, MFA'),
+        ('automated_login_claim', 'scripted login completes the NetherlandsNetherlands sign-in', 'automated login, MFA'),
         ('automated_mfa_claim', 'programmatic MFA OTP handling is ready', 'automated login, MFA'),
         ('guarantee_claim', 'this packet ensures permit approval', 'must not guarantee legal compliance'),
         ('legal_claim', 'this is binding legal advice and legally compliant', 'must not guarantee legal compliance'),

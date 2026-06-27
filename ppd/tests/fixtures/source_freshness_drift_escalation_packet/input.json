@@ -5,7 +5,7 @@
     "freshness_badges": [
       {
         "source_id": "src-devhub-submit-permit-application-guide",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
         "freshness_status": "review_due_daily",
         "last_verified_at": "2026-05-08",
         "badge_reason": "DevHub permit application guidance can change frequently.",
@@ -13,7 +13,7 @@
       },
       {
         "source_id": "src-ppd-forms-index",
-        "canonical_url": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+        "canonical_url": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
         "freshness_status": "review_due_weekly",
         "last_verified_at": "2026-05-08",
         "badge_reason": "Permit application form indexes affect document requirement readiness.",
@@ -38,7 +38,7 @@
         "evidence_id": "review-evidence-devhub-submit-guide",
         "batch_order": 1,
         "source_id": "src-devhub-submit-permit-application-guide",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
         "synthetic_reviewer_evidence_fields": {
           "owning_surface": "public_ppd_guidance",
           "source_type": "public_html",
@@ -63,7 +63,7 @@
         "evidence_id": "review-evidence-forms-index",
         "batch_order": 2,
         "source_id": "src-ppd-forms-index",
-        "canonical_url": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+        "canonical_url": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
         "synthetic_reviewer_evidence_fields": {
           "owning_surface": "public_ppd_forms",
           "source_type": "public_html",
@@ -89,7 +89,7 @@
       {
         "attestation_id": "intake-no-raw-body-devhub-submit-guide",
         "source_id": "src-devhub-submit-permit-application-guide",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
         "no_raw_body_persisted": true,
         "raw_body_persisted": false,
         "processor_invoked": false,
@@ -98,7 +98,7 @@
       {
         "attestation_id": "intake-no-raw-body-forms-index",
         "source_id": "src-ppd-forms-index",
-        "canonical_url": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+        "canonical_url": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
         "no_raw_body_persisted": true,
         "raw_body_persisted": false,
         "processor_invoked": false,
@@ -122,7 +122,7 @@
         "candidate_id": "source-registry-update-devhub-submit-guide",
         "source_id": "src-devhub-submit-permit-application-guide",
         "prior_registry_id": "src-devhub-submit-permit-application-guide",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
         "candidate_status": "proposed_only",
         "registry_edit_status": "not_applied",
         "prior_fields": {
@@ -166,7 +166,7 @@
         "candidate_id": "source-registry-update-forms-index",
         "source_id": "src-ppd-forms-index",
         "prior_registry_id": "src-ppd-forms-index",
-        "canonical_url": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+        "canonical_url": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
         "candidate_status": "proposed_only",
         "registry_edit_status": "not_applied",
         "prior_fields": {

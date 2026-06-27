@@ -22,8 +22,8 @@ _PRIVATE_MARKERS = (
 )
 
 _STABLE_PREFIXES = (
-    "https://www.portland.gov/",
-    "https://efiles.portlandoregon.gov/",
+    "https://wetten.overheid.nl/",
+    "https://repository.overheid.nl/",
     "urn:ppd:public:",
     "sha256:",
 )
@@ -125,8 +125,8 @@ def _is_public_citation_url(value: Any) -> bool:
         return False
     parsed = urlparse(value)
     return parsed.scheme == "https" and parsed.netloc in {
-        "www.portland.gov",
-        "efiles.portlandoregon.gov",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
     }
 
 

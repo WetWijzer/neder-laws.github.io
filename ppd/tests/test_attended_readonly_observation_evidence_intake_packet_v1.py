@@ -104,7 +104,7 @@ def test_rejects_private_artifacts_live_access_consequential_claims_and_mutation
 
 def test_rejects_browser_or_network_validation_commands() -> None:
     packet = load_fixture()
-    packet["intake_rows"][0]["offline_validation_commands"] = [["curl", "https://devhub.portlandoregon.gov"]]
+    packet["intake_rows"][0]["offline_validation_commands"] = [["curl", "https://wetten.overheid.nl"]]
 
     assert "online_or_browser_validation_command" in finding_codes(packet)
 

@@ -17,10 +17,10 @@ PACKET_VERSION = 2
 
 DEFAULT_ALLOWED_HOSTS = frozenset(
     {
-        "www.portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
-        "www.portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
     }
 )
 

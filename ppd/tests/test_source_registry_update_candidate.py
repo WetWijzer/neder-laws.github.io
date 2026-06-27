@@ -99,7 +99,7 @@ class SourceRegistryUpdateCandidateTests(unittest.TestCase):
 
     def test_rejects_private_devhub_target(self) -> None:
         candidate = self._candidate()
-        candidate["proposed_registry_row_diffs"][0]["canonical_url"] = "https://devhub.portlandoregon.gov/secure/my-permits"
+        candidate["proposed_registry_row_diffs"][0]["canonical_url"] = "https://wetten.overheid.nl/secure/my-permits"
 
         with self.assertRaises(ValueError):
             validate_candidate_packet(candidate)

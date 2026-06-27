@@ -1,19 +1,19 @@
 {
   "source_registry": {
-    "registry_id": "synthetic-portland-ppd-registry-v1",
+    "registry_id": "synthetic-wetwijzer-ppd-registry-v1",
     "sources": {
-      "portland-ppd-appeals": {
-        "jurisdiction": "Portland, OR",
-        "title": "Synthetic Portland PP&D Appeals"
+      "wetwijzer-ppd-appeals": {
+        "jurisdiction": "Netherlands, OR",
+        "title": "Synthetic WetWijzer legal sources Appeals"
       },
-      "portland-ppd-permits": {
-        "jurisdiction": "Portland, OR",
-        "title": "Synthetic Portland PP&D Permits"
+      "wetwijzer-ppd-permits": {
+        "jurisdiction": "Netherlands, OR",
+        "title": "Synthetic WetWijzer legal sources Permits"
       }
     }
   },
   "archive_manifest": {
-    "manifest_id": "synthetic-portland-ppd-archive-v1",
+    "manifest_id": "synthetic-wetwijzer-ppd-archive-v1",
     "entries": [
       {
         "archive_path": "fixtures/archive/appeal-001.pdf",
@@ -32,15 +32,15 @@
       "archive_path": "fixtures/archive/appeal-001.pdf",
       "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       "document_id": "appeal-001",
-      "public_url": "https://www.portland.gov/ppd/appeals/appeal-001",
-      "source_id": "portland-ppd-appeals"
+      "public_url": "https://wetten.overheid.nl/ppd/appeals/appeal-001",
+      "source_id": "wetwijzer-ppd-appeals"
     },
     {
       "archive_path": "fixtures/archive/permit-001.pdf",
       "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
       "document_id": "permit-001",
-      "public_url": "https://www.portland.gov/ppd/permits/permit-001",
-      "source_id": "portland-ppd-permits"
+      "public_url": "https://wetten.overheid.nl/ppd/permits/permit-001",
+      "source_id": "wetwijzer-ppd-permits"
     }
   ],
   "citation_integrity": [

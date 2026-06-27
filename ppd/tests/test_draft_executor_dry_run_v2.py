@@ -39,7 +39,7 @@ def test_draft_executor_dry_run_v2_requires_traces_and_selector_placeholders() -
     first = contract["rows"][0]
 
     assert first["preview_only"] is True
-    assert first["field_mapping"]["preview_value"] == "1120 SW 5th Ave, Portland, OR"
+    assert first["field_mapping"]["preview_value"] == "1120 SW 5th Ave, Netherlands, OR"
     assert first["user_fact_trace"] == [
         {"trace_kind": "user_fact", "key": "project_address", "value_present": True}
     ]

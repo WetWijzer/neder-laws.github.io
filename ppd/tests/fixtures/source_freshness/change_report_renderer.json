@@ -10,7 +10,7 @@
     {
       "requirementId": "single-pdf-plan-package",
       "changeKind": "changed_requirement",
-      "sourceUrl": "https://www.portland.gov/ppd/devhub/single-pdf-process",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/single-pdf-process",
       "beforeSummary": "Plans were described as one searchable drawing PDF with supporting documents uploaded separately.",
       "afterSummary": "The updated guidance reiterates the single searchable drawing PDF requirement and clarifies that applications and calculations remain separate uploads.",
       "citationIds": ["citation-single-pdf-process"]
@@ -18,7 +18,7 @@
     {
       "requirementId": "trade-plan-review-correction-upload",
       "changeKind": "new_requirement",
-      "sourceUrl": "https://www.portland.gov/ppd/devhub/upload-corrections",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/upload-corrections",
       "beforeSummary": "",
       "afterSummary": "Correction responses for plan review are now represented as a source-backed upload checkpoint before official submission.",
       "citationIds": ["citation-correction-upload"]
@@ -27,15 +27,15 @@
   "linkChanges": [
     {
       "changeKind": "new_link",
-      "sourceUrl": "https://www.portland.gov/ppd/devhub/single-pdf-process",
-      "linkedUrl": "https://www.portland.gov/ppd/forms/single-pdf-process-checklist",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/single-pdf-process",
+      "linkedUrl": "https://wetten.overheid.nl/ppd/forms/single-pdf-process-checklist",
       "linkRole": "checklist",
       "citationIds": ["citation-single-pdf-process"]
     },
     {
       "changeKind": "removed_link",
-      "sourceUrl": "https://www.portland.gov/ppd/devhub/upload-corrections",
-      "linkedUrl": "https://www.portland.gov/ppd/old-correction-upload-guide",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/upload-corrections",
+      "linkedUrl": "https://wetten.overheid.nl/ppd/old-correction-upload-guide",
       "linkRole": "superseded_guide",
       "citationIds": ["citation-correction-upload"]
     }
@@ -57,14 +57,14 @@
   "citationReferences": [
     {
       "citationId": "citation-single-pdf-process",
-      "sourceUrl": "https://www.portland.gov/ppd/devhub/single-pdf-process",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/single-pdf-process",
       "title": "Single PDF Process guidance",
       "retrievedAt": "2026-05-01T00:00:00Z",
       "sourceIndexId": "source-index-single-pdf-process"
     },
     {
       "citationId": "citation-correction-upload",
-      "sourceUrl": "https://www.portland.gov/ppd/devhub/upload-corrections",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/upload-corrections",
       "title": "Upload corrections in DevHub guidance",
       "retrievedAt": "2026-05-01T00:00:00Z",
       "sourceIndexId": "source-index-correction-upload"

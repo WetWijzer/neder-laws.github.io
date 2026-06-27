@@ -125,31 +125,31 @@
     {
       "citation_id": "devhub-faq-corrections",
       "title": "DevHub FAQs",
-      "url": "https://www.portland.gov/ppd/devhub-faqs",
+      "url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "supports": "DevHub includes account-scoped services such as uploading corrections and checking requests."
     },
     {
       "citation_id": "upload-corrections-guide",
       "title": "Upload corrections in DevHub",
-      "url": "https://www.portland.gov/ppd/devhub-guide-upload-corrections",
+      "url": "https://wetten.overheid.nl/ppd/devhub-guide-upload-corrections",
       "supports": "Correction upload is an authenticated DevHub workflow tied to a permit or application and review-group status."
     },
     {
       "citation_id": "single-pdf-guidance",
       "title": "Submit Plans Online / Single PDF Process",
-      "url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "supports": "Plans, applications, calculations, and supporting documents have document grouping expectations before upload."
     },
     {
       "citation_id": "file-naming-guidance",
       "title": "File naming standards and preparing PDFs",
-      "url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "supports": "Local checklist preview can verify PDF preparation and naming expectations before official upload."
     },
     {
       "citation_id": "devhub-application-guide",
       "title": "DevHub permit application guide",
-      "url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "supports": "DevHub workflows can include required uploads, acknowledgements, certification, and post-submission status tracking."
     }
   ]

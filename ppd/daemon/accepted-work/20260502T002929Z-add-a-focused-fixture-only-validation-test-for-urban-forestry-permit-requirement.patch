@@ -111,19 +111,19 @@
 +  "sources": [
 +    {
 +      "id": "uf-src-application-guide",
-+      "canonicalUrl": "https://www.portland.gov/ppd/apply-permit",
-+      "title": "Apply for permits through Development Hub PDX",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/apply-permit",
++      "title": "Apply for permits through Development Hub Netherlands",
 +      "capturedAt": "2026-05-01T00:00:00Z"
 +    },
 +    {
 +      "id": "uf-src-devhub-faq",
-+      "canonicalUrl": "https://www.portland.gov/ppd/development-hub-pdx-help",
-+      "title": "Development Hub PDX help and FAQ",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/development-hub-netherlands-help",
++      "title": "Development Hub Netherlands help and FAQ",
 +      "capturedAt": "2026-05-01T00:00:00Z"
 +    },
 +    {
 +      "id": "uf-src-public-forestry-guidance",
-+      "canonicalUrl": "https://www.portland.gov/trees/treepermits",
++      "canonicalUrl": "https://wetten.overheid.nl/trees/treepermits",
 +      "title": "Tree permits",
 +      "capturedAt": "2026-05-01T00:00:00Z"
 +    }

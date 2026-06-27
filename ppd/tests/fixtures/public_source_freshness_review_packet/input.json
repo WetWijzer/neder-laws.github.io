@@ -25,7 +25,7 @@
     ],
     "robots_policy_prerequisite_ids": [
       "policy-prereq-ppd-public-metadata-only-20260528",
-      "robots-prereq-portland-gov-20260528"
+      "robots-prereq-wetwijzer-gov-20260528"
     ],
     "cadence_recommendations": [
       {
@@ -35,7 +35,7 @@
         "rationale": "DevHub FAQ metadata drift can affect account-scoped service guidance.",
         "robots_policy_prerequisite_ids": [
           "policy-prereq-ppd-public-metadata-only-20260528",
-          "robots-prereq-portland-gov-20260528"
+          "robots-prereq-wetwijzer-gov-20260528"
         ],
         "reviewer_owner": "ppd-devhub-guidance-reviewer",
         "abort_condition_ids": [
@@ -50,7 +50,7 @@
         "rationale": "Single PDF process metadata drift can affect file preparation checks.",
         "robots_policy_prerequisite_ids": [
           "policy-prereq-ppd-public-metadata-only-20260528",
-          "robots-prereq-portland-gov-20260528"
+          "robots-prereq-wetwijzer-gov-20260528"
         ],
         "reviewer_owner": "ppd-file-standards-reviewer",
         "abort_condition_ids": [
@@ -86,7 +86,7 @@
     "normalized_source_evidence": [
       {
         "evidence_id": "ev-devhub-guide",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
         "citation_spans": [
           {
             "start": 12,
@@ -97,7 +97,7 @@
       },
       {
         "evidence_id": "ev-payment-guide",
-        "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+        "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
         "citation_spans": [
           {
             "page": 1

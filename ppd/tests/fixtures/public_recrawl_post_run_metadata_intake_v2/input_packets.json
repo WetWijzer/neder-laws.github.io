@@ -10,7 +10,7 @@
         "source_evidence_ids": ["ppd-plan-official-source-anchors-20260508"],
         "seeds": [
           {
-            "url": "https://www.portland.gov/ppd",
+            "url": "https://wetten.overheid.nl/ppd",
             "source_evidence_ids": ["ppd-plan-official-source-anchors-20260508"],
             "robots_decision": {
               "decision": "manual_preflight_required_before_any_separate_live_run",
@@ -18,7 +18,7 @@
             }
           },
           {
-            "url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+            "url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
             "source_evidence_ids": ["ppd-plan-official-source-anchors-20260508"],
             "robots_decision": {
               "decision": "manual_preflight_required_before_any_separate_live_run",
@@ -61,7 +61,7 @@
     "candidate_sources": [
       {
         "source_id": "ppd-landing-page",
-        "canonical_url": "https://www.portland.gov/ppd",
+        "canonical_url": "https://wetten.overheid.nl/ppd",
         "source_type": "public_html",
         "owning_surface": "ppd_public_guidance",
         "refresh_reason": "daily PP&D public landing page freshness review",
@@ -73,7 +73,7 @@
         },
         "robots_policy": {
           "decision": "allowed_by_fixture_preflight",
-          "evidence_ref": "robots-evidence:www.portland.gov:2026-05-08"
+          "evidence_ref": "robots-evidence:wetten.overheid.nl:2026-05-08"
         },
         "policy_evidence": {
           "decision": "public_first_party_guidance",
@@ -82,7 +82,7 @@
       },
       {
         "source_id": "ppd-online-tools-overview",
-        "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+        "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
         "source_type": "public_html",
         "owning_surface": "ppd_public_guidance",
         "refresh_reason": "daily DevHub and online tools guidance freshness review",
@@ -94,7 +94,7 @@
         },
         "robots_policy": {
           "decision": "allowed_by_fixture_preflight",
-          "evidence_ref": "robots-evidence:www.portland.gov:2026-05-08"
+          "evidence_ref": "robots-evidence:wetten.overheid.nl:2026-05-08"
         },
         "policy_evidence": {
           "decision": "public_first_party_guidance",
@@ -109,10 +109,10 @@
       {
         "capture_id": "synthetic-capture-ppd-landing-page",
         "source_id": "ppd-landing-page",
-        "canonical_url": "https://www.portland.gov/ppd",
-        "requested_url": "https://www.portland.gov/ppd",
-        "final_url": "https://www.portland.gov/ppd",
-        "redirect_chain": ["https://www.portland.gov/ppd"],
+        "canonical_url": "https://wetten.overheid.nl/ppd",
+        "requested_url": "https://wetten.overheid.nl/ppd",
+        "final_url": "https://wetten.overheid.nl/ppd",
+        "redirect_chain": ["https://wetten.overheid.nl/ppd"],
         "http_status": 200,
         "content_hash": "sha256:fixturemetadataonlyppdlanding000000000000000000000000000000000001",
         "previous_content_hash": "sha256:fixturemetadataonlyppdlanding000000000000000000000000000000000000",
@@ -132,10 +132,10 @@
       {
         "capture_id": "synthetic-capture-online-tools-skipped",
         "source_id": "ppd-online-tools-overview",
-        "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
-        "requested_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
-        "final_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
-        "redirect_chain": ["https://www.portland.gov/ppd/how-use-online-permitting-tools"],
+        "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
+        "requested_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
+        "final_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
+        "redirect_chain": ["https://wetten.overheid.nl/ppd/how-use-online-permitting-tools"],
         "http_status": null,
         "content_hash": "",
         "previous_content_hash": "",

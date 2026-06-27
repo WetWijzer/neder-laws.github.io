@@ -20,29 +20,29 @@
 +  "sources": [
 +    {
 +      "evidence_id": "ev-devhub-online-permitting-system",
-+      "title": "Development Hub PDX public portal guidance",
-+      "url": "https://devhub.portlandoregon.gov",
++      "title": "Development Hub Netherlands public portal guidance",
++      "url": "https://wetten.overheid.nl",
 +      "authority_label": "DevHub public portal",
 +      "public_fixture_only": true
 +    },
 +    {
 +      "evidence_id": "ev-devhub-account-guidance",
 +      "title": "Development Hub sign-in and account guidance",
-+      "url": "https://www.portland.gov/ppd/devhub",
++      "url": "https://wetten.overheid.nl/ppd/devhub",
 +      "authority_label": "PP&D public guidance",
 +      "public_fixture_only": true
 +    },
 +    {
 +      "evidence_id": "ev-devhub-faq-service-categories",
 +      "title": "Development Hub FAQ service categories",
-+      "url": "https://www.portland.gov/ppd/development-hub-pdx/devhub-faq",
++      "url": "https://wetten.overheid.nl/ppd/development-hub-netherlands/devhub-faq",
 +      "authority_label": "PP&D public FAQ",
 +      "public_fixture_only": true
 +    },
 +    {
 +      "evidence_id": "ev-devhub-application-guidance-trade-permits",
 +      "title": "Development Hub application guidance listing trade permit request types",
-+      "url": "https://www.portland.gov/ppd/permits/devhub-apply-permit-request",
++      "url": "https://wetten.overheid.nl/ppd/permits/devhub-apply-permit-request",
 +      "authority_label": "PP&D public application guidance",
 +      "public_fixture_only": true
 +    }

@@ -14,19 +14,19 @@
 +    {
 +      "id": "residential_building_permit_guide",
 +      "title": "Residential Building Permit Guidance",
-+      "url": "https://www.portland.gov/ppd/residential-permitting/residential-building-permits",
++      "url": "https://wetten.overheid.nl/ppd/residential-permitting/residential-building-permits",
 +      "retrievedAt": "2026-05-01T00:00:00Z"
 +    },
 +    {
 +      "id": "single_pdf_process_guide",
 +      "title": "Single PDF Process Guidance",
-+      "url": "https://www.portland.gov/ppd/permits/single-pdf-process",
++      "url": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +      "retrievedAt": "2026-05-01T00:00:00Z"
 +    },
 +    {
 +      "id": "devhub_payment_and_inspection_guide",
 +      "title": "DevHub Payment and Inspection Guidance",
-+      "url": "https://www.portland.gov/ppd/devhub",
++      "url": "https://wetten.overheid.nl/ppd/devhub",
 +      "retrievedAt": "2026-05-01T00:00:00Z"
 +    }
 +  ],

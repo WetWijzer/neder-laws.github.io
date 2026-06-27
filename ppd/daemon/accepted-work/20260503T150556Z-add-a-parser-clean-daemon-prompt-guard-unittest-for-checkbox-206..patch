@@ -73,7 +73,7 @@
 +            PROMPT_AFTER_TWO_SYNTAX_PREFLIGHT_FAILURES,
 +        )
 +        self.assertNotIn("ppd/devhub/", PROMPT_AFTER_TWO_SYNTAX_PREFLIGHT_FAILURES)
-+        self.assertNotIn("public/corpus/portland-or/current/", PROMPT_AFTER_TWO_SYNTAX_PREFLIGHT_FAILURES)
++        self.assertNotIn("public/corpus/wetwijzer-or/current/", PROMPT_AFTER_TWO_SYNTAX_PREFLIGHT_FAILURES)
 +
 +
 +if __name__ == "__main__":

@@ -23,7 +23,7 @@
     "source_level_triage_decisions": [
       {
         "source_id": "src-submit-plans-online",
-        "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+        "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
         "decision": "changed",
         "review_required": true,
         "reviewer_owner": "public-recrawl-reviewer",
@@ -33,7 +33,7 @@
       },
       {
         "source_id": "src-devhub-guide-submit-application",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
         "decision": "new",
         "review_required": true,
         "reviewer_owner": "devhub-guidance-reviewer",
@@ -127,7 +127,7 @@
     {
       "document_id": "doc-submit-plans-online-fixture",
       "source_id": "src-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "title": "Submit Plans Online fixture record",
       "document_type": "public_html",
       "citation_spans": [
@@ -141,7 +141,7 @@
     {
       "document_id": "doc-devhub-guide-fixture",
       "source_id": "src-devhub-guide-submit-application",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "title": "DevHub submit permit application fixture record",
       "document_type": "public_html",
       "citation_spans": [

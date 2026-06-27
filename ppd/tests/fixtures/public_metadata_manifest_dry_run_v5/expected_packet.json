@@ -15,7 +15,7 @@
     {
       "seed_id": "seed-permit-applications-index-metadata",
       "source_registry_placeholder_id": "src-placeholder-permit-applications-index",
-      "source_registry_ref": "source-registry-placeholder://portland-ppd/permit-applications-index",
+      "source_registry_ref": "source-registry-placeholder://wetwijzer-ppd/permit-applications-index",
       "owning_surface": "public_ppd_forms_index",
       "selection_state": "selected_for_synthetic_archive_manifest_row",
       "processor_handoff_state": "metadata_manifest_candidate_ready",
@@ -26,7 +26,7 @@
     {
       "seed_id": "seed-file-standards-review-hold",
       "source_registry_placeholder_id": "src-placeholder-file-standards",
-      "source_registry_ref": "source-registry-placeholder://portland-ppd/file-standards",
+      "source_registry_ref": "source-registry-placeholder://wetwijzer-ppd/file-standards",
       "owning_surface": "public_ppd_file_guidance",
       "selection_state": "selected_for_synthetic_archive_manifest_row",
       "processor_handoff_state": "blocked_by_skip_or_reviewer_hold",
@@ -40,7 +40,7 @@
       "manifest_id": "archive-manifest-dry-run-v5:seed-permit-applications-index-metadata",
       "source_id": "public-source-placeholder:seed-permit-applications-index-metadata",
       "source_registry_placeholder_id": "src-placeholder-permit-applications-index",
-      "source_registry_ref": "source-registry-placeholder://portland-ppd/permit-applications-index",
+      "source_registry_ref": "source-registry-placeholder://wetwijzer-ppd/permit-applications-index",
       "canonical_url": "placeholder:canonical-url:seed-permit-applications-index-metadata",
       "requested_url": "placeholder:requested-url:seed-permit-applications-index-metadata",
       "redirect_chain": [
@@ -73,7 +73,7 @@
       "manifest_id": "archive-manifest-dry-run-v5:seed-file-standards-review-hold",
       "source_id": "public-source-placeholder:seed-file-standards-review-hold",
       "source_registry_placeholder_id": "src-placeholder-file-standards",
-      "source_registry_ref": "source-registry-placeholder://portland-ppd/file-standards",
+      "source_registry_ref": "source-registry-placeholder://wetwijzer-ppd/file-standards",
       "canonical_url": "placeholder:canonical-url:seed-file-standards-review-hold",
       "requested_url": "placeholder:requested-url:seed-file-standards-review-hold",
       "redirect_chain": [

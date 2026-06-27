@@ -13,7 +13,7 @@ def _valid_packet() -> dict:
             {
                 "id": "predicate-1",
                 "text": "Permit status must come from the archived PP&D source.",
-                "citations": [{"url": "https://www.portland.gov/ppd", "captured_at": "2026-05-20"}],
+                "citations": [{"url": "https://wetten.overheid.nl/ppd", "captured_at": "2026-05-20"}],
             }
         ],
         "input_models": [{"id": "model-1", "last_verified_at": "2026-05-20"}],
@@ -46,7 +46,7 @@ def _valid_regenerated_requirement_packet() -> dict:
                     "summary": "Regenerated requirement keeps supporting documents separate from drawings.",
                     "citations": [
                         {
-                            "url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+                            "url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
                             "source_type": "public_html",
                             "privacy_classification": "public",
                             "captured_at": "2026-05-20",
@@ -152,7 +152,7 @@ def test_regenerated_requirement_packet_rejects_private_or_authenticated_evidenc
     packet = _valid_regenerated_requirement_packet()
     packet["requirement_diffs"][0]["citations"] = [
         {
-            "url": "https://devhub.portlandoregon.gov/account/permits/123",
+            "url": "https://wetten.overheid.nl/account/permits/123",
             "source_type": "devhub_authenticated",
             "auth_scope": "authenticated",
             "privacy_classification": "private",

@@ -1,7 +1,7 @@
 """Deterministic validation for PP&D normalized document link graphs.
 
 The link graph is a commit-safe fixture artifact. It connects normalized public
-PP&D documents to linked forms, PDFs, DevHub guides, Portland Maps references,
+PP&D documents to linked forms, PDFs, DevHub guides, BWB metadata references,
 and skipped links. It must not contain raw crawl bodies, downloaded documents,
 private DevHub session artifacts, browser traces, screenshots, credentials, or
 other live crawl output.
@@ -364,7 +364,7 @@ def _canonicalize_url(url: str) -> str:
 
 def _is_private_devhub_url(value: str) -> bool:
     parsed = urlparse(value.strip())
-    if parsed.netloc.lower() != "devhub.portlandoregon.gov":
+    if parsed.netloc.lower() != "wetten.overheid.nl":
         return False
     path = parsed.path.lower()
     return any(marker in path for marker in PRIVATE_DEVHUB_MARKERS)

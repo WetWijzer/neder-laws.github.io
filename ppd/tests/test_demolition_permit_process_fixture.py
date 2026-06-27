@@ -38,7 +38,7 @@ class DemolitionPermitProcessFixtureTest(unittest.TestCase):
         for source in self.process["authority_sources"]:
             parsed = urlparse(source["url"])
             self.assertEqual(parsed.scheme, "https")
-            self.assertIn(parsed.netloc, {"www.portland.gov", "devhub.portlandoregon.gov", "www.portlandoregon.gov"})
+            self.assertIn(parsed.netloc, {"wetten.overheid.nl", "wetten.overheid.nl", "wetten.overheid.nl"})
             self.assertEqual(source["captured_as"], "public_fixture_reference")
             self.assertTrue(source["authority_label"])
             self.assertTrue(source["source_inventory_category"])

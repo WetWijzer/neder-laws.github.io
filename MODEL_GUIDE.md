@@ -1,6 +1,6 @@
 # AI Model Selection & Performance Guide
 
-This guide helps you choose the optimal AI model for your device and understand the performance characteristics of each supported model in AI Town.
+This guide helps you choose the optimal AI model for your device and understand the performance characteristics of each supported model in WetWijzer.
 
 ## 🎯 Quick Model Selection
 
@@ -308,7 +308,7 @@ Solution: Update browser to latest version or use fallback model
 
 ## 📈 Benchmarking Your Setup
 
-AI Town includes built-in benchmarking tools. Access them through the developer console:
+WetWijzer includes built-in benchmarking tools. Access them through the developer console:
 
 ```javascript
 // Get automatic model recommendation

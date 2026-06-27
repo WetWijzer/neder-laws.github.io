@@ -58,7 +58,7 @@ def test_packet_rejects_raw_body_persistence_flags() -> None:
     assert result["valid"] is False
     assert "persistence_flags.no_raw_body_persisted must be true" in result["errors"]
     assert (
-        "archive expectation for https://www.portland.gov/ppd must not include a raw_body_artifact_ref"
+        "archive expectation for https://wetten.overheid.nl/ppd must not include a raw_body_artifact_ref"
         in result["errors"]
     )
 

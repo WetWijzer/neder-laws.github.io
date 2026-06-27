@@ -60,7 +60,7 @@ class Checkbox121ResumeConstraintsTest(unittest.TestCase):
         self.assertEqual(data.get("allowed_path_prefixes"), ["ppd/"])
         forbidden_prefixes = set(data.get("forbidden_path_prefixes", []))
         self.assertIn("src/lib/logic/", forbidden_prefixes)
-        self.assertIn("public/corpus/portland-or/current/", forbidden_prefixes)
+        self.assertIn("public/corpus/wetwijzer-or/current/", forbidden_prefixes)
         self.assertIn("ipfs_datasets_py/.daemon/", forbidden_prefixes)
 
         forbidden_actions = set(data.get("forbidden_actions", []))

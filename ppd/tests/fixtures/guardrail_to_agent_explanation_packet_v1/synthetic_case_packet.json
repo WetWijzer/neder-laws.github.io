@@ -5,7 +5,7 @@
       "evidence_id": "ev-submit-plans-online-single-pdf",
       "source_type": "public_html",
       "title": "Submit Plans Online / Single PDF Process",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "last_verified_at": "2026-05-08T00:00:00Z",
       "freshness_status": "current",
       "no_raw_body_persisted": true
@@ -14,7 +14,7 @@
       "evidence_id": "ev-devhub-submit-application-guide",
       "source_type": "public_html",
       "title": "DevHub permit application guide",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "last_verified_at": "2026-05-08T00:00:00Z",
       "freshness_status": "current",
       "no_raw_body_persisted": true
@@ -23,7 +23,7 @@
       "evidence_id": "ev-devhub-fee-payment-guide",
       "source_type": "public_pdf",
       "title": "How to pay fees",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "last_verified_at": "2026-05-08T00:00:00Z",
       "freshness_status": "current",
       "no_raw_body_persisted": true

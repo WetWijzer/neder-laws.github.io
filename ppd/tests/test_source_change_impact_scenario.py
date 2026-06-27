@@ -41,7 +41,7 @@ class SourceChangeImpactScenarioTest(unittest.TestCase):
     def test_changed_evidence_routes_to_affected_requirements(self) -> None:
         evidence_ids = {item["sourceEvidenceId"] for item in self.fixture["changedEvidence"]}
         for evidence in self.fixture["changedEvidence"]:
-            self.assertTrue(evidence["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
+            self.assertTrue(evidence["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
             self.assertRegex(evidence["previousHashPlaceholder"], SHA256_RE)
             self.assertRegex(evidence["currentHashPlaceholder"], SHA256_RE)
             self.assertNotEqual(evidence["previousHashPlaceholder"], evidence["currentHashPlaceholder"])

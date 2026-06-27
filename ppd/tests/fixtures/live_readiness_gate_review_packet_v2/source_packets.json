@@ -11,8 +11,8 @@
         ],
         "seeds": [
           {
-            "seed_url": "https://www.portland.gov/ppd",
-            "canonical_url": "https://www.portland.gov/ppd",
+            "seed_url": "https://wetten.overheid.nl/ppd",
+            "canonical_url": "https://wetten.overheid.nl/ppd",
             "robots_decision": {
               "decision": "allow_preflight_only"
             },
@@ -21,8 +21,8 @@
             ]
           },
           {
-            "seed_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
-            "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+            "seed_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
+            "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
             "robots_decision": {
               "decision": "allow_preflight_only"
             },

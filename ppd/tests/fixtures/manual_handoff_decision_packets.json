@@ -4,14 +4,14 @@
     "summary": "PP&D DevHub login and inspection scheduling remain attended steps.",
     "handoff_reasons": [
       {
-        "reason": "DevHub account access can require user-owned PortlandOregon.gov credentials and security prompts.",
-        "source_url": "https://www.portland.gov/ppd/devhub-sign-guide"
+        "reason": "DevHub account access can require user-owned wetten.overheid.nl credentials and security prompts.",
+        "source_url": "https://wetten.overheid.nl/ppd/devhub-sign-guide"
       }
     ],
     "blocked_actions": [
       {
         "action": "The agent must not schedule an inspection or submit an official request.",
-        "source_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools"
+        "source_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools"
       }
     ],
     "alternatives": [

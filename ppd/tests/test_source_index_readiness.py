@@ -69,7 +69,7 @@ def test_unready_source_index_blocks_requirement_extraction(mutation, expected: 
         (lambda index: index["official_source_anchors"][0].update({"freshness_status": "stale"}), "stale official source anchor freshness_status"),
         (lambda index: index["official_source_anchors"][0].pop("freshness_status"), "missing required fields"),
         (lambda index: index["official_source_anchors"][0].pop("owning_surface"), "missing required fields"),
-        (lambda index: index["official_source_anchors"][0].update({"canonical_url": "https://www.portland.gov/account?session=abc"}), "private or authenticated canonical_url"),
+        (lambda index: index["official_source_anchors"][0].update({"canonical_url": "https://wetten.overheid.nl/account?session=abc"}), "private or authenticated canonical_url"),
     ],
 )
 def test_source_index_readiness_requires_safe_official_anchor_coverage(mutation, expected: str) -> None:

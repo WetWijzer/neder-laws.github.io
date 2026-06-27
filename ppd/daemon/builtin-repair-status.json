@@ -20,7 +20,7 @@
           "--self-test"
         ],
         "returncode": 0,
-        "stderr": "/home/barberb/portland-laws.github.io/ppd/tests/test_draft_preview_agent_handoff_acceptance_packet_v2.py:104: SyntaxWarning: invalid escape sequence '\\[' with pytest.raises(AcceptancePacketError, match=\"migration_checklist_items\\[0\\].summary required\"):",
+        "stderr": "/home/barberb/wetwijzer.github.io/ppd/tests/test_draft_preview_agent_handoff_acceptance_packet_v2.py:104: SyntaxWarning: invalid escape sequence '\\[' with pytest.raises(AcceptancePacketError, match=\"migration_checklist_items\\[0\\].summary required\"):",
         "stdout": "{ \"ok\": true, \"task_count\": 40 }"
       },
       {

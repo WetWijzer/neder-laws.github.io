@@ -31,13 +31,13 @@ PUBLIC_SOURCE_TYPES = frozenset(
 
 PUBLIC_HOST_ALLOWLIST = frozenset(
     {
-        "www.portland.gov",
-        "portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
-        "portlandoregon.gov",
-        "www.portlandmaps.com",
-        "portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
+        "repository.overheid.nl",
     }
 )
 
@@ -265,7 +265,7 @@ def _validate_public_url(canonical_url: str, source_type: str) -> None:
         key = sorted(sensitive_keys)[0]
         raise SourceLineageError(f"sensitive query parameter rejected: {key}")
 
-    if host == "devhub.portlandoregon.gov" and source_type != "devhub_public":
+    if host == "wetten.overheid.nl" and source_type != "devhub_public":
         raise SourceLineageError("DevHub public URLs must use source_type devhub_public")
 
 

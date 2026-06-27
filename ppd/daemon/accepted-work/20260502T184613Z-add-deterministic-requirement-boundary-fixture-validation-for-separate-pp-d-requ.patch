@@ -15,7 +15,7 @@
 +      "sourceEvidenceIds": ["ppd-public-guidance-building-permit-source"],
 +      "citations": [
 +        {
-+          "sourceUrl": "https://www.portland.gov/ppd/permits",
++          "sourceUrl": "https://wetten.overheid.nl/ppd/permits",
 +          "sourceAnchor": "building-permits",
 +          "evidenceId": "ppd-public-guidance-building-permit-source"
 +        }
@@ -31,7 +31,7 @@
 +      "sourceEvidenceIds": ["ppd-public-guidance-devhub-save-source"],
 +      "citations": [
 +        {
-+          "sourceUrl": "https://www.portland.gov/ppd/devhub",
++          "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
 +          "sourceAnchor": "save-for-later",
 +          "evidenceId": "ppd-public-guidance-devhub-save-source"
 +        }
@@ -47,7 +47,7 @@
 +      "sourceEvidenceIds": ["ppd-public-guidance-address-source"],
 +      "citations": [
 +        {
-+          "sourceUrl": "https://www.portland.gov/ppd/permits/apply-online",
++          "sourceUrl": "https://wetten.overheid.nl/ppd/permits/apply-online",
 +          "sourceAnchor": "project-information",
 +          "evidenceId": "ppd-public-guidance-address-source"
 +        }
@@ -63,7 +63,7 @@
 +      "sourceEvidenceIds": ["ppd-public-guidance-single-pdf-source"],
 +      "citations": [
 +        {
-+          "sourceUrl": "https://www.portland.gov/ppd/single-pdf-process",
++          "sourceUrl": "https://wetten.overheid.nl/ppd/single-pdf-process",
 +          "sourceAnchor": "drawing-plans",
 +          "evidenceId": "ppd-public-guidance-single-pdf-source"
 +        }
@@ -79,7 +79,7 @@
 +      "sourceEvidenceIds": ["ppd-public-guidance-fees-source"],
 +      "citations": [
 +        {
-+          "sourceUrl": "https://www.portland.gov/ppd/fees",
++          "sourceUrl": "https://wetten.overheid.nl/ppd/fees",
 +          "sourceAnchor": "permit-fees",
 +          "evidenceId": "ppd-public-guidance-fees-source"
 +        }
@@ -95,7 +95,7 @@
 +      "sourceEvidenceIds": ["ppd-public-guidance-deadline-source"],
 +      "citations": [
 +        {
-+          "sourceUrl": "https://www.portland.gov/ppd/permits/revisions-corrections",
++          "sourceUrl": "https://wetten.overheid.nl/ppd/permits/revisions-corrections",
 +          "sourceAnchor": "corrections-deadlines",
 +          "evidenceId": "ppd-public-guidance-deadline-source"
 +        }
@@ -248,8 +248,8 @@
 +    source_anchor = _non_empty_text(citation.get("sourceAnchor"))
 +    evidence_id = _non_empty_text(citation.get("evidenceId"))
 +
-+    if source_url is None or not source_url.startswith("https://www.portland.gov/"):
-+        errors.append(f"record {record_id}: citation {index} requires a public Portland.gov sourceUrl")
++    if source_url is None or not source_url.startswith("https://wetten.overheid.nl/"):
++        errors.append(f"record {record_id}: citation {index} requires a public wetten.overheid.nl sourceUrl")
 +    if source_anchor is None:
 +        errors.append(f"record {record_id}: citation {index} requires sourceAnchor")
 +    if evidence_id is None:

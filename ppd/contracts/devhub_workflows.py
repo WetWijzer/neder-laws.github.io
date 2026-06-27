@@ -199,7 +199,7 @@ class DevHubWorkflowState:
             errors.append("workflow state id is required")
         if not self.workflow.strip():
             errors.append(f"workflow state {self.id} workflow is required")
-        if not self.url_pattern.startswith("https://devhub.portlandoregon.gov/"):
+        if not self.url_pattern.startswith("https://wetten.overheid.nl/"):
             errors.append(f"workflow state {self.id} url_pattern must be a DevHub HTTPS URL pattern")
         if not self.heading.strip():
             errors.append(f"workflow state {self.id} heading is required")

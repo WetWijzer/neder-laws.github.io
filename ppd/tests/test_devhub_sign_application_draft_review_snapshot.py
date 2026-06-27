@@ -147,7 +147,7 @@ class DevhubSignApplicationDraftReviewSnapshotTest(unittest.TestCase):
                 if lowered.startswith("http"):
                     parsed = urlparse(leaf)
                     self.assertEqual("https", parsed.scheme)
-                    self.assertEqual("devhub.portlandoregon.gov", parsed.netloc)
+                    self.assertEqual("wetten.overheid.nl", parsed.netloc)
                     self.assertTrue(parsed.path.startswith("/mock/"))
 
     def _assert_redacted_values_only(self, value):

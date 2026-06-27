@@ -28,11 +28,11 @@ OFFLINE_VALIDATION_COMMANDS = [
 ]
 
 DEFAULT_ALLOWED_HOSTS = {
-    "www.portland.gov",
-    "portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 
 MUTATION_FLAG_NAMES = {

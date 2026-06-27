@@ -202,7 +202,7 @@
 +            errors.append("workflow state id is required")
 +        if not self.workflow.strip():
 +            errors.append(f"workflow state {self.id} workflow is required")
-+        if not self.url_pattern.startswith("https://devhub.portlandoregon.gov/"):
++        if not self.url_pattern.startswith("https://wetten.overheid.nl/"):
 +            errors.append(f"workflow state {self.id} url_pattern must be a DevHub HTTPS URL pattern")
 +        if not self.heading.strip():
 +            errors.append(f"workflow state {self.id} heading is required")
@@ -440,7 +440,7 @@
 +  const errors: string[] = [];
 +  if (!state.id.trim()) errors.push("state id is required");
 +  if (!state.workflow.trim()) errors.push(`state ${state.id} workflow is required`);
-+  if (!state.urlPattern.startsWith("https://devhub.portlandoregon.gov/")) {
++  if (!state.urlPattern.startsWith("https://wetten.overheid.nl/")) {
 +    errors.push(`state ${state.id} urlPattern must be a DevHub HTTPS URL pattern`);
 +  }
 +  if (!state.heading.trim()) errors.push(`state ${state.id} heading is required`);
@@ -483,7 +483,7 @@
 +    {
 +      "id": "devhub-request-type",
 +      "workflow": "mock_plan_review_request",
-+      "urlPattern": "https://devhub.portlandoregon.gov/permits/request-type*",
++      "urlPattern": "https://wetten.overheid.nl/permits/request-type*",
 +      "heading": "Start a permit request",
 +      "capturedAt": "2026-05-01T18:20:00Z",
 +      "fields": [
@@ -592,7 +592,7 @@
 +    {
 +      "id": "devhub-document-upload",
 +      "workflow": "mock_plan_review_request",
-+      "urlPattern": "https://devhub.portlandoregon.gov/permits/documents*",
++      "urlPattern": "https://wetten.overheid.nl/permits/documents*",
 +      "heading": "Upload documents",
 +      "capturedAt": "2026-05-01T18:20:00Z",
 +      "fields": [
@@ -746,7 +746,7 @@
 +    {
 +      "id": "devhub-review-and-certify",
 +      "workflow": "mock_plan_review_request",
-+      "urlPattern": "https://devhub.portlandoregon.gov/permits/review*",
++      "urlPattern": "https://wetten.overheid.nl/permits/review*",
 +      "heading": "Review and certify",
 +      "capturedAt": "2026-05-01T18:20:00Z",
 +      "fields": [

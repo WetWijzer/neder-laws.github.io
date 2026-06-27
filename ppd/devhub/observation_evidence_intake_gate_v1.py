@@ -290,7 +290,7 @@ def _validate_offline_commands(value: Any, path: str, findings: list[IntakeGateF
         if not all(part.strip() for part in parts):
             findings.append(IntakeGateFinding("blank_offline_command_part", command_path, "must not contain blank parts"))
         joined = " ".join(parts).lower()
-        if any(term in joined for term in ("playwright", "curl", "wget", "devhub.portlandoregon.gov")):
+        if any(term in joined for term in ("playwright", "curl", "wget", "wetten.overheid.nl")):
             findings.append(IntakeGateFinding("online_validation_command", command_path, "must remain offline"))
 
 

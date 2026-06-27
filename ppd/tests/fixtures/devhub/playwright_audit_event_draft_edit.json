@@ -36,7 +36,7 @@
         "requirementId": "trade-plan-review-project-description-required",
         "type": "precondition",
         "sourceTitle": "Trade permit with plan review fixture",
-        "sourceUrl": "https://www.portland.gov/ppd/permits/trade-permits-plan-review",
+        "sourceUrl": "https://wetten.overheid.nl/ppd/permits/trade-permits-plan-review",
         "sourceAnchor": "project-information",
         "requiresUserSuppliedFact": true,
         "supportsDraftEditOnly": true

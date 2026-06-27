@@ -171,7 +171,7 @@ DEFAULT_VALIDATION_COMMANDS = (
 class Config:
     repo_root: Path
     task_board: Path = Path("ppd/daemon/task-board.md")
-    plan_doc: Path = Path("docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md")
+    plan_doc: Path = Path("docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md")
     readme: Path = Path("ppd/README.md")
     status_file: Path = Path("ppd/daemon/status.json")
     progress_file: Path = Path("ppd/daemon/progress.json")
@@ -304,7 +304,7 @@ def build_validation_repair_prompt(proposal: Proposal, config: Config) -> str:
         proposal,
         subject="PP&D daemon candidate",
         repair_rules=(
-            "Edit only files under ppd/ or docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md.",
+            "Edit only files under ppd/ or docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md.",
             "Keep the repair smaller than the failed candidate when possible.",
             "Do not create private DevHub artifacts, raw crawl output, downloaded documents, browser traces, screenshots, credentials, or payment data.",
         ),
@@ -506,7 +506,7 @@ def self_test(repo_root: Path) -> int:
         repo_root / "ppd/README.md",
         repo_root / "ppd/.gitignore",
         repo_root / "ppd/daemon/task-board.md",
-        repo_root / "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
+        repo_root / "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
     ]
     missing = [path.as_posix() for path in required if not path.exists()]
     errors: list[str] = []

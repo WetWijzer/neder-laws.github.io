@@ -4,9 +4,9 @@
   "generated_at": "2026-05-30T00:00:00Z",
   "sources": [
     {
-      "source_id": "portland-bds-title-33",
+      "source_id": "wetwijzer-bds-title-33",
       "requirement_ids": ["PCC-33.110.215", "PCC-33.110.220"],
-      "public_url": "https://www.portland.gov/code/33",
+      "public_url": "https://wetten.overheid.nl/code/33",
       "public_page_title": "Title 33 Planning and Zoning",
       "evidence": {
         "title_observed": "Title 33 Planning and Zoning",
@@ -16,9 +16,9 @@
       }
     },
     {
-      "source_id": "portland-transportation-trn-10",
+      "source_id": "wetwijzer-transportation-trn-10",
       "requirement_ids": ["TRN-10.20"],
-      "public_url": "https://www.portland.gov/transportation/permitting",
+      "public_url": "https://wetten.overheid.nl/transportation/permitting",
       "public_page_title": "Transportation Permitting",
       "evidence": {
         "title_observed": "PBOT Permits",

@@ -15,7 +15,7 @@ from typing import Any
 _PRIVATE_URL_MARKERS = (
     "localhost",
     "127.0.0.1",
-    "devhub.portlandoregon.gov",
+    "wetten.overheid.nl",
     "session",
     "token=",
     "auth=",

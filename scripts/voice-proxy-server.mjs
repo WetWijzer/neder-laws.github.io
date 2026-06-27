@@ -14,7 +14,7 @@ function getVoiceRouteUpstreams() {
 }
 
 function parseAllowedOrigins() {
-  return (process.env.VOICE_PROXY_ALLOWED_ORIGINS || process.env.OPENROUTER_PROXY_ALLOWED_ORIGINS || 'https://portland-laws.github.io,https://211-ai.github.io,http://localhost:5173,http://127.0.0.1:5173')
+  return (process.env.VOICE_PROXY_ALLOWED_ORIGINS || process.env.OPENROUTER_PROXY_ALLOWED_ORIGINS || 'https://wetwijzer.github.io,https://211-ai.github.io,http://localhost:5173,http://127.0.0.1:5173')
     .split(',')
     .map((origin) => origin.trim())
     .filter(Boolean);

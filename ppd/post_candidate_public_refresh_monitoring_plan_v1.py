@@ -16,7 +16,7 @@ REQUIRED_CATEGORIES = {
     'fee_payment_guidance': 'fee/payment guidance',
     'devhub_public_guidance': 'DevHub public guidance',
     'forms_index': 'forms index',
-    'linked_portland_maps_references': 'linked Portland Maps references',
+    'linked_bwb_metadata_references': 'linked BWB metadata references',
 }
 
 _PRIVATE_FIELD_RE = re.compile(r'(auth|browser|cookie|credential|download|har|private|raw|screenshot|session|storage_state|token|trace)', re.IGNORECASE)

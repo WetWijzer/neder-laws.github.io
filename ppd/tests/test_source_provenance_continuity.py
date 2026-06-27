@@ -78,8 +78,8 @@ def _string_values_for_keys(value: Any, keys: set[str]) -> set[str]:
 
 
 def _looks_public_ppd_url(value: str) -> bool:
-    return value.startswith("https://www.portland.gov/ppd") or value.startswith(
-        "https://devhub.portlandoregon.gov"
+    return value.startswith("https://wetten.overheid.nl/ppd") or value.startswith(
+        "https://wetten.overheid.nl"
     )
 
 

@@ -19,10 +19,10 @@
   ],
   "source_urls": [
     "https://example.com/permit-source",
-    "https://www.portland.gov/bds?token=secret"
+    "https://wetten.overheid.nl/bds?token=secret"
   ],
   "commands": [
-    "curl https://www.portland.gov/bds | python3 process_live_source.py"
+    "curl https://wetten.overheid.nl/bds | python3 process_live_source.py"
   ],
   "registry_mutation": true,
   "schedule_mutation": true,

@@ -17,18 +17,18 @@ from typing import Any, Iterable, Mapping, Sequence
 PACKET_VERSION = "public-source-freshness-review-packet-v2"
 
 OFFICIAL_PPD_ANCHORS: tuple[tuple[str, str], ...] = (
-    ("ppd_bureau_landing_page", "https://www.portland.gov/ppd"),
-    ("online_permitting_tools_overview", "https://www.portland.gov/ppd/how-use-online-permitting-tools"),
-    ("devhub_public_portal", "https://devhub.portlandoregon.gov"),
-    ("devhub_faq", "https://www.portland.gov/ppd/devhub-faqs"),
-    ("devhub_account_sign_in_guide", "https://www.portland.gov/ppd/devhub-sign-guide"),
-    ("apply_for_permits", "https://www.portland.gov/ppd/get-permit/apply-permits"),
-    ("devhub_permit_application_guide", "https://www.portland.gov/ppd/devhub-guide-submit-permit-application"),
-    ("submit_plans_online_single_pdf_process", "https://www.portland.gov/ppd/get-permit/submit-plans-online"),
-    ("permit_applications_and_forms_index", "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications"),
-    ("file_naming_standards_pdf_preparation", "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs"),
-    ("fee_payment_guide", "https://www.portland.gov/ppd/documents/how-pay-fees/download"),
-    ("portland_maps_public_references", "https://www.portlandmaps.com"),
+    ("ppd_bureau_landing_page", "https://wetten.overheid.nl/ppd"),
+    ("online_permitting_tools_overview", "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools"),
+    ("devhub_public_portal", "https://wetten.overheid.nl"),
+    ("devhub_faq", "https://wetten.overheid.nl/ppd/devhub-faqs"),
+    ("devhub_account_sign_in_guide", "https://wetten.overheid.nl/ppd/devhub-sign-guide"),
+    ("apply_for_permits", "https://wetten.overheid.nl/ppd/get-permit/apply-permits"),
+    ("devhub_permit_application_guide", "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application"),
+    ("submit_plans_online_single_pdf_process", "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online"),
+    ("permit_applications_and_forms_index", "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications"),
+    ("file_naming_standards_pdf_preparation", "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs"),
+    ("fee_payment_guide", "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download"),
+    ("bwb_metadata_public_references", "https://repository.overheid.nl"),
 )
 
 _FORBIDDEN_RAW_BODY_KEYS = {

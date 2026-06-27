@@ -25,8 +25,8 @@
 +)
 +
 +_STABLE_PREFIXES = (
-+    "https://www.portland.gov/",
-+    "https://efiles.portlandoregon.gov/",
++    "https://wetten.overheid.nl/",
++    "https://repository.overheid.nl/",
 +    "urn:ppd:public:",
 +    "sha256:",
 +)
@@ -128,8 +128,8 @@
 +        return False
 +    parsed = urlparse(value)
 +    return parsed.scheme == "https" and parsed.netloc in {
-+        "www.portland.gov",
-+        "efiles.portlandoregon.gov",
++        "wetten.overheid.nl",
++        "repository.overheid.nl",
 +    }
 +
 +
@@ -213,13 +213,13 @@
 +  "lineage_edges": [
 +    {
 +      "id": "edge-public-guidance-to-checklist",
-+      "source_id": "https://www.portland.gov/ppd/permits/residential-permits",
++      "source_id": "https://wetten.overheid.nl/ppd/permits/residential-permits",
 +      "target_id": "urn:ppd:public:residential-checklist",
 +      "review_needed": false,
 +      "evidence": [
 +        {
-+          "citation_url": "https://www.portland.gov/ppd/permits/residential-permits",
-+          "public_identifier": "https://www.portland.gov/ppd/permits/residential-permits",
++          "citation_url": "https://wetten.overheid.nl/ppd/permits/residential-permits",
++          "public_identifier": "https://wetten.overheid.nl/ppd/permits/residential-permits",
 +          "observed_at": "2026-04-15"
 +        }
 +      ]
@@ -238,7 +238,7 @@
 +      "review_needed": false,
 +      "evidence": [
 +        {
-+          "citation_url": "https://www.portland.gov/ppd/permits/residential-permits",
++          "citation_url": "https://wetten.overheid.nl/ppd/permits/residential-permits",
 +          "public_identifier": "private_devhub/raw_crawl/session-12345.json",
 +          "observed_at": "2026-04-20"
 +        }
@@ -253,13 +253,13 @@
 +  "lineage_edges": [
 +    {
 +      "id": "edge-stale-conflict",
-+      "source_id": "https://www.portland.gov/ppd/permits/commercial-permits",
++      "source_id": "https://wetten.overheid.nl/ppd/permits/commercial-permits",
 +      "target_id": "urn:ppd:public:commercial-submittal-rule",
 +      "review_needed": false,
 +      "conflicting_evidence": true,
 +      "evidence": [
 +        {
-+          "citation_url": "https://www.portland.gov/ppd/permits/commercial-permits",
++          "citation_url": "https://wetten.overheid.nl/ppd/permits/commercial-permits",
 +          "public_identifier": "urn:ppd:public:commercial-permits-page",
 +          "observed_at": "2024-01-01",
 +          "status": "conflicts"

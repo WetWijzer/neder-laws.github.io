@@ -139,8 +139,8 @@ def _validate_citation(record_id: str, index: int, citation: Any) -> list[str]:
     source_anchor = _non_empty_text(citation.get("sourceAnchor"))
     evidence_id = _non_empty_text(citation.get("evidenceId"))
 
-    if source_url is None or not source_url.startswith("https://www.portland.gov/"):
-        errors.append(f"record {record_id}: citation {index} requires a public Portland.gov sourceUrl")
+    if source_url is None or not source_url.startswith("https://wetten.overheid.nl/"):
+        errors.append(f"record {record_id}: citation {index} requires a public wetten.overheid.nl sourceUrl")
     if source_anchor is None:
         errors.append(f"record {record_id}: citation {index} requires sourceAnchor")
     if evidence_id is None:

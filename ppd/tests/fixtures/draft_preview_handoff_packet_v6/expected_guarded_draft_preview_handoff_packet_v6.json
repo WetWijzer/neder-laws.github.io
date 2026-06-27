@@ -32,7 +32,7 @@
     {
       "field_id": "project_address",
       "label": "Project address",
-      "draft_value": "123 Fixture Ave, Portland, OR 97201",
+      "draft_value": "123 Fixture Ave, Netherlands, OR 97201",
       "value_source": "fixture_redacted_user_fact",
       "reversible_only": true,
       "may_autofill_devhub": false,

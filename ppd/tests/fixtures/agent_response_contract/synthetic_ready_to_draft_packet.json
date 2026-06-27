@@ -19,28 +19,28 @@
       {
         "evidence_id": "ppd-devhub-application-guide",
         "title": "DevHub permit application guide",
-        "url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+        "url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
         "accessed_at": "2026-05-08",
         "quote": "DevHub permit requests can include dynamic questions, uploads, save-for-later behavior, acknowledgement, and post-submission tracking."
       },
       {
         "evidence_id": "ppd-submit-plans-online",
         "title": "Submit Plans Online / Single PDF Process",
-        "url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+        "url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
         "accessed_at": "2026-05-08",
         "quote": "Drawing plans are prepared together in one PDF while applications, calculations, and supporting documents are uploaded separately."
       },
       {
         "evidence_id": "ppd-devhub-sign-in-guide",
         "title": "DevHub account and sign-in guide",
-        "url": "https://www.portland.gov/ppd/devhub-sign-guide",
+        "url": "https://wetten.overheid.nl/ppd/devhub-sign-guide",
         "accessed_at": "2026-05-08",
-        "quote": "Online permitting services require a DevHub user account with PortlandOregon.gov credentials and an attended sign-in flow."
+        "quote": "Online permitting services require a DevHub user account with wetten.overheid.nl credentials and an attended sign-in flow."
       },
       {
         "evidence_id": "ppd-fee-payment-guide",
         "title": "How to pay fees",
-        "url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+        "url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
         "accessed_at": "2026-05-08",
         "quote": "Fee payment includes payment detail entry and a final payment submission action."
       }

@@ -27,7 +27,7 @@ FORBIDDEN_KEYS = {
     "trace",
     "uploadPayload",
 }
-PUBLIC_HOSTS = {"www.portland.gov", "devhub.portlandoregon.gov"}
+PUBLIC_HOSTS = {"wetten.overheid.nl", "wetten.overheid.nl"}
 
 
 class FccWirelessGuardrailFixtureTest(unittest.TestCase):

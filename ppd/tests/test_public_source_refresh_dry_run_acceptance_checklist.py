@@ -95,7 +95,7 @@ def test_rejects_missing_metadata_outputs_reviewer_owner_and_required_attestatio
 
 def test_rejects_live_fetch_raw_artifacts_authenticated_urls_and_mutations() -> None:
     packet = build_public_source_refresh_dry_run_acceptance_checklist_packet(_fixture())
-    packet["per_source_abort_checks"][0]["canonical_url"] = "https://devhub.portlandoregon.gov/account/my-permits"
+    packet["per_source_abort_checks"][0]["canonical_url"] = "https://wetten.overheid.nl/account/my-permits"
     packet["download_ref"] = "downloaded-documents/devhub-faq.pdf"
     packet["fetch_allowed"] = True
     packet["notes"] = "processor executed and registry was updated"

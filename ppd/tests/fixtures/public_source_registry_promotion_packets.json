@@ -4,7 +4,7 @@
     "packet_id": "promotion-packet-valid-001",
     "promotion_decision": "promote",
     "source_id": "ppd-devhub-faq",
-    "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+    "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
     "rehearsal_link": "ppd/tests/fixtures/public_source_registry/rehearsal-report.json",
     "release_gate_link": "ppd/tests/fixtures/public_source_registry/release-gate-report.json",
     "rollback_notes": "Remove the staged source registry candidate and retain the previous registry snapshot.",
@@ -25,7 +25,7 @@
     "packet_id": "promotion-packet-invalid-001",
     "promotion_decision": "promote",
     "source_id": "ppd-devhub-private-dashboard",
-    "canonical_url": "https://devhub.portlandoregon.gov/dashboard/my-permits?session=abc123",
+    "canonical_url": "https://wetten.overheid.nl/dashboard/my-permits?session=abc123",
     "candidate_artifact": "ppd/data/raw_crawl/downloads/devhub-dashboard.html",
     "blockers": [
       {

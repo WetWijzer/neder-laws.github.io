@@ -5,12 +5,12 @@
       "metadata_review_link": "ppd/reviews/metadata/recrawl-001.json",
       "risk_decision": "invalidate stale public metadata",
       "citations": [
-        "https://www.portland.gov/ppd/public-record"
+        "https://wetten.overheid.nl/ppd/public-record"
       ],
       "evidence": [
         {
-          "url": "https://www.portland.gov/ppd/public-record",
-          "citation": "https://www.portland.gov/ppd/public-record"
+          "url": "https://wetten.overheid.nl/ppd/public-record",
+          "citation": "https://wetten.overheid.nl/ppd/public-record"
         }
       ],
       "status": "queued_for_metadata_review"

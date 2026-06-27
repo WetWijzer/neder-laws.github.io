@@ -137,7 +137,7 @@ class SourceToGuardrailInvalidationPacketTest(unittest.TestCase):
         data = self.load_fixture()
         source_change = data["source_change"]
         assert isinstance(source_change, dict)
-        source_change["canonical_url"] = "https://devhub.portlandoregon.gov/permit/private-case-123"
+        source_change["canonical_url"] = "https://wetten.overheid.nl/permit/private-case-123"
 
         with self.assertRaisesRegex(ValueError, "forbidden private or authenticated URL"):
             packet_from_dict(data)

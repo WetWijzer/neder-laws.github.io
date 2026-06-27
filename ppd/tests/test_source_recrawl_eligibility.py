@@ -20,7 +20,7 @@ def test_fixture_first_public_recrawl_candidates_are_deterministic() -> None:
     assert candidates == [
         {
             "source_id": "devhub-faq",
-            "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+            "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
             "source_type": "devhub_public",
             "crawl_frequency": "every_few_days",
             "last_seen_at": "2026-05-09T00:00:00Z",
@@ -31,7 +31,7 @@ def test_fixture_first_public_recrawl_candidates_are_deterministic() -> None:
         },
         {
             "source_id": "forms-index",
-            "canonical_url": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+            "canonical_url": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
             "source_type": "public_html",
             "crawl_frequency": "weekly",
             "last_seen_at": "2026-05-13T00:00:00Z",
@@ -42,7 +42,7 @@ def test_fixture_first_public_recrawl_candidates_are_deterministic() -> None:
         },
         {
             "source_id": "submit-plans-online",
-            "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+            "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
             "source_type": "public_html",
             "crawl_frequency": "weekly",
             "last_seen_at": "2026-05-13T00:00:00Z",

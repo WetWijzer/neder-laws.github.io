@@ -130,7 +130,7 @@ def _validate_safe_plan(data: dict[str, Any]) -> list[str]:
                 errors.append(f"question {question.get('id', '')} must cite public evidence only")
             if source.get("status") != "fresh":
                 errors.append(f"question {question.get('id', '')} must cite fresh evidence")
-            if not str(source.get("url", "")).startswith(("https://www.portland.gov/", "https://devhub.portlandoregon.gov/")):
+            if not str(source.get("url", "")).startswith(("https://wetten.overheid.nl/", "https://wetten.overheid.nl/")):
                 errors.append(f"question {question.get('id', '')} must cite PP&D or public DevHub guidance")
         redaction = question.get("redaction", {})
         if not isinstance(redaction, dict):

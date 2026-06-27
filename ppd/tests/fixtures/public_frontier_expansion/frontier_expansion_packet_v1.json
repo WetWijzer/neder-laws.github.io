@@ -7,10 +7,10 @@
   ],
   "public_crawl_allowlist_fixtures_v1": {
     "allowed_hosts": [
-      "www.portland.gov",
-      "devhub.portlandoregon.gov",
-      "www.portlandoregon.gov",
-      "www.portlandmaps.com"
+      "wetten.overheid.nl",
+      "wetten.overheid.nl",
+      "wetten.overheid.nl",
+      "repository.overheid.nl"
     ],
     "private_path_patterns": [
       "/login",
@@ -25,19 +25,19 @@
   "robots_policy_preflight_fixtures_v1": {
     "decisions": [
       {
-        "canonical_url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+        "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
         "decision": "allow"
       },
       {
-        "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+        "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
         "decision": "allow"
       },
       {
-        "canonical_url": "https://devhub.portlandoregon.gov/login",
+        "canonical_url": "https://wetten.overheid.nl/login",
         "decision": "disallow"
       },
       {
-        "canonical_url": "https://www.portland.gov/private/downloads/internal.pdf",
+        "canonical_url": "https://wetten.overheid.nl/private/downloads/internal.pdf",
         "decision": "disallow"
       }
     ]
@@ -46,19 +46,19 @@
     "records": [
       {
         "source_id": "ppd-apply-permits",
-        "canonical_url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+        "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
         "content_type_expectation": "text/html",
         "processor_policy": "public_html_metadata_then_normalized_text"
       },
       {
         "source_id": "ppd-fee-payment-pdf",
-        "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+        "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
         "content_type_expectation": "application/pdf",
         "processor_policy": "public_pdf_metadata_then_text_extraction"
       },
       {
         "source_id": "devhub-login-public-boundary",
-        "canonical_url": "https://devhub.portlandoregon.gov/login",
+        "canonical_url": "https://wetten.overheid.nl/login",
         "content_type_expectation": "text/html",
         "processor_policy": "no_public_crawl_authenticated_boundary"
       }
@@ -68,18 +68,18 @@
     "anchors": [
       {
         "source_id": "ppd-online-tools",
-        "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+        "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
         "links": [
           {
-            "href": "https://www.portland.gov/ppd/get-permit/apply-permits#start",
+            "href": "https://wetten.overheid.nl/ppd/get-permit/apply-permits#start",
             "text": "Apply for permits"
           },
           {
-            "href": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+            "href": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
             "text": "How to pay fees"
           },
           {
-            "href": "https://devhub.portlandoregon.gov/login",
+            "href": "https://wetten.overheid.nl/login",
             "text": "Sign in to DevHub"
           },
           {

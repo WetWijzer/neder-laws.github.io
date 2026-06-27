@@ -68,9 +68,9 @@ def test_packet_uses_only_official_source_anchor_placeholders():
     packet = _packet()
 
     assert packet["official_source_anchor_placeholders"] == [
-        "official://portland-ppd/source-anchor/appeals",
-        "official://portland-ppd/source-anchor/bds-fees",
-        "official://portland-ppd/source-anchor/land-use-notices",
+        "official://wetwijzer-ppd/source-anchor/appeals",
+        "official://wetwijzer-ppd/source-anchor/bds-fees",
+        "official://wetwijzer-ppd/source-anchor/land-use-notices",
     ]
     for candidate in packet["candidates"]:
         assert candidate["official_source_anchor"].startswith("official://")
@@ -94,7 +94,7 @@ def test_rejects_source_anchor_that_requires_official_action(tmp_path):
           {
             "anchor_id": "anchor-bds-fees",
             "agency": "placeholder",
-            "official_placeholder": "official://portland-ppd/source-anchor/bds-fees",
+            "official_placeholder": "official://wetwijzer-ppd/source-anchor/bds-fees",
             "devhub_open_required": true,
             "auth_required": false,
             "document_download_required": false

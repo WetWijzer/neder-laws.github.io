@@ -35,12 +35,12 @@
       "source_hint": "Manual/email submission paths require human routing outside attended DevHub browser automation."
     },
     {
-      "permit_type_id": "portland_maps_property_reference",
-      "label": "Portland Maps public property reference",
+      "permit_type_id": "bwb_metadata_property_reference",
+      "label": "BWB metadata public property reference",
       "category": "public_reference_only",
       "routing": "manual_handoff",
       "browser_automation_allowed": false,
-      "source_hint": "Portland Maps is a public reference surface linked from PP&D guidance, not a DevHub permit application automation path."
+      "source_hint": "BWB metadata is a public reference surface linked from PP&D guidance, not a DevHub permit application automation path."
     }
   ]
 }

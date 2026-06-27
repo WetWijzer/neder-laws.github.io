@@ -4,7 +4,7 @@
     {
       "surface_id": "devhub-public-landing",
       "auth_scope": "public",
-      "url_pattern": "https://devhub.portlandoregon.gov/*",
+      "url_pattern": "https://wetten.overheid.nl/*",
       "page_heading": "DevHub public portal",
       "accessible_landmarks": [
         "main navigation",
@@ -36,7 +36,7 @@
     {
       "surface_id": "devhub-authenticated-application-summary",
       "auth_scope": "authenticated-user-owned-session",
-      "url_pattern": "https://devhub.portlandoregon.gov/permit/*",
+      "url_pattern": "https://wetten.overheid.nl/permit/*",
       "page_heading": "Application summary",
       "accessible_landmarks": [
         "application status region",

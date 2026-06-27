@@ -36,7 +36,7 @@ def test_public_freshness_watchlist_rows_include_guards_and_references() -> None
     handoff = build_public_freshness_watchlist_handoff_v7(fixture_dir)
     rows = {row["source_id"]: row for row in handoff["next_refresh_watch_rows"]}
 
-    permits = rows["portland_maps_public_permits"]
+    permits = rows["bwb_metadata_public_permits"]
     assert permits["agent_api_compatibility"] is True
     assert permits["post_promotion_smoke_replay"] == "post_promotion_smoke_replay_ready"
     assert permits["rollback_reference"].startswith("rollback://ppd/public-fixtures/")

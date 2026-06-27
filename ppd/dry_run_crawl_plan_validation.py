@@ -15,11 +15,11 @@ from urllib.parse import urlparse
 
 _ALLOWED_SCHEMES = {"http", "https"}
 _ALLOWED_PUBLIC_HOSTS = {
-    "www.portland.gov",
-    "portland.gov",
-    "devhub.portlandoregon.gov",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
 }
-_DEVHUB_HOSTS = {"devhub.portlandoregon.gov"}
+_DEVHUB_HOSTS = {"wetten.overheid.nl"}
 _PRIVATE_DEVHUB_TOKENS = {
     "account",
     "admin",

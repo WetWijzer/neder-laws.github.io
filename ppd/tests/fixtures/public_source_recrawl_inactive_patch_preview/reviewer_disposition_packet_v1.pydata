@@ -10,7 +10,7 @@
         {
             'source_order': 1,
             'source_id': 'ppd-devhub-faq',
-            'canonical_url': 'https://www.portland.gov/ppd/devhub-faqs',
+            'canonical_url': 'https://wetten.overheid.nl/ppd/devhub-faqs',
             'decision': 'approve_for_metadata_only_recrawl',
             'reason_codes': ['APPROVE_PUBLIC_METADATA_ONLY', 'APPROVE_ROBOTS_AND_POLICY_PLACEHOLDER_READY'],
             'reviewer_notes_placeholder': 'Reviewer approved metadata-only recrawl preview for fixture replay.',

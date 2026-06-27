@@ -20,7 +20,7 @@ ALLOWED_SOURCE_GROUPS = {
     "ppd_public_pdf",
     "ppd_public_form",
     "devhub_public_help",
-    "portland_maps_public_reference",
+    "bwb_metadata_public_reference",
 }
 
 ALLOWED_SKIPPED_REASONS = {
@@ -163,10 +163,10 @@ def infer_source_group(canonical_url: str, content_type: str | None = None) -> s
     path = parsed.path.lower()
     mime = (content_type or "").lower()
 
-    if host == "devhub.portlandoregon.gov":
+    if host == "wetten.overheid.nl":
         return "devhub_public_help"
-    if host == "www.portlandmaps.com":
-        return "portland_maps_public_reference"
+    if host == "repository.overheid.nl":
+        return "bwb_metadata_public_reference"
     if path.endswith(".pdf") or mime == "application/pdf":
         return "ppd_public_pdf"
     if "form" in path or "applications" in path:

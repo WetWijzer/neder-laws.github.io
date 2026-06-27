@@ -137,7 +137,7 @@ def test_lifecycle_source_coverage_rejects_missing_recrawl_cadence() -> None:
 def test_lifecycle_source_coverage_rejects_private_devhub_paths() -> None:
     _assert_invalid_after_mutation(
         lambda report: report["evidence"][0].update(
-            {"sourceUrl": "https://devhub.portlandoregon.gov/secure/permits/12345"}
+            {"sourceUrl": "https://wetten.overheid.nl/secure/permits/12345"}
         ),
         "private DevHub path",
     )
@@ -292,7 +292,7 @@ def _validate_no_private_or_raw_artifacts(value: Any) -> list[str]:
 
 
 def _is_private_devhub_path(value: str) -> bool:
-    if "devhub.portlandoregon.gov" not in value:
+    if "wetten.overheid.nl" not in value:
         return False
     return any(marker.lower() in value for marker in PRIVATE_DEVHUB_MARKERS)
 

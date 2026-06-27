@@ -34,14 +34,14 @@ def test_missing_capture_date_is_not_fresh_enough_for_readiness() -> None:
             {
                 "evidence_id": "ppd-file-naming-undated",
                 "source_name": "PP&D File Naming Standards and Preparing PDFs",
-                "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+                "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
                 "captured_at": "",
                 "supports_rules": ["file_naming"],
             },
             {
                 "evidence_id": "ppd-single-pdf-2026-05-08",
                 "source_name": "PP&D Submit Plans Online Single PDF Process",
-                "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+                "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
                 "captured_at": "2026-05-08",
                 "supports_rules": ["single_pdf"],
             },

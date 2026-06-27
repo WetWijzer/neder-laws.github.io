@@ -31,7 +31,7 @@ REVIEWED_CHANGE_KINDS = frozenset(
         "reviewed_public_form_change",
     }
 )
-PUBLIC_SOURCE_HOSTS = frozenset({"www.portland.gov", "www.portlandoregon.gov", "www.portlandmaps.com"})
+PUBLIC_SOURCE_HOSTS = frozenset({"wetten.overheid.nl", "wetten.overheid.nl", "repository.overheid.nl"})
 BLOCKING_CACHE_STATUSES = frozenset(
     {
         "stale_due_to_source_change",
@@ -498,7 +498,7 @@ def _looks_private_or_authenticated_url(value: str) -> bool:
     parsed = urlparse(value)
     if parsed.scheme not in {"http", "https"} or not parsed.netloc:
         return False
-    if parsed.netloc == "devhub.portlandoregon.gov":
+    if parsed.netloc == "wetten.overheid.nl":
         return True
     return _path_is_private_or_authenticated(parsed.path)
 

@@ -91,14 +91,14 @@ def test_source_citation_payloads_and_validation_commands_are_exact():
     assert response["source_citations"] == [
         {
             "source_id": "src-devhub-guide-submit-application",
-            "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+            "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
             "title": "DevHub permit application guide",
             "last_verified_at": "2026-05-08",
             "excerpt": "The public guide describes application request types, save-for-later behavior, uploads, and acknowledgement review.",
         },
         {
             "source_id": "src-submit-plans-online",
-            "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+            "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
             "title": "Submit Plans Online / Single PDF Process",
             "last_verified_at": "2026-05-08",
             "excerpt": "Plans are prepared as one PDF while applications, calculations, and supporting documents are separate PDFs.",

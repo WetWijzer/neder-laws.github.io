@@ -176,7 +176,7 @@
 +      "ppd/crawler/",
 +      "ppd/contracts/",
 +      "ppd/data/raw/",
-+      "public/corpus/portland-or/current/",
++      "public/corpus/wetwijzer-or/current/",
 +      "src/lib/logic/",
 +      "ipfs_datasets_py/.daemon/"
 +    ],

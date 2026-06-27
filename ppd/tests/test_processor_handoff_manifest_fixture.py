@@ -58,7 +58,7 @@ def test_processor_handoff_fixture_records_required_public_metadata():
         assert processor["version"]
 
         redirect_metadata = capture["redirect_metadata"]
-        assert redirect_metadata["final_url"].startswith("https://www.portland.gov/ppd/")
+        assert redirect_metadata["final_url"].startswith("https://wetten.overheid.nl/ppd/")
         assert isinstance(redirect_metadata["redirect_chain"], list)
         assert redirect_metadata["redirect_count"] == len(redirect_metadata["redirect_chain"])
 

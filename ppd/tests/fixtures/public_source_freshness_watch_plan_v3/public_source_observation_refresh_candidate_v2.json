@@ -4,7 +4,7 @@
   "candidates": [
     {
       "source_id": "ppd-devhub-submit-guide",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "source_type": "public_html",
       "citation_ids": [
         "cite-devhub-submit-application-guide"
@@ -36,7 +36,7 @@
     },
     {
       "source_id": "ppd-file-naming-standards",
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "source_type": "public_html",
       "citation_ids": [
         "cite-spp-file-naming-standards"
@@ -66,7 +66,7 @@
     },
     {
       "source_id": "ppd-legacy-fee-handout",
-      "canonical_url": "https://www.portland.gov/ppd/documents/legacy-fee-handout/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/legacy-fee-handout/download",
       "source_type": "public_pdf",
       "citation_ids": [
         "cite-legacy-fee-handout"

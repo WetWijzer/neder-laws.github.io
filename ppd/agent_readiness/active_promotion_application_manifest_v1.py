@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import Any, Mapping
 
 
-REQUIRED_SCHEMA_ID = 'portland_ppd.active_promotion_application_manifest'
+REQUIRED_SCHEMA_ID = 'wetwijzer_ppd.active_promotion_application_manifest'
 REQUIRED_SCHEMA_VERSION = '1.0.0'
 
 _REQUIRED_SECTIONS: tuple[str, ...] = (

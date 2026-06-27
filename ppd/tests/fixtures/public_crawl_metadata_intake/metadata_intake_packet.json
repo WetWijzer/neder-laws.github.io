@@ -19,7 +19,7 @@
   "selected_allowlisted_targets": [
     {
       "source_id": "ppd-landing",
-      "canonical_url": "https://www.portland.gov/ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
       "expected_archive_manifest_id": "archive-manifest-expected-ppd-landing",
       "prerequisite_evidence_ids": [
         "evidence:ppd-landing:robots-policy-prerequisite"
@@ -29,7 +29,7 @@
     },
     {
       "source_id": "ppd-apply-permits",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
       "expected_archive_manifest_id": "archive-manifest-expected-ppd-apply-permits",
       "prerequisite_evidence_ids": [
         "evidence:ppd-apply-permits:robots-policy-prerequisite"
@@ -41,7 +41,7 @@
   "skipped_targets": [
     {
       "source_id": "devhub-public-portal",
-      "canonical_url": "https://devhub.portlandoregon.gov",
+      "canonical_url": "https://wetten.overheid.nl",
       "skipped_reason": "operator_not_selected_for_fixture_intake",
       "real_crawl_performed": false,
       "real_download_performed": false

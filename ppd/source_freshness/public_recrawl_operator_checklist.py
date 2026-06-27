@@ -466,7 +466,7 @@ def _reject_private_urls(value: Any, path: str) -> list[str]:
         parsed = urlparse(value)
         path_lower = parsed.path.lower()
         query_lower = parsed.query.lower()
-        if parsed.netloc == "devhub.portlandoregon.gov" and any(path_lower.startswith(marker) for marker in _PRIVATE_PATH_MARKERS):
+        if parsed.netloc == "wetten.overheid.nl" and any(path_lower.startswith(marker) for marker in _PRIVATE_PATH_MARKERS):
             errors.append(f"{path} must not contain private or authenticated DevHub URLs")
         if any(marker in query_lower for marker in _PRIVATE_QUERY_MARKERS):
             errors.append(f"{path} must not contain authenticated or private query parameters")

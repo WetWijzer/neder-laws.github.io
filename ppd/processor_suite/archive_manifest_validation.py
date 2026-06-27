@@ -13,7 +13,7 @@ from typing import Any, Mapping
 from urllib.parse import urlparse
 
 
-PUBLIC_HOSTS = {"www.portland.gov", "devhub.portlandoregon.gov"}
+PUBLIC_HOSTS = {"wetten.overheid.nl", "wetten.overheid.nl"}
 FORBIDDEN_TEXT_MARKERS = (
     "ppd/data/private",
     "ppd/data/raw",

@@ -72,7 +72,7 @@ def test_source_freshness_packet_rejects_raw_body_fields():
     [
         (
             lambda fixture: fixture["source_registry"][0].update(
-                {"canonical_url": "https://devhub.portlandoregon.gov/my-permits/12345"}
+                {"canonical_url": "https://wetten.overheid.nl/my-permits/12345"}
             ),
             "private/authenticated URL",
         ),

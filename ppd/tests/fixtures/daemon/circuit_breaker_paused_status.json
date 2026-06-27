@@ -33,7 +33,7 @@
     ],
     "forbidden_write_prefixes": [
       "src/lib/logic/",
-      "public/corpus/portland-or/current/",
+      "public/corpus/wetwijzer-or/current/",
       "ipfs_datasets_py/.daemon/",
       "ppd/data/private/",
       "ppd/data/raw/",

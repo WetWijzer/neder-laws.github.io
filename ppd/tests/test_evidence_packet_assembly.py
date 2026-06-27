@@ -50,9 +50,9 @@ def test_fixture_first_agent_evidence_packet_is_complete_and_sanitized():
     assert packet["source_registry"] == [
         {
             "source_id": "src-devhub-guide-submit-application",
-            "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+            "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
             "source_type": "devhub_public",
-            "owning_surface": "Portland PP&D",
+            "owning_surface": "WetWijzer legal sources",
             "allowlist_policy": "allowed_official_public_source",
             "robots_policy": "respect_robots_before_live_fetch",
             "privacy_classification": "public",

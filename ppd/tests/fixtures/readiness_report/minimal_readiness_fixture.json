@@ -3,7 +3,7 @@
   "sources": [
     {
       "source_id": "src-ppd-apply-permits",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
       "source_type": "public_html",
       "owning_surface": "ppd_public_site",
       "allowlist_policy": "allowlisted",
@@ -16,7 +16,7 @@
     },
     {
       "source_id": "src-ppd-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "source_type": "public_html",
       "owning_surface": "ppd_public_site",
       "allowlist_policy": "allowlisted",
@@ -32,8 +32,8 @@
     {
       "manifest_id": "manifest-apply-permits",
       "source_id": "src-ppd-apply-permits",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/apply-permits",
-      "requested_url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
+      "requested_url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
       "redirect_chain": [],
       "http_status": 200,
       "content_type": "text/html",
@@ -50,8 +50,8 @@
     {
       "manifest_id": "manifest-submit-plans-online",
       "source_id": "src-ppd-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
-      "requested_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
+      "requested_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "redirect_chain": [],
       "http_status": 200,
       "content_type": "text/html",

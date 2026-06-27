@@ -6,7 +6,7 @@
       "surface_id": "devhub-home",
       "observation_order": 10,
       "auth_scope": "authenticated_attended",
-      "url_pattern": "https://devhub.portlandoregon.gov/home",
+      "url_pattern": "https://wetten.overheid.nl/home",
       "page_heading": "DevHub Home",
       "accessible_landmarks": [
         "main",
@@ -36,7 +36,7 @@
       "surface_id": "my-permits-and-requests",
       "observation_order": 20,
       "auth_scope": "authenticated_attended",
-      "url_pattern": "https://devhub.portlandoregon.gov/permits*",
+      "url_pattern": "https://wetten.overheid.nl/permits*",
       "page_heading": "My Permits & Requests",
       "accessible_landmarks": [
         "main",
@@ -67,7 +67,7 @@
       "surface_id": "fee-notice-review",
       "observation_order": 30,
       "auth_scope": "authenticated_attended",
-      "url_pattern": "https://devhub.portlandoregon.gov/fees*",
+      "url_pattern": "https://wetten.overheid.nl/fees*",
       "page_heading": "Fee Notice Review",
       "accessible_landmarks": [
         "main",

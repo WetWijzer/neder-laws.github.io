@@ -21,8 +21,8 @@
 +  "sourceEvidence": [
 +    {
 +      "sourceEvidenceId": "ev-devhub-application-guidance",
-+      "sourceUrl": "https://www.portland.gov/ppd/devhub/apply-permit",
-+      "sourceTitle": "Apply for a permit in Development Hub PDX",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/apply-permit",
++      "sourceTitle": "Apply for a permit in Development Hub Netherlands",
 +      "capturedAt": "2026-05-01T00:00:00Z",
 +      "publicOnly": true,
 +      "supports": [
@@ -32,7 +32,7 @@
 +    },
 +    {
 +      "sourceEvidenceId": "ev-single-pdf-process-guidance",
-+      "sourceUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +      "sourceTitle": "Single PDF Process guidance",
 +      "capturedAt": "2026-05-01T00:00:00Z",
 +      "publicOnly": true,
@@ -43,8 +43,8 @@
 +    },
 +    {
 +      "sourceEvidenceId": "ev-devhub-faq-payment-submit",
-+      "sourceUrl": "https://www.portland.gov/ppd/devhub/help",
-+      "sourceTitle": "Development Hub PDX help and FAQ",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/help",
++      "sourceTitle": "Development Hub Netherlands help and FAQ",
 +      "capturedAt": "2026-05-01T00:00:00Z",
 +      "publicOnly": true,
 +      "supports": [
@@ -218,7 +218,7 @@
 +        self.assertEqual(referenced_ids, self.evidence_ids)
 +        for evidence in self.fixture["sourceEvidence"]:
 +            self.assertTrue(evidence["publicOnly"])
-+            self.assertTrue(evidence["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
++            self.assertTrue(evidence["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
 +            self.assertTrue(evidence["capturedAt"].endswith("Z"))
 +            self.assertGreater(len(evidence["supports"]), 0)
 +

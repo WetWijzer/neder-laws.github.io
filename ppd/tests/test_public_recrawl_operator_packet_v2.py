@@ -45,7 +45,7 @@ class PublicRecrawlOperatorPacketV2Test(unittest.TestCase):
 
     def test_rejects_direct_authenticated_urls_even_on_allowlisted_hosts(self) -> None:
         packet = _load_fixture("safe_packet.json")
-        packet["seed_batches"][0]["seeds"][0]["url"] = "https://www.portland.gov/account?session=abc"
+        packet["seed_batches"][0]["seeds"][0]["url"] = "https://wetten.overheid.nl/account?session=abc"
 
         codes = issue_codes(validate_public_recrawl_operator_packet_v2(packet))
 

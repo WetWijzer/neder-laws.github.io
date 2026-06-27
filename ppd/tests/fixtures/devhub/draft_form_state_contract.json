@@ -14,7 +14,7 @@
     {
       "pageId": "devhub-draft-project-info",
       "stateKind": "devhub_draft_page",
-      "url": "https://devhub.portlandoregon.gov/",
+      "url": "https://wetten.overheid.nl/",
       "heading": "Project Information",
       "valuePolicy": "redacted_values_only",
       "availableActions": [
@@ -83,7 +83,7 @@
     {
       "pageId": "devhub-draft-contact-info",
       "stateKind": "devhub_draft_page",
-      "url": "https://devhub.portlandoregon.gov/",
+      "url": "https://wetten.overheid.nl/",
       "heading": "Applicant Contact",
       "valuePolicy": "redacted_values_only",
       "availableActions": [

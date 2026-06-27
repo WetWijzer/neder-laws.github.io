@@ -5,7 +5,7 @@
   "source_hash_changes": [
     {
       "source_id": "src-ppd-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "previous_source_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
       "current_source_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
       "change_reason": "fixture metadata indicates changed upload guidance hash",
@@ -14,7 +14,7 @@
     },
     {
       "source_id": "src-ppd-devhub-faqs",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "previous_source_hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
       "current_source_hash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
       "change_reason": "fixture metadata indicates changed DevHub action guidance hash",

@@ -23,9 +23,9 @@
       "reviewer_routing": {"primary_reviewer": "ppd-forms-and-fees-reviewer", "escalation_reviewer": "ppd-release-owner"}
     },
     {
-      "check_id": "forms-index-and-portland-maps-follow-up",
-      "coverage_categories": ["forms_index", "linked_portland_maps_references"],
-      "source_evidence_ids": ["src-permit-applications-forms-index", "src-linked-portland-maps-public-reference"],
+      "check_id": "forms-index-and-wetwijzer-maps-follow-up",
+      "coverage_categories": ["forms_index", "linked_bwb_metadata_references"],
+      "source_evidence_ids": ["src-permit-applications-forms-index", "src-linked-wetwijzer-maps-public-reference"],
       "hold_thresholds": {"missing_required_source_count": 1, "missing_linked_reference_count": 1, "stale_fixture_age_days": 7},
       "reviewer_routing": {"primary_reviewer": "ppd-source-linkage-reviewer", "escalation_reviewer": "ppd-release-owner"}
     }
@@ -37,8 +37,8 @@
     {"source_evidence_id": "src-submit-plans-online", "check_id": "file-preparation-and-fee-guidance-follow-up", "outcome": "pass", "stale_source_reasons": [], "reviewer_routing": {"primary_reviewer": "ppd-forms-and-fees-reviewer", "route_reason": "synthetic submit-plans guidance metadata remains within hold thresholds"}, "dependency_refs": ["fixture-post-candidate-public-refresh-monitoring-plan-v1", "src-submit-plans-online"]},
     {"source_evidence_id": "src-spp-file-naming-standards", "check_id": "file-preparation-and-fee-guidance-follow-up", "outcome": "hold", "stale_source_reasons": ["fixture_age_exceeds_threshold"], "reviewer_routing": {"primary_reviewer": "ppd-forms-and-fees-reviewer", "escalation_reviewer": "ppd-release-owner"}, "dependency_refs": ["fixture-post-candidate-public-refresh-monitoring-plan-v1", "src-spp-file-naming-standards"]},
     {"source_evidence_id": "src-fee-payment-guide", "check_id": "file-preparation-and-fee-guidance-follow-up", "outcome": "pass", "stale_source_reasons": [], "reviewer_routing": {"primary_reviewer": "ppd-forms-and-fees-reviewer", "route_reason": "synthetic fee-payment guidance metadata remains within hold thresholds"}, "dependency_refs": ["fixture-post-candidate-public-refresh-monitoring-plan-v1", "src-fee-payment-guide"]},
-    {"source_evidence_id": "src-permit-applications-forms-index", "check_id": "forms-index-and-portland-maps-follow-up", "outcome": "pass", "stale_source_reasons": [], "reviewer_routing": {"primary_reviewer": "ppd-source-linkage-reviewer", "route_reason": "synthetic forms-index metadata remains within hold thresholds"}, "dependency_refs": ["fixture-post-candidate-public-refresh-monitoring-plan-v1", "src-permit-applications-forms-index"]},
-    {"source_evidence_id": "src-linked-portland-maps-public-reference", "check_id": "forms-index-and-portland-maps-follow-up", "outcome": "reject", "stale_source_reasons": ["linked_reference_gap"], "reviewer_routing": {"primary_reviewer": "ppd-source-linkage-reviewer", "escalation_reviewer": "ppd-release-owner"}, "dependency_refs": ["fixture-post-candidate-public-refresh-monitoring-plan-v1", "src-linked-portland-maps-public-reference"]}
+    {"source_evidence_id": "src-permit-applications-forms-index", "check_id": "forms-index-and-wetwijzer-maps-follow-up", "outcome": "pass", "stale_source_reasons": [], "reviewer_routing": {"primary_reviewer": "ppd-source-linkage-reviewer", "route_reason": "synthetic forms-index metadata remains within hold thresholds"}, "dependency_refs": ["fixture-post-candidate-public-refresh-monitoring-plan-v1", "src-permit-applications-forms-index"]},
+    {"source_evidence_id": "src-linked-wetwijzer-maps-public-reference", "check_id": "forms-index-and-wetwijzer-maps-follow-up", "outcome": "reject", "stale_source_reasons": ["linked_reference_gap"], "reviewer_routing": {"primary_reviewer": "ppd-source-linkage-reviewer", "escalation_reviewer": "ppd-release-owner"}, "dependency_refs": ["fixture-post-candidate-public-refresh-monitoring-plan-v1", "src-linked-wetwijzer-maps-public-reference"]}
   ],
   "dependency_refs": ["ppd.post_candidate_public_refresh_monitoring_plan.v1", "fixture-post-candidate-public-refresh-monitoring-plan-v1", "ppd/tests/fixtures/post_candidate_public_refresh_monitoring_plan_v1/valid_packet.json"],
   "reviewer_routing": {"primary_reviewer": "ppd-monitoring-outcome-reviewer", "escalation_reviewer": "ppd-release-owner"},

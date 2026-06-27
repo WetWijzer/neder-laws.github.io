@@ -8,11 +8,11 @@ from ppd.validation.public_recrawl_evidence_v2 import validate_public_recrawl_dr
 def valid_envelope() -> dict:
     return {
         "schema_version": "public-recrawl-dry-run-evidence-v2",
-        "url_allowlist": ["https://www.portland.gov"],
+        "url_allowlist": ["https://wetten.overheid.nl"],
         "citations": [
             {
                 "id": "c1",
-                "url": "https://www.portland.gov/bds/permits",
+                "url": "https://wetten.overheid.nl/bds/permits",
                 "title": "Permits",
             }
         ],
@@ -58,7 +58,7 @@ def test_rejects_non_allowlisted_and_authenticated_urls() -> None:
     envelope = valid_envelope()
     envelope["citations"] = [
         {"id": "c1", "url": "https://user:secret@example.com/private"},
-        {"id": "c2", "url": "https://www.portland.gov/bds?token=secret"},
+        {"id": "c2", "url": "https://wetten.overheid.nl/bds?token=secret"},
     ]
     envelope["observations"][0]["citation_ids"] = ["c1"]
     result = validate_public_recrawl_dry_run_evidence_v2(envelope)

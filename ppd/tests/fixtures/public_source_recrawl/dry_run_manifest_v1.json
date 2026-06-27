@@ -9,21 +9,21 @@
   "candidate_sources": [
     {
       "source_id": "ppd-landing-page",
-      "canonical_url": "https://www.portland.gov/ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
       "allow_reason": "ALLOW_OFFICIAL_PUBLIC_PPD_ANCHOR",
       "robots_decision_placeholder": "REVIEWER_TO_CONFIRM_BEFORE_EXECUTION",
       "policy_decision_placeholder": "REVIEWER_TO_CONFIRM_METADATA_ONLY_CAPTURE"
     },
     {
       "source_id": "ppd-online-permitting-tools",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "allow_reason": "ALLOW_OFFICIAL_PUBLIC_PPD_GUIDE",
       "robots_decision_placeholder": "REVIEWER_TO_CONFIRM_BEFORE_EXECUTION",
       "policy_decision_placeholder": "REVIEWER_TO_CONFIRM_METADATA_ONLY_CAPTURE"
     },
     {
-      "source_id": "portlandmaps-linked-reference",
-      "canonical_url": "https://www.portlandmaps.com",
+      "source_id": "wetwijzermaps-linked-reference",
+      "canonical_url": "https://repository.overheid.nl",
       "skip_reason": "SKIP_EXTERNAL_REFERENCE_REQUIRES_SEPARATE_POLICY_REVIEW",
       "robots_decision_placeholder": "REVIEWER_TO_CONFIRM_BEFORE_EXECUTION",
       "policy_decision_placeholder": "REVIEWER_TO_CONFIRM_SKIP_OR_DEFER"

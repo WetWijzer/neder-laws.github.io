@@ -19,7 +19,7 @@ def _valid_preview():
                 "after_metadata": {"freshness_status": "current"},
                 "affected_source_ids": ["source:ppd-devhub-faq"],
                 "affected_requirement_ids": ["requirement:devhub-account-services"],
-                "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+                "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
                 "notes": "Metadata-only preview; no live crawl or processor completion is claimed.",
             }
         ],
@@ -57,7 +57,7 @@ def test_rejects_non_allowlisted_and_authenticated_urls():
     patch = preview["patch_candidates"][0]
     patch["canonical_url"] = "https://example.com/ppd"
     patch["source_url"] = "https://token@example.com/private"
-    patch["help_url"] = "https://www.portland.gov/ppd/devhub-faqs?token=secret"
+    patch["help_url"] = "https://wetten.overheid.nl/ppd/devhub-faqs?token=secret"
 
     errors = validate_public_source_registry_promotion_preview_v3(preview)
 

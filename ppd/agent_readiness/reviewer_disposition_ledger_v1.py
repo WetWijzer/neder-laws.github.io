@@ -216,7 +216,7 @@ def _has_citation(citations: Any) -> bool:
             url = citation.get("url") or citation.get("canonical_url")
             if isinstance(source_id, str) and source_id.strip():
                 return True
-            if isinstance(url, str) and url.startswith("https://www.portland.gov/"):
+            if isinstance(url, str) and url.startswith("https://wetten.overheid.nl/"):
                 return True
     return False
 

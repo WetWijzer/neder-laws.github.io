@@ -182,7 +182,7 @@ export const expandFormulaTree = (
   }
 
   const diagnostics = completed.flatMap((branch) => branch.diagnostics);
-  return { strategy, branches: completed, diagnostics, appliedRuleIds };
+  return { strategy, branches: completed, diagnostics, appliedRuleIds: [...new Set(appliedRuleIds)] };
 };
 
 export const renderInteractiveExpansion = (

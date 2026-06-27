@@ -166,8 +166,8 @@
 +
 +    document = NormalizedDocument(
 +        id="fixture-doc",
-+        source_url="https://www.portland.gov/ppd/example",
-+        canonical_url="https://www.portland.gov/ppd/example",
++        source_url="https://wetten.overheid.nl/ppd/example",
++        canonical_url="https://wetten.overheid.nl/ppd/example",
 +        content_type=PpdContentType.HTML,
 +        title="Fixture Document",
 +        fetched_at="2026-05-01T00:00:00Z",
@@ -175,7 +175,7 @@
 +        text="Public PP&D fixture text.",
 +        document_role=PpdDocumentRole.GUIDANCE,
 +        normalized_at="2026-05-01T00:00:00Z",
-+        source_family="portland_gov_ppd",
++        source_family="wetwijzer_gov_ppd",
 +    )
 +    document_errors = document.validate()
 +    if document_errors:

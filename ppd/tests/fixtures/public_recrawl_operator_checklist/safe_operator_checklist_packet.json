@@ -7,13 +7,13 @@
   "targets": [
     {
       "source_id": "ppd:public:devhub_faq",
-      "url": "https://www.portland.gov/ppd/devhub-faqs",
+      "url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "robots_evidence": "fixture robots policy allowed",
       "policy_evidence": "fixture crawl policy approved"
     },
     {
       "source_id": "ppd:public:online_tools",
-      "url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "robots_evidence": "fixture robots policy allowed",
       "policy_evidence": "fixture crawl policy approved"
     }

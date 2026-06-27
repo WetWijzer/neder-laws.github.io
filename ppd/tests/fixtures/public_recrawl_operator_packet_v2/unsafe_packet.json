@@ -10,7 +10,7 @@
           "url": "https://example.com/outside"
         },
         {
-          "url": "https://devhub.portlandoregon.gov/permits/123?token=secret",
+          "url": "https://wetten.overheid.nl/permits/123?token=secret",
           "source_evidence_ids": [
             "fixture-evidence"
           ],

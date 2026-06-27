@@ -20,7 +20,7 @@
       "id": "devhub-boundary",
       "subject": "DevHub and official action boundary",
       "status": "passed",
-      "citations": ["docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md"],
+      "citations": ["docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md"],
       "rationale": "Fixture replay does not authenticate to DevHub or submit official actions."
     }
   ]

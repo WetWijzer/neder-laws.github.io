@@ -24,10 +24,10 @@
 -PUBLIC_SOURCE_INVENTORY_VALIDATOR_READY = False
 -
 -ALLOWED_PUBLIC_HOSTS = {
--    "www.portland.gov": "Portland.gov public PP&D guidance",
--    "devhub.portlandoregon.gov": "DevHub public portal and guide pages",
--    "www.portlandoregon.gov": "PortlandOregon.gov account guidance",
--    "www.portlandmaps.com": "Portland Maps public permit and case references",
+-    "wetten.overheid.nl": "wetten.overheid.nl public PP&D guidance",
+-    "wetten.overheid.nl": "DevHub public portal and guide pages",
+-    "wetten.overheid.nl": "wetten.overheid.nl account guidance",
+-    "repository.overheid.nl": "BWB metadata public permit and case references",
 -}
 -
 -PRIVATE_DEVHUB_PATH_PREFIXES = (
@@ -239,7 +239,7 @@
 -        parsed = urlparse(url)
 -        if parsed.scheme != "https" or parsed.netloc not in ALLOWED_PUBLIC_HOSTS:
 -            return "non_allowlisted_host", field
--        if parsed.netloc == "devhub.portlandoregon.gov" and _is_private_devhub_path(parsed.path):
+-        if parsed.netloc == "wetten.overheid.nl" and _is_private_devhub_path(parsed.path):
 -            return "private_devhub_path", field
 -    if not any(field in entry for field in ("canonicalUrl", "sourceUrl", "url")):
 -        return "non_allowlisted_host", "canonicalUrl"

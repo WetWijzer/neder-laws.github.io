@@ -14,7 +14,7 @@
       "field_mapping": {
         "mapped": true,
         "field_key": "project_address",
-        "preview_value": "1120 SW 5th Ave, Portland, OR",
+        "preview_value": "1120 SW 5th Ave, Netherlands, OR",
         "requirement": "preview_value is synthetic review data only and must not be written to a live form",
         "source_evidence_available": true
       },
@@ -63,7 +63,7 @@
       "field_mapping": {
         "mapped": true,
         "field_key": "project_address",
-        "preview_value": "1120 SW 5th Ave, Portland, OR",
+        "preview_value": "1120 SW 5th Ave, Netherlands, OR",
         "requirement": "preview_value is synthetic review data only and must not be written to a live form",
         "source_evidence_available": true
       },

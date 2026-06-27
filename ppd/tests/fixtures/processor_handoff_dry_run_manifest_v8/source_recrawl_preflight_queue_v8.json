@@ -4,12 +4,12 @@
   "source_registry_references": [
     {
       "source_id": "ppd-landing-page",
-      "canonical_url": "https://www.portland.gov/ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
       "registry_status": "referenced_before_recrawl"
     },
     {
       "source_id": "ppd-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "registry_status": "referenced_before_recrawl"
     }
   ],
@@ -17,39 +17,39 @@
     {
       "order": 1,
       "source_id": "ppd-landing-page",
-      "url": "https://www.portland.gov/ppd",
+      "url": "https://wetten.overheid.nl/ppd",
       "source_type": "public_html"
     },
     {
       "order": 2,
       "source_id": "ppd-submit-plans-online",
-      "url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "source_type": "public_html"
     }
   ],
   "canonical_url_checks": [
     {
       "source_id": "ppd-landing-page",
-      "input_url": "https://www.portland.gov/ppd",
-      "canonical_url": "https://www.portland.gov/ppd",
+      "input_url": "https://wetten.overheid.nl/ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
       "status": "placeholder_pending_preflight_resolution"
     },
     {
       "source_id": "ppd-submit-plans-online",
-      "input_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "input_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "status": "placeholder_pending_preflight_resolution"
     }
   ],
   "allowlist_decisions": [
     {
       "source_id": "ppd-landing-page",
-      "host": "www.portland.gov",
+      "host": "wetten.overheid.nl",
       "decision": "allowlisted_public_official_source"
     },
     {
       "source_id": "ppd-submit-plans-online",
-      "host": "www.portland.gov",
+      "host": "wetten.overheid.nl",
       "decision": "allowlisted_public_official_source"
     }
   ],
@@ -68,7 +68,7 @@
   "skipped_url_reason_rows": [
     {
       "reason_code": "disallowed_by_robots_or_policy",
-      "example_url": "https://www.portland.gov/ppd/private-policy-placeholder"
+      "example_url": "https://wetten.overheid.nl/ppd/private-policy-placeholder"
     },
     {
       "reason_code": "outside_allowlist",
@@ -76,19 +76,19 @@
     },
     {
       "reason_code": "private_authenticated",
-      "example_url": "https://devhub.portlandoregon.gov/private-placeholder"
+      "example_url": "https://wetten.overheid.nl/private-placeholder"
     },
     {
       "reason_code": "raw_download_not_permitted",
-      "example_url": "https://www.portland.gov/ppd/documents/raw-download-placeholder"
+      "example_url": "https://wetten.overheid.nl/ppd/documents/raw-download-placeholder"
     },
     {
       "reason_code": "too_large",
-      "example_url": "https://www.portland.gov/ppd/documents/too-large-placeholder"
+      "example_url": "https://wetten.overheid.nl/ppd/documents/too-large-placeholder"
     },
     {
       "reason_code": "unsupported_content_type",
-      "example_url": "https://www.portland.gov/ppd/downloads/archive-placeholder.zip"
+      "example_url": "https://wetten.overheid.nl/ppd/downloads/archive-placeholder.zip"
     },
     {
       "reason_code": "unsupported_scheme",

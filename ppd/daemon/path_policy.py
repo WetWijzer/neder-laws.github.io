@@ -9,12 +9,12 @@ from ipfs_datasets_py.optimizers.todo_daemon.engine import PathPolicy
 
 ALLOWED_WRITE_PREFIXES = (
     "ppd/",
-    "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
+    "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
 )
 
 DISALLOWED_WRITE_PREFIXES = (
     "src/lib/logic/",
-    "public/corpus/portland-or/current/",
+    "public/corpus/wetwijzer-or/current/",
     "ipfs_datasets_py/.daemon/",
     "docs/IPFS_DATASETS_LOGIC_TYPESCRIPT_PORT_PLAN.md",
     "docs/IPFS_DATASETS_LOGIC_PORT_DAEMON_ACCEPTED.md",

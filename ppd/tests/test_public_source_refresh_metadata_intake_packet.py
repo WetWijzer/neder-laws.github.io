@@ -34,14 +34,14 @@ def test_metadata_intake_records_redirect_hash_content_type_and_freshness() -> N
     packet = _build_packet()
 
     summaries = packet['redirect_hash_content_type_summaries']
-    assert summaries[0]['redirect_chain'] == ['https://www.portland.gov/code']
+    assert summaries[0]['redirect_chain'] == ['https://wetten.overheid.nl/code']
     assert summaries[0]['content_hash_status'] == 'present'
     assert summaries[0]['content_type'] == 'text/html; charset=utf-8'
     assert summaries[1]['content_hash_status'] == 'not_captured'
 
     freshness = {row['source_batch_id']: row for row in packet['freshness_signals']}
-    assert freshness['portland-auditor-code-library']['hash_changed'] is True
-    assert freshness['portland-auditor-code-library']['requires_reviewer_review'] is True
+    assert freshness['wetwijzer-auditor-code-library']['hash_changed'] is True
+    assert freshness['wetwijzer-auditor-code-library']['requires_reviewer_review'] is True
     assert freshness['devhub-public-portal']['freshness_status'] == 'skipped_pending_operator_review'
 
 
@@ -54,7 +54,7 @@ def test_metadata_intake_records_skip_reasons_and_attestations() -> None:
         {
             'source_batch_id': 'devhub-public-portal',
             'source_id': 'devhub-public-portal',
-            'canonical_url': 'https://devhub.portlandoregon.gov',
+            'canonical_url': 'https://wetten.overheid.nl',
             'skipped_reason': 'operator_not_selected_for_metadata_only_capture',
             'citation_refs': ['public-source-refresh-launch-rehearsal-transcript-20260529-fixture-first'],
             'reviewer_owner': 'ppd-public-source-refresh-rehearsal-reviewer',
@@ -139,7 +139,7 @@ def test_metadata_intake_rejects_artifacts_execution_guarantees_and_mutation_fla
 
 def test_metadata_intake_rejects_private_or_authenticated_urls() -> None:
     packet = deepcopy(_build_packet())
-    packet['redirect_hash_content_type_summaries'][0]['requested_url'] = 'https://devhub.portlandoregon.gov/login'
+    packet['redirect_hash_content_type_summaries'][0]['requested_url'] = 'https://wetten.overheid.nl/login'
 
     result = validate_public_source_refresh_metadata_intake_packet(packet)
 

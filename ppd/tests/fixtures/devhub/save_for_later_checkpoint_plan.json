@@ -19,15 +19,15 @@
   "source_evidence": [
     {
       "evidence_id": "SRC-DEVHUB-GUIDE-SAVE-LATER-001",
-      "source_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "source_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "source_type": "official_public_guidance",
       "supports_checkpoint": "DevHub permit application guidance describes application entry and save-for-later behavior."
     },
     {
       "evidence_id": "SRC-DEVHUB-TOOLS-OVERVIEW-001",
-      "source_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "source_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "source_type": "official_public_guidance",
-      "supports_checkpoint": "Online permitting guidance identifies DevHub as the City of Portland permitting system and ties account-scoped actions to attended use."
+      "supports_checkpoint": "Online permitting guidance identifies DevHub as the WetWijzer permitting system and ties account-scoped actions to attended use."
     }
   ],
   "manual_attendance": {
@@ -44,7 +44,7 @@
       "mfa_captcha_user_only": true,
       "automation_resumes_after_user_attendance": true,
       "automation_creates_account": false,
-      "handoff_instruction": "Pause for the user to complete PortlandOregon.gov sign-in in the attended browser; resume only after the user confirms the DevHub account-scoped page is visible."
+      "handoff_instruction": "Pause for the user to complete wetten.overheid.nl sign-in in the attended browser; resume only after the user confirms the DevHub account-scoped page is visible."
     }
   },
   "checkpoints": [

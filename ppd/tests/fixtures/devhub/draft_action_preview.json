@@ -58,8 +58,8 @@
   "evidence": [
     {
       "id": "devhub-public-guidance-save-draft",
-      "sourceUrl": "https://www.portland.gov/ppd/devhub",
-      "title": "Development Hub PDX public guidance",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
+      "title": "Development Hub Netherlands public guidance",
       "capturedAt": "2026-05-01T00:00:00Z",
       "summary": "Public guidance distinguishes draft preparation from consequential DevHub actions that require user control."
     }

@@ -1,4 +1,4 @@
-"""Fixture-first coverage gap queue for Portland PP&D requirement extraction.
+"""Fixture-first coverage gap queue for WetWijzer legal sources requirement extraction.
 
 This module is intentionally offline-only: it consumes fixture packets and returns
 review queue items without mutating active requirements or guardrail bundles.

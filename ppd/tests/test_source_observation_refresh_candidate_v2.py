@@ -65,8 +65,8 @@ class SourceObservationRefreshCandidateV2Test(unittest.TestCase):
         packet = self._valid_result()
         packet["candidates"][0]["citations"] = [
             {"packet": "fixture", "source_id": "permit-center-fees", "url": "https://example.com/public"},
-            {"packet": "fixture", "source_id": "permit-center-fees", "url": "https://user:secret@www.portland.gov/ppd"},
-            {"packet": "fixture", "source_id": "permit-center-fees", "url": "https://www.portland.gov/ppd?token=secret"},
+            {"packet": "fixture", "source_id": "permit-center-fees", "url": "https://user:secret@wetten.overheid.nl/ppd"},
+            {"packet": "fixture", "source_id": "permit-center-fees", "url": "https://wetten.overheid.nl/ppd?token=secret"},
         ]
         result = validate_source_observation_refresh_candidate_v2(packet)
         self.assertFalse(result.ok)
@@ -94,7 +94,7 @@ class SourceObservationRefreshCandidateV2Test(unittest.TestCase):
         packet = self._valid_result()
         packet["raw_body"] = "raw"
         packet["candidates"][0]["download_path"] = "/tmp/source.pdf"
-        packet["candidates"][0]["archive_url"] = "https://www.portland.gov/archive"
+        packet["candidates"][0]["archive_url"] = "https://wetten.overheid.nl/archive"
         packet["candidates"][0]["browser_artifacts"] = {"screenshot_path": "/tmp/page.png", "har_path": "/tmp/page.har"}
         result = validate_source_observation_refresh_candidate_v2(packet)
         self.assertFalse(result.ok)

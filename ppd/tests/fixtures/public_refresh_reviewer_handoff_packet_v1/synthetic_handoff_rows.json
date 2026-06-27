@@ -4,7 +4,7 @@
       "synthetic_citation_impact_queue_row": true,
       "row_id": "citation-row-001",
       "source_id": "ppd-source-devhub-faq-public",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "metadata_dry_run_reference_id": "metadata-dry-run-ref-001",
       "manifest_id": "manifest-devhub-faq-public-001",
       "document_id": "document-devhub-faq-public-001",
@@ -34,8 +34,8 @@
       "synthetic_public_refresh_preflight_checklist_row": true,
       "row_id": "preflight-row-001",
       "source_id": "ppd-source-devhub-faq-public",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
-      "official_anchor_citation": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
+      "official_anchor_citation": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "seed_review_references": [
         "PP&D plan official source anchors verified 2026-05-08",
         "public refresh preflight checklist fixture row"

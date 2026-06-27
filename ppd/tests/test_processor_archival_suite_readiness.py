@@ -32,7 +32,7 @@ class ProcessorArchivalSuiteReadinessTest(unittest.TestCase):
 
     def test_public_sources_have_processor_handoff_ids_and_citations(self) -> None:
         for source in self.fixture["publicSources"]:
-            self.assertTrue(source["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
+            self.assertTrue(source["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
             self.assertTrue(source["canonicalDocumentId"].startswith("ppd-public-"))
             self.assertTrue(source["contentHashPlaceholder"].startswith("sha256:[PUBLIC_ARCHIVE_HASH_PLACEHOLDER_"))
             self.assertTrue(source["processorHandoffId"].startswith("processor-handoff-ppd-"))

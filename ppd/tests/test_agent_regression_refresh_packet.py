@@ -37,7 +37,7 @@ class AgentRegressionRefreshPacketTest(unittest.TestCase):
         scenarios = self.packet["offline_user_scenarios"]
         self.assertEqual(len(scenarios), 2)
         for scenario in scenarios:
-            self.assertIn("Portland", scenario["user_scenario"])
+            self.assertIn("Netherlands", scenario["user_scenario"])
             self.assertEqual(len(scenario["cited_offline_evidence"]), 3)
             self.assertEqual(
                 scenario["source_packet_ids"],

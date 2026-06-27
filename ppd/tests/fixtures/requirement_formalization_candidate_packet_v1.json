@@ -43,7 +43,7 @@
             "supporting construction documents"
           ],
           "actor": "applicant",
-          "reviewing_authority": "Portland Permitting & Development"
+          "reviewing_authority": "Netherlands Permitting & Development"
         }
       },
       "citations": [
@@ -198,7 +198,7 @@
         "formalization_fields": {
           "blocked_action": "regulated work",
           "required_gate": "permit_or_authorization_approval",
-          "gate_actor": "Portland Permitting & Development"
+          "gate_actor": "Netherlands Permitting & Development"
         }
       },
       "citations": [

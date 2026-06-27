@@ -47,7 +47,7 @@ def test_acceptance_criteria_are_cited_and_reviewer_ready() -> None:
     assert all(criterion["ready_for_review"] is True for criterion in criteria)
     assert all(criterion["reviewer_owner"] for criterion in criteria)
     assert all(criterion["citation_ids"] for criterion in criteria)
-    assert any("watch-plan-v3:portland-zoning-code" in criterion["citation_ids"] for criterion in criteria)
+    assert any("watch-plan-v3:wetwijzer-zoning-code" in criterion["citation_ids"] for criterion in criteria)
     assert any("guardrail-bundle-fixtures-v1" in criterion["citation_ids"] for criterion in criteria)
     assert any("process-model-fixtures-v1" in criterion["citation_ids"] for criterion in criteria)
 

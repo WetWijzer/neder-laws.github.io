@@ -6,7 +6,7 @@
   "sourceRequirement": {
     "id": "ppd-public-single-pdf-process-requirements",
     "title": "Single PDF Process submittal requirements",
-    "sourceUrl": "https://www.portland.gov/ppd/apply-permit/single-pdf-process",
+    "sourceUrl": "https://wetten.overheid.nl/ppd/apply-permit/single-pdf-process",
     "sourceId": "ppd-guidance-single-pdf-process",
     "anchorId": "single-pdf-process-submittal-requirements"
   },
@@ -18,7 +18,7 @@
         {
           "id": "single-pdf-application-documents",
           "sourceId": "ppd-guidance-single-pdf-process",
-          "sourceUrl": "https://www.portland.gov/ppd/apply-permit/single-pdf-process",
+          "sourceUrl": "https://wetten.overheid.nl/ppd/apply-permit/single-pdf-process",
           "anchorId": "applications-and-supporting-documents",
           "requirementType": "obligation",
           "text": "Applicants must upload the permit application as a separate PDF from drawing plans.",
@@ -29,7 +29,7 @@
         {
           "id": "single-pdf-drawing-plans",
           "sourceId": "ppd-guidance-single-pdf-process",
-          "sourceUrl": "https://www.portland.gov/ppd/apply-permit/single-pdf-process",
+          "sourceUrl": "https://wetten.overheid.nl/ppd/apply-permit/single-pdf-process",
           "anchorId": "drawing-plans",
           "requirementType": "obligation",
           "text": "Applicants must combine drawing plan sheets into one PDF when the Single PDF Process applies.",
@@ -40,7 +40,7 @@
         {
           "id": "single-pdf-paper-copy-checklist",
           "sourceId": "ppd-guidance-single-pdf-process",
-          "sourceUrl": "https://www.portland.gov/ppd/apply-permit/single-pdf-process",
+          "sourceUrl": "https://wetten.overheid.nl/ppd/apply-permit/single-pdf-process",
           "anchorId": "paper-copy-checklist",
           "requirementType": "obligation",
           "text": "Applicants must keep a paper copy checklist with the submitted application packet.",
@@ -57,7 +57,7 @@
         {
           "id": "single-pdf-application-documents",
           "sourceId": "ppd-guidance-single-pdf-process",
-          "sourceUrl": "https://www.portland.gov/ppd/apply-permit/single-pdf-process",
+          "sourceUrl": "https://wetten.overheid.nl/ppd/apply-permit/single-pdf-process",
           "anchorId": "applications-calculations-supporting-documents",
           "requirementType": "obligation",
           "text": "Applicants must upload applications, calculations, and supporting documents as PDFs separate from drawing plans.",
@@ -68,7 +68,7 @@
         {
           "id": "single-pdf-drawing-plans",
           "sourceId": "ppd-guidance-single-pdf-process",
-          "sourceUrl": "https://www.portland.gov/ppd/apply-permit/single-pdf-process",
+          "sourceUrl": "https://wetten.overheid.nl/ppd/apply-permit/single-pdf-process",
           "anchorId": "drawing-plans",
           "requirementType": "obligation",
           "text": "Applicants must combine drawing plan sheets into one PDF when the Single PDF Process applies.",
@@ -79,7 +79,7 @@
         {
           "id": "single-pdf-searchable-plan-pdf",
           "sourceId": "ppd-guidance-single-pdf-process",
-          "sourceUrl": "https://www.portland.gov/ppd/apply-permit/single-pdf-process",
+          "sourceUrl": "https://wetten.overheid.nl/ppd/apply-permit/single-pdf-process",
           "anchorId": "searchable-drawing-plan-pdf",
           "requirementType": "obligation",
           "text": "Applicants must make drawing plan PDFs searchable when submitting through the Single PDF Process.",
@@ -101,7 +101,7 @@
       "citations": [
         {
           "sourceId": "ppd-guidance-single-pdf-process",
-          "sourceUrl": "https://www.portland.gov/ppd/apply-permit/single-pdf-process",
+          "sourceUrl": "https://wetten.overheid.nl/ppd/apply-permit/single-pdf-process",
           "anchorId": "searchable-drawing-plan-pdf",
           "snapshotId": "single-pdf-process-after-synthetic-v2",
           "evidenceText": "Drawing plans must be one searchable PDF.",
@@ -119,7 +119,7 @@
       "citations": [
         {
           "sourceId": "ppd-guidance-single-pdf-process",
-          "sourceUrl": "https://www.portland.gov/ppd/apply-permit/single-pdf-process",
+          "sourceUrl": "https://wetten.overheid.nl/ppd/apply-permit/single-pdf-process",
           "anchorId": "paper-copy-checklist",
           "snapshotId": "single-pdf-process-before-synthetic-v1",
           "evidenceText": "Keep a paper copy checklist with the application packet.",
@@ -143,7 +143,7 @@
       "citations": [
         {
           "sourceId": "ppd-guidance-single-pdf-process",
-          "sourceUrl": "https://www.portland.gov/ppd/apply-permit/single-pdf-process",
+          "sourceUrl": "https://wetten.overheid.nl/ppd/apply-permit/single-pdf-process",
           "anchorId": "applications-and-supporting-documents",
           "snapshotId": "single-pdf-process-before-synthetic-v1",
           "evidenceText": "Upload the permit application separately from the drawing plan PDF.",
@@ -151,7 +151,7 @@
         },
         {
           "sourceId": "ppd-guidance-single-pdf-process",
-          "sourceUrl": "https://www.portland.gov/ppd/apply-permit/single-pdf-process",
+          "sourceUrl": "https://wetten.overheid.nl/ppd/apply-permit/single-pdf-process",
           "anchorId": "applications-calculations-supporting-documents",
           "snapshotId": "single-pdf-process-after-synthetic-v2",
           "evidenceText": "Applications, calculations, and supporting documents are separate PDFs from drawing plans.",

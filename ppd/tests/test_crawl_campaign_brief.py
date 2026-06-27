@@ -5,7 +5,7 @@ from pathlib import Path
 from ppd.crawler.crawl_campaign_brief import campaign_batch_summary, load_campaign_brief, validate_campaign_brief
 
 
-FIXTURE_PATH = Path(__file__).resolve().parents[1] / "crawl_campaigns" / "portland_ppd_campaign_brief.json"
+FIXTURE_PATH = Path(__file__).resolve().parents[1] / "crawl_campaigns" / "wetwijzer_ppd_campaign_brief.json"
 
 
 def test_campaign_brief_fixture_validates_without_network_access() -> None:
@@ -34,7 +34,7 @@ def test_campaign_brief_summary_is_deterministic() -> None:
 
 def test_campaign_brief_rejects_private_or_consequential_paths() -> None:
     brief = load_campaign_brief(FIXTURE_PATH)
-    brief["permit_family_batches"][0]["public_html_seeds"].append("https://devhub.portlandoregon.gov/login")
+    brief["permit_family_batches"][0]["public_html_seeds"].append("https://wetten.overheid.nl/login")
 
     errors = validate_campaign_brief(brief)
 

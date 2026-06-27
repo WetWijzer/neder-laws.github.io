@@ -14,7 +14,7 @@
   "sourceEvidence": [
     {
       "sourceEvidenceId": "src-ppd-public-permit-guidance",
-      "sourceUrl": "https://www.portland.gov/ppd/permits",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/permits",
       "canonicalDocumentId": "doc-ppd-building-permit-public-guidance",
       "capturedAt": "2026-05-01T00:00:00Z",
       "stale": false,
@@ -25,7 +25,7 @@
     },
     {
       "sourceEvidenceId": "src-ppd-public-checklist",
-      "sourceUrl": "https://www.portland.gov/ppd/building-permit-forms",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/building-permit-forms",
       "canonicalDocumentId": "doc-ppd-public-checklist-placeholder",
       "capturedAt": "2026-04-01T00:00:00Z",
       "stale": true,

@@ -4,7 +4,7 @@
   "changed_sources": [
     {
       "source_id": "ppd-devhub-application-guide",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "freshness_status": "changed",
       "change_kinds": [
         "changed_devhub_action_guidance"
@@ -12,7 +12,7 @@
     },
     {
       "source_id": "ppd-spp-file-naming-standards",
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "freshness_status": "changed",
       "change_kinds": [
         "changed_required_document",

@@ -31,15 +31,15 @@ class PpdArchiveAdapterContractTests(unittest.TestCase):
             self.assertTrue(record.processor.name)
             self.assertTrue(record.processor.version)
             self.assertTrue(record.content_hash.startswith("sha256:"))
-            self.assertTrue(record.source_url.startswith("https://www.portland.gov/ppd/"))
+            self.assertTrue(record.source_url.startswith("https://wetten.overheid.nl/ppd/"))
             self.assertEqual(ArchivePolicyDecision.ALLOW, record.policy_decision.decision)
             self.assertTrue(record.should_invoke_processor())
 
     def test_policy_refusal_prevents_processor_invocation(self) -> None:
         record = PpdArchiveAdapterRecord(
             id="private-devhub-refusal",
-            source_url="https://devhub.portlandoregon.gov/private/my-permits",
-            canonical_url="https://devhub.portlandoregon.gov/private/my-permits",
+            source_url="https://wetten.overheid.nl/private/my-permits",
+            canonical_url="https://wetten.overheid.nl/private/my-permits",
             content_hash="sha256:3333333333333333333333333333333333333333333333333333333333333333",
             created_at="2026-05-01T19:00:00Z",
             processor=ArchiveProcessorIdentity(
@@ -60,8 +60,8 @@ class PpdArchiveAdapterContractTests(unittest.TestCase):
     def test_raw_body_persistence_and_wrong_backend_are_invalid(self) -> None:
         record = PpdArchiveAdapterRecord(
             id="bad-backend",
-            source_url="https://www.portland.gov/ppd/example",
-            canonical_url="https://www.portland.gov/ppd/example",
+            source_url="https://wetten.overheid.nl/ppd/example",
+            canonical_url="https://wetten.overheid.nl/ppd/example",
             content_hash="sha256:4444444444444444444444444444444444444444444444444444444444444444",
             created_at="2026-05-01T19:00:00Z",
             manifest_only=False,

@@ -22,7 +22,7 @@ def _valid_packet() -> dict[str, object]:
             {
                 'candidate_id': 'normalized-extraction-readiness::ppd-devhub-faq',
                 'source_id': 'ppd-devhub-faq',
-                'canonical_url': 'https://www.portland.gov/ppd/devhub-faqs',
+                'canonical_url': 'https://wetten.overheid.nl/ppd/devhub-faqs',
                 'inactive_archive_patch_preview_ref': 'inactive-archive-preview::ppd-devhub-faq',
                 'citation_impact_queue_ref': 'citation-impact-queue::ppd-devhub-faq',
                 'normalized_document_id_placeholder': 'pending-normalized-document-ppd-devhub-faq',

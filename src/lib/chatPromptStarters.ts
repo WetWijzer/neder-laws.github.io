@@ -1,13 +1,13 @@
-import type { CorpusEntity, CorpusRelationship, CorpusSection } from './portlandCorpus';
-import type { LogicProofSummary } from './portlandLogic';
+import type { CorpusEntity, CorpusRelationship, CorpusSection } from './netherlandsCorpus';
+import type { LogicProofSummary } from './netherlandsLogic';
 
 export const DEFAULT_CHAT_PROMPTS = [
-  'What does this section require?',
-  'Who is affected by this section?',
+  'What does this article require?',
+  'Who is affected by this article?',
   'What evidence supports this answer?',
   'What exceptions or conditions matter here?',
-  'How does this section connect to related code provisions?',
-  'What logic rule or theorem best describes this section?',
+  'How does this article connect to related legal provisions?',
+  'What logic rule or theorem best describes this article?',
 ];
 
 export function buildChatPromptStarters(
@@ -48,14 +48,14 @@ export function buildChatPromptStarters(
     addPrompt(`How does ${sectionLabel} treat ${entityPromptLabel(obligationEntity)}?`);
   }
 
-  topEntities.forEach((entity) => {
-    addPrompt(`How is ${sectionLabel} connected to ${entityPromptLabel(entity)} in the knowledge graph?`);
-  });
-
   topRelationships.forEach((relationship) => {
     addPrompt(
       `What evidence shows how ${formatGraphNodeLabel(relationship.source)} ${formatGraphTypeLabel(relationship.type).toLowerCase()} ${formatGraphNodeLabel(relationship.target)}?`,
     );
+  });
+
+  topEntities.forEach((entity) => {
+    addPrompt(`How is ${sectionLabel} connected to ${entityPromptLabel(entity)} in the knowledge graph?`);
   });
 
   if (proof) {
@@ -64,7 +64,7 @@ export function buildChatPromptStarters(
     addPrompt(`What ${normLabel} does the theorem for ${sectionLabel} formalize?`);
     addPrompt(`Explain the ${operatorLabel}-based theorem for ${sectionLabel} in plain language.`);
     if (proof.deontic_temporal_fol) {
-      addPrompt(`How does the temporal theorem for ${sectionLabel} map back to the code text?`);
+      addPrompt(`How does the temporal theorem for ${sectionLabel} map back to the legal text?`);
     }
     if (proof.deontic_cognitive_event_calculus) {
       addPrompt(`What event sequence or enforcement logic is captured for ${sectionLabel}?`);
@@ -74,10 +74,10 @@ export function buildChatPromptStarters(
     }
   }
 
-  addPrompt(`Which related sections should I compare with ${sectionLabel}?`);
+  addPrompt(`Which related articles should I compare with ${sectionLabel}?`);
   addPrompt(`What facts from the knowledge graph would help interpret ${sectionLabel}?`);
 
-  return prompts.slice(0, 14);
+  return prompts.slice(0, 22);
 }
 
 function entityPromptLabel(entity: CorpusEntity) {
@@ -94,15 +94,19 @@ function formatGraphTypeLabel(type: string) {
 }
 
 function formatGraphNodeLabel(nodeId: string) {
-  if (nodeId.startsWith('bafk')) return 'This section';
+  if (nodeId.startsWith('bafk')) return 'This article';
   const [prefix, value] = nodeId.split(':');
   if (!value) return nodeId;
-  if (prefix === 'portland_code_title') return `Title ${value}`;
-  if (prefix === 'portland_code_chapter') return `Chapter ${value}`;
-  if (prefix === 'portland_code_section') return `Section ${value.replace(/_/g, '.')}`;
-  if (prefix === 'municipal_actor') return formatGraphValueLabel(value);
-  if (prefix === 'municipal_subject') return formatGraphValueLabel(value);
-  if (prefix === 'ordinance') return `Ordinance ${value}`;
+  if (prefix === 'netherlands_law') return formatGraphValueLabel(value);
+  if (prefix === 'netherlands_law_title') return formatGraphValueLabel(value);
+  if (prefix === 'netherlands_law_chapter') return formatGraphValueLabel(value);
+  if (prefix === 'netherlands_law_section') return `Article ${value.replace(/_/g, '.')}`;
+  if (prefix === 'netherlands_article') return `Article ${value.replace(/_/g, '.')}`;
+  if (prefix === 'netherlands_status') return `Status ${value}`;
+  if (prefix === 'netherlands_source') return formatGraphValueLabel(value);
+  if (prefix === 'legal_actor') return formatGraphValueLabel(value);
+  if (prefix === 'legal_subject') return formatGraphValueLabel(value);
+  if (prefix === 'legal_instrument') return `Instrument ${value}`;
   if (prefix === 'jurisdiction') return value;
   return formatGraphValueLabel(value);
 }

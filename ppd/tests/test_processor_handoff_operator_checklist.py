@@ -35,7 +35,7 @@ def test_builds_manual_operator_checklist_from_readiness_and_freshness_packets()
     assert checklist['archive_artifact_writes']['allowed'] is False
     assert checklist['no_raw_body_attestations']['checklist_persists_raw_body'] is False
     assert checklist['no_raw_body_attestations']['readiness_packet_attests_no_raw_body'] is True
-    assert checklist['prerequisite_links'][0]['url'] == 'https://www.portland.gov/ppd'
+    assert checklist['prerequisite_links'][0]['url'] == 'https://wetten.overheid.nl/ppd'
     assert checklist['expected_manifest_ids'] == [
         'ppd-processor-manifest-devhub-faqs',
         'ppd-processor-manifest-submit-plans-online',
@@ -48,7 +48,7 @@ def test_builds_manual_operator_checklist_from_readiness_and_freshness_packets()
         skipped['target_id'] == 'devhub-private-permit-dashboard' and 'private authenticated' in skipped['reason']
         for skipped in checklist['skipped_target_reasons']
     )
-    assert {caution['bucket'] for caution in checklist['rate_limit_cautions']} == {'public-host:www.portland.gov'}
+    assert {caution['bucket'] for caution in checklist['rate_limit_cautions']} == {'public-host:wetten.overheid.nl'}
 
     assert validate_processor_handoff_operator_checklist(checklist) == []
     assert_processor_handoff_operator_checklist_is_safe(checklist)
@@ -103,11 +103,11 @@ def test_checklist_rejects_processor_invocation_archive_writes_and_raw_reference
 def test_checklist_rejects_private_non_allowlisted_and_raw_download_targets():
     unsafe = _checklist()
     unsafe['handoff_targets'] = [
-        {'source_id': 'private-devhub-permit', 'url': 'https://devhub.portlandoregon.gov/permits/private-dashboard', 'host': 'devhub.portlandoregon.gov'},
+        {'source_id': 'private-devhub-permit', 'url': 'https://wetten.overheid.nl/permits/private-dashboard', 'host': 'wetten.overheid.nl'},
         {'source_id': 'outside-host', 'url': 'https://example.com/ppd', 'host': 'example.com'},
-        {'source_id': 'raw-download', 'url': 'https://www.portland.gov/ppd/documents/how-pay-fees/download', 'host': 'www.portland.gov'},
+        {'source_id': 'raw-download', 'url': 'https://wetten.overheid.nl/ppd/documents/how-pay-fees/download', 'host': 'wetten.overheid.nl'},
     ]
-    unsafe['prerequisite_links'] = [{'source_id': 'bad-prereq', 'url': 'http://www.portland.gov/ppd', 'host': 'www.portland.gov'}]
+    unsafe['prerequisite_links'] = [{'source_id': 'bad-prereq', 'url': 'http://wetten.overheid.nl/ppd', 'host': 'wetten.overheid.nl'}]
 
     codes = issue_codes(validate_processor_handoff_operator_checklist(unsafe))
 

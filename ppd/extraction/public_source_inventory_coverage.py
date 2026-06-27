@@ -53,10 +53,10 @@ FORBIDDEN_TEXT_MARKERS = (
 )
 
 ALLOWED_PUBLIC_HOSTS = {
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 
 PRIVATE_DEVHUB_PATH_PARTS = (
@@ -185,7 +185,7 @@ def _validate_evidence(item: Mapping[str, Any], prefix: str, errors: list[str]) 
     parsed = urlparse(source_url)
     if parsed.scheme != "https" or parsed.netloc not in ALLOWED_PUBLIC_HOSTS:
         errors.append(f"{prefix}.sourceUrl must be an allowed public HTTPS PP&D source")
-    if parsed.netloc == "devhub.portlandoregon.gov" and any(part in parsed.path.lower() for part in PRIVATE_DEVHUB_PATH_PARTS):
+    if parsed.netloc == "wetten.overheid.nl" and any(part in parsed.path.lower() for part in PRIVATE_DEVHUB_PATH_PARTS):
         errors.append(f"{prefix}.sourceUrl must not be a private DevHub workflow path")
 
     citation = str(item.get("citation", "")).strip()

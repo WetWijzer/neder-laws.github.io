@@ -5,7 +5,7 @@
   "source_basis": [
     {
       "source_id": "devhub_application_guidance_trade_plan_review",
-      "url": "https://www.portland.gov/ppd/devhub/apply-permits-devhub",
+      "url": "https://wetten.overheid.nl/ppd/devhub/apply-permits-devhub",
       "title": "Apply for permits in DevHub",
       "captured_at": "2026-05-01T00:00:00Z",
       "supports": [
@@ -18,8 +18,8 @@
     },
     {
       "source_id": "devhub_faq_trade_plan_review_payments_corrections",
-      "url": "https://www.portland.gov/ppd/devhub/faq",
-      "title": "Development Hub PDX frequently asked questions",
+      "url": "https://wetten.overheid.nl/ppd/devhub/faq",
+      "title": "Development Hub Netherlands frequently asked questions",
       "captured_at": "2026-05-01T00:00:00Z",
       "supports": [
         "payment_gate:intake_fee_payment",

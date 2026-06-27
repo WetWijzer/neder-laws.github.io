@@ -3,9 +3,9 @@
   "mode": "attended_read_only_pilot",
   "pilot_id": "fixture-devhub-read-only-preflight",
   "source_scope": [
-    "https://devhub.portlandoregon.gov",
-    "https://www.portland.gov/ppd/devhub-faqs",
-    "https://www.portland.gov/ppd/devhub-sign-guide"
+    "https://wetten.overheid.nl",
+    "https://wetten.overheid.nl/ppd/devhub-faqs",
+    "https://wetten.overheid.nl/ppd/devhub-sign-guide"
   ],
   "purpose": "Prepare a human-attended, read-only DevHub pilot without recording private session artifacts.",
   "preflight": [

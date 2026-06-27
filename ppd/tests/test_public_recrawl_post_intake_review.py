@@ -119,7 +119,7 @@ def test_public_recrawl_post_intake_review_blocks_promotion_for_review_required_
             "allowlisted public URL",
         ),
         (
-            lambda packet: packet["source_level_triage_decisions"][0].update({"canonical_url": "https://devhub.portlandoregon.gov/account"}),
+            lambda packet: packet["source_level_triage_decisions"][0].update({"canonical_url": "https://wetten.overheid.nl/account"}),
             "allowlisted public URL",
         ),
         (

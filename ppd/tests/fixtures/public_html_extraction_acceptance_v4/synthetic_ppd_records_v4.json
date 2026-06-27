@@ -14,12 +14,12 @@
   "records": [
     {
       "document_id": "synthetic-ppd-public-html-001",
-      "source_id": "synthetic-portland-gov-ppd-guide",
-      "canonical_url": "https://www.portland.gov/ppd/synthetic-fixture/apply-permit-guide",
+      "source_id": "synthetic-wetwijzer-gov-ppd-guide",
+      "canonical_url": "https://wetten.overheid.nl/ppd/synthetic-fixture/apply-permit-guide",
       "document_type": "public_html",
       "language": "en",
       "title": "Apply for a Synthetic Residential Building Permit",
-      "breadcrumbs": ["Portland.gov", "Portland Permitting & Development", "Permits", "Apply for a permit"],
+      "breadcrumbs": ["wetten.overheid.nl", "Netherlands Permitting & Development", "Permits", "Apply for a permit"],
       "visible_updated_date": "2026-05-08",
       "headings": [
         {"level": 1, "text": "Apply for a Synthetic Residential Building Permit", "order": 1},
@@ -59,13 +59,13 @@
         }
       ],
       "related_links": [
-        {"text": "Submit plans online", "url": "https://www.portland.gov/ppd/get-permit/submit-plans-online"},
-        {"text": "DevHub help", "url": "https://www.portland.gov/ppd/devhub-faqs"}
+        {"text": "Submit plans online", "url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online"},
+        {"text": "DevHub help", "url": "https://wetten.overheid.nl/ppd/devhub-faqs"}
       ],
       "downloadable_links": [
         {
           "text": "Synthetic permit application PDF",
-          "url": "https://www.portland.gov/ppd/documents/synthetic-permit-application/download",
+          "url": "https://wetten.overheid.nl/ppd/documents/synthetic-permit-application/download",
           "file_type": "pdf",
           "download": true,
           "metadata": {"content_type": "application/pdf", "requires_authentication": false}
@@ -81,12 +81,12 @@
     },
     {
       "document_id": "synthetic-ppd-public-html-002",
-      "source_id": "synthetic-portland-gov-ppd-warning-page",
-      "canonical_url": "https://www.portland.gov/ppd/synthetic-fixture/corrections-upload-guide",
+      "source_id": "synthetic-wetwijzer-gov-ppd-warning-page",
+      "canonical_url": "https://wetten.overheid.nl/ppd/synthetic-fixture/corrections-upload-guide",
       "document_type": "public_html",
       "language": "en",
       "title": "Upload Synthetic Permit Corrections",
-      "breadcrumbs": ["Portland.gov", "Portland Permitting & Development", "Permit review", "Corrections"],
+      "breadcrumbs": ["wetten.overheid.nl", "Netherlands Permitting & Development", "Permit review", "Corrections"],
       "visible_updated_date": "2026-05-08",
       "headings": [
         {"level": 1, "text": "Upload Synthetic Permit Corrections", "order": 1},
@@ -122,12 +122,12 @@
         }
       ],
       "related_links": [
-        {"text": "How to use online permitting tools", "url": "https://www.portland.gov/ppd/how-use-online-permitting-tools"}
+        {"text": "How to use online permitting tools", "url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools"}
       ],
       "downloadable_links": [
         {
           "text": "Synthetic checksheet response template",
-          "url": "https://www.portland.gov/ppd/documents/synthetic-checksheet-response/download",
+          "url": "https://wetten.overheid.nl/ppd/documents/synthetic-checksheet-response/download",
           "file_type": "pdf",
           "download": true,
           "metadata": {"content_type": "application/pdf", "requires_authentication": false}

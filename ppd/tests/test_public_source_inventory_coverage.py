@@ -49,7 +49,7 @@ def test_coverage_report_rejects_private_devhub_paths() -> None:
     bad_report = dict(report)
     bad_categories = [dict(category) for category in report["categories"]]
     bad_evidence = dict(bad_categories[0]["publicSourceEvidence"][0])
-    bad_evidence["sourceUrl"] = "https://devhub.portlandoregon.gov/dashboard/my-permits"
+    bad_evidence["sourceUrl"] = "https://wetten.overheid.nl/dashboard/my-permits"
     bad_categories[0] = dict(bad_categories[0], publicSourceEvidence=[bad_evidence])
     bad_report["categories"] = bad_categories
 

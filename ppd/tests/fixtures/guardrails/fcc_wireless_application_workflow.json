@@ -7,21 +7,21 @@
   "provenance": [
     {
       "sourceId": "ppd-devhub-application-guidance",
-      "url": "https://www.portland.gov/ppd/devhub/apply-permits-devhub",
-      "title": "Apply for permits in Development Hub PDX",
+      "url": "https://wetten.overheid.nl/ppd/devhub/apply-permits-devhub",
+      "title": "Apply for permits in Development Hub Netherlands",
       "capturedAt": "2026-05-01T00:00:00Z",
       "evidenceType": "public_guidance_fixture"
     },
     {
       "sourceId": "ppd-devhub-faq",
-      "url": "https://www.portland.gov/ppd/devhub/devhub-faq",
-      "title": "Development Hub PDX FAQ",
+      "url": "https://wetten.overheid.nl/ppd/devhub/devhub-faq",
+      "title": "Development Hub Netherlands FAQ",
       "capturedAt": "2026-05-01T00:00:00Z",
       "evidenceType": "public_guidance_fixture"
     },
     {
       "sourceId": "ppd-single-pdf-process",
-      "url": "https://www.portland.gov/ppd/single-pdf-process",
+      "url": "https://wetten.overheid.nl/ppd/single-pdf-process",
       "title": "Single PDF Process",
       "capturedAt": "2026-05-01T00:00:00Z",
       "evidenceType": "public_guidance_fixture"

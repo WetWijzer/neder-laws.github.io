@@ -78,7 +78,7 @@ class DevHubSurfaceRecorderRedactionFixtureTest(unittest.TestCase):
         self.assertEqual(fixture["surface"]["captured_from"], "synthetic-fixture")
         self.assertEqual(
             fixture["surface"]["url"],
-            "https://devhub.portland.gov/synthetic/permits",
+            "https://devhub.wetten.overheid.nl/synthetic/permits",
         )
         self.assertNotIn("raw_crawl_output", fixture)
         self.assertNotIn("downloaded_documents", fixture)

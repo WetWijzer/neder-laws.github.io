@@ -34,7 +34,7 @@ def test_source_coverage_audit_packet_links_registry_to_downstream_controls() ->
     source_map = source_ids_by_anchor(packet)
     links_by_source = {row["source_id"]: row for row in packet["downstreamLinks"]}
 
-    assert source_map["https://www.portland.gov/ppd/documents/how-pay-fees/download"] == "ppd-how-pay-fees-pdf"
+    assert source_map["https://wetten.overheid.nl/ppd/documents/how-pay-fees/download"] == "ppd-how-pay-fees-pdf"
     assert links_by_source["ppd-how-pay-fees-pdf"]["guardrail_bundle_ids"] == ["guardrail-financial-actions"]
     assert links_by_source["ppd-submit-plans-online-single-pdf"]["requirement_ids"] == ["req-single-pdf-plan-set"]
 

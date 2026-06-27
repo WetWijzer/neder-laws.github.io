@@ -27,9 +27,9 @@
     ],
     "allowlisted_source_batches": [
       {
-        "batch_id": "portland-auditor-code-library",
-        "source_name": "City of Portland Auditor Code Library",
-        "source_url": "https://www.portland.gov/code",
+        "batch_id": "wetwijzer-auditor-code-library",
+        "source_name": "WetWijzer Auditor Code Library",
+        "source_url": "https://wetten.overheid.nl/code",
         "allowed_scope": ["metadata-refresh", "freshness-check"],
         "reviewer_owner": {
           "owner_name": "PPD source freshness reviewer",
@@ -58,7 +58,7 @@
     ],
     "expected_metadata_only_result_records": [
       {
-        "source_batch_id": "portland-auditor-code-library",
+        "source_batch_id": "wetwijzer-auditor-code-library",
         "result_type": "metadata-only-refresh-record",
         "document_downloaded": false,
         "processor_invoked": false,
@@ -112,7 +112,7 @@
     ],
     "expected_metadata_only_outputs": [
       {
-        "source_batch_id": "portland-auditor-code-library",
+        "source_batch_id": "wetwijzer-auditor-code-library",
         "required_fields": ["source_batch_id", "checked_at", "freshness_status", "reviewer_owner", "citation_refs"],
         "citation_refs": ["public-source-refresh-execution-readiness-20260529"]
       }

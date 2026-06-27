@@ -53,7 +53,7 @@ class ArchivalLogicPlaywrightHandoffScenarioTest(unittest.TestCase):
         self.assertFalse(boundary["officialDevhubActionsAllowed"])
 
         for evidence in self.fixture["archiveEvidence"]:
-            self.assertTrue(evidence["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
+            self.assertTrue(evidence["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
             self.assertTrue(evidence["archiveManifestId"])
             self.assertTrue(evidence["processorHandoffId"].startswith("handoff-ppd-"))
             self.assertTrue(evidence["canonicalDocumentId"].startswith("doc-ppd-"))

@@ -12,7 +12,7 @@ PACKET_TYPE = 'ppd_public_recrawl_metadata_intake_reconciliation_packet'
 SCHEMA_VERSION = 1
 MODE = 'fixture_first_public_recrawl_metadata_intake_reconciliation'
 
-_ALLOWED_HOSTS = {'www.portland.gov', 'devhub.portlandoregon.gov', 'www.portlandoregon.gov', 'www.portlandmaps.com'}
+_ALLOWED_HOSTS = {'wetten.overheid.nl', 'wetten.overheid.nl', 'wetten.overheid.nl', 'repository.overheid.nl'}
 _PRIVATE_TARGET_MARKERS = ('/account', '/admin', '/api/private', '/dashboard', '/login', '/my-permits', '/private', '/signin', '/sign-in', '/user/', 'auth=', 'session=', 'token=')
 _FORBIDDEN_TRUE_KEYS = {'activeRegistryMutated', 'activeRegistryWriteAllowed', 'activeRegistryWritesAllowed', 'activeSourceRegistryMutated', 'archiveArtifactRefPresent', 'archiveArtifactWriteAllowed', 'archiveArtifactWritesAllowed', 'archiveArtifactWritten', 'archiveMutationAllowed', 'archiveWriteAllowed', 'documentsDownloaded', 'downloadedDocuments', 'fetchedLive', 'liveFetchClaimed', 'liveFetchUsed', 'liveNetworkUsed', 'processorExecuted', 'processorExecutionClaimed', 'processorInvocationAllowed', 'processorInvoked', 'rawBodiesPersisted', 'rawBodyPersisted', 'registryMutationAllowed'}
 _FORBIDDEN_VALUE_MARKERS = ('auth_state', 'bearer ', 'cookies.json', 'credential', 'download_ref', 'download_url', 'downloaded_document', 'downloaded_documents', 'file://', 'localstorage.json', 'password', 'raw body', 'raw_body', 'raw_html', 'response_body', 's3://', 'session_cookie', 'storage_state', 'trace.zip', 'warc://')

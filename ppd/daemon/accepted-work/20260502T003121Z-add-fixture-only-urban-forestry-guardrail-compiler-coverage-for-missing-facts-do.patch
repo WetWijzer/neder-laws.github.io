@@ -11,19 +11,19 @@
 +      {
 +        "id": "src_urban_forestry_devhub_guidance",
 +        "title": "DevHub permit request guidance for Urban Forestry permits",
-+        "url": "https://www.portland.gov/ppd/devhub/apply-permit",
++        "url": "https://wetten.overheid.nl/ppd/devhub/apply-permit",
 +        "retrievedAt": "2026-05-01T00:00:00Z"
 +      },
 +      {
 +        "id": "src_urban_forestry_tree_permit_guidance",
 +        "title": "Urban Forestry tree permit guidance",
-+        "url": "https://www.portland.gov/trees/treepermits",
++        "url": "https://wetten.overheid.nl/trees/treepermits",
 +        "retrievedAt": "2026-05-01T00:00:00Z"
 +      },
 +      {
 +        "id": "src_devhub_fee_payment_guidance",
 +        "title": "DevHub fee payment guidance",
-+        "url": "https://www.portland.gov/ppd/devhub/fees-payments",
++        "url": "https://wetten.overheid.nl/ppd/devhub/fees-payments",
 +        "retrievedAt": "2026-05-01T00:00:00Z"
 +      }
 +    ],

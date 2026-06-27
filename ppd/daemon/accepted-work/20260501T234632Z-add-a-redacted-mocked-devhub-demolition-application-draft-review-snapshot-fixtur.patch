@@ -7,7 +7,7 @@
 +  "workflow": "demolition_application_draft_review",
 +  "capturedMode": "mocked_fixture_only",
 +  "capturedAt": "2026-05-01T00:00:00Z",
-+  "sourceSystem": "DevHub PDX mocked form state",
++  "sourceSystem": "DevHub Netherlands mocked form state",
 +  "privacy": {
 +    "redactionPolicy": "all user, property, account, project, document, and contact values are redacted",
 +    "containsCredentials": false,
@@ -20,7 +20,7 @@
 +  "state": {
 +    "stateId": "draft-review",
 +    "pageTitle": "Review demolition permit application draft",
-+    "urlState": "https://devhub.portlandoregon.gov/mock/permits/demolition/draft/review",
++    "urlState": "https://wetten.overheid.nl/mock/permits/demolition/draft/review",
 +    "nearbyHeading": "Review your application",
 +    "draftStatus": "saved_for_later_available",
 +    "saveForLater": {
@@ -286,7 +286,7 @@
 +      "action": "submit_demolition_application",
 +      "classification": "potentially_consequential",
 +      "visibleControl": "Submit application",
-+      "exactRequiredUserConfirmation": "I confirm I want to submit this redacted demolition application to Portland Permitting and Development in this DevHub session.",
++      "exactRequiredUserConfirmation": "I confirm I want to submit this redacted demolition application to Netherlands Permitting and Development in this DevHub session.",
 +      "agentMayProceedWithoutExactConfirmation": false,
 +      "semanticSelector": "getByRole('button', { name: 'Submit application' })",
 +      "auditRequirement": "record action preview, blocking validation status, and exact user confirmation before submit"

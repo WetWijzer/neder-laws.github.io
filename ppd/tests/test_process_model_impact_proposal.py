@@ -42,7 +42,7 @@ def test_build_impact_proposal_covers_required_categories() -> None:
             assert impact["citations"]
             for citation in impact["citations"]:
                 assert citation["evidence_id"]
-                assert citation["canonical_url"].startswith("https://www.portland.gov/")
+                assert citation["canonical_url"].startswith("https://wetten.overheid.nl/")
 
 
 def test_build_impact_proposal_does_not_mutate_inputs() -> None:

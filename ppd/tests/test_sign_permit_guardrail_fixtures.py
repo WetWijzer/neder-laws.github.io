@@ -10,7 +10,7 @@ from urllib.parse import urlparse
 
 
 FIXTURE_PATH = Path(__file__).parent / "fixtures" / "guardrails" / "sign_permit_workflow_guardrails.json"
-_ALLOWED_HOSTS = {"www.portland.gov", "devhub.portlandoregon.gov", "www.portlandoregon.gov", "www.portlandmaps.com"}
+_ALLOWED_HOSTS = {"wetten.overheid.nl", "wetten.overheid.nl", "wetten.overheid.nl", "repository.overheid.nl"}
 _PRIVATE_MARKERS = (
     "password",
     "credential",

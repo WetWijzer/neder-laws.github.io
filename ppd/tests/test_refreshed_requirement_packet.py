@@ -40,7 +40,7 @@ def test_packet_contains_changed_html_and_pdf_records_with_hash_deltas():
     assert {record["document_type"] for record in packet["records"]} == {"public_html", "public_pdf"}
 
     for record in packet["records"]:
-        assert record["canonical_url"].startswith("https://www.portland.gov/ppd/")
+        assert record["canonical_url"].startswith("https://wetten.overheid.nl/ppd/")
         assert HEX_64.match(record["previous_source_hash"])
         assert HEX_64.match(record["refreshed_source_hash"])
         assert record["previous_source_hash"] != record["refreshed_source_hash"]

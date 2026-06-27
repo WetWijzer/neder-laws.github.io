@@ -6,7 +6,7 @@
       "readiness_packet_ref": "normalized-extraction-readiness::ppd-devhub-faq",
       "normalized_document_id_placeholder": "pending-normalized-document-ppd-devhub-faq",
       "source_id": "ppd-devhub-faq",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "candidate_requirement_id": "pending-requirement-devhub-account-service-review",
       "candidate_requirement_type": "precondition",
       "candidate_requirement_action": "review account-scoped DevHub service availability before drafting online permitting steps",

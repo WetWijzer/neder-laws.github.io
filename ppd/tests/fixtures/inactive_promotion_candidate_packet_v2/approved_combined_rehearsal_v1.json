@@ -10,7 +10,7 @@
       "public_source_patch": {
         "source_patch_id": "public-source-patch-devhub-application-guide",
         "source_id": "ppd-devhub-guide-submit-permit-application",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
         "changed_requirement_ids": [
           "requirement:devhub-application-draft-save-for-later"
         ],
@@ -45,7 +45,7 @@
       "public_source_patch": {
         "source_patch_id": "public-source-patch-single-pdf",
         "source_id": "ppd-submit-plans-online-single-pdf",
-        "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+        "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
         "changed_requirement_ids": [
           "requirement:single-pdf-drawings-together"
         ],

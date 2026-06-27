@@ -6,7 +6,7 @@
       "evidence_id": "evidence-001",
       "observed_at": "2026-05-29T00:00:00Z",
       "metadata": {
-        "url": "https://www.portland.gov/ppd/permit-center/fees",
+        "url": "https://wetten.overheid.nl/ppd/permit-center/fees",
         "http_status": 200,
         "content_type": "text/html"
       }
@@ -16,7 +16,7 @@
       "evidence_id": "evidence-002",
       "observed_at": "2026-05-29T00:00:00Z",
       "metadata": {
-        "url": "https://www.portland.gov/ppd/zoning",
+        "url": "https://wetten.overheid.nl/ppd/zoning",
         "http_status": 200,
         "content_type": "text/html"
       }

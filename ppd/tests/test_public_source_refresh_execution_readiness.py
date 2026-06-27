@@ -89,7 +89,7 @@ class PublicSourceRefreshExecutionReadinessTests(unittest.TestCase):
             },
             {
                 "source_id": "auth",
-                "canonical_url": "https://devhub.portlandoregon.gov/account/my-permits?token=abc",
+                "canonical_url": "https://wetten.overheid.nl/account/my-permits?token=abc",
                 "allowlist_evidence_refs": ["fixture://allowlist/auth"],
                 "robots_evidence_refs": ["fixture://robots/auth"],
             },
@@ -101,7 +101,7 @@ class PublicSourceRefreshExecutionReadinessTests(unittest.TestCase):
 
     def test_rejects_live_fetch_download_or_processor_commands(self) -> None:
         packet = _fixture()
-        packet["safe_operator_command"] = "python3 -m ppd.crawler.live_public_scrape --url https://www.portland.gov/ppd/devhub-faqs"
+        packet["safe_operator_command"] = "python3 -m ppd.crawler.live_public_scrape --url https://wetten.overheid.nl/ppd/devhub-faqs"
 
         self.assertIn(
             "command_string_fetches_downloads_or_processes_live_sources",

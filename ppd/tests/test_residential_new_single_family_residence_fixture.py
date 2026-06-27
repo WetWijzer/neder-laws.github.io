@@ -135,7 +135,7 @@ class ResidentialNewSingleFamilyResidenceFixtureTest(unittest.TestCase):
                     self.assertIn(evidence["sourceId"], self.process["sourceIds"])
                     parsed = urlparse(evidence["sourceUrl"])
                     self.assertEqual("https", parsed.scheme)
-                    self.assertIn(parsed.netloc, {"www.portland.gov", "devhub.portlandoregon.gov"})
+                    self.assertIn(parsed.netloc, {"wetten.overheid.nl", "wetten.overheid.nl"})
                     self.assertTrue(evidence["capturedAt"].endswith("Z"))
                     self.assertTrue(evidence.get("note"))
 

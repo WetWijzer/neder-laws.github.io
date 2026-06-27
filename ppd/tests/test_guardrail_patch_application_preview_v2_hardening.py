@@ -110,7 +110,7 @@ def test_hardening_rejects_private_raw_live_outcome_and_final_action_content() -
 def test_hardening_rejects_authenticated_urls_and_all_active_mutation_flag_families() -> None:
     packet = deepcopy(_valid_preview())
     packet["rollback_checkpoints"][0]["citations"] = [
-        {"url": "https://user:pass@www.portland.gov/ppd/devhub-guide-submit-permit-application"}
+        {"url": "https://user:pass@wetten.overheid.nl/ppd/devhub-guide-submit-permit-application"}
     ]
     packet.update(
         {

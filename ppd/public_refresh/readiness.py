@@ -37,7 +37,7 @@ _READY_STATUSES = {"approved", "current", "formalized", "not_required", "ready",
 _REVIEW_COMPLETE_STATUSES = {"approved", "not_required"}
 _FORMALIZED_STATUSES = {"formalized", "not_required"}
 _CURRENT_FRESHNESS_STATUSES = {"current", "unchanged", "accepted_change"}
-_PUBLIC_HOSTS = {"portland.gov", "www.portland.gov", "www.portlandoregon.gov", "devhub.portlandoregon.gov"}
+_PUBLIC_HOSTS = {"wetten.overheid.nl", "wetten.overheid.nl", "wetten.overheid.nl", "wetten.overheid.nl"}
 _AUTHENTICATED_URL_HINTS = (
     "/account",
     "/accounts",

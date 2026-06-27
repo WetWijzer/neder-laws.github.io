@@ -9,28 +9,28 @@
   "source_evidence": [
     {
       "evidence_id": "evidence::apply-permits::plan-review::2026-05-08",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
       "source_type": "public_html_fixture",
       "fixture_extract": "Permit requests requiring plan review are distinct from standard trade permits.",
       "last_verified_at": "2026-05-08"
     },
     {
       "evidence_id": "evidence::submit-plans-online::single-pdf::2026-05-08",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "source_type": "public_html_fixture",
       "fixture_extract": "Drawing plans are prepared as one PDF while applications and supporting documents are separate PDFs.",
       "last_verified_at": "2026-05-08"
     },
     {
       "evidence_id": "evidence::devhub-faq::upload-corrections::2026-05-08",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "source_type": "public_html_fixture",
       "fixture_extract": "Uploading corrections is an account-scoped DevHub workflow.",
       "last_verified_at": "2026-05-08"
     },
     {
       "evidence_id": "evidence::fee-payment::financial-action::2026-05-08",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "source_type": "public_pdf_fixture",
       "fixture_extract": "Payment detail entry and final payment submission are financial workflow steps.",
       "last_verified_at": "2026-05-08"

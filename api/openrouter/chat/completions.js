@@ -5,7 +5,7 @@ const ALLOWED_MODELS = new Set([
 ]);
 
 function parseAllowedOrigins() {
-  return (process.env.OPENROUTER_PROXY_ALLOWED_ORIGINS || 'https://portland-laws.github.io,https://211-ai.github.io,http://localhost:5173,http://127.0.0.1:5173')
+  return (process.env.OPENROUTER_PROXY_ALLOWED_ORIGINS || 'https://wetwijzer.github.io,https://211-ai.github.io,http://localhost:5173,http://127.0.0.1:5173')
     .split(',')
     .map((origin) => origin.trim())
     .filter(Boolean);
@@ -82,8 +82,8 @@ export default async function handler(req, res) {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${apiKey}`,
-        'HTTP-Referer': process.env.OPENROUTER_SITE_URL || 'https://portland-laws.github.io',
-        'X-OpenRouter-Title': process.env.OPENROUTER_SITE_NAME || 'Portland Laws',
+        'HTTP-Referer': process.env.OPENROUTER_SITE_URL || 'https://wetwijzer.github.io',
+        'X-OpenRouter-Title': process.env.OPENROUTER_SITE_NAME || 'WetWijzer Laws',
       },
       body: JSON.stringify({
         ...body,

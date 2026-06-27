@@ -1,6 +1,6 @@
 {
   "mode": "attended",
-  "start_url": "https://devhub.portlandoregon.gov/",
+  "start_url": "https://wetten.overheid.nl/",
   "requires_user_attendance": true,
   "launch_browser": false,
   "save_storage_state": false,

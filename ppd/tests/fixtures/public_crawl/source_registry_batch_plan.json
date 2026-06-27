@@ -3,7 +3,7 @@
   "sources": [
     {
       "source_id": "ppd_public_landing",
-      "canonical_url": "https://www.portland.gov/ppd?utm_source=newsletter#overview",
+      "canonical_url": "https://wetten.overheid.nl/ppd?utm_source=newsletter#overview",
       "source_type": "public_html",
       "owning_surface": "ppd_public_website",
       "allowlist_policy": "allow",
@@ -16,7 +16,7 @@
     },
     {
       "source_id": "ppd_devhub_portal_public",
-      "canonical_url": "https://devhub.portlandoregon.gov/",
+      "canonical_url": "https://wetten.overheid.nl/",
       "source_type": "devhub_public",
       "owning_surface": "devhub_public_portal",
       "allowlist_policy": "allow",
@@ -29,7 +29,7 @@
     },
     {
       "source_id": "ppd_fee_payment_pdf",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download?utm_campaign=permit-help",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download?utm_campaign=permit-help",
       "source_type": "public_pdf",
       "owning_surface": "ppd_public_documents",
       "allowlist_policy": "allow",
@@ -55,7 +55,7 @@
     },
     {
       "source_id": "devhub_authenticated_home",
-      "canonical_url": "https://devhub.portlandoregon.gov/secure/home",
+      "canonical_url": "https://wetten.overheid.nl/secure/home",
       "source_type": "devhub_authenticated",
       "owning_surface": "devhub_authenticated",
       "allowlist_policy": "allow",
@@ -68,7 +68,7 @@
     },
     {
       "source_id": "robots_blocked_public_page",
-      "canonical_url": "https://www.portland.gov/ppd/internal-search-results",
+      "canonical_url": "https://wetten.overheid.nl/ppd/internal-search-results",
       "source_type": "public_html",
       "owning_surface": "ppd_public_website",
       "allowlist_policy": "allow",

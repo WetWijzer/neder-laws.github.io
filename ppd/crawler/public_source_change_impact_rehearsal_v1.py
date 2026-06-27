@@ -60,7 +60,7 @@ def build_public_source_change_impact_rehearsal_v1() -> dict[str, Any]:
         'source_registry_snapshot': [
             {
                 'source_id': 'ppd-submit-plans-online',
-                'canonical_url': 'https://www.portland.gov/ppd/get-permit/submit-plans-online',
+                'canonical_url': 'https://wetten.overheid.nl/ppd/get-permit/submit-plans-online',
                 'freshness_status': 'fixture_current',
             }
         ],
@@ -83,7 +83,7 @@ def build_public_source_change_impact_rehearsal_v1() -> dict[str, Any]:
                     {
                         'source_id': 'ppd-submit-plans-online',
                         'requirement_id': 'req-single-pdf-process-separate-supporting-documents',
-                        'public_url': 'https://www.portland.gov/ppd/get-permit/submit-plans-online',
+                        'public_url': 'https://wetten.overheid.nl/ppd/get-permit/submit-plans-online',
                         'span_ref': 'fixture-span-single-pdf-001',
                         'quoted_or_paraphrased_basis': 'Plans are grouped as one PDF while supporting documents remain separate PDFs.',
                     }

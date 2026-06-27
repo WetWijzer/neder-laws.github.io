@@ -33,7 +33,7 @@ PRIVATE_OR_LIVE_MARKERS = (
     "traces/",
     "screenshots/",
     "downloads/",
-    "public/corpus/portland-or/current",
+    "public/corpus/wetwijzer-or/current",
     "src/lib/logic",
     "ipfs_datasets_py/.daemon",
 )

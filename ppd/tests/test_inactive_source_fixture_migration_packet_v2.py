@@ -108,7 +108,7 @@ class InactiveSourceFixtureMigrationPacketV2Test(unittest.TestCase):
             validate_inactive_source_fixture_migration_packet_v2(outside)
 
         authenticated = deepcopy(packet)
-        authenticated['cited_fixture_only_source_registry_metadata_patch_rows'][0]['after_metadata_value'] = 'https://devhub.portlandoregon.gov/account/dashboard'
+        authenticated['cited_fixture_only_source_registry_metadata_patch_rows'][0]['after_metadata_value'] = 'https://wetten.overheid.nl/account/dashboard'
 
         with self.assertRaisesRegex(ValueError, 'authenticated or account-scoped URL'):
             validate_inactive_source_fixture_migration_packet_v2(authenticated)

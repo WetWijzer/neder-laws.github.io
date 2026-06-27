@@ -1,6 +1,6 @@
 """Validate requirement extraction coverage for trade permits with plan review.
 
-This test is fixture-only. It does not crawl Portland.gov, open DevHub,
+This test is fixture-only. It does not crawl wetten.overheid.nl, open DevHub,
 authenticate, submit, upload, pay, or inspect private session artifacts.
 """
 
@@ -112,7 +112,7 @@ class TradePermitWithPlanReviewRequirementExtractionTest(unittest.TestCase):
         eligibility_requirements = self._requirements_for("eligibility_precondition")
         combined_text = self._combined_text(eligibility_requirements)
         self.assertIn("devhub account", combined_text)
-        self.assertIn("portlandoregon.gov credentials", combined_text)
+        self.assertIn("wetten.overheid.nl credentials", combined_text)
         self.assertIn("trade permit with plan review", combined_text)
         self.assertIn("property", combined_text)
         self.assertIn("work description", combined_text)
@@ -175,8 +175,8 @@ class TradePermitWithPlanReviewRequirementExtractionTest(unittest.TestCase):
                 self.assertIn("url", evidence)
                 self.assertIn("title", evidence)
                 self.assertIn("quote", evidence)
-                self.assertTrue(evidence["url"].startswith(("https://www.portland.gov/", "docs/")))
-                self.assertNotIn("devhub.portlandoregon.gov/secure", evidence["url"])
+                self.assertTrue(evidence["url"].startswith(("https://wetten.overheid.nl/", "docs/")))
+                self.assertNotIn("wetten.overheid.nl/secure", evidence["url"])
 
     def test_confirmation_sensitive_categories_require_exact_gate_marker(self) -> None:
         for requirement in self.requirements:

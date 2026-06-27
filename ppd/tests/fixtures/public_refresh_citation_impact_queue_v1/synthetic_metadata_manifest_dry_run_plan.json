@@ -6,7 +6,7 @@
       "plan_id": "public-refresh-dry-run-plan-20260601",
       "metadata_dry_run_reference_id": "metadata-dry-run-ref-001",
       "source_id": "ppd-source-devhub-faq-public",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "manifest_id": "manifest-devhub-faq-public-001",
       "document_id": "document-devhub-faq-public-001",
       "citation_span_ids": ["span-devhub-faq-001"],

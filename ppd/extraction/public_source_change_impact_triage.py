@@ -15,12 +15,12 @@ from typing import Any, Iterable, Mapping, Sequence
 from urllib.parse import parse_qsl, urlparse
 
 _ALLOWED_PUBLIC_HOSTS = {
-    "www.portland.gov",
-    "portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
-    "portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
+    "repository.overheid.nl",
 }
 
 _PRIVATE_PATH_MARKERS = (

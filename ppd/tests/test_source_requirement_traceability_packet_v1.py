@@ -92,8 +92,8 @@ class SourceRequirementTraceabilityPacketV1Test(unittest.TestCase):
 
     def test_validation_rejects_private_download_raw_guarantee_and_mutation_content(self) -> None:
         mutations = {
-            "private_url": lambda packet: packet["rows"][0].update(canonical_url="https://www.portland.gov/ppd/private/case/123"),
-            "download_url": lambda packet: packet["rows"][0].update(canonical_url="https://www.portland.gov/ppd/documents/how-pay-fees/download"),
+            "private_url": lambda packet: packet["rows"][0].update(canonical_url="https://wetten.overheid.nl/ppd/private/case/123"),
+            "download_url": lambda packet: packet["rows"][0].update(canonical_url="https://wetten.overheid.nl/ppd/documents/how-pay-fees/download"),
             "raw_body": lambda packet: packet["rows"][0].update(raw_body="raw response"),
             "guarantee": lambda packet: packet["rows"][0].update(note="permit will be approved"),
             "source_mutation": lambda packet: packet.update(active_source_mutation=True),

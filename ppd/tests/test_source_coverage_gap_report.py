@@ -54,7 +54,7 @@ class SourceCoverageGapReportTest(unittest.TestCase):
                 {
                     "category_id": "private-devhub-example",
                     "permit_family": "private-family",
-                    "canonical_url": "https://devhub.portlandoregon.gov/mypermits",
+                    "canonical_url": "https://wetten.overheid.nl/mypermits",
                     "authority_label": "DevHub private session",
                     "recrawl_cadence": "never",
                     "raw_body": "private",
@@ -62,7 +62,7 @@ class SourceCoverageGapReportTest(unittest.TestCase):
                 {
                     "category_id": "missing-provenance",
                     "permit_family": "missing-provenance-family",
-                    "canonical_url": "https://www.portland.gov/ppd/example"
+                    "canonical_url": "https://wetten.overheid.nl/ppd/example"
                 },
             ]
         }

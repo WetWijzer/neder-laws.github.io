@@ -36,7 +36,7 @@
   ],
   "manual_login_boundaries": [
     "The worker must not request, receive, type, paste, infer, save, replay, or transform credentials.",
-    "The user must manually select sign-in controls and complete PortlandOregon.gov authentication in the visible browser.",
+    "The user must manually select sign-in controls and complete wetten.overheid.nl authentication in the visible browser.",
     "The user must manually complete MFA, CAPTCHA, security prompts, account recovery, consent prompts, and any identity checks.",
     "The worker must not create accounts, change account settings, enroll MFA, recover passwords, or bypass access controls.",
     "If the login flow requires a consequential choice outside read-only observation, the worker must stop and record a refused-action journal event without private values."

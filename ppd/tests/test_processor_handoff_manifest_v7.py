@@ -98,7 +98,7 @@ def test_rejects_raw_body_fields_in_queue_fixture(tmp_path: Path) -> None:
           "entries": [
             {
               "source_id": "bad-source",
-              "canonical_url": "https://www.portland.gov/ppd",
+              "canonical_url": "https://wetten.overheid.nl/ppd",
               "source_type": "public_html",
               "preflight_decision": "handoff_ready",
               "raw_body": "not allowed"

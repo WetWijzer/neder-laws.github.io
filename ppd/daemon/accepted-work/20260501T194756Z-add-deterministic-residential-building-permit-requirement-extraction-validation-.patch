@@ -15,14 +15,14 @@
 +      "action": "verify",
 +      "object": "property address, zoning constraints, and residential project scope before selecting the residential building permit workflow",
 +      "conditions": [
-+        "project is for residential building work in Portland",
++        "project is for residential building work in Netherlands",
 +        "applicant has a property identifier or project address"
 +      ],
 +      "deadline_or_temporal_scope": "before application preparation and permit type selection",
 +      "evidence": [
 +        {
 +          "source_id": "residential-building-permit-process",
-+          "canonical_url": "https://www.portland.gov/ppd/residential-permitting/residential-building-permits",
++          "canonical_url": "https://wetten.overheid.nl/ppd/residential-permitting/residential-building-permits",
 +          "section": "Before you apply",
 +          "quote": "Review permit requirements, property information, and project scope before applying for a residential building permit."
 +        }
@@ -45,7 +45,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "residential-building-permit-process",
-+          "canonical_url": "https://www.portland.gov/ppd/residential-permitting/residential-building-permits",
++          "canonical_url": "https://wetten.overheid.nl/ppd/residential-permitting/residential-building-permits",
 +          "section": "Apply for a residential building permit",
 +          "quote": "Provide applicant, owner, contractor, project site, and project description information with the permit request."
 +        }
@@ -67,7 +67,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "residential-building-permit-process",
-+          "canonical_url": "https://www.portland.gov/ppd/residential-permitting/residential-building-permits",
++          "canonical_url": "https://wetten.overheid.nl/ppd/residential-permitting/residential-building-permits",
 +          "section": "What to include",
 +          "quote": "Submit a complete application with project information and required documents."
 +        }
@@ -90,7 +90,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "residential-building-permit-process",
-+          "canonical_url": "https://www.portland.gov/ppd/residential-permitting/residential-building-permits",
++          "canonical_url": "https://wetten.overheid.nl/ppd/residential-permitting/residential-building-permits",
 +          "section": "Plans and documents",
 +          "quote": "Plans must show the proposed work and include information needed to review the project."
 +        }
@@ -112,7 +112,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "residential-building-permit-process",
-+          "canonical_url": "https://www.portland.gov/ppd/residential-permitting/residential-building-permits",
++          "canonical_url": "https://wetten.overheid.nl/ppd/residential-permitting/residential-building-permits",
 +          "section": "Plans and documents",
 +          "quote": "Additional calculations, forms, engineering, or reports may be required depending on the project."
 +        }
@@ -135,7 +135,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "single-pdf-process",
-+          "canonical_url": "https://www.portland.gov/ppd/permits/single-pdf-process",
++          "canonical_url": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +          "section": "Single PDF Process",
 +          "quote": "Drawing plans are submitted as one searchable PDF; applications, calculations, and supporting documents are separate PDFs."
 +        }
@@ -158,7 +158,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "residential-building-permit-process",
-+          "canonical_url": "https://www.portland.gov/ppd/residential-permitting/residential-building-permits",
++          "canonical_url": "https://wetten.overheid.nl/ppd/residential-permitting/residential-building-permits",
 +          "section": "After you apply",
 +          "quote": "Staff review the submittal for completeness before routing the plans for review."
 +        }
@@ -180,7 +180,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "residential-building-permit-process",
-+          "canonical_url": "https://www.portland.gov/ppd/residential-permitting/residential-building-permits",
++          "canonical_url": "https://wetten.overheid.nl/ppd/residential-permitting/residential-building-permits",
 +          "section": "Plan review",
 +          "quote": "Plans are reviewed by required review groups before a permit can be issued."
 +        }
@@ -202,7 +202,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "residential-building-permit-process",
-+          "canonical_url": "https://www.portland.gov/ppd/residential-permitting/residential-building-permits",
++          "canonical_url": "https://wetten.overheid.nl/ppd/residential-permitting/residential-building-permits",
 +          "section": "Corrections",
 +          "quote": "If corrections are needed, respond to checksheets and upload corrected plans or documents."
 +        }
@@ -225,7 +225,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "devhub-correction-guidance",
-+          "canonical_url": "https://www.portland.gov/ppd/devhub",
++          "canonical_url": "https://wetten.overheid.nl/ppd/devhub",
 +          "section": "Upload corrections",
 +          "quote": "Use DevHub to upload correction materials when responding to plan review checksheets."
 +        }
@@ -250,7 +250,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "residential-building-permit-process",
-+          "canonical_url": "https://www.portland.gov/ppd/inspections",
++          "canonical_url": "https://wetten.overheid.nl/ppd/inspections",
 +          "section": "Schedule inspections",
 +          "quote": "Schedule required inspections for permitted work and receive approval before proceeding where required."
 +        }
@@ -273,7 +273,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "devhub-inspection-guidance",
-+          "canonical_url": "https://www.portland.gov/ppd/devhub",
++          "canonical_url": "https://wetten.overheid.nl/ppd/devhub",
 +          "section": "Inspections",
 +          "quote": "DevHub supports inspection scheduling for eligible online permits."
 +        }
@@ -297,7 +297,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "residential-building-permit-process",
-+          "canonical_url": "https://www.portland.gov/ppd/residential-permitting/residential-building-permits",
++          "canonical_url": "https://wetten.overheid.nl/ppd/residential-permitting/residential-building-permits",
 +          "section": "Permit expiration",
 +          "quote": "Applications and permits may expire if required steps are not completed within the allowed time."
 +        }
@@ -320,7 +320,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "residential-building-permit-process",
-+          "canonical_url": "https://www.portland.gov/ppd/residential-permitting/residential-building-permits",
++          "canonical_url": "https://wetten.overheid.nl/ppd/residential-permitting/residential-building-permits",
 +          "section": "Permit expiration",
 +          "quote": "Contact PP&D or use the available process to address expired permits or reactivation questions."
 +        }
@@ -343,7 +343,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "devhub-application-guidance",
-+          "canonical_url": "https://www.portland.gov/ppd/devhub/apply-permit-devhub",
++          "canonical_url": "https://wetten.overheid.nl/ppd/devhub/apply-permit-devhub",
 +          "section": "Submit application",
 +          "quote": "Submit the permit request through DevHub after completing the required application steps."
 +        }
@@ -367,7 +367,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "devhub-payment-guidance",
-+          "canonical_url": "https://www.portland.gov/ppd/devhub",
++          "canonical_url": "https://wetten.overheid.nl/ppd/devhub",
 +          "section": "Pay fees",
 +          "quote": "DevHub can be used to pay permit fees when payment is due."
 +        }
@@ -445,7 +445,7 @@
 +                self.assertTrue(req["evidence"], "every extracted requirement needs evidence")
 +                for evidence in req["evidence"]:
 +                    self.assertTrue(evidence["source_id"].strip())
-+                    self.assertTrue(evidence["canonical_url"].startswith("https://www.portland.gov/"))
++                    self.assertTrue(evidence["canonical_url"].startswith("https://wetten.overheid.nl/"))
 +                    self.assertTrue(evidence["section"].strip())
 +                    self.assertTrue(evidence["quote"].strip())
 +

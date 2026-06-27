@@ -111,7 +111,7 @@ def build_source_recrawl_preflight_queue_v8_fixture() -> dict[str, Any]:
         "source_registry_references": [
             {
                 "source_id": "ppd-landing-page",
-                "canonical_url": "https://www.portland.gov/ppd",
+                "canonical_url": "https://wetten.overheid.nl/ppd",
                 "registry_status": "referenced_before_recrawl",
             }
         ],
@@ -119,22 +119,22 @@ def build_source_recrawl_preflight_queue_v8_fixture() -> dict[str, Any]:
             {
                 "order": 1,
                 "source_id": "ppd-landing-page",
-                "url": "https://www.portland.gov/ppd",
+                "url": "https://wetten.overheid.nl/ppd",
                 "source_type": "public_html",
             }
         ],
         "canonical_url_checks": [
             {
                 "source_id": "ppd-landing-page",
-                "input_url": "https://www.portland.gov/ppd",
-                "canonical_url": "https://www.portland.gov/ppd",
+                "input_url": "https://wetten.overheid.nl/ppd",
+                "canonical_url": "https://wetten.overheid.nl/ppd",
                 "status": "placeholder_pending_preflight_resolution",
             }
         ],
         "allowlist_decisions": [
             {
                 "source_id": "ppd-landing-page",
-                "host": "www.portland.gov",
+                "host": "wetten.overheid.nl",
                 "decision": "allowlisted_public_official_source",
             }
         ],

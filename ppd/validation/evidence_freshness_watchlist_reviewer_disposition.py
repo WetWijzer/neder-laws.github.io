@@ -14,11 +14,11 @@ from urllib.parse import urlparse
 
 ALLOWLISTED_URL_HOSTS = frozenset(
     {
-        "www.portland.gov",
-        "portland.gov",
-        "efiles.portlandoregon.gov",
-        "www.oregon.gov",
-        "oregon.gov",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
+        "www.netherlands.gov",
+        "netherlands.gov",
     }
 )
 

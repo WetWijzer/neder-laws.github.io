@@ -16,7 +16,7 @@
   "candidate_sources": [
     {
       "source_id": "ppd-online-tools-overview",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "source_type": "public_html",
       "owning_surface": "ppd_public_guidance",
       "refresh_reason": "daily DevHub and online tools guidance freshness review",
@@ -28,7 +28,7 @@
       },
       "robots_policy": {
         "decision": "allowed_by_fixture_preflight",
-        "evidence_ref": "robots-evidence:www.portland.gov:2026-05-08"
+        "evidence_ref": "robots-evidence:wetten.overheid.nl:2026-05-08"
       },
       "policy_evidence": {
         "decision": "public_first_party_guidance",
@@ -37,7 +37,7 @@
     },
     {
       "source_id": "ppd-devhub-faqs",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "source_type": "public_html",
       "owning_surface": "devhub_public_guidance",
       "refresh_reason": "daily account-scoped service guidance freshness review",
@@ -49,7 +49,7 @@
       },
       "robots_policy": {
         "decision": "allowed_by_fixture_preflight",
-        "evidence_ref": "robots-evidence:www.portland.gov:2026-05-08"
+        "evidence_ref": "robots-evidence:wetten.overheid.nl:2026-05-08"
       },
       "policy_evidence": {
         "decision": "public_first_party_guidance",
@@ -58,7 +58,7 @@
     },
     {
       "source_id": "ppd-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "source_type": "public_html",
       "owning_surface": "ppd_document_preparation_guidance",
       "refresh_reason": "weekly single PDF and upload preparation guidance freshness review",
@@ -70,7 +70,7 @@
       },
       "robots_policy": {
         "decision": "allowed_by_fixture_preflight",
-        "evidence_ref": "robots-evidence:www.portland.gov:2026-05-08"
+        "evidence_ref": "robots-evidence:wetten.overheid.nl:2026-05-08"
       },
       "policy_evidence": {
         "decision": "public_first_party_guidance",

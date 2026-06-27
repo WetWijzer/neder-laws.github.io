@@ -423,7 +423,7 @@ def _is_live_auth_url(location: str, value: str) -> bool:
         return True
     host = parsed.netloc.lower()
     path = parsed.path.lower()
-    if "devhub.portlandoregon.gov" not in host:
+    if "wetten.overheid.nl" not in host:
         return False
     return any(marker in path for marker in ("/account", "/application", "/dashboard", "/login", "/permit", "/project"))
 

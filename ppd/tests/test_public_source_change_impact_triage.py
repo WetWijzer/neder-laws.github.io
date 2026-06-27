@@ -111,7 +111,7 @@ def test_valid_packet_passes_explicit_validation() -> None:
             "unknown_source_id",
         ),
         (
-            lambda packet: packet["public_source_monitoring_schedule_candidate"]["candidates"][0].update({"canonical_url": "https://devhub.portlandoregon.gov/my-permits?token=secret"}),
+            lambda packet: packet["public_source_monitoring_schedule_candidate"]["candidates"][0].update({"canonical_url": "https://wetten.overheid.nl/my-permits?token=secret"}),
             "private_or_authenticated_url",
         ),
         (

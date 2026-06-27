@@ -18,9 +18,9 @@
 +      "evidenceId": "ppd_lifecycle_extension_reactivation_public_guidance",
 +      "categoryId": "permit_extension_guidance",
 +      "title": "Permit extension and reactivation guidance",
-+      "sourceUrl": "https://www.portland.gov/ppd/permits/permit-extension-reactivation",
-+      "canonicalUrl": "https://www.portland.gov/ppd/permits/permit-extension-reactivation",
-+      "authorityLabel": "Portland Permitting & Development public permit lifecycle guidance",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/permit-extension-reactivation",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/permit-extension-reactivation",
++      "authorityLabel": "Netherlands Permitting & Development public permit lifecycle guidance",
 +      "recrawlCadence": "monthly",
 +      "capturedAt": "2026-05-01T00:00:00Z"
 +    }

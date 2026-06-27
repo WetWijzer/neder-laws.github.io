@@ -76,42 +76,42 @@
     "evidence": [
       {
         "id": "solar-devhub-guidance",
-        "sourceUrl": "https://www.portland.gov/ppd/devhub",
-        "title": "Development Hub PDX guidance",
+        "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
+        "title": "Development Hub Netherlands guidance",
         "retrievedAt": "2026-05-01T00:00:00Z",
         "summary": "Public DevHub guidance identifies solar permits as an online permit request type."
       },
       {
         "id": "solar-application-guidance",
-        "sourceUrl": "https://www.portland.gov/ppd/permits/solar-permits",
+        "sourceUrl": "https://wetten.overheid.nl/ppd/permits/solar-permits",
         "title": "Solar permit public guidance fixture",
         "retrievedAt": "2026-05-01T00:00:00Z",
         "summary": "Public solar permit guidance fixture identifies application facts and submittal package components."
       },
       {
         "id": "solar-single-pdf-process",
-        "sourceUrl": "https://www.portland.gov/ppd/single-pdf-process",
+        "sourceUrl": "https://wetten.overheid.nl/ppd/single-pdf-process",
         "title": "Single PDF Process guidance",
         "retrievedAt": "2026-05-01T00:00:00Z",
         "summary": "Public fixture guidance separates drawing plans from application and supporting documents."
       },
       {
         "id": "solar-payment-guidance",
-        "sourceUrl": "https://www.portland.gov/ppd/pay-permit-fees",
+        "sourceUrl": "https://wetten.overheid.nl/ppd/pay-permit-fees",
         "title": "Permit fee payment guidance",
         "retrievedAt": "2026-05-01T00:00:00Z",
         "summary": "Payment is a financial stop point requiring exact user confirmation before action."
       },
       {
         "id": "solar-correction-guidance",
-        "sourceUrl": "https://www.portland.gov/ppd/upload-corrections-devhub",
+        "sourceUrl": "https://wetten.overheid.nl/ppd/upload-corrections-devhub",
         "title": "Correction upload guidance",
         "retrievedAt": "2026-05-01T00:00:00Z",
         "summary": "Official correction upload is a consequential stop point requiring exact user confirmation."
       },
       {
         "id": "solar-inspection-guidance",
-        "sourceUrl": "https://www.portland.gov/ppd/schedule-inspection",
+        "sourceUrl": "https://wetten.overheid.nl/ppd/schedule-inspection",
         "title": "Inspection scheduling guidance",
         "retrievedAt": "2026-05-01T00:00:00Z",
         "summary": "Inspection scheduling is a consequential stop point requiring exact user confirmation."

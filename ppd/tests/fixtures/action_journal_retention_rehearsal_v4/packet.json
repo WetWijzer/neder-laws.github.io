@@ -23,7 +23,7 @@
       {"kind": "manual_handoff", "expected_response": "Route official decisions and ambiguous permit actions to a human reviewer."},
       {"kind": "refusal_explanation", "expected_response": "Explain that the agent cannot perform restricted official, payment, or account actions."}
     ],
-    "source_citation_payloads": [{"row_id": "request-001", "citations": [{"label": "PP&D public evidence fixture", "url": "https://www.portland.gov/ppd"}]}],
+    "source_citation_payloads": [{"row_id": "request-001", "citations": [{"label": "PP&D public evidence fixture", "url": "https://wetten.overheid.nl/ppd"}]}],
     "validation_commands": [["python3", "-m", "pytest", "ppd/tests/test_agent_api_compat_rehearsal_v4.py"]],
     "safety": {"draft_only": true, "live_submit": false, "mutates_live_systems": false, "autonomous_official_action": false, "legal_guarantee": false, "permitting_guarantee": false}
   },

@@ -6,7 +6,7 @@
   "liveCrawlingUsed": false,
   "authenticatedAutomationUsed": false,
   "scope": {
-    "bureau": "Portland Permitting & Development",
+    "bureau": "Netherlands Permitting & Development",
     "coverageGoal": "Inventory committed public fixture and source-inventory evidence for permit extension, permit reactivation, cancellation, refund, and inspection-result guidance categories.",
     "excludedArtifacts": [
       "private DevHub session state",
@@ -34,15 +34,15 @@
           "evidenceId": "source-inventory-permit-lifecycle-guidance",
           "evidenceType": "source_inventory_record",
           "fixtureRef": "ppd/tests/fixtures/source_inventory/public_ppd_source_inventory.json",
-          "sourceUrl": "https://www.portland.gov/ppd",
-          "citation": "PP&D public guidance source inventory record for Portland.gov PP&D pages.",
+          "sourceUrl": "https://wetten.overheid.nl/ppd",
+          "citation": "PP&D public guidance source inventory record for wetten.overheid.nl PP&D pages.",
           "fixtureCapturedAt": "2026-05-01T00:00:00Z"
         },
         {
           "evidenceId": "normalized-guidance-devhub-processes",
           "evidenceType": "normalized_public_guidance_fixture",
           "fixtureRef": "ppd/tests/fixtures/extraction/devhub_public_guidance_normalized.json",
-          "sourceUrl": "https://www.portland.gov/ppd/devhub",
+          "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
           "citation": "Normalized public DevHub guidance fixture covering public process help before authenticated workflow use.",
           "fixtureCapturedAt": "2026-05-01T00:00:00Z"
         }
@@ -75,15 +75,15 @@
           "evidenceId": "source-inventory-permit-lifecycle-guidance",
           "evidenceType": "source_inventory_record",
           "fixtureRef": "ppd/tests/fixtures/source_inventory/public_ppd_source_inventory.json",
-          "sourceUrl": "https://www.portland.gov/ppd",
-          "citation": "PP&D public guidance source inventory record for Portland.gov PP&D pages.",
+          "sourceUrl": "https://wetten.overheid.nl/ppd",
+          "citation": "PP&D public guidance source inventory record for wetten.overheid.nl PP&D pages.",
           "fixtureCapturedAt": "2026-05-01T00:00:00Z"
         },
         {
           "evidenceId": "normalized-guidance-devhub-processes",
           "evidenceType": "normalized_public_guidance_fixture",
           "fixtureRef": "ppd/tests/fixtures/extraction/devhub_public_guidance_normalized.json",
-          "sourceUrl": "https://www.portland.gov/ppd/devhub",
+          "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
           "citation": "Normalized public DevHub guidance fixture covering public process help before authenticated workflow use.",
           "fixtureCapturedAt": "2026-05-01T00:00:00Z"
         }
@@ -116,15 +116,15 @@
           "evidenceId": "source-inventory-permit-lifecycle-guidance",
           "evidenceType": "source_inventory_record",
           "fixtureRef": "ppd/tests/fixtures/source_inventory/public_ppd_source_inventory.json",
-          "sourceUrl": "https://www.portland.gov/ppd",
-          "citation": "PP&D public guidance source inventory record for Portland.gov PP&D pages.",
+          "sourceUrl": "https://wetten.overheid.nl/ppd",
+          "citation": "PP&D public guidance source inventory record for wetten.overheid.nl PP&D pages.",
           "fixtureCapturedAt": "2026-05-01T00:00:00Z"
         },
         {
           "evidenceId": "normalized-guidance-devhub-processes",
           "evidenceType": "normalized_public_guidance_fixture",
           "fixtureRef": "ppd/tests/fixtures/extraction/devhub_public_guidance_normalized.json",
-          "sourceUrl": "https://www.portland.gov/ppd/devhub",
+          "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
           "citation": "Normalized public DevHub guidance fixture covering public process help before authenticated workflow use.",
           "fixtureCapturedAt": "2026-05-01T00:00:00Z"
         }
@@ -157,7 +157,7 @@
           "evidenceId": "source-inventory-fee-payment-guidance",
           "evidenceType": "source_inventory_record",
           "fixtureRef": "ppd/tests/fixtures/source_inventory/public_ppd_source_inventory.json",
-          "sourceUrl": "https://www.portland.gov/ppd",
+          "sourceUrl": "https://wetten.overheid.nl/ppd",
           "citation": "PP&D public source inventory record for fee, payment, and lifecycle guidance pages.",
           "fixtureCapturedAt": "2026-05-01T00:00:00Z"
         },
@@ -165,7 +165,7 @@
           "evidenceId": "normalized-guidance-devhub-processes",
           "evidenceType": "normalized_public_guidance_fixture",
           "fixtureRef": "ppd/tests/fixtures/extraction/devhub_public_guidance_normalized.json",
-          "sourceUrl": "https://www.portland.gov/ppd/devhub",
+          "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
           "citation": "Normalized public DevHub guidance fixture covering fee payment guidance before authenticated workflow use.",
           "fixtureCapturedAt": "2026-05-01T00:00:00Z"
         }
@@ -198,7 +198,7 @@
           "evidenceId": "source-inventory-inspection-guidance",
           "evidenceType": "source_inventory_record",
           "fixtureRef": "ppd/tests/fixtures/source_inventory/public_ppd_source_inventory.json",
-          "sourceUrl": "https://www.portland.gov/ppd",
+          "sourceUrl": "https://wetten.overheid.nl/ppd",
           "citation": "PP&D public source inventory record for inspection-related guidance pages.",
           "fixtureCapturedAt": "2026-05-01T00:00:00Z"
         },
@@ -206,7 +206,7 @@
           "evidenceId": "normalized-guidance-devhub-inspections",
           "evidenceType": "normalized_public_guidance_fixture",
           "fixtureRef": "ppd/tests/fixtures/extraction/devhub_public_guidance_normalized.json",
-          "sourceUrl": "https://www.portland.gov/ppd/devhub",
+          "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
           "citation": "Normalized public DevHub guidance fixture covering inspection-related public help before authenticated workflow use.",
           "fixtureCapturedAt": "2026-05-01T00:00:00Z"
         }

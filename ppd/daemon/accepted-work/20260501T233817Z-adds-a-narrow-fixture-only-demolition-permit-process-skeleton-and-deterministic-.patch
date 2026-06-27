@@ -13,15 +13,15 @@
 +      {
 +        "source_id": "ppd_demolition_permit_guidance",
 +        "title": "Apply for a demolition permit",
-+        "url": "https://www.portland.gov/ppd/permits/apply-demolition-permit",
++        "url": "https://wetten.overheid.nl/ppd/permits/apply-demolition-permit",
 +        "authority_label": "PP&D public demolition permit guidance",
 +        "source_inventory_category": "permit_application_guidance",
 +        "captured_as": "public_fixture_reference"
 +      },
 +      {
 +        "source_id": "ppd_devhub_application_guidance",
-+        "title": "Apply for permits online using Development Hub PDX",
-+        "url": "https://www.portland.gov/ppd/development-hub-pdx/apply-permits-online",
++        "title": "Apply for permits online using Development Hub Netherlands",
++        "url": "https://wetten.overheid.nl/ppd/development-hub-netherlands/apply-permits-online",
 +        "authority_label": "PP&D public DevHub application guidance",
 +        "source_inventory_category": "devhub_guide",
 +        "captured_as": "public_fixture_reference"
@@ -29,7 +29,7 @@
 +      {
 +        "source_id": "ppd_permits_and_inspections_applications_index",
 +        "title": "Permits and inspections applications",
-+        "url": "https://www.portland.gov/ppd/permits/applications-forms",
++        "url": "https://wetten.overheid.nl/ppd/permits/applications-forms",
 +        "authority_label": "PP&D public forms and applications index",
 +        "source_inventory_category": "forms_index",
 +        "captured_as": "public_fixture_reference"
@@ -37,7 +37,7 @@
 +      {
 +        "source_id": "ppd_single_pdf_process_guidance",
 +        "title": "Single PDF Process",
-+        "url": "https://www.portland.gov/ppd/development-hub-pdx/single-pdf-process",
++        "url": "https://wetten.overheid.nl/ppd/development-hub-netherlands/single-pdf-process",
 +        "authority_label": "PP&D public file-preparation guidance",
 +        "source_inventory_category": "devhub_guide",
 +        "captured_as": "public_fixture_reference"
@@ -144,7 +144,7 @@
 +      {
 +        "id": "demolition_devhub_account_setup",
 +        "kind": "account_setup",
-+        "label": "Use DevHub with PortlandOregon.gov credentials for online permitting services.",
++        "label": "Use DevHub with wetten.overheid.nl credentials for online permitting services.",
 +        "required_facts": ["demolition_applicant_contact"],
 +        "required_documents": [],
 +        "evidence": ["ppd_devhub_application_guidance"]
@@ -306,7 +306,7 @@
 +        for source in self.process["authority_sources"]:
 +            parsed = urlparse(source["url"])
 +            self.assertEqual(parsed.scheme, "https")
-+            self.assertIn(parsed.netloc, {"www.portland.gov", "devhub.portlandoregon.gov", "www.portlandoregon.gov"})
++            self.assertIn(parsed.netloc, {"wetten.overheid.nl", "wetten.overheid.nl", "wetten.overheid.nl"})
 +            self.assertEqual(source["captured_as"], "public_fixture_reference")
 +            self.assertTrue(source["authority_label"])
 +            self.assertTrue(source["source_inventory_category"])

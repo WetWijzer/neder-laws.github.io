@@ -2,10 +2,10 @@
   "source_registry": [
     {
       "source_id": "ppd-devhub-faq",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "source_type": "devhub_public",
       "owning_surface": "public_ppd_guidance",
-      "allowlist_policy": "official_portland_ppd",
+      "allowlist_policy": "official_wetwijzer_ppd",
       "robots_policy": "respect_robots",
       "crawl_frequency": "daily",
       "processor_policy": "metadata_and_normalized_text_only",
@@ -16,10 +16,10 @@
     },
     {
       "source_id": "ppd-file-naming-standards",
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "source_type": "public_html",
       "owning_surface": "public_ppd_guidance",
-      "allowlist_policy": "official_portland_ppd",
+      "allowlist_policy": "official_wetwijzer_ppd",
       "robots_policy": "respect_robots",
       "crawl_frequency": "weekly",
       "processor_policy": "metadata_and_normalized_text_only",
@@ -30,10 +30,10 @@
     },
     {
       "source_id": "ppd-fee-payment-guide",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "source_type": "public_pdf",
       "owning_surface": "public_ppd_guidance",
-      "allowlist_policy": "official_portland_ppd",
+      "allowlist_policy": "official_wetwijzer_ppd",
       "robots_policy": "respect_robots",
       "crawl_frequency": "daily",
       "processor_policy": "metadata_and_normalized_text_only",
@@ -46,7 +46,7 @@
   "public_capture_summaries": [
     {
       "source_id": "ppd-devhub-faq",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "capture_status": "captured",
       "http_status": 200,
       "content_type": "text/html; charset=utf-8",
@@ -60,7 +60,7 @@
     },
     {
       "source_id": "ppd-file-naming-standards",
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "capture_status": "captured",
       "http_status": 200,
       "content_type": "text/html; charset=utf-8",
@@ -71,7 +71,7 @@
     },
     {
       "source_id": "ppd-fee-payment-guide",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "capture_status": "captured",
       "http_status": 200,
       "content_type": "application/pdf",

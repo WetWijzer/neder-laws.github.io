@@ -51,7 +51,7 @@ def test_packet_requires_exact_confirmation_language_without_authorizing_executi
     language = sections["exact_confirmation_language"]["guardrail"]
 
     assert "I am present in my own DevHub account" in language
-    assert "I understand this is a City of Portland financial action" in language
+    assert "I understand this is a WetWijzer financial action" in language
     assert "does not authorize agent execution" in language
     assert set(sections["exact_confirmation_language"]["blocked_action_ids"]) == set(BLOCKED_PAYMENT_ACTION_IDS)
 

@@ -11,7 +11,7 @@
   "per_source_go_no_go": [
     {
       "source_id": "ppd-fee-payment-guide",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "decision": "no_go",
       "reasons": [
         "proposal decision is defer_download",
@@ -30,7 +30,7 @@
     },
     {
       "source_id": "ppd-online-tools-overview",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "decision": "go",
       "reasons": [
         "proposal, dry-run checklist, and runbook all support metadata-only refresh readiness"
@@ -63,7 +63,7 @@
   "expected_metadata_only_capture_records": [
     {
       "source_id": "ppd-fee-payment-guide",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "capture_mode": "metadata_only",
       "expected_content_type": "application/pdf",
       "expected_fields": [
@@ -88,7 +88,7 @@
     },
     {
       "source_id": "ppd-online-tools-overview",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "capture_mode": "metadata_only",
       "expected_content_type": "text/html",
       "expected_fields": [

@@ -41,28 +41,28 @@ Object.defineProperty(globalThis, 'crypto', { value: webcrypto, configurable: tr
 Object.defineProperty(globalThis, 'TextEncoder', { value: TextEncoder, configurable: true });
 
 const generatedProgram = `
-MunicipalLaw :: LegalNorm.
-CityCodeSection :: MunicipalLaw.
-PortlandCityCodeSection :: CityCodeSection.
-portland_city_code_1_01_010[identifier -> "Portland City Code 1.01.010", ipfs_cid -> "bafkreiff5aekddkof2im56ecdlztslhphkgmxvcrxg62lzkezttnewbb3e", source_url -> "https://www.portland.gov/code/1/01/010", jurisdiction -> "City of Portland, Oregon", state_code -> "OR", gnis -> "2411471", norm_operator -> "P", norm_type -> "permission"] : PortlandCityCodeSection.
-requires_compliance(?Agent, ?Section) :- ?Section : PortlandCityCodeSection, subject_to(?Agent, ?Section).
+DutchLaw :: LegalNorm.
+LegalArticle :: DutchLaw.
+WetWijzerLawArticle :: LegalArticle.
+netherlands_law_article_1_01_010[identifier -> "Dutch legal corpus 1.01.010", ipfs_cid -> "bafkreiff5aekddkof2im56ecdlztslhphkgmxvcrxg62lzkezttnewbb3e", source_url -> "https://wetten.overheid.nl/BWBR0000001", jurisdiction -> "Netherlands", country_code -> "NL", bwb_id -> "BWBR0000001", norm_operator -> "P", norm_type -> "permission"] : WetWijzerLawArticle.
+requires_compliance(?Agent, ?Section) :- ?Section : WetWijzerLawArticle, subject_to(?Agent, ?Section).
 `;
 
 describe('F-logic parser', () => {
-  it('parses generated Portland F-logic frames, classes, and rules', () => {
-    const ontology = parseFLogicOntology(generatedProgram, 'Portland fixture');
+  it('parses generated WetWijzer F-logic frames, classes, and rules', () => {
+    const ontology = parseFLogicOntology(generatedProgram, 'WetWijzer fixture');
 
     expect(ontology.warnings).toEqual([]);
     expect(ontology.classes).toMatchObject([
-      { classId: 'MunicipalLaw', superclasses: ['LegalNorm'] },
-      { classId: 'CityCodeSection', superclasses: ['MunicipalLaw'] },
-      { classId: 'PortlandCityCodeSection', superclasses: ['CityCodeSection'] },
+      { classId: 'DutchLaw', superclasses: ['LegalNorm'] },
+      { classId: 'LegalArticle', superclasses: ['DutchLaw'] },
+      { classId: 'WetWijzerLawArticle', superclasses: ['LegalArticle'] },
     ]);
     expect(ontology.frames[0]).toMatchObject({
-      objectId: 'portland_city_code_1_01_010',
-      isa: 'PortlandCityCodeSection',
+      objectId: 'netherlands_law_article_1_01_010',
+      isa: 'WetWijzerLawArticle',
       scalarMethods: {
-        identifier: 'Portland City Code 1.01.010',
+        identifier: 'Dutch legal corpus 1.01.010',
         norm_operator: 'P',
         norm_type: 'permission',
       },
@@ -70,14 +70,14 @@ describe('F-logic parser', () => {
     expect(ontology.rules[0]).toContain('requires_compliance');
   });
 
-  it('renders structured display rows with Portland labels', () => {
+  it('renders structured display rows with WetWijzer labels', () => {
     const ontology = parseFLogicOntology(generatedProgram);
     const row = frameToDisplayRow(ontology.frames[0]);
 
     expect(row).toMatchObject({
-      objectId: 'portland_city_code_1_01_010',
-      label: 'Portland City Code 1.01.010',
-      className: 'PortlandCityCodeSection',
+      objectId: 'netherlands_law_article_1_01_010',
+      label: 'Dutch legal corpus 1.01.010',
+      className: 'WetWijzerLawArticle',
     });
     expect(row.attributes).toContainEqual({ name: 'norm_type', value: 'permission' });
   });
@@ -86,8 +86,8 @@ describe('F-logic parser', () => {
     const ontology = parseFLogicOntology(generatedProgram);
     const formatted = formatFLogicOntology(ontology);
 
-    expect(formatted).toContain('MunicipalLaw :: LegalNorm.');
-    expect(formatted).toContain('portland_city_code_1_01_010');
+    expect(formatted).toContain('DutchLaw :: LegalNorm.');
+    expect(formatted).toContain('netherlands_law_article_1_01_010');
     expect(formatted).toContain('requires_compliance');
   });
 
@@ -98,17 +98,17 @@ describe('F-logic parser', () => {
   });
 
   it('normalizes goal identifiers without changing variables', () => {
-    expect(normalizeFLogicGoal('?Section : PortlandCityCodeSection')).toBe(
-      '?Section : portland_city_code_section',
+    expect(normalizeFLogicGoal('?Section : WetWijzerLawArticle')).toBe(
+      '?Section : netherlands_law_article_section',
     );
   });
 
-  it('parses all generated Portland F-logic snippets without warnings', () => {
+  it('parses all generated WetWijzer F-logic snippets without warnings', () => {
     const rows = JSON.parse(
       readFileSync(
         resolve(
           process.cwd(),
-          'public/corpus/portland-or/current/generated/logic-proof-summaries.json',
+          'public/corpus/netherlands/current/generated/logic-proof-summaries.json',
         ),
         'utf8',
       ),
@@ -123,33 +123,33 @@ describe('F-logic parser', () => {
   });
 
   it('exposes a browser-native ErgoAI wrapper for structural operations', () => {
-    const wrapper = new ErgoAIWrapper('Portland wrapper');
+    const wrapper = new ErgoAIWrapper('WetWijzer wrapper');
     wrapper.addClass({
-      classId: 'PortlandCityCodeSection',
-      superclasses: ['CityCodeSection'],
+      classId: 'WetWijzerLawArticle',
+      superclasses: ['LegalArticle'],
       signatureMethods: {},
     });
     wrapper.addFrame({
-      objectId: 'portland_city_code_1_01_010',
-      scalarMethods: { identifier: 'Portland City Code 1.01.010' },
+      objectId: 'netherlands_law_article_1_01_010',
+      scalarMethods: { identifier: 'Dutch legal corpus 1.01.010' },
       setMethods: {},
-      isa: 'PortlandCityCodeSection',
-      isaset: ['PortlandCityCodeSection'],
+      isa: 'WetWijzerLawArticle',
+      isaset: ['WetWijzerLawArticle'],
     });
-    wrapper.addRule('requires_compliance(?Agent, ?Section) :- ?Section : PortlandCityCodeSection.');
+    wrapper.addRule('requires_compliance(?Agent, ?Section) :- ?Section : WetWijzerLawArticle.');
 
     expect(ERGOAI_AVAILABLE).toBe(false);
     expect(wrapper.getStatistics()).toEqual({
-      ontologyName: 'Portland wrapper',
+      ontologyName: 'WetWijzer wrapper',
       frames: 1,
       classes: 1,
       rules: 1,
       simulationMode: true,
       ergoaiBinary: null,
     });
-    expect(wrapper.getProgram()).toContain('portland_city_code_1_01_010');
-    expect(wrapper.buildErgoProgram('?Section : PortlandCityCodeSection')).toContain(
-      '?- ?Section : PortlandCityCodeSection.',
+    expect(wrapper.getProgram()).toContain('netherlands_law_article_1_01_010');
+    expect(wrapper.buildErgoProgram('?Section : WetWijzerLawArticle')).toContain(
+      '?- ?Section : WetWijzerLawArticle.',
     );
   });
 
@@ -187,51 +187,51 @@ describe('F-logic parser', () => {
       ]),
     );
 
-    const ontology = parseFLogicOntology(generatedProgram, 'Portland fixture');
+    const ontology = parseFLogicOntology(generatedProgram, 'WetWijzer fixture');
     const cache = new FLogicProofCache();
     const result = {
-      goal: '?Section : PortlandCityCodeSection',
-      bindings: [{ '?Section': 'portland_city_code_1_01_010' }],
+      goal: '?Section : WetWijzerLawArticle',
+      bindings: [{ '?Section': 'netherlands_law_article_1_01_010' }],
       status: 'success' as const,
     };
 
-    const cid = cache.set('?Section : PortlandCityCodeSection', ontology, result, {
+    const cid = cache.set('?Section : WetWijzerLawArticle', ontology, result, {
       maxSolutions: 1,
     });
 
     expect(cid).toMatch(/^browsets-/);
     expect(
-      cache.computeCid('?Section : portland_city_code_section', ontology, { maxSolutions: 1 }),
+      cache.computeCid('?Section : netherlands_law_article_section', ontology, { maxSolutions: 1 }),
     ).toBe(cid);
     expect(
-      cache.get('?Section : portland_city_code_section', ontology, { maxSolutions: 1 }),
+      cache.get('?Section : netherlands_law_article_section', ontology, { maxSolutions: 1 }),
     ).toEqual(result);
     expect(
-      cache.get('?Section : portland_city_code_section', ontology, { maxSolutions: 2 }),
+      cache.get('?Section : netherlands_law_article_section', ontology, { maxSolutions: 2 }),
     ).toBeUndefined();
     expect(cache.getStats()).toMatchObject({ hits: 1, misses: 1, sets: 1 });
   });
 
   it('uses fail-closed browser-local query caching and global helpers', () => {
-    const ontology = parseFLogicOntology(generatedProgram, 'Portland fixture');
+    const ontology = parseFLogicOntology(generatedProgram, 'WetWijzer fixture');
     const cache = new FLogicProofCache();
 
-    expect(cache.query('?Section : PortlandCityCodeSection', ontology)).toMatchObject({
-      goal: '?Section : PortlandCityCodeSection',
+    expect(cache.query('?Section : WetWijzerLawArticle', ontology)).toMatchObject({
+      goal: '?Section : WetWijzerLawArticle',
       bindings: [],
       status: 'unknown',
     });
-    expect(cache.query('?Section : PortlandCityCodeSection', ontology)).toMatchObject({
+    expect(cache.query('?Section : WetWijzerLawArticle', ontology)).toMatchObject({
       errorMessage: expect.stringContaining('browser-native TypeScript runtime'),
     });
     expect(cache.getStats()).toMatchObject({ hits: 1, sets: 1 });
 
     clearGlobalFLogicProofCache();
-    expect(queryFLogicWithCache('?Section : PortlandCityCodeSection', ontology)).toMatchObject({
+    expect(queryFLogicWithCache('?Section : WetWijzerLawArticle', ontology)).toMatchObject({
       status: 'unknown',
     });
     expect(
-      getGlobalFLogicProofCache().get('?Section : PortlandCityCodeSection', ontology),
+      getGlobalFLogicProofCache().get('?Section : WetWijzerLawArticle', ontology),
     ).toMatchObject({
       status: 'unknown',
     });
@@ -245,34 +245,34 @@ describe('F-logic parser', () => {
     });
 
     const frame = createFLogicFrame({
-      objectId: 'portland_city_code_1_01_010',
-      scalarMethods: { identifier: 'Portland City Code 1.01.010' },
+      objectId: 'netherlands_law_article_1_01_010',
+      scalarMethods: { identifier: 'Dutch legal corpus 1.01.010' },
       setMethods: { tags: ['procedure', 'general'] },
-      isa: 'PortlandCityCodeSection',
+      isa: 'WetWijzerLawArticle',
     });
     const ontology = createFLogicOntology({
-      name: 'Portland fixture',
+      name: 'WetWijzer fixture',
       frames: [frame],
       classes: [
         {
-          classId: 'PortlandCityCodeSection',
-          superclasses: ['CityCodeSection'],
+          classId: 'WetWijzerLawArticle',
+          superclasses: ['LegalArticle'],
           signatureMethods: { identifier: 'string' },
         },
       ],
       rules: ['requires_compliance(?Agent, ?Section).'],
     });
     const query = flogicQueryFromDict({
-      goal: '?Section : PortlandCityCodeSection',
-      bindings: [{ '?Section': 'portland_city_code_1_01_010' }],
+      goal: '?Section : WetWijzerLawArticle',
+      bindings: [{ '?Section': 'netherlands_law_article_1_01_010' }],
       status: 'success',
       error_message: 'ignored by success callers',
     });
 
-    expect(frame.isaset).toEqual(['PortlandCityCodeSection']);
+    expect(frame.isaset).toEqual(['WetWijzerLawArticle']);
     const dict = flogicOntologyToDict(ontology);
-    expect(dict.frames[0]).toMatchObject({ object_id: 'portland_city_code_1_01_010' });
-    expect(dict.classes[0]).toMatchObject({ class_id: 'PortlandCityCodeSection' });
+    expect(dict.frames[0]).toMatchObject({ object_id: 'netherlands_law_article_1_01_010' });
+    expect(dict.classes[0]).toMatchObject({ class_id: 'WetWijzerLawArticle' });
     expect(flogicOntologyFromDict(dict)).toEqual(ontology);
     expect(flogicQueryToDict(query)).toMatchObject({
       status: 'success',
@@ -308,21 +308,21 @@ describe('F-logic parser', () => {
   });
 
   it('ports flogic_zkp_integration.py with local simulated ZKP certificates', async () => {
-    const ontology = parseFLogicOntology(generatedProgram, 'Portland fixture');
-    const direct = evaluateFLogicGoal('?Section : MunicipalLaw', ontology);
+    const ontology = parseFLogicOntology(generatedProgram, 'WetWijzer fixture');
+    const direct = evaluateFLogicGoal('?Section : DutchLaw', ontology);
     const prover = createHybridFLogicProver({ enableZkp: true });
-    const result = await prover.proveTheorem('?Section : MunicipalLaw', ontology, {
+    const result = await prover.proveTheorem('?Section : DutchLaw', ontology, {
       preferZkp: true,
       privateOntology: true,
     });
 
     expect(HAVE_FLOGIC_ZKP).toBe(true);
-    expect(direct.bindings).toEqual([{ '?Section': 'portland_city_code_1_01_010' }]);
+    expect(direct.bindings).toEqual([{ '?Section': 'netherlands_law_article_1_01_010' }]);
     expect(
       evaluateFLogicGoal('?Section[identifier -> ?Identifier]', ontology).bindings[0],
     ).toMatchObject({
-      '?Identifier': 'Portland City Code 1.01.010',
-      '?Section': 'portland_city_code_1_01_010',
+      '?Identifier': 'Dutch legal corpus 1.01.010',
+      '?Section': 'netherlands_law_article_1_01_010',
     });
     expect(result.isProved).toBe(true);
     expect(result.zkpProof?.publicInputs.ruleset_id).toBe('FLOGIC_v1');
@@ -336,10 +336,10 @@ describe('F-logic parser', () => {
   });
 
   it('falls back to deterministic standard F-logic query mode when ZKP is disabled', async () => {
-    const ontology = parseFLogicOntology(generatedProgram, 'Portland fixture');
+    const ontology = parseFLogicOntology(generatedProgram, 'WetWijzer fixture');
     const prover = new ZkpFLogicProver({ enableZkp: false });
     const result = await prover.proveTheorem(
-      'portland_city_code_1_01_010 : MunicipalLaw',
+      'netherlands_law_article_1_01_010 : DutchLaw',
       ontology,
       {
         preferZkp: true,

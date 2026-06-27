@@ -196,7 +196,7 @@ def _validate_citations(
             errors.append(f"citation reference {ref_id} must be an object")
             continue
         url = ref.get("url")
-        if not isinstance(url, str) or not url.startswith("https://www.portland.gov/ppd"):
+        if not isinstance(url, str) or not url.startswith("https://wetten.overheid.nl/ppd"):
             errors.append(f"citation reference {ref_id} must use an official PP&D https URL")
 
 

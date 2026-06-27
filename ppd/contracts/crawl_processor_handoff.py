@@ -22,10 +22,10 @@ from .crawl_manifest_privacy import validate_crawl_manifest_privacy
 
 ALLOWED_PUBLIC_HOSTS = frozenset(
     {
-        "www.portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
-        "www.portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
     }
 )
 
@@ -255,7 +255,7 @@ def _validate_public_https_url(value: str, field_name: str) -> list[str]:
 
 
 def _is_private_devhub_path(host: str, path: str) -> bool:
-    if host != "devhub.portlandoregon.gov":
+    if host != "wetten.overheid.nl":
         return False
     private_prefixes = (
         "/account",

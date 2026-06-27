@@ -53,7 +53,7 @@ def test_rejects_archive_rows_without_required_metadata_placeholders() -> None:
     plan["archive_manifest_placeholder_rows"] = [
         {
             "source_id": "ppd-public-tools",
-            "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+            "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
             "no_raw_body_persisted": False,
         }
     ]

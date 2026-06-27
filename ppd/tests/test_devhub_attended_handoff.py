@@ -44,7 +44,7 @@ def test_fixture_loads_without_private_state() -> None:
 def test_default_loader_uses_committed_fixture() -> None:
     checklist = load_default_attended_handoff_checklist()
 
-    assert "user_completes_portlandoregon_login" in checklist.manual_login_prerequisites
+    assert "user_completes_wetwijzernetherlands_login" in checklist.manual_login_prerequisites
     assert "submit_permit_request" in checklist.exact_confirmation_boundaries
     assert "credentials" in checklist.redaction_requirements
 

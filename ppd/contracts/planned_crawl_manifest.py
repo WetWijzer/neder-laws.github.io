@@ -43,10 +43,10 @@ FORBIDDEN_RESPONSE_KEYS = frozenset(
 
 PUBLIC_HOSTS = frozenset(
     {
-        "www.portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
-        "www.portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
     }
 )
 
@@ -205,7 +205,7 @@ def _validate_public_url(url: str, context: str) -> list[str]:
         errors.append(f"{context} must use https")
     if parsed.hostname not in PUBLIC_HOSTS:
         errors.append(f"{context} host must be in the PP&D public allowlist")
-    if parsed.hostname == "devhub.portlandoregon.gov" and _looks_private_devhub_path(parsed.path):
+    if parsed.hostname == "wetten.overheid.nl" and _looks_private_devhub_path(parsed.path):
         errors.append(f"{context} must not target private DevHub paths")
     return errors
 

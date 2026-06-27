@@ -22,15 +22,15 @@ def test_public_frontier_expansion_allows_official_html_and_pdf_candidates() -> 
     rows = expand_public_frontier_from_fixture(FIXTURE_PATH)
     by_url = {row["canonical_url"]: row for row in rows}
 
-    html = by_url["https://www.portland.gov/ppd/get-permit/apply-permits"]
-    assert html["source_page"] == "https://www.portland.gov/ppd/how-use-online-permitting-tools"
+    html = by_url["https://wetten.overheid.nl/ppd/get-permit/apply-permits"]
+    assert html["source_page"] == "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools"
     assert html["link_text"] == "Apply for permits"
     assert html["content_type_expectation"] == "text/html"
     assert html["allow_skip_decision"] == "allow"
     assert html["skip_reason"] == ""
     assert html["processor_handoff_expectation"] == "candidate_for_html_processor:public_html_metadata_then_normalized_text"
 
-    pdf = by_url["https://www.portland.gov/ppd/documents/how-pay-fees/download"]
+    pdf = by_url["https://wetten.overheid.nl/ppd/documents/how-pay-fees/download"]
     assert pdf["content_type_expectation"] == "application/pdf"
     assert pdf["allow_skip_decision"] == "allow"
     assert pdf["processor_handoff_expectation"] == "candidate_for_pdf_processor:public_pdf_metadata_then_text_extraction"
@@ -40,7 +40,7 @@ def test_public_frontier_expansion_records_skips_without_active_frontier_mutatio
     rows = expand_public_frontier_from_fixture(FIXTURE_PATH)
     by_url = {row["canonical_url"]: row for row in rows}
 
-    devhub_login = by_url["https://devhub.portlandoregon.gov/login"]
+    devhub_login = by_url["https://wetten.overheid.nl/login"]
     assert devhub_login["allow_skip_decision"] == "skip"
     assert devhub_login["skip_reason"] == "private_or_authenticated"
     assert devhub_login["processor_handoff_expectation"] == "no_handoff:private_or_authenticated"

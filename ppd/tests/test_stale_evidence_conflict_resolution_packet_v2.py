@@ -64,7 +64,7 @@ def test_rejects_missing_validation_commands() -> None:
         ({"active_registry_mutation": True}, "active_mutation_flag"),
         ({"evidence": {"raw_body": "raw"}}, "raw_or_downloaded_artifact"),
         ({"downloaded_document": "/tmp/private.pdf"}, "raw_or_downloaded_artifact"),
-        ({"citation_url": "https://devhub.portlandoregon.gov/account?session_id=secret"}, "private_session_or_browser_artifact"),
+        ({"citation_url": "https://wetten.overheid.nl/account?session_id=secret"}, "private_session_or_browser_artifact"),
         ({"citation_url": "https://example.com/not-ppd"}, "unsupported_path_or_host"),
     ],
 )

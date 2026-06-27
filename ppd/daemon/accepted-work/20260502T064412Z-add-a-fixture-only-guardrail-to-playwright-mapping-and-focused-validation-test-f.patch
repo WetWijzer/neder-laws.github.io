@@ -8,13 +8,13 @@
 +  "sourceEvidence": [
 +    {
 +      "id": "src-devhub-building-permit-request",
-+      "sourceUrl": "https://www.portland.gov/ppd/devhub",
-+      "title": "Development Hub PDX guidance",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
++      "title": "Development Hub Netherlands guidance",
 +      "capturedAt": "2026-05-01T00:00:00Z"
 +    },
 +    {
 +      "id": "src-single-pdf-process",
-+      "sourceUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +      "title": "Single PDF Process guidance",
 +      "capturedAt": "2026-05-01T00:00:00Z"
 +    }

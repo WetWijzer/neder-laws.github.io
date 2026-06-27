@@ -3,7 +3,7 @@
   "fixture_only": true,
   "reviewer_handoff": [
     {
-      "source_id": "PPD-SRC-PORTLAND-ZONING-001",
+      "source_id": "PPD-SRC-NETHERLANDS-ZONING-001",
       "reviewer_owner": "planning-policy-reviewer",
       "reviewer_backup_owner": "ppd-guardrails-reviewer",
       "freshness_signal": "hypothetical section update discovered during offline rehearsal",
@@ -11,7 +11,7 @@
       "citations": ["fixture://freshness-handoff#zoning-reviewer"]
     },
     {
-      "source_id": "PPD-SRC-PORTLAND-PERMIT-002",
+      "source_id": "PPD-SRC-NETHERLANDS-PERMIT-002",
       "reviewer_owner": "permit-process-reviewer",
       "reviewer_backup_owner": "ppd-guardrails-reviewer",
       "freshness_signal": "hypothetical permit checklist wording change discovered during offline rehearsal",

@@ -1,6 +1,6 @@
 import { buildChatPromptStarters, DEFAULT_CHAT_PROMPTS } from './chatPromptStarters';
-import type { CorpusEntity, CorpusRelationship, CorpusSection } from './portlandCorpus';
-import type { LogicProofSummary } from './portlandLogic';
+import type { CorpusEntity, CorpusRelationship, CorpusSection } from './netherlandsCorpus';
+import type { LogicProofSummary } from './netherlandsLogic';
 
 function makeSection(overrides: Partial<CorpusSection> = {}): CorpusSection {
   return {
@@ -9,8 +9,8 @@ function makeSection(overrides: Partial<CorpusSection> = {}): CorpusSection {
     title: 'Notice requirements',
     text: 'Notice text',
     source_url: 'https://example.test/section',
-    official_cite: 'PCC 33.10.010',
-    bluebook_citation: 'PCC 33.10.010',
+    official_cite: 'netherlands law 33.10.010',
+    bluebook_citation: 'netherlands law 33.10.010',
     chapter: '33.10',
     title_number: '33',
     jsonld: '{}',
@@ -20,8 +20,8 @@ function makeSection(overrides: Partial<CorpusSection> = {}): CorpusSection {
 
 function makeEntity(overrides: Partial<CorpusEntity> = {}): CorpusEntity {
   return {
-    id: 'municipal_actor:director',
-    type: 'municipal_actor',
+    id: 'legal_actor:director',
+    type: 'legal_actor',
     label: 'Director',
     properties: {},
     ...overrides,
@@ -32,7 +32,7 @@ function makeRelationship(overrides: Partial<CorpusRelationship> = {}): CorpusRe
   return {
     id: 'rel-1',
     source: 'bafk-section-cid',
-    target: 'portland_code_section:33_10_020',
+    target: 'netherlands_law_section:33_10_020',
     type: 'cross_reference',
     properties: {},
     ...overrides,
@@ -66,17 +66,17 @@ describe('buildChatPromptStarters', () => {
       makeProof(),
       [
         makeEntity(),
-        makeEntity({ id: 'municipal_subject:applicant', type: 'municipal_subject', label: 'Applicant' }),
+        makeEntity({ id: 'legal_subject:applicant', type: 'legal_subject', label: 'Applicant' }),
         makeEntity({ id: 'requirement:notice', type: 'requirement', label: 'Notice requirement' }),
       ],
       [makeRelationship()],
     );
 
-    expect(prompts).toContain('What duties does PCC 33.10.010 impose on Director?');
-    expect(prompts).toContain('How does PCC 33.10.010 treat Notice requirement?');
-    expect(prompts).toContain('What evidence shows how This section Cross Reference Section 33.10.020?');
-    expect(prompts).toContain('What obligation does the theorem for PCC 33.10.010 formalize?');
-    expect(prompts).toContain('What proof-backed conclusions about PCC 33.10.010 are certificate-verified?');
+    expect(prompts).toContain('What duties does netherlands law 33.10.010 impose on Director?');
+    expect(prompts).toContain('How does netherlands law 33.10.010 treat Notice requirement?');
+    expect(prompts).toContain('What evidence shows how This article cross reference Article 33.10.020?');
+    expect(prompts).toContain('What obligation does the theorem for netherlands law 33.10.010 formalize?');
+    expect(prompts).toContain('What proof-backed conclusions about netherlands law 33.10.010 are certificate-verified?');
   });
 
   it('keeps fallback prompts available and de-duplicates repeated graph context', () => {
@@ -84,8 +84,8 @@ describe('buildChatPromptStarters', () => {
       makeSection(),
       null,
       [
-        makeEntity({ id: 'municipal_actor:director', type: 'municipal_actor', label: 'Director' }),
-        makeEntity({ id: 'municipal_actor:director', type: 'municipal_actor', label: 'Director' }),
+        makeEntity({ id: 'legal_actor:director', type: 'legal_actor', label: 'Director' }),
+        makeEntity({ id: 'legal_actor:director', type: 'legal_actor', label: 'Director' }),
       ],
       [
         makeRelationship({ id: 'rel-1' }),
@@ -94,8 +94,8 @@ describe('buildChatPromptStarters', () => {
     );
 
     expect(prompts.slice(0, DEFAULT_CHAT_PROMPTS.length)).toEqual(DEFAULT_CHAT_PROMPTS);
-    expect(prompts.filter((prompt) => prompt === 'How is PCC 33.10.010 connected to Director in the knowledge graph?')).toHaveLength(1);
-    expect(prompts.length).toBeLessThanOrEqual(14);
+    expect(prompts.filter((prompt) => prompt === 'How is netherlands law 33.10.010 connected to Director in the knowledge graph?')).toHaveLength(1);
+    expect(prompts.length).toBeLessThanOrEqual(22);
   });
 
   it('falls back to the section title when no citation label is available', () => {

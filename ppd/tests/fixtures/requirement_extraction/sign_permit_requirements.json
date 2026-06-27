@@ -5,44 +5,44 @@
   "source_evidence": [
     {
       "id": "sign-src-application-type",
-      "source_url": "https://www.portland.gov/ppd/permits/sign-permits",
+      "source_url": "https://wetten.overheid.nl/ppd/permits/sign-permits",
       "title": "Sign permits guidance",
       "anchor": "permit-type-selection"
     },
     {
       "id": "sign-src-project-scope",
-      "source_url": "https://www.portland.gov/ppd/permits/sign-permits",
+      "source_url": "https://wetten.overheid.nl/ppd/permits/sign-permits",
       "title": "Sign permits guidance",
       "anchor": "project-scope"
     },
     {
       "id": "sign-src-site-plan",
-      "source_url": "https://www.portland.gov/ppd/permits/sign-permits",
+      "source_url": "https://wetten.overheid.nl/ppd/permits/sign-permits",
       "title": "Sign permit submittal checklist",
       "anchor": "site-plan-and-drawings"
     },
     {
       "id": "sign-src-structural",
-      "source_url": "https://www.portland.gov/ppd/permits/sign-permits",
+      "source_url": "https://wetten.overheid.nl/ppd/permits/sign-permits",
       "title": "Sign permit submittal checklist",
       "anchor": "structural-details"
     },
     {
       "id": "sign-src-property-owner",
-      "source_url": "https://www.portland.gov/ppd/permits/sign-permits",
+      "source_url": "https://wetten.overheid.nl/ppd/permits/sign-permits",
       "title": "Sign permit application instructions",
       "anchor": "owner-authorization"
     },
     {
       "id": "sign-src-fees",
-      "source_url": "https://www.portland.gov/ppd/permits/fees",
+      "source_url": "https://wetten.overheid.nl/ppd/permits/fees",
       "title": "Permit fees",
       "anchor": "fee-payment"
     },
     {
       "id": "sign-src-devhub-gates",
-      "source_url": "https://www.portland.gov/ppd/devhub",
-      "title": "Development Hub PDX guidance",
+      "source_url": "https://wetten.overheid.nl/ppd/devhub",
+      "title": "Development Hub Netherlands guidance",
       "anchor": "submit-and-upload"
     }
   ],

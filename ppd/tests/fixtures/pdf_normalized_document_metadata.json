@@ -5,8 +5,8 @@
   "documents": [
     {
       "documentId": "building-permit-application-pdf-fixture",
-      "sourceUrl": "https://www.portland.gov/ppd/forms/building-permit-application.pdf",
-      "canonicalUrl": "https://www.portland.gov/ppd/forms/building-permit-application.pdf",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/forms/building-permit-application.pdf",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/forms/building-permit-application.pdf",
       "title": "Building Permit Application PDF fixture",
       "pageCount": 3,
       "capturedAt": "2026-05-01T17:40:00Z",

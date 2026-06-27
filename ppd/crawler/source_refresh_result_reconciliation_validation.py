@@ -7,10 +7,10 @@ from typing import Any, Mapping
 from urllib.parse import urlparse, parse_qsl
 
 ALLOWLISTED_HOSTS = {
-    "portland.gov",
-    "www.portland.gov",
-    "www.portlandmaps.com",
-    "portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
+    "repository.overheid.nl",
 }
 
 RAW_REFERENCE_RE = re.compile(

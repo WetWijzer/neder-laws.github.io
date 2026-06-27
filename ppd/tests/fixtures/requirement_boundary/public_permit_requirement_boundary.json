@@ -15,21 +15,21 @@
   "sourceEvidence": [
     {
       "id": "ppd-devhub-faq-services",
-      "sourceUrl": "https://www.portland.gov/ppd/devhub-faq",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-faq",
       "sourceType": "public_guidance_html",
       "capturedAt": "2026-05-01T00:00:00Z",
       "supports": "Public DevHub FAQ describes online permitting service categories including permit requests requiring plan review, inspection scheduling for online trade permits, correction uploads, and fee payments."
     },
     {
       "id": "ppd-devhub-application-guidance-request-types",
-      "sourceUrl": "https://www.portland.gov/ppd/devhub/apply-permit-devhub",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/apply-permit-devhub",
       "sourceType": "public_guidance_html",
       "capturedAt": "2026-05-01T00:00:00Z",
       "supports": "Public application guidance lists permit request types including building permits and related permit categories."
     },
     {
       "id": "ppd-single-pdf-process-guidance",
-      "sourceUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
       "sourceType": "public_guidance_html",
       "capturedAt": "2026-05-01T00:00:00Z",
       "supports": "Public guidance says some projects use a Single PDF Process where drawing plans are one searchable PDF and applications, calculations, and supporting documents are separate PDFs."
@@ -99,7 +99,7 @@
         "boundaryClass": "operational_devhub_ui_behavior",
         "requirementType": "dependency",
         "subject": "applicant",
-        "action": "use PortlandOregon.gov credentials to access DevHub online permitting services",
+        "action": "use wetten.overheid.nl credentials to access DevHub online permitting services",
         "object": "DevHub account access",
         "conditions": [
           "applicant chooses to use authenticated DevHub services",

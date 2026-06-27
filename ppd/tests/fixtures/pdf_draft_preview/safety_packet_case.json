@@ -34,13 +34,13 @@
     {
       "evidence_id": "ppd-forms-index-field-evidence",
       "source_title": "PP&D permit applications and forms index",
-      "source_url": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+      "source_url": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
       "evidence_label": "Application forms identify project, applicant, and permit type fields."
     },
     {
       "evidence_id": "ppd-devhub-guide-field-evidence",
       "source_title": "DevHub permit application guide",
-      "source_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "source_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "evidence_label": "Permit requests can require typed facts and acknowledgements before submission."
     }
   ],

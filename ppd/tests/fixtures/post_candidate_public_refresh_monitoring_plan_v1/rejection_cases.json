@@ -6,7 +6,7 @@
         {
           "check_id": "no-thresholds",
           "schedule": "fixture-first synthetic check",
-          "coverage_categories": ["official_ppd_anchors", "file_preparation_guidance", "fee_payment_guidance", "devhub_public_guidance", "forms_index", "linked_portland_maps_references"],
+          "coverage_categories": ["official_ppd_anchors", "file_preparation_guidance", "fee_payment_guidance", "devhub_public_guidance", "forms_index", "linked_bwb_metadata_references"],
           "source_evidence_ids": ["src-ppd-landing-anchor"],
           "reviewer_routing": {"primary_reviewer": "ppd-public-source-reviewer"}
         }
@@ -22,7 +22,7 @@
         {
           "check_id": "no-routing",
           "schedule": "fixture-first synthetic check",
-          "coverage_categories": ["official_ppd_anchors", "file_preparation_guidance", "fee_payment_guidance", "devhub_public_guidance", "forms_index", "linked_portland_maps_references"],
+          "coverage_categories": ["official_ppd_anchors", "file_preparation_guidance", "fee_payment_guidance", "devhub_public_guidance", "forms_index", "linked_bwb_metadata_references"],
           "source_evidence_ids": ["src-ppd-landing-anchor"],
           "hold_thresholds": {"missing_required_source_count": 1}
         }

@@ -25,7 +25,7 @@ class SyntheticHtmlExtractionFixtureTest(unittest.TestCase):
             [crumb["text"] for crumb in self.fixture["breadcrumbs"]],
             [
                 "Home",
-                "Portland Permitting & Development",
+                "Netherlands Permitting & Development",
                 "Get a Permit",
                 "Apply for a Synthetic Residential Permit",
             ],

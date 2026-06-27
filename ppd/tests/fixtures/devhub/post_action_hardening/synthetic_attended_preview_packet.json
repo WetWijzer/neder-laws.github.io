@@ -13,16 +13,16 @@
   "source_backed_outcome_evidence": [
     {
       "source_id": "official-devhub-guide-submit-permit-application",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "citation": "Official DevHub permit application guide, apply for permits workflow.",
       "supports_outcome": "DevHub permit requests can involve dynamic questions, draft review, uploaded documents, acknowledgement, and later submission steps.",
       "observed_preview_fact": "The synthetic cycle stopped at a local preview summary before acknowledgement, upload, or submit controls."
     },
     {
       "source_id": "official-online-permitting-tools-overview",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "citation": "Official online permitting tools overview, DevHub entry point and service list.",
-      "supports_outcome": "DevHub is the City of Portland online permitting system and includes account-scoped permit services.",
+      "supports_outcome": "DevHub is the WetWijzer online permitting system and includes account-scoped permit services.",
       "observed_preview_fact": "The review packet treats the browser cycle as user-attended and records only commit-safe workflow metadata."
     }
   ],

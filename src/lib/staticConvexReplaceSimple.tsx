@@ -100,7 +100,7 @@ export const api = {
     leaveWorld: (args: any) => Promise.resolve({ success: true }), // Add leaveWorld endpoint
     previousConversation: (args: any) => Promise.resolve(null), // Add previousConversation endpoint
   },
-  aiTown: {
+  wetwijzer: {
     main: {
       inputStatus: (args: any) => Promise.resolve({ kind: 'processed', inputId: args.inputId, result: null }),
     }

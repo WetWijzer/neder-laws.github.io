@@ -37,13 +37,13 @@
   ],
   "source_groups": [
     {
-      "source_group_id": "portland_gov_ppd_public_guidance",
-      "canonical_hosts": ["www.portland.gov"],
+      "source_group_id": "wetwijzer_gov_ppd_public_guidance",
+      "canonical_hosts": ["wetten.overheid.nl"],
       "current_manifest_ref": "placeholder_current_public_guidance_manifest"
     },
     {
       "source_group_id": "devhub_public_guidance",
-      "canonical_hosts": ["devhub.portlandoregon.gov", "www.portland.gov"],
+      "canonical_hosts": ["wetten.overheid.nl", "wetten.overheid.nl"],
       "current_manifest_ref": "placeholder_current_devhub_public_manifest"
     }
   ],

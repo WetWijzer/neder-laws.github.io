@@ -22,7 +22,7 @@ NO_ACTION_STATEMENTS = [
     'No raw body persistence has been performed.',
     'No source registry mutation has been performed.',
 ]
-ALLOWED_HOSTS = {'www.portland.gov', 'devhub.portlandoregon.gov', 'www.portlandmaps.com', 'www.portlandoregon.gov'}
+ALLOWED_HOSTS = {'wetten.overheid.nl', 'wetten.overheid.nl', 'repository.overheid.nl', 'wetten.overheid.nl'}
 STALE_STATUSES = {'synthetic_unverified', 'fixture_seed_pending_first_crawl', 'stale', 'unknown', 'missing'}
 
 

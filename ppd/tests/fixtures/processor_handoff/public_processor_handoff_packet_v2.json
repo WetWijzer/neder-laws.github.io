@@ -9,10 +9,10 @@
   "active_crawler_behavior_changed": false,
   "description": "Synthetic fixture mapping allowed public PP&D URLs to processor preflight decisions and placeholder downstream records. This packet is committed only as a contract fixture; it is not processor output.",
   "allowed_hosts": [
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com"
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl"
   ],
   "processor_policy": {
     "name": "ppd_public_processor_handoff_v2_fixture_policy",
@@ -26,8 +26,8 @@
   "preflight_rows": [
     {
       "row_id": "preflight-public-tools-html",
-      "requested_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "requested_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "source_type": "public_html",
       "owning_surface": "ppd_public_website",
       "decision": "allow_processor_metadata_handoff",
@@ -43,8 +43,8 @@
     },
     {
       "row_id": "preflight-devhub-faq-html",
-      "requested_url": "https://www.portland.gov/ppd/devhub-faqs",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "requested_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "source_type": "devhub_public",
       "owning_surface": "ppd_public_website",
       "decision": "allow_processor_metadata_handoff",
@@ -60,8 +60,8 @@
     },
     {
       "row_id": "preflight-fee-guide-pdf-download",
-      "requested_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "requested_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "source_type": "public_pdf",
       "owning_surface": "ppd_public_website",
       "decision": "allow_manifest_placeholder_skip_download",
@@ -77,8 +77,8 @@
     },
     {
       "row_id": "preflight-devhub-root-public",
-      "requested_url": "https://devhub.portlandoregon.gov/",
-      "canonical_url": "https://devhub.portlandoregon.gov/",
+      "requested_url": "https://wetten.overheid.nl/",
+      "canonical_url": "https://wetten.overheid.nl/",
       "source_type": "devhub_public",
       "owning_surface": "devhub_public_portal",
       "decision": "skip_authenticated_or_dynamic_surface",
@@ -93,9 +93,9 @@
       "normalized_document_id": null
     },
     {
-      "row_id": "preflight-portlandmaps-reference",
-      "requested_url": "https://www.portlandmaps.com/",
-      "canonical_url": "https://www.portlandmaps.com/",
+      "row_id": "preflight-wetwijzermaps-reference",
+      "requested_url": "https://repository.overheid.nl/",
+      "canonical_url": "https://repository.overheid.nl/",
       "source_type": "external_reference",
       "owning_surface": "linked_public_reference",
       "decision": "skip_reference_root_without_source_context",
@@ -106,7 +106,7 @@
       "no_raw_body_persisted": true,
       "raw_body_persistence_allowed": false,
       "skipped_reason": "reference_host_requires_specific_ppd_source_link_context",
-      "archive_manifest_id": "manifest-portlandmaps-root-skipped-placeholder",
+      "archive_manifest_id": "manifest-wetwijzermaps-root-skipped-placeholder",
       "normalized_document_id": null
     }
   ],
@@ -114,8 +114,8 @@
     {
       "manifest_id": "manifest-public-tools-html-placeholder",
       "source_id": "source-public-tools-html",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
-      "requested_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
+      "requested_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "redirect_chain": [],
       "http_status": "fixture_not_fetched",
       "content_type": "text/html; charset=utf-8",
@@ -132,8 +132,8 @@
     {
       "manifest_id": "manifest-devhub-faq-html-placeholder",
       "source_id": "source-devhub-faq-html",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
-      "requested_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
+      "requested_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "redirect_chain": [],
       "http_status": "fixture_not_fetched",
       "content_type": "text/html; charset=utf-8",
@@ -150,8 +150,8 @@
     {
       "manifest_id": "manifest-fee-guide-pdf-placeholder",
       "source_id": "source-fee-guide-pdf",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
-      "requested_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
+      "requested_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "redirect_chain": [],
       "http_status": "fixture_not_fetched",
       "content_type": "application/pdf",
@@ -168,8 +168,8 @@
     {
       "manifest_id": "manifest-devhub-root-skipped-placeholder",
       "source_id": "source-devhub-root-public",
-      "canonical_url": "https://devhub.portlandoregon.gov/",
-      "requested_url": "https://devhub.portlandoregon.gov/",
+      "canonical_url": "https://wetten.overheid.nl/",
+      "requested_url": "https://wetten.overheid.nl/",
       "redirect_chain": [],
       "http_status": "fixture_not_fetched",
       "content_type": "unknown_fixture_not_fetched",
@@ -184,10 +184,10 @@
       "no_raw_body_persisted": true
     },
     {
-      "manifest_id": "manifest-portlandmaps-root-skipped-placeholder",
-      "source_id": "source-portlandmaps-root-reference",
-      "canonical_url": "https://www.portlandmaps.com/",
-      "requested_url": "https://www.portlandmaps.com/",
+      "manifest_id": "manifest-wetwijzermaps-root-skipped-placeholder",
+      "source_id": "source-wetwijzermaps-root-reference",
+      "canonical_url": "https://repository.overheid.nl/",
+      "requested_url": "https://repository.overheid.nl/",
       "redirect_chain": [],
       "http_status": "fixture_not_fetched",
       "content_type": "unknown_fixture_not_fetched",
@@ -252,21 +252,21 @@
   "skipped_reason_rows": [
     {
       "row_id": "preflight-fee-guide-pdf-download",
-      "requested_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "requested_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "skipped_reason": "fixture_pdf_download_suppressed",
       "operator_action": "Use only the manifest and normalized document placeholders in offline validation. Do not download the PDF for this fixture."
     },
     {
       "row_id": "preflight-devhub-root-public",
-      "requested_url": "https://devhub.portlandoregon.gov/",
+      "requested_url": "https://wetten.overheid.nl/",
       "skipped_reason": "dynamic_or_auth_adjacent_surface_requires_attended_handoff",
       "operator_action": "Do not invoke a crawler or browser session from this packet. Auth-adjacent DevHub work belongs to attended handoff workflows."
     },
     {
-      "row_id": "preflight-portlandmaps-reference",
-      "requested_url": "https://www.portlandmaps.com/",
+      "row_id": "preflight-wetwijzermaps-reference",
+      "requested_url": "https://repository.overheid.nl/",
       "skipped_reason": "reference_host_requires_specific_ppd_source_link_context",
-      "operator_action": "Only process Portland Maps URLs when a specific PP&D public source link context has been recorded."
+      "operator_action": "Only process BWB metadata URLs when a specific PP&D public source link context has been recorded."
     }
   ],
   "offline_validation_commands": [

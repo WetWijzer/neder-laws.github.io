@@ -21,14 +21,14 @@ from ppd.agent_readiness.public_source_recrawl_preflight_review_packet_v1 import
 MANIFEST_VERSION = "public_source_recrawl_dry_run_manifest_v1"
 
 ALLOWED_HOSTS = {
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 
 PORTAL_DEFERRED_HOSTS = {
-    "devhub.portlandoregon.gov",
+    "wetten.overheid.nl",
 }
 
 SUPPORTED_METADATA_CONTENT_TYPES = {

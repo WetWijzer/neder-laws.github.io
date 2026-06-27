@@ -25,25 +25,25 @@ CITATION_REFERENCES: List[Dict[str, str]] = [
     {
         "citation_id": "ppd_apply_permits_public_guide",
         "title": "Apply for permits",
-        "url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+        "url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
         "supports": "Permit application facts should be reviewed against official PP&D application guidance before use.",
     },
     {
         "citation_id": "ppd_submit_plans_single_pdf_guidance",
         "title": "Submit Plans Online / Single PDF Process",
-        "url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+        "url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
         "supports": "Plans, applications, calculations, and supporting documents have distinct upload and preparation expectations.",
     },
     {
         "citation_id": "ppd_file_naming_pdf_prep",
         "title": "File naming standards and PDF preparation",
-        "url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+        "url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
         "supports": "Local preview packets must not be treated as final upload-ready files without file preparation review.",
     },
     {
         "citation_id": "ppd_devhub_application_guide",
         "title": "DevHub permit application guide",
-        "url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+        "url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
         "supports": "DevHub application data entry, acknowledgement, upload, and submission remain attended and confirmation-gated workflows.",
     },
 ]
@@ -210,7 +210,7 @@ def build_pdf_draft_preview_packet_v2(facts: Mapping[str, Any]) -> Packet:
         "case_id": case_id,
         "fixture_id": facts.get("fixture_id", "synthetic_pdf_draft_preview_packet_v2"),
         "permit_type": facts.get("permit_type"),
-        "jurisdiction": "Portland Permitting & Development",
+        "jurisdiction": "Netherlands Permitting & Development",
         "mode": "fixture_first_reversible_preview_only",
     }
 

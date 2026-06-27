@@ -11,7 +11,7 @@ import json
 from typing import Any
 
 
-CONTRACT_JSON = '{\n  "capability": "ppd_surface_registry",\n  "defaultMode": "fixture_only",\n  "exactConfirmationBeforeOfficialAction": true,\n  "fallbackKind": "surface_registry_taxonomy",\n  "liveCrawlAllowedByDefault": false,\n  "officialDevhubActionAllowedByDefault": false,\n  "privateArtifactPersistence": "forbidden",\n  "requiredOutputs": [\n    "surface_taxonomy",\n    "action_boundary_map",\n    "agent_guardrail_api_index"\n  ],\n  "requiresHumanAttendanceBeforeBrowserUse": true,\n  "schemaVersion": 1,\n  "surfaces": [\n    "public_portland_pages",\n    "devhub_public_entrypoints",\n    "authenticated_read_only",\n    "reversible_drafts"\n  ]\n}'
+CONTRACT_JSON = '{\n  "capability": "ppd_surface_registry",\n  "defaultMode": "fixture_only",\n  "exactConfirmationBeforeOfficialAction": true,\n  "fallbackKind": "surface_registry_taxonomy",\n  "liveCrawlAllowedByDefault": false,\n  "officialDevhubActionAllowedByDefault": false,\n  "privateArtifactPersistence": "forbidden",\n  "requiredOutputs": [\n    "surface_taxonomy",\n    "action_boundary_map",\n    "agent_guardrail_api_index"\n  ],\n  "requiresHumanAttendanceBeforeBrowserUse": true,\n  "schemaVersion": 1,\n  "surfaces": [\n    "public_wetwijzer_pages",\n    "devhub_public_entrypoints",\n    "authenticated_read_only",\n    "reversible_drafts"\n  ]\n}'
 
 
 def contract() -> dict[str, Any]:

@@ -531,7 +531,7 @@ def _has_citation(value: Any) -> bool:
             if _string_value(item.get("source_id") or item.get("source_evidence_id")):
                 return True
             url = _string_value(item.get("url") or item.get("canonical_url"))
-            if url.startswith("https://www.portland.gov/"):
+            if url.startswith("https://wetten.overheid.nl/"):
                 return True
     return False
 

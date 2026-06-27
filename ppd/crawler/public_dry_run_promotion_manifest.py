@@ -8,10 +8,10 @@ from urllib.parse import urlparse
 MANIFEST_TYPE = 'ppd.public_crawl_dry_run_promotion_manifest.v1'
 
 ALLOWED_PUBLIC_HOSTS = frozenset({
-    'www.portland.gov',
-    'devhub.portlandoregon.gov',
-    'www.portlandoregon.gov',
-    'www.portlandmaps.com',
+    'wetten.overheid.nl',
+    'wetten.overheid.nl',
+    'wetten.overheid.nl',
+    'repository.overheid.nl',
 })
 
 ALLOWED_ROBOTS_STATUSES = frozenset({'allowed', 'permitted', 'public_allowed'})

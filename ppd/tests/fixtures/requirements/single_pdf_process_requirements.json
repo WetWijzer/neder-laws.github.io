@@ -17,7 +17,7 @@
       "evidence": [
         {
           "source_id": "ppd-single-pdf-process-guidance",
-          "source_url": "https://www.portland.gov/ppd/permits/single-pdf-process",
+          "source_url": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
           "quote": "Drawing plans are submitted as one searchable PDF.",
           "anchor_id": "single-pdf-file-rules"
         }
@@ -39,7 +39,7 @@
       "evidence": [
         {
           "source_id": "ppd-single-pdf-process-guidance",
-          "source_url": "https://www.portland.gov/ppd/permits/single-pdf-process",
+          "source_url": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
           "quote": "Applications, calculations, and supporting documents are submitted as separate PDF files.",
           "anchor_id": "single-pdf-file-rules"
         }
@@ -62,7 +62,7 @@
       "evidence": [
         {
           "source_id": "ppd-single-pdf-process-guidance",
-          "source_url": "https://www.portland.gov/ppd/permits/single-pdf-process",
+          "source_url": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
           "quote": "Some projects use a Single PDF Process for plan review submittals.",
           "anchor_id": "single-pdf-process-overview"
         }
@@ -84,7 +84,7 @@
       "evidence": [
         {
           "source_id": "ppd-devhub-application-guidance",
-          "source_url": "https://www.portland.gov/ppd/devhub/apply-permit",
+          "source_url": "https://wetten.overheid.nl/ppd/devhub/apply-permit",
           "quote": "Prepare the drawing plan PDF and separate application or supporting PDFs before uploading the permit request in DevHub.",
           "anchor_id": "devhub-application-submission"
         }
@@ -106,7 +106,7 @@
       "evidence": [
         {
           "source_id": "ppd-single-pdf-process-guidance",
-          "source_url": "https://www.portland.gov/ppd/permits/single-pdf-process",
+          "source_url": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
           "quote": "Drawing plans are one searchable PDF; applications, calculations, and supporting documents are separate PDFs.",
           "anchor_id": "single-pdf-file-rules"
         }

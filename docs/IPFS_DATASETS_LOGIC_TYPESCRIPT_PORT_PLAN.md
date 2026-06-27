@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This project already contains the Portland City Code corpus, generated search assets, knowledge graph artifacts, and machine-generated logic proof summaries. The improvement track is to port the full `ipfs_datasets_py/ipfs_datasets_py/logic` module into a browser-native TypeScript/WASM logic stack. Heavyweight theorem provers, NLP dependencies, ML confidence scoring, cryptographic proof systems, and chain integrations should be replaced with TypeScript or WebAssembly implementations rather than external server-side calls.
+This project already contains the Dutch legal corpus corpus, generated search assets, knowledge graph artifacts, and machine-generated logic proof summaries. The improvement track is to port the full `ipfs_datasets_py/ipfs_datasets_py/logic` module into a browser-native TypeScript/WASM logic stack. Heavyweight theorem provers, NLP dependencies, ML confidence scoring, cryptographic proof systems, and chain integrations should be replaced with TypeScript or WebAssembly implementations rather than external server-side calls.
 
 The practical goal is to translate the entire Python logic surface area into TypeScript/WASM in phases. The runtime target is browser-native TypeScript/WebAssembly only. The app must not depend on external server-side services for logic conversion, ML/NLP confidence, proving, or verification.
 
@@ -10,12 +10,12 @@ Update: Python ML confidence scoring and spaCy-style NLP extraction are required
 
 ## Current Project Fit
 
-The repository is a Vite/React/TypeScript static app with existing Portland corpus support:
+The repository is a Vite/React/TypeScript static app with existing WetWijzer corpus support:
 
-- `src/lib/portlandCorpus.ts` loads sections, BM25 documents, embeddings, entities, relationships, and graph adjacency from `public/corpus/portland-or/current/generated/`.
-- `public/corpus/portland-or/current/generated/logic-proof-summaries.json` already exposes per-section formalization data, including `deontic_temporal_fol`, `deontic_cognitive_event_calculus`, `frame_logic_ergo`, `norm_operator`, `norm_type`, `zkp_backend`, `zkp_security_note`, and `zkp_verified`.
+- `src/lib/netherlandsCorpus.ts` loads sections, BM25 documents, embeddings, entities, relationships, and graph adjacency from `public/corpus/netherlands/current/generated/`.
+- `public/corpus/netherlands/current/generated/logic-proof-summaries.json` already exposes per-section formalization data, including `deontic_temporal_fol`, `deontic_cognitive_event_calculus`, `frame_logic_ergo`, `norm_operator`, `norm_type`, `zkp_backend`, `zkp_security_note`, and `zkp_verified`.
 - `package.json` already includes browser-oriented foundations that help this port: TypeScript, Jest, Playwright, DuckDB-WASM, parquet-wasm, Transformers.js, hnswlib-wasm, and Vite workers.
-- `docs/PORTLAND_LEGAL_CORPUS_IMPLEMENTATION_PLAN.md` already identifies proof artifact exploration and browser theorem-prover research as future phases.
+- `docs/WETWIJZER_LEGAL_CORPUS_IMPLEMENTATION_PLAN.md` already identifies proof artifact exploration and browser theorem-prover research as future phases.
 
 The Python source tree has a broad logic surface:
 
@@ -59,7 +59,7 @@ The TypeScript target should be a clean client-side domain library that preserve
 
 ## Target Outcomes
 
-1. Add first-class TypeScript types for Portland logic artifacts.
+1. Add first-class TypeScript types for WetWijzer logic artifacts.
 2. Load and index proof summaries alongside existing corpus data.
 3. Parse the generated TDFOL, DCEC, and F-logic strings into lightweight ASTs or structured views.
 4. Validate formulas and proof metadata deterministically in the browser.
@@ -103,7 +103,7 @@ The TypeScript target should be a clean client-side domain library that preserve
 | `logic/fol/utils/predicate_extractor.py` | Port fully | Regex and rule-based extraction are portable. |
 | `logic/fol/utils/nlp_predicate_extractor.py` | Port fully via browser-native NLP | Reproduce spaCy extraction behavior with Transformers.js, ONNX/WebGPU, compromise-like parsers, or WASM NLP. |
 | `logic/fol/converter.py` | Port fully | Preserve cache, batch, validation, ML confidence, NLP mode, output formats, and monitoring-compatible metadata. |
-| `logic/deontic/utils/deontic_parser.py` | Port directly if regex/pattern-based | Norm extraction from legal text is valuable for Portland sections and can be tested against generated artifacts. |
+| `logic/deontic/utils/deontic_parser.py` | Port directly if regex/pattern-based | Norm extraction from legal text is valuable for WetWijzer sections and can be tested against generated artifacts. |
 | `logic/deontic/converter.py` | Port fully | Deontic extraction, exception handling, obligations, permissions, prohibitions, confidence, batch, and cache behavior need parity. |
 | `logic/ml_confidence.py` | Port fully via browser-native ML | Initial deterministic TypeScript port now covers Python-compatible feature extraction, fallback scoring, training facade, and feature importance. Next step is local browser artifact loading for trained XGBoost/LightGBM-equivalent weights through TS/WASM/ONNX where needed. |
 | `logic/deontic/knowledge_base.py` | Port fully | Browser-native indexed norms and query APIs are required. |
@@ -211,7 +211,7 @@ export interface LogicProofSummary {
 Derived indexes:
 
 - `proofByCid`: map section CID to proof summary.
-- `proofByIdentifier`: map Portland citation to proof summary.
+- `proofByIdentifier`: map WetWijzer citation to proof summary.
 - `normByOperator`: `O`, `P`, `F`.
 - `formalizationStatusCounts`: success/partial/failed/unknown counts.
 - `proofParseStatus`: TDFOL/DCEC/F-logic parse success by section.
@@ -219,13 +219,13 @@ Derived indexes:
 
 ## Integration With Existing Corpus Service
 
-Extend `src/lib/portlandCorpus.ts` or add a sibling `src/lib/portlandLogic.ts`.
+Extend `src/lib/netherlandsCorpus.ts` or add a sibling `src/lib/netherlandsLogic.ts`.
 
 Recommended split:
 
-- Keep `portlandCorpus.ts` focused on sections, BM25, embeddings, and KG.
-- Add `portlandLogic.ts` for proof summaries, norm indexes, and parsed formula caches.
-- Add shared ID helpers for `ipfs_cid`, `identifier`, and Portland citation normalization.
+- Keep `netherlandsCorpus.ts` focused on sections, BM25, embeddings, and KG.
+- Add `netherlandsLogic.ts` for proof summaries, norm indexes, and parsed formula caches.
+- Add shared ID helpers for `ipfs_cid`, `identifier`, and WetWijzer citation normalization.
 
 New corpus-level APIs:
 
@@ -288,7 +288,7 @@ export interface LogicSearchFilters {
 ### Phase 0: Inventory And Baseline
 
 - [x] Add this plan to `docs/`.
-- [x] Record the exact generated proof summary schema from `public/corpus/portland-or/current/generated/logic-proof-summaries.json`.
+- [x] Record the exact generated proof summary schema from `public/corpus/netherlands/current/generated/logic-proof-summaries.json`.
 - [x] Add a small script or test fixture with 10 representative proof summaries: obligation, permission, prohibition, parse success, parse failure, simulated certificate, missing logic, long F-logic, citation match, KG-linked section.
 - [x] Decide whether logic code lives in `src/lib/logic/` or a package-style `src/logic/`.
 
@@ -300,7 +300,7 @@ Acceptance criteria:
 
 ### Phase 1: Proof Summary Loader And Types
 
-- [x] Add `src/lib/portlandLogic.ts`.
+- [x] Add `src/lib/netherlandsLogic.ts`.
 - [x] Add `LogicProofSummary` and related enums/unions.
 - [x] Implement `loadLogicProofSummaries()`, `getLogicProofForSection()`, and summary count helpers.
 - [x] Cache the loaded proof summaries like the existing corpus service does.
@@ -309,7 +309,7 @@ Acceptance criteria:
 Acceptance criteria:
 
 - The app can join any section to its proof summary by `ipfs_cid`.
-- Tests verify at least one known citation such as `Portland City Code 1.01.010`.
+- Tests verify at least one known citation such as `Dutch legal corpus 1.01.010`.
 - Logic artifacts remain lazy-loaded.
 
 ### Phase 2: TypeScript Logic Foundation
@@ -355,7 +355,7 @@ Acceptance criteria:
 - [x] Port initial `performance_profiler.py` browser profiler for repeated timing samples, optional browser memory snapshots, bottleneck classification, benchmark suites, and text/JSON/HTML reports.
 - [x] Port initial `performance_dashboard.py` browser dashboard for proof metrics, time-series metrics, aggregation, strategy comparison, JSON export, and self-contained HTML.
 - [x] Port initial `tdfol_performance_engine.py` browser engine for metrics aggregation, profiling operations, dashboard HTML strings, statistics export, strategy comparison, regression checks, and reset.
-- [x] Add fixtures from generated Portland formulas.
+- [x] Add fixtures from generated WetWijzer formulas.
 
 Acceptance criteria:
 
@@ -380,7 +380,7 @@ Acceptance criteria:
 
 Acceptance criteria:
 
-- The TypeScript converter can classify simple Portland-style legal clauses as obligation, permission, or prohibition.
+- The TypeScript converter can classify simple WetWijzer-style legal clauses as obligation, permission, or prohibition.
 - It can explain why an operator was selected using matched phrases.
 - It never overwrites the authoritative generated artifact without explicit user action.
 - It documents where browser heuristics differ from Python ML/spaCy outputs.
@@ -404,9 +404,9 @@ Acceptance criteria:
 ### Phase 5: F-Logic Display And Semantic Normalization
 
 - [x] Port `FLogicFrame`, `FLogicClass`, `FLogicQuery`, and `FLogicOntology` concepts.
-- [x] Parse the subset of `frame_logic_ergo` currently generated for Portland sections.
+- [x] Parse the subset of `frame_logic_ergo` currently generated for WetWijzer sections.
 - [x] Render frames as structured tables: object, class, attributes, rules.
-- [x] Normalize generated object IDs back to Portland citations when possible.
+- [x] Normalize generated object IDs back to WetWijzer citations when possible.
 
 Acceptance criteria:
 
@@ -449,7 +449,7 @@ Acceptance criteria:
 
 ### Phase 8: Search And GraphRAG Integration
 
-- [x] Add logic filters to the search service layer. UI wiring is deferred to the Portland research screen.
+- [x] Add logic filters to the search service layer. UI wiring is deferred to the WetWijzer research screen.
 - [x] Add norm-aware score parts to logic-aware search results.
 - [x] Add proof facts to GraphRAG evidence packs.
 - [x] Add prompts or answer formatting that distinguish code text, KG facts, generated formalization, and local reasoning.
@@ -459,7 +459,7 @@ Acceptance criteria:
 
 - Search can answer "show prohibitions about retaliation" with norm-aware results.
 - GraphRAG evidence includes citations and proof metadata.
-- Answers remain grounded in retrieved Portland Code sections.
+- Answers remain grounded in retrieved WetWijzer Article sections.
 
 ### Phase 9: Python Parity Harness
 
@@ -516,7 +516,7 @@ Acceptance criteria:
 ### Phase 12: Full CEC/DCEC Parity
 
 - [x] Port CEC syntax tree, grammar loader, grammar engine, problem parser, and DCEC parsers.
-  - [x] Initial browser-native CEC/DCEC s-expression AST, parser, formatter, validator, and Portland DCEC unit coverage.
+  - [x] Initial browser-native CEC/DCEC s-expression AST, parser, formatter, validator, and WetWijzer DCEC unit coverage.
   - [x] Initial CEC/DCEC expression analyzer for predicates, atoms, section refs, quantifiers, deontic operators, temporal operators, and expression complexity.
   - [x] Initial CEC ShadowProver problem parser with browser-native TPTP `fof`/`cnf` parsing, include tracking, custom `LOGIC`/`ASSUMPTIONS`/`GOALS` format parsing, format auto-detection, and parser-specific errors.
   - [x] Initial CEC syntax tree utility with typed node kinds, parent-aware construction, traversal/search helpers, transform/map/filter, JSON round-trip, leaf/height/size metrics, and ASCII pretty printing.
@@ -531,7 +531,7 @@ Acceptance criteria:
   - [x] Initial DCEC prototype namespace with sort inheritance, overloaded function prototypes, atomic type definitions, text prototype parsing, base DCEC/logical/numeric vocabularies, type-conflict checks, quantifier map state, statistics, and printable snapshots.
   - [x] Initial DCEC temporal evaluator/state layer with finite-trace `ALWAYS`/`EVENTUALLY`/`NEXT`/`UNTIL`/`SINCE`/`YESTERDAY` evaluation, unary/binary arity validation, DCEC atom proposition extraction, negated-atom handling, symbolic rendering, and convenience constructors.
   - [x] Initial DCEC natural-language converter with browser-native pattern matching for deontic/cognitive/temporal/logical phrases, DCEC namespace reuse, conversion result history/statistics, formula-to-English linearization, deterministic precedence, and local dependency-free grammar placeholders.
-- [x] Add CEC/DCEC parity fixtures and generated Portland DCEC parse coverage.
+- [x] Add CEC/DCEC parity fixtures and generated WetWijzer DCEC parse coverage.
 - [x] Port native inference rule groups: propositional, modal, temporal, deontic, cognitive, specialized, and resolution.
   - [x] Initial CEC native inference rule slice: modus ponens, conjunction elimination, double-negation elimination, temporal T, deontic D, and prohibition equivalence.
   - [x] Expanded deterministic CEC inference slice: hypothetical syllogism, conjunction introduction as an opt-in generative rule, eventuality introduction as an opt-in generative rule, prohibition-from-obligation, universal modus ponens, existential instantiation, existential generalization, and universal generalization.
@@ -558,7 +558,7 @@ Acceptance criteria:
   - [x] Initial CEC proof-optimization layer with proof-node trees, depth/redundancy pruning, optimization metrics, duplicate/subsumption elimination, browser-native async batch search, combined optimizer coordination, and metrics export.
   - [x] Initial CEC/ZKP integration layer with unified standard/ZKP/cached proof results, simulated educational CEC ZKP certificates, private axiom hiding, deterministic browser Web Crypto commitments, local standard fallback, cache-first hybrid proving, statistics, clear/reset helpers, and explicit non-cryptographic simulated-backend language.
   - [x] Initial bounded CEC forward prover with proof steps, unknown results, and derived-expression budget handling.
-  - [x] Initial CEC prover support for Portland-style quantified DCEC facts through browser-native universal modus ponens, without Python delegation.
+  - [x] Initial CEC prover support for WetWijzer-style quantified DCEC facts through browser-native universal modus ponens, without Python delegation.
   - [x] Initial CEC proof cache with normalized theorem/axiom keys, prover-config sensitivity, invalidation, global helper, TTL/LRU stats, and cached prove facade.
   - [x] Initial CEC strategy selector with forward and cached-forward strategies, priority/cost selection, metadata, and convenience proving facade.
   - [x] Expanded CEC proof strategy parity with backward chaining, bidirectional backward-first/forward-fallback search, hybrid adaptive strategy selection using Python axiom-count heuristics, Python-style strategy factory, strategy costs, and direct/cached default selection.
@@ -619,7 +619,7 @@ Current completed TypeScript/WASM port slice:
 - 100 percent of shared types needed by the UI.
 - 75-85 percent of common module behavior: cache, converter lifecycle, browser feature detection, proof cache, utility monitoring, validation, and error surfaces.
 - 100 percent of proof summary loading, indexing, validation, and display helpers.
-- 80-90 percent of TDFOL core AST/parser/formatter behavior needed for generated Portland formulas.
+- 80-90 percent of TDFOL core AST/parser/formatter behavior needed for generated WetWijzer formulas.
 - 70-80 percent of TDFOL inference/prover/explanation/operations behavior: initial converter outputs, propositional, first-order, temporal, deontic rules, tableaux expansion rules, bounded forward/backward/bidirectional chaining, local CEC delegation, modal tableaux, strategy selection, indexed-KB optimization, countermodels, proof explanations, dependency graphs, proof tree views, security validation, metrics collection, profiling, dashboarding, and performance-engine orchestration.
 - 75-85 percent of regex FOL/deontic extraction, formatter, analyzer, and knowledge-base behavior, focused on legal-code clauses.
 - 70-80 percent of F-logic data modeling and display rendering for generated frame snippets.
@@ -675,7 +675,7 @@ Playwright tests:
 Parity tests:
 
 - Fixed fixtures from `ipfs_datasets_py` outputs.
-- Generated Portland proof summary samples.
+- Generated WetWijzer proof summary samples.
 - Round-trip normalized formulas.
 - Known failures documented instead of ignored.
 
@@ -703,12 +703,12 @@ Parity tests:
 
 The first implementation PR should be intentionally small:
 
-1. Add `src/lib/portlandLogic.ts`.
+1. Add `src/lib/netherlandsLogic.ts`.
 2. Add TypeScript proof summary types and lazy loader.
 3. Add indexes by CID, identifier, norm operator, and norm type.
 4. Add validation with warnings for simulated certificates.
 5. Add Jest tests using a tiny fixture.
-6. Add a minimal proof metadata panel to the existing Portland section detail UI, if that UI is already ready.
+6. Add a minimal proof metadata panel to the existing WetWijzer section detail UI, if that UI is already ready.
 
 That PR gives the project immediate product value without committing to a full theorem prover port.
 
@@ -1045,10 +1045,10 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 ### Checklist
 
 - [x] `Task checkbox-1: Add this plan to 'docs/'.` - complete
-- [x] `Task checkbox-2: Record the exact generated proof summary schema from 'public/corpus/portland-or/current/generated/logic-proof-summaries.json'.` - complete
+- [x] `Task checkbox-2: Record the exact generated proof summary schema from 'public/corpus/netherlands/current/generated/logic-proof-summaries.json'.` - complete
 - [x] `Task checkbox-3: Add a small script or test fixture with 10 representative proof summaries: obligation, permission, prohibition, parse success, parse failure, simulated certificate, missing logic, long F-logic, citation match, KG-linked section.` - complete
 - [x] `Task checkbox-4: Decide whether logic code lives in 'src/lib/logic/' or a package-style 'src/logic/'.` - complete
-- [x] `Task checkbox-5: Add 'src/lib/portlandLogic.ts'.` - complete
+- [x] `Task checkbox-5: Add 'src/lib/netherlandsLogic.ts'.` - complete
 - [x] `Task checkbox-6: Add 'LogicProofSummary' and related enums/unions.` - complete
 - [x] `Task checkbox-7: Implement 'loadLogicProofSummaries()', 'getLogicProofForSection()', and summary count helpers.` - complete
 - [x] `Task checkbox-8: Cache the loaded proof summaries like the existing corpus service does.` - complete
@@ -1085,7 +1085,7 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - [x] `Task checkbox-39: Port initial 'performance_profiler.py' browser profiler for repeated timing samples, optional browser memory snapshots, bottleneck classification, benchmark suites, and text/JSON/HTML reports.` - complete
 - [x] `Task checkbox-40: Port initial 'performance_dashboard.py' browser dashboard for proof metrics, time-series metrics, aggregation, strategy comparison, JSON export, and self-contained HTML.` - complete
 - [x] `Task checkbox-41: Port initial 'tdfol_performance_engine.py' browser engine for metrics aggregation, profiling operations, dashboard HTML strings, statistics export, strategy comparison, regression checks, and reset.` - complete
-- [x] `Task checkbox-42: Add fixtures from generated Portland formulas.` - complete
+- [x] `Task checkbox-42: Add fixtures from generated WetWijzer formulas.` - complete
 - [x] `Task checkbox-43: Port regex-based quantifier and logical operator parsing from 'fol/utils/fol_parser.py'.` - complete
 - [x] `Task checkbox-44: Port 'fol/utils/predicate_extractor.py' regex predicate, relation, and variable extraction.` - complete
 - [x] `Task checkbox-45: Port 'fol/utils/logic_formatter.py' FOL/deontic JSON, Prolog, TPTP, defeasible, text, and aggregate formatting helpers.` - complete
@@ -1106,9 +1106,9 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - [x] `Task checkbox-60: Add a compatibility mode that surfaces 'nlpUnavailable' or 'mlUnavailable' rather than silently pretending full parity.` - complete
 - [x] `Task checkbox-61: Define acceptance thresholds: exact matches for operator classification, approximate matches for confidence scores, and documented divergences for predicate spans.` - complete
 - [x] `Task checkbox-62: Port 'FLogicFrame', 'FLogicClass', 'FLogicQuery', and 'FLogicOntology' concepts.` - complete
-- [x] `Task checkbox-63: Parse the subset of 'frame_logic_ergo' currently generated for Portland sections.` - complete
+- [x] `Task checkbox-63: Parse the subset of 'frame_logic_ergo' currently generated for WetWijzer sections.` - complete
 - [x] `Task checkbox-64: Render frames as structured tables: object, class, attributes, rules.` - complete
-- [x] `Task checkbox-65: Normalize generated object IDs back to Portland citations when possible.` - complete
+- [x] `Task checkbox-65: Normalize generated object IDs back to WetWijzer citations when possible.` - complete
 - [x] `Task checkbox-66: Port text normalization and deterministic hashing concepts from 'zkp/canonicalization.py'.` - complete
 - [x] `Task checkbox-67: Port 'Statement', 'Witness', and 'ProofStatement' shapes, dictionary serialization, circuit reference parsing/formatting, and field-element mapping from 'zkp/statement.py'.` - complete
 - [x] `Task checkbox-68: Port initial 'zkp/circuits.py' circuit metadata, Boolean circuit construction, simplified R1CS export, knowledge-of-axioms constraint checks, and TDFOL v1 Horn derivation constraint checks.` - complete
@@ -1125,7 +1125,7 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - [x] `Task checkbox-79: Add contradiction hints for obvious norm conflicts: same actor/action/condition with 'O' and 'F'.` - complete
 - [x] `Task checkbox-80: Add temporal summary helpers for always/eventually/next/until.` - complete
 - [x] `Task checkbox-81: Add proof trace output for any inferred result.` - complete
-- [x] `Task checkbox-82: Add logic filters to the search service layer. UI wiring is deferred to the Portland research screen.` - complete
+- [x] `Task checkbox-82: Add logic filters to the search service layer. UI wiring is deferred to the WetWijzer research screen.` - complete
 - [x] `Task checkbox-83: Add norm-aware score parts to logic-aware search results.` - complete
 - [x] `Task checkbox-84: Add proof facts to GraphRAG evidence packs.` - complete
 - [x] `Task checkbox-85: Add prompts or answer formatting that distinguish code text, KG facts, generated formalization, and local reasoning.` - complete
@@ -1164,7 +1164,7 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - [x] `Task checkbox-118: Initial browser performance profiler with repeated timing samples, memory snapshots, bottleneck classification, benchmark suites, and report strings.` - complete
 - [x] `Task checkbox-119: Full profiler/dashboard parity with browser performance timelines, flamegraph-style views, and richer bottleneck reports.` - complete
 - [x] `Task checkbox-120: Port CEC syntax tree, grammar loader, grammar engine, problem parser, and DCEC parsers.` - complete
-- [x] `Task checkbox-121: Initial browser-native CEC/DCEC s-expression AST, parser, formatter, validator, and Portland DCEC unit coverage.` - complete
+- [x] `Task checkbox-121: Initial browser-native CEC/DCEC s-expression AST, parser, formatter, validator, and WetWijzer DCEC unit coverage.` - complete
 - [x] `Task checkbox-122: Initial CEC/DCEC expression analyzer for predicates, atoms, section refs, quantifiers, deontic operators, temporal operators, and expression complexity.` - complete
 - [x] `Task checkbox-123: Initial CEC ShadowProver problem parser with browser-native TPTP 'fof'/'cnf' parsing, include tracking, custom 'LOGIC'/'ASSUMPTIONS'/'GOALS' format parsing, format auto-detection, and parser-specific errors.` - complete
 - [x] `Task checkbox-124: Initial CEC syntax tree utility with typed node kinds, parent-aware construction, traversal/search helpers, transform/map/filter, JSON round-trip, leaf/height/size metrics, and ASCII pretty printing.` - complete
@@ -1179,7 +1179,7 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - [x] `Task checkbox-133: Initial DCEC prototype namespace with sort inheritance, overloaded function prototypes, atomic type definitions, text prototype parsing, base DCEC/logical/numeric vocabularies, type-conflict checks, quantifier map state, statistics, and printable snapshots.` - complete
 - [x] `Task checkbox-134: Initial DCEC temporal evaluator/state layer with finite-trace 'ALWAYS'/'EVENTUALLY'/'NEXT'/'UNTIL'/'SINCE'/'YESTERDAY' evaluation, unary/binary arity validation, DCEC atom proposition extraction, negated-atom handling, symbolic rendering, and convenience constructors.` - complete
 - [x] `Task checkbox-135: Initial DCEC natural-language converter with browser-native pattern matching for deontic/cognitive/temporal/logical phrases, DCEC namespace reuse, conversion result history/statistics, formula-to-English linearization, deterministic precedence, and local dependency-free grammar placeholders.` - complete
-- [x] `Task checkbox-136: Add CEC/DCEC parity fixtures and generated Portland DCEC parse coverage.` - complete
+- [x] `Task checkbox-136: Add CEC/DCEC parity fixtures and generated WetWijzer DCEC parse coverage.` - complete
 - [x] `Task checkbox-137: Port native inference rule groups: propositional, modal, temporal, deontic, cognitive, specialized, and resolution.` - complete
 - [x] `Task checkbox-138: Initial CEC native inference rule slice: modus ponens, conjunction elimination, double-negation elimination, temporal T, deontic D, and prohibition equivalence.` - complete
 - [x] `Task checkbox-139: Expanded deterministic CEC inference slice: hypothetical syllogism, conjunction introduction as an opt-in generative rule, eventuality introduction as an opt-in generative rule, prohibition-from-obligation, universal modus ponens, existential instantiation, existential generalization, and universal generalization.` - complete
@@ -1206,7 +1206,7 @@ Legend: `[ ]` needed, `[~]` in progress, `[x]` complete, `[!]` blocked or failin
 - [x] `Task checkbox-160: Initial CEC proof-optimization layer with proof-node trees, depth/redundancy pruning, optimization metrics, duplicate/subsumption elimination, browser-native async batch search, combined optimizer coordination, and metrics export.` - complete
 - [x] `Task checkbox-161: Initial CEC/ZKP integration layer with unified standard/ZKP/cached proof results, simulated educational CEC ZKP certificates, private axiom hiding, deterministic browser Web Crypto commitments, local standard fallback, cache-first hybrid proving, statistics, clear/reset helpers, and explicit non-cryptographic simulated-backend language.` - complete
 - [x] `Task checkbox-162: Initial bounded CEC forward prover with proof steps, unknown results, and derived-expression budget handling.` - complete
-- [x] `Task checkbox-163: Initial CEC prover support for Portland-style quantified DCEC facts through browser-native universal modus ponens, without Python delegation.` - complete
+- [x] `Task checkbox-163: Initial CEC prover support for WetWijzer-style quantified DCEC facts through browser-native universal modus ponens, without Python delegation.` - complete
 - [x] `Task checkbox-164: Initial CEC proof cache with normalized theorem/axiom keys, prover-config sensitivity, invalidation, global helper, TTL/LRU stats, and cached prove facade.` - complete
 - [x] `Task checkbox-165: Initial CEC strategy selector with forward and cached-forward strategies, priority/cost selection, metadata, and convenience proving facade.` - complete
 - [x] `Task checkbox-166: Expanded CEC proof strategy parity with backward chaining, bidirectional backward-first/forward-fallback search, hybrid adaptive strategy selection using Python axiom-count heuristics, Python-style strategy factory, strategy costs, and direct/cached default selection.` - complete

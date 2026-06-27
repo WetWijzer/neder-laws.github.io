@@ -32,11 +32,11 @@ class PublicDryRunPromotionManifestTest(unittest.TestCase):
 
     def test_rejects_private_authenticated_or_non_allowlisted_urls(self) -> None:
         private_path = self.load_manifest()
-        private_path["promotion_targets"][0]["canonical_url"] = "https://devhub.portlandoregon.gov/secure/applications/123"
+        private_path["promotion_targets"][0]["canonical_url"] = "https://wetten.overheid.nl/secure/applications/123"
         self.assert_rejects(private_path, "must not reference private or authenticated paths")
 
         credentialed = self.load_manifest()
-        credentialed["promotion_targets"][0]["canonical_url"] = "https://user:pass@www.portland.gov/ppd"
+        credentialed["promotion_targets"][0]["canonical_url"] = "https://user:pass@wetten.overheid.nl/ppd"
         self.assert_rejects(credentialed, "must not include credentials")
 
         outside_host = self.load_manifest()
@@ -44,7 +44,7 @@ class PublicDryRunPromotionManifestTest(unittest.TestCase):
         self.assert_rejects(outside_host, "host must be allowlisted")
 
         auth_query = self.load_manifest()
-        auth_query["promotion_targets"][0]["canonical_url"] = "https://www.portland.gov/ppd?token=secret"
+        auth_query["promotion_targets"][0]["canonical_url"] = "https://wetten.overheid.nl/ppd?token=secret"
         self.assert_rejects(auth_query, "query must not contain authentication material")
 
     def test_rejects_raw_body_download_archive_paths_and_live_claims(self) -> None:

@@ -17,7 +17,7 @@ export default defineConfig({
     ],
   },
   server: {
-    allowedHosts: ['portland-laws.github.io', 'localhost', '127.0.0.1'],
+    allowedHosts: ['wetwijzer.github.io', 'neder-laws.github.io', 'localhost', '127.0.0.1'],
     watch: {
       ignored: ['**/ppd/**', '**/ipfs_datasets_py/**', '**/.cache/**', '**/dist/**'],
     },

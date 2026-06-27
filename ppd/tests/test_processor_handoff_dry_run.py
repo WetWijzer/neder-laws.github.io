@@ -65,7 +65,7 @@ class ProcessorHandoffDryRunTests(unittest.TestCase):
 
     def test_rejects_private_devhub_handoff_urls(self) -> None:
         fixture = self.load_fixture()
-        fixture["documents"][0]["canonicalUrl"] = "https://devhub.portlandoregon.gov/permits/123"
+        fixture["documents"][0]["canonicalUrl"] = "https://wetten.overheid.nl/permits/123"
 
         with self.assertRaises(ValueError):
             build_processor_handoff_dry_run_packet(

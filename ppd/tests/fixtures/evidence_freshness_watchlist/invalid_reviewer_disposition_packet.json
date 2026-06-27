@@ -11,7 +11,7 @@
   ],
   "source_urls": [
     "https://example.com/private/archive.zip",
-    "https://devhub.portlandoregon.gov/login?session=abc123"
+    "https://wetten.overheid.nl/login?session=abc123"
   ],
   "raw_body": "downloaded raw response body",
   "private_artifacts": {

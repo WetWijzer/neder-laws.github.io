@@ -35,8 +35,8 @@ def test_builds_metadata_only_queue_items_from_fixtures() -> None:
     assert len(queue["items"]) == 2
 
     first = queue["items"][0]
-    assert first["queue_item_id"] == "psrrq-v1-portland-bds-title-33"
-    assert first["source_id"] == "portland-bds-title-33"
+    assert first["queue_item_id"] == "psrrq-v1-wetwijzer-bds-title-33"
+    assert first["source_id"] == "wetwijzer-bds-title-33"
     assert first["requirement_ids"] == ["PCC-33.110.215", "PCC-33.110.220"]
     assert first["reviewer_owner"] == "ppd-zoning-reviewer"
     assert first["public_page_title_check"] == {
@@ -49,7 +49,7 @@ def test_builds_metadata_only_queue_items_from_fixtures() -> None:
         "observed_text": "Updated May 15, 2026",
         "status": "visible_in_fixture_metadata",
     }
-    assert first["affected_source_ids"] == ["portland-bds-title-33"]
+    assert first["affected_source_ids"] == ["wetwijzer-bds-title-33"]
     assert first["affected_requirement_ids"] == ["PCC-33.110.215", "PCC-33.110.220"]
     assert first["defer_reason"] is None
     assert "current public corpus metadata" in first["rollback_notes"]
@@ -64,7 +64,7 @@ def test_builds_metadata_only_queue_items_from_fixtures() -> None:
     assert first["attestations"] == queue["attestations"]
 
     second = queue["items"][1]
-    assert second["source_id"] == "portland-transportation-trn-10"
+    assert second["source_id"] == "wetwijzer-transportation-trn-10"
     assert second["review_status"] == "deferred"
     assert second["public_page_title_check"]["status"] == "needs_review"
     assert second["visible_updated_date_review"]["status"] == "needs_review"

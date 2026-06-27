@@ -260,9 +260,9 @@ class SupervisorStaleStatusReplanningTest(unittest.TestCase):
     def test_replenishment_reopens_manual_comprehensive_goal_before_generated_continuation(self) -> None:
         board = (
             "## Manual Comprehensive PP&D Goal Handoff Tranche\n\n"
-            "- [!] Task checkbox-462: Add a source-backed PP&D surface registry and taxonomy under ppd/sources that covers public Portland.gov pages, public PDFs, DevHub public entry points, authenticated read-only surfaces, reversible draft surfaces, consequential official actions, local PDF previews, and agent-facing guardrail APIs.\n"
+            "- [!] Task checkbox-462: Add a source-backed PP&D surface registry and taxonomy under ppd/sources that covers public wetten.overheid.nl pages, public PDFs, DevHub public entry points, authenticated read-only surfaces, reversible draft surfaces, consequential official actions, local PDF previews, and agent-facing guardrail APIs.\n"
             "- [!] Task checkbox-463: Add a PP&D source seed manifest and validation that includes the PP&D landing page, online permitting tools overview, DevHub FAQ, DevHub sign-in guide, DevHub submit-permit guide, permit applications index, Single PDF Process, file naming standards, and DevHub portal URL with crawl policy metadata.\n"
-            "- [!] Task checkbox-464: Add a public crawl frontier contract that enforces Portland.gov and DevHub allowlists, robots preflight, bounded retries, content-type decisions, redirect recording, skipped reasons, and no raw body or downloaded-document persistence.\n"
+            "- [!] Task checkbox-464: Add a public crawl frontier contract that enforces wetten.overheid.nl and DevHub allowlists, robots preflight, bounded retries, content-type decisions, redirect recording, skipped reasons, and no raw body or downloaded-document persistence.\n"
             "- [!] Task checkbox-465: Add processor-suite archival integration work under ppd/crawler proving PP&D public pages and PDFs hand off to ipfs_datasets_py processor records with archive manifest IDs, content hashes, normalized document IDs, and formal-logic source evidence IDs.\n"
             "- [!] Task checkbox-466: Add a public PDF and form inventory extractor for PP&D applications, handouts, Single PDF guidance, file naming standards, checklist PDFs, and fillable form metadata without storing downloaded raw documents.\n"
             "\n## Built-In Source-Backed Execution Continuation Tranche\n\n"
@@ -279,9 +279,9 @@ class SupervisorStaleStatusReplanningTest(unittest.TestCase):
 
     def test_reopened_manual_comprehensive_goal_tasks_have_deterministic_fallbacks(self) -> None:
         board = (
-            "- [ ] Task checkbox-462: Add a source-backed PP&D surface registry and taxonomy under ppd/sources that covers public Portland.gov pages, public PDFs, DevHub public entry points, authenticated read-only surfaces, reversible draft surfaces, consequential official actions, local PDF previews, and agent-facing guardrail APIs.\n"
+            "- [ ] Task checkbox-462: Add a source-backed PP&D surface registry and taxonomy under ppd/sources that covers public wetten.overheid.nl pages, public PDFs, DevHub public entry points, authenticated read-only surfaces, reversible draft surfaces, consequential official actions, local PDF previews, and agent-facing guardrail APIs.\n"
             "- [ ] Task checkbox-463: Add a PP&D source seed manifest and validation that includes the PP&D landing page, online permitting tools overview, DevHub FAQ, DevHub sign-in guide, DevHub submit-permit guide, permit applications index, Single PDF Process, file naming standards, and DevHub portal URL with crawl policy metadata.\n"
-            "- [ ] Task checkbox-464: Add a public crawl frontier contract that enforces Portland.gov and DevHub allowlists, robots preflight, bounded retries, content-type decisions, redirect recording, skipped reasons, and no raw body or downloaded-document persistence.\n"
+            "- [ ] Task checkbox-464: Add a public crawl frontier contract that enforces wetten.overheid.nl and DevHub allowlists, robots preflight, bounded retries, content-type decisions, redirect recording, skipped reasons, and no raw body or downloaded-document persistence.\n"
             "- [ ] Task checkbox-465: Add processor-suite archival integration work under ppd/crawler proving PP&D public pages and PDFs hand off to ipfs_datasets_py processor records with archive manifest IDs, content hashes, normalized document IDs, and formal-logic source evidence IDs.\n"
         )
 
@@ -1453,7 +1453,7 @@ class SupervisorStaleStatusReplanningTest(unittest.TestCase):
             failed_dir = daemon_dir / "failed-patches"
             failed_dir.mkdir(parents=True)
             (repo / "docs").mkdir()
-            (repo / "docs" / "PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md").write_text(
+            (repo / "docs" / "WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md").write_text(
                 "Plan\n" + ("long plan\n" * 1000),
                 encoding="utf-8",
             )

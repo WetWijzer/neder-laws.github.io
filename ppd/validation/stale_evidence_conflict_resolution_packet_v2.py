@@ -26,13 +26,13 @@ REQUIRED_CASE_LISTS = {
 
 ALLOWLISTED_PUBLIC_HOSTS = frozenset(
     {
-        "www.portland.gov",
-        "portland.gov",
-        "efiles.portlandoregon.gov",
-        "www.oregon.gov",
-        "oregon.gov",
-        "www.portlandmaps.com",
-        "portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
+        "www.netherlands.gov",
+        "netherlands.gov",
+        "repository.overheid.nl",
+        "repository.overheid.nl",
     }
 )
 
@@ -357,7 +357,7 @@ def _validate_url(path: str, value: str) -> list[StaleEvidencePacketFinding]:
             StaleEvidencePacketFinding(
                 "unsupported_path_or_host",
                 path,
-                "packets may only cite allowlisted public Portland source URLs",
+                "packets may only cite allowlisted public Netherlands source URLs",
             )
         )
 

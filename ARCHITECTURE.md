@@ -1,86 +1,47 @@
-# Architecture
+# WetWijzer Architecture
 
-This repository has two primary systems:
+WetWijzer is a static Vite/React site for Netherlands legal information search. It preserves the useful generic browser functionality from the fork while replacing the old jurisdiction-specific corpus with Dutch law metadata and dataset configuration.
 
-1. A static, browser-run Portland City Code legal-research application.
-2. An isolated PP&D (`ppd/`) automation workspace with a local daemon/supervisor lifecycle.
+## Application Flow
 
-## 1) Legal Research Frontend (GitHub Pages)
+1. `src/main.tsx` mounts `src/AppStatic.tsx`.
+2. `src/AppStatic.tsx` renders `src/components/WetWijzerLegalResearchApp.tsx`.
+3. `loadWetWijzerCorpus()` reads browser-ready artifacts from `public/corpus/netherlands/current/`.
+4. The search panel combines BM25-style keyword search with optional browser embeddings.
+5. The chat panel builds cited answers from retrieved local evidence.
+6. The graph panel reads local JSON-LD-derived entity and relationship artifacts.
+7. Article rows carry inherited law status fields such as `law_status`, `is_current`, `valid_from`, `valid_to`, `status_source`, and `status_confidence`.
 
-### Runtime profile
+## Data Stack
 
-- Entry point: `src/main.tsx` → `src/AppStatic.tsx` → `src/components/PortlandLegalResearchApp.tsx`
-- Hosting target: static bundle on GitHub Pages
-- Core behavior: load prebuilt corpus artifacts from `public/corpus/portland-or/current/` and run retrieval/inference in-browser
+The production dataset stack is published on Hugging Face:
 
-### Core data flow
+- `justicedao/ipfs_netherlands_laws`
+- `justicedao/ipfs_netherlands_laws_vector_index`
+- `justicedao/ipfs_netherlands_laws_bm25_index`
+- `justicedao/ipfs_netherlands_laws_knowledge_graph`
 
-1. `loadPortlandCorpus()` loads manifest + sections (`src/lib/portlandCorpus.ts`).
-2. Hybrid retrieval combines BM25 and vector search (`searchCorpus`).
-3. Graph context is loaded from precomputed entities/relationships/adjacency JSON.
-4. GraphRAG answer generation runs through `answerWithGraphRag()` (`src/lib/portlandGraphRag.ts`):
-   - retrieves evidence
-   - enriches with logic evidence
-   - attempts local/browser generation first
-   - falls back to cloud proxy or evidence-only summaries when needed
+The browser bundle includes a small deterministic sample cache so the static app can build and run without downloading the full corpus at runtime. The manifest records the Hugging Face dataset IDs and the current project metadata.
 
-### Browser worker layer
+## Source Semantics
 
-- Embedding worker service: `src/lib/clientEmbeddingWorkerService.ts`
-- LLM worker service: `src/lib/clientLLMWorkerService.ts`
-- Worker implementation: `src/workers/clientLLMWorker.ts`
+WetWijzer uses official Dutch government source references:
 
-Workers isolate model/inference workloads from the UI thread and expose structured readiness/fallback status.
+- `wetten.overheid.nl`
+- official BWB/SRU metadata
+- official `/informatie` pages when available
 
-### Logic engine layer
+Status labels are metadata parsed from official sources. A status of `unknown` means the site could not determine a normalized status from the available metadata; it should not be treated as a guess.
 
-- TypeScript logic modules under `src/lib/logic/`
-- Includes FOL, deontic, TDFOL, CEC/DCEC, F-logic, and ZKP-related modules
-- Used both for UI proof exploration and for parity/security/testing workflows
+## Build
 
-## 2) PP&D Automation Workspace (`ppd/`)
+The site is built with Vite:
 
-### Scope boundary
+```bash
+npm install
+npm run prepare:netherlands-corpus
+npm run build
+npm test
+```
 
-The PP&D system is intentionally separated from the legal corpus/frontend and keeps automation state/code under `ppd/`.
-
-Primary references:
-
-- Workspace overview: `ppd/README.md`
-- Daemon operations: `ppd/daemon/OPERATIONS.md`
-- Plan/requirements: `docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md`
-
-### Daemon architecture
-
-- Daemon worker: `ppd/daemon/ppd_daemon.py`
-- Supervisor: `ppd/daemon/ppd_supervisor.py`
-- Control wrapper: `ppd/daemon/control.sh`
-- Task source: `ppd/daemon/task-board.md`
-
-Execution model:
-
-1. Select one narrow task-board item.
-2. Generate JSON file-replacement proposals (no command execution from model output).
-3. Validate in isolated temporary PP&D worktrees.
-4. Promote only validated replacements.
-5. Persist accepted/failed evidence under `ppd/daemon/` ledgers.
-
-### Safety constraints
-
-The PP&D validation/daemon flow is fixture-first and deterministic by design. It must not perform live submission/payment/certification/scheduling actions. Authenticated portal interactions are guarded and explicitly separated from unsafe autonomous actions.
-
-## Build and deployment architecture
-
-- Workflow: `.github/workflows/deploy.yml`
-- Build job runs:
-  - `npm ci --legacy-peer-deps`
-  - `npx tsc --noEmit`
-  - `npx vite build`
-- Output: static `dist/` artifact published to GitHub Pages
-
-## Key directories
-
-- `src/` — frontend app, UI components, browser logic engine, tests
-- `public/corpus/portland-or/current/generated/` — prebuilt corpus/search/graph/proof assets
-- `ppd/` — PP&D daemon/crawler/devhub/contracts/tests/operations
-- `docs/` — implementation plans and parity/roadmap notes
+No Hugging Face tokens or other private credentials are required for the static build.

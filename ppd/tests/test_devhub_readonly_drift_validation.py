@@ -13,7 +13,7 @@ def _base_packet() -> dict[str, object]:
         "drift_claims": [
             {
                 "claim": "The public permit search label changed.",
-                "citations": ["https://www.portland.gov/ppd/public-source"],
+                "citations": ["https://wetten.overheid.nl/ppd/public-source"],
             }
         ],
         "deferrals": [

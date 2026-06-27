@@ -483,7 +483,7 @@ def _validate_command_rows(value: Any, errors: list[str]) -> None:
             errors.append(f"offline_validation_commands[{index}] must be a non-empty string array")
             continue
         lowered = " ".join(command_row).lower()
-        if any(term in lowered for term in ("curl", "wget", "playwright open", "devhub.portlandoregon.gov", "--headed", "storage-state")):
+        if any(term in lowered for term in ("curl", "wget", "playwright open", "wetten.overheid.nl", "--headed", "storage-state")):
             errors.append(f"offline_validation_commands[{index}] must be offline and deterministic")
 
 

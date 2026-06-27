@@ -5,7 +5,7 @@
   "sources": [
     {
       "source_id": "ppd-online-tools",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "content_hash": "sha256:online-tools-stable-v1",
       "normalized_document_id": "doc-online-tools-v1",
       "title": "Online permitting tools",
@@ -15,7 +15,7 @@
     },
     {
       "source_id": "ppd-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "content_hash": "sha256:submit-plans-current-v2",
       "normalized_document_id": "doc-submit-plans-v2",
       "title": "Submit plans online",
@@ -25,7 +25,7 @@
     },
     {
       "source_id": "ppd-devhub-faq",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "content_hash": "sha256:devhub-faq-current-v1",
       "normalized_document_id": "doc-devhub-faq-v1",
       "title": "DevHub FAQs",

@@ -43,7 +43,7 @@ def test_validator_rejects_raw_body_persistence_fields() -> None:
 def test_validator_rejects_live_automation_commands() -> None:
     packet = load_packet(FIXTURE_PATH)
     broken = copy.deepcopy(packet)
-    broken['offline_validation_commands'][0]['argv'] = ['curl', 'https://www.portland.gov/code/33']
+    broken['offline_validation_commands'][0]['argv'] = ['curl', 'https://wetten.overheid.nl/code/33']
 
     errors = validate_packet(broken)
 

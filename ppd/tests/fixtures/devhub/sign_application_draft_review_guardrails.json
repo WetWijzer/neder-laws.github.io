@@ -11,7 +11,7 @@
   },
   "draft_review": {
     "workflow_state_id": "sign-application-draft-review",
-    "url_state": "https://devhub.portlandoregon.gov/permits/signs/mock-draft-review",
+    "url_state": "https://wetten.overheid.nl/permits/signs/mock-draft-review",
     "page_heading": "Review sign application draft",
     "read_only_preview_allowed": true,
     "official_action_performed": false,
@@ -143,7 +143,7 @@
   "source_requirements": [
     {
       "requirement_id": "devhub-sign-application-action-gate",
-      "source_url": "https://www.portland.gov/ppd/devhub",
+      "source_url": "https://wetten.overheid.nl/ppd/devhub",
       "citation_label": "DevHub public guidance fixture",
       "requirement_type": "action_gate",
       "summary": "An assistant may prepare a sign permit draft preview but must pause before upload, certification, submission, payment, cancellation, or inspection scheduling."

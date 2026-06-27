@@ -4,8 +4,8 @@
     "status": "candidate",
     "mode": "metadata-only",
     "target_urls": [
-      "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
-      "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications"
+      "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
+      "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications"
     ],
     "policy_evidence": {
       "robots": "robots policy evidence fixture reviewed for public PP&D metadata-only refresh planning",

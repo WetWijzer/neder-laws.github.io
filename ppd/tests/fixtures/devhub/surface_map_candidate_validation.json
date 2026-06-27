@@ -5,7 +5,7 @@
     {
       "candidate_id": "valid_residential_draft_surface",
       "selector_confidence": 0.94,
-      "url_pattern": "https://devhub.portlandoregon.gov/permits/draft/*",
+      "url_pattern": "https://wetten.overheid.nl/permits/draft/*",
       "page_heading": "Residential Permit Draft",
       "fields": [
         {
@@ -91,7 +91,7 @@
     {
       "candidate_id": "consequential_controls_mislabeled_reversible",
       "selector_confidence": 0.9,
-      "url_pattern": "https://devhub.portlandoregon.gov/permits/draft/*",
+      "url_pattern": "https://wetten.overheid.nl/permits/draft/*",
       "page_heading": "Upload and Submit",
       "fields": [
         {

@@ -84,7 +84,7 @@ export interface ScrapedDocument {
 export interface NormalizedDocument extends ScrapedDocument {
   documentRole: PpdDocumentRole;
   normalizedAt: string;
-  sourceFamily?: "portland_gov_ppd" | "portland_gov_devhub_guidance" | "devhub_public_portal" | "portlandoregon_legacy_reference" | "portland_maps_public_reference" | "unknown";
+  sourceFamily?: "wetwijzer_gov_ppd" | "wetwijzer_gov_devhub_guidance" | "devhub_public_portal" | "wetwijzernetherlands_legacy_reference" | "bwb_metadata_public_reference" | "unknown";
   sections: DocumentSection[];
   orderedSteps?: DocumentOrderedStep[];
   tables: DocumentTable[];

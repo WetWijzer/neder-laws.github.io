@@ -10,8 +10,8 @@ def safe_summary() -> dict[str, object]:
         "rate_limit_policy": {"enabled": True, "requests_per_minute": 12},
         "freshness_policy": {"is_stale": False},
         "host_expansion": {
-            "allowed_hosts": ["www.portland.gov"],
-            "expanded_hosts": ["www.portland.gov"],
+            "allowed_hosts": ["wetten.overheid.nl"],
+            "expanded_hosts": ["wetten.overheid.nl"],
             "unexpected_hosts": [],
             "over_broad": False,
         },
@@ -61,8 +61,8 @@ def test_stale_freshness_policy_blocks_promotion() -> None:
 def test_over_broad_host_expansion_blocks_promotion() -> None:
     summary = safe_summary()
     summary["host_expansion"] = {
-        "allowed_hosts": ["www.portland.gov"],
-        "expanded_hosts": ["www.portland.gov", "example.com"],
+        "allowed_hosts": ["wetten.overheid.nl"],
+        "expanded_hosts": ["wetten.overheid.nl", "example.com"],
         "unexpected_hosts": ["example.com"],
     }
 

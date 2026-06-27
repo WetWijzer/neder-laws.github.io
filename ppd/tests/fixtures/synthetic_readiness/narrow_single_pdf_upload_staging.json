@@ -19,9 +19,9 @@
   "source_registry": [
     {
       "source_id": "src-ppd-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "source_type": "public_html",
-      "owning_surface": "portland.gov PP&D public guidance",
+      "owning_surface": "wetten.overheid.nl PP&D public guidance",
       "allowlist_policy": "official_ppd_public_seed",
       "robots_policy": "respect_robots_before_live_crawl",
       "crawl_frequency": "weekly",
@@ -32,9 +32,9 @@
     },
     {
       "source_id": "src-ppd-devhub-submit-application-guide",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "source_type": "public_html",
-      "owning_surface": "portland.gov DevHub public guide",
+      "owning_surface": "wetten.overheid.nl DevHub public guide",
       "allowlist_policy": "official_ppd_public_seed",
       "robots_policy": "respect_robots_before_live_crawl",
       "crawl_frequency": "daily_or_every_few_days",
@@ -48,8 +48,8 @@
     {
       "manifest_id": "archive-submit-plans-online-synthetic-20260508",
       "source_id": "src-ppd-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
-      "requested_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
+      "requested_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "redirect_chain": [],
       "http_status": 200,
       "content_type": "text/html; charset=utf-8",
@@ -66,8 +66,8 @@
     {
       "manifest_id": "archive-devhub-submit-application-guide-synthetic-20260508",
       "source_id": "src-ppd-devhub-submit-application-guide",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
-      "requested_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
+      "requested_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "redirect_chain": [],
       "http_status": 200,
       "content_type": "text/html; charset=utf-8",
@@ -263,7 +263,7 @@
     {
       "surface_id": "devhub-permit-application-authenticated-synthetic",
       "auth_scope": "authenticated_user_owned_session",
-      "url_pattern": "https://devhub.portlandoregon.gov/*",
+      "url_pattern": "https://wetten.overheid.nl/*",
       "page_heading": "Permit application workflow",
       "accessible_landmarks": ["main", "form", "navigation"],
       "actions": [

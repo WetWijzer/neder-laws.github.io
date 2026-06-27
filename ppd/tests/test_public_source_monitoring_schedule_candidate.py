@@ -46,7 +46,7 @@ def test_builds_metadata_only_schedule_candidate_from_three_fixture_inputs() -> 
     assert packet["allowlisted_source_ids"] == ["ppd-devhub-faq", "ppd-submit-plans-online"]
     assert packet["robots_policy_prerequisite_ids"] == [
         "policy-prereq-ppd-public-metadata-only-20260528",
-        "robots-prereq-portland-gov-20260528",
+        "robots-prereq-wetwijzer-gov-20260528",
     ]
 
 
@@ -94,7 +94,7 @@ def test_validation_rejects_raw_or_private_artifact_references() -> None:
 
 def test_builder_rejects_unsafe_intake_before_candidate_creation() -> None:
     inputs = load_inputs()
-    inputs["public_crawl_metadata_dry_run_intake"]["requested_url"] = "https://devhub.portlandoregon.gov/account/my-permits?token=secret"
+    inputs["public_crawl_metadata_dry_run_intake"]["requested_url"] = "https://wetten.overheid.nl/account/my-permits?token=secret"
 
     with pytest.raises(ValueError, match="invalid public crawl metadata dry-run intake"):
         build_public_source_monitoring_schedule_candidate(

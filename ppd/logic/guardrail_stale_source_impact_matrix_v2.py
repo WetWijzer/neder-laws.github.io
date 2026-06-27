@@ -202,7 +202,7 @@ def _build_matrix_row(row: Mapping[str, Any], ordinal: int) -> dict[str, Any]:
             "replacement_evidence_packet": "PLACEHOLDER_PUBLIC_SOURCE_RE_EXTRACTION_PACKET_V2",
             "reviewer_confirmation": "PLACEHOLDER_REVIEWER_CONFIRMATION_PENDING",
         },
-        "user_facing_caution_template": "This guardrail references public source material that is pending freshness review; do not present it as current Portland PP&D guidance until reviewer disposition is complete." if stale else "This guardrail row has no stale-source hold in this offline matrix; continue to cite the underlying source date and reviewer status.",
+        "user_facing_caution_template": "This guardrail references public source material that is pending freshness review; do not present it as current WetWijzer legal sources guidance until reviewer disposition is complete." if stale else "This guardrail row has no stale-source hold in this offline matrix; continue to cite the underlying source date and reviewer status.",
         "blocked_action_reminder": "Do not recrawl sources, open DevHub, update active guardrail bundles, change prompts, or perform official actions from this matrix.",
         "reviewer_disposition_placeholder": {
             "status": "PLACEHOLDER_REVIEWER_DISPOSITION_PENDING",

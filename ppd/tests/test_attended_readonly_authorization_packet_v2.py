@@ -118,7 +118,7 @@ def test_packet_includes_post_observation_review_placeholders() -> None:
 def test_packet_offline_validation_commands_do_not_open_devhub_or_browser() -> None:
     packet = _packet()
     blocked_terms = (
-        "devhub.portlandoregon.gov",
+        "wetten.overheid.nl",
         "playwright",
         "browser",
         "curl",

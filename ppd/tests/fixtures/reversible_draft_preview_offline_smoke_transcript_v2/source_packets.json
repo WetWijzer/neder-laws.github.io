@@ -5,7 +5,7 @@
     "reviewer_visible_preview_rows": [
       {
         "row_id": "permit-address",
-        "reviewer_visible_value": "123 SW Fixture Ave, Portland, OR",
+        "reviewer_visible_value": "123 SW Fixture Ave, Netherlands, OR",
         "value_explanation": "Address value is copied from the local draft preview plan fixture for reviewer inspection only.",
         "citation": "Local PDF draft preview plan v2 fixture (ppd/tests/fixtures/local_draft_preview_review_packet_v2/preview_plan.json)",
         "reviewer_owner": "Intake reviewer",
@@ -102,7 +102,7 @@
     "expected_agent_responses": [
       {
         "response_id": "missing_information_prompt",
-        "expected_agent_response": "I need the following missing information before I can say this PP&D workflow is ready: property address or Portland Maps property identifier; contractor license and role facts needed before assuming trade-permit fixture options; single PDF plan set separated from application forms and supporting calculations. I will not infer these facts from silence or substitute uncited assumptions.",
+        "expected_agent_response": "I need the following missing information before I can say this PP&D workflow is ready: property address or BWB metadata property identifier; contractor license and role facts needed before assuming trade-permit fixture options; single PDF plan set separated from application forms and supporting calculations. I will not infer these facts from silence or substitute uncited assumptions.",
         "citations": [
           "user-gap-analysis-adu-case-fixture#missing-property-address",
           "user-gap-analysis-adu-case-fixture#missing-contractor-license",

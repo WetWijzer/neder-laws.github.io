@@ -17,8 +17,8 @@
   "candidate_preflight_rows": [
     {
       "source_id": "ppd-online-permitting-tools",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
-      "official_anchor_citation": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
+      "official_anchor_citation": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "official_source_anchor_placeholder": "Reviewer must confirm this URL is still the PP&D online permitting tools overview before any processor handoff.",
       "seed_review_references": [
         "PP&D plan official source anchors verified 2026-05-08"
@@ -26,7 +26,7 @@
       "allow_reason": "official public PP&D guide on allowlisted host",
       "robots_decision_placeholder": "Reviewer must record robots result before processor handoff.",
       "allowlist_decision_placeholder": "Reviewer must record host allowlist and PP&D policy decision before processor handoff.",
-      "canonical_url_expectation": "Canonical URL remains the public Portland.gov PP&D online permitting tools overview.",
+      "canonical_url_expectation": "Canonical URL remains the public wetten.overheid.nl PP&D online permitting tools overview.",
       "request_method": "GET",
       "rate_limit_note": "Later approved metadata capture must use one-at-a-time conservative pacing and stop on errors.",
       "raw_body_persistence_exclusion_check": "Source bodies are not retained in committed artifacts.",
@@ -59,7 +59,7 @@
     {
       "source_id": "ppd-online-permitting-tools",
       "synthetic_request_id": "synthetic-ppd-online-tools-get",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "method": "GET",
       "rate_limit_note": "Synthetic row documents conservative pacing only; no network request is made by this fixture.",
       "synthetic_only": true,

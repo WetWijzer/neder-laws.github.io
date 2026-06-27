@@ -7,7 +7,7 @@
     {
       "id": "req-existing-file-format",
       "sourceId": "single-pdf-process",
-      "sourceUrl": "https://www.portland.gov/ppd/single-pdf-process",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/single-pdf-process",
       "anchorId": "drawing-plans",
       "requirementType": "obligation",
       "text": "Drawing plans must be submitted as one searchable PDF.",
@@ -17,7 +17,7 @@
     {
       "id": "req-removed-paper-copy",
       "sourceId": "legacy-submittal",
-      "sourceUrl": "https://www.portland.gov/ppd/legacy-submittal",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/legacy-submittal",
       "anchorId": "paper-copy",
       "requirementType": "obligation",
       "text": "Applicants should bring a paper copy to the permit center.",
@@ -29,7 +29,7 @@
     {
       "id": "req-existing-file-format",
       "sourceId": "single-pdf-process",
-      "sourceUrl": "https://www.portland.gov/ppd/single-pdf-process",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/single-pdf-process",
       "anchorId": "drawing-plans",
       "requirementType": "obligation",
       "text": "Drawing plans must be submitted as one searchable PDF with bookmarks when required.",
@@ -39,11 +39,11 @@
     {
       "id": "req-added-fee-confirmation",
       "sourceId": "devhub-fees",
-      "sourceUrl": "https://www.portland.gov/ppd/devhub-fees",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-fees",
       "anchorId": "fee-payment",
       "requirementType": "action_gate",
       "text": "Fee payment requires explicit user confirmation before proceeding.",
-      "evidenceText": "Confirm before paying fees in Development Hub PDX.",
+      "evidenceText": "Confirm before paying fees in Development Hub Netherlands.",
       "contentHash": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
     }
   ],

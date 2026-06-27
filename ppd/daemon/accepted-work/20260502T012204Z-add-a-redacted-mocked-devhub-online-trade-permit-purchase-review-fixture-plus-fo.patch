@@ -7,7 +7,7 @@
 +  "workflow": "online_trade_permit_purchase_review",
 +  "capturedFrom": "mocked_devhub_fixture_only",
 +  "redactionPolicy": "all applicant, property, contractor, permit, contact, payment, and project values are redacted placeholders",
-+  "stateUrlTemplate": "https://devhub.portlandoregon.gov/trade-permits/purchase/review",
++  "stateUrlTemplate": "https://wetten.overheid.nl/trade-permits/purchase/review",
 +  "recordedAt": "2026-05-02T00:00:00Z",
 +  "sourceLimits": {
 +    "liveDevHubUsed": false,

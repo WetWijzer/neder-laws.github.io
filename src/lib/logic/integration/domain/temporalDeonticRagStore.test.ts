@@ -10,7 +10,7 @@ describe('BrowserNativeTemporalDeonticRagStore', () => {
       {
         id: 'inspection',
         title: 'Inspection Rule',
-        citation: 'PCC 1.01',
+        citation: 'netherlands law 1.01',
         text: 'The landlord shall inspect the unit within 10 days. The tenant may attend.',
       },
       {
@@ -37,7 +37,7 @@ describe('BrowserNativeTemporalDeonticRagStore', () => {
     });
     expect(result.evidence[0]).toMatchObject({
       documentId: 'inspection',
-      citation: 'PCC 1.01',
+      citation: 'netherlands law 1.01',
       normCount: 2,
       temporalCount: 1,
     });

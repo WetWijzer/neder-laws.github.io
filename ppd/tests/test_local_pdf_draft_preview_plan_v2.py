@@ -130,7 +130,7 @@ def test_packet_has_offline_validation_commands_without_live_devhub_or_pdf_write
 
     assert "ppd/tests/test_local_pdf_draft_preview_plan_v2.py" in command_text
     assert "ppd/daemon/ppd_daemon.py --self-test" in command_text
-    assert "devhub.portlandoregon.gov" not in command_text
+    assert "wetten.overheid.nl" not in command_text
     assert "upload" not in command_text.lower()
     assert "write_pdf" not in command_text.lower()
 

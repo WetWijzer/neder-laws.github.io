@@ -4,8 +4,8 @@
   "sourceDocument": {
     "documentId": "residential-building-permit-application-extract",
     "title": "Residential Building Permit Application PDF fixture",
-    "sourceUrl": "https://www.portland.gov/ppd/forms/building-permit-application.pdf",
-    "canonicalUrl": "https://www.portland.gov/ppd/forms/building-permit-application.pdf",
+    "sourceUrl": "https://wetten.overheid.nl/ppd/forms/building-permit-application.pdf",
+    "canonicalUrl": "https://wetten.overheid.nl/ppd/forms/building-permit-application.pdf",
     "contentType": "application/pdf",
     "access": "public",
     "retrievalMode": "fixture_only_no_download",
@@ -18,14 +18,14 @@
     {
       "anchorId": "page-1-title",
       "pageNumber": 1,
-      "sourceUrl": "https://www.portland.gov/ppd/forms/building-permit-application.pdf#page=1",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/forms/building-permit-application.pdf#page=1",
       "label": "Application title",
       "snippet": "Building Permit Application"
     },
     {
       "anchorId": "page-2-signature",
       "pageNumber": 2,
-      "sourceUrl": "https://www.portland.gov/ppd/forms/building-permit-application.pdf#page=2",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/forms/building-permit-application.pdf#page=2",
       "label": "Applicant acknowledgment",
       "snippet": "Applicant signature and date"
     }
@@ -35,7 +35,7 @@
       "fieldId": "project-address",
       "label": "Project address",
       "pageAnchorId": "page-1-title",
-      "sourceUrl": "https://www.portland.gov/ppd/forms/building-permit-application.pdf#page=1",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/forms/building-permit-application.pdf#page=1",
       "redactedValue": "[REDACTED:PROJECT_ADDRESS]",
       "valuePolicy": "placeholder_only"
     },
@@ -43,7 +43,7 @@
       "fieldId": "applicant-signature",
       "label": "Applicant signature",
       "pageAnchorId": "page-2-signature",
-      "sourceUrl": "https://www.portland.gov/ppd/forms/building-permit-application.pdf#page=2",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/forms/building-permit-application.pdf#page=2",
       "redactedValue": "[REDACTED:APPLICANT_SIGNATURE]",
       "valuePolicy": "placeholder_only"
     }
@@ -59,7 +59,7 @@
     {
       "caseId": "reject-private-devhub",
       "payload": {
-        "sourceUrl": "https://devhub.portlandoregon.gov/secure/permits/123",
+        "sourceUrl": "https://wetten.overheid.nl/secure/permits/123",
         "authState": "[REDACTED:AUTH_STATE]"
       },
       "expectedReason": "private DevHub artifacts are not allowed"

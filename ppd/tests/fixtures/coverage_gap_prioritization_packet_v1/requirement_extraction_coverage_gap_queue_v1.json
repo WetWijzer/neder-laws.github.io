@@ -18,7 +18,7 @@
         {
           "source_id": "ppd-devhub-guide-submit-permit-application",
           "title": "DevHub permit application guide",
-          "url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+          "url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
           "citation": "Guide describes online permit application steps including acknowledgements, upload, and submission flow."
         }
       ]
@@ -38,7 +38,7 @@
         {
           "source_id": "ppd-how-pay-fees-pdf",
           "title": "How to pay fees",
-          "url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+          "url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
           "citation": "Fee payment guide is the official source anchor for payment workflow extraction."
         }
       ]
@@ -58,7 +58,7 @@
         {
           "source_id": "ppd-submit-plans-online",
           "title": "Submit Plans Online / Single PDF Process",
-          "url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+          "url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
           "citation": "Single PDF guidance describes drawing plan and supporting document upload expectations."
         }
       ]
@@ -78,7 +78,7 @@
         {
           "source_id": "ppd-upload-corrections-guide",
           "title": "Upload corrections guide",
-          "url": "https://www.portland.gov/ppd",
+          "url": "https://wetten.overheid.nl/ppd",
           "citation": "Official guidance treats correction uploads as authenticated status-dependent workflow steps."
         }
       ]
@@ -98,7 +98,7 @@
         {
           "source_id": "ppd-online-permitting-tools",
           "title": "Online permitting tools overview",
-          "url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+          "url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
           "citation": "Online permitting guidance links standard trade permit and DevHub workflows."
         }
       ]
@@ -118,7 +118,7 @@
         {
           "source_id": "ppd-spp-file-naming-standards",
           "title": "File naming standards and PDF preparation",
-          "url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+          "url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
           "citation": "File naming and PDF preparation guidance anchors PDF class extraction."
         }
       ]
@@ -138,7 +138,7 @@
         {
           "source_id": "ppd-apply-for-permits",
           "title": "Apply for permits",
-          "url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+          "url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
           "citation": "Apply for permits guidance distinguishes online and alternate submission paths."
         }
       ]

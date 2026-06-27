@@ -2,8 +2,8 @@
   {
     "manifest_id": "manifest-ppd-landing-20260512",
     "source_id": "ppd-landing",
-    "canonical_url": "https://www.portland.gov/ppd",
-    "requested_url": "https://www.portland.gov/ppd",
+    "canonical_url": "https://wetten.overheid.nl/ppd",
+    "requested_url": "https://wetten.overheid.nl/ppd",
     "redirect_chain": [],
     "http_status": 200,
     "content_type": "text/html",
@@ -20,8 +20,8 @@
   {
     "manifest_id": "manifest-devhub-faq-20260509",
     "source_id": "devhub-faq",
-    "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
-    "requested_url": "https://www.portland.gov/ppd/devhub-faqs",
+    "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
+    "requested_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
     "redirect_chain": [],
     "http_status": 200,
     "content_type": "text/html",
@@ -38,8 +38,8 @@
   {
     "manifest_id": "manifest-forms-index-20260513",
     "source_id": "forms-index",
-    "canonical_url": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
-    "requested_url": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+    "canonical_url": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+    "requested_url": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
     "redirect_chain": [],
     "http_status": 200,
     "content_type": "text/html",
@@ -56,8 +56,8 @@
   {
     "manifest_id": "manifest-fee-payment-20260501",
     "source_id": "fee-payment-guide",
-    "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
-    "requested_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+    "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
+    "requested_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
     "redirect_chain": [],
     "http_status": 200,
     "content_type": "application/pdf",

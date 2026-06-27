@@ -53,7 +53,7 @@ def validate_guardrail_consumer_contract_audit_packet(packet: Mapping[str, Any])
     """Return validation findings for an audit packet.
 
     The function performs only structural/content checks. It does not load files,
-    call model providers, open browsers, or contact Portland systems.
+    call model providers, open browsers, or contact Netherlands systems.
     """
 
     findings: list[AuditFinding] = []

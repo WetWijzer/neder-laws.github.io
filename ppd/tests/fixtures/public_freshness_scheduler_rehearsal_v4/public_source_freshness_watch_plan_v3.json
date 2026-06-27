@@ -2,7 +2,7 @@
   "schema": "ppd.public_source_freshness_watch_plan.v3",
   "watch_plan": [
     {
-      "source_id": "portland-zoning-code",
+      "source_id": "wetwijzer-zoning-code",
       "priority": 1,
       "freshness_cadence": "P7D",
       "freshness_signal": "public metadata updated timestamp",
@@ -17,13 +17,13 @@
       },
       "citations": [
         {
-          "label": "watch-plan-v3:portland-zoning-code",
+          "label": "watch-plan-v3:wetwijzer-zoning-code",
           "field": "last_seen_metadata_at"
         }
       ]
     },
     {
-      "source_id": "portland-archived-fee-schedule",
+      "source_id": "wetwijzer-archived-fee-schedule",
       "priority": 2,
       "freshness_cadence": "manual-review",
       "freshness_signal": "archive landing page metadata",
@@ -33,13 +33,13 @@
       ],
       "citations": [
         {
-          "label": "watch-plan-v3:portland-archived-fee-schedule",
+          "label": "watch-plan-v3:wetwijzer-archived-fee-schedule",
           "field": "freshness_signal"
         }
       ]
     },
     {
-      "source_id": "portland-building-code",
+      "source_id": "wetwijzer-building-code",
       "priority": 3,
       "action": "defer",
       "defer_reason": "awaiting reviewer confirmation of registry promotion preview",
@@ -48,7 +48,7 @@
       "last_seen_metadata_at": "2026-05-01T00:00:00Z",
       "citations": [
         {
-          "label": "watch-plan-v3:portland-building-code",
+          "label": "watch-plan-v3:wetwijzer-building-code",
           "field": "defer_reason"
         }
       ]

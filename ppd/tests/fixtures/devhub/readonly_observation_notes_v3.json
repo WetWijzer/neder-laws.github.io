@@ -8,7 +8,7 @@
   "observations": [
     {
       "surface_id": "devhub-status-review-synthetic",
-      "url_pattern": "https://devhub.portlandoregon.gov/synthetic/status-review/*",
+      "url_pattern": "https://wetten.overheid.nl/synthetic/status-review/*",
       "page_heading": "Permit status review",
       "landmark_notes": [
         "Main landmark exposes status summary and request detail regions.",

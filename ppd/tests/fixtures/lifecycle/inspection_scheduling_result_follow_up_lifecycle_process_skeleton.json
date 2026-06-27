@@ -15,19 +15,19 @@
     {
       "evidenceId": "permit_lifecycle_source_inventory:devhub_faq_inspection_scheduling_online_trade_permits",
       "authorityLabel": "Public DevHub FAQ",
-      "citationUrl": "https://www.portland.gov/ppd/devhub",
+      "citationUrl": "https://wetten.overheid.nl/ppd/devhub",
       "citationNote": "Existing source-inventory fixture evidence identifies inspection scheduling for online trade permits as a public DevHub service category."
     },
     {
       "evidenceId": "permit_lifecycle_source_inventory:inspection_scheduling_guidance",
       "authorityLabel": "PP&D inspection scheduling guidance",
-      "citationUrl": "https://www.portland.gov/ppd/inspections",
+      "citationUrl": "https://wetten.overheid.nl/ppd/inspections",
       "citationNote": "Existing source-inventory fixture evidence covers public inspection scheduling guidance and must be consulted before any scheduling workflow is proposed."
     },
     {
       "evidenceId": "permit_lifecycle_source_inventory:inspection_result_guidance",
       "authorityLabel": "PP&D inspection result guidance",
-      "citationUrl": "https://www.portland.gov/ppd/inspections",
+      "citationUrl": "https://wetten.overheid.nl/ppd/inspections",
       "citationNote": "Existing source-inventory fixture evidence covers public inspection-result follow-up guidance and result-dependent next steps."
     }
   ],

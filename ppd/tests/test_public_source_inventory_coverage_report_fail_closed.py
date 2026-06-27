@@ -144,7 +144,7 @@ def _is_private_devhub_url(value: Any) -> bool:
     if not isinstance(value, str):
         return False
     parsed = urlparse(value)
-    if parsed.netloc.lower() != "devhub.portlandoregon.gov":
+    if parsed.netloc.lower() != "wetten.overheid.nl":
         return False
     path = parsed.path.lower()
     return any(part in path for part in PRIVATE_DEVHUB_PATH_PARTS)

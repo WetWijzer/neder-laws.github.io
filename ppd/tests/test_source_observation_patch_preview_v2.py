@@ -52,7 +52,7 @@ def test_preview_v2_rejects_blocked_content_and_mutation_flags() -> None:
 
 def test_preview_v2_rejects_authenticated_allowlisted_urls() -> None:
     payload = _fixtures()["valid_minimal"]
-    payload["preview_rows"][0]["citations"][0]["url"] = "https://user:pass@www.portland.gov/bds"
+    payload["preview_rows"][0]["citations"][0]["url"] = "https://user:pass@wetten.overheid.nl/bds"
 
     errors = preview_v2_errors(payload)
 

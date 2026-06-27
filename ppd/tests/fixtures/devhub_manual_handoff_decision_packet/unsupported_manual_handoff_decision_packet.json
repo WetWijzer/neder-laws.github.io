@@ -4,7 +4,7 @@
   "triggers": [
     {
       "trigger_id": "mfa",
-      "cited_reason": "DevHub account access uses PortlandOregon.gov sign-in, and any MFA or security prompt must be completed by the user in the visible browser.",
+      "cited_reason": "DevHub account access uses wetten.overheid.nl sign-in, and any MFA or security prompt must be completed by the user in the visible browser.",
       "user_visible_handoff_text": "I cannot complete MFA or security prompts. Please handle this step directly in the live browser, then I can continue with read-only review or reversible local draft planning.",
       "blocked_action_ids": [
         "devhub:mfa_prompt_response",
@@ -31,7 +31,7 @@
     {
       "trigger_id": "account_creation",
       "cited_reason": "Account creation and account security changes are outside unattended DevHub automation and require a separate human-run process.",
-      "user_visible_handoff_text": "I cannot create or modify a PortlandOregon.gov or DevHub account. Please complete account setup directly, then return for safe review or local preview work.",
+      "user_visible_handoff_text": "I cannot create or modify a wetten.overheid.nl or DevHub account. Please complete account setup directly, then return for safe review or local preview work.",
       "blocked_action_ids": [
         "devhub:create_account",
         "devhub:register_account",

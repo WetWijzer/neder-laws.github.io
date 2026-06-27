@@ -26,7 +26,7 @@
       "evidence": [
         {
           "sourceTitle": "Residential demolition permits",
-          "url": "https://www.portland.gov/ppd/residential-permitting/home-projects/residential-demolition-permits",
+          "url": "https://wetten.overheid.nl/ppd/residential-permitting/home-projects/residential-demolition-permits",
           "anchor": "Do I need a residential demolition permit?",
           "supports": "The page states when a demolition permit is needed and that each structure requires its own permit."
         }
@@ -48,7 +48,7 @@
       "evidence": [
         {
           "sourceTitle": "Residential demolition permits",
-          "url": "https://www.portland.gov/ppd/residential-permitting/home-projects/residential-demolition-permits",
+          "url": "https://wetten.overheid.nl/ppd/residential-permitting/home-projects/residential-demolition-permits",
           "anchor": "Residential demolition permit plan review process",
           "supports": "The page identifies demolition review paths and typical review groups for demolition projects."
         }
@@ -61,7 +61,7 @@
       "recordId": "demo-upload-requirements-001",
       "requirementType": "obligation",
       "subject": "applicant",
-      "expectedExtraction": "The demolition permit application package must include the demolition packet materials and may require structural plans or tree preservation plans; online submittal is through Development Hub PDX, and most projects use the Single PDF process for electronic plans.",
+      "expectedExtraction": "The demolition permit application package must include the demolition packet materials and may require structural plans or tree preservation plans; online submittal is through Development Hub Netherlands, and most projects use the Single PDF process for electronic plans.",
       "redactedUserFacts": [
         "application_packet:",
         "site_plan:",
@@ -70,19 +70,19 @@
       "evidence": [
         {
           "sourceTitle": "Residential demolition permits",
-          "url": "https://www.portland.gov/ppd/residential-permitting/home-projects/residential-demolition-permits",
+          "url": "https://wetten.overheid.nl/ppd/residential-permitting/home-projects/residential-demolition-permits",
           "anchor": "Application, forms, and handouts for a residential demolition permit",
           "supports": "The page lists required demolition packet materials and possible additional plan requirements."
         },
         {
           "sourceTitle": "Residential demolition permits",
-          "url": "https://www.portland.gov/ppd/residential-permitting/home-projects/residential-demolition-permits",
+          "url": "https://wetten.overheid.nl/ppd/residential-permitting/home-projects/residential-demolition-permits",
           "anchor": "How to apply for a demolition permit",
-          "supports": "The page directs applicants to submit online through Development Hub PDX and references the Single PDF process for most projects."
+          "supports": "The page directs applicants to submit online through Development Hub Netherlands and references the Single PDF process for most projects."
         },
         {
-          "sourceTitle": "Quick Guide: Submit a permit application on Development Hub PDX (DevHub)",
-          "url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+          "sourceTitle": "Quick Guide: Submit a permit application on Development Hub Netherlands (DevHub)",
+          "url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
           "anchor": "Prepare your permit application requirements",
           "supports": "The guide requires applicants to prepare permit application materials, plans where applicable, PDF naming standards, and upload-ready files."
         }
@@ -104,15 +104,15 @@
       "evidence": [
         {
           "sourceTitle": "Residential demolition permits",
-          "url": "https://www.portland.gov/ppd/residential-permitting/home-projects/residential-demolition-permits",
+          "url": "https://wetten.overheid.nl/ppd/residential-permitting/home-projects/residential-demolition-permits",
           "anchor": "Get your approved residential demolition permit",
           "supports": "The page describes pre-issuance, final fee notification, payment instructions, and the requirement that fees be paid before issuance."
         },
         {
           "sourceTitle": "Development Services Center",
-          "url": "https://www.portland.gov/bds/article/756804",
+          "url": "https://wetten.overheid.nl/bds/article/756804",
           "anchor": "Building permit services are available online, 24 hours a day",
-          "supports": "The page identifies Development Hub PDX as the online system used to apply and pay for permits."
+          "supports": "The page identifies Development Hub Netherlands as the online system used to apply and pay for permits."
         }
       ],
       "confidence": "high",
@@ -132,19 +132,19 @@
       "evidence": [
         {
           "sourceTitle": "Residential demolition permits",
-          "url": "https://www.portland.gov/ppd/residential-permitting/home-projects/residential-demolition-permits",
+          "url": "https://wetten.overheid.nl/ppd/residential-permitting/home-projects/residential-demolition-permits",
           "anchor": "Residential demolition permit plan review process",
           "supports": "The page says PP&D may send a checksheet requesting clarifications or corrections during review."
         },
         {
           "sourceTitle": "Help Guide: Uploading Corrections in DevHub",
-          "url": "https://www.portland.gov/ppd/upload-corrections-devhub",
+          "url": "https://wetten.overheid.nl/ppd/upload-corrections-devhub",
           "anchor": "Upload Corrections in DevHub",
           "supports": "The guide describes adding PDF correction documents, descriptions, authorization acknowledgement, and submission."
         },
         {
           "sourceTitle": "Checksheet: Prepare and submit corrections electronically",
-          "url": "https://www.portland.gov/ppd/get-permit/checksheets",
+          "url": "https://wetten.overheid.nl/ppd/get-permit/checksheets",
           "anchor": "Step 4. Complete the Upload Corrections Process through DevHub",
           "supports": "The checksheet guide describes correction upload steps and the post-submission review cycle."
         }
@@ -166,13 +166,13 @@
       "evidence": [
         {
           "sourceTitle": "Residential demolition permits",
-          "url": "https://www.portland.gov/ppd/residential-permitting/home-projects/residential-demolition-permits",
+          "url": "https://wetten.overheid.nl/ppd/residential-permitting/home-projects/residential-demolition-permits",
           "anchor": "Get ready for inspections",
           "supports": "The page describes inspection-card instructions, required demolition inspections, pre-disturbance approvals, replacement-construction sequencing, and final approval."
         },
         {
           "sourceTitle": "Residential demolition permits",
-          "url": "https://www.portland.gov/ppd/residential-permitting/home-projects/residential-demolition-permits",
+          "url": "https://wetten.overheid.nl/ppd/residential-permitting/home-projects/residential-demolition-permits",
           "anchor": "Residential demolition inspections",
           "supports": "The page describes scheduling demolition inspections through the automated inspection request line using permit identifiers and inspection codes."
         }
@@ -193,26 +193,26 @@
       ],
       "evidence": [
         {
-          "sourceTitle": "Quick Guide: Submit a permit application on Development Hub PDX (DevHub)",
-          "url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+          "sourceTitle": "Quick Guide: Submit a permit application on Development Hub Netherlands (DevHub)",
+          "url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
           "anchor": "Select your permit request type",
           "supports": "The guide includes demolition permits in the DevHub permit request workflow and requires applicants to review permitting information before continuing."
         },
         {
           "sourceTitle": "Help Guide: Uploading Corrections in DevHub",
-          "url": "https://www.portland.gov/ppd/upload-corrections-devhub",
+          "url": "https://wetten.overheid.nl/ppd/upload-corrections-devhub",
           "anchor": "Upload Corrections in DevHub",
           "supports": "The guide requires an authorization acknowledgement before submitting corrections."
         },
         {
           "sourceTitle": "Residential demolition permits",
-          "url": "https://www.portland.gov/ppd/residential-permitting/home-projects/residential-demolition-permits",
+          "url": "https://wetten.overheid.nl/ppd/residential-permitting/home-projects/residential-demolition-permits",
           "anchor": "Get your approved residential demolition permit",
           "supports": "The page makes payment a permit-issuance checkpoint."
         },
         {
           "sourceTitle": "Residential demolition permits",
-          "url": "https://www.portland.gov/ppd/residential-permitting/home-projects/residential-demolition-permits",
+          "url": "https://wetten.overheid.nl/ppd/residential-permitting/home-projects/residential-demolition-permits",
           "anchor": "Residential demolition inspections",
           "supports": "The page describes inspection scheduling as an applicant action tied to permit identifiers."
         }

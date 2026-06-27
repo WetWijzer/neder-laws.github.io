@@ -18,12 +18,12 @@ PACKET_TYPE = "ppd_source_freshness_drift_escalation_packet"
 PACKET_VERSION = "1.0"
 
 _ALLOWED_PUBLIC_HOSTS = {
-    "www.portland.gov",
-    "portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
-    "portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
+    "repository.overheid.nl",
 }
 
 _ALLOWED_CITATION_ARTIFACT_TYPES = {

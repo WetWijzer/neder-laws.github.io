@@ -18,7 +18,7 @@ def test_change_monitor_fixture_reports_changed_source_hashes_and_affected_ids()
     assert report["changed_sources"] == [
         {
             "source_id": "src_devhub_faq",
-            "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+            "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
             "previous_content_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
             "current_content_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "affected_requirement_ids": [
@@ -68,7 +68,7 @@ def test_change_monitor_fixture_rejects_raw_page_body_fields() -> None:
                 "current_sources": [
                     {
                         "source_id": "src_bad_fixture",
-                        "canonical_url": "https://www.portland.gov/ppd",
+                        "canonical_url": "https://wetten.overheid.nl/ppd",
                         "content_hash": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
                         "raw_body": "committed page body is not allowed",
                     }

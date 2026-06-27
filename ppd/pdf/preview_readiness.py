@@ -116,7 +116,7 @@ def _validate_citations(citations: list[dict[str, Any]]) -> set[str]:
             raise PreviewReadinessError(f"Duplicate citation_id: {citation_id}")
         citation_ids.add(citation_id)
         url = _require_string(citation, "url")
-        if not url.startswith("https://www.portland.gov/") and not url.startswith("https://devhub.portlandoregon.gov"):
+        if not url.startswith("https://wetten.overheid.nl/") and not url.startswith("https://wetten.overheid.nl"):
             raise PreviewReadinessError(f"Citation URL is outside PP&D allowlist: {url}")
         _require_string(citation, "source_title")
         _require_string(citation, "evidence_text")

@@ -21,7 +21,7 @@ _LIVE_EXECUTION_RE = re.compile(
     r"(?i)\b(?:"
     r"(?:ran|run|executed|called|queried|used|invoked)\s+(?:the\s+)?(?:live\s+)?(?:llm|devhub|crawler|processor)|"
     r"(?:live\s+)?(?:llm|devhub|crawler|processor)\s+(?:run|execution|call|query|crawl|session)\s+(?:completed|succeeded|ran|executed)|"
-    r"crawled\s+(?:live|production|devhub|portland)|"
+    r"crawled\s+(?:live|production|devhub|wetwijzer)|"
     r"processed\s+(?:live|production|devhub|crawler)"
     r")\b"
 )

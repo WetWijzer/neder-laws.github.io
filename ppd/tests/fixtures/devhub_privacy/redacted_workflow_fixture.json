@@ -8,7 +8,7 @@
     {
       "id": "request-type",
       "heading": "Start a permit request",
-      "urlPattern": "https://devhub.portlandoregon.gov/permits/request-type*",
+      "urlPattern": "https://wetten.overheid.nl/permits/request-type*",
       "fields": [
         {
           "id": "project-address",

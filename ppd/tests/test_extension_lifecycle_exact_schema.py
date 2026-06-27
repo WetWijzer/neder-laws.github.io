@@ -138,7 +138,7 @@ class ExtensionLifecycleExactSchemaTest(unittest.TestCase):
         for source in skeleton["authoritySources"]:
             self.assertEqual(set(source), AUTHORITY_SOURCE_KEYS)
             self.assertEqual(source["categoryId"], EXPECTED_CATEGORY_ID)
-            self.assertTrue(source["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
+            self.assertTrue(source["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
             self.assertEqual(source["sourceUrl"], source["canonicalUrl"])
             self.assertTrue(source["capturedAt"].endswith("Z"))
             authority_evidence_ids.add(source["evidenceId"])

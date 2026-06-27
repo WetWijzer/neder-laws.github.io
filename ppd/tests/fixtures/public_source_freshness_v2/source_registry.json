@@ -4,7 +4,7 @@
   "sources": [
     {
       "source_id": "ppd-devhub-faq",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "source_type": "devhub_public",
       "owning_surface": "public_ppd_guidance",
       "allowlist_policy": "allowed_official_ppd_anchor",
@@ -17,7 +17,7 @@
     },
     {
       "source_id": "ppd-bureau-landing",
-      "canonical_url": "https://www.portland.gov/ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
       "source_type": "public_html",
       "owning_surface": "public_ppd_guidance",
       "allowlist_policy": "allowed_official_ppd_anchor",
@@ -30,7 +30,7 @@
     },
     {
       "source_id": "ppd-online-tools",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "source_type": "public_html",
       "owning_surface": "public_ppd_guidance",
       "allowlist_policy": "allowed_official_ppd_anchor",
@@ -43,7 +43,7 @@
     },
     {
       "source_id": "ppd-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "source_type": "public_html",
       "owning_surface": "public_ppd_guidance",
       "allowlist_policy": "allowed_official_ppd_anchor",

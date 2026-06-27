@@ -15,7 +15,7 @@ def valid_packet() -> dict[str, object]:
         "source_evidence": [
             {
                 "source_evidence_id": "EVID-001",
-                "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+                "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
                 "freshness_status": "fresh",
             }
         ],
@@ -47,7 +47,7 @@ def test_rejects_stale_source_evidence() -> None:
     packet["source_evidence"] = [
         {
             "source_evidence_id": "EVID-001",
-            "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+            "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
             "freshness_status": "stale",
         }
     ]
@@ -78,7 +78,7 @@ def test_rejects_private_or_authenticated_urls() -> None:
     packet["source_evidence"] = [
         {
             "source_evidence_id": "EVID-001",
-            "canonical_url": "https://devhub.portlandoregon.gov/account/my-permits?token=secret",
+            "canonical_url": "https://wetten.overheid.nl/account/my-permits?token=secret",
             "freshness_status": "fresh",
         }
     ]

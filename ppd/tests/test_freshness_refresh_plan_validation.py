@@ -21,8 +21,8 @@ def base_plan() -> dict[str, object]:
     return {
         "crawl_frequency": "P1D",
         "rate_limit_policy": {"requests_per_second": 0.2, "burst": 1},
-        "seed_urls": ["https://www.portland.gov/bds"],
-        "allowed_hosts": ["www.portland.gov"],
+        "seed_urls": ["https://wetten.overheid.nl/bds"],
+        "allowed_hosts": ["wetten.overheid.nl"],
     }
 
 
@@ -38,8 +38,8 @@ def test_accepts_minimal_public_plan() -> None:
         "http://127.0.0.1/private",
         "http://10.0.0.5/crawl",
         "https://user:password@example.com/index.html",
-        "https://www.portland.gov/login",
-        "https://www.portland.gov/bds?token=secret",
+        "https://wetten.overheid.nl/login",
+        "https://wetten.overheid.nl/bds?token=secret",
     ],
 )
 def test_refuses_private_or_authenticated_urls(url: str) -> None:
@@ -48,7 +48,7 @@ def test_refuses_private_or_authenticated_urls(url: str) -> None:
     assert "private_or_authenticated_url" in issue_codes(plan)
 
 
-@pytest.mark.parametrize("host", ["*", "*.portland.gov", ".portland.gov", "gov", "or.us", "https://www.portland.gov/bds"])
+@pytest.mark.parametrize("host", ["*", "*.wetten.overheid.nl", ".wetten.overheid.nl", "gov", "or.us", "https://wetten.overheid.nl/bds"])
 def test_refuses_over_broad_host_expansion(host: str) -> None:
     plan = base_plan()
     plan["allowed_hosts"] = [host]

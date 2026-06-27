@@ -41,7 +41,7 @@ def test_notification_packet_summarizes_changed_hashes_and_requirement_deltas() 
         assert source_change["previous_source_hash"].startswith("sha256:")
         assert source_change["current_source_hash"].startswith("sha256:")
         assert source_change["previous_source_hash"] != source_change["current_source_hash"]
-        assert source_change["canonical_url"].startswith("https://www.portland.gov/ppd/")
+        assert source_change["canonical_url"].startswith("https://wetten.overheid.nl/ppd/")
         assert source_change["source_freshness_status"] == "fresh"
 
 
@@ -121,13 +121,13 @@ def test_notification_packet_rejects_downloaded_document_paths() -> None:
 
 def test_notification_packet_rejects_private_or_authenticated_urls() -> None:
     fixture = load_fixture()
-    fixture["source_hash_changes"][0]["canonical_url"] = "https://devhub.portlandoregon.gov/permits/12345"
+    fixture["source_hash_changes"][0]["canonical_url"] = "https://wetten.overheid.nl/permits/12345"
 
     with pytest.raises(ValueError, match="private or authenticated URL"):
         build_public_change_monitor_notification(fixture)
 
     fixture = load_fixture()
-    fixture["recommendations"][0]["summary"] = "Open https://www.portland.gov/login?token=secret"
+    fixture["recommendations"][0]["summary"] = "Open https://wetten.overheid.nl/login?token=secret"
 
     with pytest.raises(ValueError, match="private or authenticated URL"):
         build_public_change_monitor_notification(fixture)

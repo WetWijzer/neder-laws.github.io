@@ -17,11 +17,11 @@
   },
   "syntheticProcessorPrerequisites": [
     {
-      "prerequisite_id": "processor-prereq-source-portland-ppd",
-      "source_id": "source-portland-ppd",
-      "canonical_url": "https://www.portland.gov/ppd",
-      "requested_url": "https://www.portland.gov/ppd",
-      "source_evidence_ids": ["evidence-portland-ppd-landing"],
+      "prerequisite_id": "processor-prereq-source-wetwijzer-ppd",
+      "source_id": "source-wetwijzer-ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
+      "requested_url": "https://wetten.overheid.nl/ppd",
+      "source_evidence_ids": ["evidence-wetwijzer-ppd-landing"],
       "robots_evidence_id": "robots-policy-fixture",
       "policy_evidence_id": "public-policy-fixture",
       "rate_limit_note": "metadata-only fixture rehearsal",
@@ -33,8 +33,8 @@
     {
       "prerequisite_id": "processor-prereq-source-devhub-faqs",
       "source_id": "source-devhub-faqs",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
-      "requested_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
+      "requested_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "source_evidence_ids": ["evidence-devhub-faqs"],
       "robots_evidence_id": "robots-policy-fixture",
       "policy_evidence_id": "public-policy-fixture",
@@ -47,10 +47,10 @@
   ],
   "expectedMetadataOnlyArchiveManifests": [
     {
-      "manifest_id": "archive-manifest-rehearsal-source-portland-ppd",
-      "source_id": "source-portland-ppd",
-      "canonical_url": "https://www.portland.gov/ppd",
-      "requested_url": "https://www.portland.gov/ppd",
+      "manifest_id": "archive-manifest-rehearsal-source-wetwijzer-ppd",
+      "source_id": "source-wetwijzer-ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
+      "requested_url": "https://wetten.overheid.nl/ppd",
       "redirect_chain": [],
       "http_status": "expected_metadata_only_not_fetched",
       "content_type": "expected_metadata_only_pending_capture",
@@ -60,7 +60,7 @@
       "processor_name": "ipfs_datasets_py.web_archive_processor",
       "processor_version": "fixture-rehearsal-no-execution",
       "archive_artifact_ref": null,
-      "normalized_document_id": "expected-normalized-document-source-portland-ppd",
+      "normalized_document_id": "expected-normalized-document-source-wetwijzer-ppd",
       "skipped_reason": "rehearsal_only_processor_not_invoked",
       "no_raw_body_persisted": true,
       "metadata_only": true
@@ -68,8 +68,8 @@
     {
       "manifest_id": "archive-manifest-rehearsal-source-devhub-faqs",
       "source_id": "source-devhub-faqs",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
-      "requested_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
+      "requested_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "redirect_chain": [],
       "http_status": "expected_metadata_only_not_fetched",
       "content_type": "expected_metadata_only_pending_capture",
@@ -87,9 +87,9 @@
   ],
   "noRawBodyAttestations": [
     {
-      "attestation_id": "no-body-source-portland-ppd",
-      "source_id": "source-portland-ppd",
-      "canonical_url": "https://www.portland.gov/ppd",
+      "attestation_id": "no-body-source-wetwijzer-ppd",
+      "source_id": "source-wetwijzer-ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
       "raw_body_persisted": false,
       "archive_artifact_written": false,
       "attestation": "Only metadata-only expected manifest fields are rehearsed."
@@ -97,7 +97,7 @@
     {
       "attestation_id": "no-body-source-devhub-faqs",
       "source_id": "source-devhub-faqs",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "raw_body_persisted": false,
       "archive_artifact_written": false,
       "attestation": "Only metadata-only expected manifest fields are rehearsed."

@@ -51,7 +51,7 @@
 -If the active task is live-public-crawl preflight, the worker must only report eligible tiny seed URLs and must not fetch pages, persist crawl output, or create raw response fixtures.
 +- Do not create private DevHub session files, auth state, traces, screenshots, raw crawl output, or downloaded documents.
 +- Do not automate CAPTCHA, MFA, account creation, payment, submission, certification, cancellation, official upload, or inspection scheduling.
-+- Do not edit `src/lib/logic/`, `public/corpus/portland-or/current/`, `ipfs_datasets_py/.daemon/`, or TypeScript-port daemon ledgers.
++- Do not edit `src/lib/logic/`, `public/corpus/wetwijzer-or/current/`, `ipfs_datasets_py/.daemon/`, or TypeScript-port daemon ledgers.
 +- Do not mark a checkbox complete manually. The daemon marks successful tasks complete after validation passes.
  
 -## Retry Policy

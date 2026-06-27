@@ -13,13 +13,13 @@ import {
 
 describe('FOL predicate extractor', () => {
   it('extracts nouns, verbs, and adjectives with Python-style normalization', () => {
-    expect(extractPredicates('Portland is Safe and tenants must comply.')).toEqual({
-      nouns: ['Portland', 'Safe'],
+    expect(extractPredicates('WetWijzer is Safe and tenants must comply.')).toEqual({
+      nouns: ['Safe'],
       verbs: ['Safe', 'Comply'],
       adjectives: ['Safe'],
       relations: [],
     });
-    expect(normalizePredicate('the city of portland')).toBe('CityPortland');
+    expect(normalizePredicate('the city of netherlands')).toBe('CityNetherlands');
   });
 
   it('extracts implication, universal, and existential relations', () => {

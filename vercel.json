@@ -5,10 +5,5 @@
       "maxDuration": 30
     }
   },
-  "rewrites": [
-    {
-      "source": "/ai-town/:match*",
-      "destination": "/:match*"
-    }
-  ]
+  "rewrites": []
 }

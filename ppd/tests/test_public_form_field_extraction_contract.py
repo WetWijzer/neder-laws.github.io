@@ -29,7 +29,7 @@ class PublicFormFieldExtractionContractTest(unittest.TestCase):
         self.assertTrue(fixture["fixtureOnly"])
         self.assertFalse(fixture["sourceDocument"]["capturedFromLiveSite"])
         self.assertFalse(fixture["sourceDocument"]["downloadedDocumentIncluded"])
-        self.assertTrue(fixture["sourceDocument"]["sourceUrl"].startswith("https://www.portland.gov/ppd"))
+        self.assertTrue(fixture["sourceDocument"]["sourceUrl"].startswith("https://wetten.overheid.nl/ppd"))
 
         required_fields = fixture["requiredFields"]
         self.assertGreaterEqual(len(required_fields), 3)
@@ -101,7 +101,7 @@ def _anchor_ids(fixture: dict[str, Any]) -> set[str]:
     if len(anchor_ids) != len(anchors):
         raise AssertionError("source page anchor IDs must be unique")
     for anchor in anchors:
-        if not anchor["sourceUrl"].startswith("https://www.portland.gov/ppd"):
+        if not anchor["sourceUrl"].startswith("https://wetten.overheid.nl/ppd"):
             raise AssertionError(f"unexpected non-PP&D source URL: {anchor['sourceUrl']}")
         if not anchor["sectionLabel"].strip():
             raise AssertionError(f"source anchor {anchor['anchorId']} is missing sectionLabel")

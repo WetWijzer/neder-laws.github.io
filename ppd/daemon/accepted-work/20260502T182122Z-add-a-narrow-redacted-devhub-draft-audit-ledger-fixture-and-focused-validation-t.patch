@@ -8,7 +8,7 @@
 +  "fixtureKind": "redacted_mock_devhub_draft_audit_ledger",
 +  "workflowState": {
 +    "stateId": "mock-devhub-building-permit-draft-project-details",
-+    "stableUrlState": "https://devhub.portlandoregon.gov/mock/permit-request/project-details",
++    "stableUrlState": "https://wetten.overheid.nl/mock/permit-request/project-details",
 +    "mode": "preview_only",
 +    "liveBrowserUsed": false,
 +    "portalWriteAttempted": false
@@ -25,8 +25,8 @@
 +  "publicSourceEvidence": [
 +    {
 +      "evidenceId": "pub-devhub-application-guidance-001",
-+      "sourceUrl": "https://www.portland.gov/ppd/devhub/apply-online",
-+      "title": "Apply online through Development Hub PDX",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/apply-online",
++      "title": "Apply online through Development Hub Netherlands",
 +      "capturedAt": "2026-05-01T12:00:00Z",
 +      "anchor": "permit-request-types",
 +      "supports": [
@@ -36,7 +36,7 @@
 +    },
 +    {
 +      "evidenceId": "pub-single-pdf-process-001",
-+      "sourceUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +      "title": "Single PDF Process",
 +      "capturedAt": "2026-05-01T12:05:00Z",
 +      "anchor": "application-and-supporting-documents",
@@ -237,7 +237,7 @@
 +
 +        self.assertGreaterEqual(len(evidence_ids), 2)
 +        for evidence in self.fixture["publicSourceEvidence"]:
-+            self.assertTrue(evidence["sourceUrl"].startswith("https://www.portland.gov/"))
++            self.assertTrue(evidence["sourceUrl"].startswith("https://wetten.overheid.nl/"))
 +            self.assertTrue(evidence["capturedAt"].endswith("Z"))
 +            self.assertTrue(evidence["anchor"])
 +            self.assertNotIn("body", evidence)

@@ -28,7 +28,7 @@ def test_load_public_source_lineage_from_committed_fixture() -> None:
 def test_public_source_lineage_dicts_are_json_ready() -> None:
     records = public_source_lineage_dicts(FIXTURES / "public_sources.json", fixtures_root=FIXTURES)
 
-    assert records[0]["canonical_url"] == "https://www.portland.gov/ppd/how-use-online-permitting-tools"
+    assert records[0]["canonical_url"] == "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools"
     assert set(records[0]) == {
         "source_id",
         "canonical_url",
@@ -48,7 +48,7 @@ def test_rejects_private_devhub_source_type(tmp_path: Path) -> None:
           "sources": [
             {
               "source_id": "devhub-private-case",
-              "canonical_url": "https://devhub.portlandoregon.gov/mypermits",
+              "canonical_url": "https://wetten.overheid.nl/mypermits",
               "source_type": "devhub_authenticated",
               "title": "Private case list",
               "normalized_text": "private authenticated account data"
@@ -71,7 +71,7 @@ def test_rejects_sensitive_devhub_public_url(tmp_path: Path) -> None:
           "sources": [
             {
               "source_id": "devhub-session",
-              "canonical_url": "https://devhub.portlandoregon.gov/?session=abc123",
+              "canonical_url": "https://wetten.overheid.nl/?session=abc123",
               "source_type": "devhub_public",
               "title": "DevHub session URL",
               "normalized_text": "session-bearing URL must not be accepted"

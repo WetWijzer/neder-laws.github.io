@@ -106,7 +106,7 @@ describe('DeonticGraph browser-native parity helpers', () => {
         entity: 'The Tenant',
         modality: 'obligation',
         action: 'pay rent',
-        document_source: 'Portland Code',
+        document_source: 'Netherlands Law',
         document_date: '2026-01-01',
         document_id: 7,
         context: 'The tenant must pay rent.',
@@ -121,7 +121,7 @@ describe('DeonticGraph browser-native parity helpers', () => {
     expect(graph.rules.get('stmt_1')).toMatchObject({
       modality: 'obligation',
       evidence_ids: ['context_1'],
-      authority_ids: ['authority_portland_code'],
+      authority_ids: ['authority_netherlands_law'],
     });
   });
 });

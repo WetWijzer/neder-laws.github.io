@@ -31,11 +31,11 @@ def test_rejects_raw_body_persistence_and_raw_body_fields() -> None:
 
 def test_rejects_private_or_authenticated_devhub_urls() -> None:
     manifest = _valid_manifest()
-    manifest["canonical_url"] = "https://devhub.portlandoregon.gov/permits/12345?sessionid=secret"
-    manifest["requested_url"] = "https://devhub.portlandoregon.gov/"
+    manifest["canonical_url"] = "https://wetten.overheid.nl/permits/12345?sessionid=secret"
+    manifest["requested_url"] = "https://wetten.overheid.nl/"
     manifest["redirect_chain"] = [
-        "https://devhub.portlandoregon.gov/signin",
-        {"url": "https://www.portland.gov/ppd/devhub-faqs"},
+        "https://wetten.overheid.nl/signin",
+        {"url": "https://wetten.overheid.nl/ppd/devhub-faqs"},
     ]
 
     assert "private_devhub_url" in _codes(manifest)
@@ -43,8 +43,8 @@ def test_rejects_private_or_authenticated_devhub_urls() -> None:
 
 def test_public_devhub_root_url_is_allowed() -> None:
     manifest = _valid_manifest()
-    manifest["canonical_url"] = "https://devhub.portlandoregon.gov/"
-    manifest["requested_url"] = "https://devhub.portlandoregon.gov/"
+    manifest["canonical_url"] = "https://wetten.overheid.nl/"
+    manifest["requested_url"] = "https://wetten.overheid.nl/"
 
     assert validate_archive_manifest(manifest) == []
 

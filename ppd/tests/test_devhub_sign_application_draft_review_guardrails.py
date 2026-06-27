@@ -150,7 +150,7 @@ class DevHubSignApplicationDraftReviewGuardrailTests(unittest.TestCase):
         requirements = self.fixture["source_requirements"]
         self.assertEqual(len(requirements), 1)
         self.assertEqual(requirements[0]["requirement_type"], "action_gate")
-        self.assertTrue(requirements[0]["source_url"].startswith("https://www.portland.gov/ppd"))
+        self.assertTrue(requirements[0]["source_url"].startswith("https://wetten.overheid.nl/ppd"))
 
     def test_fixture_contains_no_private_devhub_artifacts(self) -> None:
         serialized = json.dumps(self.fixture, sort_keys=True).lower()

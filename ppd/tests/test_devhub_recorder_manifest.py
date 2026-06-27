@@ -48,7 +48,7 @@ def test_manifest_requires_metadata_only_recorder_shape() -> None:
             "surface": {
                 "surface_id": "devhub-public-help",
                 "auth_scope": "public",
-                "url_pattern": "https://www.portland.gov/ppd/devhub-faqs",
+                "url_pattern": "https://wetten.overheid.nl/ppd/devhub-faqs",
             },
         }
     )
@@ -74,7 +74,7 @@ def test_manifest_rejects_unredacted_field_values() -> None:
             "surface": {
                 "surface_id": "devhub-private-form",
                 "auth_scope": "authenticated_attended",
-                "url_pattern": "https://devhub.portlandoregon.gov/**",
+                "url_pattern": "https://wetten.overheid.nl/**",
                 "fields": [
                     {
                         "field_id": "applicant-name",

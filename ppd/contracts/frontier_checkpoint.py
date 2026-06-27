@@ -14,10 +14,10 @@ from urllib.parse import urlparse
 
 
 ALLOWED_PUBLIC_HOSTS = {
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 
 SKIPPED_STATUSES = {"skipped", "blocked", "deferred"}
@@ -163,7 +163,7 @@ def _validate_public_url(url: str, path: str) -> list[FrontierCheckpointFinding]
         findings.append(FrontierCheckpointFinding(path, "frontier URL host must be PP&D allowlisted"))
 
     lowered_path = parsed.path.lower()
-    if parsed.hostname == "devhub.portlandoregon.gov":
+    if parsed.hostname == "wetten.overheid.nl":
         for marker in AUTHENTICATED_PATH_MARKERS:
             if lowered_path.startswith(marker):
                 findings.append(FrontierCheckpointFinding(path, "live authenticated DevHub URLs are not allowed in public checkpoint fixtures"))

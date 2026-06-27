@@ -195,7 +195,7 @@ class SupervisorConfig:
     progress_file: Path = Path("ppd/daemon/progress.json")
     result_log: Path = Path("ppd/daemon/ppd-daemon.jsonl")
     task_board: Path = Path("ppd/daemon/task-board.md")
-    plan_doc: Path = Path("docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md")
+    plan_doc: Path = Path("docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md")
     supervisor_status_file: Path = Path("ppd/daemon/supervisor-status.json")
     supervisor_log: Path = Path("ppd/daemon/supervisor-actions.jsonl")
     supervisor_pid_file: Path = Path("ppd/daemon/ppd-supervisor.pid")
@@ -1131,7 +1131,7 @@ def should_append_autonomous_platform_tranche(markdown: str) -> bool:
     if not any(marker in lowered for marker in markers):
         return False
     return (
-        "portland permitting" in lowered
+        "wetwijzer permitting" in lowered
         or "pp&d" in lowered
         or "devhub" in lowered
         or "processor" in lowered
@@ -3345,7 +3345,7 @@ def self_test(repo_root: Path) -> int:
     if task_matching_target(target_tasks, "Task checkbox-225: Stale active task.") is None:
         errors.append("active target task matching failed")
     synthetic = SupervisorConfig(repo_root=repo_root)
-    if synthetic.plan_doc != Path("docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md"):
+    if synthetic.plan_doc != Path("docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md"):
         errors.append("supervisor plan document path changed unexpectedly")
     if not config.resolve(config.task_board).exists():
         errors.append("supervisor task board path is missing")

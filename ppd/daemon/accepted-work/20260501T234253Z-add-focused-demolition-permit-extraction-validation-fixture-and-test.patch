@@ -48,7 +48,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "DEM-SRC-APPLICATION",
-+          "source_url": "https://www.portland.gov/ppd/permits/demolition-permits",
++          "source_url": "https://wetten.overheid.nl/ppd/permits/demolition-permits",
 +          "quote": "Submit a completed demolition permit application for demolition permit review.",
 +          "anchor_id": "application-requirements"
 +        }
@@ -71,7 +71,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "DEM-SRC-SITE-PLAN",
-+          "source_url": "https://www.portland.gov/ppd/permits/demolition-permits",
++          "source_url": "https://wetten.overheid.nl/ppd/permits/demolition-permits",
 +          "quote": "Provide plans or site information that identify the structure and demolition work proposed.",
 +          "anchor_id": "plan-requirements"
 +        }
@@ -94,7 +94,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "DEM-SRC-ASBESTOS",
-+          "source_url": "https://www.portland.gov/ppd/permits/demolition-permits",
++          "source_url": "https://wetten.overheid.nl/ppd/permits/demolition-permits",
 +          "quote": "Demolition projects may need asbestos documentation before permit issuance or work begins.",
 +          "anchor_id": "asbestos"
 +        }
@@ -117,7 +117,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "DEM-SRC-UTILITIES",
-+          "source_url": "https://www.portland.gov/ppd/permits/demolition-permits",
++          "source_url": "https://wetten.overheid.nl/ppd/permits/demolition-permits",
 +          "quote": "Utility services must be addressed before demolition activity proceeds.",
 +          "anchor_id": "utilities"
 +        }
@@ -140,7 +140,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "DEM-SRC-SEWER-CAP",
-+          "source_url": "https://www.portland.gov/ppd/permits/demolition-permits",
++          "source_url": "https://wetten.overheid.nl/ppd/permits/demolition-permits",
 +          "quote": "Sewer service may need to be capped or otherwise resolved as part of demolition work.",
 +          "anchor_id": "sewer"
 +        }
@@ -163,7 +163,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "DEM-SRC-TREES",
-+          "source_url": "https://www.portland.gov/ppd/permits/demolition-permits",
++          "source_url": "https://wetten.overheid.nl/ppd/permits/demolition-permits",
 +          "quote": "Tree requirements may apply when demolition work affects trees on or near the site.",
 +          "anchor_id": "trees"
 +        }
@@ -186,7 +186,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "DEM-SRC-EROSION",
-+          "source_url": "https://www.portland.gov/ppd/permits/demolition-permits",
++          "source_url": "https://wetten.overheid.nl/ppd/permits/demolition-permits",
 +          "quote": "Erosion control requirements may apply to demolition projects with ground disturbance.",
 +          "anchor_id": "erosion-control"
 +        }
@@ -209,7 +209,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "DEM-SRC-APPLICATION",
-+          "source_url": "https://www.portland.gov/ppd/permits/demolition-permits",
++          "source_url": "https://wetten.overheid.nl/ppd/permits/demolition-permits",
 +          "quote": "Submit a completed demolition permit application for demolition permit review.",
 +          "anchor_id": "application-requirements"
 +        }
@@ -236,7 +236,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "DEM-SRC-APPLICATION",
-+          "source_url": "https://www.portland.gov/ppd/permits/demolition-permits",
++          "source_url": "https://wetten.overheid.nl/ppd/permits/demolition-permits",
 +          "quote": "Submit a completed demolition permit application for demolition permit review.",
 +          "anchor_id": "application-requirements"
 +        }
@@ -263,7 +263,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "DEM-SRC-APPLICATION",
-+          "source_url": "https://www.portland.gov/ppd/permits/demolition-permits",
++          "source_url": "https://wetten.overheid.nl/ppd/permits/demolition-permits",
 +          "quote": "Submit a completed demolition permit application for demolition permit review.",
 +          "anchor_id": "application-requirements"
 +        }

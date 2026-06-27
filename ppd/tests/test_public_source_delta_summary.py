@@ -89,7 +89,7 @@ def test_public_source_delta_summary_rejects_uncited_changed_source_claims():
 
 def test_public_source_delta_summary_rejects_private_or_authenticated_urls():
     packet = _packet()
-    packet["sources"][0]["canonical_url"] = "https://devhub.portlandoregon.gov/dashboard?token=abc"
+    packet["sources"][0]["canonical_url"] = "https://wetten.overheid.nl/dashboard?token=abc"
 
     with pytest.raises(PublicSourceDeltaSummaryError, match="private or authenticated URL"):
         build_public_source_delta_summary(packet)

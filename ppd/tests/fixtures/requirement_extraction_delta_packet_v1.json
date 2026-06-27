@@ -37,17 +37,17 @@
     "source_evidence_refs": [
       {
         "evidence_id": "EVID-001",
-        "citation": "https://www.portland.gov/ppd/get-permit/submit-plans-online#offline-fixture",
+        "citation": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online#offline-fixture",
         "review_note": "Public guidance fixture reference only."
       },
       {
         "evidence_id": "EVID-002",
-        "citation": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application#offline-fixture",
+        "citation": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application#offline-fixture",
         "review_note": "Public guidance fixture reference only."
       },
       {
         "evidence_id": "EVID-003",
-        "citation": "https://www.portland.gov/ppd/devhub-faqs#offline-fixture",
+        "citation": "https://wetten.overheid.nl/ppd/devhub-faqs#offline-fixture",
         "review_note": "Public guidance fixture reference only."
       }
     ],

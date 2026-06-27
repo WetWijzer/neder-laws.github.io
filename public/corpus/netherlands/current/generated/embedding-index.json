@@ -1,0 +1,12 @@
+{
+  "count": 3,
+  "dimension": 384,
+  "embeddingModel": "thenlper/gte-small",
+  "browserEmbeddingModel": "Xenova/gte-small",
+  "binary": "generated/embeddings.f32",
+  "ipfs_cids": [
+    "bafywetwijzer000000000000000000000000000000000000000000000001",
+    "bafywetwijzer000000000000000000000000000000000000000000000002",
+    "bafywetwijzer000000000000000000000000000000000000000000000003"
+  ]
+}

@@ -17,7 +17,7 @@ def test_manual_login_detection_uses_local_fixture() -> None:
     html = fixture_path("manual_sign_in.html").read_text(encoding="utf-8")
 
     state = contract.state_from_observation(
-        "https://www.portlandoregon.gov/DevHub/Account/Login",
+        "https://wetten.overheid.nl/DevHub/Account/Login",
         html,
         200,
     )
@@ -31,7 +31,7 @@ def test_authenticated_save_resume_detection_uses_local_fixture() -> None:
     html = fixture_path("save_resume.html").read_text(encoding="utf-8")
 
     state = contract.state_from_observation(
-        "https://www.portlandoregon.gov/DevHub/Permits/Draft?id=123",
+        "https://wetten.overheid.nl/DevHub/Permits/Draft?id=123",
         html,
         200,
     )
@@ -44,7 +44,7 @@ def test_route_snapshot_redacts_query_values_and_fragments() -> None:
     contract = AttendedDevHubLoginContract()
 
     snapshot = contract.redacted_route_snapshot(
-        "https://www.portlandoregon.gov/DevHub/Callback?code=abc123&recordId=RSW-1#token=hidden",
+        "https://wetten.overheid.nl/DevHub/Callback?code=abc123&recordId=RSW-1#token=hidden",
         method="post",
         html_text="My Account Save and Resume",
         status_code=200,
@@ -53,7 +53,7 @@ def test_route_snapshot_redacts_query_values_and_fragments() -> None:
     assert snapshot.method == "POST"
     assert snapshot.status_code == 200
     assert snapshot.state is DevHubLoginState.SAVE_RESUME_READY
-    assert snapshot.url == "https://www.portlandoregon.gov/DevHub/Callback?code=REDACTED&recordId=VALUE"
+    assert snapshot.url == "https://wetten.overheid.nl/DevHub/Callback?code=REDACTED&recordId=VALUE"
 
 
 def test_external_routes_are_blocked_and_not_snapshotted() -> None:

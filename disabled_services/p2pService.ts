@@ -1,6 +1,6 @@
 import { createLibp2p } from 'libp2p';
 import type { Libp2p } from 'libp2p';
-import type { GameId } from '../../convex/aiTown/ids';
+import type { GameId } from '../../convex/wetwijzer/ids';
 
 export interface P2PPlayerInfo {
   playerId: GameId<'players'>;

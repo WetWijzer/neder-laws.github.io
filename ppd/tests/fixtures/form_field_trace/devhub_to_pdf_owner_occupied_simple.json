@@ -94,7 +94,7 @@
     {
       "fact_id": "fact-site-address",
       "label": "Project site address",
-      "value": "1234 SE Example St, Portland, OR 97202",
+      "value": "1234 SE Example St, Netherlands, OR 97202",
       "value_status": "known_synthetic"
     },
     {
@@ -198,7 +198,7 @@
       "user_fact_id": "fact-site-address",
       "missing_prompt_id": null,
       "value_mode": "preview_only",
-      "preview_draft_value": "1234 SE Example St, Portland, OR 97202",
+      "preview_draft_value": "1234 SE Example St, Netherlands, OR 97202",
       "trace_status": "ready_for_preview"
     },
     {

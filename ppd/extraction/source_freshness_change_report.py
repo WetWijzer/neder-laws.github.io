@@ -222,7 +222,7 @@ def _required_public_url(data: Mapping[str, Any], key: str) -> str:
     parsed = urlparse(value)
     if parsed.scheme != "https" or not parsed.netloc:
         raise SourceFreshnessChangeReportError(f"{key} must be an HTTPS public URL")
-    if parsed.netloc == "devhub.portlandoregon.gov" and _is_private_devhub_path(parsed.path):
+    if parsed.netloc == "wetten.overheid.nl" and _is_private_devhub_path(parsed.path):
         raise SourceFreshnessChangeReportError(f"{key} must not reference private DevHub paths")
     return value
 

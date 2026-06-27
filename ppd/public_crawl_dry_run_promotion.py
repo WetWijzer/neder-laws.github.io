@@ -141,8 +141,8 @@ def validate_manifest(manifest: dict[str, Any]) -> list[str]:
         if target.get("metadata_only") is not True:
             errors.append(f"allowlisted_public_metadata_targets[{index}] must be metadata_only")
         url = target.get("public_metadata_url")
-        if not isinstance(url, str) or not url.startswith("https://www.portland.gov/"):
-            errors.append(f"allowlisted_public_metadata_targets[{index}] must use an allowlisted public Portland metadata URL")
+        if not isinstance(url, str) or not url.startswith("https://wetten.overheid.nl/"):
+            errors.append(f"allowlisted_public_metadata_targets[{index}] must use an allowlisted public Netherlands metadata URL")
         expected_handoff = target.get("expected_processor_handoff_id")
         if expected_handoff not in handoff_ids:
             errors.append(f"allowlisted_public_metadata_targets[{index}] references an unknown processor handoff")

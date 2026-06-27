@@ -4,7 +4,7 @@
   "predicate_candidates": [
     {
       "predicate_id": "ppd.fixture.predicate.zoning-review-required",
-      "jurisdiction": "Portland, OR",
+      "jurisdiction": "Netherlands, OR",
       "permit_stage": "pre-submittal review",
       "predicate_text": "Fixture-only predicate row stating that zoning review may be required before permit intake.",
       "process_impact_evidence_refs": ["process-impact:devhub-intake-routing"],
@@ -12,7 +12,7 @@
     },
     {
       "predicate_id": "ppd.fixture.predicate.structural-review-hold",
-      "jurisdiction": "Portland, OR",
+      "jurisdiction": "Netherlands, OR",
       "permit_stage": "plan review",
       "predicate_text": "Fixture-only predicate row stating that structural review status must be confirmed before downstream reliance.",
       "process_impact_evidence_refs": ["process-impact:review-cycle-hold"],

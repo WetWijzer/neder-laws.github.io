@@ -15,13 +15,13 @@ PACKET_VERSION = "official_source_anchor_audit_packet_v1"
 
 OFFICIAL_HOST_ALLOWLIST = frozenset(
     {
-        "www.portland.gov",
-        "portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
-        "portlandoregon.gov",
-        "www.portlandmaps.com",
-        "portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
+        "repository.overheid.nl",
     }
 )
 

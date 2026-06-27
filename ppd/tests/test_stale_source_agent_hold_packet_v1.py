@@ -90,7 +90,7 @@ def test_private_or_runtime_fields_are_rejected() -> None:
     row = {
         "row_id": "bad-row",
         "source_id": "source-x",
-        "canonical_url": "https://www.portland.gov/ppd/example",
+        "canonical_url": "https://wetten.overheid.nl/ppd/example",
         "outcome": "stale",
         "severity": "high",
         "observed_at": "2026-06-01T10:19:00Z",

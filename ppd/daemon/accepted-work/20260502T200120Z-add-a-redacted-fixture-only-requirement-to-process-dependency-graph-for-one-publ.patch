@@ -16,22 +16,22 @@
 +  "sourceEvidence": [
 +    {
 +      "id": "src_devhub_application_guidance",
-+      "url": "https://www.portland.gov/ppd/devhub/apply-permit",
-+      "title": "Apply for permits through Development Hub PDX",
++      "url": "https://wetten.overheid.nl/ppd/devhub/apply-permit",
++      "title": "Apply for permits through Development Hub Netherlands",
 +      "capturedAt": "2026-05-01T00:00:00Z",
 +      "citation": "Public PP&D guidance for using DevHub to request permits. Fixture citation only; no raw page body is stored."
 +    },
 +    {
 +      "id": "src_single_pdf_process_guidance",
-+      "url": "https://www.portland.gov/ppd/single-pdf-process",
++      "url": "https://wetten.overheid.nl/ppd/single-pdf-process",
 +      "title": "Single PDF Process guidance",
 +      "capturedAt": "2026-05-01T00:00:00Z",
 +      "citation": "Public PP&D guidance describing drawing plans as one searchable PDF with supporting documents as separate PDFs. Fixture citation only."
 +    },
 +    {
 +      "id": "src_devhub_faq",
-+      "url": "https://www.portland.gov/ppd/devhub-faq",
-+      "title": "Development Hub PDX FAQ",
++      "url": "https://wetten.overheid.nl/ppd/devhub-faq",
++      "title": "Development Hub Netherlands FAQ",
 +      "capturedAt": "2026-05-01T00:00:00Z",
 +      "citation": "Public DevHub FAQ covering permit requests, correction uploads, fee payments, and inspection-related service categories. Fixture citation only."
 +    }
@@ -323,7 +323,7 @@
 +            raise RequirementProcessGraphError(f"duplicate source evidence id {evidence_id}")
 +        evidence_ids.add(evidence_id)
 +        url = _required_text(record, "url", evidence_id)
-+        if not url.startswith("https://www.portland.gov/ppd"):
++        if not url.startswith("https://wetten.overheid.nl/ppd"):
 +            raise RequirementProcessGraphError(f"source evidence {evidence_id} must cite a public PP&D URL")
 +        _required_text(record, "title", evidence_id)
 +        _required_text(record, "capturedAt", evidence_id)

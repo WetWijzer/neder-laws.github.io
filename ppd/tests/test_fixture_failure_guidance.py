@@ -23,7 +23,7 @@ class FixtureFailureGuidanceTest(unittest.TestCase):
                         'plannedSeeds': [
                             {
                                 'id': 'seed-ppd-landing',
-                                'url': 'https://www.portland.gov/ppd',
+                                'url': 'https://wetten.overheid.nl/ppd',
                                 'preflight': {'robots': 'respect', 'timeoutSeconds': 20},
                             }
                         ],

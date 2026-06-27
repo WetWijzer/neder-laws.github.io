@@ -66,7 +66,7 @@ class CrossPermitGuardrailReuseTest(unittest.TestCase):
         for binding in self.fixture["processBindings"]:
             for source_id in binding["sourceEvidenceIds"]:
                 source = evidence[source_id]
-                self.assertTrue(source["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
+                self.assertTrue(source["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
                 self.assertTrue(source["citation"]["locator"])
                 self.assertTrue(source["citation"]["paraphrase"])
 

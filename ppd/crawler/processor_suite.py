@@ -101,7 +101,7 @@ def build_processor_suite(inputs: Iterable[dict[str, Any]]) -> dict[str, list[di
                 "kind": kind,
                 "archive_sha256": content_sha256,
                 "archive_path": archive_path,
-                "jurisdiction": "portland-or",
+                "jurisdiction": "wetwijzer-or",
                 "department": "ppd",
                 "public_source": True,
             }

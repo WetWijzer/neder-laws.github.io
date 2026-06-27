@@ -3,9 +3,9 @@
   "extractionId": "ppd-public-pdf-extraction-residential-building-permit-application-fixture",
   "fixtureOnly": true,
   "source": {
-    "sourceUrl": "https://www.portland.gov/ppd/documents/residential-building-permit-application-sample",
-    "canonicalUrl": "https://www.portland.gov/ppd/documents/residential-building-permit-application-sample",
-    "bureau": "Portland Permitting & Development",
+    "sourceUrl": "https://wetten.overheid.nl/ppd/documents/residential-building-permit-application-sample",
+    "canonicalUrl": "https://wetten.overheid.nl/ppd/documents/residential-building-permit-application-sample",
+    "bureau": "Netherlands Permitting & Development",
     "access": "public",
     "retrievalMode": "metadata_and_text_snippet_fixture_only",
     "capturedAt": "2026-05-01T00:00:00Z"

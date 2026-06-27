@@ -7,31 +7,31 @@
     {
       "evidence_id": "ppd-source:online-tools:devhub-services",
       "source_id": "online-permitting-tools-overview",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
-      "excerpt": "DevHub is the City of Portland online permitting system."
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
+      "excerpt": "DevHub is the WetWijzer online permitting system."
     },
     {
       "evidence_id": "ppd-source:devhub-faq:standard-permits",
       "source_id": "devhub-faqs",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "excerpt": "DevHub supports purchasing standard permits not requiring plan review."
     },
     {
       "evidence_id": "ppd-source:devhub-signin:account-required",
       "source_id": "devhub-sign-guide",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-sign-guide",
-      "excerpt": "A DevHub user account with PortlandOregon.gov credentials is required for online permitting services."
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-sign-guide",
+      "excerpt": "A DevHub user account with wetten.overheid.nl credentials is required for online permitting services."
     },
     {
       "evidence_id": "ppd-source:trade-guide:license-affects-options",
       "source_id": "standard-trade-permit-guide",
-      "canonical_url": "https://www.portland.gov/ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
       "excerpt": "Contractor license data on the DevHub profile can affect available fixture options."
     },
     {
       "evidence_id": "ppd-source:fee-payment:financial-workflow",
       "source_id": "fee-payment-guide",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "excerpt": "Fee payment is a financial workflow with payment detail entry and final submit-payment action."
     }
   ],
@@ -42,7 +42,7 @@
       "requirement_type": "precondition",
       "subject": "applicant",
       "action": "use",
-      "object": "DevHub account with PortlandOregon.gov credentials",
+      "object": "DevHub account with wetten.overheid.nl credentials",
       "conditions": {
         "required_user_fact": "has_devhub_account",
         "fact_label": "DevHub account is available for attended login",

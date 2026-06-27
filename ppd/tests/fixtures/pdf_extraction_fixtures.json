@@ -8,7 +8,7 @@
     "no_live_fetch_required": true,
     "no_downloaded_documents": true,
     "no_private_devhub_session": true,
-    "authoritative_discovery_source": "https://www.portland.gov/ppd/applications-forms",
+    "authoritative_discovery_source": "https://wetten.overheid.nl/ppd/applications-forms",
     "required_preflight_before_future_fetch": [
       "load_crawler_allowlist",
       "check_robots_txt",
@@ -48,8 +48,8 @@
       "document_family": "public_ppd_application",
       "document_type": "application_pdf",
       "source": {
-        "discovery_url": "https://www.portland.gov/ppd/applications-forms",
-        "expected_host": "www.portland.gov",
+        "discovery_url": "https://wetten.overheid.nl/ppd/applications-forms",
+        "expected_host": "wetten.overheid.nl",
         "expected_content_type": "application/pdf",
         "public_access": "unauthenticated",
         "future_capture_required": true
@@ -106,8 +106,8 @@
       "document_family": "public_ppd_checklist",
       "document_type": "checklist_pdf",
       "source": {
-        "discovery_url": "https://www.portland.gov/ppd/applications-forms",
-        "expected_host": "www.portland.gov",
+        "discovery_url": "https://wetten.overheid.nl/ppd/applications-forms",
+        "expected_host": "wetten.overheid.nl",
         "expected_content_type": "application/pdf",
         "public_access": "unauthenticated",
         "future_capture_required": true
@@ -157,8 +157,8 @@
       "document_family": "public_ppd_checklist",
       "document_type": "checklist_pdf",
       "source": {
-        "discovery_url": "https://www.portland.gov/ppd/applications-forms",
-        "expected_host": "www.portland.gov",
+        "discovery_url": "https://wetten.overheid.nl/ppd/applications-forms",
+        "expected_host": "wetten.overheid.nl",
         "expected_content_type": "application/pdf",
         "public_access": "unauthenticated",
         "future_capture_required": true

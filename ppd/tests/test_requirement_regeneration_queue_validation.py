@@ -15,7 +15,7 @@ class RequirementRegenerationQueueValidationTest(unittest.TestCase):
             "source_evidence": [
                 {
                     "source_evidence_id": "ev-file-standards-2026-05-08",
-                    "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+                    "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
                     "freshness_status": "changed",
                 }
             ],
@@ -28,7 +28,7 @@ class RequirementRegenerationQueueValidationTest(unittest.TestCase):
                 {
                     "queue_item_id": "regen-ppd-file-standards",
                     "source_id": "ppd-file-standards",
-                    "source_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+                    "source_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
                     "change_kinds": ["changed_file_rule"],
                     "source_evidence_ids": ["ev-file-standards-2026-05-08"],
                     "affected_requirement_ids": ["req-file-name-standard"],

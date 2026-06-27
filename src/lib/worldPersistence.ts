@@ -165,7 +165,7 @@ export class WorldPersistenceManager {
         // Fallback to localStorage
         const savedStates = this.getLocalStorageStates();
         savedStates.push(worldState);
-        localStorage.setItem('aitown_world_states', JSON.stringify(savedStates));
+        localStorage.setItem('wetwijzer_world_states', JSON.stringify(savedStates));
       }
 
       console.log('World state saved:', worldState.id);
@@ -248,7 +248,7 @@ export class WorldPersistenceManager {
         // Fallback to localStorage
         const savedStates = this.getLocalStorageStates();
         const filtered = savedStates.filter(state => state.id !== worldId);
-        localStorage.setItem('aitown_world_states', JSON.stringify(filtered));
+        localStorage.setItem('wetwijzer_world_states', JSON.stringify(filtered));
       }
 
       console.log('World state deleted:', worldId);
@@ -300,7 +300,7 @@ export class WorldPersistenceManager {
   }
 
   private getLocalStorageStates(): WorldState[] {
-    const stored = localStorage.getItem('aitown_world_states');
+    const stored = localStorage.getItem('wetwijzer_world_states');
     return stored ? JSON.parse(stored) : [];
   }
 

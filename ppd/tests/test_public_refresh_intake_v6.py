@@ -38,8 +38,8 @@ def test_v6_intake_normalizes_fixture_rows_without_raw_bodies() -> None:
         "plan_id": "public-refresh-dry-run-execution-plan-v6-fixture",
         "schema_version": "ppd.public_refresh_dry_run_execution_plan.v6",
     }
-    assert first["source_url"] == "https://www.portland.gov/ppd/how-use-online-permitting-tools"
-    assert first["canonical_url"] == "https://www.portland.gov/ppd/how-use-online-permitting-tools"
+    assert first["source_url"] == "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools"
+    assert first["canonical_url"] == "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools"
     assert first["source_group"] == "ppd_public_html"
     assert first["http_metadata"] == {
         "status_code": None,
@@ -56,7 +56,7 @@ def test_v6_intake_normalizes_fixture_rows_without_raw_bodies() -> None:
     assert first["citation_refresh_candidates"] == [
         {
             "citation_id": "ppd-online-tools-overview",
-            "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+            "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
             "reason": "public_guidance_refresh",
         }
     ]
@@ -198,7 +198,7 @@ def test_v6_intake_rejects_active_mutation_flags(flag: str) -> None:
 
 def test_v6_intake_rejects_private_session_auth_url_fields() -> None:
     row = fixture_row()
-    row["source_url"] = "https://www.portland.gov/ppd/how-use-online-permitting-tools?session=private"
+    row["source_url"] = "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools?session=private"
 
     with pytest.raises(ValueError, match="private/session/auth query fields"):
         normalize_manifest_row(row)

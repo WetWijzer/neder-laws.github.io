@@ -144,8 +144,8 @@ def test_rejects_live_private_raw_or_consequential_values() -> None:
     base = _valid_packet()
 
     bad_values = (
-        'https://www.portland.gov/ppd/live',
-        'devhub.portlandoregon.gov private session',
+        'https://wetten.overheid.nl/ppd/live',
+        'wetten.overheid.nl private session',
         'storage_state file',
         'raw html capture',
         'downloaded document',

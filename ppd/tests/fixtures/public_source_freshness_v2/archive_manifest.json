@@ -5,8 +5,8 @@
     {
       "manifest_id": "capture-ppd-bureau-landing-20260508",
       "source_id": "ppd-bureau-landing",
-      "canonical_url": "https://www.portland.gov/ppd",
-      "requested_url": "https://www.portland.gov/ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
+      "requested_url": "https://wetten.overheid.nl/ppd",
       "redirect_chain": [],
       "http_status": 200,
       "content_type": "text/html; charset=utf-8",
@@ -23,8 +23,8 @@
     {
       "manifest_id": "capture-ppd-online-tools-20260508",
       "source_id": "ppd-online-tools",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
-      "requested_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
+      "requested_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "redirect_chain": [],
       "http_status": 200,
       "content_type": "text/html; charset=utf-8",
@@ -41,8 +41,8 @@
     {
       "manifest_id": "capture-ppd-devhub-faq-20260508",
       "source_id": "ppd-devhub-faq",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
-      "requested_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
+      "requested_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "redirect_chain": [],
       "http_status": 200,
       "content_type": "text/html; charset=utf-8",
@@ -59,8 +59,8 @@
     {
       "manifest_id": "capture-ppd-submit-plans-online-20260508",
       "source_id": "ppd-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
-      "requested_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
+      "requested_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "redirect_chain": [],
       "http_status": 200,
       "content_type": "text/html; charset=utf-8",

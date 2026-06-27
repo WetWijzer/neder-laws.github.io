@@ -60,7 +60,7 @@ class DraftAuditLedgerFixtureTest(unittest.TestCase):
 
         self.assertGreaterEqual(len(evidence_ids), 2)
         for evidence in self.fixture["publicSourceEvidence"]:
-            self.assertTrue(evidence["sourceUrl"].startswith("https://www.portland.gov/"))
+            self.assertTrue(evidence["sourceUrl"].startswith("https://wetten.overheid.nl/"))
             self.assertTrue(evidence["capturedAt"].endswith("Z"))
             self.assertTrue(evidence["anchor"])
             self.assertNotIn("body", evidence)

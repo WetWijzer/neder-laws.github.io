@@ -496,10 +496,10 @@ def _resolve(base: Path, value: str) -> Path:
 def _official_url(value: str) -> bool:
     parsed = urlparse(value)
     return parsed.scheme == "https" and parsed.netloc.lower() in {
-        "www.portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
-        "www.portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
     }
 
 

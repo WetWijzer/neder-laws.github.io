@@ -3,13 +3,13 @@
   "sources": [
     {
       "source_id": "SRC-PPD-ONLINE-TOOLS",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "freshness_status": "current",
       "last_reviewed_at": "2026-05-08"
     },
     {
       "source_id": "SRC-PPD-FEE-PAYMENT-GUIDE",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "freshness_status": "stale",
       "last_reviewed_at": "2026-04-01",
       "stale_source_acknowledgement": {
@@ -20,7 +20,7 @@
     },
     {
       "source_id": "SRC-PPD-UNACKED-STALE",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "freshness_status": "stale",
       "last_reviewed_at": "2026-03-15"
     }

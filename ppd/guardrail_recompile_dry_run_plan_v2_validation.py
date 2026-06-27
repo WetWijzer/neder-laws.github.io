@@ -114,7 +114,7 @@ _MUTATION_FLAG_KEY_MARKERS = (
 
 _FORBIDDEN_COMMAND_TARGETS = (
     "src/lib/logic/",
-    "public/corpus/portland-or/current/",
+    "public/corpus/wetwijzer-or/current/",
     "ipfs_datasets_py/.daemon/",
     "ppd/contracts/active",
     "ppd/devhub/surfaces/active",

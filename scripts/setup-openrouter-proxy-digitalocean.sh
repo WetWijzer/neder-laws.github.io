@@ -9,13 +9,13 @@ Usage:
 Optional environment variables:
   OPENROUTER_PROXY_PORT=8787
   OPENROUTER_PROXY_HOST=127.0.0.1
-  OPENROUTER_PROXY_ALLOWED_ORIGINS=https://portland-laws.github.io,https://211-ai.github.io,http://localhost:5173
+  OPENROUTER_PROXY_ALLOWED_ORIGINS=https://wetwijzer.github.io,https://211-ai.github.io,http://localhost:5173
   OPENROUTER_PROXY_PUBLIC_IP=178.128.128.216
   OPENROUTER_PROXY_PUBLIC_ORIGIN=https://animegf.chat
   OPENROUTER_PROXY_OPEN_FIREWALL=1
-  OPENROUTER_SITE_URL=https://portland-laws.github.io
-  OPENROUTER_SITE_NAME="Portland Laws"
-  SERVICE_NAME=portland-openrouter-proxy
+  OPENROUTER_SITE_URL=https://wetwijzer.github.io
+  OPENROUTER_SITE_NAME="WetWijzer Laws"
+  SERVICE_NAME=netherlands-openrouter-proxy
 
 After setup, point the frontend at:
   VITE_OPENROUTER_BASE_URL=https://animegf.chat:8787/api/openrouter
@@ -45,7 +45,7 @@ fi
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 REPO_DIR="$(cd -- "${SCRIPT_DIR}/.." >/dev/null 2>&1 && pwd)"
-SERVICE_NAME="${SERVICE_NAME:-portland-openrouter-proxy}"
+SERVICE_NAME="${SERVICE_NAME:-netherlands-openrouter-proxy}"
 SERVICE_USER="${SUDO_USER:-${USER:-root}}"
 SERVICE_GROUP="$(id -gn "${SERVICE_USER}" 2>/dev/null || echo "${SERVICE_USER}")"
 PORT="${OPENROUTER_PROXY_PORT:-8787}"
@@ -59,7 +59,7 @@ if [[ -z "${PUBLIC_IP}" ]]; then
   PUBLIC_IP="$(ip -4 route get 1.1.1.1 2>/dev/null | awk '{for (i=1;i<=NF;i++) if ($i=="src") {print $(i+1); exit}}')"
 fi
 
-DEFAULT_ALLOWED_ORIGINS="https://portland-laws.github.io,https://211-ai.github.io,http://localhost:5173,http://127.0.0.1:5173"
+DEFAULT_ALLOWED_ORIGINS="https://wetwijzer.github.io,https://211-ai.github.io,http://localhost:5173,http://127.0.0.1:5173"
 if [[ -n "${PUBLIC_ORIGIN}" ]]; then
   DEFAULT_ALLOWED_ORIGINS+=",${PUBLIC_ORIGIN}"
 fi
@@ -95,8 +95,8 @@ OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
 OPENROUTER_PROXY_PORT=${PORT}
 OPENROUTER_PROXY_HOST=${HOST}
 OPENROUTER_PROXY_ALLOWED_ORIGINS=${ALLOWED_ORIGINS}
-OPENROUTER_SITE_URL=${OPENROUTER_SITE_URL:-https://portland-laws.github.io}
-OPENROUTER_SITE_NAME=${OPENROUTER_SITE_NAME:-Portland Laws}
+OPENROUTER_SITE_URL=${OPENROUTER_SITE_URL:-https://wetwijzer.github.io}
+OPENROUTER_SITE_NAME=${OPENROUTER_SITE_NAME:-WetWijzer Laws}
 EOF
 chmod 600 "${ENV_FILE}"
 chown root:root "${ENV_FILE}"
@@ -104,7 +104,7 @@ chown root:root "${ENV_FILE}"
 echo "Writing ${SERVICE_FILE}..."
 cat > "${SERVICE_FILE}" <<EOF
 [Unit]
-Description=Portland Laws OpenRouter proxy
+Description=WetWijzer Laws OpenRouter proxy
 After=network-online.target
 Wants=network-online.target
 

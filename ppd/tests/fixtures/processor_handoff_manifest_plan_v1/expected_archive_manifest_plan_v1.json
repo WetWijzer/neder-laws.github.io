@@ -9,8 +9,8 @@
       "source_evidence_ids": [
         "official-source-anchor:online-permitting-tools"
       ],
-      "requested_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "requested_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "redirect_chain": [],
       "http_status": null,
       "content_type": "text/html",
@@ -30,8 +30,8 @@
       "source_evidence_ids": [
         "official-source-anchor:fee-payment-guide"
       ],
-      "requested_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "requested_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "redirect_chain": [],
       "http_status": null,
       "content_type": "application/pdf",
@@ -51,8 +51,8 @@
       "source_evidence_ids": [
         "official-source-anchor:devhub-public-portal"
       ],
-      "requested_url": "https://devhub.portlandoregon.gov/secure/my-permits",
-      "canonical_url": "https://devhub.portlandoregon.gov/secure/my-permits",
+      "requested_url": "https://wetten.overheid.nl/secure/my-permits",
+      "canonical_url": "https://wetten.overheid.nl/secure/my-permits",
       "redirect_chain": [],
       "http_status": null,
       "content_type": "text/html",
@@ -93,8 +93,8 @@
       "source_evidence_ids": [
         "official-source-anchor:unsupported-content-type-negative-fixture"
       ],
-      "requested_url": "https://www.portland.gov/ppd/assets/site-logo.png",
-      "canonical_url": "https://www.portland.gov/ppd/assets/site-logo.png",
+      "requested_url": "https://wetten.overheid.nl/ppd/assets/site-logo.png",
+      "canonical_url": "https://wetten.overheid.nl/ppd/assets/site-logo.png",
       "redirect_chain": [],
       "http_status": null,
       "content_type": "image/png",

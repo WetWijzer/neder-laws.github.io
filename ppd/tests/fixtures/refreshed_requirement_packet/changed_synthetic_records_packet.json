@@ -6,7 +6,7 @@
     {
       "record_id": "synthetic-html-fees-deadlines-v1",
       "document_type": "public_html",
-      "canonical_url": "https://www.portland.gov/ppd/synthetic/fees-and-deadlines",
+      "canonical_url": "https://wetten.overheid.nl/ppd/synthetic/fees-and-deadlines",
       "previous_source_hash": "1111111111111111111111111111111111111111111111111111111111111111",
       "refreshed_source_hash": "2222222222222222222222222222222222222222222222222222222222222222",
       "source_hash_delta": {
@@ -82,7 +82,7 @@
     {
       "record_id": "synthetic-pdf-upload-documents-v1",
       "document_type": "public_pdf",
-      "canonical_url": "https://www.portland.gov/ppd/documents/synthetic-upload-rules/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/synthetic-upload-rules/download",
       "previous_source_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       "refreshed_source_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
       "source_hash_delta": {

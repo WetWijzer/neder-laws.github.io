@@ -77,7 +77,7 @@
       {
         "trace_id": "trace-single-pdf-supporting-documents",
         "source_id": "ppd-submit-plans-online",
-        "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+        "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
         "requirement_ids": [
           "req-single-pdf-process-separate-supporting-documents"
         ],

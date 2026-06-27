@@ -24,7 +24,7 @@
     {
       "placeholder_id": "official-placeholder-devhub-faq-account-services",
       "source_type": "official_devhub_guidance_placeholder",
-      "official_source_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "official_source_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "placeholder_status": "placeholder_only",
       "live_fetch_performed": false,
       "expected_guidance_scope": "Account-scoped DevHub services and read-only status review references."
@@ -32,7 +32,7 @@
     {
       "placeholder_id": "official-placeholder-devhub-sign-guide",
       "source_type": "official_devhub_guidance_placeholder",
-      "official_source_url": "https://www.portland.gov/ppd/devhub-sign-guide",
+      "official_source_url": "https://wetten.overheid.nl/ppd/devhub-sign-guide",
       "placeholder_status": "placeholder_only",
       "live_fetch_performed": false,
       "expected_guidance_scope": "Manual account attendance prerequisites for online permitting services."

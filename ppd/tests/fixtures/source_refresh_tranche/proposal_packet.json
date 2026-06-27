@@ -9,8 +9,8 @@
         "freshness_reason": "DevHub public workflow guidance is watched for possible action-gate and help-link drift.",
         "owner": "ppd-public-sources-owner",
         "reviewer": "ppd-freshness-reviewer",
-        "allowlist_evidence_ref": "allowlist://ppd-public-sources/portland-gov-hosts#www.portland.gov",
-        "robots_evidence_ref": "robots://www.portland.gov/robots.txt#fixture-reviewed-2026-05-29"
+        "allowlist_evidence_ref": "allowlist://ppd-public-sources/wetwijzer-gov-hosts#wetten.overheid.nl",
+        "robots_evidence_ref": "robots://wetten.overheid.nl/robots.txt#fixture-reviewed-2026-05-29"
       },
       {
         "source_id": "ppd-devhub-faqs",
@@ -18,8 +18,8 @@
         "freshness_reason": "FAQ content is watched for changes to authenticated service descriptions and consequential action boundaries.",
         "owner": "ppd-devhub-public-owner",
         "reviewer": "ppd-freshness-reviewer",
-        "allowlist_evidence_ref": "allowlist://ppd-public-sources/portland-gov-hosts#www.portland.gov",
-        "robots_evidence_ref": "robots://www.portland.gov/robots.txt#fixture-reviewed-2026-05-29"
+        "allowlist_evidence_ref": "allowlist://ppd-public-sources/wetwijzer-gov-hosts#wetten.overheid.nl",
+        "robots_evidence_ref": "robots://wetten.overheid.nl/robots.txt#fixture-reviewed-2026-05-29"
       },
       {
         "source_id": "ppd-spp-file-naming-standards",
@@ -27,8 +27,8 @@
         "freshness_reason": "File naming and PDF preparation requirements can affect document readiness guardrails.",
         "owner": "ppd-document-requirements-owner",
         "reviewer": "ppd-freshness-reviewer",
-        "allowlist_evidence_ref": "allowlist://ppd-public-sources/portland-gov-hosts#www.portland.gov",
-        "robots_evidence_ref": "robots://www.portland.gov/robots.txt#fixture-reviewed-2026-05-29"
+        "allowlist_evidence_ref": "allowlist://ppd-public-sources/wetwijzer-gov-hosts#wetten.overheid.nl",
+        "robots_evidence_ref": "robots://wetten.overheid.nl/robots.txt#fixture-reviewed-2026-05-29"
       }
     ]
   },
@@ -37,19 +37,19 @@
     "sources": [
       {
         "source_id": "ppd-online-permitting-tools",
-        "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+        "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
         "current_frequency": "weekly",
         "proposed_frequency": "daily"
       },
       {
         "source_id": "ppd-devhub-faqs",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
         "current_frequency": "weekly",
         "proposed_frequency": "daily"
       },
       {
         "source_id": "ppd-spp-file-naming-standards",
-        "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+        "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
         "current_frequency": "monthly",
         "proposed_frequency": "weekly"
       }
@@ -114,13 +114,13 @@
     "ordered_sources": [
       {
         "source_id": "ppd-online-permitting-tools",
-        "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+        "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
         "refresh_reason": "DevHub public workflow guidance is watched for possible action-gate and help-link drift.",
         "proposed_frequency": "daily",
         "owner": "ppd-public-sources-owner",
         "reviewer": "ppd-freshness-reviewer",
-        "allowlist_evidence_ref": "allowlist://ppd-public-sources/portland-gov-hosts#www.portland.gov",
-        "robots_evidence_ref": "robots://www.portland.gov/robots.txt#fixture-reviewed-2026-05-29",
+        "allowlist_evidence_ref": "allowlist://ppd-public-sources/wetwijzer-gov-hosts#wetten.overheid.nl",
+        "robots_evidence_ref": "robots://wetten.overheid.nl/robots.txt#fixture-reviewed-2026-05-29",
         "abort_criteria": [
           "Abort if host is not present in the committed public-source allowlist evidence reference.",
           "Abort if robots evidence is missing, stale, or records a disallow decision for the proposed path.",
@@ -133,13 +133,13 @@
       },
       {
         "source_id": "ppd-devhub-faqs",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
         "refresh_reason": "FAQ content is watched for changes to authenticated service descriptions and consequential action boundaries.",
         "proposed_frequency": "daily",
         "owner": "ppd-devhub-public-owner",
         "reviewer": "ppd-freshness-reviewer",
-        "allowlist_evidence_ref": "allowlist://ppd-public-sources/portland-gov-hosts#www.portland.gov",
-        "robots_evidence_ref": "robots://www.portland.gov/robots.txt#fixture-reviewed-2026-05-29",
+        "allowlist_evidence_ref": "allowlist://ppd-public-sources/wetwijzer-gov-hosts#wetten.overheid.nl",
+        "robots_evidence_ref": "robots://wetten.overheid.nl/robots.txt#fixture-reviewed-2026-05-29",
         "abort_criteria": [
           "Abort if FAQ links require sign-in or account-scoped state to inspect.",
           "Abort if robots evidence is missing, stale, or records a disallow decision for the proposed path.",
@@ -152,13 +152,13 @@
       },
       {
         "source_id": "ppd-spp-file-naming-standards",
-        "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+        "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
         "refresh_reason": "File naming and PDF preparation requirements can affect document readiness guardrails.",
         "proposed_frequency": "weekly",
         "owner": "ppd-document-requirements-owner",
         "reviewer": "ppd-freshness-reviewer",
-        "allowlist_evidence_ref": "allowlist://ppd-public-sources/portland-gov-hosts#www.portland.gov",
-        "robots_evidence_ref": "robots://www.portland.gov/robots.txt#fixture-reviewed-2026-05-29",
+        "allowlist_evidence_ref": "allowlist://ppd-public-sources/wetwijzer-gov-hosts#wetten.overheid.nl",
+        "robots_evidence_ref": "robots://wetten.overheid.nl/robots.txt#fixture-reviewed-2026-05-29",
         "abort_criteria": [
           "Abort if the canonical URL resolves to a binary download instead of public HTML metadata.",
           "Abort if robots evidence is missing, stale, or records a disallow decision for the proposed path.",

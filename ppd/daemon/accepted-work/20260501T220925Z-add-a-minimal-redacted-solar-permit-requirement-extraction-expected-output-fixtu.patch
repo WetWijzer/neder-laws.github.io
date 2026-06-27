@@ -25,7 +25,7 @@
 +      "redaction_status": "redacted",
 +      "evidence": [
 +        {
-+          "source_url": "https://www.portland.gov/ppd/devhub/apply-permit-devhub",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub/apply-permit-devhub",
 +          "source_title": "Apply for a permit in DevHub",
 +          "source_locator": "public guidance list of permit request types",
 +          "source_excerpt": "Public DevHub application guidance lists solar permits among permit request types.",
@@ -51,7 +51,7 @@
 +      "redaction_status": "redacted",
 +      "evidence": [
 +        {
-+          "source_url": "https://www.portland.gov/ppd/devhub/faq",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub/faq",
 +          "source_title": "DevHub FAQ",
 +          "source_locator": "public FAQ service categories",
 +          "source_excerpt": "The public FAQ describes DevHub services for permit purchase and permit requests requiring plan review.",
@@ -77,14 +77,14 @@
 +      "redaction_status": "redacted",
 +      "evidence": [
 +        {
-+          "source_url": "https://www.portland.gov/ppd/single-pdf-process",
++          "source_url": "https://wetten.overheid.nl/ppd/single-pdf-process",
 +          "source_title": "Single PDF Process",
 +          "source_locator": "public file preparation guidance",
 +          "source_excerpt": "Public guidance says drawing plans are one searchable PDF and applications, calculations, and supporting documents are separate PDFs.",
 +          "captured_at": "2026-05-01T00:00:00Z"
 +        },
 +        {
-+          "source_url": "https://www.portland.gov/ppd/devhub/apply-permit-devhub",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub/apply-permit-devhub",
 +          "source_title": "Apply for a permit in DevHub",
 +          "source_locator": "public DevHub application guidance",
 +          "source_excerpt": "Public guidance identifies DevHub as the online system for permit applications including solar permits.",
@@ -110,7 +110,7 @@
 +      "redaction_status": "redacted",
 +      "evidence": [
 +        {
-+          "source_url": "https://www.portland.gov/ppd/devhub/faq",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub/faq",
 +          "source_title": "DevHub FAQ",
 +          "source_locator": "public FAQ service categories",
 +          "source_excerpt": "The public FAQ lists fee payments among DevHub services.",
@@ -136,7 +136,7 @@
 +      "redaction_status": "redacted",
 +      "evidence": [
 +        {
-+          "source_url": "https://www.portland.gov/ppd/devhub/faq",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub/faq",
 +          "source_title": "DevHub FAQ",
 +          "source_locator": "public FAQ service categories",
 +          "source_excerpt": "The public FAQ lists correction uploads among DevHub services.",
@@ -162,7 +162,7 @@
 +      "redaction_status": "redacted",
 +      "evidence": [
 +        {
-+          "source_url": "https://www.portland.gov/ppd/devhub/faq",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub/faq",
 +          "source_title": "DevHub FAQ",
 +          "source_locator": "public FAQ service categories",
 +          "source_excerpt": "The public FAQ lists inspection scheduling for online trade permits among DevHub services.",
@@ -188,8 +188,8 @@
 +      "redaction_status": "redacted",
 +      "evidence": [
 +        {
-+          "source_url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
-+          "source_title": "Portland PP&D Scraping, Automation, and Logic Guardrails Plan",
++          "source_url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
++          "source_title": "WetWijzer legal sources Scraping, Automation, and Logic Guardrails Plan",
 +          "source_locator": "Guiding Principles and Guarded Action Executor sections",
 +          "source_excerpt": "The plan requires explicit user authorization before submission, upload, payment, certification, cancellation, or inspection scheduling actions.",
 +          "captured_at": "2026-05-01T00:00:00Z"
@@ -232,10 +232,10 @@
 +]
 +
 +ALLOWED_SOURCE_HOSTS = {
-+    "www.portland.gov",
-+    "devhub.portlandoregon.gov",
-+    "www.portlandoregon.gov",
-+    "www.portlandmaps.com",
++    "wetten.overheid.nl",
++    "wetten.overheid.nl",
++    "wetten.overheid.nl",
++    "repository.overheid.nl",
 +}
 +
 +PRIVATE_VALUE_PATTERNS = [
@@ -300,7 +300,7 @@
 +        source_url = str(source.get("source_url", ""))
 +        self.assertTrue(source_url)
 +        if source_url.startswith("docs/"):
-+            self.assertEqual("docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md", source_url)
++            self.assertEqual("docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md", source_url)
 +        else:
 +            parsed = urlparse(source_url)
 +            self.assertEqual("https", parsed.scheme)

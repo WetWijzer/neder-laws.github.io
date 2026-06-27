@@ -16,7 +16,7 @@ FIXTURES_DIR = Path(__file__).parent / "fixtures" / "public_recrawl_rehearsal"
 class PublicRecrawlRehearsalValidationTest(unittest.TestCase):
     def test_accepts_deterministic_public_rehearsal_plan(self) -> None:
         plan = PublicRecrawlRehearsalPlan(
-            urls=("https://www.portland.gov/ppd/zoning-code",),
+            urls=("https://wetten.overheid.nl/ppd/zoning-code",),
             robots_prerequisites_confirmed=True,
             policy_prerequisites_confirmed=True,
             processor_handoff_intent="Hand validated public HTML to the PP&D document processor fixture path.",
@@ -33,7 +33,7 @@ class PublicRecrawlRehearsalValidationTest(unittest.TestCase):
                 "urls": [
                     "http://localhost/admin",
                     "https://user:secret@example.com/public",
-                    "https://www.portland.gov/login",
+                    "https://wetten.overheid.nl/login",
                 ],
                 "robots_prerequisites_confirmed": True,
                 "policy_prerequisites_confirmed": True,
@@ -52,9 +52,9 @@ class PublicRecrawlRehearsalValidationTest(unittest.TestCase):
         errors = validate_public_recrawl_rehearsal_plan(
             PublicRecrawlRehearsalPlan(
                 urls=(
-                    "https://www.portland.gov/code/raw",
-                    "https://www.portland.gov/code/download?download=true",
-                    "https://www.portland.gov/code/archive",
+                    "https://wetten.overheid.nl/code/raw",
+                    "https://wetten.overheid.nl/code/download?download=true",
+                    "https://wetten.overheid.nl/code/archive",
                 ),
                 robots_prerequisites_confirmed=True,
                 policy_prerequisites_confirmed=True,
@@ -68,7 +68,7 @@ class PublicRecrawlRehearsalValidationTest(unittest.TestCase):
     def test_rejects_missing_prerequisites_live_flags_and_missing_handoff_controls(self) -> None:
         errors = validate_public_recrawl_rehearsal_plan(
             PublicRecrawlRehearsalPlan(
-                urls=("https://www.portland.gov/ppd/zoning-code",),
+                urls=("https://wetten.overheid.nl/ppd/zoning-code",),
                 live_network_execution=True,
                 authenticated_automation=True,
             )
@@ -84,7 +84,7 @@ class PublicRecrawlRehearsalValidationTest(unittest.TestCase):
     def test_rejects_claim_that_real_recrawl_was_performed(self) -> None:
         errors = validate_public_recrawl_rehearsal_plan(
             PublicRecrawlRehearsalPlan(
-                urls=("https://www.portland.gov/ppd/zoning-code",),
+                urls=("https://wetten.overheid.nl/ppd/zoning-code",),
                 robots_prerequisites_confirmed=True,
                 policy_prerequisites_confirmed=True,
                 processor_handoff_intent="processor handoff planned",

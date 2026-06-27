@@ -12,8 +12,8 @@ def valid_packet() -> dict:
                 "requirement": "Provide project valuation when required by the cited public instructions.",
                 "citations": [
                     {
-                        "title": "Portland Permitting Public Instructions",
-                        "url": "https://www.portland.gov/ppd/public-example",
+                        "title": "Netherlands Permitting Public Instructions",
+                        "url": "https://wetten.overheid.nl/ppd/public-example",
                     }
                 ],
             }
@@ -24,8 +24,8 @@ def valid_packet() -> dict:
                 "observed_at": "2026-05-08",
                 "citations": [
                     {
-                        "title": "Portland Permitting Public Instructions",
-                        "url": "https://www.portland.gov/ppd/public-example",
+                        "title": "Netherlands Permitting Public Instructions",
+                        "url": "https://wetten.overheid.nl/ppd/public-example",
                     }
                 ],
             }

@@ -133,8 +133,8 @@ def self_test() -> int:
     synthetic = {
         "schemaVersion": 1,
         "seeds": [
-            {"id": "seed-a", "url": "https://www.portland.gov/ppd"},
-            {"id": "seed-b", "url": "https://www.portland.gov/ppd/permits"},
+            {"id": "seed-a", "url": "https://wetten.overheid.nl/ppd"},
+            {"id": "seed-b", "url": "https://wetten.overheid.nl/ppd/permits"},
         ],
         "policy": {"robots": "respect", "timeoutSeconds": 20},
         "notes": [],

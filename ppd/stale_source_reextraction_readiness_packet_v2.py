@@ -223,7 +223,7 @@ def _validate_commands(issues: list[str], value: Any) -> None:
             issues.append("missing validation command: " + " ".join(required))
     for command in commands:
         joined = " ".join(command).lower()
-        if any(term in joined for term in ("curl", "wget", "playwright", "browser", "devhub.portlandoregon.gov")):
+        if any(term in joined for term in ("curl", "wget", "playwright", "browser", "wetten.overheid.nl")):
             issues.append("validation commands must remain offline and fixture-first")
 
 

@@ -27,14 +27,14 @@
     }
   ],
   "source_metadata": {
-    "canonical_url": "https://www.portland.gov/ppd/example-public-guide",
+    "canonical_url": "https://wetten.overheid.nl/ppd/example-public-guide",
     "source_type": "public_html",
     "content_hash": "sha256:fixture-only",
     "captured_at": "2026-05-31T00:00:00Z",
     "no_raw_body_persisted": true,
     "downloadable_link_metadata": [
       {
-        "url": "https://www.portland.gov/ppd/example-public-guide/download",
+        "url": "https://wetten.overheid.nl/ppd/example-public-guide/download",
         "link_text": "Download guide",
         "content_type": "application/pdf",
         "download_allowed": true,
@@ -79,7 +79,7 @@
     "citation_spans": [
       {
         "span_id": "span-1",
-        "source_url": "https://www.portland.gov/ppd/example-public-guide",
+        "source_url": "https://wetten.overheid.nl/ppd/example-public-guide",
         "start": 0,
         "end": 24
       }
@@ -90,7 +90,7 @@
     {
       "row_id": "evidence-1",
       "row_type": "callout",
-      "source_url": "https://www.portland.gov/ppd/example-public-guide",
+      "source_url": "https://wetten.overheid.nl/ppd/example-public-guide",
       "citation_span_id": "span-1",
       "text": "Public guidance may change.",
       "severity": "info",
@@ -99,7 +99,7 @@
     {
       "row_id": "evidence-2",
       "row_type": "warning",
-      "source_url": "https://www.portland.gov/ppd/example-public-guide",
+      "source_url": "https://wetten.overheid.nl/ppd/example-public-guide",
       "citation_span_id": "span-1",
       "text": "Confirm requirements with the official source before consequential action.",
       "severity": "warning",
@@ -108,7 +108,7 @@
     {
       "row_id": "evidence-3",
       "row_type": "table",
-      "source_url": "https://www.portland.gov/ppd/example-public-guide",
+      "source_url": "https://wetten.overheid.nl/ppd/example-public-guide",
       "citation_span_id": "span-1",
       "text": "Document when needed",
       "table_row_index": 0,

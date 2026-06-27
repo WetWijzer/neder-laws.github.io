@@ -56,8 +56,8 @@ class DevHubUrlState:
         parsed = urlparse(self.stable_url)
         if parsed.scheme != "https":
             errors.append("urlState.stableUrl must be an HTTPS URL")
-        if parsed.netloc != "devhub.portlandoregon.gov":
-            errors.append("urlState.stableUrl must stay on devhub.portlandoregon.gov")
+        if parsed.netloc != "wetten.overheid.nl":
+            errors.append("urlState.stableUrl must stay on wetten.overheid.nl")
         if parsed.fragment:
             errors.append("urlState.stableUrl must not include a fragment")
         if not self.state_name.strip():

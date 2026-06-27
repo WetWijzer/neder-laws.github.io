@@ -46,10 +46,10 @@
 +
 +PUBLIC_HOSTS = frozenset(
 +    {
-+        "www.portland.gov",
-+        "devhub.portlandoregon.gov",
-+        "www.portlandoregon.gov",
-+        "www.portlandmaps.com",
++        "wetten.overheid.nl",
++        "wetten.overheid.nl",
++        "wetten.overheid.nl",
++        "repository.overheid.nl",
 +    }
 +)
 +
@@ -208,7 +208,7 @@
 +        errors.append(f"{context} must use https")
 +    if parsed.hostname not in PUBLIC_HOSTS:
 +        errors.append(f"{context} host must be in the PP&D public allowlist")
-+    if parsed.hostname == "devhub.portlandoregon.gov" and _looks_private_devhub_path(parsed.path):
++    if parsed.hostname == "wetten.overheid.nl" and _looks_private_devhub_path(parsed.path):
 +        errors.append(f"{context} must not target private DevHub paths")
 +    return errors
 +
@@ -281,8 +281,8 @@
 +  "planned_fetches": [
 +    {
 +      "id": "ppd-home",
-+      "url": "https://www.portland.gov/ppd",
-+      "canonical_url": "https://www.portland.gov/ppd",
++      "url": "https://wetten.overheid.nl/ppd",
++      "canonical_url": "https://wetten.overheid.nl/ppd",
 +      "method": "GET",
 +      "expected_content_type": "text/html",
 +      "source_seed_id": "seed-ppd-home",
@@ -315,8 +315,8 @@
 +    },
 +    {
 +      "id": "devhub-public-home",
-+      "url": "https://devhub.portlandoregon.gov/",
-+      "canonical_url": "https://devhub.portlandoregon.gov/",
++      "url": "https://wetten.overheid.nl/",
++      "canonical_url": "https://wetten.overheid.nl/",
 +      "method": "GET",
 +      "expected_content_type": "text/html",
 +      "source_seed_id": "seed-devhub-public",
@@ -349,8 +349,8 @@
 +    },
 +    {
 +      "id": "devhub-private-path-skipped",
-+      "url": "https://devhub.portlandoregon.gov/my/permits",
-+      "canonical_url": "https://devhub.portlandoregon.gov/my/permits",
++      "url": "https://wetten.overheid.nl/my/permits",
++      "canonical_url": "https://wetten.overheid.nl/my/permits",
 +      "method": "GET",
 +      "expected_content_type": "text/html",
 +      "decision": "skipped",

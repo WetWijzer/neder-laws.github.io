@@ -15,10 +15,10 @@ from urllib.parse import urlparse
 
 PUBLIC_SOURCE_HOSTS = frozenset(
     {
-        "www.portland.gov",
-        "www.portlandoregon.gov",
-        "www.portlandmaps.com",
-        "devhub.portlandoregon.gov",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
+        "wetten.overheid.nl",
     }
 )
 
@@ -187,7 +187,7 @@ def _looks_private_or_authenticated_url(value: str) -> bool:
     lowered_query = parsed.query.lower()
     if parsed.netloc not in PUBLIC_SOURCE_HOSTS:
         return True
-    if parsed.netloc == "devhub.portlandoregon.gov" and lowered_path not in {"", "/"}:
+    if parsed.netloc == "wetten.overheid.nl" and lowered_path not in {"", "/"}:
         return True
     if any(part in lowered_path for part in PRIVATE_URL_PATH_PARTS):
         return True

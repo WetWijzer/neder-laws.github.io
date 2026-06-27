@@ -10,8 +10,8 @@
         "kind": "metadata_only_public_crawl",
         "sourceId": "ppd-seed-landing",
         "approved": true,
-        "sourceUrl": "https://www.portland.gov/ppd",
-        "canonicalUrl": "https://www.portland.gov/ppd"
+        "sourceUrl": "https://wetten.overheid.nl/ppd",
+        "canonicalUrl": "https://wetten.overheid.nl/ppd"
       },
       "adapterInputs": {
         "policyPreflight": {
@@ -27,8 +27,8 @@
           "allowlistPolicy": "official_ppd_public_seed"
         },
         "rateLimitBucket": {
-          "bucketId": "public-portland-gov-metadata-only",
-          "scope": "host:www.portland.gov",
+          "bucketId": "public-wetwijzer-gov-metadata-only",
+          "scope": "host:wetten.overheid.nl",
           "maxRequestsPerMinute": 6,
           "minDelaySeconds": 10,
           "burstLimit": 1,
@@ -46,8 +46,8 @@
         },
         "processorInvocation": {
           "operation": "capture_url",
-          "url": "https://www.portland.gov/ppd",
-          "canonicalUrl": "https://www.portland.gov/ppd",
+          "url": "https://wetten.overheid.nl/ppd",
+          "canonicalUrl": "https://wetten.overheid.nl/ppd",
           "captureMode": "metadata_and_archive_reference",
           "respectRobots": true,
           "metadataOnly": true,
@@ -73,8 +73,8 @@
         "kind": "metadata_only_public_crawl",
         "sourceId": "ppd-seed-permit-forms-index",
         "approved": true,
-        "sourceUrl": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
-        "canonicalUrl": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications"
+        "sourceUrl": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+        "canonicalUrl": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications"
       },
       "adapterInputs": {
         "policyPreflight": {
@@ -90,8 +90,8 @@
           "allowlistPolicy": "official_ppd_public_seed"
         },
         "rateLimitBucket": {
-          "bucketId": "public-portland-gov-metadata-only",
-          "scope": "host:www.portland.gov",
+          "bucketId": "public-wetwijzer-gov-metadata-only",
+          "scope": "host:wetten.overheid.nl",
           "maxRequestsPerMinute": 6,
           "minDelaySeconds": 10,
           "burstLimit": 1,
@@ -109,9 +109,9 @@
         },
         "processorInvocation": {
           "operation": "legal_archive_url",
-          "url": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
-          "canonicalUrl": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
-          "jurisdiction": "portland-or-ppd",
+          "url": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+          "canonicalUrl": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+          "jurisdiction": "wetwijzer-or-ppd",
           "captureMode": "metadata_and_archive_reference",
           "respectRobots": true,
           "metadataOnly": true,
@@ -136,8 +136,8 @@
     {
       "id": "metadata-only-public-ppd-landing",
       "seedId": "ppd-seed-landing",
-      "sourceUrl": "https://www.portland.gov/ppd",
-      "canonicalUrl": "https://www.portland.gov/ppd",
+      "sourceUrl": "https://wetten.overheid.nl/ppd",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd",
       "operation": "capture_url",
       "processor": {
         "name": "web_archive_capture",
@@ -147,8 +147,8 @@
         "backendPath": "ipfs_datasets_py/ipfs_datasets_py/processors"
       },
       "arguments": {
-        "url": "https://www.portland.gov/ppd",
-        "canonicalUrl": "https://www.portland.gov/ppd",
+        "url": "https://wetten.overheid.nl/ppd",
+        "canonicalUrl": "https://wetten.overheid.nl/ppd",
         "captureMode": "metadata_and_archive_reference",
         "respectRobots": true,
         "metadataOnly": true,
@@ -168,8 +168,8 @@
           "evaluator": "ppd.crawler.policy"
         },
         "rateLimitBucket": {
-          "bucketId": "public-portland-gov-metadata-only",
-          "scope": "host:www.portland.gov",
+          "bucketId": "public-wetwijzer-gov-metadata-only",
+          "scope": "host:wetten.overheid.nl",
           "maxRequestsPerMinute": 6,
           "minDelaySeconds": 10,
           "burstLimit": 1
@@ -195,8 +195,8 @@
     {
       "id": "metadata-only-public-ppd-forms-index",
       "seedId": "ppd-seed-permit-forms-index",
-      "sourceUrl": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
-      "canonicalUrl": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
       "operation": "legal_archive_url",
       "processor": {
         "name": "parallel_web_archiver",
@@ -206,9 +206,9 @@
         "backendPath": "ipfs_datasets_py/ipfs_datasets_py/processors"
       },
       "arguments": {
-        "url": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
-        "canonicalUrl": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
-        "jurisdiction": "portland-or-ppd",
+        "url": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+        "canonicalUrl": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+        "jurisdiction": "wetwijzer-or-ppd",
         "captureMode": "metadata_and_archive_reference",
         "respectRobots": true,
         "metadataOnly": true,
@@ -228,8 +228,8 @@
           "evaluator": "ppd.crawler.policy"
         },
         "rateLimitBucket": {
-          "bucketId": "public-portland-gov-metadata-only",
-          "scope": "host:www.portland.gov",
+          "bucketId": "public-wetwijzer-gov-metadata-only",
+          "scope": "host:wetten.overheid.nl",
           "maxRequestsPerMinute": 6,
           "minDelaySeconds": 10,
           "burstLimit": 1

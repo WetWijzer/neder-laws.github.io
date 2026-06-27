@@ -1,5 +1,5 @@
-import PortlandLegalResearchApp from './components/PortlandLegalResearchApp';
+import WetWijzerLegalResearchApp from './components/WetWijzerLegalResearchApp';
 
 export default function AppStatic() {
-  return <PortlandLegalResearchApp />;
+  return <WetWijzerLegalResearchApp />;
 }

@@ -36,7 +36,7 @@
     {
       "work_row_id": "source-to-extraction::ppd-submit-plans-online",
       "source_id": "ppd-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "change_kind": "changed_normalized_public_guidance_fixture",
       "normalized_document_id_placeholder": "norm-doc-submit-plans-v7",
       "requirement_placeholder_id": "candidate-req-submit-plans-v7",
@@ -48,7 +48,7 @@
     {
       "work_row_id": "source-to-extraction::ppd-devhub-faq",
       "source_id": "ppd-devhub-faq",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "change_kind": "changed_normalized_public_guidance_fixture",
       "normalized_document_id_placeholder": "norm-doc-devhub-faq-v7",
       "requirement_placeholder_id": "candidate-req-devhub-faq-v7",

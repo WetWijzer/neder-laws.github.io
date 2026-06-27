@@ -76,7 +76,7 @@
     "hostRateLimitWindows": [
       {
         "windowId": "host-window-001",
-        "host": "www.portland.gov",
+        "host": "wetten.overheid.nl",
         "windowSeconds": 60,
         "minDelaySeconds": 10,
         "maxRequestsPerWindow": 6,
@@ -88,7 +88,7 @@
       {
         "checkpointId": "robots-policy-001",
         "sourceId": "ppd-submit-plans-online",
-        "canonicalUrl": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+        "canonicalUrl": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
         "robotsStatus": "allowed",
         "policyStatus": "approved",
         "evaluatedAt": "2026-05-28T20:10:00Z",
@@ -99,14 +99,14 @@
     "processorHandoffInputs": [
       {
         "sourceId": "ppd-submit-plans-online",
-        "canonicalUrl": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
-        "requestedUrl": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+        "canonicalUrl": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
+        "requestedUrl": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
         "processor": {
           "name": "ipfs_datasets_py.web_archive",
           "operation": "capture_url_metadata_only"
         },
         "arguments": {
-          "url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+          "url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
           "metadataOnly": true,
           "persistRawBody": false,
           "downloadDocuments": false
@@ -186,7 +186,7 @@
         "candidate_id": "candidate-ppd-submit-plans-online",
         "source_id": "ppd-submit-plans-online",
         "prior_registry_id": "source-registry-current",
-        "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+        "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
         "review_evidence_id": "review-evidence-ppd-submit-plans-online",
         "changed_field_count": 1,
         "exact_metadata_field_changes": [

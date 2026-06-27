@@ -34,7 +34,7 @@ class OfficialSourceAnchorAuditPacketV1Tests(unittest.TestCase):
     def test_missing_anchor_rows_name_registry_and_index_gaps(self):
         packet = build_official_source_anchor_audit_packet_v1(self.load_inputs())
         rows_by_url = {row['anchor_url']: row for row in packet['gap_rows']}
-        missing = rows_by_url['https://devhub.portlandoregon.gov']
+        missing = rows_by_url['https://wetten.overheid.nl']
         self.assertIn('missing_committed_source_registry_anchor', missing['issue_types'])
         self.assertIn('missing_source_index_anchor', missing['issue_types'])
         self.assertEqual(missing['citations'], ['human_release_handoff_packet_v1', 'original_ppd_official_source_anchor_list'])

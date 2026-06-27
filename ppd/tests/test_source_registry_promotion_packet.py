@@ -21,8 +21,8 @@ def test_builds_fixture_first_promotion_decision_packet() -> None:
     assert packet["live_registry_mutated"] is False
     assert packet["summary"] == {"promote": 1, "defer": 1}
     assert [item["source_id"] for item in packet["decisions"]] == [
-        "portland-devhub-permits",
-        "portland-zoning-code",
+        "wetwijzer-devhub-permits",
+        "wetwijzer-zoning-code",
     ]
 
     deferred = packet["decisions"][1]
@@ -34,7 +34,7 @@ def test_builds_fixture_first_promotion_decision_packet() -> None:
 def test_defer_requires_explicit_blocker_refs(tmp_path: Path) -> None:
     bad_decisions = tmp_path / "bad_decisions.json"
     bad_decisions.write_text(
-        '{"reviewer":"fixture-reviewer","decisions":[{"source_id":"portland-zoning-code","decision":"defer","blocker_refs":[],"rollback_owner_notes":"Planning policy owner will hold rollback notes.","downstream_invalidation_targets":[],"metadata_only_artifact_ids":["artifact:ppd:registry:zoning-code:metadata-review"]}]}',
+        '{"reviewer":"fixture-reviewer","decisions":[{"source_id":"wetwijzer-zoning-code","decision":"defer","blocker_refs":[],"rollback_owner_notes":"Planning policy owner will hold rollback notes.","downstream_invalidation_targets":[],"metadata_only_artifact_ids":["artifact:ppd:registry:zoning-code:metadata-review"]}]}',
         encoding="utf-8",
     )
 

@@ -11,7 +11,7 @@ def test_sanitize_action_journal_event_accepts_minimal_allowed_event() -> None:
             "event_type": "document_discovered",
             "source": "ppd-public-site",
             "message": "Found permit guide link.",
-            "url": " https://www.portland.gov/ppd ",
+            "url": " https://wetten.overheid.nl/ppd ",
             "metadata": {"status_code": 200, "reviewed": False},
         }
     )
@@ -20,7 +20,7 @@ def test_sanitize_action_journal_event_accepts_minimal_allowed_event() -> None:
         "event_type": "document_discovered",
         "source": "ppd-public-site",
         "message": "Found permit guide link.",
-        "url": "https://www.portland.gov/ppd",
+        "url": "https://wetten.overheid.nl/ppd",
         "metadata": {"status_code": 200, "reviewed": False},
     }
 

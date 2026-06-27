@@ -109,7 +109,7 @@ def test_public_change_report_packet_v2_rejects_private_browser_raw_or_downloade
 
 def test_public_change_report_packet_v2_rejects_private_query_urls() -> None:
     fixture = _fixture()
-    fixture["synthetic_changed_source_hashes"][0]["canonical_url"] = "https://www.portland.gov/ppd/get-permit/submit-plans-online?token=abc"
+    fixture["synthetic_changed_source_hashes"][0]["canonical_url"] = "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online?token=abc"
     with pytest.raises(PublicChangeReportPacketV2Error, match="private query"):
         build_public_change_report_packet_v2(fixture)
 

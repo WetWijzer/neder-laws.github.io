@@ -15,17 +15,17 @@
 +      "action": "use",
 +      "object": "DevHub account before starting an online trade permit request with plan review",
 +      "conditions": [
-+        "request is initiated through Development Hub PDX",
-+        "online permit services require PortlandOregon.gov credentials"
++        "request is initiated through Development Hub Netherlands",
++        "online permit services require wetten.overheid.nl credentials"
 +      ],
 +      "deadline_or_temporal_scope": "before drafting or submitting the request",
 +      "evidence": [
 +        {
 +          "source_id": "devhub-faq-public-services",
-+          "url": "https://www.portland.gov/ppd/devhub-faq",
-+          "title": "Development Hub PDX FAQ",
++          "url": "https://wetten.overheid.nl/ppd/devhub-faq",
++          "title": "Development Hub Netherlands FAQ",
 +          "anchor": "online-permitting-services",
-+          "quote": "DevHub is Portland's online permitting system and uses PortlandOregon.gov credentials for online permitting services."
++          "quote": "DevHub is Netherlands's online permitting system and uses wetten.overheid.nl credentials for online permitting services."
 +        }
 +      ],
 +      "confidence": 0.93,
@@ -46,8 +46,8 @@
 +      "evidence": [
 +        {
 +          "source_id": "devhub-application-guidance",
-+          "url": "https://www.portland.gov/ppd/devhub/apply-permits",
-+          "title": "Apply for permits in Development Hub PDX",
++          "url": "https://wetten.overheid.nl/ppd/devhub/apply-permits",
++          "title": "Apply for permits in Development Hub Netherlands",
 +          "anchor": "permit-request-types",
 +          "quote": "Public guidance lists trade permits with plan review among DevHub permit request types."
 +        }
@@ -70,7 +70,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "trade-plan-review-process-fixture",
-+          "url": "https://www.portland.gov/ppd/devhub/apply-permits",
++          "url": "https://wetten.overheid.nl/ppd/devhub/apply-permits",
 +          "title": "Trade permit with plan review process fixture",
 +          "anchor": "required-facts",
 +          "quote": "Fixture process model requires property, permit type, trade discipline, project scope, and applicant/contact facts."
@@ -94,8 +94,8 @@
 +      "evidence": [
 +        {
 +          "source_id": "devhub-application-guidance",
-+          "url": "https://www.portland.gov/ppd/devhub/apply-permits",
-+          "title": "Apply for permits in Development Hub PDX",
++          "url": "https://wetten.overheid.nl/ppd/devhub/apply-permits",
++          "title": "Apply for permits in Development Hub Netherlands",
 +          "anchor": "applications-and-documents",
 +          "quote": "Application guidance directs applicants to prepare and upload required application materials before submitting online requests."
 +        }
@@ -118,7 +118,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "single-pdf-process-public-guidance",
-+          "url": "https://www.portland.gov/ppd/permit-review-process/single-pdf-process",
++          "url": "https://wetten.overheid.nl/ppd/permit-review-process/single-pdf-process",
 +          "title": "Single PDF Process",
 +          "anchor": "drawing-plans-and-supporting-documents",
 +          "quote": "Public guidance says drawing plans are submitted as one searchable PDF when the Single PDF Process applies."
@@ -142,8 +142,8 @@
 +      "evidence": [
 +        {
 +          "source_id": "devhub-faq-fee-payments",
-+          "url": "https://www.portland.gov/ppd/devhub-faq",
-+          "title": "Development Hub PDX FAQ",
++          "url": "https://wetten.overheid.nl/ppd/devhub-faq",
++          "title": "Development Hub Netherlands FAQ",
 +          "anchor": "fee-payments",
 +          "quote": "Public DevHub FAQ includes fee payments as an online service category."
 +        }
@@ -167,8 +167,8 @@
 +      "evidence": [
 +        {
 +          "source_id": "devhub-faq-fee-payments",
-+          "url": "https://www.portland.gov/ppd/devhub-faq",
-+          "title": "Development Hub PDX FAQ",
++          "url": "https://wetten.overheid.nl/ppd/devhub-faq",
++          "title": "Development Hub Netherlands FAQ",
 +          "anchor": "pay-fees",
 +          "quote": "Fee payment is a DevHub workflow checkpoint and must remain user-confirmed."
 +        }
@@ -192,8 +192,8 @@
 +      "evidence": [
 +        {
 +          "source_id": "devhub-faq-corrections",
-+          "url": "https://www.portland.gov/ppd/devhub-faq",
-+          "title": "Development Hub PDX FAQ",
++          "url": "https://wetten.overheid.nl/ppd/devhub-faq",
++          "title": "Development Hub Netherlands FAQ",
 +          "anchor": "correction-uploads",
 +          "quote": "Public DevHub FAQ lists correction uploads as an online permitting service."
 +        }
@@ -216,7 +216,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd-automation-guardrails-plan",
-+          "url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
++          "url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
 +          "title": "PP&D scraping, automation, and logic guardrails plan",
 +          "anchor": "guarded-action-executor",
 +          "quote": "Potentially consequential actions require exact user instruction, action preview, confirmation checkpoint, and durable audit event."
@@ -241,7 +241,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd-automation-guardrails-plan",
-+          "url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
++          "url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
 +          "title": "PP&D scraping, automation, and logic guardrails plan",
 +          "anchor": "guarded-action-executor",
 +          "quote": "Agents must stop before submission, certification, payment, cancellation, inspection scheduling, or official upload unless the user explicitly confirms the exact action."
@@ -265,7 +265,7 @@
 @@ -0,0 +1,201 @@
 +"""Validate requirement extraction coverage for trade permits with plan review.
 +
-+This test is fixture-only. It does not crawl Portland.gov, open DevHub,
++This test is fixture-only. It does not crawl wetten.overheid.nl, open DevHub,
 +authenticate, submit, upload, pay, or inspect private session artifacts.
 +"""
 +
@@ -377,7 +377,7 @@
 +        eligibility_requirements = self._requirements_for("eligibility_precondition")
 +        combined_text = self._combined_text(eligibility_requirements)
 +        self.assertIn("devhub account", combined_text)
-+        self.assertIn("portlandoregon.gov credentials", combined_text)
++        self.assertIn("wetten.overheid.nl credentials", combined_text)
 +        self.assertIn("trade permit with plan review", combined_text)
 +        self.assertIn("property", combined_text)
 +        self.assertIn("work description", combined_text)
@@ -440,8 +440,8 @@
 +                self.assertIn("url", evidence)
 +                self.assertIn("title", evidence)
 +                self.assertIn("quote", evidence)
-+                self.assertTrue(evidence["url"].startswith(("https://www.portland.gov/", "docs/")))
-+                self.assertNotIn("devhub.portlandoregon.gov/secure", evidence["url"])
++                self.assertTrue(evidence["url"].startswith(("https://wetten.overheid.nl/", "docs/")))
++                self.assertNotIn("wetten.overheid.nl/secure", evidence["url"])
 +
 +    def test_confirmation_sensitive_categories_require_exact_gate_marker(self) -> None:
 +        for requirement in self.requirements:

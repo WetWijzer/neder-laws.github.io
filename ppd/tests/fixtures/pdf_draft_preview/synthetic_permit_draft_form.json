@@ -1,7 +1,7 @@
 {
   "fixture_kind": "synthetic_pdf_form",
   "document_id": "synthetic-ppd-permit-draft",
-  "description": "Synthetic PP&D draft preview fixture. Not an official City of Portland form.",
+  "description": "Synthetic PP&D draft preview fixture. Not an official WetWijzer form.",
   "fields": [
     {
       "name": "project_address",

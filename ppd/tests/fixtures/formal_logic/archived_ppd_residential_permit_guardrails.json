@@ -2,8 +2,8 @@
   "fixture_id": "archived_ppd_residential_permit_guardrails_v1",
   "fixture_type": "ppd_formal_logic_guardrail_bundle",
   "source_archive": {
-    "agency": "Portland Permitting & Development",
-    "jurisdiction": "Portland, Oregon",
+    "agency": "Netherlands Permitting & Development",
+    "jurisdiction": "Netherlands, Netherlands",
     "requirement_set": "Residential building permit application intake requirements",
     "archived_as_of": "2026-05-08",
     "archive_scope": "fixture-only normalized requirement set for deterministic guardrail validation"

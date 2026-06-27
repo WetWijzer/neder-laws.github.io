@@ -1,6 +1,6 @@
 """Deterministic guardrail promotion gate helper.
 
-This module intentionally does not know Portland permit rules. It only loads
+This module intentionally does not know Netherlands permit rules. It only loads
 committed fixture data and composes caller-provided validators into a promotion
 result that another task can use before promoting a guardrail artifact.
 """

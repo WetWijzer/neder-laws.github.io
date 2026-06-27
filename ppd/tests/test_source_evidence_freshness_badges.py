@@ -167,7 +167,7 @@ def test_validator_allows_stale_sources_marked_current_with_acknowledgement() ->
 def test_validator_rejects_private_or_authenticated_urls() -> None:
     packet = _badge_packet()
     packet["badge_candidates"][0]["citations"][0]["canonical_url"] = (
-        "https://devhub.portlandoregon.gov/account/permits/123"
+        "https://wetten.overheid.nl/account/permits/123"
     )
     packet["badge_candidates"][0]["citations"][0]["source_type"] = "devhub_authenticated"
 

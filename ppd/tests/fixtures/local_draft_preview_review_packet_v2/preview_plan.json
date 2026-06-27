@@ -10,7 +10,7 @@
     {
       "row_id": "permit-address",
       "source_id": "preview-plan",
-      "value": "123 SW Fixture Ave, Portland, OR",
+      "value": "123 SW Fixture Ave, Netherlands, OR",
       "explanation": "Address value is copied from the local draft preview plan fixture for reviewer inspection only.",
       "reviewer_owner": "Intake reviewer",
       "confirmation_checkpoint": "Confirm the address exactly matches the locally reviewed draft before any submission workflow.",

@@ -34,7 +34,7 @@
       "executes_processor": false,
       "starts_crawler": false,
       "synthetic_input": {
-        "requested_url": "https://www.portland.gov/ppd/blocked-by-robots-fixture",
+        "requested_url": "https://wetten.overheid.nl/ppd/blocked-by-robots-fixture",
         "policy_source": "robots",
         "policy_decision": "deny"
       },
@@ -56,7 +56,7 @@
       "executes_processor": false,
       "starts_crawler": false,
       "synthetic_input": {
-        "requested_url": "https://devhub.portlandoregon.gov/private-fixture",
+        "requested_url": "https://wetten.overheid.nl/private-fixture",
         "policy_source": "ppd_local_policy",
         "policy_decision": "deny"
       },
@@ -78,7 +78,7 @@
       "executes_processor": false,
       "starts_crawler": false,
       "synthetic_input": {
-        "requested_url": "https://www.portland.gov/ppd/timeout-fixture",
+        "requested_url": "https://wetten.overheid.nl/ppd/timeout-fixture",
         "elapsed_ms": 30000,
         "status": "timeout"
       },
@@ -101,10 +101,10 @@
       "executes_processor": false,
       "starts_crawler": false,
       "synthetic_input": {
-        "requested_url": "https://www.portland.gov/ppd/old-fixture",
+        "requested_url": "https://wetten.overheid.nl/ppd/old-fixture",
         "redirect_chain": [
-          "https://www.portland.gov/ppd/old-fixture",
-          "https://www.portland.gov/ppd/new-fixture"
+          "https://wetten.overheid.nl/ppd/old-fixture",
+          "https://wetten.overheid.nl/ppd/new-fixture"
         ],
         "redirect_changed_from_previous_manifest": true
       },
@@ -126,7 +126,7 @@
       "executes_processor": false,
       "starts_crawler": false,
       "synthetic_input": {
-        "requested_url": "https://www.portland.gov/ppd/calendar-fixture.ics",
+        "requested_url": "https://wetten.overheid.nl/ppd/calendar-fixture.ics",
         "content_type": "text/calendar"
       },
       "retry_plan": {
@@ -147,7 +147,7 @@
       "executes_processor": false,
       "starts_crawler": false,
       "synthetic_input": {
-        "requested_url": "https://www.portland.gov/ppd/oversize-fixture.pdf",
+        "requested_url": "https://wetten.overheid.nl/ppd/oversize-fixture.pdf",
         "content_length_bytes": 209715201,
         "max_allowed_bytes": 209715200
       },
@@ -169,7 +169,7 @@
       "executes_processor": false,
       "starts_crawler": false,
       "synthetic_input": {
-        "requested_url": "https://www.portland.gov/ppd/handoff-fixture",
+        "requested_url": "https://wetten.overheid.nl/ppd/handoff-fixture",
         "processor_name": "ipfs_datasets_py.web_archive",
         "handoff_status": "failed_before_execution"
       },
@@ -192,7 +192,7 @@
       "executes_processor": false,
       "starts_crawler": false,
       "synthetic_input": {
-        "requested_url": "https://www.portland.gov/ppd/no-body-fixture",
+        "requested_url": "https://wetten.overheid.nl/ppd/no-body-fixture",
         "body_persistence_policy": "metadata_only"
       },
       "retry_plan": {
@@ -213,7 +213,7 @@
       "executes_processor": false,
       "starts_crawler": false,
       "synthetic_input": {
-        "requested_url": "https://www.portland.gov/ppd/transient-503-fixture",
+        "requested_url": "https://wetten.overheid.nl/ppd/transient-503-fixture",
         "http_status": 503
       },
       "retry_plan": {
@@ -236,7 +236,7 @@
       "executes_processor": false,
       "starts_crawler": false,
       "synthetic_input": {
-        "requested_url": "https://www.portland.gov/ppd/reviewer-placeholder-fixture",
+        "requested_url": "https://wetten.overheid.nl/ppd/reviewer-placeholder-fixture",
         "needs_human_review": true
       },
       "retry_plan": {

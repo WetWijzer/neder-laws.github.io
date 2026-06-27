@@ -5,7 +5,7 @@
     {
       "surface_id": "devhub_home",
       "auth_scope": "authenticated",
-      "url_pattern": "https://devhub.portlandoregon.gov/*/home*",
+      "url_pattern": "https://wetten.overheid.nl/*/home*",
       "page_heading": "DevHub Home",
       "accessible_landmarks": [
         {"label": "Main navigation"},
@@ -32,7 +32,7 @@
     {
       "surface_id": "permit_detail",
       "auth_scope": "authenticated",
-      "url_pattern": "https://devhub.portlandoregon.gov/*/permits/*",
+      "url_pattern": "https://wetten.overheid.nl/*/permits/*",
       "page_heading": "Permit Details",
       "accessible_landmarks": [
         {"label": "Permit summary"},

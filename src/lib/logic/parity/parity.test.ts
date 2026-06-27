@@ -348,8 +348,8 @@ describe('Python parity fixtures', () => {
       return;
     }
 
-    expect(fixture.section_id).toMatch(/^portland_city_code_\d+_\d+_\d+$/);
-    expect(fixture.citation).toMatch(/^PCC \d+\.\d+\.\d+$/);
+    expect(fixture.section_id).toMatch(/^netherlands_law_article_\d+_\d+_\d+$/);
+    expect(fixture.citation).toMatch(/^netherlands law \d+\.\d+\.\d+$/);
     expect(fixture.title.length).toBeGreaterThan(0);
     expect(fixture.source_text.length).toBeGreaterThan(0);
 
@@ -469,6 +469,6 @@ describe('Python parity fixtures', () => {
     });
     expect(
       proofSummaries.find((fixture) => fixture.category === 'kg_linked_section')?.kg_section_id,
-    ).toBe('portland_city_code_16_20_130');
+    ).toBe('netherlands_law_article_16_20_130');
   });
 });

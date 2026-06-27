@@ -5,8 +5,8 @@
   "candidate_preflight_rows": [
     {
       "source_id": "ppd-online-permitting-tools",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
-      "official_anchor_citation": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
+      "official_anchor_citation": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "expected_content_type": "text/html",
       "robots_decision_placeholder": "Reviewer must record robots result before processor handoff.",
       "policy_decision_placeholder": "Reviewer must record PP&D allowlist and policy decision before processor handoff.",
@@ -23,8 +23,8 @@
     },
     {
       "source_id": "ppd-fee-payment-guide",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
-      "official_anchor_citation": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
+      "official_anchor_citation": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "expected_content_type": "application/pdf",
       "robots_decision_placeholder": "Reviewer must record robots result before processor handoff.",
       "policy_decision_placeholder": "Reviewer must record PP&D allowlist and policy decision before processor handoff.",
@@ -41,8 +41,8 @@
     },
     {
       "source_id": "ppd-devhub-public-portal",
-      "canonical_url": "https://devhub.portlandoregon.gov",
-      "official_anchor_citation": "https://devhub.portlandoregon.gov",
+      "canonical_url": "https://wetten.overheid.nl",
+      "official_anchor_citation": "https://wetten.overheid.nl",
       "expected_content_type": "text/html",
       "robots_decision_placeholder": "Reviewer must record robots result before processor handoff.",
       "policy_decision_placeholder": "Reviewer must record PP&D allowlist and policy decision before processor handoff.",

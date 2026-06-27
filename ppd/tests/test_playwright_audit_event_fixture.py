@@ -76,7 +76,7 @@ def _assert_selector_basis(test_case: unittest.TestCase, selector: dict[str, Any
 def _assert_source_requirement(test_case: unittest.TestCase, requirement: dict[str, Any]) -> None:
     test_case.assertEqual(requirement["requirementId"], "trade-plan-review-project-description-required")
     test_case.assertEqual(requirement["type"], "precondition")
-    test_case.assertTrue(requirement["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
+    test_case.assertTrue(requirement["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
     test_case.assertEqual(requirement["sourceAnchor"], "project-information")
     test_case.assertIs(requirement["requiresUserSuppliedFact"], True)
     test_case.assertIs(requirement["supportsDraftEditOnly"], True)

@@ -7,10 +7,10 @@ from urllib.parse import urlparse
 from ppd.crawler.processor_handoff_readiness import validate_processor_handoff_readiness
 
 ALLOWLISTED_HOSTS = frozenset({
-    'www.portland.gov',
-    'devhub.portlandoregon.gov',
-    'www.portlandoregon.gov',
-    'www.portlandmaps.com',
+    'wetten.overheid.nl',
+    'wetten.overheid.nl',
+    'wetten.overheid.nl',
+    'repository.overheid.nl',
 })
 
 PREREQUISITE_KEYS = ('prerequisite_links', 'prerequisites', 'policy_prerequisite_links', 'robots_policy_prerequisites')

@@ -12,13 +12,13 @@
     },
     {
       "source_id": "ppd:public:private_devhub",
-      "url": "https://devhub.portlandoregon.gov/account/REDACTED",
+      "url": "https://wetten.overheid.nl/account/REDACTED",
       "robots_evidence": "synthetic fixture only",
       "policy_evidence": "synthetic fixture only"
     },
     {
       "source_id": "ppd:public:tokenized_query",
-      "url": "https://www.portland.gov/ppd?token=REDACTED",
+      "url": "https://wetten.overheid.nl/ppd?token=REDACTED",
       "robots_evidence": "synthetic fixture only",
       "policy_evidence": "synthetic fixture only"
     }

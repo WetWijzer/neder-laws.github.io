@@ -1,13 +1,13 @@
 {
   "fixture_id": "may8_official_source_anchor_contracts",
   "fixture_date": "2026-05-08",
-  "jurisdiction": "portland_or_ppd",
+  "jurisdiction": "wetwijzer_or_ppd",
   "purpose": "Public extraction contracts for May 8 official source anchors.",
   "sources": [
     {
       "source_id": "ppd_building_permit_process_html",
       "source_type": "html",
-      "official_url": "https://www.portland.gov/ppd/permits/building-permits",
+      "official_url": "https://wetten.overheid.nl/ppd/permits/building-permits",
       "retrieved_anchor_date": "2026-05-08",
       "expected_contract": {
         "heading_hierarchy": [
@@ -41,7 +41,7 @@
     {
       "source_id": "ppd_devhub_help_html",
       "source_type": "html",
-      "official_url": "https://www.portland.gov/ppd/devhub",
+      "official_url": "https://wetten.overheid.nl/ppd/devhub",
       "retrieved_anchor_date": "2026-05-08",
       "expected_contract": {
         "heading_hierarchy": [
@@ -61,7 +61,7 @@
     {
       "source_id": "building_permit_application_pdf",
       "source_type": "pdf",
-      "official_url": "https://www.portland.gov/ppd/documents/building-permit-application/download",
+      "official_url": "https://wetten.overheid.nl/ppd/documents/building-permit-application/download",
       "retrieved_anchor_date": "2026-05-08",
       "expected_contract": {
         "pdf_page_anchors": [

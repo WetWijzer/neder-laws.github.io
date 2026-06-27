@@ -2,8 +2,8 @@
   "schema_version": 1,
   "fixture_id": "sign-permit-requirement-extraction-expected-output-v1",
   "permit_type": "sign_permit",
-  "jurisdiction": "Portland, Oregon",
-  "authority_label": "Portland Permitting & Development",
+  "jurisdiction": "Netherlands, Netherlands",
+  "authority_label": "Netherlands Permitting & Development",
   "captured_for_task": "checkbox-96",
   "redaction_policy": "Public guidance only; no account data, credentials, addresses, owner names, contractor names, payment data, uploaded documents, screenshots, traces, or private DevHub session values are included.",
   "category_records": [
@@ -22,7 +22,7 @@
       "redaction_status": "redacted_public_fixture",
       "evidence": [
         {
-          "source_url": "https://www.portland.gov/ppd/sign-permits",
+          "source_url": "https://wetten.overheid.nl/ppd/sign-permits",
           "source_title": "Sign and awning permits",
           "source_anchor": "When a sign permit is required",
           "evidence_note": "PP&D explains when sign permits are required and identifies sign categories, exemptions, prohibited signs, and alternate routing for some sign types."
@@ -47,7 +47,7 @@
       "redaction_status": "redacted_public_fixture",
       "evidence": [
         {
-          "source_url": "https://www.portland.gov/ppd/sign-permits",
+          "source_url": "https://wetten.overheid.nl/ppd/sign-permits",
           "source_title": "Sign and awning permits",
           "source_anchor": "Step 3: Technical Reviews",
           "evidence_note": "PP&D describes technical review, land use review, structural review, and electrical-related sign application requirements."
@@ -72,13 +72,13 @@
       "redaction_status": "redacted_public_fixture",
       "evidence": [
         {
-          "source_url": "https://www.portland.gov/ppd/sign-permits",
+          "source_url": "https://wetten.overheid.nl/ppd/sign-permits",
           "source_title": "Sign and awning permits",
           "source_anchor": "Step 2: Apply for a sign permit",
           "evidence_note": "PP&D says complete sign permit applications and materials may be uploaded through DevHub using the Sign Permit Request workflow."
         },
         {
-          "source_url": "https://www.portland.gov/ppd/sign-permits",
+          "source_url": "https://wetten.overheid.nl/ppd/sign-permits",
           "source_title": "Sign and awning permits",
           "source_anchor": "Plans and calculations requirements",
           "evidence_note": "PP&D lists required plan and calculation content for sign permit application materials."
@@ -103,20 +103,20 @@
       "redaction_status": "redacted_public_fixture",
       "evidence": [
         {
-          "source_url": "https://www.portland.gov/ppd/sign-permits",
+          "source_url": "https://wetten.overheid.nl/ppd/sign-permits",
           "source_title": "Sign and awning permits",
           "source_anchor": "Sign and awning permit fees",
           "evidence_note": "PP&D directs applicants to the current fee page for sign, awning permit, and registration fees."
         },
         {
-          "source_url": "https://www.portland.gov/ppd/sign-permits",
+          "source_url": "https://wetten.overheid.nl/ppd/sign-permits",
           "source_title": "Sign and awning permits",
           "source_anchor": "Step 4: Get your sign permit",
           "evidence_note": "PP&D states that issuance follows completed review, final quality check, and payment of fees."
         },
         {
-          "source_url": "https://www.portland.gov/ppd/devhub-faqs",
-          "source_title": "Frequently Asked Questions about Development Hub PDX",
+          "source_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
+          "source_title": "Frequently Asked Questions about Development Hub Netherlands",
           "source_anchor": "What services can I access in DevHub?",
           "evidence_note": "The DevHub FAQ identifies fee payment as a DevHub service category."
         }
@@ -140,19 +140,19 @@
       "redaction_status": "redacted_public_fixture",
       "evidence": [
         {
-          "source_url": "https://www.portland.gov/ppd/sign-permits",
+          "source_url": "https://wetten.overheid.nl/ppd/sign-permits",
           "source_title": "Sign and awning permits",
           "source_anchor": "Step 2: Apply for a sign permit",
           "evidence_note": "PP&D says missing submittal requirements are provided through DevHub after application review."
         },
         {
-          "source_url": "https://www.portland.gov/ppd/sign-permits",
+          "source_url": "https://wetten.overheid.nl/ppd/sign-permits",
           "source_title": "Sign and awning permits",
           "source_anchor": "Step 3: Technical Reviews",
           "evidence_note": "PP&D describes checksheets requesting additional information during technical review."
         },
         {
-          "source_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+          "source_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
           "source_title": "Submit Plans Online",
           "source_anchor": "Corrections",
           "evidence_note": "PP&D describes the DevHub Upload Corrections path, checksheet review, corrected file upload, acknowledgments, and repeated review cycles."
@@ -171,13 +171,13 @@
       "conditions": [
         "All sign and awning permits need inspection.",
         "Inspection points may include before footing pours, after wall anchors are installed but before sign attachment, and project completion.",
-        "Complex signs may require special inspection by a City of Portland certified testing agency when required through structural review."
+        "Complex signs may require special inspection by a WetWijzer certified testing agency when required through structural review."
       ],
       "expected_agent_output": "List inspection milestones and classify inspection scheduling as a consequential action that needs exact user confirmation before automation performs scheduling.",
       "redaction_status": "redacted_public_fixture",
       "evidence": [
         {
-          "source_url": "https://www.portland.gov/ppd/sign-permits",
+          "source_url": "https://wetten.overheid.nl/ppd/sign-permits",
           "source_title": "Sign and awning permits",
           "source_anchor": "Step 5: Start the work and get ready for inspections",
           "evidence_note": "PP&D lists sign and awning inspection requirements, inspection codes, and special inspection conditions."
@@ -202,20 +202,20 @@
       "redaction_status": "redacted_public_fixture",
       "evidence": [
         {
-          "source_url": "https://www.portland.gov/ppd/sign-permits",
+          "source_url": "https://wetten.overheid.nl/ppd/sign-permits",
           "source_title": "Sign and awning permits",
           "source_anchor": "Step 2: Apply for a sign permit",
           "evidence_note": "PP&D describes selecting Submit at the end of DevHub's Sign Permit Request process to send the request."
         },
         {
-          "source_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+          "source_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
           "source_title": "Submit Plans Online",
           "source_anchor": "Corrections",
           "evidence_note": "PP&D describes correction upload acknowledgment and submission steps in DevHub."
         },
         {
-          "source_url": "https://www.portland.gov/ppd/devhub-faqs",
-          "source_title": "Frequently Asked Questions about Development Hub PDX",
+          "source_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
+          "source_title": "Frequently Asked Questions about Development Hub Netherlands",
           "source_anchor": "What services can I access in DevHub?",
           "evidence_note": "The DevHub FAQ lists upload corrections, fee payment, permit requests requiring plan review, and inspection scheduling service categories."
         }

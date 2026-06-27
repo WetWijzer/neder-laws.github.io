@@ -43,8 +43,8 @@ def test_allowed_public_html_and_pdf_rows_are_processor_ready_without_raw_body_p
 
     for row in allowed_rows:
         assert row["source_evidence_ids"]
-        assert row["requested_url"].startswith("https://www.portland.gov/ppd/")
-        assert row["canonical_url"].startswith("https://www.portland.gov/ppd/")
+        assert row["requested_url"].startswith("https://wetten.overheid.nl/ppd/")
+        assert row["canonical_url"].startswith("https://wetten.overheid.nl/ppd/")
         assert row["processor_name"].startswith("ipfs-datasets-")
         assert row["processor_version"] == "placeholder-version"
         assert row["archive_artifact_ref"] is None

@@ -563,7 +563,7 @@ def _source_evidence_problems(record: Mapping[str, Any], path: str, *, citation_
         if not _non_empty_text(record.get(key)):
             problems.append(f"{path}.{key} is required for cited guardrail output")
     canonical_url = str(record.get("canonical_url") or "")
-    if canonical_url and not canonical_url.startswith("https://www.portland.gov/ppd/"):
+    if canonical_url and not canonical_url.startswith("https://wetten.overheid.nl/ppd/"):
         problems.append(f"{path}.canonical_url must be an official PP&D URL")
     last_verified_at = str(record.get("last_verified_at") or "")
     if last_verified_at and not last_verified_at.endswith("Z"):

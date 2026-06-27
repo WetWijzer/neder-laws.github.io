@@ -120,7 +120,7 @@ _PRIVATE_CLASSIFICATIONS = {
     "user_private",
 }
 _PRIVATE_PATH_RE = re.compile(r"(file://|/home/|/users/|/var/folders/|/tmp/|\\users\\|[a-z]:\\)", re.IGNORECASE)
-_AUTHENTICATED_URL_RE = re.compile(r"\b(devhub\.portlandoregon\.gov/.+/(account|dashboard|my|secure|session|signin|login)|auth|token|session)\b", re.IGNORECASE)
+_AUTHENTICATED_URL_RE = re.compile(r"\b(devhub\.wetwijzernetherlands\.gov/.+/(account|dashboard|my|secure|session|signin|login)|auth|token|session)\b", re.IGNORECASE)
 _PRIVATE_FACT_RE = re.compile(r"\b(private|authenticated|account-scoped|credential|cookie|session|payment detail|card number|applicant email|phone number)\b", re.IGNORECASE)
 _GUARANTEE_RE = re.compile(
     r"\b(guarantee[sd]?\s+(approval|issuance|permit|legal|compliance|outcome)|"
@@ -254,7 +254,7 @@ def validate_guardrail_to_agent_explanation_packet(packet: Mapping[str, Any]) ->
             if not evidence_id:
                 errors.append(f"citation_index[{index}].evidence_id is required")
             citation_ids.add(evidence_id)
-            if not _text(citation.get("canonical_url")).startswith("https://www.portland.gov/ppd/"):
+            if not _text(citation.get("canonical_url")).startswith("https://wetten.overheid.nl/ppd/"):
                 errors.append(f"citation_index[{index}].canonical_url must be an official PP&D URL")
             if _text(citation.get("freshness_status")) != "current":
                 errors.append(f"citation_index[{index}].freshness_status must be current")
@@ -430,7 +430,7 @@ def _input_problems(bundle: Mapping[str, Any], gap: Mapping[str, Any], blocked_a
         problems.append("source_evidence is missing cited ids: " + ", ".join(missing_sources))
     for evidence_id in source_ids.intersection(evidence):
         citation = _citation(evidence[evidence_id])
-        if not citation["canonical_url"].startswith("https://www.portland.gov/ppd/"):
+        if not citation["canonical_url"].startswith("https://wetten.overheid.nl/ppd/"):
             problems.append(f"source_evidence[{evidence_id}] must use an official PP&D URL")
         if citation["freshness_status"] != "current":
             problems.append(f"source_evidence[{evidence_id}] must be current")

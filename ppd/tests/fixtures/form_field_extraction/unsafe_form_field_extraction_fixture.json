@@ -3,14 +3,14 @@
   "fixtureId": "unsafe-form-field-extraction-fixture",
   "sourceDocument": {
     "documentId": "unsafe-synthetic-document",
-    "sourceUrl": "https://www.portland.gov/ppd/permits/synthetic-public-fixture",
+    "sourceUrl": "https://wetten.overheid.nl/ppd/permits/synthetic-public-fixture",
     "documentRole": "public_form_metadata",
     "contentStorage": "unsafe_payload_for_validator_test"
   },
   "sourceEvidence": [
     {
       "id": "evidence-known-required-field",
-      "url": "https://www.portland.gov/ppd/permits/synthetic-public-fixture",
+      "url": "https://wetten.overheid.nl/ppd/permits/synthetic-public-fixture",
       "quote": "Known required field has source evidence.",
       "capturedAt": "2026-05-01T00:00:00Z"
     }

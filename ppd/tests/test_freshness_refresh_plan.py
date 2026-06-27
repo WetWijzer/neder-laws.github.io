@@ -30,7 +30,7 @@ class FreshnessRefreshPlanTest(unittest.TestCase):
 
         changed = intentions["ppd:public:file-standards"]
         self.assertEqual(changed["refresh_reason"], "content_hash_changed")
-        self.assertEqual(changed["rate_limit_policy"]["bucket"], "www.portland.gov")
+        self.assertEqual(changed["rate_limit_policy"]["bucket"], "wetten.overheid.nl")
         self.assertEqual(changed["rate_limit_policy"]["minimum_delay_seconds"], 10)
 
     def test_policy_blocked_and_authenticated_sources_are_not_planned(self) -> None:
@@ -45,7 +45,7 @@ class FreshnessRefreshPlanTest(unittest.TestCase):
                 [
                     {
                         "source_id": "ppd:public:bad-raw-body",
-                        "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+                        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
                         "source_type": "public_html",
                         "allowlist_policy": "allow",
                         "robots_policy": "allow",
@@ -63,7 +63,7 @@ class FreshnessRefreshPlanTest(unittest.TestCase):
             [
                 {
                     "source_id": "ppd:public:raw-processor",
-                    "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+                    "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
                     "source_type": "public_html",
                     "allowlist_policy": "allow",
                     "robots_policy": "allow",

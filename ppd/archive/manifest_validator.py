@@ -212,7 +212,7 @@ def _check_skipped_capture_hash_policy(
 def _is_private_devhub_url(value: str) -> bool:
     parsed = urlparse(value)
     host = parsed.hostname or ""
-    if host.lower() != "devhub.portlandoregon.gov":
+    if host.lower() != "wetten.overheid.nl":
         return False
 
     if parsed.username or parsed.password:

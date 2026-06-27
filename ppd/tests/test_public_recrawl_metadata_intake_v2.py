@@ -61,10 +61,10 @@ def test_rejects_captured_url_hash_without_sha256_prefix() -> None:
 @pytest.mark.parametrize(
     "url",
     [
-        "http://www.portland.gov/ppd/devhub-faqs",
+        "http://wetten.overheid.nl/ppd/devhub-faqs",
         "https://example.com/ppd/devhub-faqs",
-        "https://devhub.portlandoregon.gov/account/permits",
-        "https://www.portland.gov/ppd/devhub-faqs?token=secret",
+        "https://wetten.overheid.nl/account/permits",
+        "https://wetten.overheid.nl/ppd/devhub-faqs?token=secret",
     ],
 )
 def test_rejects_non_allowlisted_or_authenticated_urls(url: str) -> None:

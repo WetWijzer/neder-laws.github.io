@@ -14,7 +14,7 @@
   "sourceEvidence": [
     {
       "sourceEvidenceId": "src-public-form-a",
-      "sourceUrl": "https://www.portland.gov/ppd/apply-permit",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/apply-permit",
       "citation": {
         "locator": "fixture-public-form-a",
         "paraphrase": "Public guidance says a project description is needed before application review."
@@ -22,7 +22,7 @@
     },
     {
       "sourceEvidenceId": "src-public-form-b",
-      "sourceUrl": "https://www.portland.gov/ppd/devhub/how-apply-permit-devhub",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/how-apply-permit-devhub",
       "citation": {
         "locator": "fixture-public-form-b",
         "paraphrase": "Public DevHub guidance describes draft preparation separately from official submission."
@@ -30,7 +30,7 @@
     },
     {
       "sourceEvidenceId": "src-public-fee-notice",
-      "sourceUrl": "https://www.portland.gov/ppd/fees",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/fees",
       "citation": {
         "locator": "fixture-public-fee-notice",
         "paraphrase": "Public fee guidance can be displayed as notice-only information."

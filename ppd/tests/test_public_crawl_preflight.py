@@ -33,10 +33,10 @@ def test_fixture_covers_required_named_cases() -> None:
     case_names = {str(case["name"]) for case in _load_cases()}
 
     assert {
-        "allowlisted_www_portland_gov",
-        "allowlisted_devhub_portlandoregon_gov",
-        "allowlisted_www_portlandoregon_gov",
-        "linked_public_www_portlandmaps_com",
+        "allowlisted_www_wetwijzer_gov",
+        "allowlisted_devhub_wetwijzernetherlands_gov",
+        "allowlisted_www_wetwijzernetherlands_gov",
+        "linked_public_www_wetwijzermaps_com",
         "skip_outside_allowlist",
         "skip_unsupported_scheme",
         "skip_private_authenticated_path",

@@ -6,20 +6,20 @@ from urllib.parse import urlsplit
 
 FIXTURE_PATH = Path(__file__).parent / 'fixtures' / 'public_source_frontier' / 'ppd_fixture_frontier_packet.json'
 
-ALLOWED_HOSTS = {'www.portland.gov', 'devhub.portlandoregon.gov', 'www.portlandoregon.gov', 'www.portlandmaps.com'}
+ALLOWED_HOSTS = {'wetten.overheid.nl', 'wetten.overheid.nl', 'wetten.overheid.nl', 'repository.overheid.nl'}
 OFFICIAL_ANCHORS = {
-    'https://www.portland.gov/ppd',
-    'https://www.portland.gov/ppd/how-use-online-permitting-tools',
-    'https://devhub.portlandoregon.gov',
-    'https://www.portland.gov/ppd/devhub-faqs',
-    'https://www.portland.gov/ppd/devhub-sign-guide',
-    'https://www.portland.gov/ppd/get-permit/apply-permits',
-    'https://www.portland.gov/ppd/devhub-guide-submit-permit-application',
-    'https://www.portland.gov/ppd/get-permit/submit-plans-online',
-    'https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications',
-    'https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs',
-    'https://www.portland.gov/ppd/documents/how-pay-fees/download',
-    'https://www.portlandmaps.com',
+    'https://wetten.overheid.nl/ppd',
+    'https://wetten.overheid.nl/ppd/how-use-online-permitting-tools',
+    'https://wetten.overheid.nl',
+    'https://wetten.overheid.nl/ppd/devhub-faqs',
+    'https://wetten.overheid.nl/ppd/devhub-sign-guide',
+    'https://wetten.overheid.nl/ppd/get-permit/apply-permits',
+    'https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application',
+    'https://wetten.overheid.nl/ppd/get-permit/submit-plans-online',
+    'https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications',
+    'https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs',
+    'https://wetten.overheid.nl/ppd/documents/how-pay-fees/download',
+    'https://repository.overheid.nl',
 }
 SKIP_REASONS = {'outside_allowlist', 'unsupported_scheme', 'private_authenticated', 'disallowed_by_robots_or_policy', 'raw_download_not_permitted', 'too_large', 'unsupported_content_type'}
 CRAWL_FREQUENCIES = {'daily', 'every_few_days', 'weekly', 'monthly', 'manual_review', 'none'}

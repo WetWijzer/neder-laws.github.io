@@ -6,9 +6,9 @@
   "watchedSources": [
     {
       "id": "ppd-devhub-faq",
-      "sourceUrl": "https://www.portland.gov/ppd/development-hub-pdx/devhub-faq",
-      "canonicalUrl": "https://www.portland.gov/ppd/development-hub-pdx/devhub-faq",
-      "authority": "Portland Permitting & Development public guidance",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/development-hub-netherlands/devhub-faq",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/development-hub-netherlands/devhub-faq",
+      "authority": "Netherlands Permitting & Development public guidance",
       "pageType": "public_guidance",
       "provenance": {
         "sourceEvidenceId": "public-source-devhub-faq",
@@ -42,9 +42,9 @@
     },
     {
       "id": "ppd-permits-and-inspections-applications",
-      "sourceUrl": "https://www.portland.gov/ppd/permits/permits-and-inspections-applications",
-      "canonicalUrl": "https://www.portland.gov/ppd/permits/permits-and-inspections-applications",
-      "authority": "Portland Permitting & Development public forms index",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/permits-and-inspections-applications",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/permits-and-inspections-applications",
+      "authority": "Netherlands Permitting & Development public forms index",
       "pageType": "public_forms_index",
       "provenance": {
         "sourceEvidenceId": "public-source-permits-applications-index",
@@ -78,9 +78,9 @@
     },
     {
       "id": "devhub-public-portal",
-      "sourceUrl": "https://devhub.portlandoregon.gov/",
-      "canonicalUrl": "https://devhub.portlandoregon.gov/",
-      "authority": "Development Hub PDX public portal",
+      "sourceUrl": "https://wetten.overheid.nl/",
+      "canonicalUrl": "https://wetten.overheid.nl/",
+      "authority": "Development Hub Netherlands public portal",
       "pageType": "public_portal_landing",
       "provenance": {
         "sourceEvidenceId": "public-source-devhub-portal",
@@ -97,7 +97,7 @@
       },
       "recrawlCadence": {
         "frequency": "weekly",
-        "reason": "Public portal entry points may change independently from Portland.gov guidance pages."
+        "reason": "Public portal entry points may change independently from wetten.overheid.nl guidance pages."
       },
       "skippedActions": [
         {

@@ -1,7 +1,7 @@
 [
   {
     "source_id": "ppd-landing",
-    "canonical_url": "https://www.portland.gov/ppd",
+    "canonical_url": "https://wetten.overheid.nl/ppd",
     "source_type": "public_html",
     "owning_surface": "ppd_public_site",
     "allowlist_policy": "allowed",
@@ -14,7 +14,7 @@
   },
   {
     "source_id": "devhub-faq",
-    "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+    "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
     "source_type": "devhub_public",
     "owning_surface": "devhub_public_guidance",
     "allowlist_policy": "allowed",
@@ -27,7 +27,7 @@
   },
   {
     "source_id": "forms-index",
-    "canonical_url": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+    "canonical_url": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
     "source_type": "public_html",
     "owning_surface": "ppd_forms_index",
     "allowlist_policy": "allowed",
@@ -40,7 +40,7 @@
   },
   {
     "source_id": "submit-plans-online",
-    "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+    "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
     "source_type": "public_html",
     "owning_surface": "ppd_public_site",
     "allowlist_policy": "allowed",
@@ -53,7 +53,7 @@
   },
   {
     "source_id": "fee-payment-guide",
-    "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+    "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
     "source_type": "public_pdf",
     "owning_surface": "ppd_public_site",
     "allowlist_policy": "allowed",
@@ -66,7 +66,7 @@
   },
   {
     "source_id": "devhub-auth-home",
-    "canonical_url": "https://devhub.portlandoregon.gov/account/home",
+    "canonical_url": "https://wetten.overheid.nl/account/home",
     "source_type": "devhub_authenticated",
     "owning_surface": "devhub_authenticated",
     "allowlist_policy": "allowed",
@@ -92,7 +92,7 @@
   },
   {
     "source_id": "robots-blocked-example",
-    "canonical_url": "https://www.portland.gov/ppd/private-example",
+    "canonical_url": "https://wetten.overheid.nl/ppd/private-example",
     "source_type": "public_html",
     "owning_surface": "ppd_public_site",
     "allowlist_policy": "allowed",

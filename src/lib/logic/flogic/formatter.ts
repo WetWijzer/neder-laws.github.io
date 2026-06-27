@@ -1,4 +1,4 @@
-import { objectIdToPortlandIdentifier } from '../normalization';
+import { objectIdToWetWijzerIdentifier } from '../normalization';
 import type { FLogicClass, FLogicDisplayRow, FLogicFrame, FLogicOntology } from './types';
 
 export function formatFLogicFrame(frame: FLogicFrame): string {
@@ -26,7 +26,7 @@ export function formatFLogicOntology(ontology: FLogicOntology): string {
 }
 
 export function frameToDisplayRow(frame: FLogicFrame): FLogicDisplayRow {
-  const citation = objectIdToPortlandIdentifier(frame.objectId);
+  const citation = objectIdToWetWijzerIdentifier(frame.objectId);
   return {
     objectId: frame.objectId,
     label: frame.scalarMethods.identifier || citation || frame.objectId,

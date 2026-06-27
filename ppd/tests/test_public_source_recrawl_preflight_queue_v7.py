@@ -79,8 +79,8 @@ def test_public_source_recrawl_preflight_queue_v7_rate_limits_and_processor_hand
 
     assert packet["rate_limit_reminders"] == [
         {
-            "rate_limit_reminder_id": "rate-limit::www.portland.gov",
-            "host": "www.portland.gov",
+            "rate_limit_reminder_id": "rate-limit::wetten.overheid.nl",
+            "host": "wetten.overheid.nl",
             "crawl_delay_seconds": 2,
             "reminder": "Honor committed robots-policy crawl delay and operator-approved rate limits before any future live public recrawl.",
             "live_crawl_authorized": False,

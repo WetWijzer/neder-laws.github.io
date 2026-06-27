@@ -98,7 +98,7 @@ def test_rejects_private_authenticated_download_raw_archive_live_execution_and_m
     source = runbook["candidate_sources"][0]
     source.update(
         {
-            "canonical_url": "https://devhub.portlandoregon.gov/account/download",
+            "canonical_url": "https://wetten.overheid.nl/account/download",
             "source_type": "devhub_authenticated",
             "privacy_classification": "account_scoped",
             "raw_body_ref": "raw-body:not-allowed",

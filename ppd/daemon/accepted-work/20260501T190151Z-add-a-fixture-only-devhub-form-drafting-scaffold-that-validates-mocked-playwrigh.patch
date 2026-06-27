@@ -315,7 +315,7 @@
 +  "fixtureSource": "mocked_devhub_fixture",
 +  "environment": "mocked",
 +  "workflowStateId": "trade-permit-plan-review-draft",
-+  "urlState": "https://devhub.portlandoregon.gov/mock/permits/trade-plan-review/draft",
++  "urlState": "https://wetten.overheid.nl/mock/permits/trade-plan-review/draft",
 +  "fields": [
 +    {
 +      "fieldId": "project_description",
@@ -329,7 +329,7 @@
 +        "labelText": "Project description",
 +        "role": "textbox",
 +        "nearbyHeading": "Project information",
-+        "urlState": "https://devhub.portlandoregon.gov/mock/permits/trade-plan-review/draft"
++        "urlState": "https://wetten.overheid.nl/mock/permits/trade-plan-review/draft"
 +      }
 +    },
 +    {
@@ -345,7 +345,7 @@
 +        "labelText": "Work category",
 +        "role": "combobox",
 +        "nearbyHeading": "Permit type",
-+        "urlState": "https://devhub.portlandoregon.gov/mock/permits/trade-plan-review/draft"
++        "urlState": "https://wetten.overheid.nl/mock/permits/trade-plan-review/draft"
 +      }
 +    },
 +    {
@@ -360,7 +360,7 @@
 +        "labelText": "I understand this is a draft only",
 +        "role": "checkbox",
 +        "nearbyHeading": "Draft review",
-+        "urlState": "https://devhub.portlandoregon.gov/mock/permits/trade-plan-review/draft"
++        "urlState": "https://wetten.overheid.nl/mock/permits/trade-plan-review/draft"
 +      }
 +    },
 +    {
@@ -375,7 +375,7 @@
 +        "labelText": "Upload plan set",
 +        "role": "button",
 +        "nearbyHeading": "Documents",
-+        "urlState": "https://devhub.portlandoregon.gov/mock/permits/trade-plan-review/draft"
++        "urlState": "https://wetten.overheid.nl/mock/permits/trade-plan-review/draft"
 +      }
 +    }
 +  ]

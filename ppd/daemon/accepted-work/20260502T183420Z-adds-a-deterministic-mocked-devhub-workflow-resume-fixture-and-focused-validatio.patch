@@ -21,18 +21,18 @@
 +    "captureMethod": "synthetic_fixture",
 +    "accountRef": "[REDACTED_ACCOUNT]",
 +    "projectRef": "[REDACTED_PROJECT]",
-+    "portal": "Development Hub PDX",
++    "portal": "Development Hub Netherlands",
 +    "sourceEvidence": [
 +      {
 +        "id": "public-devhub-guidance-001",
 +        "sourceType": "public_guidance",
-+        "url": "https://www.portland.gov/ppd/devhub",
-+        "description": "Public DevHub guidance identifies Development Hub PDX as Portland's online permitting system."
++        "url": "https://wetten.overheid.nl/ppd/devhub",
++        "description": "Public DevHub guidance identifies Development Hub Netherlands as Netherlands's online permitting system."
 +      },
 +      {
 +        "id": "public-devhub-guidance-002",
 +        "sourceType": "public_guidance",
-+        "url": "https://www.portland.gov/ppd/devhub-help",
++        "url": "https://wetten.overheid.nl/ppd/devhub-help",
 +        "description": "Public DevHub help describes saved permitting workflows and user-visible draft status concepts."
 +      }
 +    ]

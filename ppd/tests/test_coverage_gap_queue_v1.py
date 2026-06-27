@@ -44,7 +44,7 @@ def test_fixture_first_queue_covers_required_gap_types() -> None:
         assert item["affected_source_ids"]
         assert item["affected_requirement_ids"]
         assert item["citation"]["source_id"] in item["affected_source_ids"]
-        assert item["citation"]["url"].startswith("https://www.portland.gov/ppd/")
+        assert item["citation"]["url"].startswith("https://wetten.overheid.nl/ppd/")
         assert item["citation"]["anchor"]
         assert item["human_review_status"] == "needs_review"
         assert item["reviewer_owner"] == "ppd-fixture-reviewer"

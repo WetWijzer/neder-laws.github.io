@@ -15,8 +15,8 @@ import {
   validateCecExpression,
 } from './parser';
 
-const portlandDcec =
-  '(forall agent (implies (subject_to agent portland_city_code_1_01_010) (P (always (comply_with agent portland_city_code_1_01_010)))))';
+const netherlandsDcec =
+  '(forall agent (implies (subject_to agent netherlands_law_article_1_01_010) (P (always (comply_with agent netherlands_law_article_1_01_010)))))';
 
 interface GeneratedLogicProofSummary {
   identifier: string;
@@ -25,7 +25,7 @@ interface GeneratedLogicProofSummary {
 
 const fixturePath = resolve(
   process.cwd(),
-  'public/corpus/portland-or/current/generated/logic-proof-summaries.json',
+  'public/corpus/netherlands/current/generated/logic-proof-summaries.json',
 );
 
 function loadGeneratedSummaries(): GeneratedLogicProofSummary[] {
@@ -33,8 +33,8 @@ function loadGeneratedSummaries(): GeneratedLogicProofSummary[] {
 }
 
 describe('CEC/DCEC parser', () => {
-  it('parses generated Portland DCEC quantified expressions', () => {
-    const expression = parseCecExpression(portlandDcec);
+  it('parses generated WetWijzer DCEC quantified expressions', () => {
+    const expression = parseCecExpression(netherlandsDcec);
 
     expect(expression.kind).toBe('quantified');
     if (expression.kind !== 'quantified') {
@@ -62,25 +62,25 @@ describe('CEC/DCEC parser', () => {
 
   it('normalizes valid DCEC expressions back to s-expression syntax', () => {
     const formatted = formatCecExpression(
-      parseCecExpression(`  ${portlandDcec.replaceAll(' ', '\n  ')}  `),
+      parseCecExpression(`  ${netherlandsDcec.replaceAll(' ', '\n  ')}  `),
     );
 
-    expect(formatted).toBe(portlandDcec);
+    expect(formatted).toBe(netherlandsDcec);
   });
 
   it('collects atoms from application arguments', () => {
-    const atoms = collectCecAtoms(parseCecExpression(portlandDcec));
+    const atoms = collectCecAtoms(parseCecExpression(netherlandsDcec));
 
-    expect([...atoms].sort()).toEqual(['agent', 'portland_city_code_1_01_010']);
+    expect([...atoms].sort()).toEqual(['agent', 'netherlands_law_article_1_01_010']);
   });
 
-  it('analyzes generated Portland DCEC metadata', () => {
-    const analysis = analyzeCecExpression(parseCecExpression(portlandDcec));
+  it('analyzes generated WetWijzer DCEC metadata', () => {
+    const analysis = analyzeCecExpression(parseCecExpression(netherlandsDcec));
 
     expect(analysis).toMatchObject({
       predicates: ['comply_with', 'subject_to'],
-      atoms: ['agent', 'portland_city_code_1_01_010'],
-      sectionRefs: ['portland_city_code_1_01_010'],
+      atoms: ['agent', 'netherlands_law_article_1_01_010'],
+      sectionRefs: ['netherlands_law_article_1_01_010'],
       quantifiers: ['forall'],
       deonticOperators: ['P'],
       temporalOperators: ['always'],
@@ -91,14 +91,14 @@ describe('CEC/DCEC parser', () => {
 
   it('ports external_provers/formula_analyzer.py formula classification without runtime bridges', () => {
     const analysis = analyzeExternalProverFormula(
-      '(forall tenant (implies (licensed tenant) (O (operate tenant portland_city_code_1_01_010))))',
+      '(forall tenant (implies (licensed tenant) (O (operate tenant netherlands_law_article_1_01_010))))',
     );
 
     expect(analysis.ok).toBe(true);
     expect(analysis.formulaClass).toBe('modal-deontic');
     expect(analysis.decidableFragment).toBe('modal-temporal');
     expect(analysis.predicates).toEqual(['licensed', 'operate']);
-    expect(analysis.constants).toEqual(['portland_city_code_1_01_010']);
+    expect(analysis.constants).toEqual(['netherlands_law_article_1_01_010']);
     expect(analysis.variables).toEqual(['tenant']);
     expect(analysis.quantifiers).toEqual(['forall']);
     expect(analysis.unaryOperators).toEqual(['O']);
@@ -132,7 +132,7 @@ describe('CEC/DCEC parser', () => {
       error: expect.stringContaining('requires two operands'),
     });
 
-    expect(validateCecExpression('(subject_to agent portland_city_code_1_01_010')).toMatchObject({
+    expect(validateCecExpression('(subject_to agent netherlands_law_article_1_01_010')).toMatchObject({
       ok: false,
       error: expect.stringContaining('Unclosed application subject_to'),
     });
@@ -270,7 +270,7 @@ describe('CEC/DCEC parser', () => {
     });
   });
 
-  it('parses all generated Portland DCEC snippets', () => {
+  it('parses all generated WetWijzer DCEC snippets', () => {
     const summaries = loadGeneratedSummaries();
     const failures: Array<{ identifier: string; error: string }> = [];
 

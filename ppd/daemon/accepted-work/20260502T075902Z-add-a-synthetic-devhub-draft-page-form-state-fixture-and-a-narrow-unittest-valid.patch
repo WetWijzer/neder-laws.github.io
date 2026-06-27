@@ -14,7 +14,7 @@
 +  },
 +  "pageState": {
 +    "stateId": "draft-building-permit-request",
-+    "urlPattern": "https://devhub.portlandoregon.gov/**/draft/**",
++    "urlPattern": "https://wetten.overheid.nl/**/draft/**",
 +    "title": "Permit request draft",
 +    "heading": "Building permit request",
 +    "workflowStatus": "draft"

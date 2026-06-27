@@ -133,8 +133,8 @@ def validate_exact_confirmation_checkpoint_contract(data: Mapping[str, Any]) -> 
             if not isinstance(item, Mapping):
                 findings.append(ExactConfirmationFinding(f"sourceEvidence[{index}]", "source evidence must be an object"))
                 continue
-            if not str(item.get("url", "")).startswith("https://www.portland.gov/"):
-                findings.append(ExactConfirmationFinding(f"sourceEvidence[{index}].url", "source evidence must use a public Portland.gov URL"))
+            if not str(item.get("url", "")).startswith("https://wetten.overheid.nl/"):
+                findings.append(ExactConfirmationFinding(f"sourceEvidence[{index}].url", "source evidence must use a public wetten.overheid.nl URL"))
             if not str(item.get("retrievedAt", "")).endswith("Z"):
                 findings.append(ExactConfirmationFinding(f"sourceEvidence[{index}].retrievedAt", "retrievedAt must be an ISO UTC timestamp ending in Z"))
         for index, checkpoint in enumerate(checkpoints):

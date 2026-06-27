@@ -4,32 +4,32 @@
   "citations": [
     {
       "citation_id": "plan.boundaries.no-consequential-actions",
-      "source_url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md#non-negotiable-boundaries",
+      "source_url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md#non-negotiable-boundaries",
       "supports": "Agents must not upload, submit, certify, cancel, schedule, or pay without user attendance and exact confirmation."
     },
     {
       "citation_id": "plan.devhub.safe-read-only",
-      "source_url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md#devhub-surface-categories",
+      "source_url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md#devhub-surface-categories",
       "supports": "Read-only status, fee notice, correction request, attachment list, and inspection result review are safe categories."
     },
     {
       "citation_id": "plan.devhub.reversible-draft",
-      "source_url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md#devhub-surface-categories",
+      "source_url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md#devhub-surface-categories",
       "supports": "Address search, permit type selection before submission, form field fill before submission, save draft, local preview, and upload staging are reversible draft categories."
     },
     {
       "citation_id": "plan.devhub.consequential-official",
-      "source_url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md#devhub-surface-categories",
+      "source_url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md#devhub-surface-categories",
       "supports": "Submission, certification, official correction upload, permit purchase, inspection scheduling, cancellation, and extension or reactivation are consequential."
     },
     {
       "citation_id": "plan.devhub.unsupported-manual",
-      "source_url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md#devhub-surface-categories",
+      "source_url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md#devhub-surface-categories",
       "supports": "MFA, CAPTCHA, account creation, password recovery, final payment execution, and unclear workflows require refusal or manual handoff."
     },
     {
       "citation_id": "plan.readiness.fixture-first",
-      "source_url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md#purpose",
+      "source_url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md#purpose",
       "supports": "The agent must load cited process models and ask only for missing, stale, ambiguous, or conflicting facts before reversible drafting."
     }
   ],

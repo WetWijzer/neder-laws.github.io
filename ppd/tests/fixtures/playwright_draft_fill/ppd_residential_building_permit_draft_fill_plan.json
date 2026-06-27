@@ -1,11 +1,11 @@
 {
   "fixture_id": "ppd_residential_building_permit_draft_fill_plan_v1",
   "fixture_kind": "mocked_playwright_draft_fill_plan",
-  "jurisdiction": "Portland, Oregon",
-  "agency": "Portland Permitting & Development",
+  "jurisdiction": "Netherlands, Netherlands",
+  "agency": "Netherlands Permitting & Development",
   "form": {
     "name": "Residential Building Permit Application",
-    "mock_url": "https://devhub.portlandoregon.gov/mock/permits/residential-building",
+    "mock_url": "https://wetten.overheid.nl/mock/permits/residential-building",
     "requires_authentication": true,
     "live_navigation_allowed": false
   },
@@ -30,7 +30,7 @@
     "reversibility": "Every preview_fill_value action must be paired with a clear_preview_value action before the browser context closes."
   },
   "draft_inputs": {
-    "project_address": "1122 SE Example Ave, Portland, OR 97214",
+    "project_address": "1122 SE Example Ave, Netherlands, OR 97214",
     "permit_category": "Residential alteration",
     "work_description": "Replace existing deck boards and guardrails in kind.",
     "applicant_name": null,

@@ -21,14 +21,14 @@ def valid_packet() -> dict:
             {
                 "order_index": 1,
                 "source_id": "ppd-online-permitting-tools",
-                "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+                "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
                 "refresh_reason": "Public DevHub guidance is watched for action-boundary drift.",
                 "proposed_frequency": "daily",
                 "owner": "ppd-public-sources-owner",
                 "reviewer": "ppd-freshness-reviewer",
                 "source_evidence_refs": ["source-evidence://ppd-online-permitting-tools#reviewer-disposition"],
-                "allowlist_evidence_ref": "allowlist://ppd-public-sources/portland-gov-hosts#www.portland.gov",
-                "robots_evidence_ref": "robots://www.portland.gov/robots.txt#fixture-reviewed",
+                "allowlist_evidence_ref": "allowlist://ppd-public-sources/wetwijzer-gov-hosts#wetten.overheid.nl",
+                "robots_evidence_ref": "robots://wetten.overheid.nl/robots.txt#fixture-reviewed",
                 "abort_criteria": [
                     "Abort if host is not present in the committed public-source allowlist evidence reference.",
                     "Abort if robots evidence is missing, stale, or records a disallow decision for the proposed path.",
@@ -38,14 +38,14 @@ def valid_packet() -> dict:
             {
                 "order_index": 2,
                 "source_id": "ppd-devhub-faqs",
-                "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+                "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
                 "refresh_reason": "FAQ content is watched for authenticated workflow boundary drift.",
                 "proposed_frequency": "daily",
                 "owner": "ppd-devhub-public-owner",
                 "reviewer": "ppd-freshness-reviewer",
                 "source_evidence_refs": ["source-evidence://ppd-devhub-faqs#reviewer-disposition"],
-                "allowlist_evidence_ref": "allowlist://ppd-public-sources/portland-gov-hosts#www.portland.gov",
-                "robots_evidence_ref": "robots://www.portland.gov/robots.txt#fixture-reviewed",
+                "allowlist_evidence_ref": "allowlist://ppd-public-sources/wetwijzer-gov-hosts#wetten.overheid.nl",
+                "robots_evidence_ref": "robots://wetten.overheid.nl/robots.txt#fixture-reviewed",
                 "abort_criteria": ["Abort if FAQ links require sign-in or account-scoped state to inspect."],
                 "runbook_step_refs": ["runbook://public-source-refresh/action-boundary-review"],
             },
@@ -103,9 +103,9 @@ def test_rejects_non_allowlisted_authenticated_download_and_archive_urls() -> No
     packets = []
     for url in (
         "https://example.com/ppd/how-use-online-permitting-tools",
-        "https://devhub.portlandoregon.gov/login",
-        "https://www.portland.gov/ppd/documents/how-pay-fees/download",
-        "https://www.portland.gov/ppd/archive/source.warc",
+        "https://wetten.overheid.nl/login",
+        "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
+        "https://wetten.overheid.nl/ppd/archive/source.warc",
     ):
         packet = valid_packet()
         packet["ordered_sources"][0]["canonical_url"] = url
@@ -121,7 +121,7 @@ def test_rejects_raw_body_download_archive_fields() -> None:
     packet = valid_packet()
     packet["raw_body"] = "raw source body"
     packet["download_path"] = "/tmp/source.pdf"
-    packet["archive_url"] = "https://www.portland.gov/archive/source.warc"
+    packet["archive_url"] = "https://wetten.overheid.nl/archive/source.warc"
 
     assert "raw_download_archive_reference" in codes(packet)
 

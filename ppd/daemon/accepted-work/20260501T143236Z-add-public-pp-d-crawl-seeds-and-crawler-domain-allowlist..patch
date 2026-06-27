@@ -3,7 +3,7 @@
 @@ -0,0 +1,92 @@
 +{
 +  "manifest_id": "ppd-public-seed-manifest-v1",
-+  "created_for_task": "Task checkbox-3: Add public PP&D seed manifest and crawler allowlist for Portland.gov, DevHub, PortlandOregon.gov, and Portland Maps references.",
++  "created_for_task": "Task checkbox-3: Add public PP&D seed manifest and crawler allowlist for wetten.overheid.nl, DevHub, wetten.overheid.nl, and BWB metadata references.",
 +  "verified_context_date": "2026-05-01",
 +  "crawl_mode": "public_discovery_seed_only",
 +  "notes": [
@@ -13,73 +13,73 @@
 +  ],
 +  "seeds": [
 +    {
-+      "id": "portland-gov-ppd-home",
-+      "url": "https://www.portland.gov/ppd",
-+      "source_family": "portland_gov_ppd",
++      "id": "wetwijzer-gov-ppd-home",
++      "url": "https://wetten.overheid.nl/ppd",
++      "source_family": "wetwijzer_gov_ppd",
 +      "authority_role": "primary_public_guidance",
 +      "expected_content_types": ["html"],
 +      "purpose": "PP&D landing page and public guidance discovery."
 +    },
 +    {
-+      "id": "portland-gov-ppd-permits",
-+      "url": "https://www.portland.gov/ppd/permits",
-+      "source_family": "portland_gov_ppd",
++      "id": "wetwijzer-gov-ppd-permits",
++      "url": "https://wetten.overheid.nl/ppd/permits",
++      "source_family": "wetwijzer_gov_ppd",
 +      "authority_role": "primary_public_guidance",
 +      "expected_content_types": ["html", "pdf"],
 +      "purpose": "Permit process, application, checklist, handout, and form discovery."
 +    },
 +    {
-+      "id": "portland-gov-ppd-residential-permits",
-+      "url": "https://www.portland.gov/ppd/residential-permits",
-+      "source_family": "portland_gov_ppd",
++      "id": "wetwijzer-gov-ppd-residential-permits",
++      "url": "https://wetten.overheid.nl/ppd/residential-permits",
++      "source_family": "wetwijzer_gov_ppd",
 +      "authority_role": "primary_public_guidance",
 +      "expected_content_types": ["html", "pdf"],
 +      "purpose": "Residential permitting process discovery."
 +    },
 +    {
-+      "id": "portland-gov-ppd-commercial-permits",
-+      "url": "https://www.portland.gov/ppd/commercial-permits",
-+      "source_family": "portland_gov_ppd",
++      "id": "wetwijzer-gov-ppd-commercial-permits",
++      "url": "https://wetten.overheid.nl/ppd/commercial-permits",
++      "source_family": "wetwijzer_gov_ppd",
 +      "authority_role": "primary_public_guidance",
 +      "expected_content_types": ["html", "pdf"],
 +      "purpose": "Commercial permitting process discovery."
 +    },
 +    {
-+      "id": "portland-gov-ppd-applications-forms",
-+      "url": "https://www.portland.gov/ppd/applications-forms",
-+      "source_family": "portland_gov_ppd",
++      "id": "wetwijzer-gov-ppd-applications-forms",
++      "url": "https://wetten.overheid.nl/ppd/applications-forms",
++      "source_family": "wetwijzer_gov_ppd",
 +      "authority_role": "primary_public_guidance",
 +      "expected_content_types": ["html", "pdf"],
 +      "purpose": "Applications, forms, handouts, and checklist discovery."
 +    },
 +    {
-+      "id": "portland-gov-devhub-guidance-search",
-+      "url": "https://www.portland.gov/search?search=DevHub",
-+      "source_family": "portland_gov_devhub_guidance",
++      "id": "wetwijzer-gov-devhub-guidance-search",
++      "url": "https://wetten.overheid.nl/search?search=DevHub",
++      "source_family": "wetwijzer_gov_devhub_guidance",
 +      "authority_role": "public_operational_guidance",
 +      "expected_content_types": ["html"],
 +      "purpose": "Public DevHub FAQ, sign-in, quick guide, correction upload, fee payment, and submission guidance discovery."
 +    },
 +    {
 +      "id": "devhub-public-portal",
-+      "url": "https://devhub.portlandoregon.gov",
++      "url": "https://wetten.overheid.nl",
 +      "source_family": "devhub_public_portal",
 +      "authority_role": "public_portal_entrypoint",
 +      "expected_content_types": ["html"],
 +      "purpose": "Public DevHub portal entrypoint discovery without login or account-scoped access."
 +    },
 +    {
-+      "id": "portlandoregon-account-reference",
-+      "url": "https://www.portlandoregon.gov",
-+      "source_family": "portlandoregon_legacy_reference",
++      "id": "wetwijzernetherlands-account-reference",
++      "url": "https://wetten.overheid.nl",
++      "source_family": "wetwijzernetherlands_legacy_reference",
 +      "authority_role": "legacy_account_reference",
 +      "expected_content_types": ["html"],
-+      "purpose": "Legacy PortlandOregon.gov account and authentication reference discovery only where linked by PP&D or DevHub public guidance."
++      "purpose": "Legacy wetten.overheid.nl account and authentication reference discovery only where linked by PP&D or DevHub public guidance."
 +    },
 +    {
-+      "id": "portland-maps-public-reference",
-+      "url": "https://www.portlandmaps.com",
-+      "source_family": "portland_maps_public_reference",
++      "id": "wetwijzer-maps-public-reference",
++      "url": "https://repository.overheid.nl",
++      "source_family": "bwb_metadata_public_reference",
 +      "authority_role": "public_property_permit_reference",
 +      "expected_content_types": ["html"],
 +      "purpose": "Public permit, case, and property lookup references only where relevant to PP&D public guidance."
@@ -98,7 +98,7 @@
 @@ -0,0 +1,122 @@
 +{
 +  "allowlist_id": "ppd-public-crawler-allowlist-v1",
-+  "created_for_task": "Task checkbox-3: Add public PP&D seed manifest and crawler allowlist for Portland.gov, DevHub, PortlandOregon.gov, and Portland Maps references.",
++  "created_for_task": "Task checkbox-3: Add public PP&D seed manifest and crawler allowlist for wetten.overheid.nl, DevHub, wetten.overheid.nl, and BWB metadata references.",
 +  "verified_context_date": "2026-05-01",
 +  "default_policy": "deny",
 +  "global_requirements": [
@@ -110,7 +110,7 @@
 +  ],
 +  "allowed_hosts": [
 +    {
-+      "host": "www.portland.gov",
++      "host": "wetten.overheid.nl",
 +      "scheme": "https",
 +      "scope": "PP&D public guidance, forms, handouts, checklists, process pages, DevHub public help pages, and linked public documents.",
 +      "allowed_path_prefixes": [
@@ -132,7 +132,7 @@
 +      ]
 +    },
 +    {
-+      "host": "devhub.portlandoregon.gov",
++      "host": "wetten.overheid.nl",
 +      "scheme": "https",
 +      "scope": "Public DevHub portal landing and unauthenticated help or reference pages only.",
 +      "allowed_path_prefixes": [
@@ -163,9 +163,9 @@
 +      ]
 +    },
 +    {
-+      "host": "www.portlandoregon.gov",
++      "host": "wetten.overheid.nl",
 +      "scheme": "https",
-+      "scope": "Legacy PortlandOregon.gov public account and authentication references linked from Portland.gov or DevHub public guidance.",
++      "scope": "Legacy wetten.overheid.nl public account and authentication references linked from wetten.overheid.nl or DevHub public guidance.",
 +      "allowed_path_prefixes": [
 +        "/"
 +      ],
@@ -187,7 +187,7 @@
 +      ]
 +    },
 +    {
-+      "host": "www.portlandmaps.com",
++      "host": "repository.overheid.nl",
 +      "scheme": "https",
 +      "scope": "Public permit, case, and property reference pages relevant to PP&D guidance.",
 +      "allowed_path_prefixes": [

@@ -1,6 +1,6 @@
-# P2P Player Discovery in AI Town
+# P2P Player Discovery in WetWijzer
 
-This document describes the peer-to-peer (P2P) player discovery implementation in AI Town, which enables players to find each other through decentralized networking using libp2p.
+This document describes the peer-to-peer (P2P) player discovery implementation in WetWijzer, which enables players to find each other through decentralized networking using libp2p.
 
 ## Overview
 

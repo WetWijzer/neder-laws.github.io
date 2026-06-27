@@ -41,17 +41,17 @@ def test_fixture_maps_metadata_only_archive_and_normalized_candidates() -> None:
     first_archive = archive_rows[0]
     assert first_archive == {
         "candidate_id": "archive-candidate-001",
-        "source_url": "https://example.invalid/portland/devhub/documents/alpha",
-        "final_url": "https://example.invalid/portland/archive/documents/alpha.pdf",
+        "source_url": "https://example.invalid/wetwijzer/devhub/documents/alpha",
+        "final_url": "https://example.invalid/wetwijzer/archive/documents/alpha.pdf",
         "redirect_chain": [
             {
-                "from_url": "https://example.invalid/portland/devhub/documents/alpha",
-                "to_url": "https://example.invalid/portland/archive/documents/alpha",
+                "from_url": "https://example.invalid/wetwijzer/devhub/documents/alpha",
+                "to_url": "https://example.invalid/wetwijzer/archive/documents/alpha",
                 "status": 301,
             },
             {
-                "from_url": "https://example.invalid/portland/archive/documents/alpha",
-                "to_url": "https://example.invalid/portland/archive/documents/alpha.pdf",
+                "from_url": "https://example.invalid/wetwijzer/archive/documents/alpha",
+                "to_url": "https://example.invalid/wetwijzer/archive/documents/alpha.pdf",
                 "status": 302,
             },
         ],

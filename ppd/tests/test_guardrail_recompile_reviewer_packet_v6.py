@@ -140,7 +140,7 @@ class GuardrailRecompileReviewerPacketV6Tests(unittest.TestCase):
                     "refused_actions": [],
                     "stale_evidence": [],
                     "offline_validation_commands": [
-                        {"argv": ["curl", "https://www.portland.gov/ppd"]}
+                        {"argv": ["curl", "https://wetten.overheid.nl/ppd"]}
                     ],
                 }
             )

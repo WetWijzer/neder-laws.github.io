@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-27T00:00:00Z",
+  "datasetId": "justicedao/ipfs_netherlands_laws",
+  "datasetPath": "netherlands_laws_quality_audited_partial",
+  "corpus": {
+    "jurisdiction": "Netherlands",
+    "name": "WetWijzer Netherlands Laws",
+    "source": "wetten.overheid.nl official BWB/SRU sources",
+    "note": "Browser sample cache for the published quality-audited partial Dutch corpus. Use the Hugging Face datasets for the full published package.",
+    "publishedCorpus": {
+      "laws": 4999,
+      "articles": 89737,
+      "cidRows": 94736,
+      "coverage": "quality-audited partial corpus, not full Dutch corpus coverage"
+    },
+    "hfDatasets": {
+      "normalized": "justicedao/ipfs_netherlands_laws",
+      "vectorIndex": "justicedao/ipfs_netherlands_laws_vector_index",
+      "bm25Index": "justicedao/ipfs_netherlands_laws_bm25_index",
+      "knowledgeGraph": "justicedao/ipfs_netherlands_laws_knowledge_graph"
+    }
+  },
+  "artifacts": [
+    {
+      "id": "sections",
+      "path": "generated/sections.json",
+      "bytes": 4243,
+      "role": "browser_core",
+      "sourceUrl": "https://huggingface.co/datasets/justicedao/ipfs_netherlands_laws"
+    },
+    {
+      "id": "bm25_documents",
+      "path": "generated/bm25-documents.json",
+      "bytes": 4486,
+      "role": "browser_search",
+      "sourceUrl": "https://huggingface.co/datasets/justicedao/ipfs_netherlands_laws_bm25_index"
+    },
+    {
+      "id": "embedding_index",
+      "path": "generated/embedding-index.json",
+      "bytes": 394,
+      "role": "browser_vector",
+      "sourceUrl": "https://huggingface.co/datasets/justicedao/ipfs_netherlands_laws_vector_index"
+    },
+    {
+      "id": "embeddings",
+      "path": "generated/embeddings.f32",
+      "bytes": 4608,
+      "role": "browser_vector",
+      "sourceUrl": "https://huggingface.co/datasets/justicedao/ipfs_netherlands_laws_vector_index"
+    },
+    {
+      "id": "entities",
+      "path": "generated/entities.json",
+      "bytes": 2220,
+      "role": "browser_graph",
+      "sourceUrl": "https://huggingface.co/datasets/justicedao/ipfs_netherlands_laws_knowledge_graph"
+    },
+    {
+      "id": "relationships",
+      "path": "generated/relationships.json",
+      "bytes": 3138,
+      "role": "browser_graph",
+      "sourceUrl": "https://huggingface.co/datasets/justicedao/ipfs_netherlands_laws_knowledge_graph"
+    },
+    {
+      "id": "graph_adjacency",
+      "path": "generated/graph-adjacency.json",
+      "bytes": 7440,
+      "role": "browser_graph",
+      "sourceUrl": "https://huggingface.co/datasets/justicedao/ipfs_netherlands_laws_knowledge_graph"
+    },
+    {
+      "id": "logic_proof_summaries",
+      "path": "generated/logic-proof-summaries.json",
+      "bytes": 3868,
+      "role": "browser_logic",
+      "sourceUrl": "https://huggingface.co/datasets/justicedao/ipfs_netherlands_laws"
+    }
+  ],
+  "generatedFiles": [
+    "generated/sections.json",
+    "generated/bm25-documents.json",
+    "generated/embedding-index.json",
+    "generated/embeddings.f32",
+    "generated/entities.json",
+    "generated/relationships.json",
+    "generated/graph-adjacency.json",
+    "generated/logic-proof-summaries.json"
+  ]
+}

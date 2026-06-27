@@ -84,7 +84,7 @@ def _build_row(index: int, candidate: dict[str, Any]) -> dict[str, Any]:
                 "citation_id": f"A{index}.{anchor_index}",
                 "label": str(anchor.get("label", "official source anchor")),
                 "url": str(anchor.get("url", "")),
-                "publisher": str(anchor.get("publisher", "City of Portland")),
+                "publisher": str(anchor.get("publisher", "WetWijzer")),
             }
         )
 

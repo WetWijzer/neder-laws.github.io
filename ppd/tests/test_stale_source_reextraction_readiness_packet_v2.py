@@ -118,7 +118,7 @@ class StaleSourceReextractionReadinessPacketV2Test(unittest.TestCase):
     def test_rejects_live_or_browser_validation_commands(self) -> None:
         packet = self.load_valid_packet()
         packet["validation_commands"] = copy.deepcopy(packet["validation_commands"])
-        packet["validation_commands"].append(["python3", "-m", "playwright", "open", "https://devhub.portlandoregon.gov"])
+        packet["validation_commands"].append(["python3", "-m", "playwright", "open", "https://wetten.overheid.nl"])
 
         issues = validate_stale_source_reextraction_readiness_packet_v2(packet)
 

@@ -41,7 +41,7 @@ class RollbackActivationDecisionPacketTests(unittest.TestCase):
     def test_rejects_unsafe_references_claims_guarantees_and_mutation_flags(self) -> None:
         cases = {
             "raw body": {"raw_body": "raw"},
-            "download ref": {"download_url": "https://www.portland.gov/ppd/documents/form/download"},
+            "download ref": {"download_url": "https://wetten.overheid.nl/ppd/documents/form/download"},
             "archive ref": {"archive_artifact_ref": "capture.warc.gz"},
             "private path": {"note": "/home/example/private/session-state.json"},
             "session artifact": {"session_state": "storage_state.json"},

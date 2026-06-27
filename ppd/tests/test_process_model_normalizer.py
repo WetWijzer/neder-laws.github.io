@@ -55,7 +55,7 @@ def test_normalizer_rejects_uncommitted_evidence_ids() -> None:
             {
                 "evidence_id": "ppd-source:committed",
                 "source_id": "fixture",
-                "canonical_url": "https://www.portland.gov/ppd",
+                "canonical_url": "https://wetten.overheid.nl/ppd",
             }
         ],
         "requirements": [

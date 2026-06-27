@@ -4,7 +4,7 @@ Scope: attended read-only review only. No browser automation, no submissions, no
 
 Manual handoff boundary: a human operator stops before login, MFA, CAPTCHA, account prompts, credential entry, or any authenticated page. The plan records only public observations and cited verification notes.
 
-Verification step: compare the public DevHub landing page labels with the PP&D plan source. Source: docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md:1
+Verification step: compare the public DevHub landing page labels with the PP&D plan source. Source: docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md:1
 
 Verification step: validate that no consequential action is requested by this dry run. Source: ppd/tests/fixtures/devhub_live_dry_run_plan_v2/valid_plan.md:1
 

@@ -188,7 +188,7 @@ class PdfFillPlan:
         errors: list[str] = []
         if not self.id.strip():
             errors.append("pdf fill plan id is required")
-        if not self.source_pdf_url.startswith("https://www.portland.gov/ppd/"):
+        if not self.source_pdf_url.startswith("https://wetten.overheid.nl/ppd/"):
             errors.append("pdf fill source must be a public PP&D document URL")
         if not self.local_template_ref.startswith("ppd/tests/fixtures/"):
             errors.append("pdf fill local_template_ref must point at a committed fixture template")
@@ -351,7 +351,7 @@ def build_default_interaction_plan() -> AutonomousInteractionPlan:
         PlaywrightActionPlan(
             id="pw-open-user-authorized-draft",
             action_kind=AutomationActionKind.OPEN_USER_AUTHORIZED_DRAFT,
-            target_url_pattern="https://devhub.portlandoregon.gov/",
+            target_url_pattern="https://wetten.overheid.nl/",
             selector=None,
             redacted_fact_id=None,
             preview_only=True,
@@ -360,7 +360,7 @@ def build_default_interaction_plan() -> AutonomousInteractionPlan:
         PlaywrightActionPlan(
             id="pw-fill-project-address",
             action_kind=AutomationActionKind.FILL_FIELD,
-            target_url_pattern="https://devhub.portlandoregon.gov/",
+            target_url_pattern="https://wetten.overheid.nl/",
             selector=selector,
             redacted_fact_id="fact-project-address",
             preview_only=True,
@@ -369,7 +369,7 @@ def build_default_interaction_plan() -> AutonomousInteractionPlan:
         PlaywrightActionPlan(
             id="pw-save-draft-preview",
             action_kind=AutomationActionKind.SAVE_DRAFT_PREVIEW,
-            target_url_pattern="https://devhub.portlandoregon.gov/",
+            target_url_pattern="https://wetten.overheid.nl/",
             selector=None,
             redacted_fact_id=None,
             preview_only=True,
@@ -378,7 +378,7 @@ def build_default_interaction_plan() -> AutonomousInteractionPlan:
     )
     pdf_plan = PdfFillPlan(
         id="pdf-building-permit-application-draft",
-        source_pdf_url="https://www.portland.gov/ppd/documents/building-permit-application-building-site-development-demolition-and-zoning-permits/download",
+        source_pdf_url="https://wetten.overheid.nl/ppd/documents/building-permit-application-building-site-development-demolition-and-zoning-permits/download",
         local_template_ref="ppd/tests/fixtures/forms/building_permit_application_field_contract.json",
         output_mode="draft_preview_pdf_fields",
         fill_engine="pdf_field_manifest",

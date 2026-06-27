@@ -20,25 +20,25 @@ PACKET_TYPE = 'ppd.public_refresh.observation_plan.v2'
 PACKET_VERSION = 'public-refresh-observation-plan-v2'
 
 OFFICIAL_PPD_ANCHORS: list[dict[str, str]] = [
-    {'anchor_id': 'ppd-bureau-landing', 'label': 'PP&D bureau landing page', 'url': 'https://www.portland.gov/ppd'},
-    {'anchor_id': 'online-permitting-tools', 'label': 'Online permitting tools overview', 'url': 'https://www.portland.gov/ppd/how-use-online-permitting-tools'},
-    {'anchor_id': 'devhub-public-portal', 'label': 'DevHub public portal', 'url': 'https://devhub.portlandoregon.gov'},
-    {'anchor_id': 'devhub-faq', 'label': 'DevHub FAQ', 'url': 'https://www.portland.gov/ppd/devhub-faqs'},
-    {'anchor_id': 'devhub-sign-guide', 'label': 'DevHub account and sign-in guide', 'url': 'https://www.portland.gov/ppd/devhub-sign-guide'},
-    {'anchor_id': 'apply-for-permits', 'label': 'Apply for permits', 'url': 'https://www.portland.gov/ppd/get-permit/apply-permits'},
-    {'anchor_id': 'devhub-submit-permit-application-guide', 'label': 'DevHub permit application guide', 'url': 'https://www.portland.gov/ppd/devhub-guide-submit-permit-application'},
-    {'anchor_id': 'submit-plans-online', 'label': 'Submit Plans Online / Single PDF Process', 'url': 'https://www.portland.gov/ppd/get-permit/submit-plans-online'},
-    {'anchor_id': 'permit-applications-forms-index', 'label': 'Permit applications and forms index', 'url': 'https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications'},
-    {'anchor_id': 'spp-file-naming-standards', 'label': 'File naming standards and PDF preparation', 'url': 'https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs'},
-    {'anchor_id': 'fee-payment-guide', 'label': 'Fee payment guide', 'url': 'https://www.portland.gov/ppd/documents/how-pay-fees/download'},
-    {'anchor_id': 'portland-maps-public-references', 'label': 'Portland Maps public references where linked from PP&D guidance', 'url': 'https://www.portlandmaps.com'},
+    {'anchor_id': 'ppd-bureau-landing', 'label': 'PP&D bureau landing page', 'url': 'https://wetten.overheid.nl/ppd'},
+    {'anchor_id': 'online-permitting-tools', 'label': 'Online permitting tools overview', 'url': 'https://wetten.overheid.nl/ppd/how-use-online-permitting-tools'},
+    {'anchor_id': 'devhub-public-portal', 'label': 'DevHub public portal', 'url': 'https://wetten.overheid.nl'},
+    {'anchor_id': 'devhub-faq', 'label': 'DevHub FAQ', 'url': 'https://wetten.overheid.nl/ppd/devhub-faqs'},
+    {'anchor_id': 'devhub-sign-guide', 'label': 'DevHub account and sign-in guide', 'url': 'https://wetten.overheid.nl/ppd/devhub-sign-guide'},
+    {'anchor_id': 'apply-for-permits', 'label': 'Apply for permits', 'url': 'https://wetten.overheid.nl/ppd/get-permit/apply-permits'},
+    {'anchor_id': 'devhub-submit-permit-application-guide', 'label': 'DevHub permit application guide', 'url': 'https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application'},
+    {'anchor_id': 'submit-plans-online', 'label': 'Submit Plans Online / Single PDF Process', 'url': 'https://wetten.overheid.nl/ppd/get-permit/submit-plans-online'},
+    {'anchor_id': 'permit-applications-forms-index', 'label': 'Permit applications and forms index', 'url': 'https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications'},
+    {'anchor_id': 'spp-file-naming-standards', 'label': 'File naming standards and PDF preparation', 'url': 'https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs'},
+    {'anchor_id': 'fee-payment-guide', 'label': 'Fee payment guide', 'url': 'https://wetten.overheid.nl/ppd/documents/how-pay-fees/download'},
+    {'anchor_id': 'wetwijzer-maps-public-references', 'label': 'BWB metadata public references where linked from PP&D guidance', 'url': 'https://repository.overheid.nl'},
 ]
 
 ALLOWED_HOSTS = {
-    'www.portland.gov',
-    'devhub.portlandoregon.gov',
-    'www.portlandoregon.gov',
-    'www.portlandmaps.com',
+    'wetten.overheid.nl',
+    'wetten.overheid.nl',
+    'wetten.overheid.nl',
+    'repository.overheid.nl',
 }
 
 EXACT_OFFLINE_VALIDATION_COMMANDS: list[list[str]] = [
@@ -197,9 +197,9 @@ def _freshness_placeholders_by_group(readiness_packet: Mapping[str, Any]) -> dic
 
 def _source_group_id(url: str) -> str:
     host = urlparse(url).hostname or ''
-    if host == 'devhub.portlandoregon.gov':
+    if host == 'wetten.overheid.nl':
         return 'devhub_public_guidance'
-    return 'portland_gov_ppd_public_guidance'
+    return 'wetwijzer_gov_ppd_public_guidance'
 
 
 def _validate_row(errors: list[str], index: int, row: Mapping[str, Any]) -> None:

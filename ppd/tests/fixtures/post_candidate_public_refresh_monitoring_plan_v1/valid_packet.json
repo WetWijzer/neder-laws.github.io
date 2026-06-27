@@ -9,48 +9,48 @@
     "fee_payment_guidance": true,
     "devhub_public_guidance": true,
     "forms_index": true,
-    "linked_portland_maps_references": true
+    "linked_bwb_metadata_references": true
   },
   "normalized_source_evidence": [
     {
       "source_evidence_id": "src-ppd-landing-anchor",
-      "canonical_url": "https://www.portland.gov/ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
       "coverage_categories": ["official_ppd_anchors"]
     },
     {
       "source_evidence_id": "src-online-permitting-tools",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "coverage_categories": ["official_ppd_anchors", "devhub_public_guidance"]
     },
     {
       "source_evidence_id": "src-devhub-faqs",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "coverage_categories": ["devhub_public_guidance"]
     },
     {
       "source_evidence_id": "src-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "coverage_categories": ["file_preparation_guidance"]
     },
     {
       "source_evidence_id": "src-spp-file-naming-standards",
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "coverage_categories": ["file_preparation_guidance"]
     },
     {
       "source_evidence_id": "src-fee-payment-guide",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "coverage_categories": ["fee_payment_guidance"]
     },
     {
       "source_evidence_id": "src-permit-applications-forms-index",
-      "canonical_url": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+      "canonical_url": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
       "coverage_categories": ["forms_index"]
     },
     {
-      "source_evidence_id": "src-linked-portland-maps-public-reference",
-      "canonical_url": "https://www.portlandmaps.com",
-      "coverage_categories": ["linked_portland_maps_references"]
+      "source_evidence_id": "src-linked-wetwijzer-maps-public-reference",
+      "canonical_url": "https://repository.overheid.nl",
+      "coverage_categories": ["linked_bwb_metadata_references"]
     }
   ],
   "synthetic_follow_up_freshness_checks": [
@@ -87,10 +87,10 @@
       }
     },
     {
-      "check_id": "forms-index-and-portland-maps-follow-up",
+      "check_id": "forms-index-and-wetwijzer-maps-follow-up",
       "schedule": "fixture-first synthetic check before process-model or guardrail consumers use candidate public refresh evidence",
-      "coverage_categories": ["forms_index", "linked_portland_maps_references"],
-      "source_evidence_ids": ["src-permit-applications-forms-index", "src-linked-portland-maps-public-reference"],
+      "coverage_categories": ["forms_index", "linked_bwb_metadata_references"],
+      "source_evidence_ids": ["src-permit-applications-forms-index", "src-linked-wetwijzer-maps-public-reference"],
       "freshness_method": "Compare committed fixture link references, source roles, and stale-evidence markers only.",
       "hold_thresholds": {
         "missing_required_source_count": 1,

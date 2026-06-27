@@ -17,7 +17,7 @@ def test_accepts_narrow_fact_gap_questions_with_cited_explanations_and_confirmat
         "explanations": [
             {
                 "text": "The permit status is listed in the public record.",
-                "citations": [{"url": "https://www.portland.gov/example", "title": "Public record"}],
+                "citations": [{"url": "https://wetten.overheid.nl/example", "title": "Public record"}],
             }
         ],
         "actions": [

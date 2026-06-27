@@ -6,7 +6,7 @@ def test_accepts_cited_review_owned_candidate() -> None:
         "source_registry": [
             {
                 "source_id": "ppd-devhub-faq",
-                "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+                "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
             }
         ],
         "requirement_candidates": [
@@ -16,7 +16,7 @@ def test_accepts_cited_review_owned_candidate() -> None:
                 "citations": [
                     {
                         "source_id": "ppd-devhub-faq",
-                        "canonical_url": "https://www.portland.gov/ppd/devhub-faqs#accounts",
+                        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs#accounts",
                         "span_id": "accounts",
                     }
                 ],
@@ -75,11 +75,11 @@ def test_rejects_private_authenticated_and_tokenized_urls() -> None:
                 "citations": [
                     {
                         "source_id": "devhub-private",
-                        "url": "https://devhub.portlandoregon.gov/PermitDetails/12345",
+                        "url": "https://wetten.overheid.nl/PermitDetails/12345",
                     },
                     {
                         "source_id": "tokenized-public",
-                        "url": "https://www.portland.gov/ppd/devhub-faqs?token=secret",
+                        "url": "https://wetten.overheid.nl/ppd/devhub-faqs?token=secret",
                     },
                 ],
                 "reviewer_owner": "ppd-requirements-review",

@@ -8,8 +8,8 @@
   "sourceEvidence": [
     {
       "id": "src-ppd-devhub-apply-guidance-2026-05-01",
-      "url": "https://www.portland.gov/ppd/permits/apply-online-devhub",
-      "title": "Apply online using Development Hub PDX",
+      "url": "https://wetten.overheid.nl/ppd/permits/apply-online-devhub",
+      "title": "Apply online using Development Hub Netherlands",
       "capturedAt": "2026-05-01T00:00:00Z",
       "status": "fresh",
       "public": true,
@@ -21,8 +21,8 @@
     },
     {
       "id": "src-ppd-devhub-stale-guidance-2025-01-01",
-      "url": "https://www.portland.gov/ppd/permits/apply-online-devhub",
-      "title": "Apply online using Development Hub PDX",
+      "url": "https://wetten.overheid.nl/ppd/permits/apply-online-devhub",
+      "title": "Apply online using Development Hub Netherlands",
       "capturedAt": "2025-01-01T00:00:00Z",
       "status": "stale",
       "public": true,
@@ -34,8 +34,8 @@
     },
     {
       "id": "src-ppd-devhub-conflict-a-2026-05-01",
-      "url": "https://www.portland.gov/ppd/devhub/faq",
-      "title": "Development Hub PDX FAQ",
+      "url": "https://wetten.overheid.nl/ppd/devhub/faq",
+      "title": "Development Hub Netherlands FAQ",
       "capturedAt": "2026-05-01T00:00:00Z",
       "status": "fresh",
       "public": true,
@@ -47,8 +47,8 @@
     },
     {
       "id": "src-ppd-devhub-conflict-b-2026-05-01",
-      "url": "https://www.portland.gov/ppd/devhub/faq",
-      "title": "Development Hub PDX FAQ",
+      "url": "https://wetten.overheid.nl/ppd/devhub/faq",
+      "title": "Development Hub Netherlands FAQ",
       "capturedAt": "2026-05-01T00:00:00Z",
       "status": "fresh",
       "public": true,

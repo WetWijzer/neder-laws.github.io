@@ -46,7 +46,7 @@ def test_public_refresh_monitoring_plan_v1_rejects_removed_required_coverage() -
         "file_preparation_or_fee_payment_guidance_coverage": "file preparation or fee/payment guidance coverage",
         "devhub_public_guidance_coverage": "DevHub public guidance coverage",
         "forms_index_coverage": "forms index coverage",
-        "linked_portland_maps_coverage": "linked Portland Maps guidance coverage",
+        "linked_bwb_metadata_coverage": "linked BWB metadata guidance coverage",
     }
     for key, expected in required.items():
         packet = _valid_packet()

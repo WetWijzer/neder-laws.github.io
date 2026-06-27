@@ -38,15 +38,15 @@
   "source_groups": [
     {
       "source_group_id": "devhub_home_readonly",
-      "canonical_hosts": ["devhub.portlandoregon.gov"]
+      "canonical_hosts": ["wetten.overheid.nl"]
     },
     {
       "source_group_id": "devhub_permits_requests_readonly",
-      "canonical_hosts": ["devhub.portlandoregon.gov"]
+      "canonical_hosts": ["wetten.overheid.nl"]
     },
     {
       "source_group_id": "devhub_status_messages_readonly",
-      "canonical_hosts": ["devhub.portlandoregon.gov"]
+      "canonical_hosts": ["wetten.overheid.nl"]
     }
   ]
 }

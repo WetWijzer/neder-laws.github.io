@@ -24,7 +24,7 @@ class SignPermitWorkflowFixtureTest(unittest.TestCase):
         self.assertGreaterEqual(len(self.fixture["authoritySources"]), 5)
         for source in self.fixture["authoritySources"]:
             self.assertTrue(source["sourceId"].startswith("source_inventory_"))
-            self.assertTrue(source["canonicalUrl"].startswith("https://www.portland.gov/ppd"))
+            self.assertTrue(source["canonicalUrl"].startswith("https://wetten.overheid.nl/ppd"))
             self.assertIn("authorityLabel", source)
             self.assertIn("recrawlCadenceHint", source)
             self.assertIn("evidenceUse", source)

@@ -3,13 +3,13 @@
   "description": "Synthetic DevHub surface-recorder fixture for validating that accessibility structure metadata is retained while private recorder artifacts are rejected.",
   "surface": {
     "name": "DevHub synthetic permit search",
-    "url": "https://devhub.portland.gov/synthetic/permits",
+    "url": "https://devhub.wetten.overheid.nl/synthetic/permits",
     "captured_from": "synthetic-fixture"
   },
   "allowed_accessibility_metadata": {
     "page": {
-      "url": "https://devhub.portland.gov/synthetic/permits",
-      "title": "Development Hub PDX - Permit Search",
+      "url": "https://devhub.wetten.overheid.nl/synthetic/permits",
+      "title": "Development Hub Netherlands - Permit Search",
       "lang": "en"
     },
     "nodes": [
@@ -102,7 +102,7 @@
         "storage_state": {
           "origins": [
             {
-              "origin": "https://devhub.portland.gov",
+              "origin": "https://devhub.wetten.overheid.nl",
               "localStorage": []
             }
           ]
@@ -116,7 +116,7 @@
         "cookies": [
           {
             "name": "synthetic_session_marker",
-            "domain": ".portland.gov"
+            "domain": ".wetten.overheid.nl"
           }
         ]
       }

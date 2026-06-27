@@ -25,7 +25,7 @@
       "needed_for_next_safe_action": false,
       "reason": "This public lookup was verified recently and must not be asked again.",
       "source_requirement_ids": ["req-property-lookup-before-application"],
-      "reason_citation_ids": ["cite-portlandmaps-public-property-reference"]
+      "reason_citation_ids": ["cite-wetwijzermaps-public-property-reference"]
     }
   ],
   "required_confirmations": []

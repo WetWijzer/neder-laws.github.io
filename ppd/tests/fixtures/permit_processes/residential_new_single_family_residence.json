@@ -30,7 +30,7 @@
         "evidence": [
           {
             "sourceId": "ppd-new-single-family-residence-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/permits/new-single-family-residence-permits",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/permits/new-single-family-residence-permits",
             "anchorId": "overview",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Public PP&D residential permit guidance identifies new single-family residence permits as a residential building permit workflow."
@@ -58,7 +58,7 @@
         "evidence": [
           {
             "sourceId": "ppd-single-pdf-process-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/single-pdf-process",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/single-pdf-process",
             "anchorId": "single-pdf-process-submittals",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Public guidance says projects using the Single PDF Process submit drawing plans as one searchable PDF and applications, calculations, and supporting documents as separate PDFs."
@@ -70,7 +70,7 @@
         "name": "Create or use DevHub account",
         "kind": "account_setup",
         "sequence": 30,
-        "description": "Use DevHub with PortlandOregon.gov credentials for online permitting services; automation fixtures only record public workflow requirements and do not create accounts or authenticate.",
+        "description": "Use DevHub with wetten.overheid.nl credentials for online permitting services; automation fixtures only record public workflow requirements and do not create accounts or authenticate.",
         "entryConditions": [
           "application_information_ready"
         ],
@@ -83,10 +83,10 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-faq",
-            "sourceUrl": "https://www.portland.gov/ppd/devhub-pdx-help",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-netherlands-help",
             "anchorId": "devhub-account",
             "capturedAt": "2026-05-01T00:00:00Z",
-            "note": "Public DevHub guidance identifies DevHub as Portland's online permitting system and says PortlandOregon.gov credentials are used for authenticated services."
+            "note": "Public DevHub guidance identifies DevHub as Netherlands's online permitting system and says wetten.overheid.nl credentials are used for authenticated services."
           }
         ]
       },
@@ -108,7 +108,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-apply-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/apply-devhub-permit",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/apply-devhub-permit",
             "anchorId": "permit-request-types",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Public application guidance lists building permits and new single-family residence or detached ADU permits among DevHub request types."
@@ -133,7 +133,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-apply-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/apply-devhub-permit",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/apply-devhub-permit",
             "anchorId": "apply-online",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Public DevHub application guidance describes permit requests requiring plan review through the online permitting workflow."
@@ -160,7 +160,7 @@
         "evidence": [
           {
             "sourceId": "ppd-single-pdf-process-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/single-pdf-process",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/single-pdf-process",
             "anchorId": "file-standards",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Single PDF Process guidance separates drawing plans from application, calculation, and supporting PDFs."
@@ -185,7 +185,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-apply-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/apply-devhub-permit",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/apply-devhub-permit",
             "anchorId": "submit-request",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Public DevHub guidance treats online application submission as part of the permit request workflow."
@@ -211,7 +211,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-faq",
-            "sourceUrl": "https://www.portland.gov/ppd/devhub-pdx-help",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-netherlands-help",
             "anchorId": "permit-requests-requiring-plan-review",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Public DevHub FAQ identifies permit requests requiring plan review and fee payment services."
@@ -236,7 +236,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-faq",
-            "sourceUrl": "https://www.portland.gov/ppd/devhub-pdx-help",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-netherlands-help",
             "anchorId": "fee-payments",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Public DevHub FAQ lists fee payments as an online permitting service category."
@@ -263,7 +263,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-faq",
-            "sourceUrl": "https://www.portland.gov/ppd/devhub-pdx-help",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-netherlands-help",
             "anchorId": "correction-uploads",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Public DevHub FAQ lists correction uploads as part of online permit services."
@@ -288,7 +288,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-faq",
-            "sourceUrl": "https://www.portland.gov/ppd/devhub-pdx-help",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-netherlands-help",
             "anchorId": "correction-uploads",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Public DevHub FAQ identifies correction upload services for online permit workflows."
@@ -313,7 +313,7 @@
         "evidence": [
           {
             "sourceId": "ppd-new-single-family-residence-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/permits/new-single-family-residence-permits",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/permits/new-single-family-residence-permits",
             "anchorId": "permit-review-and-issuance",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Residential building permit guidance describes PP&D review before permit issuance."
@@ -338,7 +338,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-faq",
-            "sourceUrl": "https://www.portland.gov/ppd/devhub-pdx-help",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-netherlands-help",
             "anchorId": "inspection-scheduling",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Public DevHub FAQ lists inspection scheduling for online trade permits; this residential fixture treats scheduling as consequential and user-confirmed when available."
@@ -361,7 +361,7 @@
         "evidence": [
           {
             "sourceId": "ppd-new-single-family-residence-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/permits/new-single-family-residence-permits",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/permits/new-single-family-residence-permits",
             "anchorId": "permit-status",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Permit lifecycle tracking belongs to the residential permit workflow after issuance and inspections."
@@ -388,7 +388,7 @@
         "evidence": [
           {
             "sourceId": "ppd-new-single-family-residence-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/permits/new-single-family-residence-permits",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/permits/new-single-family-residence-permits",
             "anchorId": "property-information",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Residential permit guidance is property-specific and requires site identification."
@@ -413,7 +413,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-apply-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/apply-devhub-permit",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/apply-devhub-permit",
             "anchorId": "permit-request-types",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "DevHub application guidance routes request types based on project type."
@@ -437,7 +437,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-apply-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/apply-devhub-permit",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/apply-devhub-permit",
             "anchorId": "apply-online",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Online application data entry requires applicant information in the authenticated workflow."
@@ -461,7 +461,7 @@
         "evidence": [
           {
             "sourceId": "ppd-new-single-family-residence-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/permits/new-single-family-residence-permits",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/permits/new-single-family-residence-permits",
             "anchorId": "application-information",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Residential building permit applications require project-party information."
@@ -485,7 +485,7 @@
         "evidence": [
           {
             "sourceId": "ppd-new-single-family-residence-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/permits/new-single-family-residence-permits",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/permits/new-single-family-residence-permits",
             "anchorId": "contractor-information",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Residential permit application data can include contractor and license details."
@@ -510,7 +510,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-faq",
-            "sourceUrl": "https://www.portland.gov/ppd/devhub-pdx-help",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-netherlands-help",
             "anchorId": "fee-payments",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Fee payment is part of the DevHub service set; valuation is a typical fee input for building permits."
@@ -540,7 +540,7 @@
         "evidence": [
           {
             "sourceId": "ppd-single-pdf-process-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/single-pdf-process",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/single-pdf-process",
             "anchorId": "applications-separate-pdfs",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Single PDF Process guidance keeps applications separate from the drawing plan PDF."
@@ -568,7 +568,7 @@
         "evidence": [
           {
             "sourceId": "ppd-single-pdf-process-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/single-pdf-process",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/single-pdf-process",
             "anchorId": "drawing-plans-one-searchable-pdf",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Public guidance says drawing plans are one searchable PDF in the Single PDF Process."
@@ -597,7 +597,7 @@
         "evidence": [
           {
             "sourceId": "ppd-single-pdf-process-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/single-pdf-process",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/single-pdf-process",
             "anchorId": "calculations-separate-pdfs",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Single PDF Process guidance treats calculations as separate PDFs from the drawing plan file."
@@ -625,7 +625,7 @@
         "evidence": [
           {
             "sourceId": "ppd-single-pdf-process-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/single-pdf-process",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/single-pdf-process",
             "anchorId": "supporting-documents-separate-pdfs",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Single PDF Process guidance separates supporting documents from the drawing plan PDF."
@@ -652,7 +652,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-faq",
-            "sourceUrl": "https://www.portland.gov/ppd/devhub-pdx-help",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-netherlands-help",
             "anchorId": "correction-uploads",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Public DevHub FAQ identifies correction uploads as an online service category."
@@ -679,7 +679,7 @@
         "evidence": [
           {
             "sourceId": "ppd-single-pdf-process-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/single-pdf-process",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/single-pdf-process",
             "anchorId": "drawing-plans-one-searchable-pdf",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Single PDF Process guidance requires drawing plans as one searchable PDF."
@@ -705,7 +705,7 @@
         "evidence": [
           {
             "sourceId": "ppd-single-pdf-process-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/single-pdf-process",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/single-pdf-process",
             "anchorId": "applications-calculations-supporting-documents",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Single PDF Process guidance lists applications, calculations, and supporting documents as separate PDFs."
@@ -727,7 +727,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-faq",
-            "sourceUrl": "https://www.portland.gov/ppd/devhub-pdx-help",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-netherlands-help",
             "anchorId": "fee-payments",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Public DevHub FAQ lists fee payments as an online service category."
@@ -746,7 +746,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-faq",
-            "sourceUrl": "https://www.portland.gov/ppd/devhub-pdx-help",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-netherlands-help",
             "anchorId": "fee-payments",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Fee payment is a public DevHub service and is treated as financial."
@@ -772,7 +772,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-apply-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/apply-devhub-permit",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/apply-devhub-permit",
             "anchorId": "apply-online",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Application data entry is part of the online request workflow; this fixture permits only reversible draft previews."
@@ -797,7 +797,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-faq",
-            "sourceUrl": "https://www.portland.gov/ppd/devhub-pdx-help",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-netherlands-help",
             "anchorId": "correction-uploads",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Correction uploads and permit-request document uploads are official workflow actions and are treated as consequential."
@@ -823,7 +823,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-apply-guidance",
-            "sourceUrl": "https://www.portland.gov/ppd/apply-devhub-permit",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/apply-devhub-permit",
             "anchorId": "submit-request",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Online permit application submission is part of the DevHub permit request workflow."
@@ -849,7 +849,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-faq",
-            "sourceUrl": "https://www.portland.gov/ppd/devhub-pdx-help",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-netherlands-help",
             "anchorId": "fee-payments",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Public DevHub FAQ lists fee payments; the fixture classifies payment as financial."
@@ -874,7 +874,7 @@
         "evidence": [
           {
             "sourceId": "ppd-devhub-faq",
-            "sourceUrl": "https://www.portland.gov/ppd/devhub-pdx-help",
+            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-netherlands-help",
             "anchorId": "inspection-scheduling",
             "capturedAt": "2026-05-01T00:00:00Z",
             "note": "Public DevHub FAQ lists inspection scheduling; this fixture treats scheduling as consequential."

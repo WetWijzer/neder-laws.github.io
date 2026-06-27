@@ -1,10 +1,10 @@
 {
   "packet_version": 2,
   "allowlist_decisions": [
-    {"source": "portland-permitting-public-index", "decision": "allowed", "basis": "public allowlist fixture"}
+    {"source": "wetwijzer-permitting-public-index", "decision": "allowed", "basis": "public allowlist fixture"}
   ],
   "robots_preflight_evidence": [
-    {"source": "portland-permitting-public-index", "status": "checked", "placeholder": true}
+    {"source": "wetwijzer-permitting-public-index", "status": "checked", "placeholder": true}
   ],
   "policy_preflight_evidence": [
     {"policy": "public-evidence-only", "status": "checked", "placeholder": true}

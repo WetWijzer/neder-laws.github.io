@@ -14,10 +14,10 @@ from urllib.parse import urlparse
 
 _ALLOWED_HOSTS = frozenset(
     {
-        "www.portland.gov",
-        "portland.gov",
-        "www.portlandmaps.com",
-        "portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
+        "repository.overheid.nl",
     }
 )
 

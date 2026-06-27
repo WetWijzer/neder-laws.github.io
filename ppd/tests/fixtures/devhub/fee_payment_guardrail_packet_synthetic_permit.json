@@ -81,7 +81,7 @@
     {
       "section_id": "exact_confirmation_language",
       "title": "Exact-confirmation language",
-      "guardrail": "Before the user personally performs either blocked financial step, show: I am present in my own DevHub account, I understand this is a City of Portland financial action, and I will personally perform the payment step. This language records a handoff requirement only and does not authorize agent execution.",
+      "guardrail": "Before the user personally performs either blocked financial step, show: I am present in my own DevHub account, I understand this is a WetWijzer financial action, and I will personally perform the payment step. This language records a handoff requirement only and does not authorize agent execution.",
       "allowed_autonomous": false,
       "requires_manual_handoff": true,
       "requires_exact_confirmation": true,

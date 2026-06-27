@@ -10,17 +10,17 @@
 +    {
 +      "id": "devhub_application_guidance_fcc_wireless",
 +      "label": "DevHub application guidance lists FCC wireless applications as a permit request type.",
-+      "url": "https://www.portland.gov/ppd/devhub"
++      "url": "https://wetten.overheid.nl/ppd/devhub"
 +    },
 +    {
 +      "id": "ppd_guarded_action_executor_plan",
 +      "label": "PP&D guarded action executor requires exact user confirmation for consequential and financial DevHub actions.",
-+      "url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md"
++      "url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md"
 +    }
 +  ],
 +  "workflowState": {
 +    "stateId": "fcc_wireless_draft_review",
-+    "urlState": "https://devhub.portlandoregon.gov/mock/fcc-wireless/draft-review",
++    "urlState": "https://wetten.overheid.nl/mock/fcc-wireless/draft-review",
 +    "redactionStatus": "fixture_contains_only_redacted_values",
 +    "visibleHeading": "FCC Wireless Application Draft Review",
 +    "summary": "Synthetic mocked DevHub state for reviewing a draft FCC wireless application before official user-controlled actions."

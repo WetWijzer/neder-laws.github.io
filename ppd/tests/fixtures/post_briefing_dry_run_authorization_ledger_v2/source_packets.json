@@ -92,7 +92,7 @@
     },
     "seed_batches": [
       {
-        "source_id": "portland-council-agendas",
+        "source_id": "wetwijzer-council-agendas",
         "expected_capture": {
           "metadata_only": true,
           "excluded_fields": [

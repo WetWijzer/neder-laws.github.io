@@ -10,7 +10,7 @@ import { api } from '../../convex/_generated/api';
 import { useWorldHeartbeat } from '../hooks/useWorldHeartbeat.ts';
 import { useHistoricalTime } from '../hooks/useHistoricalTime.ts';
 import { DebugTimeManager } from './DebugTimeManager.tsx';
-import { GameId } from '../../convex/aiTown/ids.ts';
+import { GameId } from '../../convex/wetwijzer/ids.ts';
 import { useServerGame } from '../hooks/serverGame.ts';
 import { ClientLLMProcessor } from '../hooks/useClientLLM.tsx';
 

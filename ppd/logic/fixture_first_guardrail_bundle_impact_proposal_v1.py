@@ -243,7 +243,7 @@ def _validate_offline_commands(commands: Any, findings: list[GuardrailBundleImpa
             findings.append(GuardrailBundleImpactProposalFinding('invalid_offline_validation_command', path, 'command must be an argv list'))
             continue
         text = ' '.join(str(part).lower() for part in command)
-        if any(term in text for term in ('curl', 'wget', 'playwright', 'devhub.portlandoregon.gov')):
+        if any(term in text for term in ('curl', 'wget', 'playwright', 'wetten.overheid.nl')):
             findings.append(GuardrailBundleImpactProposalFinding('non_offline_validation_command', path, 'validation command must remain offline'))
 
 

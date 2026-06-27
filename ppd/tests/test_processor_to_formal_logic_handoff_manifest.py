@@ -129,8 +129,8 @@ class ProcessorToFormalLogicHandoffManifestTest(unittest.TestCase):
 
     def test_source_evidence_is_public_and_hash_backed(self) -> None:
         for evidence in self.manifest["sourceEvidence"]:
-            self.assertTrue(evidence["sourceUrl"].startswith("https://www.portland.gov/ppd"))
-            self.assertTrue(evidence["canonicalUrl"].startswith("https://www.portland.gov/ppd"))
+            self.assertTrue(evidence["sourceUrl"].startswith("https://wetten.overheid.nl/ppd"))
+            self.assertTrue(evidence["canonicalUrl"].startswith("https://wetten.overheid.nl/ppd"))
             self.assertTrue(evidence["capturedAt"].endswith("Z"))
             self.assertRegex(evidence["contentHash"], SHA256_RE)
             self.assertIn(evidence["documentId"], {doc["id"] for doc in self.manifest["normalizedDocuments"]})

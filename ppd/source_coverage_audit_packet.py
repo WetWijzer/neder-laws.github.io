@@ -21,10 +21,10 @@ MODULE_PURPOSE = "fixture_first_source_coverage_audit_packet"
 SCHEMA_VERSION = 1
 
 ALLOWED_PUBLIC_HOSTS = {
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 
 ALLOWED_SOURCE_TYPES = {

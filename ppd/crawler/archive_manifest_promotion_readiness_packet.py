@@ -13,10 +13,10 @@ SCHEMA_VERSION = 1
 MODE = "fixture_first_archive_manifest_promotion_readiness"
 
 _ALLOWED_HOSTS = {
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 _PRIVATE_TARGET_MARKERS = (
     "/account",

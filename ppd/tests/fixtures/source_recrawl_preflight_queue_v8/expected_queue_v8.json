@@ -18,22 +18,22 @@
   "ordered_public_source_candidates": [
     {
       "sequence": 1,
-      "source_id": "portland_public_bds",
-      "source_name": "City of Portland BDS public pages",
-      "input_url": "https://www.portland.gov/bds/permits",
-      "canonical_url": "https://www.portland.gov/bds/permits",
+      "source_id": "wetwijzer_public_bds",
+      "source_name": "WetWijzer BDS public pages",
+      "input_url": "https://wetten.overheid.nl/bds/permits",
+      "canonical_url": "https://wetten.overheid.nl/bds/permits",
       "canonical_url_check": {
-        "input_url": "https://www.portland.gov/bds/permits",
-        "trimmed_url": "https://www.portland.gov/bds/permits",
+        "input_url": "https://wetten.overheid.nl/bds/permits",
+        "trimmed_url": "https://wetten.overheid.nl/bds/permits",
         "is_valid_public_http_url": true,
-        "canonical_url": "https://www.portland.gov/bds/permits",
+        "canonical_url": "https://wetten.overheid.nl/bds/permits",
         "reason": "canonicalized"
       },
       "allowlist_decision": {
         "allowed": true,
         "allowed_hosts": [
-          "www.portland.gov",
-          "portland.gov"
+          "wetten.overheid.nl",
+          "wetten.overheid.nl"
         ],
         "reason": "canonical_host_matched_source_allowlist"
       },
@@ -52,22 +52,22 @@
     },
     {
       "sequence": 2,
-      "source_id": "portland_maps_public_permits",
-      "source_name": "Portland Maps public permits",
-      "input_url": "https://www.portlandmaps.com/permits/?propertyid=fixture",
-      "canonical_url": "https://www.portlandmaps.com/permits?propertyid=fixture",
+      "source_id": "bwb_metadata_public_permits",
+      "source_name": "BWB metadata public permits",
+      "input_url": "https://repository.overheid.nl/permits/?propertyid=fixture",
+      "canonical_url": "https://repository.overheid.nl/permits?propertyid=fixture",
       "canonical_url_check": {
-        "input_url": "https://www.portlandmaps.com/permits/?propertyid=fixture",
-        "trimmed_url": "https://www.portlandmaps.com/permits/?propertyid=fixture",
+        "input_url": "https://repository.overheid.nl/permits/?propertyid=fixture",
+        "trimmed_url": "https://repository.overheid.nl/permits/?propertyid=fixture",
         "is_valid_public_http_url": true,
-        "canonical_url": "https://www.portlandmaps.com/permits?propertyid=fixture",
+        "canonical_url": "https://repository.overheid.nl/permits?propertyid=fixture",
         "reason": "canonicalized"
       },
       "allowlist_decision": {
         "allowed": true,
         "allowed_hosts": [
-          "www.portlandmaps.com",
-          "portlandmaps.com"
+          "repository.overheid.nl",
+          "repository.overheid.nl"
         ],
         "reason": "canonical_host_matched_source_allowlist"
       },
@@ -87,19 +87,19 @@
   ],
   "skipped_url_reason_rows": [
     {
-      "source_id": "portland_public_bds",
-      "input_url": "https://WWW.PORTLAND.GOV:443/bds/permits/",
-      "canonical_url": "https://www.portland.gov/bds/permits",
+      "source_id": "wetwijzer_public_bds",
+      "input_url": "https://wetten.overheid.nl:443/bds/permits/",
+      "canonical_url": "https://wetten.overheid.nl/bds/permits",
       "reason": "duplicate_canonical_url"
     },
     {
-      "source_id": "portland_public_bds",
-      "input_url": "ftp://www.portland.gov/bds/private",
+      "source_id": "wetwijzer_public_bds",
+      "input_url": "ftp://wetten.overheid.nl/bds/private",
       "canonical_url": null,
       "reason": "unsupported_or_missing_public_http_url"
     },
     {
-      "source_id": "portland_maps_public_permits",
+      "source_id": "bwb_metadata_public_permits",
       "input_url": "https://example.com/not-allowed",
       "canonical_url": "https://example.com/not-allowed",
       "reason": "canonical_host_not_in_source_allowlist"

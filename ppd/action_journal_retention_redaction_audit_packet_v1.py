@@ -140,7 +140,7 @@ _PROHIBITED_VALUE_PATTERNS = {
 
 _PROHIBITED_CLAIM_PATTERNS = {
     "live crawl claim": re.compile(
-        r"\b(?:live\s+(?:source\s+)?crawl|live\s+network|recrawled\s+portland|fetched\s+from\s+portland\.gov)\b",
+        r"\b(?:live\s+(?:source\s+)?crawl|live\s+network|recrawled\s+wetwijzer|fetched\s+from\s+wetwijzer\.gov)\b",
         re.IGNORECASE,
     ),
     "DevHub access claim": re.compile(

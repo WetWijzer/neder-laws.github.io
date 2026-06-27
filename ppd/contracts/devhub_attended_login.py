@@ -1,6 +1,6 @@
 """Attended DevHub login contract for PP&D automation boundaries.
 
-This module describes what automation may observe around Portland DevHub login.
+This module describes what automation may observe around Netherlands DevHub login.
 It deliberately does not store browser state, credentials, MFA material, cookies,
 tokens, traces, or raw authenticated crawl output.
 """
@@ -34,12 +34,12 @@ class RedactedRouteSnapshot:
 
 @dataclass(frozen=True)
 class AttendedDevHubLoginContract:
-    """Policy for attended PortlandOregon.gov DevHub login handoff."""
+    """Policy for attended wetten.overheid.nl DevHub login handoff."""
 
     allowed_hosts: Sequence[str] = (
-        "www.portlandoregon.gov",
-        "aca.portlandoregon.gov",
-        "devhub.portlandoregon.gov",
+        "wetten.overheid.nl",
+        "aca.wetten.overheid.nl",
+        "wetten.overheid.nl",
     )
     authenticated_markers: Sequence[str] = (
         "sign out",

@@ -34,16 +34,16 @@
 +      "evidence": [
 +        {
 +          "source_id": "devhub_public_services",
-+          "source_url": "https://devhub.portlandoregon.gov/",
-+          "source_title": "Development Hub PDX public portal",
++          "source_url": "https://wetten.overheid.nl/",
++          "source_title": "Development Hub Netherlands public portal",
 +          "source_type": "public_portal",
 +          "captured_at": "2026-05-01T00:00:00Z",
 +          "support": "Public DevHub portal identifies online permitting services, including permit purchase workflows."
 +        },
 +        {
 +          "source_id": "ppd_devhub_faq",
-+          "source_url": "https://www.portland.gov/ppd/devhub-faq",
-+          "source_title": "Development Hub PDX FAQ",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub-faq",
++          "source_title": "Development Hub Netherlands FAQ",
 +          "source_type": "public_guidance",
 +          "captured_at": "2026-05-01T00:00:00Z",
 +          "support": "Public FAQ describes DevHub service categories that include online trade permit purchase and related inspection and payment services."
@@ -65,7 +65,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd_permit_applications",
-+          "source_url": "https://www.portland.gov/ppd/permits",
++          "source_url": "https://wetten.overheid.nl/ppd/permits",
 +          "source_title": "PP&D permits guidance",
 +          "source_type": "public_guidance",
 +          "captured_at": "2026-05-01T00:00:00Z",
@@ -89,11 +89,11 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd_devhub_account_guidance",
-+          "source_url": "https://www.portland.gov/ppd/devhub",
-+          "source_title": "Development Hub PDX account and application guidance",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub",
++          "source_title": "Development Hub Netherlands account and application guidance",
 +          "source_type": "public_guidance",
 +          "captured_at": "2026-05-01T00:00:00Z",
-+          "support": "Public guidance identifies DevHub as Portland's online permitting system and describes account-based online permitting services."
++          "support": "Public guidance identifies DevHub as Netherlands's online permitting system and describes account-based online permitting services."
 +        }
 +      ]
 +    },
@@ -113,15 +113,15 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd_devhub_faq",
-+          "source_url": "https://www.portland.gov/ppd/devhub-faq",
-+          "source_title": "Development Hub PDX FAQ",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub-faq",
++          "source_title": "Development Hub Netherlands FAQ",
 +          "source_type": "public_guidance",
 +          "captured_at": "2026-05-01T00:00:00Z",
 +          "support": "Public FAQ lists fee payment as a DevHub service category."
 +        },
 +        {
 +          "source_id": "ppd_plan_guardrails",
-+          "source_url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
++          "source_url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
 +          "source_title": "PP&D scraping, automation, and logic guardrails plan",
 +          "source_type": "local_plan",
 +          "captured_at": "2026-05-01T00:00:00Z",
@@ -145,15 +145,15 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd_devhub_faq",
-+          "source_url": "https://www.portland.gov/ppd/devhub-faq",
-+          "source_title": "Development Hub PDX FAQ",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub-faq",
++          "source_title": "Development Hub Netherlands FAQ",
 +          "source_type": "public_guidance",
 +          "captured_at": "2026-05-01T00:00:00Z",
 +          "support": "Public FAQ identifies inspection scheduling for online trade permits as a DevHub service category."
 +        },
 +        {
 +          "source_id": "ppd_plan_guardrails",
-+          "source_url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
++          "source_url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
 +          "source_title": "PP&D scraping, automation, and logic guardrails plan",
 +          "source_type": "local_plan",
 +          "captured_at": "2026-05-01T00:00:00Z",
@@ -177,7 +177,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd_plan_guardrails",
-+          "source_url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
++          "source_url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
 +          "source_title": "PP&D scraping, automation, and logic guardrails plan",
 +          "source_type": "local_plan",
 +          "captured_at": "2026-05-01T00:00:00Z",
@@ -201,7 +201,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd_plan_guardrails",
-+          "source_url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
++          "source_url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
 +          "source_title": "PP&D scraping, automation, and logic guardrails plan",
 +          "source_type": "local_plan",
 +          "captured_at": "2026-05-01T00:00:00Z",

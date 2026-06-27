@@ -12,7 +12,7 @@ def valid_packet() -> dict[str, object]:
     return {
         "packet_id": "fixture-001",
         "status": "needs_review",
-        "packet_links": [{"label": "PP&D public permit search", "url": "https://www.portland.gov/ppd"}],
+        "packet_links": [{"label": "PP&D public permit search", "url": "https://wetten.overheid.nl/ppd"}],
         "reviewer_prompts": ["Confirm whether the public source supports this packet summary."],
         "summary": "Public-source packet prepared for human review.",
     }

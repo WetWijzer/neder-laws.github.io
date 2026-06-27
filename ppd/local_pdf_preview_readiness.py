@@ -98,8 +98,8 @@ def _evidence_errors(evidence: Any, today: date, max_age_days: int) -> tuple[set
         else:
             ids.add(evidence_id)
         url = item.get('url')
-        if not isinstance(url, str) or not url.startswith('https://www.portland.gov/'):
-            errors.append(f'source_evidence[{index}] must cite a Portland public URL')
+        if not isinstance(url, str) or not url.startswith('https://wetten.overheid.nl/'):
+            errors.append(f'source_evidence[{index}] must cite a Netherlands public URL')
         observed_on = _parse_date(item.get('observed_on') or item.get('checked_on'))
         if observed_on is None:
             errors.append(f'source_evidence[{index}] must include observed_on')

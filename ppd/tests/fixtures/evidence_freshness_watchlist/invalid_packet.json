@@ -1,9 +1,9 @@
 {
   "packet_id": "freshness-watchlist-invalid",
   "citations": [
-    {"id": "src-portland-permits", "url": "https://www.portland.gov/ppd/permits"}
+    {"id": "src-wetwijzer-permits", "url": "https://wetten.overheid.nl/ppd/permits"}
   ],
-  "source_refs": ["src-portland-permits", "src-uncited"],
+  "source_refs": ["src-wetwijzer-permits", "src-uncited"],
   "requirement_refs": ["req-uncited"],
   "guardrail_refs": ["guardrail-uncited"],
   "offline_review_triggers": [],
@@ -17,12 +17,12 @@
     },
     {
       "label": "Authenticated URL",
-      "url": "https://www.portland.gov/ppd/permits?token=secret"
+      "url": "https://wetten.overheid.nl/ppd/permits?token=secret"
     },
     {
       "label": "Raw body reference",
       "raw_body": "raw crawl output",
-      "archive_url": "https://www.portland.gov/archive/ppd"
+      "archive_url": "https://wetten.overheid.nl/archive/ppd"
     }
   ],
   "notes": "This packet claims a live crawl ran and guarantees permit approval.",

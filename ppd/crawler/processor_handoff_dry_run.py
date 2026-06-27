@@ -15,10 +15,10 @@ from urllib.parse import urlparse
 
 ALLOWED_PUBLIC_HOSTS = frozenset(
     {
-        "www.portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
-        "www.portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
     }
 )
 
@@ -432,7 +432,7 @@ def _public_url_errors(value: Any, field: str) -> list[str]:
     host = parsed.hostname or ""
     if host not in ALLOWED_PUBLIC_HOSTS:
         return [f"{field} host is not PP&D allowlisted: {host}"]
-    if host == "devhub.portlandoregon.gov":
+    if host == "wetten.overheid.nl":
         path = "/" + parsed.path.strip("/").lower()
         if any(path == prefix or path.startswith(prefix + "/") for prefix in PRIVATE_DEVHUB_PREFIXES):
             return [f"{field} must not reference private DevHub account paths"]

@@ -54,7 +54,7 @@ _PRIVATE_TEXT_RE = re.compile(
     re.IGNORECASE,
 )
 _LIVE_TEXT_RE = re.compile(
-    r'\b(live\s+(crawl|crawling|extraction|extractor|browser|devhub|execution|processor|run)|crawl(ed|ing)?\s+live|extracted\s+live|access(ed)?\s+devhub|logged\s+in\s+to\s+devhub|devhub\.portlandoregon\.gov|authenticated\s+devhub|used\s+authenticated\s+session)\b',
+    r'\b(live\s+(crawl|crawling|extraction|extractor|browser|devhub|execution|processor|run)|crawl(ed|ing)?\s+live|extracted\s+live|access(ed)?\s+devhub|logged\s+in\s+to\s+devhub|devhub\.wetwijzernetherlands\.gov|authenticated\s+devhub|used\s+authenticated\s+session)\b',
     re.IGNORECASE,
 )
 _RELEASE_TEXT_RE = re.compile(

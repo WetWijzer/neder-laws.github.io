@@ -81,7 +81,7 @@ PROHIBITED_PERMITTED_SCOPE_TERMS = {
 
 REQUIRED_MANUAL_LOGIN_PREREQUISITES = {
     "user_attended_visible_browser",
-    "user_completes_portlandoregon_login",
+    "user_completes_wetwijzernetherlands_login",
     "user_completes_mfa_captcha_or_security_prompts",
     "no_credentials_requested_or_stored",
     "no_account_creation_or_password_recovery",

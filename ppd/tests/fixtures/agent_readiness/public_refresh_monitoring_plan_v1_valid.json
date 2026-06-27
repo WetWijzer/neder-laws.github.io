@@ -7,33 +7,33 @@
     "file_preparation_or_fee_payment_guidance_coverage": true,
     "devhub_public_guidance_coverage": true,
     "forms_index_coverage": true,
-    "linked_portland_maps_coverage": true
+    "linked_bwb_metadata_coverage": true
   },
   "normalized_source_evidence": [
     {
       "source_evidence_id": "src-ppd-official-anchors",
-      "canonical_url": "https://www.portland.gov/ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
       "coverage_tags": ["official_anchor_coverage"]
     },
     {
       "source_evidence_id": "src-file-prep-fee-guidance",
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "coverage_tags": ["file_preparation_or_fee_payment_guidance_coverage"]
     },
     {
       "source_evidence_id": "src-devhub-public-guidance",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "coverage_tags": ["devhub_public_guidance_coverage"]
     },
     {
       "source_evidence_id": "src-forms-index",
-      "canonical_url": "https://www.portland.gov/ppd/brochures-forms-handouts/permits-and-inspections-applications",
+      "canonical_url": "https://wetten.overheid.nl/ppd/brochures-forms-handouts/permits-and-inspections-applications",
       "coverage_tags": ["forms_index_coverage"]
     },
     {
-      "source_evidence_id": "src-linked-portland-maps",
-      "canonical_url": "https://www.portlandmaps.com",
-      "coverage_tags": ["linked_portland_maps_coverage"]
+      "source_evidence_id": "src-linked-wetwijzer-maps",
+      "canonical_url": "https://repository.overheid.nl",
+      "coverage_tags": ["linked_bwb_metadata_coverage"]
     }
   ],
   "monitoring_checks": [
@@ -55,11 +55,11 @@
     },
     {
       "check_id": "forms-files-fees-and-map-links-drift",
-      "description": "Hold the candidate when forms index, file preparation, fee/payment, or linked Portland Maps source coverage is missing or stale in committed metadata.",
+      "description": "Hold the candidate when forms index, file preparation, fee/payment, or linked BWB metadata source coverage is missing or stale in committed metadata.",
       "source_evidence_ids": [
         "src-file-prep-fee-guidance",
         "src-forms-index",
-        "src-linked-portland-maps"
+        "src-linked-wetwijzer-maps"
       ],
       "hold_thresholds": {
         "missing_required_source_count": 1,

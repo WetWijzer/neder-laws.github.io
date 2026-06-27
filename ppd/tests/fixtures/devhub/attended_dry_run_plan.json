@@ -14,7 +14,7 @@
     {
       "surface_id": "devhub_home_read_only_review",
       "state_class": "read_only",
-      "url_pattern": "https://devhub.portlandoregon.gov/*",
+      "url_pattern": "https://wetten.overheid.nl/*",
       "page_heading": "DevHub Home",
       "selector_confidence": 0.92,
       "ready_for_dry_run": true,
@@ -28,7 +28,7 @@
     {
       "surface_id": "devhub_application_reversible_draft",
       "state_class": "reversible_draft",
-      "url_pattern": "https://devhub.portlandoregon.gov/permits/draft/*",
+      "url_pattern": "https://wetten.overheid.nl/permits/draft/*",
       "page_heading": "Permit Application Draft",
       "selector_confidence": 0.9,
       "ready_for_dry_run": true,

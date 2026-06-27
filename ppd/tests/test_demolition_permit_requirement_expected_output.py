@@ -59,7 +59,7 @@ class DemolitionPermitRequirementExpectedOutputTest(unittest.TestCase):
             self.assertTrue(all("" in fact for fact in record["redactedUserFacts"]))
             self.assertTrue(record["evidence"], record["recordId"])
             for evidence in record["evidence"]:
-                self.assertTrue(evidence["url"].startswith("https://www.portland.gov/"), evidence)
+                self.assertTrue(evidence["url"].startswith("https://wetten.overheid.nl/"), evidence)
                 self.assertTrue(evidence["sourceTitle"].strip())
                 self.assertTrue(evidence["anchor"].strip())
                 self.assertTrue(evidence["supports"].strip())

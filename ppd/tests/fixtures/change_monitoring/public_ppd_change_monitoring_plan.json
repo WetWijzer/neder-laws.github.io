@@ -7,9 +7,9 @@
   "rawCrawlOutputAllowed": false,
   "downloadedDocumentsAllowed": false,
   "scope": {
-    "bureau": "Portland Permitting & Development",
+    "bureau": "Netherlands Permitting & Development",
     "allowedHosts": [
-      "www.portland.gov"
+      "wetten.overheid.nl"
     ],
     "excludedArtifacts": [
       "private DevHub session state",
@@ -24,9 +24,9 @@
       "id": "high-change-devhub-faq-guidance",
       "changeLikelihood": "high",
       "artifactType": "public_guidance_page",
-      "title": "Development Hub PDX FAQ",
-      "sourceUrl": "https://www.portland.gov/ppd/development-hub-pdx/devhub-faq",
-      "canonicalUrl": "https://www.portland.gov/ppd/development-hub-pdx/devhub-faq",
+      "title": "Development Hub Netherlands FAQ",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/development-hub-netherlands/devhub-faq",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/development-hub-netherlands/devhub-faq",
       "recrawlCadence": "weekly",
       "recrawlReason": "DevHub public guidance can change when online permit request, correction upload, inspection, or payment guidance changes.",
       "hashFields": [
@@ -53,8 +53,8 @@
       "changeLikelihood": "low",
       "artifactType": "public_pdf_or_form_artifact",
       "title": "Permit application form artifact referenced from public PP&D forms guidance",
-      "sourceUrl": "https://www.portland.gov/ppd/permits/permits-and-inspections-applications",
-      "canonicalUrl": "https://www.portland.gov/ppd/permits/permits-and-inspections-applications",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/permits-and-inspections-applications",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/permits-and-inspections-applications",
       "recrawlCadence": "monthly_unless_linked_page_changed",
       "recrawlReason": "Form and PDF artifacts are expected to change less often than public guidance pages, but should be refreshed when their index page changes.",
       "hashFields": [

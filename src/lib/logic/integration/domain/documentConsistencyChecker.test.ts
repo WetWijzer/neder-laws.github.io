@@ -7,17 +7,17 @@ import {
 describe('browser-native document consistency checker', () => {
   it('accepts supported fields and citations without Python or server runtime', () => {
     const result = checkDocumentConsistency({
-      id: 'pcc-1.01.010',
-      text: 'Portland City Code 1.01.010 states the Code is known as the City Code. The auditor shall maintain the code.',
-      citations: ['Portland City Code 1.01.010'],
+      id: 'bwbr-0001854-artikel-1',
+      text: 'BWBR0001854 Artikel 1 states the legaliteitsbeginsel. The official source shall be verified on wetten.overheid.nl.',
+      citations: ['BWBR0001854 Artikel 1'],
       extractedFields: [
         {
-          name: 'short_title',
-          value: 'City Code',
-          evidence: 'known as the City Code',
+          name: 'principle',
+          value: 'legaliteitsbeginsel',
+          evidence: 'legaliteitsbeginsel',
           required: true,
         },
-        { name: 'custodian', value: 'auditor shall maintain the code', required: true },
+        { name: 'source', value: 'wetten.overheid.nl', required: true },
       ],
     });
 
@@ -32,16 +32,16 @@ describe('browser-native document consistency checker', () => {
     expect(result.metadata).toBe(DOCUMENT_CONSISTENCY_CHECKER_METADATA);
   });
 
-  it('matches evidence snippets and normalizes PCC citation aliases deterministically', () => {
+  it('matches evidence snippets and normalized article citations deterministically', () => {
     const result = checkDocumentConsistency({
-      id: 'pcc-3.04.010',
-      text: 'Per P.C.C. § 3.04.010, permits may be granted by the planning director.',
-      citations: ['Portland City Code 3.04.010'],
+      id: 'bwbr-0002656-artikel-1',
+      text: 'According to BWBR0002656 Artikel 1, burgerlijke rechten are addressed in the official legal text.',
+      citations: ['BWBR0002656 Artikel 1'],
       extractedFields: [
         {
-          name: 'permit_authority',
-          value: 'director approval',
-          evidence: 'planning director',
+          name: 'subject',
+          value: 'burgerlijke rechten',
+          evidence: 'burgerlijke rechten',
           required: true,
         },
       ],
@@ -63,7 +63,7 @@ describe('browser-native document consistency checker', () => {
     const result = new BrowserNativeDocumentConsistencyChecker().check({
       id: 'permit-rule',
       text: 'The application is approved. The same application is denied. No permit required.',
-      citations: ['Portland City Code 3.04.010'],
+      citations: ['BWBR0002656 Artikel 1'],
       extractedFields: [
         { name: 'permit_status', value: 'planning director approval', required: true },
       ],
@@ -80,7 +80,7 @@ describe('browser-native document consistency checker', () => {
         expect.objectContaining({
           code: 'citation_not_in_text',
           severity: 'error',
-          citation: 'Portland City Code 3.04.010',
+          citation: 'BWBR0002656 Artikel 1',
         }),
         expect.objectContaining({ code: 'contradictory_terms', severity: 'error' }),
       ]),

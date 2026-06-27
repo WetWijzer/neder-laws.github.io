@@ -274,13 +274,13 @@
 +      ],
 +      "provenance_chain": [
 +        {
-+          "source_url": "https://www.portland.gov/ppd/permits/single-pdf-process",
++          "source_url": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +          "document_id": "normalized-public-guidance-single-pdf-process",
 +          "requirement_id": "req-single-drawing-plan-pdf",
 +          "evidence_quote": "Drawing plans are submitted as one searchable PDF."
 +        },
 +        {
-+          "source_url": "https://www.portland.gov/ppd/forms",
++          "source_url": "https://wetten.overheid.nl/ppd/forms",
 +          "document_id": "normalized-public-forms-index",
 +          "requirement_id": "req-application-documents-separate",
 +          "evidence_quote": "Applications and supporting documents are separate PDFs."
@@ -298,13 +298,13 @@
 +      ],
 +      "provenance_chain": [
 +        {
-+          "source_url": "https://www.portland.gov/ppd/devhub/how-to-upload-plans",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub/how-to-upload-plans",
 +          "document_id": "normalized-devhub-upload-guidance",
 +          "requirement_id": "req-upload-plan-sheets-separately",
 +          "evidence_quote": "Upload each plan sheet as a separate plan file."
 +        },
 +        {
-+          "source_url": "https://www.portland.gov/ppd/devhub/faq",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub/faq",
 +          "document_id": "normalized-devhub-faq",
 +          "requirement_id": "req-follow-current-upload-instructions",
 +          "evidence_quote": "Follow current upload instructions shown for your permit request."
@@ -324,13 +324,13 @@
 +      "provenance_chains": {
 +        "left": [
 +          {
-+            "source_url": "https://www.portland.gov/ppd/permits/single-pdf-process",
++            "source_url": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +            "document_id": "normalized-public-guidance-single-pdf-process",
 +            "requirement_id": "req-single-drawing-plan-pdf",
 +            "evidence_quote": "Drawing plans are submitted as one searchable PDF."
 +          },
 +          {
-+            "source_url": "https://www.portland.gov/ppd/forms",
++            "source_url": "https://wetten.overheid.nl/ppd/forms",
 +            "document_id": "normalized-public-forms-index",
 +            "requirement_id": "req-application-documents-separate",
 +            "evidence_quote": "Applications and supporting documents are separate PDFs."
@@ -338,13 +338,13 @@
 +        ],
 +        "right": [
 +          {
-+            "source_url": "https://www.portland.gov/ppd/devhub/how-to-upload-plans",
++            "source_url": "https://wetten.overheid.nl/ppd/devhub/how-to-upload-plans",
 +            "document_id": "normalized-devhub-upload-guidance",
 +            "requirement_id": "req-upload-plan-sheets-separately",
 +            "evidence_quote": "Upload each plan sheet as a separate plan file."
 +          },
 +          {
-+            "source_url": "https://www.portland.gov/ppd/devhub/faq",
++            "source_url": "https://wetten.overheid.nl/ppd/devhub/faq",
 +            "document_id": "normalized-devhub-faq",
 +            "requirement_id": "req-follow-current-upload-instructions",
 +            "evidence_quote": "Follow current upload instructions shown for your permit request."

@@ -12,7 +12,7 @@ from ppd.devhub_readonly_observation_rehearsal_v1_validation import (
 )
 
 
-CITATION = "https://www.portland.gov/ppd/devhub-faqs"
+CITATION = "https://wetten.overheid.nl/ppd/devhub-faqs"
 
 
 def cited_row(**values: object) -> dict:
@@ -73,7 +73,7 @@ def valid_packet() -> dict:
             cited_row(renewal_authorization_reference="Renewal authorization is only a redacted observed eligibility reference.")
         ],
         "observed_heading_rows": [cited_row(observed_heading="DevHub")],
-        "url_pattern_rows": [cited_row(url_pattern="https://devhub.portlandoregon.gov/*")],
+        "url_pattern_rows": [cited_row(url_pattern="https://wetten.overheid.nl/*")],
         "accessible_landmark_rows": [cited_row(landmark="main")],
         "read_only_action_label_rows": [cited_row(action_label="View", read_only=True)],
         "validation_message_rows": [cited_row(validation_message="Required field message placeholder")],

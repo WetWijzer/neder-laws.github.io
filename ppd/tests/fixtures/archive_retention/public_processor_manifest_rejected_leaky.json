@@ -1,8 +1,8 @@
 {
   "manifest_id": "archive-manifest-leaky-fixture",
   "source_id": "ppd-devhub-private-fixture",
-  "canonical_url": "https://devhub.portlandoregon.gov/fixture",
-  "requested_url": "https://devhub.portlandoregon.gov/fixture",
+  "canonical_url": "https://wetten.overheid.nl/fixture",
+  "requested_url": "https://wetten.overheid.nl/fixture",
   "redirect_chain": [],
   "http_status": 200,
   "content_type": "text/html; charset=utf-8",

@@ -7,7 +7,7 @@
   "surface": {
     "title": "Synthetic DevHub permit overview",
     "page_heading": "Permit overview",
-    "url_pattern": "https://devhub.portlandoregon.gov/permits/{permit_id}/summary"
+    "url_pattern": "https://wetten.overheid.nl/permits/{permit_id}/summary"
   },
   "accessible_landmarks": [
     {
@@ -29,7 +29,7 @@
       "placeholder": "redacted applicant label placeholder",
       "observed_field_class": "applicant_name",
       "redaction": "omit_private_value",
-      "route_pattern": "https://devhub.portlandoregon.gov/permits/123456/summary",
+      "route_pattern": "https://wetten.overheid.nl/permits/123456/summary",
       "selector_ref": "main.heading.applicant",
       "selector_confidence": 0.9
     },
@@ -40,7 +40,7 @@
       "placeholder": "synthetic status label placeholder",
       "observed_field_class": "public_label",
       "redaction": "public_label",
-      "route_pattern": "https://devhub.portlandoregon.gov/permits/{permit_id}/summary",
+      "route_pattern": "https://wetten.overheid.nl/permits/{permit_id}/summary",
       "selector_ref": "main.status.permit",
       "selector_confidence": 0.82
     },
@@ -51,7 +51,7 @@
       "placeholder": "synthetic fee notice placeholder",
       "observed_field_class": "financial",
       "redaction": "label_only",
-      "route_pattern": "https://devhub.portlandoregon.gov/permits/:permit_id/fees",
+      "route_pattern": "https://wetten.overheid.nl/permits/:permit_id/fees",
       "selector_ref": "aside.notice.fees",
       "selector_confidence": 0.78
     }

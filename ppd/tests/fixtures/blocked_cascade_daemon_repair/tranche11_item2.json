@@ -4,13 +4,13 @@
   "item": 2,
   "blocked_work": [
     {
-      "id": "ppd-crawl-portland-permit-index",
+      "id": "ppd-crawl-wetwijzer-permit-index",
       "state": "parked",
       "blocked_at": "2026-05-08T00:00:00Z",
       "repair_task_id": "daemon-repair-blocked-cascade-tranche11-item2"
     },
     {
-      "id": "ppd-normalize-portland-permit-index",
+      "id": "ppd-normalize-wetwijzer-permit-index",
       "state": "parked",
       "blocked_at": "2026-05-08T00:00:00Z",
       "repair_task_id": "daemon-repair-blocked-cascade-tranche11-item2"
@@ -48,12 +48,12 @@
   },
   "expected": {
     "parked_before_fresh_repair": [
-      "ppd-crawl-portland-permit-index",
-      "ppd-normalize-portland-permit-index"
+      "ppd-crawl-wetwijzer-permit-index",
+      "ppd-normalize-wetwijzer-permit-index"
     ],
     "released_after_fresh_repair": [
-      "ppd-crawl-portland-permit-index",
-      "ppd-normalize-portland-permit-index"
+      "ppd-crawl-wetwijzer-permit-index",
+      "ppd-normalize-wetwijzer-permit-index"
     ]
   }
 }

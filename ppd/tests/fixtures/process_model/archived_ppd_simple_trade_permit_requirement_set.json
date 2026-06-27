@@ -1,11 +1,11 @@
 {
-  "process_model_id": "portland-ppd-simple-trade-permit-fixture-v1",
-  "jurisdiction": "Portland, Oregon",
-  "agency": "Portland Permitting & Development",
+  "process_model_id": "wetwijzer-ppd-simple-trade-permit-fixture-v1",
+  "jurisdiction": "Netherlands, Netherlands",
+  "agency": "Netherlands Permitting & Development",
   "source_archive": {
     "archive_id": "ppd-archive-fixture-simple-trade-permit-2026-05-08",
     "title": "Simple trade permit archived requirement fixture",
-    "source_url": "https://www.portland.gov/ppd/permits",
+    "source_url": "https://wetten.overheid.nl/ppd/permits",
     "archived_at": "2026-05-08T00:00:00Z",
     "content_sha256": "fixture-only-not-a-live-crawl"
   },
@@ -17,7 +17,7 @@
         {
           "id": "eligibility.simple_trade.work_type",
           "all": [
-            {"fact": "project_location.city", "operator": "equals", "value": "Portland"},
+            {"fact": "project_location.city", "operator": "equals", "value": "Netherlands"},
             {"fact": "permit_type", "operator": "in", "value": ["mechanical", "electrical", "plumbing"]},
             {"fact": "requires_plan_review", "operator": "equals", "value": false}
           ]
@@ -45,7 +45,7 @@
       ],
       "unsupported_paths": [
         {"id": "unsupported.plan_review", "when": {"fact": "requires_plan_review", "operator": "equals", "value": true}, "reason": "Plan review paths are outside the simple trade permit fixture."},
-        {"id": "unsupported.outside_portland", "when": {"fact": "project_location.city", "operator": "not_equals", "value": "Portland"}, "reason": "The PP&D process model covers Portland jurisdiction only."}
+        {"id": "unsupported.outside_wetwijzer", "when": {"fact": "project_location.city", "operator": "not_equals", "value": "Netherlands"}, "reason": "The PP&D process model covers Netherlands jurisdiction only."}
       ],
       "guardrail_bundle_refs": [
         "guardrails.ppd.no_submission_without_user_confirmation",
@@ -55,13 +55,13 @@
     }
   ],
   "expected_process_model": {
-    "process_model_id": "portland-ppd-simple-trade-permit-fixture-v1",
-    "jurisdiction": "Portland, Oregon",
-    "agency": "Portland Permitting & Development",
+    "process_model_id": "wetwijzer-ppd-simple-trade-permit-fixture-v1",
+    "jurisdiction": "Netherlands, Netherlands",
+    "agency": "Netherlands Permitting & Development",
     "source_archive": {
       "archive_id": "ppd-archive-fixture-simple-trade-permit-2026-05-08",
       "title": "Simple trade permit archived requirement fixture",
-      "source_url": "https://www.portland.gov/ppd/permits",
+      "source_url": "https://wetten.overheid.nl/ppd/permits",
       "archived_at": "2026-05-08T00:00:00Z",
       "content_sha256": "fixture-only-not-a-live-crawl"
     },
@@ -70,7 +70,7 @@
       {
         "id": "eligibility.simple_trade.work_type",
         "all": [
-          {"fact": "project_location.city", "operator": "equals", "value": "Portland"},
+          {"fact": "project_location.city", "operator": "equals", "value": "Netherlands"},
           {"fact": "permit_type", "operator": "in", "value": ["mechanical", "electrical", "plumbing"]},
           {"fact": "requires_plan_review", "operator": "equals", "value": false}
         ],
@@ -99,7 +99,7 @@
     ],
     "unsupported_paths": [
       {"id": "unsupported.plan_review", "when": {"fact": "requires_plan_review", "operator": "equals", "value": true}, "reason": "Plan review paths are outside the simple trade permit fixture.", "requirement_id": "REQ-ELIGIBILITY-001"},
-      {"id": "unsupported.outside_portland", "when": {"fact": "project_location.city", "operator": "not_equals", "value": "Portland"}, "reason": "The PP&D process model covers Portland jurisdiction only.", "requirement_id": "REQ-ELIGIBILITY-001"}
+      {"id": "unsupported.outside_wetwijzer", "when": {"fact": "project_location.city", "operator": "not_equals", "value": "Netherlands"}, "reason": "The PP&D process model covers Netherlands jurisdiction only.", "requirement_id": "REQ-ELIGIBILITY-001"}
     ],
     "guardrail_bundle_refs": [
       "guardrails.ppd.no_payment_or_certification_automation",

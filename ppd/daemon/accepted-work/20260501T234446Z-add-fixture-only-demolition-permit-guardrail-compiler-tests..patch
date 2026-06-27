@@ -11,13 +11,13 @@
 +      {
 +        "id": "ppd-demolition-guidance",
 +        "label": "PP&D demolition permit public guidance fixture",
-+        "url": "https://www.portland.gov/ppd/permits/demolition-permits",
++        "url": "https://wetten.overheid.nl/ppd/permits/demolition-permits",
 +        "capturedAt": "2026-05-01T00:00:00Z"
 +      },
 +      {
 +        "id": "devhub-application-guidance",
 +        "label": "DevHub permit request public guidance fixture",
-+        "url": "https://www.portland.gov/ppd/devhub/apply-permit",
++        "url": "https://wetten.overheid.nl/ppd/devhub/apply-permit",
 +        "capturedAt": "2026-05-01T00:00:00Z"
 +      }
 +    ],

@@ -3,9 +3,9 @@
   "sources": [
     {
       "source_id": "src-devhub-guide-submit-application",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "source_type": "devhub_public",
-      "owning_surface": "Portland PP&D",
+      "owning_surface": "WetWijzer legal sources",
       "allowlist_policy": "allowed_official_public_source",
       "robots_policy": "respect_robots_before_live_fetch",
       "crawl_frequency": "weekly",
@@ -20,8 +20,8 @@
     {
       "manifest_id": "arc-devhub-guide-submit-application-20260508",
       "source_id": "src-devhub-guide-submit-application",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
-      "requested_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
+      "requested_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "redirect_chain": [],
       "http_status": 200,
       "content_type": "text/html; charset=utf-8",

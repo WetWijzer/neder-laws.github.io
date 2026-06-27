@@ -3,8 +3,8 @@
   "intentions": [
     {
       "source_id": "ppd-devhub-faqs",
-      "requested_url": "http://www.portland.gov/ppd/devhub-faqs",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "requested_url": "http://wetten.overheid.nl/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "synthetic": true,
       "approval": {
         "status": "approved",
@@ -12,12 +12,12 @@
       },
       "redirect_chain": [
         {
-          "url": "http://www.portland.gov/ppd/devhub-faqs",
+          "url": "http://wetten.overheid.nl/ppd/devhub-faqs",
           "status": 301,
-          "location": "https://www.portland.gov/ppd/devhub-faqs"
+          "location": "https://wetten.overheid.nl/ppd/devhub-faqs"
         },
         {
-          "url": "https://www.portland.gov/ppd/devhub-faqs",
+          "url": "https://wetten.overheid.nl/ppd/devhub-faqs",
           "status": 200
         }
       ],
@@ -29,13 +29,13 @@
     },
     {
       "source_id": "ppd-spp-file-naming-standards",
-      "requested_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "requested_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "synthetic": true,
       "approved": true,
       "redirect_chain": [
         {
-          "url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+          "url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
           "status": 200
         }
       ],

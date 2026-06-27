@@ -74,7 +74,7 @@ def test_synthetic_readiness_fixture_links_the_full_offline_chain() -> None:
 
     for source in sources.values():
         assert source["privacy_classification"] == "public"
-        assert source["canonical_url"].startswith(("https://www.portland.gov/", "https://devhub.portlandoregon.gov"))
+        assert source["canonical_url"].startswith(("https://wetten.overheid.nl/", "https://wetten.overheid.nl"))
 
     for manifest in manifests.values():
         assert manifest["source_id"] in sources

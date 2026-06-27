@@ -27,7 +27,7 @@ class FeeNoticePaymentGateTest(unittest.TestCase):
         evidence_ids = {item["sourceEvidenceId"] for item in self.fixture["publicFeeGuidance"]}
         self.assertEqual("fee_notice_payment_gate", self.fixture["fixtureKind"])
         for source in self.fixture["publicFeeGuidance"]:
-            self.assertTrue(source["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
+            self.assertTrue(source["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
             self.assertTrue(source["citation"]["locator"])
             self.assertTrue(source["citation"]["paraphrase"])
         for notice in self.fixture["estimatedFeeNotices"]:

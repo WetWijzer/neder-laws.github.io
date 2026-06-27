@@ -24,37 +24,37 @@
   "citation_catalog": [
     {
       "citation_id": "plan.non_negotiable_boundaries.no_auth_artifacts",
-      "source": "PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
+      "source": "WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
       "section": "Non-Negotiable Boundaries",
       "supports": "Do not store credentials, session state, screenshots, traces, HAR files, payment details, private uploads, local private file paths, or raw authenticated page values in committed artifacts."
     },
     {
       "citation_id": "plan.phase5.change_monitoring.report_fields",
-      "source": "PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
+      "source": "WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
       "section": "Public Website Archival Plan / Phase 5: Change Monitoring",
       "supports": "Change reports should include changed source hash, permit type, document, upload or file naming rule, fee/payment instruction, deadline, DevHub action guidance, and affected requirement or guardrail IDs."
     },
     {
       "citation_id": "plan.devhub.safe_boundaries",
-      "source": "PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
+      "source": "WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
       "section": "Authenticated DevHub Automation Plan / DevHub Surface Categories",
       "supports": "Safe read-only review is distinct from reversible draft work and consequential official or financial actions."
     },
     {
       "citation_id": "official.devhub_faq.account_services",
-      "source": "https://www.portland.gov/ppd/devhub-faqs",
+      "source": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "section": "Official Source Anchors / Verification notes",
       "supports": "DevHub account-scoped services include purchasing permits, submitting permit requests, scheduling inspections, uploading corrections, and paying fees."
     },
     {
       "citation_id": "official.submit_plans.single_pdf",
-      "source": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "source": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "section": "Official Source Anchors / Source facts verified on 2026-05-08",
       "supports": "Single PDF guidance requires drawing plans together in one PDF, with applications, calculations, and other supporting documents uploaded as separate PDFs."
     },
     {
       "citation_id": "official.file_naming_standards",
-      "source": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "source": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "section": "Official Source Anchors",
       "supports": "File naming standards and PDF preparation guidance are freshness-sensitive public PP&D sources."
     }

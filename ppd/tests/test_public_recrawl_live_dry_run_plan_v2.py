@@ -31,8 +31,8 @@ def test_build_plan_from_committed_fixtures_selects_cited_seed_batches() -> None
         "no_source_registry_mutation": True,
     }
     assert [batch["source_id"] for batch in plan["seed_batches"]] == [
-        "portland-council-agendas",
-        "portland-auditor-public-notices",
+        "wetwijzer-council-agendas",
+        "wetwijzer-auditor-public-notices",
     ]
     assert plan["seed_batches"][0]["rate_limit_decision"]["delay_seconds"] == 60
     assert plan["seed_batches"][1]["rate_limit_decision"]["delay_seconds"] == 45

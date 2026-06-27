@@ -14,7 +14,7 @@
   "sources": [
     {
       "source_id": "ppd-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "delta_status": "changed",
       "changed_fields": ["content_hash", "required_document_labels"],
       "evidence_ref": "fixture-manifest:submit-plans-online",
@@ -22,7 +22,7 @@
     },
     {
       "source_id": "ppd-devhub-faq",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "delta_status": "unchanged",
       "changed_fields": [],
       "evidence_ref": "fixture-manifest:devhub-faq",
@@ -30,7 +30,7 @@
     },
     {
       "source_id": "ppd-fee-payment-guide",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "delta_status": "added",
       "changed_fields": ["source_registry_entry"],
       "evidence_ref": "fixture-manifest:fee-payment-guide",

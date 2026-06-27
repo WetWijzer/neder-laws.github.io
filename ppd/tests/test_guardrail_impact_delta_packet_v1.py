@@ -140,7 +140,7 @@ def test_rejects_missing_required_explanation_placeholder_and_resolved_dispositi
 
 def test_rejects_non_exact_or_live_validation_commands() -> None:
     packet = _packet()
-    packet["offline_validation_commands"] = [["python3", "-m", "pytest"], ["curl", "https://devhub.portlandoregon.gov"]]
+    packet["offline_validation_commands"] = [["python3", "-m", "pytest"], ["curl", "https://wetten.overheid.nl"]]
 
     messages = _messages(packet)
 

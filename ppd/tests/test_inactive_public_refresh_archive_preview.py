@@ -47,7 +47,7 @@ def test_builds_inactive_source_registry_and_archive_manifest_preview() -> None:
     assert permit_row["patch_state"] == "inactive_preview_only"
     assert permit_row["registry_target"] == "SourceRegistry"
     assert permit_row["expected_canonical_url_change"] is True
-    assert permit_row["expected_canonical_url"] == "https://www.portland.gov/ppd/permits"
+    assert permit_row["expected_canonical_url"] == "https://wetten.overheid.nl/ppd/permits"
     assert permit_row["skipped_reason"] is None
     assert "No active record changed" in permit_row["rollback_note"]
 

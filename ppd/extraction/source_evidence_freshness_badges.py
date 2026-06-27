@@ -39,13 +39,13 @@ _STALE_MARKERS = {
 _CURRENT_MARKERS = {"current", "unchanged", "verified", "traceable", "ok", "passed"}
 
 _PUBLIC_HOSTS = {
-    "www.portland.gov",
-    "portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "portlandoregon.gov",
-    "www.portlandmaps.com",
-    "portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
+    "repository.overheid.nl",
 }
 _PRIVATE_URL_MARKERS = (
     "/account",
@@ -686,7 +686,7 @@ def _url_is_private_or_authenticated(url: str) -> bool:
     if hostname not in _PUBLIC_HOSTS:
         return True
     path = parsed.path.casefold()
-    if hostname == "devhub.portlandoregon.gov" and any(marker in path for marker in _PRIVATE_URL_MARKERS):
+    if hostname == "wetten.overheid.nl" and any(marker in path for marker in _PRIVATE_URL_MARKERS):
         return True
     return False
 

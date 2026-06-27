@@ -34,34 +34,34 @@ export interface CecPythonParityProofFixture {
 
 export const PYTHON_CEC_DCEC_PARITY_FIXTURES: CecPythonParityProofFixture[] = [
   {
-    id: 'dcec_quantified_portland_obligation',
+    id: 'dcec_quantified_netherlands_obligation',
     pythonModule: 'ipfs_datasets_py.logic.CEC.native_prover',
     format: 'custom',
     problem: `
       # Captured from Python DCEC parser/prover parity run.
       LOGIC: D
       ASSUMPTIONS:
-      (subject_to ada portland_city_code_1_05_040)
-      (forall agent (implies (subject_to agent portland_city_code_1_05_040) (O (always (comply_with agent portland_city_code_1_05_040)))))
+      (subject_to ada netherlands_law_article_1_05_040)
+      (forall agent (implies (subject_to agent netherlands_law_article_1_05_040) (O (always (comply_with agent netherlands_law_article_1_05_040)))))
       GOALS:
-      (O (always (comply_with ada portland_city_code_1_05_040)))
+      (O (always (comply_with ada netherlands_law_article_1_05_040)))
     `,
     expectedProblem: {
       name: 'custom_problem',
       logic: 'D',
       assumptions: [
-        '(subject_to ada portland_city_code_1_05_040)',
-        '(forall agent (implies (subject_to agent portland_city_code_1_05_040) (O (always (comply_with agent portland_city_code_1_05_040)))))',
+        '(subject_to ada netherlands_law_article_1_05_040)',
+        '(forall agent (implies (subject_to agent netherlands_law_article_1_05_040) (O (always (comply_with agent netherlands_law_article_1_05_040)))))',
       ],
-      goals: ['(O (always (comply_with ada portland_city_code_1_05_040)))'],
+      goals: ['(O (always (comply_with ada netherlands_law_article_1_05_040)))'],
       metadata: { format: 'custom' },
     },
     expectedProof: {
       status: 'proved',
-      theorem: '(O (always (comply_with ada portland_city_code_1_05_040)))',
+      theorem: '(O (always (comply_with ada netherlands_law_article_1_05_040)))',
       method: 'cec-forward-chaining',
       stepRules: ['CecUniversalModusPonens'],
-      stepConclusions: ['(O (always (comply_with ada portland_city_code_1_05_040)))'],
+      stepConclusions: ['(O (always (comply_with ada netherlands_law_article_1_05_040)))'],
     },
     rules: ['CecUniversalModusPonens'],
     maxSteps: 3,

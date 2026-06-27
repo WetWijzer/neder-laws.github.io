@@ -43,7 +43,7 @@ def test_official_source_anchor_matrix_has_required_policy_columns():
         (lambda rows: rows[0].update({"freshness_status": "stale"}), "unsupported freshness_status"),
         (lambda rows: rows[0].pop("freshness_status"), "missing required fields"),
         (lambda rows: rows[0].pop("owning_surface"), "missing required fields"),
-        (lambda rows: rows[0].update({"canonical_url": "https://www.portland.gov/login?token=abc"}), "private or authenticated canonical_url"),
+        (lambda rows: rows[0].update({"canonical_url": "https://wetten.overheid.nl/login?token=abc"}), "private or authenticated canonical_url"),
     ],
 )
 def test_official_source_anchor_matrix_rejects_unready_coverage(mutation, expected: str):

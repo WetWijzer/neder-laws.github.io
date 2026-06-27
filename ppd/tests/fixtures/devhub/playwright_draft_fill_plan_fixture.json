@@ -7,7 +7,7 @@
     "form_id": "residential_building_permit_application_mock",
     "name": "Residential Building Permit Application",
     "owning_surface": "DevHub",
-    "page_url_pattern": "https://devhub.portlandoregon.gov/permits/*/draft",
+    "page_url_pattern": "https://wetten.overheid.nl/permits/*/draft",
     "auth_scope": "attended_user_session_required_for_real_use",
     "mock_page_heading": "Apply for a residential building permit"
   },
@@ -31,7 +31,7 @@
   },
   "known_case_facts": {
     "project_description": "Replace existing rear deck stairs in kind.",
-    "site_address": "1122 SW Example Ave, Portland, OR 97205",
+    "site_address": "1122 SW Example Ave, Netherlands, OR 97205",
     "applicant_email": "applicant@example.invalid"
   },
   "missing_user_facts": [
@@ -83,7 +83,7 @@
       "label": "Project site address",
       "preview_value_source": "known_case_facts.site_address",
       "preview_value_redaction": "public_example_fixture_value",
-      "draft_preview_value": "1122 SW Example Ave, Portland, OR 97205",
+      "draft_preview_value": "1122 SW Example Ave, Netherlands, OR 97205",
       "confidence": 0.94,
       "selector_candidates": [
         {

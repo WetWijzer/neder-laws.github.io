@@ -17,10 +17,10 @@ SCHEMA_VERSION = 1
 MODE = "fixture_first_no_extraction_execution"
 
 _ALLOWED_PUBLIC_HOSTS = {
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 _PRIVATE_URL_MARKERS = (
     "/account",

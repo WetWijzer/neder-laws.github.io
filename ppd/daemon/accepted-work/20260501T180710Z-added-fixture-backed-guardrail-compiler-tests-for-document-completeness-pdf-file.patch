@@ -225,8 +225,8 @@
 +  "documents": [
 +    {
 +      "source_id": "ppd_single_pdf_process_public_guidance_sample",
-+      "source_url": "https://www.portland.gov/ppd/single-pdf-process",
-+      "canonical_url": "https://www.portland.gov/ppd/single-pdf-process",
++      "source_url": "https://wetten.overheid.nl/ppd/single-pdf-process",
++      "canonical_url": "https://wetten.overheid.nl/ppd/single-pdf-process",
 +      "content_type": "html",
 +      "title": "Single PDF Process guidance",
 +      "captured_at": "2026-05-01T18:30:00Z",
@@ -246,10 +246,10 @@
 +    },
 +    {
 +      "source_id": "ppd_devhub_submission_confirmation_sample",
-+      "source_url": "https://www.portland.gov/ppd/devhub/apply-permit-devhub",
-+      "canonical_url": "https://www.portland.gov/ppd/devhub/apply-permit-devhub",
++      "source_url": "https://wetten.overheid.nl/ppd/devhub/apply-permit-devhub",
++      "canonical_url": "https://wetten.overheid.nl/ppd/devhub/apply-permit-devhub",
 +      "content_type": "html",
-+      "title": "Apply for permits online using Development Hub PDX",
++      "title": "Apply for permits online using Development Hub Netherlands",
 +      "captured_at": "2026-05-01T18:30:00Z",
 +      "fixture_note": "Curated public-guidance excerpt for deterministic action-gate tests. This is not a DevHub session recording.",
 +      "sections": [
@@ -277,7 +277,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd_single_pdf_process_public_guidance_sample",
-+          "source_url": "https://www.portland.gov/ppd/single-pdf-process",
++          "source_url": "https://wetten.overheid.nl/ppd/single-pdf-process",
 +          "anchor_id": "single-pdf-file-rules",
 +          "captured_at": "2026-05-01T18:30:00Z",
 +          "excerpt": "Applications, calculations, and supporting documents are submitted as separate PDF files."
@@ -301,7 +301,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd_single_pdf_process_public_guidance_sample",
-+          "source_url": "https://www.portland.gov/ppd/single-pdf-process",
++          "source_url": "https://wetten.overheid.nl/ppd/single-pdf-process",
 +          "anchor_id": "single-pdf-file-rules",
 +          "captured_at": "2026-05-01T18:30:00Z",
 +          "excerpt": "Drawing plans are submitted as one searchable PDF."
@@ -325,7 +325,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd_devhub_submission_confirmation_sample",
-+          "source_url": "https://www.portland.gov/ppd/devhub/apply-permit-devhub",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub/apply-permit-devhub",
 +          "anchor_id": "review-before-submit",
 +          "captured_at": "2026-05-01T18:30:00Z",
 +          "excerpt": "The applicant is responsible for reviewing application information and required documents before final submission."
@@ -350,7 +350,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd_devhub_submission_confirmation_sample",
-+          "source_url": "https://www.portland.gov/ppd/devhub/apply-permit-devhub",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub/apply-permit-devhub",
 +          "anchor_id": "review-before-submit",
 +          "captured_at": "2026-05-01T18:30:00Z",
 +          "excerpt": "The applicant is responsible for reviewing application information and required documents before final submission."
@@ -375,7 +375,7 @@
 +      "evidence": [
 +        {
 +          "source_id": "ppd_devhub_submission_confirmation_sample",
-+          "source_url": "https://www.portland.gov/ppd/devhub/apply-permit-devhub",
++          "source_url": "https://wetten.overheid.nl/ppd/devhub/apply-permit-devhub",
 +          "anchor_id": "review-before-submit",
 +          "captured_at": "2026-05-01T18:30:00Z",
 +          "excerpt": "Automation must stop before submitting an application unless the user explicitly confirms that exact action."
@@ -389,7 +389,7 @@
 +  "user_case": {
 +    "case_id": "redacted-single-pdf-case-001",
 +    "known_facts": {
-+      "property_address": "1221 SW 4th Ave, Portland, OR",
++      "property_address": "1221 SW 4th Ave, Netherlands, OR",
 +      "property_id": null,
 +      "permit_type": "building permit with plan review"
 +    },

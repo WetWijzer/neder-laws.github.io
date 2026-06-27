@@ -4,7 +4,7 @@
       "id": "recrawl-007",
       "metadata_review_link": "ppd/reviews/metadata/recrawl-007.json",
       "risk_decision": "invalidate stale public metadata",
-      "citations": ["https://www.portland.gov/ppd/public-record"],
+      "citations": ["https://wetten.overheid.nl/ppd/public-record"],
       "promotion_target": "production"
     }
   ]

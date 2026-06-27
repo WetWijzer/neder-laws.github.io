@@ -6,7 +6,7 @@
   "publicFeeGuidance": [
     {
       "sourceEvidenceId": "src-ppd-fee-guidance",
-      "sourceUrl": "https://www.portland.gov/ppd/fees",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/fees",
       "citation": {
         "locator": "fixture-public-fee-guidance",
         "paraphrase": "Public fee guidance can inform estimated fee notices, but payment is a financial action requiring exact payment-specific confirmation."

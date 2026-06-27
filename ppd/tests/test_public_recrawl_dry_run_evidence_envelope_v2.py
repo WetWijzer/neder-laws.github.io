@@ -50,11 +50,11 @@ def test_envelope_includes_requested_public_recrawl_observation_values() -> None
     slots_by_kind = {slot["slot_kind"]: slot for slot in envelope["observation_slots"]}
 
     assert slots_by_kind["seed_url"]["observed_value"] == {
-        "seed_url": "https://www.portland.gov/council/agenda"
+        "seed_url": "https://wetten.overheid.nl/council/agenda"
     }
     assert slots_by_kind["allowlist_robots_decision"]["observed_value"]["robots_decision"]["policy"] == "allowed"
     assert slots_by_kind["redirect_content_type_hash_placeholder"]["observed_value"] == {
-        "requested_url": "https://www.portland.gov/council/agenda",
+        "requested_url": "https://wetten.overheid.nl/council/agenda",
         "final_url": None,
         "redirect_chain": [],
         "http_status": None,

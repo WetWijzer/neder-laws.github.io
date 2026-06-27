@@ -83,12 +83,12 @@ def test_public_refresh_ingestion_rejects_private_or_authenticated_urls() -> Non
         build_public_refresh_ingestion_plan(fixture)
 
     fixture = _fixture()
-    fixture["refreshed_captures"][0]["canonical_url"] = "https://devhub.portlandoregon.gov/dashboard"
+    fixture["refreshed_captures"][0]["canonical_url"] = "https://wetten.overheid.nl/dashboard"
     with pytest.raises(PublicRefreshIngestionError, match="requires authentication"):
         build_public_refresh_ingestion_plan(fixture)
 
     fixture = _fixture()
-    fixture["refreshed_captures"][0]["source_url"] = "https://user:secret@www.portland.gov/ppd"
+    fixture["refreshed_captures"][0]["source_url"] = "https://user:secret@wetten.overheid.nl/ppd"
     with pytest.raises(PublicRefreshIngestionError, match="must not include credentials"):
         build_public_refresh_ingestion_plan(fixture)
 

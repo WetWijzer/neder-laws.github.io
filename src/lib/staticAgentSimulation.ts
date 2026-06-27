@@ -1,4 +1,4 @@
-// Simple browser-based agent simulation for AI Town
+// Simple browser-based agent simulation for WetWijzer
 import { clientLLM } from './clientLLM';
 
 export interface Position {
@@ -68,7 +68,7 @@ export class StaticAgentSimulation {
   }
 
   private initializeAgents() {
-    // Use rich character data from original AI Town
+    // Use rich character data from original WetWijzer
     const agentData = [
       {
         id: 'lucky',

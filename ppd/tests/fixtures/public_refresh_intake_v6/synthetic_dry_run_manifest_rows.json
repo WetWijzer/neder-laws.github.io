@@ -6,8 +6,8 @@
       "plan_id": "public-refresh-dry-run-execution-plan-v6-fixture",
       "schema_version": "ppd.public_refresh_dry_run_execution_plan.v6"
     },
-    "source_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools#overview",
-    "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+    "source_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools#overview",
+    "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
     "source_group": "ppd_public_html",
     "http_metadata": {
       "status_code": null,
@@ -44,8 +44,8 @@
       "plan_id": "public-refresh-dry-run-execution-plan-v6-fixture",
       "schema_version": "ppd.public_refresh_dry_run_execution_plan.v6"
     },
-    "source_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
-    "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+    "source_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
+    "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
     "source_group": "ppd_public_pdf",
     "http_metadata": {
       "status_code": null,
@@ -82,8 +82,8 @@
       "plan_id": "public-refresh-dry-run-execution-plan-v6-fixture",
       "schema_version": "ppd.public_refresh_dry_run_execution_plan.v6"
     },
-    "source_url": "https://devhub.portlandoregon.gov/",
-    "canonical_url": "https://devhub.portlandoregon.gov/",
+    "source_url": "https://wetten.overheid.nl/",
+    "canonical_url": "https://wetten.overheid.nl/",
     "source_group": "devhub_public_help",
     "http_metadata": {
       "status_code": null,

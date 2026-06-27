@@ -52,7 +52,7 @@ class MissingInformationQuestionnaireResolutionTest(unittest.TestCase):
             self.assertTrue(question["evidenceIds"])
             for evidence_id in question["evidenceIds"]:
                 evidence = evidence_by_id[evidence_id]
-                self.assertTrue(evidence["url"].startswith("https://www.portland.gov/ppd/"))
+                self.assertTrue(evidence["url"].startswith("https://wetten.overheid.nl/ppd/"))
                 self.assertEqual("public_source_only", evidence["redaction"])
                 self.assertTrue(evidence["capturedAt"].endswith("Z"))
 

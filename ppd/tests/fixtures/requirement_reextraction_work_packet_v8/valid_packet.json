@@ -6,7 +6,7 @@
   ],
   "source_scoped_extraction_work_items": [
     {
-      "source_id": "source:portland-gov-ppd-devhub-guide-submit-permit-application",
+      "source_id": "source:wetwijzer-gov-ppd-devhub-guide-submit-permit-application",
       "normalized_document_record_ref": "document-record:ppd-devhub-guide-submit-permit-application",
       "extraction_work_item_id": "extract:devhub-guide:acknowledgement-review",
       "citation_span_inputs": [

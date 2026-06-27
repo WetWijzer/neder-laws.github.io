@@ -3,22 +3,22 @@
   "fixture_only": true,
   "sources": [
     {
-      "source_id": "PPD-SRC-PORTLAND-ZONING-001",
-      "title": "Portland zoning code public source fixture",
+      "source_id": "PPD-SRC-NETHERLANDS-ZONING-001",
+      "title": "Netherlands zoning code public source fixture",
       "document_sections": ["33.110.220", "33.110.225"],
       "requirement_ids": ["PPD-REQ-ZONING-SETBACKS", "PPD-REQ-ZONING-HEIGHT"],
       "process_stages": ["source-identification", "requirement-mapping", "reviewer-handoff"],
       "guardrail_bundle_ids": ["PPD-GUARDRAIL-PUBLIC-SOURCE-V1", "PPD-GUARDRAIL-NO-LIVE-CRAWL-V1"],
-      "citations": ["fixture://portland-zoning-code#33.110.220", "fixture://portland-zoning-code#33.110.225"]
+      "citations": ["fixture://wetwijzer-zoning-code#33.110.220", "fixture://wetwijzer-zoning-code#33.110.225"]
     },
     {
-      "source_id": "PPD-SRC-PORTLAND-PERMIT-002",
-      "title": "Portland permit procedure public source fixture",
+      "source_id": "PPD-SRC-NETHERLANDS-PERMIT-002",
+      "title": "Netherlands permit procedure public source fixture",
       "document_sections": ["Permit intake checklist", "Completeness review"],
       "requirement_ids": ["PPD-REQ-PERMIT-INTAKE", "PPD-REQ-PERMIT-COMPLETENESS"],
       "process_stages": ["source-identification", "freshness-review", "rollback-rehearsal"],
       "guardrail_bundle_ids": ["PPD-GUARDRAIL-PUBLIC-SOURCE-V1", "PPD-GUARDRAIL-NO-REGISTRY-MUTATION-V1"],
-      "citations": ["fixture://portland-permit-procedure#intake", "fixture://portland-permit-procedure#completeness"]
+      "citations": ["fixture://wetwijzer-permit-procedure#intake", "fixture://wetwijzer-permit-procedure#completeness"]
     }
   ],
   "attestations": {

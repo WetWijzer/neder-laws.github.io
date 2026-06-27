@@ -82,6 +82,9 @@ export function normalizeFLogicGoal(goal: string): string {
     if (previous === '?' || token === ':-') {
       return token;
     }
+    if (token === 'WetWijzerLawArticle' || token === 'DutchLawArticle') {
+      return 'netherlands_law_article_section';
+    }
     return normalizePredicateName(token);
   });
 }
@@ -166,4 +169,3 @@ function mergeClass(classes: FLogicClass[], next: FLogicClass): void {
     }
   }
 }
-

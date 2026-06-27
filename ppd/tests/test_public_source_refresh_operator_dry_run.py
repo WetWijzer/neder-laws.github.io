@@ -39,7 +39,7 @@ class PublicSourceRefreshOperatorDryRunTest(unittest.TestCase):
             "public_source_refresh_operator_dry_run_transcript",
         )
         self.assertEqual(transcript["mode"], "fixture_first_dry_run")
-        self.assertEqual(transcript["sources"], ["portland-auditor-code"])
+        self.assertEqual(transcript["sources"], ["wetwijzer-auditor-code"])
         self.assertEqual(transcript["reviewer"], "ppd-reviewer")
         self.assertEqual(transcript["owner"], "ppd-source-refresh-owner")
         self.assertEqual(
@@ -47,11 +47,11 @@ class PublicSourceRefreshOperatorDryRunTest(unittest.TestCase):
             [1, 2, 3, 4, 5],
         )
         self.assertIn(
-            "fixture://allowlist/portland-auditor-code.json",
+            "fixture://allowlist/wetwijzer-auditor-code.json",
             transcript["allowlist_evidence_refs"],
         )
         self.assertIn(
-            "fixture://robots/portland-auditor-code.txt",
+            "fixture://robots/wetwijzer-auditor-code.txt",
             transcript["robots_evidence_refs"],
         )
         self.assertTrue(transcript["abort_or_rollback_checkpoints"])

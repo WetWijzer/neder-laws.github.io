@@ -15,8 +15,8 @@
       "redacted_values": ["applicant_name", "site_address", "account_identifier", "project_description"],
       "evidence": [
         {
-          "source_url": "https://www.portland.gov/ppd/apply-permit-or-request-online-devhub",
-          "source_title": "Apply for a permit or request online through Development Hub PDX",
+          "source_url": "https://wetten.overheid.nl/ppd/apply-permit-or-request-online-devhub",
+          "source_title": "Apply for a permit or request online through Development Hub Netherlands",
           "source_detail": "Public DevHub application guidance lists FCC wireless applications among request types available through the online permitting flow.",
           "captured_at": "2026-05-01T00:00:00Z"
         }
@@ -33,14 +33,14 @@
       "redacted_values": ["parcel_number", "site_address", "scope_narrative"],
       "evidence": [
         {
-          "source_url": "https://www.portland.gov/ppd/apply-permit-or-request-online-devhub",
-          "source_title": "Apply for a permit or request online through Development Hub PDX",
+          "source_url": "https://wetten.overheid.nl/ppd/apply-permit-or-request-online-devhub",
+          "source_title": "Apply for a permit or request online through Development Hub Netherlands",
           "source_detail": "The public application guidance separates online request types and includes request flows that require review before permit issuance.",
           "captured_at": "2026-05-01T00:00:00Z"
         },
         {
-          "source_url": "https://www.portland.gov/ppd/development-hub-pdx-devhub-help",
-          "source_title": "Development Hub PDX help",
+          "source_url": "https://wetten.overheid.nl/ppd/development-hub-netherlands-devhub-help",
+          "source_title": "Development Hub Netherlands help",
           "source_detail": "Public DevHub help describes permit requests requiring plan review as a supported service category.",
           "captured_at": "2026-05-01T00:00:00Z"
         }
@@ -57,13 +57,13 @@
       "redacted_values": ["uploaded_file_name", "drawing_sheet_title", "engineer_name", "owner_signature"],
       "evidence": [
         {
-          "source_url": "https://www.portland.gov/ppd/apply-permit-or-request-online-devhub",
-          "source_title": "Apply for a permit or request online through Development Hub PDX",
+          "source_url": "https://wetten.overheid.nl/ppd/apply-permit-or-request-online-devhub",
+          "source_title": "Apply for a permit or request online through Development Hub Netherlands",
           "source_detail": "Public DevHub application guidance identifies online request submission and document upload as part of supported application workflows.",
           "captured_at": "2026-05-01T00:00:00Z"
         },
         {
-          "source_url": "https://www.portland.gov/ppd/single-pdf-process",
+          "source_url": "https://wetten.overheid.nl/ppd/single-pdf-process",
           "source_title": "Single PDF Process",
           "source_detail": "Public PP&D guidance says drawing plans may be one searchable PDF while applications, calculations, and supporting documents are separate PDFs when the Single PDF Process applies.",
           "captured_at": "2026-05-01T00:00:00Z"
@@ -81,14 +81,14 @@
       "redacted_values": ["invoice_number", "payment_amount", "card_number", "billing_contact"],
       "evidence": [
         {
-          "source_url": "https://www.portland.gov/ppd/development-hub-pdx-devhub-help",
-          "source_title": "Development Hub PDX help",
+          "source_url": "https://wetten.overheid.nl/ppd/development-hub-netherlands-devhub-help",
+          "source_title": "Development Hub Netherlands help",
           "source_detail": "Public DevHub FAQ lists fee payments as a supported service category.",
           "captured_at": "2026-05-01T00:00:00Z"
         },
         {
-          "source_url": "https://www.portland.gov/ppd/apply-permit-or-request-online-devhub",
-          "source_title": "Apply for a permit or request online through Development Hub PDX",
+          "source_url": "https://wetten.overheid.nl/ppd/apply-permit-or-request-online-devhub",
+          "source_title": "Apply for a permit or request online through Development Hub Netherlands",
           "source_detail": "Public DevHub application guidance routes online permit and request workflows through DevHub, where payment checkpoints can appear for applicable services.",
           "captured_at": "2026-05-01T00:00:00Z"
         }
@@ -105,8 +105,8 @@
       "redacted_values": ["checksheets_text", "reviewer_name", "revised_file_name", "comment_response"],
       "evidence": [
         {
-          "source_url": "https://www.portland.gov/ppd/development-hub-pdx-devhub-help",
-          "source_title": "Development Hub PDX help",
+          "source_url": "https://wetten.overheid.nl/ppd/development-hub-netherlands-devhub-help",
+          "source_title": "Development Hub Netherlands help",
           "source_detail": "Public DevHub FAQ lists correction uploads as a supported service category.",
           "captured_at": "2026-05-01T00:00:00Z"
         }
@@ -123,14 +123,14 @@
       "redacted_values": ["permit_number", "inspection_result", "contact_phone", "site_contact"],
       "evidence": [
         {
-          "source_url": "https://www.portland.gov/ppd/development-hub-pdx-devhub-help",
-          "source_title": "Development Hub PDX help",
+          "source_url": "https://wetten.overheid.nl/ppd/development-hub-netherlands-devhub-help",
+          "source_title": "Development Hub Netherlands help",
           "source_detail": "Public DevHub FAQ lists inspection scheduling for online trade permits and permit workflow support as service categories; finalization remains a PP&D process checkpoint for applicable permits.",
           "captured_at": "2026-05-01T00:00:00Z"
         },
         {
-          "source_url": "https://www.portland.gov/ppd/apply-permit-or-request-online-devhub",
-          "source_title": "Apply for a permit or request online through Development Hub PDX",
+          "source_url": "https://wetten.overheid.nl/ppd/apply-permit-or-request-online-devhub",
+          "source_title": "Apply for a permit or request online through Development Hub Netherlands",
           "source_detail": "Public DevHub application guidance identifies DevHub as the online system for permit and request workflows, including post-submittal status handling.",
           "captured_at": "2026-05-01T00:00:00Z"
         }
@@ -147,14 +147,14 @@
       "redacted_values": ["user_confirmation_phrase", "application_identifier", "payment_reference", "official_upload_file"],
       "evidence": [
         {
-          "source_url": "https://www.portland.gov/ppd/development-hub-pdx-devhub-help",
-          "source_title": "Development Hub PDX help",
+          "source_url": "https://wetten.overheid.nl/ppd/development-hub-netherlands-devhub-help",
+          "source_title": "Development Hub Netherlands help",
           "source_detail": "Public DevHub help identifies uploads, fee payments, and other permit workflow actions as portal services with practical consequences for the applicant.",
           "captured_at": "2026-05-01T00:00:00Z"
         },
         {
-          "source_url": "https://www.portland.gov/ppd/apply-permit-or-request-online-devhub",
-          "source_title": "Apply for a permit or request online through Development Hub PDX",
+          "source_url": "https://wetten.overheid.nl/ppd/apply-permit-or-request-online-devhub",
+          "source_title": "Apply for a permit or request online through Development Hub Netherlands",
           "source_detail": "Public DevHub application guidance places FCC wireless applications in the online request workflow, so consequential workflow actions require user-controlled confirmation gates.",
           "captured_at": "2026-05-01T00:00:00Z"
         }

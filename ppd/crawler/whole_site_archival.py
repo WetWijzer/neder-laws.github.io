@@ -1,4 +1,4 @@
-"""Whole-site archival planning for public Portland PP&D sources.
+"""Whole-site archival planning for public WetWijzer legal sources sources.
 
 The objects in this module describe how the PP&D daemon should plan an archival
 run against public sources. They are side-effect free: importing or validating
@@ -18,10 +18,10 @@ from ppd.contracts.archive_adapter import IPFS_DATASETS_PROCESSOR_BACKEND
 
 PUBLIC_PPD_HOSTS = frozenset(
     {
-        "www.portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
-        "www.portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
     }
 )
 
@@ -95,7 +95,7 @@ class ArchiveSeed:
             errors.append(f"seed {self.id or '<missing>'} must use https")
         if parsed.hostname not in PUBLIC_PPD_HOSTS:
             errors.append(f"seed {self.id or '<missing>'} host is not PP&D allowlisted")
-        if parsed.hostname == "devhub.portlandoregon.gov" and _looks_private_path(parsed.path):
+        if parsed.hostname == "wetten.overheid.nl" and _looks_private_path(parsed.path):
             errors.append(f"seed {self.id or '<missing>'} must not target private DevHub paths")
         if not self.public_only:
             errors.append(f"seed {self.id or '<missing>'} must be public_only")
@@ -219,7 +219,7 @@ class WholeSiteArchivePlan:
         errors: list[str] = []
         if not self.plan_id.strip():
             errors.append("plan_id is required")
-        if self.source_authority != "City of Portland Permitting & Development public sources":
+        if self.source_authority != "WetWijzer Permitting & Development public sources":
             errors.append("source_authority must name PP&D public sources")
         if len(self.seeds) < 5:
             errors.append("whole-site plan requires at least five public seeds")
@@ -312,38 +312,38 @@ def build_default_whole_site_archive_plan() -> WholeSiteArchivePlan:
     seeds = (
         ArchiveSeed(
             id="ppd-home",
-            url="https://www.portland.gov/ppd",
+            url="https://wetten.overheid.nl/ppd",
             purpose="PP&D public landing page and primary navigation discovery.",
         ),
         ArchiveSeed(
             id="ppd-documents",
-            url="https://www.portland.gov/ppd/documents",
+            url="https://wetten.overheid.nl/ppd/documents",
             purpose="Public forms, handouts, checklists, and PDF discovery.",
             expected_content_types=("text/html", "application/pdf"),
         ),
         ArchiveSeed(
             id="ppd-building-start-guide",
-            url="https://www.portland.gov/ppd/get-permit",
+            url="https://wetten.overheid.nl/ppd/get-permit",
             purpose="Building permit start-guide process discovery.",
         ),
         ArchiveSeed(
             id="ppd-online-tools",
-            url="https://www.portland.gov/ppd/how-use-online-permitting-tools",
+            url="https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
             purpose="Public DevHub usage guidance and portal handoff discovery.",
         ),
         ArchiveSeed(
             id="ppd-devhub-faqs",
-            url="https://www.portland.gov/ppd/devhub-faqs",
-            purpose="Public Development Hub PDX FAQ discovery.",
+            url="https://wetten.overheid.nl/ppd/devhub-faqs",
+            purpose="Public Development Hub Netherlands FAQ discovery.",
         ),
         ArchiveSeed(
             id="devhub-public-entry",
-            url="https://devhub.portlandoregon.gov/",
+            url="https://wetten.overheid.nl/",
             purpose="Unauthenticated public portal landing metadata only.",
         ),
         ArchiveSeed(
             id="ppd-zoning-permits",
-            url="https://www.portland.gov/ppd/zoning-land-use/zoning-permits",
+            url="https://wetten.overheid.nl/ppd/zoning-land-use/zoning-permits",
             purpose="Zoning permit process and public form discovery.",
             expected_content_types=("text/html", "application/pdf"),
         ),
@@ -389,7 +389,7 @@ def build_default_whole_site_archive_plan() -> WholeSiteArchivePlan:
     )
     return WholeSiteArchivePlan(
         plan_id="ppd-whole-site-archive-v2",
-        source_authority="City of Portland Permitting & Development public sources",
+        source_authority="WetWijzer Permitting & Development public sources",
         seeds=seeds,
         policy=policy,
         processor_capabilities=capabilities,
@@ -403,9 +403,9 @@ def build_default_whole_site_archive_plan() -> WholeSiteArchivePlan:
             "public_change_monitoring_report",
         ),
         citation_urls=(
-            "https://www.portland.gov/ppd",
-            "https://www.portland.gov/ppd/documents",
-            "https://devhub.portlandoregon.gov/",
+            "https://wetten.overheid.nl/ppd",
+            "https://wetten.overheid.nl/ppd/documents",
+            "https://wetten.overheid.nl/",
         ),
     )
 

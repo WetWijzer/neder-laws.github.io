@@ -132,7 +132,7 @@ class FccWirelessApplicationProcessFixtureTest(unittest.TestCase):
         for source in self.fixture["sourceInventoryEvidence"]:
             with self.subTest(source_id=source["id"]):
                 self.assertTrue(source["sourceInventoryOnly"])
-                self.assertTrue(source["canonicalUrl"].startswith("https://www.portland.gov/"))
+                self.assertTrue(source["canonicalUrl"].startswith("https://wetten.overheid.nl/"))
                 self.assertTrue(source["authorityLabel"].strip())
                 self.assertTrue(source["supports"])
 

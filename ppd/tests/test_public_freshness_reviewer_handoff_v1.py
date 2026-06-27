@@ -26,7 +26,7 @@ def _valid_packet() -> dict:
         "handoff_rows": [
             {
                 "row_id": "freshness-review-row-001",
-                "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+                "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
                 "source_citations": ["source:ppd-devhub-faqs#updated-date"],
                 "affected_ids": {
                     "source_ids": ["source:ppd-devhub-faqs"],
@@ -76,7 +76,7 @@ class PublicFreshnessReviewerHandoffV1Tests(unittest.TestCase):
     def test_rejects_authenticated_urls_raw_bodies_execution_claims_guarantees_and_mutations(self) -> None:
         packet = _valid_packet()
         row = packet["handoff_rows"][0]
-        row["canonical_url"] = "https://devhub.portlandoregon.gov/account/my-permits?token=secret"
+        row["canonical_url"] = "https://wetten.overheid.nl/account/my-permits?token=secret"
         row["raw_body_ref"] = "raw_crawl/devhub-faq.html"
         row["live_crawl_status"] = "live crawl completed"
         row["processor_completed"] = True

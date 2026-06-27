@@ -173,8 +173,8 @@ def test_rejects_applied_patch_and_mutation_flags() -> None:
 def test_rejects_missing_checksum_placeholders_and_fixture_refs() -> None:
     plan = build_inactive_promotion_application_patch_plan_v1(_dry_run_plan(), _reviewer_packet())
     plan["file_family_patch_rows"][0]["expected_after_checksum"] = "sha256:real-digest"
-    plan["file_family_patch_rows"][0]["source_fixture_refs"] = ["public/corpus/portland-or/current/active.json"]
-    plan["source_fixture_references"][0]["fixture_path"] = "public/corpus/portland-or/current/active.json"
+    plan["file_family_patch_rows"][0]["source_fixture_refs"] = ["public/corpus/wetwijzer-or/current/active.json"]
+    plan["source_fixture_references"][0]["fixture_path"] = "public/corpus/wetwijzer-or/current/active.json"
 
     codes = _codes(plan)
 

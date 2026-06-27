@@ -19,10 +19,10 @@ from urllib.parse import parse_qsl, urlparse
 _HASH_RE = re.compile(r"^(sha256:)?[0-9a-f]{64}$")
 _ALLOWED_HOSTS = frozenset(
     {
-        "www.portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
-        "www.portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
     }
 )
 _ALLOWED_REQUIREMENT_TYPES = frozenset(
@@ -372,6 +372,6 @@ def _official_url(url: str, capture_id: str) -> str:
     if query_keys & _PRIVATE_QUERY_KEYS:
         raise PublicRefreshIngestionError(f"{capture_id} url contains private or authenticated query parameters")
     path_parts = {part.lower() for part in parsed.path.split("/") if part}
-    if parsed.hostname == "devhub.portlandoregon.gov" and path_parts & _AUTH_PATH_PARTS:
+    if parsed.hostname == "wetten.overheid.nl" and path_parts & _AUTH_PATH_PARTS:
         raise PublicRefreshIngestionError(f"{capture_id} url appears to require authentication")
     return url

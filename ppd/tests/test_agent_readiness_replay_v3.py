@@ -18,7 +18,7 @@ def _valid_packet() -> dict[str, object]:
         "expected_asks": ["Ask for missing permit number before lookup."],
         "holds_or_refusals": ["Hold when CAPTCHA, auth, payment, or submission is requested."],
         "next_safe_action_rows": [{"trigger": "missing address", "action": "ask clarifying question"}],
-        "citation_references": [{"label": "PP&D public guidance", "url": "https://www.portland.gov/"}],
+        "citation_references": [{"label": "PP&D public guidance", "url": "https://wetten.overheid.nl/"}],
         "reviewer_dispositions": [{"reviewer": "fixture", "disposition": "reject unsafe actions"}],
         "validation_commands": [["python3", "ppd/daemon/ppd_daemon.py", "--self-test"]],
         "artifacts": [{"kind": "fixture", "path": "ppd/tests/fixtures/agent_readiness_replay_v3/packet.json"}],

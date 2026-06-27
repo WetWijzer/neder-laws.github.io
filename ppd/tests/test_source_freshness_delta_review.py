@@ -18,17 +18,17 @@ def _valid_packet() -> dict:
             {
                 "decision": "changed",
                 "affected_source_ids": ["ppd-zoning-code"],
-                "citations": ["https://www.portland.gov/code/33"],
+                "citations": ["https://wetten.overheid.nl/code/33"],
             },
             {
                 "decision": "unchanged",
                 "affected_source_ids": ["ppd-devhub-fees"],
-                "citations": ["https://www.portland.gov/bds/permit-review-process"],
+                "citations": ["https://wetten.overheid.nl/bds/permit-review-process"],
             },
             {
                 "decision": "stale",
                 "affected_source_ids": ["ppd-inspections"],
-                "citations": ["https://www.portlandmaps.com/advanced/?action=permits"],
+                "citations": ["https://repository.overheid.nl/advanced/?action=permits"],
             },
         ],
         "notes": "Reviewer compared cited public pages using offline evidence only.",
@@ -57,7 +57,7 @@ def test_rejects_missing_affected_source_ids_follow_up_queue_and_owner() -> None
     packet.pop("affected_source_ids")
     packet.pop("recommended_offline_follow_up_queues")
     packet.pop("reviewer_owners")
-    packet["decisions"] = [{"decision": "changed", "citations": ["https://www.portland.gov/code/33"]}]
+    packet["decisions"] = [{"decision": "changed", "citations": ["https://wetten.overheid.nl/code/33"]}]
 
     codes = _codes(packet)
 
@@ -71,9 +71,9 @@ def test_rejects_missing_affected_source_ids_follow_up_queue_and_owner() -> None
     "url, expected_code",
     [
         ("https://example.com/ppd", "url_not_allowlisted"),
-        ("https://user:pass@www.portland.gov/code/33", "authenticated_url"),
-        ("https://www.portland.gov/login", "authenticated_url"),
-        ("https://www.portland.gov/code/33?token=secret", "authenticated_url"),
+        ("https://user:pass@wetten.overheid.nl/code/33", "authenticated_url"),
+        ("https://wetten.overheid.nl/login", "authenticated_url"),
+        ("https://wetten.overheid.nl/code/33?token=secret", "authenticated_url"),
     ],
 )
 def test_rejects_non_allowlisted_or_authenticated_urls(url: str, expected_code: str) -> None:

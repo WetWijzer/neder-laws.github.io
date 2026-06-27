@@ -22,7 +22,7 @@ class DevHubWorkflowContractTests(unittest.TestCase):
             id="draft-building-permit",
             workflow="building_permit_application",
             kind=DevHubWorkflowStateKind.APPLICATION_FORM,
-            url_pattern="https://devhub.portlandoregon.gov/**/draft/**",
+            url_pattern="https://wetten.overheid.nl/**/draft/**",
             heading="Building Permit Request",
             captured_at="2026-05-01T00:00:00Z",
             fields=(
@@ -91,7 +91,7 @@ class DevHubWorkflowContractTests(unittest.TestCase):
             id="my-permits",
             workflow="permit_status",
             kind=DevHubWorkflowStateKind.MY_PERMITS,
-            url_pattern="https://devhub.portlandoregon.gov/**/my-permits",
+            url_pattern="https://wetten.overheid.nl/**/my-permits",
             heading="My Permits",
             captured_at="2026-05-01T00:00:00Z",
             private_values_redacted=False,

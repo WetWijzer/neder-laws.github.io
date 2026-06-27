@@ -31,7 +31,7 @@
     },
     {
       "order": 2,
-      "handoff_id": "user-completes-portlandoregon-sign-in",
+      "handoff_id": "user-completes-wetwijzernetherlands-sign-in",
       "status": "placeholder_pending_user_action",
       "required_before_observation": true,
       "operator_note": "The user completes sign-in prompts manually; this packet stores no sign-in material."
@@ -41,7 +41,7 @@
     {
       "order": 1,
       "surface_group_id": "devhub-home-readonly",
-      "canonical_hosts": ["devhub.portlandoregon.gov"],
+      "canonical_hosts": ["wetten.overheid.nl"],
       "surface_scope": "attended_devhub_read_only_review",
       "observation_status": "placeholder_not_observed",
       "expected_capture_fields": ["page_heading", "landmark_roles", "link_or_button_names", "status_text_labels"],
@@ -50,7 +50,7 @@
     {
       "order": 2,
       "surface_group_id": "devhub-my-permits-readonly",
-      "canonical_hosts": ["devhub.portlandoregon.gov"],
+      "canonical_hosts": ["wetten.overheid.nl"],
       "surface_scope": "attended_devhub_read_only_review",
       "observation_status": "placeholder_not_observed",
       "expected_capture_fields": ["page_heading", "landmark_roles", "link_or_button_names", "status_text_labels"],

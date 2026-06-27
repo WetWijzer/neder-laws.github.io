@@ -12,7 +12,7 @@ def valid_preview() -> dict[str, object]:
         "release_state": "inactive_preview",
         "before_fixture_preview": {"rows": 1, "digest": "before-fixture-preview"},
         "after_fixture_preview": {"rows": 1, "digest": "after-fixture-preview"},
-        "source_citations": ["Portland source citation placeholder retained"],
+        "source_citations": ["Netherlands source citation placeholder retained"],
         "observation_evidence": ["Observed fixture delta in deterministic preview"],
         "citation_preservation_checks": {"all_existing_citations_preserved": True},
         "blocked_row_explanations": ["No row is promoted without an explanation"],

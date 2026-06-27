@@ -22,9 +22,9 @@
   ],
   "intentionally_deferred": [
     {
-      "source_id": "portlandmaps_property_reference",
+      "source_id": "wetwijzermaps_property_reference",
       "deferred_until": "2026-06-01T00:00:00Z",
-      "deferred_reason": "Policy review required before automated Portland Maps recrawl."
+      "deferred_reason": "Policy review required before automated BWB metadata recrawl."
     }
   ]
 }

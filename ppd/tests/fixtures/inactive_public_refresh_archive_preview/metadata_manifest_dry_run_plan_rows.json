@@ -2,9 +2,9 @@
   {
     "source_id": "ppd-bds-permits",
     "archive_key": "synthetic/ppd-bds-permits/2026-06-01.json",
-    "current_canonical_url": "https://www.portland.gov/ppd/old-permits",
-    "candidate_url": "https://www.portland.gov/ppd/permits",
-    "expected_canonical_url": "https://www.portland.gov/ppd/permits",
+    "current_canonical_url": "https://wetten.overheid.nl/ppd/old-permits",
+    "candidate_url": "https://wetten.overheid.nl/ppd/permits",
+    "expected_canonical_url": "https://wetten.overheid.nl/ppd/permits",
     "redirect_chain_placeholder": [
       "offline:not-requested"
     ],
@@ -14,9 +14,9 @@
   {
     "source_id": "ppd-notice-archive",
     "archive_key": "synthetic/ppd-notice-archive/2026-06-01.json",
-    "current_canonical_url": "https://www.portland.gov/ppd/notices",
-    "candidate_url": "https://www.portland.gov/ppd/notices",
-    "expected_canonical_url": "https://www.portland.gov/ppd/notices",
+    "current_canonical_url": "https://wetten.overheid.nl/ppd/notices",
+    "candidate_url": "https://wetten.overheid.nl/ppd/notices",
+    "expected_canonical_url": "https://wetten.overheid.nl/ppd/notices",
     "redirect_chain_placeholder": [
       "offline:not-requested"
     ],
@@ -26,9 +26,9 @@
   {
     "source_id": "ppd-retired-feed",
     "archive_key": "synthetic/ppd-retired-feed/2026-06-01.json",
-    "current_canonical_url": "https://www.portland.gov/ppd/retired-feed",
-    "candidate_url": "https://www.portland.gov/ppd/retired-feed",
-    "expected_canonical_url": "https://www.portland.gov/ppd/retired-feed",
+    "current_canonical_url": "https://wetten.overheid.nl/ppd/retired-feed",
+    "candidate_url": "https://wetten.overheid.nl/ppd/retired-feed",
+    "expected_canonical_url": "https://wetten.overheid.nl/ppd/retired-feed",
     "redirect_chain_placeholder": [
       "offline:not-requested"
     ],

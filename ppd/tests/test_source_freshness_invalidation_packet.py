@@ -59,7 +59,7 @@ def test_source_freshness_invalidation_packet_contains_only_changed_source() -> 
         "src-devhub-submit-permit-application-guide"
     ]
     affected = packet["affected_sources"][0]
-    assert affected["canonical_url"] == "https://www.portland.gov/ppd/devhub-guide-submit-permit-application"
+    assert affected["canonical_url"] == "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application"
     assert affected["previous_content_hash"].startswith("sha256:")
     assert affected["new_content_hash"] == "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     assert affected["invalidation_reason"] == "public source content hash changed"
@@ -74,7 +74,7 @@ def test_source_freshness_invalidation_packet_contains_only_changed_source() -> 
         (lambda plan, hashes: hashes.update({"raw_html": "raw body"}), "raw HTML/PDF body field"),
         (lambda plan, hashes: hashes.update({"pdf_bytes": "%PDF-1.7"}), "raw HTML/PDF body field"),
         (lambda plan, hashes: hashes.update({"downloaded_document_path": "/home/example/Downloads/guide.pdf"}), "downloaded document path"),
-        (lambda plan, hashes: hashes.update({"canonical_url": "https://devhub.portlandoregon.gov/permit/private-case-123"}), "private or authenticated URL"),
+        (lambda plan, hashes: hashes.update({"canonical_url": "https://wetten.overheid.nl/permit/private-case-123"}), "private or authenticated URL"),
         (lambda plan, hashes: hashes.update({"guardrails_remain_current": True}), "guardrails must not be claimed current"),
     ],
 )

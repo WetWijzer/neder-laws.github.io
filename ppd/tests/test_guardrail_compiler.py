@@ -44,7 +44,7 @@ class GuardrailCompilerTests(unittest.TestCase):
             self.assertIn(guardrail.requirement_id, compiled.support_map)
             evidence = compiled.support_map[guardrail.requirement_id]
             self.assertGreaterEqual(len(evidence), 1)
-            self.assertTrue(evidence[0].source_url.startswith("https://www.portland.gov/"))
+            self.assertTrue(evidence[0].source_url.startswith("https://wetten.overheid.nl/"))
             self.assertTrue(evidence[0].anchor_id)
 
     def test_compiles_confirmation_gates_as_prohibitions(self):

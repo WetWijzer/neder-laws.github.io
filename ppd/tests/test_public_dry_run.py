@@ -34,9 +34,9 @@ class PublicCrawlDryRunTests(unittest.TestCase):
             manifest = self.write_manifest(
                 Path(temp),
                 [
-                    "https://www.portland.gov/ppd",
-                    "https://www.portland.gov/ppd/permits",
-                    "https://www.portland.gov/ppd/residential-permits",
+                    "https://wetten.overheid.nl/ppd",
+                    "https://wetten.overheid.nl/ppd/permits",
+                    "https://wetten.overheid.nl/ppd/residential-permits",
                 ],
             )
             report = run_public_crawl_dry_run(
@@ -48,13 +48,13 @@ class PublicCrawlDryRunTests(unittest.TestCase):
             self.assertEqual(report.attempted_seed_count, 2)
             self.assertEqual(report.fetched_seed_count, 2)
             self.assertEqual(report.items[0].title, "PPD Fixture")
-            self.assertEqual(calls[0], "https://www.portland.gov/robots.txt")
-            self.assertEqual(calls[1:], ["https://www.portland.gov/ppd", "https://www.portland.gov/ppd/permits"])
+            self.assertEqual(calls[0], "https://wetten.overheid.nl/robots.txt")
+            self.assertEqual(calls[1:], ["https://wetten.overheid.nl/ppd", "https://wetten.overheid.nl/ppd/permits"])
 
     def test_robots_disallow_prevents_seed_fetch(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             calls: list[str] = []
-            manifest = self.write_manifest(Path(temp), ["https://www.portland.gov/ppd"])
+            manifest = self.write_manifest(Path(temp), ["https://wetten.overheid.nl/ppd"])
 
             def fetch(url: str) -> FetchResponse:
                 calls.append(url)
@@ -71,12 +71,12 @@ class PublicCrawlDryRunTests(unittest.TestCase):
             self.assertEqual(report.fetched_seed_count, 0)
             self.assertEqual(report.skipped_seed_count, 1)
             self.assertEqual(report.items[0].reason_code, "robots_disallowed")
-            self.assertEqual(calls, ["https://www.portland.gov/robots.txt"])
+            self.assertEqual(calls, ["https://wetten.overheid.nl/robots.txt"])
 
     def test_policy_disallow_prevents_robots_and_seed_fetch(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             calls: list[str] = []
-            manifest = self.write_manifest(Path(temp), ["https://devhub.portlandoregon.gov/my-permits/payment"])
+            manifest = self.write_manifest(Path(temp), ["https://wetten.overheid.nl/my-permits/payment"])
             report = run_public_crawl_dry_run(seed_manifest_path=manifest, fetcher=self.fetcher_for(calls))
             self.assertEqual(report.fetched_seed_count, 0)
             self.assertEqual(report.items[0].reason_code, "private_or_authenticated")
@@ -85,14 +85,14 @@ class PublicCrawlDryRunTests(unittest.TestCase):
     def test_inline_robots_fixture_avoids_robots_fetch(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             calls: list[str] = []
-            manifest = self.write_manifest(Path(temp), ["https://www.portland.gov/ppd"])
+            manifest = self.write_manifest(Path(temp), ["https://wetten.overheid.nl/ppd"])
             report = run_public_crawl_dry_run(
                 seed_manifest_path=manifest,
                 fetcher=self.fetcher_for(calls),
-                robots_text_by_host={"www.portland.gov": "User-agent: *\nAllow: /ppd\n"},
+                robots_text_by_host={"wetten.overheid.nl": "User-agent: *\nAllow: /ppd\n"},
             )
             self.assertEqual(report.fetched_seed_count, 1)
-            self.assertEqual(calls, ["https://www.portland.gov/ppd"])
+            self.assertEqual(calls, ["https://wetten.overheid.nl/ppd"])
 
 
 if __name__ == "__main__":

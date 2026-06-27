@@ -8,31 +8,31 @@
   "source_evidence": [
     {
       "evidence_id": "src-apply-permits-public-guide",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
       "title": "Apply for permits",
       "freshness_status": "fixture_current"
     },
     {
       "evidence_id": "src-devhub-submit-application-guide",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "title": "DevHub permit application guide",
       "freshness_status": "fixture_current"
     },
     {
       "evidence_id": "src-single-pdf-process",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "title": "Submit Plans Online / Single PDF Process",
       "freshness_status": "fixture_current"
     },
     {
       "evidence_id": "src-file-naming-standards",
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "title": "File naming standards and PDF preparation",
       "freshness_status": "fixture_current"
     },
     {
       "evidence_id": "src-devhub-faq-services",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "title": "DevHub FAQs",
       "freshness_status": "fixture_current"
     }

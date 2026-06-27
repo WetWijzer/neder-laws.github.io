@@ -64,7 +64,7 @@ class SignPermitRequirementExpectedOutputTest(unittest.TestCase):
                 evidence_items = record.get("evidence", [])
                 self.assertGreaterEqual(len(evidence_items), 1)
                 for evidence in evidence_items:
-                    self.assertTrue(evidence["source_url"].startswith("https://www.portland.gov/ppd/"))
+                    self.assertTrue(evidence["source_url"].startswith("https://wetten.overheid.nl/ppd/"))
                     self.assertTrue(evidence["source_title"])
                     self.assertTrue(evidence["source_anchor"])
                     self.assertTrue(evidence["evidence_note"])

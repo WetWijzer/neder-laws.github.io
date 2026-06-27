@@ -72,7 +72,7 @@ class PlaywrightAutonomousFormPlanningTest(unittest.TestCase):
 
     def test_public_evidence_and_planner_outcome_stay_draft_only(self) -> None:
         for source in self.fixture["sourceEvidence"]:
-            self.assertTrue(source["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
+            self.assertTrue(source["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
             self.assertTrue(source["citation"]["locator"])
             self.assertTrue(source["citation"]["paraphrase"])
 

@@ -31,7 +31,7 @@
     "sourceEvidence": {
       "evidenceId": "ppd-public-guidance-devhub-application-address-evidence",
       "sourceType": "public_guidance_fixture",
-      "sourceUrl": "https://www.portland.gov/ppd/permits",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/permits",
       "citationLabel": "PP&D public permit application guidance fixture",
       "capturedAt": "2026-05-01T00:00:00Z"
     },

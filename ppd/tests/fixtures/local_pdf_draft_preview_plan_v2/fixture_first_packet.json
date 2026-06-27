@@ -45,7 +45,7 @@
     {
       "evidence_id": "evidence-apply-permits-v2",
       "source_title": "Apply for permits",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
       "citation_label": "PP&D public permit application guidance",
       "supports": [
         "project and applicant facts are needed before meaningful permit draft review"
@@ -54,7 +54,7 @@
     {
       "evidence_id": "evidence-devhub-guide-v2",
       "source_title": "DevHub permit application guide",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "citation_label": "DevHub application review and submission guidance",
       "supports": [
         "acknowledgement, certification, upload, and submission remain consequential actions"
@@ -63,7 +63,7 @@
     {
       "evidence_id": "evidence-submit-plans-v2",
       "source_title": "Submit Plans Online / Single PDF Process",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "citation_label": "Single PDF and supporting document preparation guidance",
       "supports": [
         "drawing plans, applications, calculations, and supporting documents must be prepared and checked as separate PDFs before upload"
@@ -72,7 +72,7 @@
     {
       "evidence_id": "evidence-file-standards-v2",
       "source_title": "File Naming Standards and Preparing PDFs",
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "citation_label": "PP&D file preparation standards",
       "supports": [
         "file naming and searchable PDF compliance must be resolved before upload staging"

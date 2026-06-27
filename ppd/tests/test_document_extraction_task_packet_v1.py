@@ -49,7 +49,7 @@ def test_builds_fixture_first_document_extraction_work_items_for_one_family() ->
         assert item["expected_fixture_output_ref"].startswith("ppd/tests/fixtures/document_extraction_task_packet_v1/")
         assert item["citation"]["source_id"] == item["affected_source_id"]
         assert item["citation"]["document_id"] == item["affected_document_id"]
-        assert item["citation"]["url"].startswith("https://www.portland.gov/ppd/")
+        assert item["citation"]["url"].startswith("https://wetten.overheid.nl/ppd/")
         assert item["citation"]["anchor"]
         assert item["human_review_status"] == "needs_review"
         assert item["reviewer_owner"] == "ppd-document-extraction-reviewer"
@@ -170,7 +170,7 @@ def test_rejects_active_source_document_requirement_process_guardrail_release_an
 
 def test_rejects_unsafe_validation_commands() -> None:
     packet = build_fixture_packet()
-    packet["offline_validation_commands"] = [["curl", "https://www.portland.gov/ppd/get-permit/submit-plans-online"]]
+    packet["offline_validation_commands"] = [["curl", "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online"]]
 
     codes = validation_codes(packet)
 

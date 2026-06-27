@@ -1,5 +1,5 @@
 import { P2PService } from '../p2pService';
-import { parseGameId } from '../../../convex/aiTown/ids';
+import { parseGameId } from '../../../convex/wetwijzer/ids';
 
 describe('P2PService', () => {
   let p2pService: P2PService;

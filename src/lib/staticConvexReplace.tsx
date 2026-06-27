@@ -65,9 +65,9 @@ export const api = {
     sendWorldInput: (args: { engineId: string; name: string; args: any }) => 
       staticApi.world.sendWorldInput(args),
   },
-  aiTown: {
+  wetwijzer: {
     main: {
-      inputStatus: (args: { inputId: string }) => staticApi.aiTown.main.inputStatus(args),
+      inputStatus: (args: { inputId: string }) => staticApi.wetwijzer.main.inputStatus(args),
     }
   },
   messages: {

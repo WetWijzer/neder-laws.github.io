@@ -17,9 +17,9 @@
     ]
   },
   "manual_login_prerequisites": {
-    "start_url": "https://devhub.portlandoregon.gov",
+    "start_url": "https://wetten.overheid.nl",
     "browser_requirement": "user_visible_browser",
-    "credential_handling": "user_enters_portlandoregon_gov_credentials_manually",
+    "credential_handling": "user_enters_wetwijzernetherlands_gov_credentials_manually",
     "mfa_or_captcha_handling": "user_completes_any_mfa_captcha_or_security_prompt_manually",
     "worker_must_not_request_credentials": true,
     "worker_must_not_store_credentials": true,

@@ -129,8 +129,8 @@ def test_release_rollback_readiness_rejects_private_authenticated_runtime_and_ex
     packet = copy.deepcopy(_packet())
     packet["notes"] = [
         "Authenticated facts from the user's account were used.",
-        "https://user:pass@www.portland.gov/ppd/private",
-        "https://www.portland.gov/ppd?token=secret",
+        "https://user:pass@wetten.overheid.nl/ppd/private",
+        "https://wetten.overheid.nl/ppd?token=secret",
         "/tmp/private/session/crawl.json",
         "The live release executed and monitoring ran after publication.",
         "DevHub was invoked and the LLM called a processor.",

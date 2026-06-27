@@ -21,10 +21,10 @@
   {
     "manifest_id": "manifest-skipped-robots-001",
     "source_id": "source-devhub-portal-001",
-    "canonical_url": "https://devhub.portlandoregon.gov/private/account",
-    "requested_url": "https://devhub.portlandoregon.gov/private/account",
+    "canonical_url": "https://wetten.overheid.nl/private/account",
+    "requested_url": "https://wetten.overheid.nl/private/account",
     "redirect_chain": [
-      "https://devhub.portlandoregon.gov/private/account"
+      "https://wetten.overheid.nl/private/account"
     ],
     "http_status": 403,
     "content_type": null,

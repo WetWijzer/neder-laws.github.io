@@ -20,7 +20,7 @@ class HtmlExtractionFixtureTests(unittest.TestCase):
     def test_fixture_file_is_public_and_curated(self) -> None:
         self.assertGreaterEqual(len(self.fixtures), 3)
         for fixture in self.fixtures:
-            self.assertTrue(fixture["source_url"].startswith("https://www.portland.gov/ppd"))
+            self.assertTrue(fixture["source_url"].startswith("https://wetten.overheid.nl/ppd"))
             self.assertNotIn("storage-state", fixture["html"].lower())
             self.assertNotIn("auth-state", fixture["html"].lower())
             self.assertNotIn("payment card", fixture["html"].lower())

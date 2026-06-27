@@ -136,7 +136,7 @@ def test_validation_rejects_missing_rollback_rehearsal_references() -> None:
 
 def test_validation_rejects_private_raw_live_and_guarantee_references() -> None:
     unsafe_values = [
-        "https://devhub.portlandoregon.gov/login?token=secret",
+        "https://wetten.overheid.nl/login?token=secret",
         "file:///home/user/private-case.pdf",
         "Use the raw body and raw archive output from a downloaded document.",
         "Live promotion complete and release notes published.",

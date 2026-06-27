@@ -78,9 +78,9 @@ export const staticApi = {
     }
   },
 
-  aiTown: {
+  wetwijzer: {
     main: {
-      // Replace api.aiTown.main.inputStatus
+      // Replace api.wetwijzer.main.inputStatus
       inputStatus: async ({ inputId }: { inputId: string }) => {
         // For static version, assume inputs are always processed quickly
         return {
@@ -130,6 +130,6 @@ export const staticApi = {
 
 // Export individual functions to match the usage pattern
 export const world = staticApi.world;
-export const aiTown = staticApi.aiTown;
+export const wetwijzer = staticApi.wetwijzer;
 export const messages = staticApi.messages;
 export const music = staticApi.music;

@@ -9,7 +9,7 @@ from urllib.parse import urljoin
 FIXTURE_DIR = Path(__file__).parent / "fixtures" / "html_extraction_review"
 HTML_FIXTURE = FIXTURE_DIR / "synthetic_ppd_public_page.html"
 PACKET_FIXTURE = FIXTURE_DIR / "synthetic_ppd_public_page_review_packet.json"
-BASE_URL = "https://www.portland.gov/ppd/synthetic-public-permit-guide"
+BASE_URL = "https://wetten.overheid.nl/ppd/synthetic-public-permit-guide"
 
 
 class ReviewPacketParser(HTMLParser):

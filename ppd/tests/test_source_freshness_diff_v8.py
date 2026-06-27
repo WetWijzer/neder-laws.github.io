@@ -46,17 +46,17 @@ def test_source_freshness_diff_v8_assembles_expected_rows() -> None:
     assert added_links == {
         (
             "ppd-new-forms-index",
-            "https://www.portland.gov/ppd/documents/sample-public-form/download",
+            "https://wetten.overheid.nl/ppd/documents/sample-public-form/download",
         ),
         (
             "ppd-online-tools",
-            "https://www.portland.gov/ppd/get-permit/apply-permits",
+            "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
         ),
     }
 
     removed_links = {(row["source_id"], row["url"]) for row in intake["removed_link_observations"]}
     assert removed_links == {
-        ("ppd-online-tools", "https://www.portland.gov/ppd/old-public-guide")
+        ("ppd-online-tools", "https://wetten.overheid.nl/ppd/old-public-guide")
     }
 
     citation_refs = {row["citation_placeholder"] for row in intake["affected_citation_placeholders"]}
@@ -177,7 +177,7 @@ def test_source_freshness_diff_v8_rejects_live_or_private_artifact_fields(field:
         "sources": [
             {
                 "source_id": "bad-live-artifact",
-                "canonical_url": "https://www.portland.gov/ppd",
+                "canonical_url": "https://wetten.overheid.nl/ppd",
                 "content_hash": "sha256:bad",
                 field: "/tmp/not-commit-safe",
             }

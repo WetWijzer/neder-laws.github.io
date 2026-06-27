@@ -2,13 +2,13 @@ import { Character } from './Character.tsx';
 import { orientationDegrees } from '../../convex/util/geometry.ts';
 import { characters } from '../../data/characters.ts';
 import { toast } from 'react-toastify';
-import { Player as ServerPlayer } from '../../convex/aiTown/player.ts';
-import { GameId } from '../../convex/aiTown/ids.ts';
+import { Player as ServerPlayer } from '../../convex/wetwijzer/player.ts';
+import { GameId } from '../../convex/wetwijzer/ids.ts';
 import { Id } from '../../convex/_generated/dataModel';
-import { Location, locationFields, playerLocation } from '../../convex/aiTown/location.ts';
+import { Location, locationFields, playerLocation } from '../../convex/wetwijzer/location.ts';
 import { useHistoricalValue } from '../hooks/useHistoricalValue.ts';
-import { PlayerDescription } from '../../convex/aiTown/playerDescription.ts';
-import { WorldMap } from '../../convex/aiTown/worldMap.ts';
+import { PlayerDescription } from '../../convex/wetwijzer/playerDescription.ts';
+import { WorldMap } from '../../convex/wetwijzer/worldMap.ts';
 import { ServerGame } from '../hooks/serverGame.ts';
 
 export type SelectElement = (element?: { kind: 'player'; id: GameId<'players'> }) => void;

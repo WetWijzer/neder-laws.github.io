@@ -6,50 +6,50 @@
 +  "sourceEvidence": [
 +    {
 +      "evidenceId": "fcc-wireless-devhub-type",
-+      "sourceUrl": "https://www.portland.gov/ppd/devhub-pdx/apply-permit",
-+      "title": "Apply for permits online using Development Hub PDX",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-netherlands/apply-permit",
++      "title": "Apply for permits online using Development Hub Netherlands",
 +      "anchor": "fcc-wireless-applications",
 +      "capturedAt": "2026-05-01T00:00:00Z"
 +    },
 +    {
 +      "evidenceId": "fcc-wireless-submittal-package",
-+      "sourceUrl": "https://www.portland.gov/ppd/permits/forms",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/forms",
 +      "title": "Permits and Inspections Applications",
 +      "anchor": "wireless-applications-and-forms",
 +      "capturedAt": "2026-05-01T00:00:00Z"
 +    },
 +    {
 +      "evidenceId": "fcc-wireless-site-information",
-+      "sourceUrl": "https://www.portland.gov/ppd/permits/forms",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/forms",
 +      "title": "Permits and Inspections Applications",
 +      "anchor": "site-and-property-information",
 +      "capturedAt": "2026-05-01T00:00:00Z"
 +    },
 +    {
 +      "evidenceId": "fcc-wireless-facility-details",
-+      "sourceUrl": "https://www.portland.gov/ppd/permits/forms",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/forms",
 +      "title": "Permits and Inspections Applications",
 +      "anchor": "wireless-facility-details",
 +      "capturedAt": "2026-05-01T00:00:00Z"
 +    },
 +    {
 +      "evidenceId": "fcc-wireless-plan-review",
-+      "sourceUrl": "https://www.portland.gov/ppd/devhub-pdx/apply-permit",
-+      "title": "Apply for permits online using Development Hub PDX",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-netherlands/apply-permit",
++      "title": "Apply for permits online using Development Hub Netherlands",
 +      "anchor": "permit-requests-requiring-plan-review",
 +      "capturedAt": "2026-05-01T00:00:00Z"
 +    },
 +    {
 +      "evidenceId": "fcc-wireless-fees",
-+      "sourceUrl": "https://www.portland.gov/ppd/devhub-pdx/faq",
-+      "title": "Development Hub PDX frequently asked questions",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-netherlands/faq",
++      "title": "Development Hub Netherlands frequently asked questions",
 +      "anchor": "fee-payments",
 +      "capturedAt": "2026-05-01T00:00:00Z"
 +    },
 +    {
 +      "evidenceId": "fcc-wireless-agent-gates",
-+      "sourceUrl": "https://www.portland.gov/ppd/devhub-pdx/apply-permit",
-+      "title": "Apply for permits online using Development Hub PDX",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub-netherlands/apply-permit",
++      "title": "Apply for permits online using Development Hub Netherlands",
 +      "anchor": "submit-application-online",
 +      "capturedAt": "2026-05-01T00:00:00Z"
 +    }

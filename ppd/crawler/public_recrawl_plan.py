@@ -14,10 +14,10 @@ from urllib.parse import urlparse, parse_qs
 
 DEFAULT_ALLOWED_HOSTS = frozenset(
     {
-        "www.portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
-        "www.portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
     }
 )
 
@@ -379,7 +379,7 @@ def _is_private_or_authenticated_url(url: str) -> bool:
         return True
 
     host = (parsed.hostname or "").lower()
-    if host == "devhub.portlandoregon.gov" and path not in {"", "/"}:
+    if host == "wetten.overheid.nl" and path not in {"", "/"}:
         public_markers = ("/public", "/permit", "/search")
         if not any(path.startswith(marker) for marker in public_markers):
             return True

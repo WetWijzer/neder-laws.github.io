@@ -5,8 +5,8 @@
   "source_anchor_pages": [
     {
       "page_id": "ppd-landing",
-      "url": "https://www.portland.gov/ppd/",
-      "title": "Portland Permitting & Development",
+      "url": "https://wetten.overheid.nl/ppd/",
+      "title": "Netherlands Permitting & Development",
       "anchors": [
         {
           "href": "/ppd/how-use-online-permitting-tools/",
@@ -14,13 +14,13 @@
           "content_type_hint": "public_html"
         },
         {
-          "href": "https://WWW.PORTLAND.GOV:443/ppd/get-permit/apply-permits/#start",
+          "href": "https://wetten.overheid.nl:443/ppd/get-permit/apply-permits/#start",
           "link_text": "Apply for permits",
           "content_type_hint": "public_html"
         },
         {
-          "href": "https://www.portlandmaps.com/",
-          "link_text": "Portland Maps public references",
+          "href": "https://repository.overheid.nl/",
+          "link_text": "BWB metadata public references",
           "content_type_hint": "external_reference"
         },
         {
@@ -32,11 +32,11 @@
     },
     {
       "page_id": "online-tools",
-      "url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "title": "How to use online permitting tools",
       "anchors": [
         {
-          "href": "https://devhub.portlandoregon.gov/",
+          "href": "https://wetten.overheid.nl/",
           "link_text": "DevHub public portal",
           "content_type_hint": "devhub_public"
         },
@@ -59,7 +59,7 @@
     },
     {
       "page_id": "apply-permits",
-      "url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+      "url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
       "title": "Apply for permits",
       "anchors": [
         {
@@ -68,13 +68,13 @@
           "content_type_hint": "public_form"
         },
         {
-          "href": "https://www.portland.gov/ppd/get-permit/apply-permits/",
+          "href": "https://wetten.overheid.nl/ppd/get-permit/apply-permits/",
           "link_text": "Apply for permits duplicate footer link",
           "content_type_hint": "public_html"
         },
         {
-          "href": "https://www.portland.gov/user/login",
-          "link_text": "PortlandOregon.gov sign-in flow",
+          "href": "https://wetten.overheid.nl/user/login",
+          "link_text": "wetten.overheid.nl sign-in flow",
           "content_type_hint": "public_html"
         }
       ]

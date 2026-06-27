@@ -30,7 +30,7 @@ class SolarPermitGuardrailFixtureTests(unittest.TestCase):
         self.assertEqual(process["permitType"], "solar_permit")
 
         for evidence in process["evidence"]:
-            self.assertTrue(evidence["sourceUrl"].startswith("https://www.portland.gov/ppd"))
+            self.assertTrue(evidence["sourceUrl"].startswith("https://wetten.overheid.nl/ppd"))
             self.assertTrue(evidence["retrievedAt"].endswith("Z"))
             self.assertNotIn("rawBody", evidence)
             self.assertNotIn("html", evidence)

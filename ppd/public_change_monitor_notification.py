@@ -349,7 +349,7 @@ def _validate_public_ppd_url(url: str) -> None:
     if _is_private_or_authenticated_url(url):
         raise ValueError(f"private or authenticated URL is not allowed: {url}")
     parsed = urlparse(url)
-    if parsed.scheme != "https" or parsed.netloc != "www.portland.gov" or not parsed.path.startswith("/ppd/"):
+    if parsed.scheme != "https" or parsed.netloc != "wetten.overheid.nl" or not parsed.path.startswith("/ppd/"):
         raise ValueError(f"canonical_url must be a public PP&D URL: {url}")
 
 
@@ -361,9 +361,9 @@ def _is_private_or_authenticated_url(url: str) -> bool:
     if query_keys.intersection(_AUTHENTICATED_QUERY_KEYS):
         return True
     path_parts = {_normalize_key(part) for part in parsed.path.split("/") if part}
-    if parsed.netloc == "devhub.portlandoregon.gov" and path_parts.intersection(_PRIVATE_PATH_MARKERS):
+    if parsed.netloc == "wetten.overheid.nl" and path_parts.intersection(_PRIVATE_PATH_MARKERS):
         return True
-    if parsed.netloc in {"www.portland.gov", "www.portlandoregon.gov"} and path_parts.intersection({"login", "signin", "sign-in", "account"}):
+    if parsed.netloc in {"wetten.overheid.nl", "wetten.overheid.nl"} and path_parts.intersection({"login", "signin", "sign-in", "account"}):
         return True
     return False
 

@@ -6,7 +6,7 @@
  - [x] Add a fixture-only public source inventory for PP&D permit application, forms, handout, fee, and DevHub guide page categories with canonical URLs, authority labels, and recrawl cadence hints.
 -- [~] Add validation for the public source inventory that rejects non-allowlisted hosts, private DevHub paths, raw response bodies, downloaded documents, credentials, traces, screenshots, and missing provenance fields.
 +- [!] Add validation for the public source inventory that rejects non-allowlisted hosts, private DevHub paths, raw response bodies, downloaded documents, credentials, traces, screenshots, and missing provenance fields.
- - [x] Add a fixture-only normalized document link graph that connects public PP&D guidance pages to linked forms, PDFs, DevHub guides, and Portland Maps references with skipped-link reason codes.
+ - [x] Add a fixture-only normalized document link graph that connects public PP&D guidance pages to linked forms, PDFs, DevHub guides, and BWB metadata references with skipped-link reason codes.
 -- [~] Add deterministic validation for the normalized document link graph covering canonical URL matching, content-type classification, source-index references, and no private or live crawl artifacts.
 +- [ ] Add deterministic validation for the normalized document link graph covering canonical URL matching, content-type classification, source-index references, and no private or live crawl artifacts.
  - [ ] Add a third permit-process fixture for a residential building permit or new single-family residence workflow with stages, required facts, required documents, file rules, fee/payment gates, and citation-backed evidence.
@@ -26,7 +26,7 @@
 -Last updated: 2026-05-01T19:20:19.072447Z
 +Last updated: 2026-05-01T19:27:00Z
  
--- Latest target: `Task checkbox-50: Add a fixture-only normalized document link graph that connects public PP&D guidance pages to linked forms, PDFs, DevHub guides, and Portland Maps references with skipped-link reason codes.`
+-- Latest target: `Task checkbox-50: Add a fixture-only normalized document link graph that connects public PP&D guidance pages to linked forms, PDFs, DevHub guides, and BWB metadata references with skipped-link reason codes.`
 -- Latest result: `accepted`
 -- Latest summary: Add a fixture-only normalized document link graph for public PP&D guidance pages and linked resources.
 -- Counts: `{"blocked": 1, "complete": 49, "in_progress": 0, "needed": 10}`
@@ -83,7 +83,7 @@
  
 -- Do not create private DevHub session files, auth state, traces, screenshots, raw crawl output, or downloaded documents.
 -- Do not automate CAPTCHA, MFA, account creation, payment, submission, certification, cancellation, official upload, or inspection scheduling.
--- Do not edit `src/lib/logic/`, `public/corpus/portland-or/current/`, `ipfs_datasets_py/.daemon/`, or TypeScript-port daemon ledgers.
+-- Do not edit `src/lib/logic/`, `public/corpus/wetwijzer-or/current/`, `ipfs_datasets_py/.daemon/`, or TypeScript-port daemon ledgers.
 -- Do not mark a checkbox complete manually. The daemon marks successful tasks complete after validation passes.
 +Do not combine those three steps in one daemon proposal. The recent failures show that broad multi-file attempts have produced syntax errors and assertion mismatches.
  

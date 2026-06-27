@@ -11,8 +11,8 @@
 +  "plannedPublicFetches": [
 +    {
 +      "id": "ppd-public-guidance-html",
-+      "sourceUrl": "https://www.portland.gov/ppd",
-+      "canonicalUrl": "https://www.portland.gov/ppd",
++      "sourceUrl": "https://wetten.overheid.nl/ppd",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd",
 +      "contentType": "text/html",
 +      "decision": "fetch",
 +      "policyPreflight": {
@@ -31,8 +31,8 @@
 +    },
 +    {
 +      "id": "ppd-public-legal-archive-cache",
-+      "sourceUrl": "https://www.portland.gov/ppd/permits",
-+      "canonicalUrl": "https://www.portland.gov/ppd/permits",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/permits",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits",
 +      "contentType": "text/html",
 +      "decision": "fetch",
 +      "policyPreflight": {
@@ -51,8 +51,8 @@
 +    },
 +    {
 +      "id": "ppd-public-forms-pdf",
-+      "sourceUrl": "https://www.portland.gov/ppd/permits-and-inspections-applications",
-+      "canonicalUrl": "https://www.portland.gov/ppd/permits-and-inspections-applications",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/permits-and-inspections-applications",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits-and-inspections-applications",
 +      "contentType": "text/html",
 +      "decision": "fetch",
 +      "policyPreflight": {
@@ -71,8 +71,8 @@
 +    },
 +    {
 +      "id": "ppd-public-devhub-guidance",
-+      "sourceUrl": "https://www.portland.gov/ppd/devhub",
-+      "canonicalUrl": "https://www.portland.gov/ppd/devhub",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub",
 +      "contentType": "text/html",
 +      "decision": "fetch",
 +      "policyPreflight": {
@@ -112,10 +112,10 @@
 +FIXTURE_PATH = Path(__file__).parent / "fixtures" / "crawler" / "processor_handoff_crawl_plan.json"
 +EXPECTED_BACKEND_ROOT = "ipfs_datasets_py/ipfs_datasets_py/processors"
 +ALLOWED_HOSTS = {
-+    "www.portland.gov",
-+    "devhub.portlandoregon.gov",
-+    "www.portlandoregon.gov",
-+    "www.portlandmaps.com",
++    "wetten.overheid.nl",
++    "wetten.overheid.nl",
++    "wetten.overheid.nl",
++    "repository.overheid.nl",
 +}
 +ALLOWED_METADATA_KINDS = {"backend_directory", "python_module"}
 +ALLOWED_HANDOFF_MODE = "manifest_only"

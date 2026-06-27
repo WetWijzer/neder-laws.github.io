@@ -18,18 +18,18 @@
 +MODULE_PURPOSE = "fixture_only_public_source_inventory_coverage"
 +
 +ALLOWED_HOSTS = {
-+    "www.portland.gov",
-+    "devhub.portlandoregon.gov",
-+    "www.portlandoregon.gov",
-+    "www.portlandmaps.com",
++    "wetten.overheid.nl",
++    "wetten.overheid.nl",
++    "wetten.overheid.nl",
++    "repository.overheid.nl",
 +}
 +
 +SOURCE_LANDSCAPE = {
-+    "ppd_landing_public_guidance": "PP&D landing and public guidance under https://www.portland.gov/ppd",
++    "ppd_landing_public_guidance": "PP&D landing and public guidance under https://wetten.overheid.nl/ppd",
 +    "applications_forms_index": "Public applications and forms, including the Permits and Inspections Applications index",
-+    "devhub_public_portal": "DevHub public portal at https://devhub.portlandoregon.gov",
-+    "devhub_signin_account_guidance": "DevHub sign-in and account guidance on Portland.gov",
-+    "devhub_faq_process_guides": "DevHub FAQ and process guides on Portland.gov",
++    "devhub_public_portal": "DevHub public portal at https://wetten.overheid.nl",
++    "devhub_signin_account_guidance": "DevHub sign-in and account guidance on wetten.overheid.nl",
++    "devhub_faq_process_guides": "DevHub FAQ and process guides on wetten.overheid.nl",
 +    "permit_submission_guidance": "Permit submission guidance pages",
 +    "plan_upload_guidance": "Plan upload guidance pages",
 +    "correction_upload_guidance": "Correction upload guidance pages",
@@ -37,7 +37,7 @@
 +    "inspection_guidance": "Inspection guidance pages",
 +    "extension_cancellation_guidance": "Extension and cancellation guidance pages",
 +    "linked_pdf_handout_checklist_documents": "Linked PDFs, image-guided how-tos, handouts, and checklist documents",
-+    "portland_maps_references": "Portland Maps public permit, case, and property references",
++    "bwb_metadata_references": "BWB metadata public permit, case, and property references",
 +}
 +
 +REQUIRED_REPORT_KEYS = {
@@ -243,7 +243,7 @@
 +    if parsed.netloc not in ALLOWED_HOSTS:
 +        errors.append(f"{context} URL host is not allowlisted: {url}")
 +    lowered_path = parsed.path.lower()
-+    if parsed.netloc == "devhub.portlandoregon.gov" and any(
++    if parsed.netloc == "wetten.overheid.nl" and any(
 +        marker in lowered_path for marker in ("/login", "/signin", "/account", "/dashboard", "/my-permits", "/cart", "/payment")
 +    ):
 +        errors.append(f"{context} URL is a private DevHub path: {url}")
@@ -277,57 +277,57 @@
 +      "inventoryCategoryId": "permit_application_pages",
 +      "inventoryCategoryLabel": "Permit application pages",
 +      "sourceLandscapeIds": ["applications_forms_index", "permit_submission_guidance"],
-+      "authorityLabels": ["Portland Permitting & Development public guidance"],
-+      "canonicalUrls": ["https://www.portland.gov/ppd/permits"],
++      "authorityLabels": ["Netherlands Permitting & Development public guidance"],
++      "canonicalUrls": ["https://wetten.overheid.nl/ppd/permits"],
 +      "recrawlCadenceHint": "weekly"
 +    },
 +    {
 +      "inventoryCategoryId": "forms_and_applications",
 +      "inventoryCategoryLabel": "Forms and applications",
 +      "sourceLandscapeIds": ["applications_forms_index"],
-+      "authorityLabels": ["Portland Permitting & Development forms index"],
-+      "canonicalUrls": ["https://www.portland.gov/ppd/forms"],
++      "authorityLabels": ["Netherlands Permitting & Development forms index"],
++      "canonicalUrls": ["https://wetten.overheid.nl/ppd/forms"],
 +      "recrawlCadenceHint": "weekly"
 +    },
 +    {
 +      "inventoryCategoryId": "handouts_and_checklists",
 +      "inventoryCategoryLabel": "Handouts and checklists",
 +      "sourceLandscapeIds": ["linked_pdf_handout_checklist_documents", "plan_upload_guidance"],
-+      "authorityLabels": ["Portland Permitting & Development handouts and checklists"],
-+      "canonicalUrls": ["https://www.portland.gov/ppd/documents"],
++      "authorityLabels": ["Netherlands Permitting & Development handouts and checklists"],
++      "canonicalUrls": ["https://wetten.overheid.nl/ppd/documents"],
 +      "recrawlCadenceHint": "monthly"
 +    },
 +    {
 +      "inventoryCategoryId": "fees_and_payment_guidance",
 +      "inventoryCategoryLabel": "Fees and payment guidance",
 +      "sourceLandscapeIds": ["payment_guidance"],
-+      "authorityLabels": ["Portland Permitting & Development fee guidance"],
-+      "canonicalUrls": ["https://www.portland.gov/ppd/fees"],
++      "authorityLabels": ["Netherlands Permitting & Development fee guidance"],
++      "canonicalUrls": ["https://wetten.overheid.nl/ppd/fees"],
 +      "recrawlCadenceHint": "weekly"
 +    },
 +    {
 +      "inventoryCategoryId": "devhub_public_guides",
 +      "inventoryCategoryLabel": "DevHub public guides",
 +      "sourceLandscapeIds": ["devhub_faq_process_guides", "correction_upload_guidance"],
-+      "authorityLabels": ["Portland.gov DevHub public guidance"],
-+      "canonicalUrls": ["https://www.portland.gov/ppd/devhub"],
++      "authorityLabels": ["wetten.overheid.nl DevHub public guidance"],
++      "canonicalUrls": ["https://wetten.overheid.nl/ppd/devhub"],
 +      "recrawlCadenceHint": "weekly"
 +    }
 +  ],
 +  "missingCategories": [
 +    {
 +      "sourceLandscapeId": "ppd_landing_public_guidance",
-+      "description": "PP&D landing and public guidance under https://www.portland.gov/ppd",
++      "description": "PP&D landing and public guidance under https://wetten.overheid.nl/ppd",
 +      "status": "missing_from_fixture_inventory"
 +    },
 +    {
 +      "sourceLandscapeId": "devhub_public_portal",
-+      "description": "DevHub public portal at https://devhub.portlandoregon.gov",
++      "description": "DevHub public portal at https://wetten.overheid.nl",
 +      "status": "missing_from_fixture_inventory"
 +    },
 +    {
 +      "sourceLandscapeId": "devhub_signin_account_guidance",
-+      "description": "DevHub sign-in and account guidance on Portland.gov",
++      "description": "DevHub sign-in and account guidance on wetten.overheid.nl",
 +      "status": "missing_from_fixture_inventory"
 +    },
 +    {
@@ -341,8 +341,8 @@
 +      "status": "missing_from_fixture_inventory"
 +    },
 +    {
-+      "sourceLandscapeId": "portland_maps_references",
-+      "description": "Portland Maps public permit, case, and property references",
++      "sourceLandscapeId": "bwb_metadata_references",
++      "description": "BWB metadata public permit, case, and property references",
 +      "status": "missing_from_fixture_inventory"
 +    }
 +  ]
@@ -387,7 +387,7 @@
 +                    "label": "Fees",
 +                    "sourceLandscapeIds": ["payment_guidance"],
 +                    "authorityLabels": ["PP&D fee guidance"],
-+                    "canonicalUrls": ["https://www.portland.gov/ppd/fees"],
++                    "canonicalUrls": ["https://wetten.overheid.nl/ppd/fees"],
 +                    "recrawlCadenceHint": "weekly",
 +                }
 +            ],
@@ -418,7 +418,7 @@
 +
 +    def test_assert_valid_coverage_report_raises_on_invalid_report(self):
 +        report = self.load_report()
-+        report["coverageEntries"][0]["canonicalUrls"] = ["https://devhub.portlandoregon.gov/account"]
++        report["coverageEntries"][0]["canonicalUrls"] = ["https://wetten.overheid.nl/account"]
 +        with self.assertRaises(ValueError):
 +            assert_valid_coverage_report(report)
 +

@@ -38,7 +38,7 @@ export const completeRequest = mutation({
       });
 
       // Send the message using the existing agent system
-      await ctx.scheduler.runAfter(0, internal.aiTown.agent.agentSendMessage, {
+      await ctx.scheduler.runAfter(0, internal.wetwijzer.agent.agentSendMessage, {
         worldId: request.worldId,
         conversationId: request.conversationContext.conversationId,
         agentId: request.agentId,
@@ -57,7 +57,7 @@ export const completeRequest = mutation({
 
       // Still send a fallback message to continue the conversation flow
       const fallbackText = getFallbackText(request.type);
-      await ctx.scheduler.runAfter(0, internal.aiTown.agent.agentSendMessage, {
+      await ctx.scheduler.runAfter(0, internal.wetwijzer.agent.agentSendMessage, {
         worldId: request.worldId,
         conversationId: request.conversationContext.conversationId,
         agentId: request.agentId,

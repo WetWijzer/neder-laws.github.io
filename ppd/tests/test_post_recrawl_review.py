@@ -39,7 +39,7 @@ def test_rejects_private_authenticated_evidence_and_downloaded_paths() -> None:
         {
             "source_type": "devhub_authenticated",
             "privacy_classification": "private",
-            "url": "https://devhub.portlandoregon.gov/account/my-permits",
+            "url": "https://wetten.overheid.nl/account/my-permits",
         },
         {"downloaded_path": "/home/example/Downloads/permit-guide.pdf"},
     ]

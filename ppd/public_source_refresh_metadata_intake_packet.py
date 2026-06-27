@@ -28,10 +28,10 @@ REQUIRED_ATTESTATIONS = (
     'no-schedule-mutation',
 )
 ALLOWED_HOSTS = {
-    'www.portland.gov',
-    'devhub.portlandoregon.gov',
-    'www.portlandoregon.gov',
-    'www.portlandmaps.com',
+    'wetten.overheid.nl',
+    'wetten.overheid.nl',
+    'wetten.overheid.nl',
+    'repository.overheid.nl',
 }
 INTAKE_STATUSES = {'accepted_metadata_only', 'skipped_metadata_only', 'needs_reviewer_resolution'}
 STATUS_REQUIRED_METADATA_FIELDS = (

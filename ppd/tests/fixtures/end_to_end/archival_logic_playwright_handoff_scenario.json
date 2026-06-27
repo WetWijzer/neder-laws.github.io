@@ -16,7 +16,7 @@
       "evidenceId": "src-ppd-public-permit-guidance",
       "archiveManifestId": "ppd-processor-archive-integration-2026-05-02",
       "processorHandoffId": "handoff-ppd-permits-guidance-formal-logic",
-      "sourceUrl": "https://www.portland.gov/ppd/permits",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/permits",
       "canonicalDocumentId": "doc-ppd-building-permit-public-guidance",
       "contentHashPlaceholder": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
       "citation": {
@@ -28,7 +28,7 @@
       "evidenceId": "src-ppd-public-devhub-guidance",
       "archiveManifestId": "ppd-processor-archive-integration-2026-05-02",
       "processorHandoffId": "handoff-ppd-devhub-guidance-playwright-draft",
-      "sourceUrl": "https://www.portland.gov/ppd/devhub/how-apply-permit-devhub",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/how-apply-permit-devhub",
       "canonicalDocumentId": "doc-ppd-devhub-public-application-guidance",
       "contentHashPlaceholder": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
       "citation": {

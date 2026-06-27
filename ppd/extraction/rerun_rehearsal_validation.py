@@ -463,12 +463,12 @@ def _is_private_or_authenticated_url(url: str) -> bool:
     if parsed.username or parsed.password:
         return True
     if host and host not in {
-        "www.portland.gov",
-        "portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
-        "www.portlandmaps.com",
-        "portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
+        "repository.overheid.nl",
     }:
         return True
     private_text = f"{path}?{query}"

@@ -28,7 +28,7 @@
     "cookie_storage": "forbidden",
     "automated_login": false,
     "account_creation_allowed": false,
-    "handoff_reason": "User must complete PortlandOregon.gov sign-in directly in the visible browser before any attended DevHub workflow is planned. The fixture records only redacted policy metadata."
+    "handoff_reason": "User must complete wetten.overheid.nl sign-in directly in the visible browser before any attended DevHub workflow is planned. The fixture records only redacted policy metadata."
   },
   "refused_action_policies": {
     "automated_login": {
@@ -101,7 +101,7 @@
     {
       "surface_id": "devhub.dashboard.permit_requests",
       "auth_scope": "authenticated_user_owned_session",
-      "url_pattern": "https://devhub.portlandoregon.gov/*",
+      "url_pattern": "https://wetten.overheid.nl/*",
       "page_heading": "DevHub",
       "requires_attendance": true,
       "requires_exact_confirmation": true,
@@ -118,7 +118,7 @@
     {
       "surface_id": "devhub.application.review_checkpoint",
       "auth_scope": "authenticated_user_owned_session",
-      "url_pattern": "https://devhub.portlandoregon.gov/*",
+      "url_pattern": "https://wetten.overheid.nl/*",
       "page_heading": "Review",
       "requires_attendance": true,
       "requires_exact_confirmation": true,

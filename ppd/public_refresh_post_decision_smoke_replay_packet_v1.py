@@ -65,7 +65,7 @@ FORBIDDEN_TEXT_TOKENS = (
     "active artifacts mutated",
     "authenticated devhub",
     "devhub opened",
-    "devhub.portlandoregon.gov",
+    "wetten.overheid.nl",
     "document downloaded",
     "documents downloaded",
     "fee paid",

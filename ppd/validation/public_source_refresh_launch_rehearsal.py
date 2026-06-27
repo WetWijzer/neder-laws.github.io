@@ -13,9 +13,9 @@ from typing import Any
 from urllib.parse import urlparse
 
 _ALLOWED_URL_HOSTS = {
-    "portland.gov",
-    "www.portland.gov",
-    "efiles.portlandoregon.gov",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 
 _AUTH_QUERY_KEYS = {

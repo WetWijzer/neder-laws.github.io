@@ -11,10 +11,10 @@
 +  "network_access_performed": false,
 +  "stores_raw_response_bodies": false,
 +  "allowed_hosts": [
-+    "www.portland.gov",
-+    "devhub.portlandoregon.gov",
-+    "www.portlandoregon.gov",
-+    "www.portlandmaps.com"
++    "wetten.overheid.nl",
++    "wetten.overheid.nl",
++    "wetten.overheid.nl",
++    "repository.overheid.nl"
 +  ],
 +  "timeout_policy": {
 +    "connect_timeout_seconds": 10,
@@ -59,8 +59,8 @@
 +  "planned_fetches": [
 +    {
 +      "id": "seed-ppd-landing",
-+      "url": "https://www.portland.gov/ppd",
-+      "canonical_url": "https://www.portland.gov/ppd",
++      "url": "https://wetten.overheid.nl/ppd",
++      "canonical_url": "https://wetten.overheid.nl/ppd",
 +      "method": "GET",
 +      "expected_content_type": "text/html",
 +      "source_seed_id": "seed-ppd-landing",
@@ -69,7 +69,7 @@
 +        {
 +          "reason": "allowlisted_public_url",
 +          "allowed": true,
-+          "detail": "Host www.portland.gov is in the PP&D public crawl allowlist."
++          "detail": "Host wetten.overheid.nl is in the PP&D public crawl allowlist."
 +        },
 +        {
 +          "reason": "robots_allowed",
@@ -88,13 +88,13 @@
 +        }
 +      ],
 +      "allowlist_decision": {
-+        "host": "www.portland.gov",
++        "host": "wetten.overheid.nl",
 +        "allowed": true,
 +        "reason_code": "allowlisted_public_url"
 +      },
 +      "robots_preflight": {
 +        "robots_checked": false,
-+        "robots_source_url": "https://www.portland.gov/robots.txt",
++        "robots_source_url": "https://wetten.overheid.nl/robots.txt",
 +        "robots_decision": "not_fetched_dry_run",
 +        "robots_checked_at": null,
 +        "user_agent": "ppd-public-crawl-dry-run"
@@ -124,8 +124,8 @@
 +    },
 +    {
 +      "id": "seed-ppd-residential-permits",
-+      "url": "https://www.portland.gov/ppd/residential-permitting",
-+      "canonical_url": "https://www.portland.gov/ppd/residential-permitting",
++      "url": "https://wetten.overheid.nl/ppd/residential-permitting",
++      "canonical_url": "https://wetten.overheid.nl/ppd/residential-permitting",
 +      "method": "GET",
 +      "expected_content_type": "text/html",
 +      "source_seed_id": "seed-ppd-residential-permits",
@@ -134,7 +134,7 @@
 +        {
 +          "reason": "allowlisted_public_url",
 +          "allowed": true,
-+          "detail": "Host www.portland.gov is in the PP&D public crawl allowlist."
++          "detail": "Host wetten.overheid.nl is in the PP&D public crawl allowlist."
 +        },
 +        {
 +          "reason": "robots_allowed",
@@ -153,13 +153,13 @@
 +        }
 +      ],
 +      "allowlist_decision": {
-+        "host": "www.portland.gov",
++        "host": "wetten.overheid.nl",
 +        "allowed": true,
 +        "reason_code": "allowlisted_public_url"
 +      },
 +      "robots_preflight": {
 +        "robots_checked": false,
-+        "robots_source_url": "https://www.portland.gov/robots.txt",
++        "robots_source_url": "https://wetten.overheid.nl/robots.txt",
 +        "robots_decision": "not_fetched_dry_run",
 +        "robots_checked_at": null,
 +        "user_agent": "ppd-public-crawl-dry-run"
@@ -189,8 +189,8 @@
 +    },
 +    {
 +      "id": "seed-ppd-applications-forms",
-+      "url": "https://www.portland.gov/ppd/applications-forms",
-+      "canonical_url": "https://www.portland.gov/ppd/applications-forms",
++      "url": "https://wetten.overheid.nl/ppd/applications-forms",
++      "canonical_url": "https://wetten.overheid.nl/ppd/applications-forms",
 +      "method": "GET",
 +      "expected_content_type": "text/html",
 +      "source_seed_id": "seed-ppd-applications-forms",
@@ -199,7 +199,7 @@
 +        {
 +          "reason": "allowlisted_public_url",
 +          "allowed": true,
-+          "detail": "Host www.portland.gov is in the PP&D public crawl allowlist."
++          "detail": "Host wetten.overheid.nl is in the PP&D public crawl allowlist."
 +        },
 +        {
 +          "reason": "robots_allowed",
@@ -218,13 +218,13 @@
 +        }
 +      ],
 +      "allowlist_decision": {
-+        "host": "www.portland.gov",
++        "host": "wetten.overheid.nl",
 +        "allowed": true,
 +        "reason_code": "allowlisted_public_url"
 +      },
 +      "robots_preflight": {
 +        "robots_checked": false,
-+        "robots_source_url": "https://www.portland.gov/robots.txt",
++        "robots_source_url": "https://wetten.overheid.nl/robots.txt",
 +        "robots_decision": "not_fetched_dry_run",
 +        "robots_checked_at": null,
 +        "user_agent": "ppd-public-crawl-dry-run"
@@ -254,8 +254,8 @@
 +    },
 +    {
 +      "id": "seed-devhub-public-landing",
-+      "url": "https://devhub.portlandoregon.gov/",
-+      "canonical_url": "https://devhub.portlandoregon.gov/",
++      "url": "https://wetten.overheid.nl/",
++      "canonical_url": "https://wetten.overheid.nl/",
 +      "method": "GET",
 +      "expected_content_type": "text/html",
 +      "source_seed_id": "seed-devhub-public-landing",
@@ -264,7 +264,7 @@
 +        {
 +          "reason": "allowlisted_public_url",
 +          "allowed": true,
-+          "detail": "Host devhub.portlandoregon.gov is in the PP&D public crawl allowlist for public portal pages only."
++          "detail": "Host wetten.overheid.nl is in the PP&D public crawl allowlist for public portal pages only."
 +        },
 +        {
 +          "reason": "robots_allowed",
@@ -283,13 +283,13 @@
 +        }
 +      ],
 +      "allowlist_decision": {
-+        "host": "devhub.portlandoregon.gov",
++        "host": "wetten.overheid.nl",
 +        "allowed": true,
 +        "reason_code": "allowlisted_public_url"
 +      },
 +      "robots_preflight": {
 +        "robots_checked": false,
-+        "robots_source_url": "https://devhub.portlandoregon.gov/robots.txt",
++        "robots_source_url": "https://wetten.overheid.nl/robots.txt",
 +        "robots_decision": "not_fetched_dry_run",
 +        "robots_checked_at": null,
 +        "user_agent": "ppd-public-crawl-dry-run"
@@ -335,18 +335,18 @@
 +      "id": "skip-devhub-private-account",
 +      "source_seed_id": "seed-devhub-public-landing",
 +      "raw_href": "/Account/Login",
-+      "normalized_url": "https://devhub.portlandoregon.gov/Account/Login",
++      "normalized_url": "https://wetten.overheid.nl/Account/Login",
 +      "reason_code": "private_or_authenticated",
 +      "decision": "skipped",
 +      "allowlist_decision": {
-+        "host": "devhub.portlandoregon.gov",
++        "host": "wetten.overheid.nl",
 +        "allowed": false,
 +        "reason_code": "private_or_authenticated",
 +        "detail": "DevHub sign-in and account-scoped paths are outside unattended public crawl scope."
 +      },
 +      "robots_preflight": {
 +        "robots_checked": false,
-+        "robots_source_url": "https://devhub.portlandoregon.gov/robots.txt",
++        "robots_source_url": "https://wetten.overheid.nl/robots.txt",
 +        "robots_decision": "not_checked_skipped_before_fetch",
 +        "robots_checked_at": null,
 +        "user_agent": "ppd-public-crawl-dry-run"
@@ -400,8 +400,8 @@
 +    {
 +      "id": "skip-mailto-contact",
 +      "source_seed_id": "seed-ppd-landing",
-+      "raw_href": "mailto:example@portlandoregon.gov",
-+      "normalized_url": "mailto:example@portlandoregon.gov",
++      "raw_href": "mailto:example@wetten.overheid.nl",
++      "normalized_url": "mailto:example@wetten.overheid.nl",
 +      "reason_code": "unsupported_scheme",
 +      "decision": "skipped",
 +      "allowlist_decision": {

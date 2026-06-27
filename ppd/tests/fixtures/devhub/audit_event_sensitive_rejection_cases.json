@@ -13,7 +13,7 @@
       "accessibleName": "Continue",
       "labelText": "Continue",
       "nearbyHeading": "Permit details",
-      "stableUrl": "https://devhub.portlandoregon.gov/mock/permit-draft"
+      "stableUrl": "https://wetten.overheid.nl/mock/permit-draft"
     },
     "sourceEvidenceIds": [
       "public-devhub-guidance-faq"

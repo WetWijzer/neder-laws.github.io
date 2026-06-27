@@ -55,8 +55,8 @@ Prompt mode:
 Hard constraints:
 - Return ONLY one JSON object; no markdown fences and no prose outside JSON.
 - Use complete file replacements in a `files` array. Do not return shell commands.
-- Edit only files under `ppd/`, or `docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md` if the task specifically requires plan updates.
-- Do not edit `src/lib/logic/`, `public/corpus/portland-or/current/`, `ipfs_datasets_py/.daemon/`, or the TypeScript logic daemon ledgers.
+- Edit only files under `ppd/`, or `docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md` if the task specifically requires plan updates.
+- Do not edit `src/lib/logic/`, `public/corpus/wetwijzer-or/current/`, `ipfs_datasets_py/.daemon/`, or the TypeScript logic daemon ledgers.
 - Do not create private DevHub session files, auth state, traces, raw crawl output, or downloaded documents.
 - Keep the change narrow and directly useful for the selected task.
 - Prefer deterministic fixtures and validation before any live crawl or authenticated automation.

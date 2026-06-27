@@ -51,7 +51,7 @@ def test_rejects_non_allowlisted_and_authenticated_urls() -> None:
     outside["canonical_url"] = "https://example.com/ppd"
     auth = copy.deepcopy(plan["watch_rows"][0])
     auth["watch_id"] = "authenticated-devhub"
-    auth["canonical_url"] = "https://devhub.portlandoregon.gov/account/my-permits"
+    auth["canonical_url"] = "https://wetten.overheid.nl/account/my-permits"
     auth["requires_auth"] = True
     plan["watch_rows"] = [outside, auth]
 

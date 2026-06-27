@@ -28,7 +28,7 @@ class PublicSourceChangeImpactRehearsalV1Test(unittest.TestCase):
             (lambda packet: packet['impact_rows'][0].update({'affected_requirement_ids': ['unknown-req']}), 'unknown requirement_id unknown-req'),
             (lambda packet: packet['impact_rows'][0].update({'freshness_rationale': ''}), 'freshness_rationale is required'),
             (lambda packet: packet['impact_rows'][0].update({'change_rationale': ''}), 'change_rationale is required'),
-            (lambda packet: packet['impact_rows'][0]['citations'][0].update({'public_url': 'https://user:secret@www.portland.gov/ppd'}), 'authenticated or credential-bearing URL'),
+            (lambda packet: packet['impact_rows'][0]['citations'][0].update({'public_url': 'https://user:secret@wetten.overheid.nl/ppd'}), 'authenticated or credential-bearing URL'),
             (lambda packet: packet['impact_rows'][0].update({'debug_ref': '/tmp/ppd/raw/body.html'}), 'forbidden raw body'),
             (lambda packet: packet['impact_rows'][0].update({'download_ref': '/tmp/ppd/downloads/source.pdf'}), 'downloaded-document'),
             (lambda packet: packet['impact_rows'][0].update({'processorCompleted': True}), 'processor completion claims are not allowed'),

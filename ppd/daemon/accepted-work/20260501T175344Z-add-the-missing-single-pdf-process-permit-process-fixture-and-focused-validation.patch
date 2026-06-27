@@ -35,7 +35,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-single-pdf-process-guidance",
-+            "sourceUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +            "anchorId": "single-pdf-process-overview",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "Public PP&D guidance describes projects that use a Single PDF Process."
@@ -62,7 +62,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-single-pdf-process-guidance",
-+            "sourceUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +            "anchorId": "single-pdf-file-rules",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "Public guidance says drawing plans are one searchable PDF and applications, calculations, and supporting documents are separate PDFs."
@@ -88,7 +88,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-devhub-application-guidance",
-+            "sourceUrl": "https://www.portland.gov/ppd/devhub/apply-permit",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/apply-permit",
 +            "anchorId": "devhub-request-types",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "Public DevHub application guidance lists permit request types handled through DevHub."
@@ -115,7 +115,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-single-pdf-process-guidance",
-+            "sourceUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +            "anchorId": "single-pdf-file-rules",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "The Single PDF Process requires plan files and other submittal documents to be prepared as PDFs before upload."
@@ -140,7 +140,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-devhub-faq",
-+            "sourceUrl": "https://www.portland.gov/ppd/development-hub-pdx/devhub-faq",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/development-hub-netherlands/devhub-faq",
 +            "anchorId": "devhub-service-categories",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "DevHub FAQ describes online permit request services, fee payments, correction uploads, and related portal actions."
@@ -165,10 +165,10 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-devhub-application-guidance",
-+            "sourceUrl": "https://www.portland.gov/ppd/devhub/apply-permit",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/apply-permit",
 +            "anchorId": "devhub-application-submission",
 +            "capturedAt": "2026-05-01T17:55:00Z",
-+            "note": "DevHub is Portland's online permitting system for permit requests, so submission is a consequential portal action."
++            "note": "DevHub is Netherlands's online permitting system for permit requests, so submission is a consequential portal action."
 +          }
 +        ]
 +      },
@@ -190,7 +190,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-devhub-faq",
-+            "sourceUrl": "https://www.portland.gov/ppd/development-hub-pdx/devhub-faq",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/development-hub-netherlands/devhub-faq",
 +            "anchorId": "devhub-service-categories",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "Public DevHub FAQ lists permit requests requiring plan review and correction uploads as DevHub service categories."
@@ -213,7 +213,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-devhub-faq",
-+            "sourceUrl": "https://www.portland.gov/ppd/development-hub-pdx/devhub-faq",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/development-hub-netherlands/devhub-faq",
 +            "anchorId": "devhub-correction-upload",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "Public DevHub FAQ identifies correction uploads as an online permitting service."
@@ -239,7 +239,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-devhub-application-guidance",
-+            "sourceUrl": "https://www.portland.gov/ppd/devhub/apply-permit",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/apply-permit",
 +            "anchorId": "devhub-application-submission",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "Permit requests are project-specific DevHub transactions."
@@ -264,7 +264,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-single-pdf-process-guidance",
-+            "sourceUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +            "anchorId": "single-pdf-process-overview",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "Single PDF Process applicability depends on the project and permit request workflow."
@@ -294,7 +294,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-single-pdf-process-guidance",
-+            "sourceUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +            "anchorId": "single-pdf-file-rules",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "Public guidance says drawing plans are one searchable PDF."
@@ -322,7 +322,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-single-pdf-process-guidance",
-+            "sourceUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +            "anchorId": "single-pdf-file-rules",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "Public guidance distinguishes applications from drawing plans and treats applications as separate PDFs."
@@ -350,7 +350,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-single-pdf-process-guidance",
-+            "sourceUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +            "anchorId": "single-pdf-file-rules",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "Public guidance says calculations and supporting documents are separate PDFs."
@@ -377,7 +377,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-devhub-faq",
-+            "sourceUrl": "https://www.portland.gov/ppd/development-hub-pdx/devhub-faq",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/development-hub-netherlands/devhub-faq",
 +            "anchorId": "devhub-correction-upload",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "DevHub FAQ lists correction uploads among online permit services."
@@ -403,7 +403,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-single-pdf-process-guidance",
-+            "sourceUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +            "anchorId": "single-pdf-file-rules",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "Public guidance says drawing plans are one searchable PDF."
@@ -428,7 +428,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-single-pdf-process-guidance",
-+            "sourceUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +            "anchorId": "single-pdf-file-rules",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "Public guidance says applications, calculations, and supporting documents are separate PDFs."
@@ -456,7 +456,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-devhub-application-guidance",
-+            "sourceUrl": "https://www.portland.gov/ppd/devhub/apply-permit",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/apply-permit",
 +            "anchorId": "devhub-application-submission",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "DevHub request submission is a consequential portal action and must remain user-confirmed in PP&D automation."
@@ -484,7 +484,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-devhub-faq",
-+            "sourceUrl": "https://www.portland.gov/ppd/development-hub-pdx/devhub-faq",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/development-hub-netherlands/devhub-faq",
 +            "anchorId": "devhub-service-categories",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "DevHub supports permit request and correction upload services."
@@ -509,7 +509,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-devhub-application-guidance",
-+            "sourceUrl": "https://www.portland.gov/ppd/devhub/apply-permit",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/apply-permit",
 +            "anchorId": "devhub-application-submission",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "Submitting a permit request through DevHub is an official workflow action."
@@ -535,7 +535,7 @@
 +        "evidence": [
 +          {
 +            "sourceId": "ppd-devhub-application-guidance",
-+            "sourceUrl": "https://www.portland.gov/ppd/devhub/apply-permit",
++            "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/apply-permit",
 +            "anchorId": "devhub-application-submission",
 +            "capturedAt": "2026-05-01T17:55:00Z",
 +            "note": "DevHub is the online permitting system for permit request submission."

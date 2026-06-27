@@ -4,47 +4,47 @@
   "prepared_for": "agent release consumers and PP&D reviewers",
   "citations": {
     "plan-non-negotiable-boundaries": {
-      "source": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
+      "source": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
       "anchor": "Non-Negotiable Boundaries",
       "supports": "Do not automate account creation, CAPTCHA, MFA, payment, upload, submission, certification, cancellation, or scheduling; do not store credentials, sessions, traces, screenshots, payment details, private uploads, or private values."
     },
     "plan-user-experience": {
-      "source": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
+      "source": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
       "anchor": "Purpose",
       "supports": "Agents should load cited process models, compare them with known facts, ask for missing or conflicting facts, draft reversible values, and block consequential official actions until the user is present and confirms the exact action."
     },
     "plan-devhub-safe-read-only": {
-      "source": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
+      "source": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
       "anchor": "DevHub Surface Categories / Safe read-only",
       "supports": "DevHub Home, permit lists, permit details, status messages, fee notice review, correction request review, attachment list review, and inspection results review are safe read-only categories."
     },
     "plan-devhub-reversible-draft": {
-      "source": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
+      "source": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
       "anchor": "DevHub Surface Categories / Reversible draft",
       "supports": "Address or property search, permit type selection before submission, form field fill before submission, save draft, local field-mapping preview, and upload staging before official attach or submit are reversible draft categories."
     },
     "plan-devhub-consequential": {
-      "source": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
+      "source": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
       "anchor": "DevHub Surface Categories / Consequential official and Financial",
       "supports": "Submitting permit requests, certifying acknowledgements, uploading corrections to the official record, purchasing trade permits, scheduling inspections, canceling or withdrawing, requesting extensions or reactivations, entering payment details, and submitting payment are consequential or financial actions."
     },
     "plan-action-journal-privacy": {
-      "source": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
+      "source": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
       "anchor": "ActionJournal",
       "supports": "Commit-safe journal events must not include credentials, cookies, auth state, screenshots, traces, HAR data, private values, payment details, or local private file paths."
     },
     "official-devhub-tools": {
-      "source": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "source": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "anchor": "Online permitting tools overview",
-      "supports": "DevHub is the City of Portland online permitting system and official guidance links workflows for permit requests, trade permits, fee payment, inspection scheduling, and account sign-in."
+      "supports": "DevHub is the WetWijzer online permitting system and official guidance links workflows for permit requests, trade permits, fee payment, inspection scheduling, and account sign-in."
     },
     "official-devhub-faq": {
-      "source": "https://www.portland.gov/ppd/devhub-faqs",
+      "source": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "anchor": "DevHub FAQ",
       "supports": "DevHub account-scoped services include purchasing standard permits, submitting permit requests requiring plan review, scheduling trade-permit inspections, uploading corrections, and paying fees."
     },
     "official-submit-plans": {
-      "source": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "source": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "anchor": "Submit Plans Online / Single PDF Process",
       "supports": "Single PDF guidance treats drawing plans, applications, calculations, and supporting documents as distinct upload materials whose readiness must be checked before official submission."
     }

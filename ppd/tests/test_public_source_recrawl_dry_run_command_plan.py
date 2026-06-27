@@ -11,7 +11,7 @@ from ppd.crawler.public_source_recrawl_dry_run_command_plan import (
 class PublicSourceRecrawlDryRunCommandPlanTests(unittest.TestCase):
     def test_accepts_public_allowlisted_planning_only_plan(self) -> None:
         plan = {
-            "targets": [{"url": "https://www.portland.gov/bds/documents"}],
+            "targets": [{"url": "https://wetten.overheid.nl/bds/documents"}],
             "robots_txt_evidence": "robots.txt reviewed for allowed public document paths",
             "policy_evidence": "public PP&D source page documents public records access",
             "rate_limit_notes": "one request at a time with backoff on 429 or 5xx",
@@ -26,7 +26,7 @@ class PublicSourceRecrawlDryRunCommandPlanTests(unittest.TestCase):
         plan = {
             "targets": [
                 {"url": "https://private.example.test/documents", "authenticated": True},
-                {"url": "http://www.portland.gov/bds/documents"},
+                {"url": "http://wetten.overheid.nl/bds/documents"},
             ],
             "raw_body_path": "ppd/raw/body.html",
             "download_path": "ppd/downloads/file.pdf",

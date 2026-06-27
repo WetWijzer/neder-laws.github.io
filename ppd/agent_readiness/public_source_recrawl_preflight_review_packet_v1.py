@@ -17,10 +17,10 @@ from typing import Any
 PACKET_VERSION = 'public_source_recrawl_preflight_review_packet_v1'
 
 OFFICIAL_ANCHOR_PREFIXES = (
-    'https://www.portland.gov/ppd',
-    'https://devhub.portlandoregon.gov',
-    'https://www.portlandoregon.gov',
-    'https://www.portlandmaps.com',
+    'https://wetten.overheid.nl/ppd',
+    'https://wetten.overheid.nl',
+    'https://wetten.overheid.nl',
+    'https://repository.overheid.nl',
 )
 
 SENSITIVE_KEY_FRAGMENTS = (

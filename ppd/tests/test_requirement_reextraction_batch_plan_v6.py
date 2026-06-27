@@ -168,6 +168,6 @@ def test_rejects_live_crawl_raw_private_official_guarantee_and_mutation_claims()
 
 def test_rejects_unsupported_validation_commands() -> None:
     plan = load_plan()
-    plan["offline_validation_commands"] = [["curl", "https://www.portland.gov/ppd"]]
+    plan["offline_validation_commands"] = [["curl", "https://wetten.overheid.nl/ppd"]]
 
     assert "unsupported_validation_command" in codes(plan)

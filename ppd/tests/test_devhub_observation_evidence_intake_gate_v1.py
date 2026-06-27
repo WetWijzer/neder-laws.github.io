@@ -124,7 +124,7 @@ def test_rejects_active_mutation_flags() -> None:
 
 def test_rejects_online_validation_commands() -> None:
     packet = load_fixture()
-    packet["observation_rows"][0]["offline_validation_commands"] = [["curl", "https://devhub.portlandoregon.gov"]]
+    packet["observation_rows"][0]["offline_validation_commands"] = [["curl", "https://wetten.overheid.nl"]]
 
     codes = finding_codes(packet)
 

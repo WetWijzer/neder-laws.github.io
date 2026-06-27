@@ -1,0 +1,50 @@
+[
+  {
+    "deontic_cognitive_event_calculus": "(forall agent (implies (subject_to agent netherlands_law_article_bwbr0001854_artikel_1) (O (always (comply_with agent netherlands_law_article_bwbr0001854_artikel_1)))))",
+    "ipfs_cid": "bafywetwijzer000000000000000000000000000000000000000000000001",
+    "identifier": "Wetboek van Strafrecht, Artikel 1",
+    "title": "Wetboek van Strafrecht - Artikel 1",
+    "formalization_scope": "article",
+    "fol_status": "success",
+    "deontic_status": "success",
+    "deontic_temporal_fol": "forall a:Agent (SubjectTo(a, netherlands_law_article_bwbr0001854_artikel_1) -> O([]ComplyWith(a, netherlands_law_article_bwbr0001854_artikel_1)))",
+    "frame_logic_ergo": "netherlands_law_article_bwbr0001854_artikel_1[identifier -> \"BWBR0001854 Artikel 1\", ipfs_cid -> \"bafywetwijzer000000000000000000000000000000000000000000000001\", source_url -> \"https://wetten.overheid.nl/BWBR0001854\", jurisdiction -> \"Netherlands\", norm_operator -> \"O\", norm_type -> \"obligation\"] : DutchLawArticle.",
+    "norm_operator": "O",
+    "norm_type": "obligation",
+    "zkp_backend": "simulated",
+    "zkp_security_note": "Local simulated proof helper only; not cryptographic verification and not legal advice.",
+    "zkp_verified": false
+  },
+  {
+    "deontic_cognitive_event_calculus": "(forall agent (implies (subject_to agent netherlands_law_article_bwbr0002656_artikel_1) (P (always (exercise_authority agent netherlands_law_article_bwbr0002656_artikel_1)))))",
+    "ipfs_cid": "bafywetwijzer000000000000000000000000000000000000000000000002",
+    "identifier": "Burgerlijk Wetboek Boek 1, Artikel 1",
+    "title": "Burgerlijk Wetboek Boek 1 - Artikel 1",
+    "formalization_scope": "article",
+    "fol_status": "success",
+    "deontic_status": "success",
+    "deontic_temporal_fol": "forall a:Agent (SubjectTo(a, netherlands_law_article_bwbr0002656_artikel_1) -> P([]ExerciseAuthority(a, netherlands_law_article_bwbr0002656_artikel_1)))",
+    "frame_logic_ergo": "netherlands_law_article_bwbr0002656_artikel_1[identifier -> \"BWBR0002656 Artikel 1\", ipfs_cid -> \"bafywetwijzer000000000000000000000000000000000000000000000002\", source_url -> \"https://wetten.overheid.nl/BWBR0002656\", jurisdiction -> \"Netherlands\", norm_operator -> \"P\", norm_type -> \"permission\"] : DutchLawArticle.",
+    "norm_operator": "P",
+    "norm_type": "permission",
+    "zkp_backend": "simulated",
+    "zkp_security_note": "Local simulated proof helper only; not cryptographic verification and not legal advice.",
+    "zkp_verified": false
+  },
+  {
+    "deontic_cognitive_event_calculus": "(forall agent (implies (subject_to agent netherlands_law_article_bwbr0001827_artikel_1) (F (always (violate agent netherlands_law_article_bwbr0001827_artikel_1)))))",
+    "ipfs_cid": "bafywetwijzer000000000000000000000000000000000000000000000003",
+    "identifier": "Wetboek van Burgerlijke Rechtsvordering, Artikel 1",
+    "title": "Wetboek van Burgerlijke Rechtsvordering - Artikel 1",
+    "formalization_scope": "article",
+    "fol_status": "success",
+    "deontic_status": "success",
+    "deontic_temporal_fol": "forall a:Agent (SubjectTo(a, netherlands_law_article_bwbr0001827_artikel_1) -> F([]Violate(a, netherlands_law_article_bwbr0001827_artikel_1)))",
+    "frame_logic_ergo": "netherlands_law_article_bwbr0001827_artikel_1[identifier -> \"BWBR0001827 Artikel 1\", ipfs_cid -> \"bafywetwijzer000000000000000000000000000000000000000000000003\", source_url -> \"https://wetten.overheid.nl/BWBR0001827\", jurisdiction -> \"Netherlands\", norm_operator -> \"F\", norm_type -> \"prohibition\"] : DutchLawArticle.",
+    "norm_operator": "F",
+    "norm_type": "prohibition",
+    "zkp_backend": "simulated",
+    "zkp_security_note": "Local simulated proof helper only; not cryptographic verification and not legal advice.",
+    "zkp_verified": false
+  }
+]

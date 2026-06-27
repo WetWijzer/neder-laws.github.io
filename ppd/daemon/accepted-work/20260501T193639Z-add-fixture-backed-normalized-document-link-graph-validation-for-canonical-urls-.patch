@@ -4,7 +4,7 @@
 +"""Deterministic validation for PP&D normalized document link graphs.
 +
 +The link graph is a commit-safe fixture artifact. It connects normalized public
-+PP&D documents to linked forms, PDFs, DevHub guides, Portland Maps references,
++PP&D documents to linked forms, PDFs, DevHub guides, BWB metadata references,
 +and skipped links. It must not contain raw crawl bodies, downloaded documents,
 +private DevHub session artifacts, browser traces, screenshots, credentials, or
 +other live crawl output.
@@ -367,7 +367,7 @@
 +
 +def _is_private_devhub_url(value: str) -> bool:
 +    parsed = urlparse(value.strip())
-+    if parsed.netloc.lower() != "devhub.portlandoregon.gov":
++    if parsed.netloc.lower() != "wetten.overheid.nl":
 +        return False
 +    path = parsed.path.lower()
 +    return any(marker in path for marker in PRIVATE_DEVHUB_MARKERS)
@@ -403,37 +403,37 @@
 +  "sourceIndex": [
 +    {
 +      "id": "src-ppd-single-pdf",
-+      "canonicalUrl": "https://www.portland.gov/ppd/single-pdf-process",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/single-pdf-process",
 +      "contentType": "html",
 +      "title": "Single PDF Process",
 +      "crawlStatus": "fixture"
 +    },
 +    {
 +      "id": "src-ppd-forms-index",
-+      "canonicalUrl": "https://www.portland.gov/ppd/permits/permits-and-inspections-applications",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/permits-and-inspections-applications",
 +      "contentType": "html",
 +      "title": "Permits and Inspections Applications",
 +      "crawlStatus": "fixture"
 +    },
 +    {
 +      "id": "src-building-permit-app-pdf",
-+      "canonicalUrl": "https://www.portland.gov/ppd/documents/building-permit-application/download",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/documents/building-permit-application/download",
 +      "contentType": "pdf",
 +      "title": "Building Permit Application",
 +      "crawlStatus": "fixture"
 +    },
 +    {
 +      "id": "src-devhub-faq",
-+      "canonicalUrl": "https://devhub.portlandoregon.gov/DevHub/FAQ",
++      "canonicalUrl": "https://wetten.overheid.nl/DevHub/FAQ",
 +      "contentType": "html",
 +      "title": "DevHub FAQ",
 +      "crawlStatus": "fixture"
 +    },
 +    {
-+      "id": "src-portlandmaps-property",
-+      "canonicalUrl": "https://www.portlandmaps.com/detail/property/fixture",
++      "id": "src-wetwijzermaps-property",
++      "canonicalUrl": "https://repository.overheid.nl/detail/property/fixture",
 +      "contentType": "external_site",
-+      "title": "Portland Maps public property reference",
++      "title": "BWB metadata public property reference",
 +      "crawlStatus": "fixture"
 +    }
 +  ],
@@ -441,25 +441,25 @@
 +    {
 +      "id": "doc-single-pdf",
 +      "sourceIndexId": "src-ppd-single-pdf",
-+      "canonicalUrl": "https://www.portland.gov/ppd/single-pdf-process",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/single-pdf-process",
 +      "contentType": "html",
 +      "links": [
 +        {
 +          "label": "Permits and Inspections Applications",
 +          "targetSourceIndexId": "src-ppd-forms-index",
-+          "targetCanonicalUrl": "https://www.portland.gov/ppd/permits/permits-and-inspections-applications",
++          "targetCanonicalUrl": "https://wetten.overheid.nl/ppd/permits/permits-and-inspections-applications",
 +          "contentType": "html"
 +        },
 +        {
 +          "label": "Building Permit Application PDF",
 +          "targetSourceIndexId": "src-building-permit-app-pdf",
-+          "targetCanonicalUrl": "https://www.portland.gov/ppd/documents/building-permit-application/download",
++          "targetCanonicalUrl": "https://wetten.overheid.nl/ppd/documents/building-permit-application/download",
 +          "contentType": "pdf"
 +        },
 +        {
 +          "label": "DevHub FAQ",
 +          "targetSourceIndexId": "src-devhub-faq",
-+          "targetCanonicalUrl": "https://devhub.portlandoregon.gov/DevHub/FAQ",
++          "targetCanonicalUrl": "https://wetten.overheid.nl/DevHub/FAQ",
 +          "contentType": "html"
 +        },
 +        {
@@ -472,13 +472,13 @@
 +    {
 +      "id": "doc-forms-index",
 +      "sourceIndexId": "src-ppd-forms-index",
-+      "canonicalUrl": "https://www.portland.gov/ppd/permits/permits-and-inspections-applications",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/permits-and-inspections-applications",
 +      "contentType": "html",
 +      "links": [
 +        {
-+          "label": "Public Portland Maps reference",
-+          "targetSourceIndexId": "src-portlandmaps-property",
-+          "targetCanonicalUrl": "https://www.portlandmaps.com/detail/property/fixture",
++          "label": "Public BWB metadata reference",
++          "targetSourceIndexId": "src-wetwijzermaps-property",
++          "targetCanonicalUrl": "https://repository.overheid.nl/detail/property/fixture",
 +          "contentType": "external_site"
 +        },
 +        {
@@ -516,7 +516,7 @@
 +
 +    def test_rejects_noncanonical_source_index_url(self) -> None:
 +        graph = _load_fixture("valid_link_graph.json")
-+        graph["sourceIndex"][0]["canonicalUrl"] = "https://www.Portland.gov/ppd/single-pdf-process#overview"
++        graph["sourceIndex"][0]["canonicalUrl"] = "https://wetten.overheid.nl/ppd/single-pdf-process#overview"
 +
 +        findings = validate_normalized_link_graph(graph)
 +
@@ -524,7 +524,7 @@
 +
 +    def test_rejects_document_canonical_mismatch(self) -> None:
 +        graph = _load_fixture("valid_link_graph.json")
-+        graph["documents"][0]["canonicalUrl"] = "https://www.portland.gov/ppd/other-page"
++        graph["documents"][0]["canonicalUrl"] = "https://wetten.overheid.nl/ppd/other-page"
 +
 +        findings = validate_normalized_link_graph(graph)
 +
@@ -559,7 +559,7 @@
 +        graph["documents"][0]["links"].append(
 +            {
 +                "label": "Private upload",
-+                "targetCanonicalUrl": "https://devhub.portlandoregon.gov/upload/corrections",
++                "targetCanonicalUrl": "https://wetten.overheid.nl/upload/corrections",
 +                "contentType": "skipped",
 +                "skippedReason": "private_devhub_path",
 +            }

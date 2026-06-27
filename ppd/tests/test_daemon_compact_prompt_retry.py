@@ -33,7 +33,7 @@ class DaemonCompactPromptRetryTest(unittest.TestCase):
             daemon_dir.mkdir(parents=True)
             (repo / "ppd" / "tests").mkdir(parents=True)
             (repo / "docs").mkdir()
-            (repo / "docs" / "PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md").write_text(
+            (repo / "docs" / "WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md").write_text(
                 "Plan\n" + ("long plan\n" * 1000),
                 encoding="utf-8",
             )
@@ -74,7 +74,7 @@ class DaemonCompactPromptRetryTest(unittest.TestCase):
             daemon_dir = repo / "ppd" / "daemon"
             daemon_dir.mkdir(parents=True)
             (repo / "docs").mkdir()
-            (repo / "docs" / "PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md").write_text("Plan\n", encoding="utf-8")
+            (repo / "docs" / "WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md").write_text("Plan\n", encoding="utf-8")
             (daemon_dir / "task-board.md").write_text(
                 "- [~] Task checkbox-1: Add JSON recovery coverage.\n",
                 encoding="utf-8",
@@ -110,7 +110,7 @@ class DaemonCompactPromptRetryTest(unittest.TestCase):
             daemon_dir = repo / "ppd" / "daemon"
             daemon_dir.mkdir(parents=True)
             (repo / "docs").mkdir()
-            (repo / "docs" / "PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md").write_text(
+            (repo / "docs" / "WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md").write_text(
                 "Plan\n" + ("x" * 5000),
                 encoding="utf-8",
             )

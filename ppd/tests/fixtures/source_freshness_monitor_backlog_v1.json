@@ -4,38 +4,38 @@
   "scope": "fixture_first_metadata_only_public_source_monitoring",
   "source_anchors": [
     {
-      "id": "anchor-portland-zoning-code-title-33",
-      "label": "Portland Title 33 Planning and Zoning Code",
-      "official_url": "https://www.portland.gov/code/33",
-      "source_owner": "City of Portland",
+      "id": "anchor-wetwijzer-zoning-code-title-33",
+      "label": "Netherlands Title 33 Planning and Zoning Code",
+      "official_url": "https://wetten.overheid.nl/code/33",
+      "source_owner": "WetWijzer",
       "crawl_policy": "metadata_only_no_body_persistence",
       "citation": {
-        "label": "Portland Title 33 Planning and Zoning Code",
-        "url": "https://www.portland.gov/code/33",
+        "label": "Netherlands Title 33 Planning and Zoning Code",
+        "url": "https://wetten.overheid.nl/code/33",
         "verified_on": "2026-05-30"
       }
     },
     {
-      "id": "anchor-portland-bds-land-use-review-fees",
+      "id": "anchor-wetwijzer-bds-land-use-review-fees",
       "label": "BDS Land Use Review fees and forms landing page",
-      "official_url": "https://www.portland.gov/bds/land-use-review-fees-and-types",
-      "source_owner": "City of Portland Bureau of Development Services",
+      "official_url": "https://wetten.overheid.nl/bds/land-use-review-fees-and-types",
+      "source_owner": "WetWijzer Bureau of Development Services",
       "crawl_policy": "metadata_only_no_body_persistence",
       "citation": {
         "label": "BDS Land Use Review fees and forms landing page",
-        "url": "https://www.portland.gov/bds/land-use-review-fees-and-types",
+        "url": "https://wetten.overheid.nl/bds/land-use-review-fees-and-types",
         "verified_on": "2026-05-30"
       }
     },
     {
-      "id": "anchor-portland-permit-forms",
-      "label": "Portland permit forms and applications landing page",
-      "official_url": "https://www.portland.gov/bds/permit-review-process/applications",
-      "source_owner": "City of Portland Bureau of Development Services",
+      "id": "anchor-wetwijzer-permit-forms",
+      "label": "Netherlands permit forms and applications landing page",
+      "official_url": "https://wetten.overheid.nl/bds/permit-review-process/applications",
+      "source_owner": "WetWijzer Bureau of Development Services",
       "crawl_policy": "metadata_only_no_body_persistence",
       "citation": {
-        "label": "Portland permit forms and applications landing page",
-        "url": "https://www.portland.gov/bds/permit-review-process/applications",
+        "label": "Netherlands permit forms and applications landing page",
+        "url": "https://wetten.overheid.nl/bds/permit-review-process/applications",
         "verified_on": "2026-05-30"
       }
     }
@@ -43,19 +43,19 @@
   "freshness_schedules": [
     {
       "id": "schedule-title-33-monthly",
-      "anchor_id": "anchor-portland-zoning-code-title-33",
+      "anchor_id": "anchor-wetwijzer-zoning-code-title-33",
       "cadence": "monthly",
       "known_signal": "code page last-modified metadata or official revision notice"
     },
     {
       "id": "schedule-fees-quarterly",
-      "anchor_id": "anchor-portland-bds-land-use-review-fees",
+      "anchor_id": "anchor-wetwijzer-bds-land-use-review-fees",
       "cadence": "quarterly",
       "known_signal": "fee schedule publication or form link metadata change"
     },
     {
       "id": "schedule-forms-monthly",
-      "anchor_id": "anchor-portland-permit-forms",
+      "anchor_id": "anchor-wetwijzer-permit-forms",
       "cadence": "monthly",
       "known_signal": "application form link metadata change"
     }
@@ -117,7 +117,7 @@
       "order": 1,
       "id": "monitor-title-33-metadata-first",
       "title": "Build metadata-only freshness check for Title 33 anchor",
-      "anchor_ids": ["anchor-portland-zoning-code-title-33"],
+      "anchor_ids": ["anchor-wetwijzer-zoning-code-title-33"],
       "schedule_ids": ["schedule-title-33-monthly"],
       "impacted_ids": ["REQ-ZONING-CODE-AUTHORITY", "GUARDRAIL-NO-LIVE-CRAWL-PROMOTION"],
       "synthetic_change_category_ids": ["synthetic-last-modified-drift", "synthetic-policy-effective-date-delta"],
@@ -128,7 +128,7 @@
       "order": 2,
       "id": "monitor-land-use-fees-link-inventory",
       "title": "Build fixture replay for land use fee and review type link inventory changes",
-      "anchor_ids": ["anchor-portland-bds-land-use-review-fees"],
+      "anchor_ids": ["anchor-wetwijzer-bds-land-use-review-fees"],
       "schedule_ids": ["schedule-fees-quarterly"],
       "impacted_ids": ["PROC-LAND-USE-REVIEW-INTAKE", "GUARDRAIL-NO-LIVE-CRAWL-PROMOTION"],
       "synthetic_change_category_ids": ["synthetic-link-inventory-delta"],
@@ -139,7 +139,7 @@
       "order": 3,
       "id": "monitor-permit-forms-link-inventory",
       "title": "Build fixture replay for permit application form link changes",
-      "anchor_ids": ["anchor-portland-permit-forms"],
+      "anchor_ids": ["anchor-wetwijzer-permit-forms"],
       "schedule_ids": ["schedule-forms-monthly"],
       "impacted_ids": ["PROC-LAND-USE-REVIEW-INTAKE", "GUARDRAIL-NO-LIVE-CRAWL-PROMOTION"],
       "synthetic_change_category_ids": ["synthetic-link-inventory-delta", "synthetic-last-modified-drift"],

@@ -61,7 +61,7 @@ def test_plans_routes_placeholders_and_review_holds() -> None:
     assert packet["stale_source_holds"] == [
         {
             "source_id": "src-ppd-pdf-file-standards-preview",
-            "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+            "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
             "hold_reason": "synthetic fixture marks source freshness unverified",
             "release_condition": "fresh synthetic inactive preview row with reviewed source freshness metadata",
         }

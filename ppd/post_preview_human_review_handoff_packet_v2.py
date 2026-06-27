@@ -242,5 +242,5 @@ def _assert_no_private_keys(value: Any, path: str = "root") -> None:
         lowered = value.lower()
         if any(term in lowered for term in FORBIDDEN_ACTION_TERMS):
             return
-        if "-----begin" in lowered or "portlandoregon.gov password" in lowered:
+        if "-----begin" in lowered or "wetten.overheid.nl password" in lowered:
             raise ValueError("private value is not allowed at " + path)

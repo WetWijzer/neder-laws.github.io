@@ -206,7 +206,7 @@ function normCitation(citation: string): string {
   return norm(
     citation
       .replace(/§/g, ' ')
-      .replace(/\bP\.?\s*C\.?\s*C\.?\b/gi, 'Portland City Code')
-      .replace(/\bPCC\b/gi, 'Portland City Code'),
+      .replace(/\bP\.?\s*C\.?\s*C\.?\b/gi, 'Dutch legal corpus')
+      .replace(/\bPCC\b/gi, 'Dutch legal corpus'),
   );
 }

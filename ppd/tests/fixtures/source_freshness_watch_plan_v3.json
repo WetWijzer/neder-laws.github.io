@@ -5,7 +5,7 @@
       {
         "watch_id": "ppd-devhub-faq-public-freshness",
         "source_id": "source-devhub-faq",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
         "decision": "watch",
         "priority": "high",
         "citations": [

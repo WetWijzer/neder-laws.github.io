@@ -5,7 +5,7 @@
   "candidate_metadata_diffs": [
     {
       "source_id": "ppd-devhub-faq",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "metadata_field_diffs": [
         {
           "field": "recrawl_evidence_hash",
@@ -23,7 +23,7 @@
     },
     {
       "source_id": "ppd-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "metadata_field_diffs": [
         {
           "field": "recrawl_evidence_hash",

@@ -31,9 +31,9 @@
         "priority_order": 1
       },
       "official_source_anchor_ref": {
-        "anchor_id": "official-anchor-portland-permitting-guidance",
-        "label": "City of Portland permitting guidance public page",
-        "url": "https://www.portland.gov/ppd/permits",
+        "anchor_id": "official-anchor-wetwijzer-permitting-guidance",
+        "label": "WetWijzer permitting guidance public page",
+        "url": "https://wetten.overheid.nl/ppd/permits",
         "verified_on": "2026-05-30"
       },
       "stale_or_changed_evidence_placeholders": [

@@ -22,11 +22,11 @@ def test_build_public_recrawl_batch_plan_groups_reviewed_public_entries_only():
     daily = plan["groups"][0]
     assert daily == {
         "cadence": "daily",
-        "host": "www.portland.gov",
-        "rate_limit_bucket": "portland-gov-public-low",
+        "host": "wetten.overheid.nl",
+        "rate_limit_bucket": "wetwijzer-gov-public-low",
         "robots_policy_evidence": "fixture:robots-reviewed-2026-05-08",
         "processor_contract": "ppd.contracts.documents:MetadataOnlyPublicRecord",
-        "metadata_output_location": "ppd/output/metadata/public-recrawl/portland-gov/",
+        "metadata_output_location": "ppd/output/metadata/public-recrawl/wetwijzer-gov/",
         "dry_run_execution_window": "2026-06-01T09:00:00Z/2026-06-01T09:15:00Z",
         "source_ids": ["ppd-inspections-public", "ppd-permit-search-public"],
         "network_requests_allowed": False,

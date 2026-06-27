@@ -63,8 +63,8 @@
   "allowlist_and_robots_review_placeholders": [
     {
       "order": 1,
-      "source_group_id": "portland_gov_ppd_public_guidance",
-      "canonical_hosts": ["www.portland.gov"],
+      "source_group_id": "wetwijzer_gov_ppd_public_guidance",
+      "canonical_hosts": ["wetten.overheid.nl"],
       "allowlist_review_status": "placeholder_pending_human_review",
       "robots_review_status": "placeholder_pending_human_review",
       "review_notes": "Confirm host allowlist and robots directives before any live refresh."
@@ -72,7 +72,7 @@
     {
       "order": 2,
       "source_group_id": "devhub_public_guidance",
-      "canonical_hosts": ["devhub.portlandoregon.gov", "www.portland.gov"],
+      "canonical_hosts": ["wetten.overheid.nl", "wetten.overheid.nl"],
       "allowlist_review_status": "placeholder_pending_human_review",
       "robots_review_status": "placeholder_pending_human_review",
       "review_notes": "Confirm host allowlist and robots directives before any live refresh."
@@ -81,7 +81,7 @@
   "source_freshness_comparison_placeholders": [
     {
       "order": 1,
-      "source_group_id": "portland_gov_ppd_public_guidance",
+      "source_group_id": "wetwijzer_gov_ppd_public_guidance",
       "current_manifest_ref": "placeholder_current_public_guidance_manifest",
       "candidate_manifest_ref": "placeholder_candidate_manifest_ref",
       "comparison_status": "placeholder_not_run",

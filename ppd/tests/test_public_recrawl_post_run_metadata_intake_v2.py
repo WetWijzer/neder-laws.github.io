@@ -43,7 +43,7 @@ class PublicRecrawlPostRunMetadataIntakeV2Test(unittest.TestCase):
         self.assertEqual("metadata_placeholder_captured", first_decision["decision"])
         self.assertIn("content_hash", first_decision["capture_placeholder"])
         self.assertIn("ppd-plan-official-source-anchors-20260508", first_decision["source_evidence_ids"])
-        self.assertIn("robots-evidence:www.portland.gov:2026-05-08", first_decision["source_evidence_ids"])
+        self.assertIn("robots-evidence:wetten.overheid.nl:2026-05-08", first_decision["source_evidence_ids"])
         self.assertEqual(1, len(packet["skipped_source_reasons"]))
         self.assertEqual(
             "operator_not_selected_for_metadata_only_capture",

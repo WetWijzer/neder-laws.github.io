@@ -7,22 +7,22 @@
 +  "permitType": "Urban Forestry permit",
 +  "fixtureOnly": true,
 +  "generatedFrom": "existing_public_fixture_source_inventory_evidence_only",
-+  "scope": "Skeleton workflow for public Urban Forestry tree permit requests that may be started through Portland public guidance or DevHub. This fixture is not a live crawl and contains no private account data.",
++  "scope": "Skeleton workflow for public Urban Forestry tree permit requests that may be started through Netherlands public guidance or DevHub. This fixture is not a live crawl and contains no private account data.",
 +  "authoritySources": [
 +    {
 +      "evidenceId": "uf-src-001",
 +      "sourceInventoryCategory": "permit_application_guidance",
-+      "authorityLabel": "Portland.gov Urban Forestry tree permit guidance",
-+      "canonicalUrl": "https://www.portland.gov/trees/treepermits",
++      "authorityLabel": "wetten.overheid.nl Urban Forestry tree permit guidance",
++      "canonicalUrl": "https://wetten.overheid.nl/trees/treepermits",
 +      "retrievalTimestamp": "2026-05-01T00:00:00Z",
-+      "sourceIndexRef": "fixture_public_source_inventory_portland_trees_treepermits",
++      "sourceIndexRef": "fixture_public_source_inventory_wetwijzer_trees_treepermits",
 +      "supports": ["eligibility_screening", "required_project_facts", "inspection_or_closeout_review"]
 +    },
 +    {
 +      "evidenceId": "uf-src-002",
 +      "sourceInventoryCategory": "permit_application_guidance",
-+      "authorityLabel": "Portland.gov tree removal and replanting permit guidance",
-+      "canonicalUrl": "https://www.portland.gov/trees/tree-removal-and-replanting-permits",
++      "authorityLabel": "wetten.overheid.nl tree removal and replanting permit guidance",
++      "canonicalUrl": "https://wetten.overheid.nl/trees/tree-removal-and-replanting-permits",
 +      "retrievalTimestamp": "2026-05-01T00:00:00Z",
 +      "sourceIndexRef": "fixture_public_source_inventory_tree_removal_replanting",
 +      "supports": ["tree_work_type", "site_plan_or_tree_information", "replanting_conditions"]
@@ -30,8 +30,8 @@
 +    {
 +      "evidenceId": "uf-src-003",
 +      "sourceInventoryCategory": "permit_application_guidance",
-+      "authorityLabel": "Portland.gov tree planting permit guidance",
-+      "canonicalUrl": "https://www.portland.gov/trees/tree-planting-permits",
++      "authorityLabel": "wetten.overheid.nl tree planting permit guidance",
++      "canonicalUrl": "https://wetten.overheid.nl/trees/tree-planting-permits",
 +      "retrievalTimestamp": "2026-05-01T00:00:00Z",
 +      "sourceIndexRef": "fixture_public_source_inventory_tree_planting_permits",
 +      "supports": ["tree_planting_work", "species_or_location_details", "right_of_way_considerations"]
@@ -39,8 +39,8 @@
 +    {
 +      "evidenceId": "uf-src-004",
 +      "sourceInventoryCategory": "devhub_guide",
-+      "authorityLabel": "Portland.gov online permit application guidance listing Urban Forestry permits",
-+      "canonicalUrl": "https://www.portland.gov/ppd/apply-online-permits",
++      "authorityLabel": "wetten.overheid.nl online permit application guidance listing Urban Forestry permits",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/apply-online-permits",
 +      "retrievalTimestamp": "2026-05-01T00:00:00Z",
 +      "sourceIndexRef": "fixture_public_source_inventory_apply_online_permits",
 +      "supports": ["devhub_account_setup", "permit_type_selection", "online_application_entry"]
@@ -48,8 +48,8 @@
 +    {
 +      "evidenceId": "uf-src-005",
 +      "sourceInventoryCategory": "devhub_guide",
-+      "authorityLabel": "Portland.gov DevHub FAQ and guide evidence for online permit requests, corrections, fee payments, and inspection-related services",
-+      "canonicalUrl": "https://www.portland.gov/ppd/devhub-faq",
++      "authorityLabel": "wetten.overheid.nl DevHub FAQ and guide evidence for online permit requests, corrections, fee payments, and inspection-related services",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/devhub-faq",
 +      "retrievalTimestamp": "2026-05-01T00:00:00Z",
 +      "sourceIndexRef": "fixture_public_source_inventory_devhub_faq",
 +      "supports": ["correction_upload_gate", "fee_payment_gate", "status_tracking", "inspection_gate"]
@@ -57,8 +57,8 @@
 +    {
 +      "evidenceId": "uf-src-006",
 +      "sourceInventoryCategory": "file_rule_guidance",
-+      "authorityLabel": "Portland.gov Single PDF Process guidance for searchable plan PDFs and separate supporting PDFs when that process applies",
-+      "canonicalUrl": "https://www.portland.gov/ppd/single-pdf-process",
++      "authorityLabel": "wetten.overheid.nl Single PDF Process guidance for searchable plan PDFs and separate supporting PDFs when that process applies",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/single-pdf-process",
 +      "retrievalTimestamp": "2026-05-01T00:00:00Z",
 +      "sourceIndexRef": "fixture_public_source_inventory_single_pdf_process",
 +      "supports": ["pdf_file_rules", "separate_supporting_documents"]
@@ -193,7 +193,7 @@
 +    {
 +      "stageId": "uf-stage-002",
 +      "kind": "account_setup",
-+      "label": "Use DevHub or Portland.gov account path when online application is required",
++      "label": "Use DevHub or wetten.overheid.nl account path when online application is required",
 +      "requiredFacts": ["uf-fact-002"],
 +      "requiredDocuments": [],
 +      "entryEvidence": ["uf-src-004", "uf-src-005"],
@@ -433,7 +433,7 @@
 +        self.assertIn("uf-src-005", evidence_ids)
 +
 +        for source in self.fixture["authoritySources"]:
-+            self.assertTrue(source["canonicalUrl"].startswith("https://www.portland.gov/"))
++            self.assertTrue(source["canonicalUrl"].startswith("https://wetten.overheid.nl/"))
 +            self.assertTrue(source["authorityLabel"].strip())
 +            self.assertTrue(source["sourceInventoryCategory"].strip())
 +            self.assertTrue(source["sourceIndexRef"].startswith("fixture_public_source_inventory_"))

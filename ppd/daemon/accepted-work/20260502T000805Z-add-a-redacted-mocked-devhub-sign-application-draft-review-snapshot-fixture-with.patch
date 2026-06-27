@@ -17,7 +17,7 @@
 +    "name": "Sign Application Draft Review",
 +    "permitType": "sign_permit",
 +    "stateId": "draft_review",
-+    "stableUrlState": "https://devhub.portlandoregon.gov/mock/sign-application/draft-review",
++    "stableUrlState": "https://wetten.overheid.nl/mock/sign-application/draft-review",
 +    "nearbyHeading": "Review Sign Application Draft",
 +    "draftStatus": "saved_for_later_available"
 +  },
@@ -407,7 +407,7 @@
 +                if lowered.startswith("http"):
 +                    parsed = urlparse(leaf)
 +                    self.assertEqual("https", parsed.scheme)
-+                    self.assertEqual("devhub.portlandoregon.gov", parsed.netloc)
++                    self.assertEqual("wetten.overheid.nl", parsed.netloc)
 +                    self.assertTrue(parsed.path.startswith("/mock/"))
 +
 +    def _assert_redacted_values_only(self, value):

@@ -915,7 +915,7 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 
 - Target: `Task checkbox-291: Port remaining Python logic module `logic/TDFOL/tdfol_dcec_parser.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
 - Summary: Added a browser-native TDFOL DCEC prefix parser adapter with focused parser coverage.
-- Impact: The TypeScript TDFOL parser now exposes local tdfol_dcec_parser.py parity metadata and parses DCEC-style prefix quantifiers, connectives, deontic functors, and temporal functors into the existing browser-native TDFOL AST. The Jest parser suite validates Portland-style quantified DCEC input and fail-closed malformed connective arity without server, Python, filesystem, subprocess, RPC, or Node-only runtime fallback.
+- Impact: The TypeScript TDFOL parser now exposes local tdfol_dcec_parser.py parity metadata and parses DCEC-style prefix quantifiers, connectives, deontic functors, and temporal functors into the existing browser-native TDFOL AST. The Jest parser suite validates WetWijzer-style quantified DCEC input and fail-closed malformed connective arity without server, Python, filesystem, subprocess, RPC, or Node-only runtime fallback.
 - Changed files: `src/lib/logic/tdfol/parser.test.ts`, `src/lib/logic/tdfol/parser.ts`
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260504T070802Z-added-a-browser-native-tdfol-dcec-prefix-parser-adapter-with-focused-parser-cove.json`, `ipfs_datasets_py/.daemon/accepted-work/20260504T070802Z-added-a-browser-native-tdfol-dcec-prefix-parser-adapter-with-focused-parser-cove.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260504T070802Z-added-a-browser-native-tdfol-dcec-prefix-parser-adapter-with-focused-parser-cove.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`
@@ -2840,8 +2840,8 @@ New accepted daemon rounds append the target task, impact statement, changed fil
 ## 2026-05-16 14:18:58 UTC
 
 - Target: `Task checkbox-483: Port remaining Python logic module `logic/integration/document_consistency_checker.py` to browser-native TypeScript/WASM, including focused validation tests and no server or Python runtime dependency.`
-- Summary: Improved browser-native document consistency parity by making field evidence matching deterministic and citation matching resilient to PCC alias formats.
-- Impact: Updates src/lib/logic/integration/domain/documentConsistencyChecker.ts with stricter local consistency checks (evidence-snippet support and PCC citation alias normalization) and extends src/lib/logic/integration/domain/documentConsistencyChecker.test.ts to validate these parity behaviors through the existing Jest logic-port suite.
+- Summary: Improved browser-native document consistency parity by making field evidence matching deterministic and citation matching resilient to netherlands law alias formats.
+- Impact: Updates src/lib/logic/integration/domain/documentConsistencyChecker.ts with stricter local consistency checks (evidence-snippet support and netherlands law citation alias normalization) and extends src/lib/logic/integration/domain/documentConsistencyChecker.test.ts to validate these parity behaviors through the existing Jest logic-port suite.
 - Changed files: `src/lib/logic/integration/domain/documentConsistencyChecker.test.ts`, `src/lib/logic/integration/domain/documentConsistencyChecker.ts`
 - Evidence: `ipfs_datasets_py/.daemon/accepted-work/20260516T141858Z-improved-browser-native-document-consistency-parity-by-making-field-evidence-mat.json`, `ipfs_datasets_py/.daemon/accepted-work/20260516T141858Z-improved-browser-native-document-consistency-parity-by-making-field-evidence-mat.diff`, `ipfs_datasets_py/.daemon/accepted-work/20260516T141858Z-improved-browser-native-document-consistency-parity-by-making-field-evidence-mat.stat.txt`
 - Validation: `npx tsc --noEmit` -> `0`, `npm run validate:logic-port` -> `0`

@@ -29,10 +29,10 @@ VALIDATION_COMMANDS = [
 ]
 
 PUBLIC_HOST_ALLOWLIST = [
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 ]
 
 NO_HOLD_KEY = "hold-none"

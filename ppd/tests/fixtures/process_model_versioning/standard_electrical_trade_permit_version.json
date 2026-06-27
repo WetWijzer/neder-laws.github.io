@@ -15,7 +15,7 @@
     {
       "source_evidence_id": "ppd-src-devhub-standard-trade-guide-synthetic",
       "source_family": "devhub_public_guidance",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-standard-trade-permits",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-standard-trade-permits",
       "synthetic_excerpt": true,
       "live_read_performed": false,
       "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
@@ -28,7 +28,7 @@
     {
       "source_evidence_id": "ppd-src-online-tools-overview-synthetic",
       "source_family": "online_permitting_tools_overview",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "synthetic_excerpt": true,
       "live_read_performed": false,
       "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
@@ -41,7 +41,7 @@
     {
       "source_evidence_id": "ppd-src-devhub-faq-synthetic",
       "source_family": "devhub_public_faq",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "synthetic_excerpt": true,
       "live_read_performed": false,
       "content_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",

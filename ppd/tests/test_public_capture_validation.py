@@ -8,7 +8,7 @@ from ppd.public_capture_validation import PublicCaptureValidationError, validate
 def valid_payload() -> dict[str, object]:
     return {
         "source_id": "ppd-public-fees",
-        "source_url": "https://www.portland.gov/ppd/fees",
+        "source_url": "https://wetten.overheid.nl/ppd/fees",
         "status": "captured",
         "processor": {"name": "fake-public-capture", "version": "1"},
         "metadata": {"title": "Public PP&D fee page"},
@@ -21,7 +21,7 @@ def valid_payload() -> dict[str, object]:
         ({"source_url": "https://localhost/private"}, "private host"),
         ({"source_url": "http://127.0.0.1/public"}, "private host"),
         ({"source_url": "file:///tmp/private.pdf"}, "http or https"),
-        ({"source_url": "https://www.portland.gov/login/session"}, "authenticated URL path"),
+        ({"source_url": "https://wetten.overheid.nl/login/session"}, "authenticated URL path"),
         ({"source_id": ""}, "missing source_id"),
         ({"processor": {}}, "missing name"),
         ({"status": "skipped", "sha256": "abc123"}, "skipped captures"),

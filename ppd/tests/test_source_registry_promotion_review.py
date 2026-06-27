@@ -78,7 +78,7 @@ def test_source_registry_promotion_review_rejects_uncited_field_changes() -> Non
 def test_source_registry_promotion_review_rejects_private_authenticated_urls() -> None:
     readiness, candidate_packet = _valid_inputs()
     candidate_packet = copy.deepcopy(candidate_packet)
-    candidate_packet["source_registry_update_candidates"][0]["canonical_url"] = "https://devhub.portlandoregon.gov/account"
+    candidate_packet["source_registry_update_candidates"][0]["canonical_url"] = "https://wetten.overheid.nl/account"
 
     with pytest.raises(ValueError, match="private or authenticated URL"):
         build_source_registry_promotion_review_packet(readiness, candidate_packet)

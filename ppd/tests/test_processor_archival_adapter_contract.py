@@ -28,7 +28,7 @@ class RecordingPreflight:
             raise PolicyPreflightError(stage)
 
     def require_allowed_url(self, request: ProcessorArchiveRequest) -> None:
-        assert request.url.startswith("https://www.portland.gov/ppd/")
+        assert request.url.startswith("https://wetten.overheid.nl/ppd/")
         self._record("allowlist")
 
     def require_robots_allowed(self, request: ProcessorArchiveRequest) -> None:
@@ -64,7 +64,7 @@ class RecordingProcessorSuite:
 
 def _request() -> ProcessorArchiveRequest:
     return ProcessorArchiveRequest(
-        url="https://www.portland.gov/ppd/permits",
+        url="https://wetten.overheid.nl/ppd/permits",
         content_type="text/html",
         timeout_seconds=15.0,
         metadata={"fixture": "processor-archive-contract"},

@@ -6,7 +6,7 @@ import {
 
 describe('legal symbolic analyzer browser-native parity', () => {
   const text =
-    'Under PCC 33.110.210, the landlord must provide notice if the tenant requests repairs. Smith v. Jones, 123 Or. 456 held the agency may inspect the parcel. Staff shall not disclose sealed testimony.';
+    'Under netherlands law 33.110.210, the landlord must provide notice if the tenant requests repairs. Smith v. Jones, 123 Or. 456 held the agency may inspect the parcel. Staff shall not disclose sealed testimony.';
 
   it('extracts symbolic legal operators, references, and domains locally', () => {
     const result = new BrowserNativeLegalSymbolicAnalyzer().analyze(text);
@@ -28,7 +28,7 @@ describe('legal symbolic analyzer browser-native parity', () => {
     expect(result.statements[0].formula).toContain('O(');
     expect(result.references).toEqual(
       expect.arrayContaining([
-        { kind: 'section', value: 'PCC 33.110.210' },
+        { kind: 'section', value: 'netherlands law 33.110.210' },
         { kind: 'citation', value: '123 Or. 456' },
         { kind: 'case', value: 'Smith v. Jones' },
       ]),

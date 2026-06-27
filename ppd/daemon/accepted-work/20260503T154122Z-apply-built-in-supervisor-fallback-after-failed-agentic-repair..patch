@@ -18,7 +18,7 @@
 +      "ppd/daemon/SUPERVISOR_REPAIR_GUIDE.md"
      ],
      "errors": [
--      "Syntax preflight failed; file edits were rolled back. python3 -m py_compile ppd/daemon/llm_failure_diagnostics.py: File \"/home/barberb/portland-laws.github.io/ppd/daemon/llm_failure_diagnostics.py\", line 32 text = re.sub(r\" str: ^ SyntaxError: unterminated string literal (detected at line 32) Next worker attempt should be smaller: replace only the syntactically failing file plus its narrow fixture/test if needed; run py_compile for each changed Python file or strict tsc for each changed TypeScript file mentally before returning JSON; do not add new contracts, fixtures, and broad tests in the same proposal until the parser-clean core file is valid."
+-      "Syntax preflight failed; file edits were rolled back. python3 -m py_compile ppd/daemon/llm_failure_diagnostics.py: File \"/home/barberb/wetwijzer.github.io/ppd/daemon/llm_failure_diagnostics.py\", line 32 text = re.sub(r\" str: ^ SyntaxError: unterminated string literal (detected at line 32) Next worker attempt should be smaller: replace only the syntactically failing file plus its narrow fixture/test if needed; run py_compile for each changed Python file or strict tsc for each changed TypeScript file mentally before returning JSON; do not add new contracts, fixtures, and broad tests in the same proposal until the parser-clean core file is valid."
 +      "Validation failed; file edits were rolled back."
      ],
 -    "failureKind": "syntax_preflight",
@@ -36,7 +36,7 @@
 +          "--self-test"
          ],
 -        "returncode": 1,
--        "stderr": "File \"/home/barberb/portland-laws.github.io/ppd/daemon/llm_failure_diagnostics.py\", line 32 text = re.sub(r\" str: ^ SyntaxError: unterminated string literal (detected at line 32)",
+-        "stderr": "File \"/home/barberb/wetwijzer.github.io/ppd/daemon/llm_failure_diagnostics.py\", line 32 text = re.sub(r\" str: ^ SyntaxError: unterminated string literal (detected at line 32)",
 -        "stdout": ""
 +        "returncode": 0,
 +        "stderr": "",

@@ -15,20 +15,20 @@ def valid_packet() -> dict[str, object]:
         "schema": "ppd.public_freshness_scheduler_rehearsal.v4",
         "cited_metadata_only_recrawl_schedule_candidates": [
             {
-                "source_id": "portland-zoning-code",
-                "affected_source_ids": ["portland-zoning-code"],
+                "source_id": "wetwijzer-zoning-code",
+                "affected_source_ids": ["wetwijzer-zoning-code"],
                 "affected_requirement_ids": ["REQ-ZONING-CODE-FRESHNESS"],
-                "metadata_fields": {"public_url": "https://www.portland.gov/code/33"},
-                "citations": [{"label": "scheduler-rehearsal:portland-zoning-code"}],
+                "metadata_fields": {"public_url": "https://wetten.overheid.nl/code/33"},
+                "citations": [{"label": "scheduler-rehearsal:wetwijzer-zoning-code"}],
             }
         ],
         "skip_defer_reasons": [
             {
-                "source_id": "portland-building-code",
-                "affected_source_ids": ["portland-building-code"],
+                "source_id": "wetwijzer-building-code",
+                "affected_source_ids": ["wetwijzer-building-code"],
                 "affected_requirement_ids": ["REQ-BUILDING-CODE-FRESHNESS"],
                 "reason": "awaiting reviewer confirmation",
-                "citations": [{"label": "scheduler-rehearsal:portland-building-code"}],
+                "citations": [{"label": "scheduler-rehearsal:wetwijzer-building-code"}],
             }
         ],
     }
@@ -67,7 +67,7 @@ class PublicFreshnessSchedulerRehearsalV4ValidationTest(unittest.TestCase):
         outside["metadata_fields"]["public_url"] = "https://example.com/ppd"
         auth = copy.deepcopy(packet["cited_metadata_only_recrawl_schedule_candidates"][0])
         auth["source_id"] = "authenticated-devhub"
-        auth["metadata_fields"]["public_url"] = "https://devhub.portlandoregon.gov/account/my-permits"
+        auth["metadata_fields"]["public_url"] = "https://wetten.overheid.nl/account/my-permits"
         auth["requires_auth"] = True
         packet["cited_metadata_only_recrawl_schedule_candidates"] = [outside, auth]
 

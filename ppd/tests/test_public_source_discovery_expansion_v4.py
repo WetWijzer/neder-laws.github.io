@@ -56,14 +56,14 @@ def test_allowlist_decisions_cover_allowed_and_skipped_sources() -> None:
     packet = build_expansion_packet(load_fixture(FIXTURE_PATH))
     decisions = {row["canonical_url"]: row for row in packet["allowlist_decisions"]}
 
-    assert decisions["https://www.portland.gov/ppd/how-use-online-permitting-tools"]["decision"] == "allow"
-    assert decisions["https://www.portland.gov/ppd/get-permit/apply-permits"]["decision"] == "allow"
-    assert decisions["https://devhub.portlandoregon.gov"]["decision"] == "allow"
-    assert decisions["https://www.portlandmaps.com"]["decision"] == "allow"
+    assert decisions["https://wetten.overheid.nl/ppd/how-use-online-permitting-tools"]["decision"] == "allow"
+    assert decisions["https://wetten.overheid.nl/ppd/get-permit/apply-permits"]["decision"] == "allow"
+    assert decisions["https://wetten.overheid.nl"]["decision"] == "allow"
+    assert decisions["https://repository.overheid.nl"]["decision"] == "allow"
     assert decisions["https://example.com/permit-reference"]["skip_reason_code"] == "outside_allowlist"
     assert decisions["mailto:devhub@example.invalid"]["skip_reason_code"] == "unsupported_scheme"
-    assert decisions["https://www.portland.gov/ppd/documents/how-pay-fees/download"]["skip_reason_code"] == "raw_download_not_permitted"
-    assert decisions["https://www.portland.gov/user/login"]["skip_reason_code"] == "private_authenticated"
+    assert decisions["https://wetten.overheid.nl/ppd/documents/how-pay-fees/download"]["skip_reason_code"] == "raw_download_not_permitted"
+    assert decisions["https://wetten.overheid.nl/user/login"]["skip_reason_code"] == "private_authenticated"
 
 
 def test_duplicate_normalization_rows_identify_canonical_duplicates() -> None:
@@ -73,7 +73,7 @@ def test_duplicate_normalization_rows_identify_canonical_duplicates() -> None:
     assert duplicates
     assert {
         row["canonical_url"] for row in duplicates
-    } == {"https://www.portland.gov/ppd/get-permit/apply-permits"}
+    } == {"https://wetten.overheid.nl/ppd/get-permit/apply-permits"}
     assert all(row["normalization_basis"] == "canonical_url" for row in duplicates)
 
 

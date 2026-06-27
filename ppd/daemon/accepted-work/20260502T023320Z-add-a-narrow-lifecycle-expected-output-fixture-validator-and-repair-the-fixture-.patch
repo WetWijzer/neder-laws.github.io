@@ -95,8 +95,8 @@
 +        },
 +        {
 +          "evidenceId": "permit_cancellation_guidance",
-+          "sourceUrl": "https://www.portland.gov/ppd",
-+          "sourceTitle": "Portland Permitting & Development cancellation guidance",
++          "sourceUrl": "https://wetten.overheid.nl/ppd",
++          "sourceTitle": "Netherlands Permitting & Development cancellation guidance",
 +          "authorityLabel": "PP&D public guidance",
 +          "recrawlCadence": "weekly",
 +          "supports": "Cancellation requires a stop gate before official lifecycle action.",
@@ -104,8 +104,8 @@
 +        },
 +        {
 +          "evidenceId": "inspection_scheduling_guidance",
-+          "sourceUrl": "https://www.portland.gov/ppd",
-+          "sourceTitle": "Portland Permitting & Development inspection scheduling guidance",
++          "sourceUrl": "https://wetten.overheid.nl/ppd",
++          "sourceTitle": "Netherlands Permitting & Development inspection scheduling guidance",
 +          "authorityLabel": "PP&D public guidance",
 +          "recrawlCadence": "weekly",
 +          "supports": "Inspection scheduling requires a stop gate before scheduling an official inspection.",

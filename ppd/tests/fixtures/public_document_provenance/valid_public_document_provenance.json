@@ -2,7 +2,7 @@
   "source_index_records": [
     {
       "id": "source-index-html-single-pdf-process",
-      "canonical_url": "https://www.portland.gov/ppd/single-pdf-process",
+      "canonical_url": "https://wetten.overheid.nl/ppd/single-pdf-process",
       "title": "Single PDF Process",
       "page_type": "guidance",
       "retrieved_at": "2026-05-01T12:00:00Z",
@@ -11,7 +11,7 @@
     },
     {
       "id": "source-index-pdf-building-permit-application",
-      "canonical_url": "https://www.portland.gov/ppd/documents/building-permit-application/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/building-permit-application/download",
       "title": "Building Permit Application PDF",
       "page_type": "pdf",
       "retrieved_at": "2026-05-01T12:05:00Z",
@@ -23,7 +23,7 @@
     {
       "id": "normalized-html-single-pdf-process",
       "document_type": "html",
-      "canonical_url": "https://www.portland.gov/ppd/single-pdf-process",
+      "canonical_url": "https://wetten.overheid.nl/ppd/single-pdf-process",
       "retrieved_at": "2026-05-01T12:00:00Z",
       "checksum": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
       "source_index_id": "source-index-html-single-pdf-process",
@@ -36,7 +36,7 @@
     {
       "id": "normalized-pdf-building-permit-application",
       "document_type": "pdf",
-      "canonical_url": "https://www.portland.gov/ppd/documents/building-permit-application/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/building-permit-application/download",
       "retrieved_at": "2026-05-01T12:05:00Z",
       "checksum": "2222222222222222222222222222222222222222222222222222222222222222",
       "source_index_id": "source-index-pdf-building-permit-application",

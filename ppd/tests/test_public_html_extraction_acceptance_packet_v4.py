@@ -41,8 +41,8 @@ def test_synthetic_records_cover_public_html_extraction_fields():
         assert record["document_type"] == "public_html"
         assert record["language"] == "en"
         assert record["title"]
-        assert record["breadcrumbs"][0] == "Portland.gov"
-        assert "Portland Permitting & Development" in record["breadcrumbs"]
+        assert record["breadcrumbs"][0] == "wetten.overheid.nl"
+        assert "Netherlands Permitting & Development" in record["breadcrumbs"]
         assert record["visible_updated_date"] == "2026-05-08"
         assert 0.85 <= record["extraction_confidence"] <= 1.0
         assert record["human_review_status"] in {"accepted_fixture", "hold_for_reviewer"}
@@ -71,7 +71,7 @@ def test_synthetic_records_cover_public_html_extraction_fields():
         assert contact["email"].endswith(".invalid")
         assert "Monday" in contact["hours"]
 
-        assert all(link["url"].startswith("https://www.portland.gov/") for link in record["related_links"])
+        assert all(link["url"].startswith("https://wetten.overheid.nl/") for link in record["related_links"])
 
         download = record["downloadable_links"][0]
         assert download["download"] is True

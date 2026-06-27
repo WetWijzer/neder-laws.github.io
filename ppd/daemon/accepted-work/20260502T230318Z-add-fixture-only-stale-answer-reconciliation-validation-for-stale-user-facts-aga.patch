@@ -14,7 +14,7 @@
 +      "assertedAt": "2026-03-15T12:00:00Z",
 +      "citation": {
 +        "sourceId": "ppd-guidance-single-pdf-2025-03",
-+        "url": "https://www.portland.gov/ppd/permits/single-pdf-process",
++        "url": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +        "anchor": "#plans",
 +        "capturedAt": "2026-03-15T12:00:00Z"
 +      }
@@ -26,7 +26,7 @@
 +      "assertedAt": "2026-03-15T12:05:00Z",
 +      "citation": {
 +        "sourceId": "ppd-guidance-single-pdf-2025-03",
-+        "url": "https://www.portland.gov/ppd/permits/single-pdf-process",
++        "url": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +        "anchor": "#supporting-documents",
 +        "capturedAt": "2026-03-15T12:00:00Z"
 +      }
@@ -38,7 +38,7 @@
 +      "assertedAt": "2026-03-15T12:10:00Z",
 +      "citation": {
 +        "sourceId": "ppd-sfr-checklist-legacy",
-+        "url": "https://www.portland.gov/ppd/forms/sfr-submittal-checklist",
++        "url": "https://wetten.overheid.nl/ppd/forms/sfr-submittal-checklist",
 +        "anchor": "page=1",
 +        "capturedAt": "2026-03-15T12:00:00Z"
 +      }
@@ -53,7 +53,7 @@
 +      "observedAt": "2026-05-01T10:00:00Z",
 +      "citation": {
 +        "sourceId": "ppd-guidance-single-pdf-2026-05",
-+        "url": "https://www.portland.gov/ppd/permits/single-pdf-process",
++        "url": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +        "anchor": "#plans",
 +        "capturedAt": "2026-05-01T10:00:00Z"
 +      }
@@ -66,7 +66,7 @@
 +      "observedAt": "2026-05-01T10:05:00Z",
 +      "citation": {
 +        "sourceId": "ppd-guidance-single-pdf-2026-05",
-+        "url": "https://www.portland.gov/ppd/permits/single-pdf-process",
++        "url": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
 +        "anchor": "#supporting-documents",
 +        "capturedAt": "2026-05-01T10:00:00Z"
 +      }
@@ -79,7 +79,7 @@
 +      "observedAt": "2026-05-01T10:10:00Z",
 +      "citation": {
 +        "sourceId": "ppd-sfr-checklist-2026-05",
-+        "url": "https://www.portland.gov/ppd/forms/sfr-submittal-checklist",
++        "url": "https://wetten.overheid.nl/ppd/forms/sfr-submittal-checklist",
 +        "anchor": "page=1",
 +        "capturedAt": "2026-05-01T10:10:00Z"
 +      }
@@ -161,7 +161,7 @@
 +        raise AssertionError(f"{owner_id} citation must be an object")
 +    for field_name in ("sourceId", "url", "anchor", "capturedAt"):
 +        _string_field(citation, field_name)
-+    if not _string_field(citation, "url").startswith("https://www.portland.gov/ppd"):
++    if not _string_field(citation, "url").startswith("https://wetten.overheid.nl/ppd"):
 +        raise AssertionError(f"{owner_id} citation must point at public PP&D guidance")
 +    _parse_utc(_string_field(citation, "capturedAt"), f"{owner_id}.citation.capturedAt")
 +    return citation

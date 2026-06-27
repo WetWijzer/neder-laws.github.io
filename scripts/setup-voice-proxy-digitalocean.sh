@@ -13,10 +13,10 @@ Optional environment variables:
   VOICE_PROXY_UPSTREAM_URL=http://10.8.0.99:8000/infer
   VOICE_PROXY_TTS_UPSTREAM_URL=http://10.8.0.99:8000/tts
   VOICE_PROXY_STT_UPSTREAM_URL=http://10.8.0.99:8000/stt
-  VOICE_PROXY_ALLOWED_ORIGINS=https://portland-laws.github.io,https://211-ai.github.io,http://localhost:5173
+  VOICE_PROXY_ALLOWED_ORIGINS=https://wetwijzer.github.io,https://211-ai.github.io,http://localhost:5173
   VOICE_PROXY_PUBLIC_ORIGIN=https://animegf.chat
   VOICE_PROXY_OPEN_FIREWALL=1
-  SERVICE_NAME=portland-voice-proxy
+  SERVICE_NAME=netherlands-voice-proxy
 
 After setup, expose the service over HTTPS and call:
   https://animegf.chat:8790/api/voice/infer
@@ -35,7 +35,7 @@ fi
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 REPO_DIR="$(cd -- "${SCRIPT_DIR}/.." >/dev/null 2>&1 && pwd)"
-SERVICE_NAME="${SERVICE_NAME:-portland-voice-proxy}"
+SERVICE_NAME="${SERVICE_NAME:-netherlands-voice-proxy}"
 SERVICE_USER="${SUDO_USER:-${USER:-root}}"
 SERVICE_GROUP="$(id -gn "${SERVICE_USER}" 2>/dev/null || echo "${SERVICE_USER}")"
 PORT="${VOICE_PROXY_PORT:-8790}"
@@ -47,7 +47,7 @@ STT_UPSTREAM_URL="${VOICE_PROXY_STT_UPSTREAM_URL:-http://10.8.0.99:8000/stt}"
 ENV_FILE="/etc/${SERVICE_NAME}.env"
 SERVICE_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
 
-DEFAULT_ALLOWED_ORIGINS="https://portland-laws.github.io,https://211-ai.github.io,http://localhost:5173,http://127.0.0.1:5173"
+DEFAULT_ALLOWED_ORIGINS="https://wetwijzer.github.io,https://211-ai.github.io,http://localhost:5173,http://127.0.0.1:5173"
 if [[ -n "${PUBLIC_ORIGIN}" ]]; then
   DEFAULT_ALLOWED_ORIGINS+=",${PUBLIC_ORIGIN}"
 fi
@@ -92,7 +92,7 @@ chown root:root "${ENV_FILE}"
 echo "Writing ${SERVICE_FILE}..."
 cat > "${SERVICE_FILE}" <<EOF
 [Unit]
-Description=Portland Laws voice proxy
+Description=WetWijzer Laws voice proxy
 After=network-online.target
 Wants=network-online.target
 

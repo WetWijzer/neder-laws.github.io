@@ -10,7 +10,7 @@
     {
       "id": "deterministic-fixtures-present",
       "description": "Validation uses committed deterministic fixtures only.",
-      "citation": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md#Non-Negotiable-Boundaries"
+      "citation": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md#Non-Negotiable-Boundaries"
     }
   ],
   "reviewer_signoff": {

@@ -133,7 +133,7 @@ def build_attended_devhub_readonly_observation_readiness_packet_v2(checklist: di
             },
             {
                 'order': 2,
-                'handoff_id': 'user-completes-portlandoregon-sign-in',
+                'handoff_id': 'user-completes-wetwijzernetherlands-sign-in',
                 'status': 'placeholder_pending_user_action',
                 'required_before_observation': True,
                 'operator_note': 'The user completes sign-in prompts manually; this packet stores no sign-in material.',

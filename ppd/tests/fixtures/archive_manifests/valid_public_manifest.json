@@ -1,8 +1,8 @@
 {
-  "manifest_id": "manifest-portland-ppd-public-001",
-  "source_id": "source-portland-ppd-public-001",
-  "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
-  "requested_url": "https://www.portland.gov/ppd/devhub-faqs",
+  "manifest_id": "manifest-wetwijzer-ppd-public-001",
+  "source_id": "source-wetwijzer-ppd-public-001",
+  "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
+  "requested_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
   "redirect_chain": [],
   "http_status": 200,
   "content_type": "text/html; charset=utf-8",
@@ -12,7 +12,7 @@
   "processor_name": "ipfs_datasets_py.web_archive",
   "processor_version": "deterministic-test",
   "archive_artifact_ref": "metadata-only:test-public-001",
-  "normalized_document_id": "doc-portland-ppd-public-001",
+  "normalized_document_id": "doc-wetwijzer-ppd-public-001",
   "skipped_reason": null,
   "no_raw_body_persisted": true
 }

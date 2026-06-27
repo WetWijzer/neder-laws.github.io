@@ -60,7 +60,7 @@ def _citation(record: Mapping[str, Any], owner_id: str) -> Mapping[str, Any]:
         raise AssertionError(f"{owner_id} citation must be an object")
     for field_name in ("sourceId", "url", "anchor", "capturedAt"):
         _string_field(citation, field_name)
-    if not _string_field(citation, "url").startswith("https://www.portland.gov/ppd"):
+    if not _string_field(citation, "url").startswith("https://wetten.overheid.nl/ppd"):
         raise AssertionError(f"{owner_id} citation must point at public PP&D guidance")
     _parse_utc(_string_field(citation, "capturedAt"), f"{owner_id}.citation.capturedAt")
     return citation

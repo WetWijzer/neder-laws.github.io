@@ -16,7 +16,7 @@
   },
   "planned_fetches": [
     {
-      "url": "https://www.portland.gov/ppd",
+      "url": "https://wetten.overheid.nl/ppd",
       "decision": "allow",
       "response_body": "Raw response bodies do not belong in manifests.",
       "headers": {

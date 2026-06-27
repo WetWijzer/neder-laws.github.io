@@ -5,13 +5,13 @@
   "publicEvidence": [
     {
       "id": "evidence_devhub_public_guidance",
-      "sourceUrl": "https://www.portland.gov/ppd/devhub",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub",
       "title": "DevHub public guidance fixture",
       "capturedAt": "2026-05-01T00:00:00Z"
     },
     {
       "id": "evidence_single_pdf_process",
-      "sourceUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
+      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
       "title": "Single PDF process public guidance fixture",
       "capturedAt": "2026-05-01T00:00:00Z"
     }

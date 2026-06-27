@@ -89,7 +89,7 @@ class ClientLLMWorkerService {
       return;
     }
 
-    (window as any).__PORTLAND_LLM__ = {
+    (window as any).__WETWIJZER_LLM__ = {
       getStatus: () => this.getStatus(),
       getCloudFallbackStatus: () => this.getCloudFallbackStatus(),
       probeLocalInference: () => this.probeLocalInference({ force: true }),

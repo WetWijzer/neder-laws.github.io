@@ -23,7 +23,7 @@
  
 -- [x] Create the isolated `ppd/` workspace marker and local ignore rules.
 -- [x] Add the PP&D daemon implementation with autonomous status, progress, accepted-work, and failed-patch evidence.
--- [x] Add public PP&D seed manifest and crawler allowlist for Portland.gov, DevHub, PortlandOregon.gov, and Portland Maps references.
+-- [x] Add public PP&D seed manifest and crawler allowlist for wetten.overheid.nl, DevHub, wetten.overheid.nl, and BWB metadata references.
 -- [x] Add robots and crawl-policy preflight helpers for PP&D public source discovery.
 -- [x] Add HTML extraction fixtures from public PP&D guidance pages.
 -- [x] Add PDF extraction fixture definitions for public PP&D applications and checklists.

@@ -33,7 +33,7 @@ def test_builds_metadata_only_processor_handoff_packet_from_reviewed_requests() 
     first = packet['processorContractInputs'][0]
     assert first['requestMetadata']['requestId'] == 'reviewed-request-001'
     assert first['requestMetadata']['publicOnly'] is True
-    assert first['rateLimitBucket'] == 'public-host:www.portland.gov'
+    assert first['rateLimitBucket'] == 'public-host:wetten.overheid.nl'
     assert first['processorExpectation']['name'] == 'ipfs_datasets_py.web_archive_processor'
     assert first['processorExpectation']['version'] == '2026.05-fixture'
     assert first['processorArguments']['metadataOnly'] is True
@@ -62,7 +62,7 @@ def test_rejects_unreviewed_or_disallowed_public_request() -> None:
 def test_rejects_private_devhub_paths_before_processor_contract_input() -> None:
     fixture = _fixture()
     request = dict(fixture['reviewedRequests'][0])
-    request['url'] = 'https://devhub.portlandoregon.gov/permits/my/123'
+    request['url'] = 'https://wetten.overheid.nl/permits/my/123'
     request['canonicalUrl'] = request['url']
 
     with pytest.raises(ValueError, match='private DevHub account paths'):

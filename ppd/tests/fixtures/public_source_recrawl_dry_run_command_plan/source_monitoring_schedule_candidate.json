@@ -15,12 +15,12 @@
       "minimum_pause_seconds": 6
     },
     {
-      "schedule_candidate_id": "schedule-portlandmaps-weekly",
-      "source_id": "portlandmaps-public-reference",
+      "schedule_candidate_id": "schedule-wetwijzermaps-weekly",
+      "source_id": "wetwijzermaps-public-reference",
       "cadence": "weekly",
       "recrawl_decision": "monitor",
       "evidence_ids": [
-        "schedule-portlandmaps-cadence-2026-05-28"
+        "schedule-wetwijzermaps-cadence-2026-05-28"
       ],
       "minimum_pause_seconds": 10
     },

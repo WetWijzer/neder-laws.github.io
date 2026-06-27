@@ -5,15 +5,15 @@
     {
       "evidence_id": "ev-devhub-account-required",
       "source_id": "src-devhub-sign-guide",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-sign-guide",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-sign-guide",
       "title": "DevHub account and sign-in guide",
-      "span": "DevHub online permitting services require a PortlandOregon.gov sign-in flow.",
+      "span": "DevHub online permitting services require a wetten.overheid.nl sign-in flow.",
       "retrieved_at": "2026-05-08"
     },
     {
       "evidence_id": "ev-single-pdf-separate-documents",
       "source_id": "src-submit-plans-online",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "title": "Submit Plans Online / Single PDF Process",
       "span": "Drawing plans are prepared as one PDF while applications, calculations, and other supporting documents are separate PDFs.",
       "retrieved_at": "2026-05-08"
@@ -21,7 +21,7 @@
     {
       "evidence_id": "ev-file-naming-standards",
       "source_id": "src-spp-file-naming",
-      "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
       "title": "File naming standards and preparing PDFs",
       "span": "PP&D guidance provides file naming and PDF preparation standards for uploaded plan review documents.",
       "retrieved_at": "2026-05-08"
@@ -29,7 +29,7 @@
     {
       "evidence_id": "ev-fee-payment-financial",
       "source_id": "src-pay-fees",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "title": "How to pay fees",
       "span": "Fee payment includes payment detail entry and a final submit-payment action.",
       "retrieved_at": "2026-05-08"
@@ -37,7 +37,7 @@
     {
       "evidence_id": "ev-devhub-dynamic-save",
       "source_id": "src-submit-permit-application",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
       "title": "DevHub permit application guide",
       "span": "Permit applications can include dynamic questions, save-for-later behavior, required uploads, acknowledgements, and post-submission status tracking.",
       "retrieved_at": "2026-05-08"
@@ -45,7 +45,7 @@
     {
       "evidence_id": "ev-some-email-paths",
       "source_id": "src-apply-permits",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
       "title": "Apply for permits",
       "span": "Some permit types must be submitted by email or other paths, so DevHub cannot be assumed to cover every permit.",
       "retrieved_at": "2026-05-08"
@@ -53,7 +53,7 @@
     {
       "evidence_id": "ev-trade-license-profile",
       "source_id": "src-standard-trade-guide",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "title": "Online permitting tools overview",
       "span": "Contractor license data on the DevHub profile can affect available fixture options for standard trade permits.",
       "retrieved_at": "2026-05-08"
@@ -61,7 +61,7 @@
     {
       "evidence_id": "ev-corrections-upload-status",
       "source_id": "src-devhub-faq",
-      "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "title": "DevHub FAQs",
       "span": "Uploading corrections is an authenticated workflow with permit lookup and review-group status checks.",
       "retrieved_at": "2026-05-08"
@@ -72,7 +72,7 @@
       "requirement_id": "req-user-devhub-account",
       "requirement_type": "precondition",
       "impact_category": "required_user_facts",
-      "summary": "Record whether the user has a DevHub-capable PortlandOregon.gov account before online permitting assistance.",
+      "summary": "Record whether the user has a DevHub-capable wetten.overheid.nl account before online permitting assistance.",
       "subject": "applicant or authorized representative",
       "action": "confirm",
       "object": "DevHub account access",

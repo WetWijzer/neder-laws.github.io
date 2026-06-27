@@ -3,7 +3,7 @@
   "version": "devhub-authenticated-workflow-boundary-packet-v2",
   "scope": "Synthetic account-scoped DevHub workflow boundary packet for offline guardrail validation only. It does not describe live selectors, active prompts, credentials, session state, or browser automation steps.",
   "non_actions": [
-    "Do not open DevHub or any PortlandOregon.gov authentication surface.",
+    "Do not open DevHub or any wetten.overheid.nl authentication surface.",
     "Do not create browser state, storage state, traces, HAR files, screenshots, downloads, or private session artifacts.",
     "Do not automate login, account creation, password recovery, MFA, CAPTCHA, payment, upload, certification, submission, scheduling, cancellation, or active record changes.",
     "Do not change active DevHub surfaces, prompts, guardrails, contracts, process models, source registries, or release state."

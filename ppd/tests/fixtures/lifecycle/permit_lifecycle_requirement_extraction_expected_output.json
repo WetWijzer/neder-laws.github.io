@@ -38,8 +38,8 @@
       "evidence": [
         {
           "evidenceId": "permit_extension_guidance",
-          "sourceUrl": "https://www.portland.gov/ppd",
-          "sourceTitle": "Portland Permitting & Development public permit lifecycle guidance",
+          "sourceUrl": "https://wetten.overheid.nl/ppd",
+          "sourceTitle": "Netherlands Permitting & Development public permit lifecycle guidance",
           "authorityLabel": "PP&D public guidance",
           "recrawlCadence": "weekly",
           "supports": "Permit extension eligibility must be evaluated from public PP&D lifecycle guidance before official action.",
@@ -69,8 +69,8 @@
       "evidence": [
         {
           "evidenceId": "permit_reactivation_guidance",
-          "sourceUrl": "https://www.portland.gov/ppd",
-          "sourceTitle": "Portland Permitting & Development permit reactivation guidance",
+          "sourceUrl": "https://wetten.overheid.nl/ppd",
+          "sourceTitle": "Netherlands Permitting & Development permit reactivation guidance",
           "authorityLabel": "PP&D public guidance",
           "recrawlCadence": "weekly",
           "supports": "Reactivation eligibility depends on the permit lifecycle state and must be verified before official action.",
@@ -100,8 +100,8 @@
       "evidence": [
         {
           "evidenceId": "permit_cancellation_guidance",
-          "sourceUrl": "https://www.portland.gov/ppd",
-          "sourceTitle": "Portland Permitting & Development cancellation guidance",
+          "sourceUrl": "https://wetten.overheid.nl/ppd",
+          "sourceTitle": "Netherlands Permitting & Development cancellation guidance",
           "authorityLabel": "PP&D public guidance",
           "recrawlCadence": "weekly",
           "supports": "Cancellation is an official lifecycle action requiring eligibility review and explicit user confirmation.",
@@ -131,8 +131,8 @@
       "evidence": [
         {
           "evidenceId": "permit_refund_guidance",
-          "sourceUrl": "https://www.portland.gov/ppd",
-          "sourceTitle": "Portland Permitting & Development refund guidance",
+          "sourceUrl": "https://wetten.overheid.nl/ppd",
+          "sourceTitle": "Netherlands Permitting & Development refund guidance",
           "authorityLabel": "PP&D public guidance",
           "recrawlCadence": "weekly",
           "supports": "Refund paths are fee-related lifecycle actions and require source-backed eligibility review.",
@@ -162,8 +162,8 @@
       "evidence": [
         {
           "evidenceId": "inspection_scheduling_guidance",
-          "sourceUrl": "https://www.portland.gov/ppd",
-          "sourceTitle": "Portland Permitting & Development inspection scheduling guidance",
+          "sourceUrl": "https://wetten.overheid.nl/ppd",
+          "sourceTitle": "Netherlands Permitting & Development inspection scheduling guidance",
           "authorityLabel": "PP&D public guidance",
           "recrawlCadence": "weekly",
           "supports": "Inspection scheduling is an official workflow action and must stop for explicit confirmation before scheduling.",
@@ -193,8 +193,8 @@
       "evidence": [
         {
           "evidenceId": "inspection_result_guidance",
-          "sourceUrl": "https://www.portland.gov/ppd",
-          "sourceTitle": "Portland Permitting & Development inspection result guidance",
+          "sourceUrl": "https://wetten.overheid.nl/ppd",
+          "sourceTitle": "Netherlands Permitting & Development inspection result guidance",
           "authorityLabel": "PP&D public guidance",
           "recrawlCadence": "weekly",
           "supports": "Inspection results can create follow-up obligations before rescheduling, correction, or closeout.",
@@ -224,8 +224,8 @@
       "evidence": [
         {
           "evidenceId": "fee_payment_guidance",
-          "sourceUrl": "https://www.portland.gov/ppd",
-          "sourceTitle": "Portland Permitting & Development fee and payment guidance",
+          "sourceUrl": "https://wetten.overheid.nl/ppd",
+          "sourceTitle": "Netherlands Permitting & Development fee and payment guidance",
           "authorityLabel": "PP&D public guidance",
           "recrawlCadence": "weekly",
           "supports": "Fee and payment checkpoints are financial workflow gates requiring explicit confirmation.",
@@ -259,8 +259,8 @@
       "evidence": [
         {
           "evidenceId": "devhub_confirmation_gate_guidance",
-          "sourceUrl": "https://devhub.portlandoregon.gov",
-          "sourceTitle": "Development Hub PDX public portal",
+          "sourceUrl": "https://wetten.overheid.nl",
+          "sourceTitle": "Development Hub Netherlands public portal",
           "authorityLabel": "DevHub public portal guidance",
           "recrawlCadence": "weekly",
           "supports": "Official DevHub workflow actions must be separated from read-only or draft preview behavior and gated by explicit confirmation.",
@@ -268,8 +268,8 @@
         },
         {
           "evidenceId": "fee_payment_guidance",
-          "sourceUrl": "https://www.portland.gov/ppd",
-          "sourceTitle": "Portland Permitting & Development fee and payment guidance",
+          "sourceUrl": "https://wetten.overheid.nl/ppd",
+          "sourceTitle": "Netherlands Permitting & Development fee and payment guidance",
           "authorityLabel": "PP&D public guidance",
           "recrawlCadence": "weekly",
           "supports": "Financial actions require a stop gate before payment or payment-detail handling.",
@@ -277,8 +277,8 @@
         },
         {
           "evidenceId": "permit_cancellation_guidance",
-          "sourceUrl": "https://www.portland.gov/ppd",
-          "sourceTitle": "Portland Permitting & Development cancellation guidance",
+          "sourceUrl": "https://wetten.overheid.nl/ppd",
+          "sourceTitle": "Netherlands Permitting & Development cancellation guidance",
           "authorityLabel": "PP&D public guidance",
           "recrawlCadence": "weekly",
           "supports": "Cancellation requires a stop gate before official lifecycle action.",
@@ -286,8 +286,8 @@
         },
         {
           "evidenceId": "inspection_scheduling_guidance",
-          "sourceUrl": "https://www.portland.gov/ppd",
-          "sourceTitle": "Portland Permitting & Development inspection scheduling guidance",
+          "sourceUrl": "https://wetten.overheid.nl/ppd",
+          "sourceTitle": "Netherlands Permitting & Development inspection scheduling guidance",
           "authorityLabel": "PP&D public guidance",
           "recrawlCadence": "weekly",
           "supports": "Inspection scheduling requires a stop gate before scheduling an official inspection.",

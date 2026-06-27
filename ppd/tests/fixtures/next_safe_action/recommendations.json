@@ -176,7 +176,7 @@
       },
       {
         "action_id": "attended_login",
-        "label": "Ask user to complete PortlandOregon.gov login, MFA, or CAPTCHA manually",
+        "label": "Ask user to complete wetten.overheid.nl login, MFA, or CAPTCHA manually",
         "surface": "DevHub sign-in",
         "class": "manual_handoff",
         "side_effect": "user_attended_authentication"

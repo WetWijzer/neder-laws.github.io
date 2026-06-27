@@ -18,7 +18,7 @@
     {
       "intake_row_id": "public-refresh-intake-v1-001",
       "source_id": "ppd-devhub-faqs",
-      "public_page_url": "https://www.portland.gov/ppd/devhub-faqs",
+      "public_page_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
       "observed_public_page_title": "DevHub FAQs",
       "visible_updated_date": "2026-05-08",
       "affected_source_ids": [
@@ -34,7 +34,7 @@
       "citations": [
         {
           "label": "DevHub FAQ public page metadata",
-          "url": "https://www.portland.gov/ppd/devhub-faqs",
+          "url": "https://wetten.overheid.nl/ppd/devhub-faqs",
           "observed_field": "visible page title and visible updated date"
         }
       ],
@@ -57,7 +57,7 @@
     {
       "intake_row_id": "public-refresh-intake-v1-002",
       "source_id": "ppd-submit-plans-online",
-      "public_page_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+      "public_page_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
       "observed_public_page_title": "Submit Plans Online / Single PDF Process",
       "visible_updated_date": "2026-05-08",
       "affected_source_ids": [
@@ -72,7 +72,7 @@
       "citations": [
         {
           "label": "Submit Plans Online public page metadata",
-          "url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+          "url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
           "observed_field": "visible page title and visible updated date"
         }
       ],

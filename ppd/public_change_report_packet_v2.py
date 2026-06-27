@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 from urllib.parse import parse_qsl, urlparse
 
-_ALLOWED_HOSTS = frozenset({"www.portland.gov", "devhub.portlandoregon.gov", "www.portlandoregon.gov", "www.portlandmaps.com"})
+_ALLOWED_HOSTS = frozenset({"wetten.overheid.nl", "wetten.overheid.nl", "wetten.overheid.nl", "repository.overheid.nl"})
 _ALLOWED_REQUIREMENT_CHANGE_TYPES = frozenset({"added", "removed", "changed"})
 _REQUIREMENT_CHANGE_ORDER = {"added": 0, "removed": 1, "changed": 2}
 _PRIVATE_QUERY_KEYS = frozenset({"access_token", "api_key", "auth", "code", "cookie", "key", "password", "session", "sessionid", "sig", "signature", "state", "token"})

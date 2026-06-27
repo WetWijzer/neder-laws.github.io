@@ -25,7 +25,7 @@
     {
       "decision": "accept_rerun_packet_for_review",
       "citations": [
-        "SRC-PORTLAND-CODE-001"
+        "SRC-NETHERLANDS-CODE-001"
       ],
       "notes": "Decision is based on cited public source metadata and offline validation only."
     }

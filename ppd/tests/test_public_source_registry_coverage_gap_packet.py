@@ -57,10 +57,10 @@ def test_packet_reports_cited_covered_missing_skipped_stale_and_owner_rows() -> 
     owner_urls = {row["canonical_url"] for row in packet["reviewerOwnerAssignments"]}
 
     assert covered_urls == {
-        "https://www.portland.gov/ppd",
-        "https://www.portland.gov/ppd/how-use-online-permitting-tools",
-        "https://devhub.portlandoregon.gov",
-        "https://www.portland.gov/ppd/devhub-faqs",
+        "https://wetten.overheid.nl/ppd",
+        "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
+        "https://wetten.overheid.nl",
+        "https://wetten.overheid.nl/ppd/devhub-faqs",
     }
     assert covered_urls | missing_urls == set(ORIGINAL_PUBLIC_SOURCE_ANCHORS)
     assert skipped_reasons == {
@@ -72,7 +72,7 @@ def test_packet_reports_cited_covered_missing_skipped_stale_and_owner_rows() -> 
         "too_large",
         "unsupported_content_type",
     }
-    assert "https://www.portland.gov/ppd/documents/how-pay-fees/download" in stale_urls
+    assert "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download" in stale_urls
     assert owner_urls == set(ORIGINAL_PUBLIC_SOURCE_ANCHORS)
     assert all(row["raw_body_stored"] is False for row in packet["skippedSourceReasons"])
 
@@ -92,7 +92,7 @@ def test_packet_reports_cited_covered_missing_skipped_stale_and_owner_rows() -> 
         (lambda packet: packet["missingAnchors"][0].update({"reviewer_owner": ""}), "missingAnchors[0].reviewer_owner is required"),
         (lambda packet: packet["missingAnchors"][0].update({"missing_reason": ""}), "missingAnchors[0].missing_reason is required"),
         (lambda packet: packet["citedCoveredAnchors"][0].update({"canonical_url": "https://example.com/ppd"}), "canonical_url must be an official source anchor"),
-        (lambda packet: packet["citedCoveredAnchors"][0].update({"canonical_url": "https://devhub.portlandoregon.gov/private/account"}), "must not be a private or authenticated target"),
+        (lambda packet: packet["citedCoveredAnchors"][0].update({"canonical_url": "https://wetten.overheid.nl/private/account"}), "must not be a private or authenticated target"),
         (lambda packet: packet["reviewerOwnerAssignments"].pop(), "reviewerOwnerAssignments must cover every official source anchor"),
         (lambda packet: packet.update({"skippedSourceReasons": []}), "skippedSourceReasons must include cited skip decisions"),
         (lambda packet: packet["skippedSourceReasons"][0].update({"reason": ""}), "reason is not an allowed skip reason"),

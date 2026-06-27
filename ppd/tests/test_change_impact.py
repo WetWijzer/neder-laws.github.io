@@ -31,7 +31,7 @@ def test_compute_change_impacts_is_deterministic_and_metadata_only() -> None:
     assert [impact.as_dict() for impact in impacts] == [
         {
             "source_id": "ppd-devhub-faq",
-            "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+            "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
             "change_type": "changed",
             "previous_content_hash": "sha256:111111",
             "current_content_hash": "sha256:222222",
@@ -41,7 +41,7 @@ def test_compute_change_impacts_is_deterministic_and_metadata_only() -> None:
         },
         {
             "source_id": "ppd-file-standards",
-            "canonical_url": "https://www.portland.gov/ppd/spp-file-naming-standards-preparing-pdfs",
+            "canonical_url": "https://wetten.overheid.nl/ppd/spp-file-naming-standards-preparing-pdfs",
             "change_type": "added",
             "previous_content_hash": None,
             "current_content_hash": "sha256:444444",
@@ -67,7 +67,7 @@ def test_raw_body_fields_are_rejected() -> None:
         SourceSnapshot.from_mapping(
             {
                 "source_id": "unsafe",
-                "canonical_url": "https://www.portland.gov/ppd",
+                "canonical_url": "https://wetten.overheid.nl/ppd",
                 "content_hash": "sha256:unsafe",
                 "raw_html": "do not commit this",
             }
@@ -77,7 +77,7 @@ def test_raw_body_fields_are_rejected() -> None:
 def test_duplicate_source_ids_are_rejected() -> None:
     duplicate = {
         "source_id": "same",
-        "canonical_url": "https://www.portland.gov/ppd",
+        "canonical_url": "https://wetten.overheid.nl/ppd",
         "content_hash": "sha256:aaaaaa",
     }
 

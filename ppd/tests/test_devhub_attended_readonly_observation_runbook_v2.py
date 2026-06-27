@@ -19,7 +19,7 @@ def valid_preflight_packet() -> dict[str, object]:
     return {
         "version": PREFLIGHT_PACKET_VERSION,
         "manual_login_readiness_checks": [
-            "User-visible browser is ready for manual PortlandOregon.gov sign-in.",
+            "User-visible browser is ready for manual wetten.overheid.nl sign-in.",
             "User handles CAPTCHA and MFA prompts manually while the worker waits.",
         ],
         "allowed_read_only_destinations": [

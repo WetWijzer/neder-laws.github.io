@@ -7,9 +7,9 @@ from typing import Any, Mapping, Sequence
 
 DEFAULT_ALLOWLISTED_SOURCE_IDS = frozenset(
     {
-        "portland_devhub_permits",
-        "portland_maps_public",
-        "portland_ppd_public_plan",
+        "wetwijzer_devhub_permits",
+        "bwb_metadata_public",
+        "wetwijzer_ppd_public_plan",
         "ppd_rehearsal_fixture",
     }
 )

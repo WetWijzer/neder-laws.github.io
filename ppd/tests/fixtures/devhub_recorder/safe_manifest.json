@@ -15,7 +15,7 @@
   "surface": {
     "surface_id": "devhub-home-redacted",
     "auth_scope": "authenticated_attended",
-    "url_pattern": "https://devhub.portlandoregon.gov/**",
+    "url_pattern": "https://wetten.overheid.nl/**",
     "page_heading": "DevHub",
     "accessible_landmarks": [
       "main",

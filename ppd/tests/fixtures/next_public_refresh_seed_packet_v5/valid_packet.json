@@ -8,13 +8,13 @@
   "source_registry_placeholders": [
     {
       "placeholder_id": "src-placeholder-permit-applications-index",
-      "source_registry_ref": "source-registry-placeholder://portland-ppd/permit-applications-index",
+      "source_registry_ref": "source-registry-placeholder://wetwijzer-ppd/permit-applications-index",
       "owning_surface": "public_ppd_forms_index",
       "metadata_only": true
     },
     {
       "placeholder_id": "src-placeholder-file-standards",
-      "source_registry_ref": "source-registry-placeholder://portland-ppd/file-standards",
+      "source_registry_ref": "source-registry-placeholder://wetwijzer-ppd/file-standards",
       "owning_surface": "public_ppd_file_guidance",
       "metadata_only": true
     }

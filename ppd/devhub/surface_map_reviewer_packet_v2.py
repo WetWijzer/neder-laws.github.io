@@ -69,7 +69,7 @@ CONSEQUENTIAL_ENABLEMENT_RE = re.compile(
     r"(the\s+)?(permit|application|inspection|payment|official record)\s+(automatically|without user)",
     re.IGNORECASE,
 )
-ONLINE_COMMAND_MARKERS = ("curl", "wget", "playwright", "devhub.portlandoregon.gov", "http://", "https://")
+ONLINE_COMMAND_MARKERS = ("curl", "wget", "playwright", "wetten.overheid.nl", "http://", "https://")
 
 
 class SurfaceMapReviewerPacketError(ValueError):

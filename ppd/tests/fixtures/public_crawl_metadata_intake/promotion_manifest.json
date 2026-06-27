@@ -13,7 +13,7 @@
   "promotion_targets": [
     {
       "source_id": "ppd-landing",
-      "canonical_url": "https://www.portland.gov/ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
       "selected_for_promotion": true,
       "dry_run_only": true,
       "no_raw_body_persistence": true,
@@ -22,7 +22,7 @@
     },
     {
       "source_id": "ppd-apply-permits",
-      "canonical_url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+      "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
       "selected_for_promotion": true,
       "dry_run_only": true,
       "no_raw_body_persistence": true,
@@ -31,7 +31,7 @@
     },
     {
       "source_id": "devhub-public-portal",
-      "canonical_url": "https://devhub.portlandoregon.gov",
+      "canonical_url": "https://wetten.overheid.nl",
       "selected_for_promotion": true,
       "dry_run_only": true,
       "no_raw_body_persistence": true,

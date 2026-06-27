@@ -3,7 +3,7 @@
   "matrix_version": "release_gate_decision_matrix_v1",
   "decisions": [
     {
-      "source_id": "portland-bds-title-33",
+      "source_id": "wetwijzer-bds-title-33",
       "reviewer_owner": "ppd-zoning-reviewer",
       "review_status": "needs_review",
       "defer_reason": null,
@@ -14,7 +14,7 @@
       ]
     },
     {
-      "source_id": "portland-transportation-trn-10",
+      "source_id": "wetwijzer-transportation-trn-10",
       "reviewer_owner": "ppd-transportation-reviewer",
       "review_status": "deferred",
       "defer_reason": "Fixture metadata lacks a visible updated date and title match.",

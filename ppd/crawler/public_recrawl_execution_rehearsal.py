@@ -8,10 +8,10 @@ from ppd.post_decision_release_readiness_digest import validate_digest as valida
 
 PACKET_TYPE = 'ppd.public_recrawl_execution_rehearsal_plan.v1'
 ALLOWED_PUBLIC_HOSTS = frozenset({
-    'www.portland.gov',
-    'devhub.portlandoregon.gov',
-    'www.portlandoregon.gov',
-    'www.portlandmaps.com',
+    'wetten.overheid.nl',
+    'wetten.overheid.nl',
+    'wetten.overheid.nl',
+    'repository.overheid.nl',
 })
 PUBLIC_SOURCE_TYPES = frozenset({'public_html', 'public_pdf', 'public_form', 'devhub_public', 'external_reference'})
 PRIVATE_PATH_MARKERS = (

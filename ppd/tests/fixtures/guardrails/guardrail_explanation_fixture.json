@@ -5,17 +5,17 @@
     {
       "source_id": "ppd-devhub-faq",
       "title": "DevHub FAQs",
-      "url": "https://www.portland.gov/ppd/devhub-faqs"
+      "url": "https://wetten.overheid.nl/ppd/devhub-faqs"
     },
     {
       "source_id": "ppd-submit-guide",
       "title": "DevHub permit application guide",
-      "url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application"
+      "url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application"
     },
     {
       "source_id": "ppd-online-tools",
       "title": "How to use online permitting tools",
-      "url": "https://www.portland.gov/ppd/how-use-online-permitting-tools"
+      "url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools"
     }
   ],
   "blocked_action_predicates": [

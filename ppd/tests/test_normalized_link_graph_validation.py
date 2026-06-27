@@ -20,7 +20,7 @@ class NormalizedLinkGraphValidationTests(unittest.TestCase):
 
     def test_rejects_noncanonical_source_index_url(self) -> None:
         graph = _load_fixture("valid_link_graph.json")
-        graph["sourceIndex"][0]["canonicalUrl"] = "https://www.Portland.gov/ppd/single-pdf-process#overview"
+        graph["sourceIndex"][0]["canonicalUrl"] = "https://wetten.overheid.nl/ppd/single-pdf-process#overview"
 
         findings = validate_normalized_link_graph(graph)
 
@@ -28,7 +28,7 @@ class NormalizedLinkGraphValidationTests(unittest.TestCase):
 
     def test_rejects_document_canonical_mismatch(self) -> None:
         graph = _load_fixture("valid_link_graph.json")
-        graph["documents"][0]["canonicalUrl"] = "https://www.portland.gov/ppd/other-page"
+        graph["documents"][0]["canonicalUrl"] = "https://wetten.overheid.nl/ppd/other-page"
 
         findings = validate_normalized_link_graph(graph)
 
@@ -63,7 +63,7 @@ class NormalizedLinkGraphValidationTests(unittest.TestCase):
         graph["documents"][0]["links"].append(
             {
                 "label": "Private upload",
-                "targetCanonicalUrl": "https://devhub.portlandoregon.gov/upload/corrections",
+                "targetCanonicalUrl": "https://wetten.overheid.nl/upload/corrections",
                 "contentType": "skipped",
                 "skippedReason": "private_devhub_path",
             }

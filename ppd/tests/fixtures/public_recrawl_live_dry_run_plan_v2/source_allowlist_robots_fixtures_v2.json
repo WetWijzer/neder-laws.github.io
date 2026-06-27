@@ -3,8 +3,8 @@
   "packet_version": 2,
   "sources": [
     {
-      "source_id": "portland-council-agendas",
-      "seed_url": "https://www.portland.gov/council/agenda",
+      "source_id": "wetwijzer-council-agendas",
+      "seed_url": "https://wetten.overheid.nl/council/agenda",
       "allowlisted": true,
       "public_records_source": true,
       "requires_authentication": false,
@@ -15,8 +15,8 @@
       }
     },
     {
-      "source_id": "portland-auditor-public-notices",
-      "seed_url": "https://www.portland.gov/auditor/notices",
+      "source_id": "wetwijzer-auditor-public-notices",
+      "seed_url": "https://wetten.overheid.nl/auditor/notices",
       "allowlisted": true,
       "public_records_source": true,
       "requires_authentication": false,

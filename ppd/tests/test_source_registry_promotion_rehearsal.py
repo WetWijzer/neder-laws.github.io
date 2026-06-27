@@ -61,7 +61,7 @@ def test_rejects_live_source_record_field_edits() -> None:
         (lambda packet: packet.update({"downloaded_document_path": "/tmp/downloads/devhub-faq.pdf"}), "downloaded document"),
         (lambda packet: packet.update({"replace_live_registry": True}), "direct live registry replacement"),
         (lambda packet: packet["rollback_checkpoints"].clear(), "rollback_checkpoints"),
-        (lambda packet: packet["metadata_only_field_diffs"][0].update({"canonical_url": "https://devhub.portlandoregon.gov/permits/123?token=secret"}), "private or authenticated"),
+        (lambda packet: packet["metadata_only_field_diffs"][0].update({"canonical_url": "https://wetten.overheid.nl/permits/123?token=secret"}), "private or authenticated"),
     ],
 )
 def test_validation_rejects_unsafe_rehearsal_packets(mutator, message: str) -> None:

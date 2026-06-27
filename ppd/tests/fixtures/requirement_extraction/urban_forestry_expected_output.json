@@ -13,7 +13,7 @@
       "action": "determine whether tree work needs an Urban Forestry permit before work begins",
       "object": "regulated tree pruning, planting, removal, or related tree work",
       "conditions": [
-        "Project involves trees regulated by City of Portland Urban Forestry guidance.",
+        "Project involves trees regulated by WetWijzer Urban Forestry guidance.",
         "Applicant must use public Urban Forestry permit guidance to identify the applicable permit path."
       ],
       "expected_agent_behavior": "Ask only for non-private project facts needed to identify the applicable Urban Forestry permit path.",
@@ -22,7 +22,7 @@
         {
           "source_id": "uf-public-permits-index",
           "title": "Tree permits",
-          "url": "https://www.portland.gov/trees/treepermits",
+          "url": "https://wetten.overheid.nl/trees/treepermits",
           "captured_at": "2026-05-01T00:00:00Z",
           "evidence_summary": "Public Urban Forestry guidance describes tree permit paths and directs applicants to determine whether planned tree work requires a permit."
         }
@@ -45,7 +45,7 @@
         {
           "source_id": "uf-development-review",
           "title": "Trees and development",
-          "url": "https://www.portland.gov/trees/treepermits/development-permits",
+          "url": "https://wetten.overheid.nl/trees/treepermits/development-permits",
           "captured_at": "2026-05-01T00:00:00Z",
           "evidence_summary": "Urban Forestry public guidance distinguishes tree requirements connected to development review from other tree permit paths."
         }
@@ -68,7 +68,7 @@
         {
           "source_id": "uf-private-property-tree-permits",
           "title": "Private property tree permits",
-          "url": "https://www.portland.gov/trees/treepermits/private-property-tree-permits",
+          "url": "https://wetten.overheid.nl/trees/treepermits/private-property-tree-permits",
           "captured_at": "2026-05-01T00:00:00Z",
           "evidence_summary": "Public Urban Forestry guidance identifies application paths and supporting information for private-property tree permit requests."
         }
@@ -91,14 +91,14 @@
         {
           "source_id": "uf-fees",
           "title": "Tree permit fees",
-          "url": "https://www.portland.gov/trees/treepermits/tree-permit-fees",
+          "url": "https://wetten.overheid.nl/trees/treepermits/tree-permit-fees",
           "captured_at": "2026-05-01T00:00:00Z",
           "evidence_summary": "Public Urban Forestry fee guidance describes fee checkpoints for tree permit activity."
         },
         {
           "source_id": "ppd-devhub-faq-payments",
           "title": "DevHub FAQ",
-          "url": "https://www.portland.gov/ppd/development-services/devhub/devhub-faq",
+          "url": "https://wetten.overheid.nl/ppd/development-services/devhub/devhub-faq",
           "captured_at": "2026-05-01T00:00:00Z",
           "evidence_summary": "Public DevHub FAQ identifies fee payment as a supported online permitting service category."
         }
@@ -121,7 +121,7 @@
         {
           "source_id": "ppd-devhub-faq-corrections",
           "title": "DevHub FAQ",
-          "url": "https://www.portland.gov/ppd/development-services/devhub/devhub-faq",
+          "url": "https://wetten.overheid.nl/ppd/development-services/devhub/devhub-faq",
           "captured_at": "2026-05-01T00:00:00Z",
           "evidence_summary": "Public DevHub FAQ lists correction uploads among online permitting service categories."
         }
@@ -144,7 +144,7 @@
         {
           "source_id": "uf-public-permits-index",
           "title": "Tree permits",
-          "url": "https://www.portland.gov/trees/treepermits",
+          "url": "https://wetten.overheid.nl/trees/treepermits",
           "captured_at": "2026-05-01T00:00:00Z",
           "evidence_summary": "Public Urban Forestry permit guidance describes permit outcomes and follow-up responsibilities by permit type."
         }
@@ -167,7 +167,7 @@
         {
           "source_id": "ppd-plan-guarded-action-executor",
           "title": "PP&D guarded action executor plan",
-          "url": "docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md",
+          "url": "docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md",
           "captured_at": "2026-05-01T00:00:00Z",
           "evidence_summary": "The PP&D plan requires exact confirmation for consequential and financial actions and forbids unattended irreversible automation."
         }

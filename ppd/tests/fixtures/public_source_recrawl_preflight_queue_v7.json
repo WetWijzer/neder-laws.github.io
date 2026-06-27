@@ -5,12 +5,12 @@
   "entries": [
     {
       "source_id": "ppd-online-tools-overview",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "source_type": "public_html",
       "owning_surface": "public_ppd_website",
       "title": "Online permitting tools overview",
       "content_type": "text/html",
-      "allowlist_policy": "allowed_public_portland_gov",
+      "allowlist_policy": "allowed_public_wetwijzer_gov",
       "robots_policy": "preflight_allowed_fixture",
       "processor_policy": "metadata_placeholder_only",
       "preflight_decision": "handoff_ready",
@@ -19,12 +19,12 @@
     },
     {
       "source_id": "ppd-fee-payment-guide-download",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "source_type": "public_pdf",
       "owning_surface": "public_ppd_website",
       "title": "How to pay fees guide",
       "content_type": "application/pdf",
-      "allowlist_policy": "allowed_public_portland_gov",
+      "allowlist_policy": "allowed_public_wetwijzer_gov",
       "robots_policy": "preflight_allowed_fixture",
       "processor_policy": "metadata_placeholder_only",
       "preflight_decision": "handoff_ready",
@@ -33,7 +33,7 @@
     },
     {
       "source_id": "devhub-private-application-placeholder",
-      "canonical_url": "https://devhub.portlandoregon.gov/Permit/Application",
+      "canonical_url": "https://wetten.overheid.nl/Permit/Application",
       "source_type": "devhub_authenticated",
       "owning_surface": "devhub_authenticated",
       "title": "Authenticated DevHub application path",
@@ -46,7 +46,7 @@
     },
     {
       "source_id": "external-example-skip",
-      "canonical_url": "https://example.com/not-a-portland-source",
+      "canonical_url": "https://example.com/not-a-wetwijzer-source",
       "source_type": "external_reference",
       "owning_surface": "external",
       "title": "Outside allowlist example",

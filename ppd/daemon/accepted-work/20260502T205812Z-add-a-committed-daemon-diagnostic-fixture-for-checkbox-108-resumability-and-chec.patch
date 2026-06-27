@@ -15,7 +15,7 @@
 +    "mustNotEdit": [
 +      "ppd/contracts/",
 +      "ppd/crawler/",
-+      "public/corpus/portland-or/current/",
++      "public/corpus/wetwijzer-or/current/",
 +      "src/lib/logic/",
 +      "ipfs_datasets_py/.daemon/"
 +    ],

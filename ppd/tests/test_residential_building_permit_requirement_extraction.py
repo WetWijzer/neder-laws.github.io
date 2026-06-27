@@ -61,7 +61,7 @@ class ResidentialBuildingPermitRequirementExtractionTest(unittest.TestCase):
                 self.assertTrue(req["evidence"], "every extracted requirement needs evidence")
                 for evidence in req["evidence"]:
                     self.assertTrue(evidence["source_id"].strip())
-                    self.assertTrue(evidence["canonical_url"].startswith("https://www.portland.gov/"))
+                    self.assertTrue(evidence["canonical_url"].startswith("https://wetten.overheid.nl/"))
                     self.assertTrue(evidence["section"].strip())
                     self.assertTrue(evidence["quote"].strip())
 

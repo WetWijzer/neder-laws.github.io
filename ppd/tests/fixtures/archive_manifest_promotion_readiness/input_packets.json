@@ -13,12 +13,12 @@
     "rawBodiesPersisted": false,
     "syntheticProcessorPrerequisites": [
       {
-        "prerequisite_id": "processor-prereq-source-portland-ppd",
-        "source_id": "source-portland-ppd",
-        "canonical_url": "https://www.portland.gov/ppd",
-        "requested_url": "https://www.portland.gov/ppd",
-        "source_evidence_ids": ["evidence-source-portland-ppd"],
-        "robots_evidence_id": "robots-www-portland-gov",
+        "prerequisite_id": "processor-prereq-source-wetwijzer-ppd",
+        "source_id": "source-wetwijzer-ppd",
+        "canonical_url": "https://wetten.overheid.nl/ppd",
+        "requested_url": "https://wetten.overheid.nl/ppd",
+        "source_evidence_ids": ["evidence-source-wetwijzer-ppd"],
+        "robots_evidence_id": "robots-www-wetwijzer-gov",
         "policy_evidence_id": "policy-public-allowlist",
         "rate_limit_note": "metadata-only rehearsal does not open a network connection",
         "processor_input_kind": "metadata_only_synthetic_prerequisite",
@@ -29,10 +29,10 @@
       {
         "prerequisite_id": "processor-prereq-source-devhub-faqs",
         "source_id": "source-devhub-faqs",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
-        "requested_url": "https://www.portland.gov/ppd/devhub-faqs",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
+        "requested_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
         "source_evidence_ids": ["evidence-source-devhub-faqs"],
-        "robots_evidence_id": "robots-www-portland-gov",
+        "robots_evidence_id": "robots-www-wetwijzer-gov",
         "policy_evidence_id": "policy-public-allowlist",
         "rate_limit_note": "metadata-only rehearsal does not open a network connection",
         "processor_input_kind": "metadata_only_synthetic_prerequisite",
@@ -43,10 +43,10 @@
     ],
     "expectedMetadataOnlyArchiveManifests": [
       {
-        "manifest_id": "archive-manifest-rehearsal-source-portland-ppd",
-        "source_id": "source-portland-ppd",
-        "canonical_url": "https://www.portland.gov/ppd",
-        "requested_url": "https://www.portland.gov/ppd",
+        "manifest_id": "archive-manifest-rehearsal-source-wetwijzer-ppd",
+        "source_id": "source-wetwijzer-ppd",
+        "canonical_url": "https://wetten.overheid.nl/ppd",
+        "requested_url": "https://wetten.overheid.nl/ppd",
         "redirect_chain": [],
         "http_status": "expected_metadata_only_not_fetched",
         "content_type": "expected_metadata_only_pending_capture",
@@ -56,7 +56,7 @@
         "processor_name": "ipfs_datasets_py.web_archive_processor",
         "processor_version": "fixture-rehearsal-no-execution",
         "archive_artifact_ref": null,
-        "normalized_document_id": "expected-normalized-document-source-portland-ppd",
+        "normalized_document_id": "expected-normalized-document-source-wetwijzer-ppd",
         "skipped_reason": "rehearsal_only_processor_not_invoked",
         "no_raw_body_persisted": true,
         "metadata_only": true
@@ -64,8 +64,8 @@
       {
         "manifest_id": "archive-manifest-rehearsal-source-devhub-faqs",
         "source_id": "source-devhub-faqs",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
-        "requested_url": "https://www.portland.gov/ppd/devhub-faqs",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
+        "requested_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
         "redirect_chain": [],
         "http_status": "expected_metadata_only_not_fetched",
         "content_type": "expected_metadata_only_pending_capture",
@@ -83,9 +83,9 @@
     ],
     "noRawBodyAttestations": [
       {
-        "attestation_id": "no-payload-source-portland-ppd",
-        "source_id": "source-portland-ppd",
-        "canonical_url": "https://www.portland.gov/ppd",
+        "attestation_id": "no-payload-source-wetwijzer-ppd",
+        "source_id": "source-wetwijzer-ppd",
+        "canonical_url": "https://wetten.overheid.nl/ppd",
         "raw_body_persisted": false,
         "archive_artifact_written": false,
         "attestation": "Only metadata-only expected fields are rehearsed."
@@ -93,7 +93,7 @@
       {
         "attestation_id": "no-payload-source-devhub-faqs",
         "source_id": "source-devhub-faqs",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
         "raw_body_persisted": false,
         "archive_artifact_written": false,
         "attestation": "Only metadata-only expected fields are rehearsed."
@@ -133,14 +133,14 @@
     "activeRegistryMutated": false,
     "syntheticMetadataOnlyIntakeRows": [
       {
-        "intake_id": "metadata-intake-source-portland-ppd",
-        "source_id": "source-portland-ppd",
-        "canonical_url": "https://www.portland.gov/ppd",
-        "requested_url": "https://www.portland.gov/ppd",
-        "source_evidence_ids": ["evidence-source-portland-ppd"],
-        "freshness_badge_id": "freshness-source-portland-ppd",
-        "expected_manifest_id": "archive-manifest-rehearsal-source-portland-ppd",
-        "normalized_document_id": "expected-normalized-document-source-portland-ppd",
+        "intake_id": "metadata-intake-source-wetwijzer-ppd",
+        "source_id": "source-wetwijzer-ppd",
+        "canonical_url": "https://wetten.overheid.nl/ppd",
+        "requested_url": "https://wetten.overheid.nl/ppd",
+        "source_evidence_ids": ["evidence-source-wetwijzer-ppd"],
+        "freshness_badge_id": "freshness-source-wetwijzer-ppd",
+        "expected_manifest_id": "archive-manifest-rehearsal-source-wetwijzer-ppd",
+        "normalized_document_id": "expected-normalized-document-source-wetwijzer-ppd",
         "content_type": "expected_metadata_only_pending_capture",
         "http_status": "expected_metadata_only_not_fetched",
         "intake_status": "ready_for_metadata_only_rehearsal",
@@ -154,8 +154,8 @@
       {
         "intake_id": "metadata-intake-source-devhub-faqs",
         "source_id": "source-devhub-faqs",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
-        "requested_url": "https://www.portland.gov/ppd/devhub-faqs",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
+        "requested_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
         "source_evidence_ids": ["evidence-source-devhub-faqs"],
         "freshness_badge_id": "freshness-source-devhub-faqs-stale",
         "expected_manifest_id": "archive-manifest-rehearsal-source-devhub-faqs",
@@ -173,11 +173,11 @@
     ],
     "expectedManifestReferences": [
       {
-        "manifest_ref_id": "manifest-ref-archive-manifest-rehearsal-source-portland-ppd",
-        "manifest_id": "archive-manifest-rehearsal-source-portland-ppd",
-        "source_id": "source-portland-ppd",
-        "canonical_url": "https://www.portland.gov/ppd",
-        "normalized_document_id": "expected-normalized-document-source-portland-ppd",
+        "manifest_ref_id": "manifest-ref-archive-manifest-rehearsal-source-wetwijzer-ppd",
+        "manifest_id": "archive-manifest-rehearsal-source-wetwijzer-ppd",
+        "source_id": "source-wetwijzer-ppd",
+        "canonical_url": "https://wetten.overheid.nl/ppd",
+        "normalized_document_id": "expected-normalized-document-source-wetwijzer-ppd",
         "archive_artifact_ref_present": false,
         "metadataOnly": true
       },
@@ -185,7 +185,7 @@
         "manifest_ref_id": "manifest-ref-archive-manifest-rehearsal-source-devhub-faqs",
         "manifest_id": "archive-manifest-rehearsal-source-devhub-faqs",
         "source_id": "source-devhub-faqs",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
         "normalized_document_id": "expected-normalized-document-source-devhub-faqs",
         "archive_artifact_ref_present": false,
         "metadataOnly": true
@@ -195,7 +195,7 @@
       {
         "queue_id": "changed-source-review-source-devhub-faqs",
         "source_id": "source-devhub-faqs",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
         "queue_reason": "stale_freshness_badge",
         "freshness_status": "stale",
         "reviewer_owner": "archive-manifest-reviewer",
@@ -208,7 +208,7 @@
       {
         "candidate_id": "freshness-badge-candidate-source-devhub-faqs",
         "source_id": "source-devhub-faqs",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
         "current_freshness_status": "stale",
         "proposed_next_status": "needs_review_before_recrawl",
         "source_evidence_ids": ["evidence-source-devhub-faqs"],

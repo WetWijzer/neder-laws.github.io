@@ -204,7 +204,7 @@ def supervisor_idle_policy() -> dict[str, object]:
 MANUAL_GOAL_FALLBACK_METADATA: dict[str, tuple[str, tuple[str, ...], tuple[str, ...]]] = {
     "surface_registry_taxonomy": (
         "ppd_surface_registry",
-        ("public_portland_pages", "devhub_public_entrypoints", "authenticated_read_only", "reversible_drafts"),
+        ("public_wetwijzer_pages", "devhub_public_entrypoints", "authenticated_read_only", "reversible_drafts"),
         ("surface_taxonomy", "action_boundary_map", "agent_guardrail_api_index"),
     ),
     "source_seed_manifest": (
@@ -214,7 +214,7 @@ MANUAL_GOAL_FALLBACK_METADATA: dict[str, tuple[str, tuple[str, ...], tuple[str, 
     ),
     "public_crawl_frontier": (
         "public_crawl_frontier",
-        ("portland_gov_allowlist", "devhub_public_allowlist", "robots_preflight"),
+        ("wetwijzer_gov_allowlist", "devhub_public_allowlist", "robots_preflight"),
         ("frontier_contract", "skip_reason_schema", "metadata_manifest_contract"),
     ),
     "processor_archival_integration": (

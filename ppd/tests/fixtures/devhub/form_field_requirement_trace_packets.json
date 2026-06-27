@@ -8,7 +8,7 @@
     "evidence_index": [
       {
         "evidence_id": "evidence:devhub-guide-submit-permit-application:2026-05-01",
-        "citation_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+        "citation_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
         "content_hash": "sha256:valid-devhub-guide",
         "captured_at": "2026-05-01T00:00:00Z"
       }
@@ -78,7 +78,7 @@
     "evidence_index": [
       {
         "evidence_id": "evidence:stale-devhub-guide:2024-01-01",
-        "citation_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+        "citation_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
         "content_hash": "sha256:old-devhub-guide",
         "captured_at": "2024-01-01T00:00:00Z"
       }

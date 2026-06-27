@@ -53,4 +53,4 @@ def test_intake_packet_is_metadata_only_and_offline_validation_ready() -> None:
 
         for citation in row["citations"]:
             assert sorted(citation) == ["label", "observed_field", "url"]
-            assert citation["url"].startswith("https://www.portland.gov/")
+            assert citation["url"].startswith("https://wetten.overheid.nl/")

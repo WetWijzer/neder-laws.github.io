@@ -38,7 +38,7 @@ class HumanReviewPacketTest(unittest.TestCase):
     def test_review_items_are_redacted_and_source_linked(self) -> None:
         source_ids = {item["sourceEvidenceId"] for item in self.fixture["sourceEvidence"]}
         for source in self.fixture["sourceEvidence"]:
-            self.assertTrue(source["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
+            self.assertTrue(source["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
             self.assertTrue(source["citation"]["locator"])
             self.assertTrue(source["citation"]["paraphrase"])
 

@@ -5,13 +5,13 @@
     "normalized_source_evidence": [
       {
         "evidence_id": "ev-devhub-guide",
-        "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+        "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
         "citation_spans": [{"start": 12, "end": 48}],
         "freshness_status": "current"
       },
       {
         "evidence_id": "ev-payment-guide",
-        "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+        "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
         "citation_spans": [{"page": 1}],
         "freshness_status": "current"
       }
@@ -46,7 +46,7 @@
     "production_ready": true,
     "unresolved_blockers": ["selector validation incomplete"],
     "normalized_source_evidence": [
-      {"evidence_id": "ev-devhub-guide", "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application"}
+      {"evidence_id": "ev-devhub-guide", "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application"}
     ],
     "findings": [
       {"finding_id": "uncited", "summary": "This finding has no citation."},

@@ -14,10 +14,10 @@ from urllib.parse import urlparse
 
 ALLOWED_PUBLIC_HOSTS = frozenset(
     {
-        "www.portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
-        "www.portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
     }
 )
 
@@ -103,9 +103,9 @@ REVIEWED_STATUSES = frozenset(
     }
 )
 
-PPD_GUIDANCE_HOST = "www.portland.gov"
+PPD_GUIDANCE_HOST = "wetten.overheid.nl"
 PPD_GUIDANCE_PREFIX = "/ppd"
-PORTLAND_MAPS_HOST = "www.portlandmaps.com"
+BWB_METADATA_HOST = "repository.overheid.nl"
 
 
 @dataclass(frozen=True)
@@ -247,12 +247,12 @@ def validate_discovery_record(
             "Discovery URL appears to require private, account, or authenticated access.",
         )
 
-    if host == PORTLAND_MAPS_HOST and not _is_public_portland_maps_reference(record):
+    if host == BWB_METADATA_HOST and not _is_public_bwb_metadata_reference(record):
         return _finding(
             record_id,
             url,
-            "portland_maps_not_from_ppd_guidance",
-            "Portland Maps URLs are allowed only when linked from public PP&D guidance.",
+            "bwb_metadata_not_from_ppd_guidance",
+            "BWB metadata URLs are allowed only when linked from public PP&D guidance.",
         )
 
     return DiscoveryValidationFinding(
@@ -282,7 +282,7 @@ def _looks_private_or_authenticated(path: str, query: str) -> bool:
     return False
 
 
-def _is_public_portland_maps_reference(record: Mapping[str, Any]) -> bool:
+def _is_public_bwb_metadata_reference(record: Mapping[str, Any]) -> bool:
     source_url = str(record.get("source_url") or record.get("source_page_url") or "")
     parsed_source = urlparse(source_url)
     source_host = parsed_source.netloc.lower()
@@ -291,7 +291,7 @@ def _is_public_portland_maps_reference(record: Mapping[str, Any]) -> bool:
         return True
 
     relationship = str(record.get("relationship") or record.get("link_role") or "").lower()
-    return relationship == "ppd_public_portland_maps_reference"
+    return relationship == "ppd_public_bwb_metadata_reference"
 
 
 def _find_forbidden_key(value: Any, forbidden_keys: frozenset[str], path: str = "record") -> str | None:

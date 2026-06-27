@@ -11,8 +11,8 @@
 +  "privateDevhubPathsIncluded": false,
 +  "downloadedDocumentsIncluded": false,
 +  "scope": {
-+    "bureau": "Portland Permitting & Development",
-+    "jurisdiction": "Portland, Oregon",
++    "bureau": "Netherlands Permitting & Development",
++    "jurisdiction": "Netherlands, Netherlands",
 +    "coverageIntent": "Public lifecycle guidance source inventory for permit extension, cancellation, refund, and inspection-result follow-up evidence.",
 +    "excludedActions": [
 +      "live crawl",
@@ -64,15 +64,15 @@
 +    {
 +      "id": "ppd_lifecycle_extension_reactivation_public_guidance",
 +      "categoryId": "permit_extension_guidance",
-+      "authorityLabel": "Portland Permitting & Development public permit lifecycle guidance",
++      "authorityLabel": "Netherlands Permitting & Development public permit lifecycle guidance",
 +      "recrawlCadence": "monthly",
-+      "sourceUrl": "https://www.portland.gov/ppd/permits/permit-extension-reactivation",
-+      "canonicalUrl": "https://www.portland.gov/ppd/permits/permit-extension-reactivation",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/permit-extension-reactivation",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/permit-extension-reactivation",
 +      "sourceType": "public_html_guidance",
 +      "citation": {
 +        "title": "Permit extension and reactivation guidance",
-+        "publisher": "City of Portland, Portland Permitting & Development",
-+        "url": "https://www.portland.gov/ppd/permits/permit-extension-reactivation",
++        "publisher": "WetWijzer, Netherlands Permitting & Development",
++        "url": "https://wetten.overheid.nl/ppd/permits/permit-extension-reactivation",
 +        "accessedAt": "2026-05-01T00:00:00Z"
 +      },
 +      "fixtureNotes": "Metadata only. This fixture records public source coverage and does not contain raw page content or downloaded documents."
@@ -80,15 +80,15 @@
 +    {
 +      "id": "ppd_lifecycle_cancellation_public_guidance",
 +      "categoryId": "permit_cancellation_guidance",
-+      "authorityLabel": "Portland Permitting & Development public permit lifecycle guidance",
++      "authorityLabel": "Netherlands Permitting & Development public permit lifecycle guidance",
 +      "recrawlCadence": "monthly",
-+      "sourceUrl": "https://www.portland.gov/ppd/permits/cancel-permit",
-+      "canonicalUrl": "https://www.portland.gov/ppd/permits/cancel-permit",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/cancel-permit",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/cancel-permit",
 +      "sourceType": "public_html_guidance",
 +      "citation": {
 +        "title": "Cancel a permit guidance",
-+        "publisher": "City of Portland, Portland Permitting & Development",
-+        "url": "https://www.portland.gov/ppd/permits/cancel-permit",
++        "publisher": "WetWijzer, Netherlands Permitting & Development",
++        "url": "https://wetten.overheid.nl/ppd/permits/cancel-permit",
 +        "accessedAt": "2026-05-01T00:00:00Z"
 +      },
 +      "fixtureNotes": "Metadata only. This fixture does not authorize or automate permit cancellation."
@@ -96,15 +96,15 @@
 +    {
 +      "id": "ppd_lifecycle_refund_public_guidance",
 +      "categoryId": "permit_refund_guidance",
-+      "authorityLabel": "Portland Permitting & Development public fee and refund guidance",
++      "authorityLabel": "Netherlands Permitting & Development public fee and refund guidance",
 +      "recrawlCadence": "monthly",
-+      "sourceUrl": "https://www.portland.gov/ppd/permits/permit-refunds",
-+      "canonicalUrl": "https://www.portland.gov/ppd/permits/permit-refunds",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/permits/permit-refunds",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/permit-refunds",
 +      "sourceType": "public_html_guidance",
 +      "citation": {
 +        "title": "Permit refund guidance",
-+        "publisher": "City of Portland, Portland Permitting & Development",
-+        "url": "https://www.portland.gov/ppd/permits/permit-refunds",
++        "publisher": "WetWijzer, Netherlands Permitting & Development",
++        "url": "https://wetten.overheid.nl/ppd/permits/permit-refunds",
 +        "accessedAt": "2026-05-01T00:00:00Z"
 +      },
 +      "fixtureNotes": "Metadata only. This fixture does not contain payment records, credentials, private account data, or refund submissions."
@@ -112,15 +112,15 @@
 +    {
 +      "id": "ppd_lifecycle_inspection_results_public_guidance",
 +      "categoryId": "inspection_result_guidance",
-+      "authorityLabel": "Portland Permitting & Development public inspections guidance",
++      "authorityLabel": "Netherlands Permitting & Development public inspections guidance",
 +      "recrawlCadence": "weekly",
-+      "sourceUrl": "https://www.portland.gov/ppd/inspections/results",
-+      "canonicalUrl": "https://www.portland.gov/ppd/inspections/results",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/inspections/results",
++      "canonicalUrl": "https://wetten.overheid.nl/ppd/inspections/results",
 +      "sourceType": "public_html_guidance",
 +      "citation": {
 +        "title": "Inspection results guidance",
-+        "publisher": "City of Portland, Portland Permitting & Development",
-+        "url": "https://www.portland.gov/ppd/inspections/results",
++        "publisher": "WetWijzer, Netherlands Permitting & Development",
++        "url": "https://wetten.overheid.nl/ppd/inspections/results",
 +        "accessedAt": "2026-05-01T00:00:00Z"
 +      },
 +      "fixtureNotes": "Metadata only. This fixture does not schedule inspections, submit corrections, or store inspection screenshots."

@@ -91,9 +91,9 @@ _CONSEQUENTIAL_ACTION_WORDS = (
 
 _ALLOWED_HOSTS = frozenset(
     {
-        "devhub.portlandoregon.gov",
-        "www.portland.gov",
-        "www.portlandoregon.gov",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
     }
 )
 

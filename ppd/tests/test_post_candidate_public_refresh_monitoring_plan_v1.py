@@ -51,7 +51,7 @@ def test_post_candidate_public_refresh_monitoring_plan_v1_requires_all_coverage_
         'fee_payment_guidance': 'missing fee/payment guidance coverage',
         'devhub_public_guidance': 'missing DevHub public guidance coverage',
         'forms_index': 'missing forms index coverage',
-        'linked_portland_maps_references': 'missing linked Portland Maps references coverage',
+        'linked_bwb_metadata_references': 'missing linked BWB metadata references coverage',
     }
     for category, expected_problem in required.items():
         packet = _valid_packet()

@@ -113,7 +113,7 @@
       {
         "id": "account_setup",
         "kind": "account_setup",
-        "label": "Use DevHub with PortlandOregon.gov credentials when authenticated services are needed.",
+        "label": "Use DevHub with wetten.overheid.nl credentials when authenticated services are needed.",
         "requiredFactIds": ["applicant_contact"],
         "requiredDocumentIds": [],
         "evidence": ["devhub_faq"]
@@ -343,28 +343,28 @@
     {
       "id": "devhub_application_guidance",
       "authorityLabel": "DevHub application guidance",
-      "canonicalUrl": "https://www.portland.gov/ppd/apply-permit/devhub",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/apply-permit/devhub",
       "supports": ["request type selection", "application drafting", "FCC wireless application appears as a DevHub request type"],
       "sourceInventoryOnly": true
     },
     {
       "id": "devhub_faq",
-      "authorityLabel": "Development Hub PDX FAQ",
-      "canonicalUrl": "https://www.portland.gov/ppd/development-hub-pdx-devhub/devhub-faq",
+      "authorityLabel": "Development Hub Netherlands FAQ",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/development-hub-netherlands-devhub/devhub-faq",
       "supports": ["DevHub account services", "fee payments", "correction uploads", "inspection scheduling"],
       "sourceInventoryOnly": true
     },
     {
       "id": "single_pdf_process_guidance",
       "authorityLabel": "Single PDF Process guidance",
-      "canonicalUrl": "https://www.portland.gov/ppd/permits/single-pdf-process",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/single-pdf-process",
       "supports": ["single searchable drawing plan PDF", "separate application calculations and supporting PDFs"],
       "sourceInventoryOnly": true
     },
     {
       "id": "public_permits_and_inspections_applications_index",
       "authorityLabel": "Permits and Inspections Applications index",
-      "canonicalUrl": "https://www.portland.gov/ppd/permits/permits-and-inspections-applications",
+      "canonicalUrl": "https://wetten.overheid.nl/ppd/permits/permits-and-inspections-applications",
       "supports": ["public application and form index", "fixture-only submittal package evidence"],
       "sourceInventoryOnly": true
     }

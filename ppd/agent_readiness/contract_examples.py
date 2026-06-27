@@ -321,7 +321,7 @@ def _citation_problems(citation: Any, path: str) -> list[str]:
         if not _non_empty_text(citation.get(key)):
             problems.append(f"{path}.{key} is required")
     canonical_url = str(citation.get("canonical_url") or "")
-    if canonical_url and not canonical_url.startswith("https://www.portland.gov/ppd/"):
+    if canonical_url and not canonical_url.startswith("https://wetten.overheid.nl/ppd/"):
         problems.append(f"{path}.canonical_url must be an official PP&D URL")
     if citation.get("review_status") != "reviewed_promotable":
         problems.append(f"{path}.review_status must be reviewed_promotable")

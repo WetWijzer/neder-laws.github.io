@@ -2,8 +2,8 @@
   {
     "candidate_id": "recrawl:pcc-title-33",
     "anchor_id": "pcc-title-33",
-    "title": "Portland City Code Title 33 Planning and Zoning",
-    "official_source_url": "https://www.portland.gov/code/33",
+    "title": "Netherlands City Code Title 33 Planning and Zoning",
+    "official_source_url": "https://wetten.overheid.nl/code/33",
     "source_family": "code",
     "source_family_priority": 10,
     "queue_reason": "changed",
@@ -22,7 +22,7 @@
     },
     "robots_policy_preflight": {
       "status": "not_run_fixture_only",
-      "robots_txt_url": "https://www.portland.gov/robots.txt",
+      "robots_txt_url": "https://wetten.overheid.nl/robots.txt",
       "policy_notes": "Reviewer must run approved preflight before any live crawl."
     },
     "processor_handoff_dry_run": {
@@ -40,7 +40,7 @@
     "candidate_id": "recrawl:trn-admin-rule-streets",
     "anchor_id": "trn-admin-rule-streets",
     "title": "Transportation Administrative Rules for Streets",
-    "official_source_url": "https://www.portland.gov/transportation/administrative-rules",
+    "official_source_url": "https://wetten.overheid.nl/transportation/administrative-rules",
     "source_family": "administrative_rule",
     "source_family_priority": 30,
     "queue_reason": "stale",
@@ -59,7 +59,7 @@
     },
     "robots_policy_preflight": {
       "status": "not_run_fixture_only",
-      "robots_txt_url": "https://www.portland.gov/robots.txt",
+      "robots_txt_url": "https://wetten.overheid.nl/robots.txt",
       "policy_notes": "Reviewer must run approved preflight before any live crawl."
     },
     "processor_handoff_dry_run": {
@@ -77,7 +77,7 @@
     "candidate_id": "recrawl:bds-fee-schedule",
     "anchor_id": "bds-fee-schedule",
     "title": "BDS Fee Schedule",
-    "official_source_url": "https://www.portland.gov/bds/fees",
+    "official_source_url": "https://wetten.overheid.nl/bds/fees",
     "source_family": "fee_schedule",
     "source_family_priority": 40,
     "queue_reason": "changed",
@@ -96,7 +96,7 @@
     },
     "robots_policy_preflight": {
       "status": "not_run_fixture_only",
-      "robots_txt_url": "https://www.portland.gov/robots.txt",
+      "robots_txt_url": "https://wetten.overheid.nl/robots.txt",
       "policy_notes": "Reviewer must run approved preflight before any live crawl."
     },
     "processor_handoff_dry_run": {

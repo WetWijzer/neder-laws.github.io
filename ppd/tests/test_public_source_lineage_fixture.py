@@ -62,7 +62,7 @@ def _assert_lineage(record, expected_source_id, expected_hash):
     lineage = record.get("lineage")
     assert isinstance(lineage, dict)
     assert lineage["source_id"] == expected_source_id
-    assert lineage["canonical_url"].startswith("https://www.portland.gov/ppd/")
+    assert lineage["canonical_url"].startswith("https://wetten.overheid.nl/ppd/")
     assert lineage["content_hash"] == expected_hash
     assert lineage["last_seen_at"] == "2026-05-08T12:00:00Z"
     assert lineage["freshness_status"] == "current"

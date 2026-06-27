@@ -140,7 +140,7 @@ _LIVE_ACCESS_TERMS = (
 
 _OFFLINE_COMMAND_DENY_TERMS = (
     "curl",
-    "devhub.portlandoregon.gov",
+    "wetten.overheid.nl",
     "headed",
     "playwright",
     "storage-state",

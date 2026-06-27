@@ -61,7 +61,7 @@ _RAW_ARTIFACT_PATTERNS = (
 _LIVE_EXECUTION_PATTERNS = (
     re.compile(r"\b(?:I|we|agent)\s+(?:logged\s+in|signed\s+in|clicked|submitted|uploaded|paid|scheduled|cancelled|canceled|certified)\b.{0,80}\b(?:DevHub|portal|application|permit|inspection|fee)\b", re.IGNORECASE),
     re.compile(r"\b(?:live|real)\s+(?:LLM|DevHub|browser|portal|account)\s+(?:run|execution|session|login|automation)\b", re.IGNORECASE),
-    re.compile(r"\b(?:called|ran|queried)\s+(?:the\s+)?(?:live\s+)?(?:LLM|DevHub|Portland\s+DevHub)\b", re.IGNORECASE),
+    re.compile(r"\b(?:called|ran|queried)\s+(?:the\s+)?(?:live\s+)?(?:LLM|DevHub|Netherlands\s+DevHub)\b", re.IGNORECASE),
 )
 
 _REFUSAL_REQUIRED_PATTERNS = (
@@ -72,7 +72,7 @@ _REFUSAL_REQUIRED_PATTERNS = (
     *_LIVE_EXECUTION_PATTERNS,
 )
 
-_CITATION_MARKER_RE = re.compile(r"(?:\[[A-Za-z0-9_.:-]+\]|https://www\.portland\.gov/ppd/[^\s)]+|source_evidence_ids?|citation_ids?)", re.IGNORECASE)
+_CITATION_MARKER_RE = re.compile(r"(?:\[[A-Za-z0-9_.:-]+\]|https://www\.wetwijzer\.gov/ppd/[^\s)]+|source_evidence_ids?|citation_ids?)", re.IGNORECASE)
 
 
 @dataclass(frozen=True)

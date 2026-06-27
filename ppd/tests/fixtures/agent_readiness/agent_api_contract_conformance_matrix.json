@@ -37,7 +37,7 @@
           {
             "evidence_id": "evidence:apply-permits",
             "title": "Apply for permits",
-            "canonical_url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+            "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
             "source_type": "public_html",
             "last_verified_at": "2026-05-08T00:00:00Z",
             "freshness_status": "current",
@@ -60,7 +60,7 @@
           {
             "evidence_id": "evidence:devhub-faq-stale",
             "title": "DevHub FAQs",
-            "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+            "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
             "source_type": "devhub_public",
             "last_verified_at": "2026-04-01T00:00:00Z",
             "freshness_status": "stale",
@@ -88,7 +88,7 @@
           {
             "evidence_id": "evidence:single-pdf-process",
             "title": "Submit plans online",
-            "canonical_url": "https://www.portland.gov/ppd/get-permit/submit-plans-online",
+            "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/submit-plans-online",
             "source_type": "public_html",
             "last_verified_at": "2026-05-08T00:00:00Z",
             "freshness_status": "current",
@@ -117,7 +117,7 @@
           {
             "evidence_id": "evidence:devhub-submit-guide",
             "title": "DevHub permit application guide",
-            "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+            "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
             "source_type": "devhub_public",
             "last_verified_at": "2026-05-08T00:00:00Z",
             "freshness_status": "current",
@@ -145,7 +145,7 @@
           {
             "evidence_id": "evidence:devhub-sign-in-guide",
             "title": "DevHub account and sign-in guide",
-            "canonical_url": "https://www.portland.gov/ppd/devhub-sign-guide",
+            "canonical_url": "https://wetten.overheid.nl/ppd/devhub-sign-guide",
             "source_type": "devhub_public",
             "last_verified_at": "2026-05-08T00:00:00Z",
             "freshness_status": "current",

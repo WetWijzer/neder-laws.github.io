@@ -16,10 +16,10 @@ from urllib.parse import ParseResult, parse_qsl, urlencode, urlparse, urlunparse
 
 ALLOWED_PUBLIC_HOSTS: frozenset[str] = frozenset(
     {
-        "www.portland.gov",
-        "devhub.portlandoregon.gov",
-        "www.portlandoregon.gov",
-        "www.portlandmaps.com",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "wetten.overheid.nl",
+        "repository.overheid.nl",
     }
 )
 
@@ -177,7 +177,7 @@ def _skip_reason(parsed: ParseResult) -> str | None:
         return "unsupported_scheme"
     if host not in ALLOWED_PUBLIC_HOSTS:
         return "outside_allowlist"
-    if host == "www.portlandmaps.com" and "/advanced/" in path:
+    if host == "repository.overheid.nl" and "/advanced/" in path:
         return "private_or_authenticated"
     if any(marker in path for marker in PRIVATE_PATH_MARKERS):
         return "private_or_authenticated"
@@ -189,9 +189,9 @@ def _source_type(parsed: ParseResult) -> str:
     path = parsed.path.lower()
     if path.endswith(PDF_EXTENSIONS) or path.endswith("/download"):
         return "public_pdf"
-    if host == "devhub.portlandoregon.gov":
+    if host == "wetten.overheid.nl":
         return "devhub_public"
-    if host == "www.portlandmaps.com":
+    if host == "repository.overheid.nl":
         return "external_reference"
     return "public_html"
 

@@ -32,14 +32,14 @@ class LivePublicPreflightTests(unittest.TestCase):
             manifest = self.write_manifest(
                 Path(temp),
                 [
-                    "https://www.portland.gov/ppd",
-                    "https://www.portland.gov/ppd/permits",
-                    "https://www.portland.gov/ppd/residential-permits",
+                    "https://wetten.overheid.nl/ppd",
+                    "https://wetten.overheid.nl/ppd/permits",
+                    "https://wetten.overheid.nl/ppd/residential-permits",
                 ],
             )
             report = build_live_public_preflight_report(
                 seed_manifest_path=manifest,
-                robots_text_by_host={"www.portland.gov": "User-agent: *\nAllow: /ppd\n"},
+                robots_text_by_host={"wetten.overheid.nl": "User-agent: *\nAllow: /ppd\n"},
                 seed_limit=99,
                 timeout_seconds=7,
             )
@@ -51,24 +51,24 @@ class LivePublicPreflightTests(unittest.TestCase):
 
     def test_missing_robots_text_fails_closed(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
-            manifest = self.write_manifest(Path(temp), ["https://www.portland.gov/ppd"])
+            manifest = self.write_manifest(Path(temp), ["https://wetten.overheid.nl/ppd"])
             report = build_live_public_preflight_report(seed_manifest_path=manifest)
             self.assertEqual(report.eligible_count, 0)
             self.assertEqual(report.items[0].reason_code, "robots_required")
 
     def test_private_or_persisting_seed_is_not_eligible(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
-            manifest = self.write_manifest(Path(temp), ["https://devhub.portlandoregon.gov/my-permits/payment"])
+            manifest = self.write_manifest(Path(temp), ["https://wetten.overheid.nl/my-permits/payment"])
             private_report = build_live_public_preflight_report(
                 seed_manifest_path=manifest,
-                robots_text_by_host={"devhub.portlandoregon.gov": "User-agent: *\nAllow: /\n"},
+                robots_text_by_host={"wetten.overheid.nl": "User-agent: *\nAllow: /\n"},
             )
             self.assertFalse(private_report.items[0].eligible)
             self.assertEqual(private_report.items[0].reason_code, "private_or_authenticated")
 
             persist_report = build_live_public_preflight_report(
                 seed_manifest_path=manifest,
-                robots_text_by_host={"devhub.portlandoregon.gov": "User-agent: *\nAllow: /\n"},
+                robots_text_by_host={"wetten.overheid.nl": "User-agent: *\nAllow: /\n"},
                 no_persist=False,
             )
             self.assertFalse(persist_report.items[0].eligible)
@@ -77,7 +77,7 @@ class LivePublicPreflightTests(unittest.TestCase):
     def test_timeout_is_bounded_and_command_prints_json(self) -> None:
         self.assertEqual(bounded_timeout_seconds(999), MAX_TIMEOUT_SECONDS)
         with tempfile.TemporaryDirectory() as temp:
-            manifest = self.write_manifest(Path(temp), ["https://www.portland.gov/ppd"])
+            manifest = self.write_manifest(Path(temp), ["https://wetten.overheid.nl/ppd"])
             output = io.StringIO()
             with redirect_stdout(output):
                 code = main(
@@ -85,7 +85,7 @@ class LivePublicPreflightTests(unittest.TestCase):
                         "--seed-manifest",
                         str(manifest),
                         "--robots-json",
-                        json.dumps({"www.portland.gov": "User-agent: *\nAllow: /ppd\n"}),
+                        json.dumps({"wetten.overheid.nl": "User-agent: *\nAllow: /ppd\n"}),
                     ]
                 )
             self.assertEqual(code, 0)

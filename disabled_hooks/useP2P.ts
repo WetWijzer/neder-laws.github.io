@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { p2pService, P2PPlayerInfo } from '../services/p2pService';
-import type { GameId } from '../../convex/aiTown/ids';
+import type { GameId } from '../../convex/wetwijzer/ids';
 
 export interface P2PStatus {
   isConnected: boolean;

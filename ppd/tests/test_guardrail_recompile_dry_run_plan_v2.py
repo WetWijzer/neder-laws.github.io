@@ -22,7 +22,7 @@ FIXTURE_PATH = (
 
 FORBIDDEN_MUTATION_TARGETS = (
     "src/lib/logic/",
-    "public/corpus/portland-or/current/",
+    "public/corpus/wetwijzer-or/current/",
     "ipfs_datasets_py/.daemon/",
     "ppd/prompts/",
     "ppd/source_registries/active",

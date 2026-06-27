@@ -4,16 +4,16 @@
   "mode": "dry_run_only",
   "preflight_checklist_references": [
     "robots and allowlist policy checked before processor handoff",
-    "public-only Portland.gov and DevHub public portal references only",
+    "public-only wetten.overheid.nl and DevHub public portal references only",
     "no raw body persistence and no authenticated DevHub state"
   ],
   "source_registry_placeholder_rows": [
     {
       "source_id": "ppd-public-tools",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "source_type": "public_html",
       "owning_surface": "ppd_public_website",
-      "allowlist_policy": "portland-gov-public-only",
+      "allowlist_policy": "wetwijzer-gov-public-only",
       "robots_policy": "preflight-required",
       "crawl_frequency": "weekly",
       "processor_policy": "metadata-manifest-dry-run-only",
@@ -26,8 +26,8 @@
     {
       "manifest_id": "archive-placeholder-ppd-public-tools",
       "source_id": "ppd-public-tools",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
-      "requested_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
+      "requested_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "redirect_chain": [
         "placeholder-no-network-request-in-dry-run"
       ],

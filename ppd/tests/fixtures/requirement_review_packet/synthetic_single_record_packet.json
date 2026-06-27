@@ -6,7 +6,7 @@
     "created_for": "checkbox-37",
     "live_crawl_used": false,
     "authenticated_data_used": false,
-    "review_note": "Synthetic text only; not a City of Portland source."
+    "review_note": "Synthetic text only; not a WetWijzer source."
   },
   "normalized_document_record": {
     "document_id": "doc-synthetic-ppd-single-record-001",

@@ -13,7 +13,7 @@
 +      "id": "evidence-before-single-pdf-process",
 +      "snapshotId": "ppd-public-guidance-2026-05-01",
 +      "sourceId": "ppd-devhub-single-pdf-guide",
-+      "sourceUrl": "https://www.portland.gov/ppd/devhub/single-pdf-process",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/single-pdf-process",
 +      "anchorId": "single-pdf-process",
 +      "contentHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
 +      "evidenceText": "Drawing plans are submitted as one searchable PDF, with applications, calculations, and supporting documents submitted as separate PDFs."
@@ -22,7 +22,7 @@
 +      "id": "evidence-after-single-pdf-process",
 +      "snapshotId": "ppd-public-guidance-2026-05-02",
 +      "sourceId": "ppd-devhub-single-pdf-guide",
-+      "sourceUrl": "https://www.portland.gov/ppd/devhub/single-pdf-process",
++      "sourceUrl": "https://wetten.overheid.nl/ppd/devhub/single-pdf-process",
 +      "anchorId": "single-pdf-process-updated",
 +      "contentHash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
 +      "evidenceText": "Drawing plans must be uploaded as one searchable PDF, and applications, calculations, and supporting documents must be uploaded as separate PDFs."

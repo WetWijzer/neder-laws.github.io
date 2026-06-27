@@ -31,7 +31,7 @@ FORBIDDEN_KEYS = {
 FORBIDDEN_FRAGMENTS = (
     "/data/private/",
     "/data/raw/",
-    "devhub.portlandoregon.gov/secure",
+    "wetten.overheid.nl/secure",
     "storage_state",
     "trace.zip",
 )
@@ -48,7 +48,7 @@ class PublicPdfExtractionFixturesTest(unittest.TestCase):
 
         self.assertTrue(self.fixture["fixtureOnly"])
         self.assertEqual("https", parsed.scheme)
-        self.assertEqual("www.portland.gov", parsed.netloc)
+        self.assertEqual("wetten.overheid.nl", parsed.netloc)
         self.assertEqual("application/pdf", source["contentType"])
         self.assertIn("checksum", source)
         self.assertTrue(source["checksum"].startswith("sha256:"))
@@ -63,12 +63,12 @@ class PublicPdfExtractionFixturesTest(unittest.TestCase):
             self.assertIsInstance(anchor["pageNumber"], int)
             self.assertGreater(anchor["pageNumber"], 0)
             self.assertIn("#page=", anchor["sourceUrl"])
-            self.assertTrue(anchor["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
+            self.assertTrue(anchor["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
             self.assertTrue(anchor["snippet"].strip())
 
         for field in self.fixture["extractedFields"]:
             self.assertIn(field["pageAnchorId"], anchors)
-            self.assertTrue(field["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
+            self.assertTrue(field["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
             self.assertEqual("placeholder_only", field["valuePolicy"])
             self.assertTrue(field["redactedValue"].startswith("[REDACTED:"))
             self.assertTrue(field["redactedValue"].endswith("]"))

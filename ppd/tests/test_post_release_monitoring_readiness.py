@@ -70,7 +70,7 @@ def test_valid_fixture_is_ready() -> None:
         ),
         (
             lambda packet: packet.update(
-                {"download_url": "https://www.portland.gov/example/download"}
+                {"download_url": "https://wetten.overheid.nl/example/download"}
             ),
             "raw_body_download_or_archive_reference",
         ),

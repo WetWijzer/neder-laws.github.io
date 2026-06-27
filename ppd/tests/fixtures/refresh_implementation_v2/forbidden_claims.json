@@ -11,7 +11,7 @@
       "depends_on": ["source:public"],
       "rollback_notes": "Revert this row.",
       "reviewer_owner": "ppd-review",
-      "citations": ["docs/PORTLAND_PPD_SCRAPING_AUTOMATION_LOGIC_PLAN.md"],
+      "citations": ["docs/WETWIJZER_SOURCE_AUTOMATION_LOGIC_PLAN.md"],
       "notes": "Approval guaranteed. File the permit after reading the browser trace."
     }
   ]

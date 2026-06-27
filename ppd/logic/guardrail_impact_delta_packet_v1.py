@@ -131,7 +131,7 @@ _OFFICIAL_ACTION_COMPLETION_TERMS = (
 
 _NON_OFFLINE_COMMAND_TERMS = (
     "curl",
-    "devhub.portlandoregon.gov",
+    "wetten.overheid.nl",
     "playwright",
     "wget",
 )

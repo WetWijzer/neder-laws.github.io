@@ -65,10 +65,10 @@ _FORBIDDEN_KEYS = {
     "warc_path",
 }
 _ALLOWED_PUBLIC_HOSTS = {
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 _PRIVATE_URL_MARKERS = (
     "/account",

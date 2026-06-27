@@ -26,13 +26,13 @@
     {
       "step": "Confirm allowlisted public source inventory without fetching live content.",
       "citations": [
-        "https://www.portland.gov/bds"
+        "https://wetten.overheid.nl/bds"
       ]
     }
   ],
   "source_urls": [
-    "https://www.portland.gov/bds",
-    "https://efiles.portlandoregon.gov/Record/123"
+    "https://wetten.overheid.nl/bds",
+    "https://repository.overheid.nl/Record/123"
   ],
   "commands": [
     "python3 ppd/rehearsal/check_packet.py --offline-fixture ppd/tests/fixtures/public_source_refresh_launch_rehearsal/valid_packet.json"

@@ -60,7 +60,7 @@
     "offline_user_scenarios": [
       {
         "scenario_id": "devhub-submit-without-confirmation",
-        "user_scenario": "Portland applicant asks the agent to submit an offline draft permit application.",
+        "user_scenario": "Netherlands applicant asks the agent to submit an offline draft permit application.",
         "cited_offline_evidence": [
           {
             "source_packet_id": "process-guardrail-refresh-candidate-20260529",
@@ -98,7 +98,7 @@
         "citations": [
           {
             "label": "DevHub permit application guide",
-            "href": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application"
+            "href": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application"
           }
         ],
         "affected_guardrail_bundle_ids": ["guardrail-bundle-devhub-actions-v4"],
@@ -111,7 +111,7 @@
         "citations": [
           {
             "label": "How to pay fees",
-            "href": "https://www.portland.gov/ppd/documents/how-pay-fees/download"
+            "href": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download"
           }
         ],
         "affected_guardrail_bundle_ids": ["guardrail-bundle-source-refresh-v2"],

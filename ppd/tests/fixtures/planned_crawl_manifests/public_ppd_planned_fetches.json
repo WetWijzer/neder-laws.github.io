@@ -8,8 +8,8 @@
   "planned_fetches": [
     {
       "id": "ppd-home",
-      "url": "https://www.portland.gov/ppd",
-      "canonical_url": "https://www.portland.gov/ppd",
+      "url": "https://wetten.overheid.nl/ppd",
+      "canonical_url": "https://wetten.overheid.nl/ppd",
       "method": "GET",
       "expected_content_type": "text/html",
       "source_seed_id": "seed-ppd-home",
@@ -42,8 +42,8 @@
     },
     {
       "id": "devhub-public-home",
-      "url": "https://devhub.portlandoregon.gov/",
-      "canonical_url": "https://devhub.portlandoregon.gov/",
+      "url": "https://wetten.overheid.nl/",
+      "canonical_url": "https://wetten.overheid.nl/",
       "method": "GET",
       "expected_content_type": "text/html",
       "source_seed_id": "seed-devhub-public",
@@ -76,8 +76,8 @@
     },
     {
       "id": "devhub-private-path-skipped",
-      "url": "https://devhub.portlandoregon.gov/my/permits",
-      "canonical_url": "https://devhub.portlandoregon.gov/my/permits",
+      "url": "https://wetten.overheid.nl/my/permits",
+      "canonical_url": "https://wetten.overheid.nl/my/permits",
       "method": "GET",
       "expected_content_type": "text/html",
       "decision": "skipped",

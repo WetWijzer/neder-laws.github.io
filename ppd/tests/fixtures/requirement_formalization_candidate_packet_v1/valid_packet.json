@@ -7,7 +7,7 @@
   "candidate_rows": [
     {
       "candidate_id": "candidate-001",
-      "affected_source_id": "source-portland-code-title-33",
+      "affected_source_id": "source-wetwijzer-code-title-33",
       "affected_document_id": "document-zoning-code-chapter-33-110",
       "affected_requirement_id": "requirement-setback-001",
       "confidence": 0.82,
@@ -16,7 +16,7 @@
       "summary": "Candidate wording for reviewer assessment only.",
       "citations": [
         {
-          "source_id": "source-portland-code-title-33",
+          "source_id": "source-wetwijzer-code-title-33",
           "document_id": "document-zoning-code-chapter-33-110",
           "locator": "33.110.220"
         }

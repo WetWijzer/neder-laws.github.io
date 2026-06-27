@@ -15,10 +15,10 @@ MODULE_PURPOSE = "validation_only_source_coverage_gap_report"
 SCHEMA_VERSION = 1
 
 _ALLOWED_HOSTS = {
-    "www.portland.gov",
-    "devhub.portlandoregon.gov",
-    "www.portlandoregon.gov",
-    "www.portlandmaps.com",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "wetten.overheid.nl",
+    "repository.overheid.nl",
 }
 
 _PRIVATE_PATH_MARKERS = (

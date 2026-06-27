@@ -228,7 +228,7 @@ async switchModel(modelName: string): Promise<void> {
 - **LaMini-GPT**: 2GB+ system RAM recommended
 - **DistilGPT-2**: 512MB+ system RAM minimum
 
-## 🎮 Integration with AI Town
+## 🎮 Integration with WetWijzer
 
 ### NPC Conversation System
 ```typescript

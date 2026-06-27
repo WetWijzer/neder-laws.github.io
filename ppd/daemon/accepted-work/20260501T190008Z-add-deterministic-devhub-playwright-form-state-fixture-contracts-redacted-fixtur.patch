@@ -59,8 +59,8 @@
 +        parsed = urlparse(self.stable_url)
 +        if parsed.scheme != "https":
 +            errors.append("urlState.stableUrl must be an HTTPS URL")
-+        if parsed.netloc != "devhub.portlandoregon.gov":
-+            errors.append("urlState.stableUrl must stay on devhub.portlandoregon.gov")
++        if parsed.netloc != "wetten.overheid.nl":
++            errors.append("urlState.stableUrl must stay on wetten.overheid.nl")
 +        if parsed.fragment:
 +            errors.append("urlState.stableUrl must not include a fragment")
 +        if not self.state_name.strip():
@@ -239,7 +239,7 @@
 +  "formStateId": "devhub-trade-plan-review-project-info",
 +  "formHeading": "Project information",
 +  "urlState": {
-+    "stableUrl": "https://devhub.portlandoregon.gov/permit-requests/trade-plan-review/project-information",
++    "stableUrl": "https://wetten.overheid.nl/permit-requests/trade-plan-review/project-information",
 +    "stateName": "trade_plan_review_project_information",
 +    "path": "/permit-requests/trade-plan-review/project-information",
 +    "queryState": "[REDACTED]"
@@ -253,7 +253,7 @@
 +        "role": "textbox",
 +        "nearbyHeading": "Project information",
 +        "urlState": {
-+          "stableUrl": "https://devhub.portlandoregon.gov/permit-requests/trade-plan-review/project-information",
++          "stableUrl": "https://wetten.overheid.nl/permit-requests/trade-plan-review/project-information",
 +          "stateName": "trade_plan_review_project_information",
 +          "path": "/permit-requests/trade-plan-review/project-information",
 +          "queryState": "[REDACTED]"
@@ -275,7 +275,7 @@
 +        "role": "textbox",
 +        "nearbyHeading": "Site information",
 +        "urlState": {
-+          "stableUrl": "https://devhub.portlandoregon.gov/permit-requests/trade-plan-review/project-information",
++          "stableUrl": "https://wetten.overheid.nl/permit-requests/trade-plan-review/project-information",
 +          "stateName": "trade_plan_review_project_information",
 +          "path": "/permit-requests/trade-plan-review/project-information",
 +          "queryState": "[REDACTED]"
@@ -297,7 +297,7 @@
 +        "role": "combobox",
 +        "nearbyHeading": "Permit request type",
 +        "urlState": {
-+          "stableUrl": "https://devhub.portlandoregon.gov/permit-requests/trade-plan-review/project-information",
++          "stableUrl": "https://wetten.overheid.nl/permit-requests/trade-plan-review/project-information",
 +          "stateName": "trade_plan_review_project_information",
 +          "path": "/permit-requests/trade-plan-review/project-information",
 +          "queryState": "[REDACTED]"
@@ -318,7 +318,7 @@
 +        "role": "checkbox",
 +        "nearbyHeading": "Applicant information",
 +        "urlState": {
-+          "stableUrl": "https://devhub.portlandoregon.gov/permit-requests/trade-plan-review/project-information",
++          "stableUrl": "https://wetten.overheid.nl/permit-requests/trade-plan-review/project-information",
 +          "stateName": "trade_plan_review_project_information",
 +          "path": "/permit-requests/trade-plan-review/project-information",
 +          "queryState": "[REDACTED]"

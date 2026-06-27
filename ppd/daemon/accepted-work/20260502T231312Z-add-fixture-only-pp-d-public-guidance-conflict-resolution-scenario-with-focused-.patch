@@ -18,7 +18,7 @@
 +      "sourceId": "ppd-guidance-single-pdf-process-page",
 +      "sourceType": "public_guidance_page",
 +      "title": "Single PDF Process guidance",
-+      "url": "https://www.portland.gov/ppd/permit-review-process/single-pdf-process",
++      "url": "https://wetten.overheid.nl/ppd/permit-review-process/single-pdf-process",
 +      "capturedAt": "2026-05-01T12:00:00Z",
 +      "citation": {
 +        "anchor": "#single-pdf-process-overview",
@@ -50,8 +50,8 @@
 +    {
 +      "sourceId": "ppd-guidance-devhub-application-guide",
 +      "sourceType": "public_guidance_page",
-+      "title": "Apply for permits through Development Hub PDX",
-+      "url": "https://www.portland.gov/ppd/apply-permit-development-hub-pdx",
++      "title": "Apply for permits through Development Hub Netherlands",
++      "url": "https://wetten.overheid.nl/ppd/apply-permit-development-hub-netherlands",
 +      "capturedAt": "2026-05-01T12:05:00Z",
 +      "citation": {
 +        "anchor": "#upload-documents",
@@ -155,7 +155,7 @@
 +            url = _required_text(source, "url")
 +            parsed = urlparse(url)
 +            self.assertEqual(parsed.scheme, "https")
-+            self.assertEqual(parsed.netloc, "www.portland.gov")
++            self.assertEqual(parsed.netloc, "wetten.overheid.nl")
 +            self.assertTrue(parsed.path.startswith("/ppd/"))
 +
 +            citation = _required_mapping(source, "citation")

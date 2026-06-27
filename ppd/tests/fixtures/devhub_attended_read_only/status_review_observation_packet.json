@@ -37,7 +37,7 @@
   "accessible_structure_surface_map": {
     "section_id": "accessible-structure-surface-map",
     "surface_id": "devhub-status-review-synthetic",
-    "url_pattern": "https://devhub.portlandoregon.gov/*",
+    "url_pattern": "https://wetten.overheid.nl/*",
     "page_heading_expectations": [
       "Dashboard",
       "Permits",

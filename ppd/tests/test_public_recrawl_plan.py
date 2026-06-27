@@ -37,7 +37,7 @@ def test_rejects_live_network_flags() -> None:
 
 def test_rejects_private_or_authenticated_urls() -> None:
     plan = load_valid_plan()
-    plan["targets"][0]["url"] = "https://devhub.portlandoregon.gov/account/dashboard?token=secret"
+    plan["targets"][0]["url"] = "https://wetten.overheid.nl/account/dashboard?token=secret"
 
     assert "private_or_authenticated_url" in issue_codes(plan)
 

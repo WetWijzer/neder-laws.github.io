@@ -15,7 +15,7 @@ def valid_preview() -> dict[str, object]:
         "inactive_patch_preview_rows": [
             {
                 "source_id": "ppd-devhub-faq",
-                "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+                "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
                 "disposition": "inactive_patch_preview",
                 "reason": "deterministic fixture preview only",
             }

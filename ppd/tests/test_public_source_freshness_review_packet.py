@@ -69,7 +69,7 @@ def test_decisions_preserve_source_ids_cadence_notes_prerequisites_and_defer_rea
     }
     assert devhub["prerequisite_robots_policy_evidence_ids"] == [
         "policy-prereq-ppd-public-metadata-only-20260528",
-        "robots-prereq-portland-gov-20260528",
+        "robots-prereq-wetwijzer-gov-20260528",
     ]
     assert "post-release-audit-not-production-ready" in devhub["defer_reason_ids"]
     assert "schedule-candidate-abort-conditions-require-review" in devhub["defer_reason_ids"]

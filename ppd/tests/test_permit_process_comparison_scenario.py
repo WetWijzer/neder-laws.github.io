@@ -88,7 +88,7 @@ class PermitProcessComparisonScenarioTest(unittest.TestCase):
         for marker in FORBIDDEN_MARKERS:
             self.assertNotIn(marker, serialized)
         for evidence in self.fixture["sourceEvidence"]:
-            self.assertTrue(evidence["sourceUrl"].startswith("https://www.portland.gov/ppd/"))
+            self.assertTrue(evidence["sourceUrl"].startswith("https://wetten.overheid.nl/ppd/"))
             self.assertTrue(evidence["citation"]["locator"])
             self.assertTrue(evidence["citation"]["paraphrase"])
 

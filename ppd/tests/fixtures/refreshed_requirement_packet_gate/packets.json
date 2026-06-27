@@ -2,7 +2,7 @@
   "valid_packet": {
     "records": [
       {
-        "canonical_url": "https://www.portland.gov/ppd/permits/sample-trade-permit",
+        "canonical_url": "https://wetten.overheid.nl/ppd/permits/sample-trade-permit",
         "previous_source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
         "refreshed_source_hash": "1111111111111111111111111111111111111111111111111111111111111111",
         "current_source_hash": "1111111111111111111111111111111111111111111111111111111111111111",
@@ -30,7 +30,7 @@
   "invalid_packet": {
     "records": [
       {
-        "canonical_url": "https://www.portland.gov/ppd/permits/sample-trade-permit",
+        "canonical_url": "https://wetten.overheid.nl/ppd/permits/sample-trade-permit",
         "previous_source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
         "refreshed_source_hash": "2222222222222222222222222222222222222222222222222222222222222222",
         "current_source_hash": "3333333333333333333333333333333333333333333333333333333333333333",

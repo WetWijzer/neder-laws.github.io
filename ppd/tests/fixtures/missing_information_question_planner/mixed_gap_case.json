@@ -21,7 +21,7 @@
         "fact_id": "property_address",
         "label": "property address",
         "process_stage": "pre-application research",
-        "source_evidence_ids": ["src-portlandmaps-property-lookup"],
+        "source_evidence_ids": ["src-wetwijzermaps-property-lookup"],
         "candidate_value": "123 Example Ave"
       }
     ],

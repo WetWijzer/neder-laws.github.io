@@ -27,11 +27,11 @@
         "handoff_mode": "metadata_manifest_only"
       },
       "request": {
-        "requested_url": "https://www.portland.gov/ppd/synthetic-public-capture",
+        "requested_url": "https://wetten.overheid.nl/ppd/synthetic-public-capture",
         "method": "GET"
       },
       "redirect_metadata": {
-        "final_url": "https://www.portland.gov/ppd/synthetic-public-capture",
+        "final_url": "https://wetten.overheid.nl/ppd/synthetic-public-capture",
         "redirect_count": 0,
         "redirect_chain": []
       },
@@ -80,16 +80,16 @@
         "handoff_mode": "metadata_manifest_only"
       },
       "request": {
-        "requested_url": "https://www.portland.gov/ppd/documents/synthetic-public-form/download",
+        "requested_url": "https://wetten.overheid.nl/ppd/documents/synthetic-public-form/download",
         "method": "GET"
       },
       "redirect_metadata": {
-        "final_url": "https://www.portland.gov/ppd/documents/synthetic-public-form/download",
+        "final_url": "https://wetten.overheid.nl/ppd/documents/synthetic-public-form/download",
         "redirect_count": 1,
         "redirect_chain": [
           {
-            "from_url": "https://www.portland.gov/ppd/synthetic-public-form.pdf",
-            "to_url": "https://www.portland.gov/ppd/documents/synthetic-public-form/download",
+            "from_url": "https://wetten.overheid.nl/ppd/synthetic-public-form.pdf",
+            "to_url": "https://wetten.overheid.nl/ppd/documents/synthetic-public-form/download",
             "http_status": 302
           }
         ]

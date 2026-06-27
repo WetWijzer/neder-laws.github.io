@@ -48,7 +48,7 @@
 +        for page in pages:
 +            self.assertEqual(page.get("stateKind"), "devhub_draft_page")
 +            self.assertEqual(page.get("valuePolicy"), "redacted_values_only")
-+            self.assertTrue(str(page.get("url", "")).startswith("https://devhub.portlandoregon.gov/"))
++            self.assertTrue(str(page.get("url", "")).startswith("https://wetten.overheid.nl/"))
 +            self.assertNotIn("storage_state", json.dumps(page).lower())
 +            self.assertNotIn("cookie", json.dumps(page).lower())
 +
@@ -116,7 +116,7 @@
 +    {
 +      "pageId": "devhub-draft-project-info",
 +      "stateKind": "devhub_draft_page",
-+      "url": "https://devhub.portlandoregon.gov/",
++      "url": "https://wetten.overheid.nl/",
 +      "heading": "Project Information",
 +      "valuePolicy": "redacted_values_only",
 +      "availableActions": [
@@ -185,7 +185,7 @@
 +    {
 +      "pageId": "devhub-draft-contact-info",
 +      "stateKind": "devhub_draft_page",
-+      "url": "https://devhub.portlandoregon.gov/",
++      "url": "https://wetten.overheid.nl/",
 +      "heading": "Applicant Contact",
 +      "valuePolicy": "redacted_values_only",
 +      "availableActions": [

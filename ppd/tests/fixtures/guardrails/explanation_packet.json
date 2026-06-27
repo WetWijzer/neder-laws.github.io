@@ -26,7 +26,7 @@
       "citations": [
         {
           "source_id": "ppd-devhub-submit-guide",
-          "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+          "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
           "title": "DevHub permit application guide",
           "evidence_label": "Guide describes permit request application and submission workflow.",
           "last_verified_at": "2026-05-08"
@@ -49,7 +49,7 @@
       "citations": [
         {
           "source_id": "ppd-devhub-submit-guide",
-          "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+          "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
           "title": "DevHub permit application guide",
           "evidence_label": "Guide includes acknowledgement and application flow checkpoints.",
           "last_verified_at": "2026-05-08"
@@ -72,7 +72,7 @@
       "citations": [
         {
           "source_id": "ppd-devhub-submit-guide",
-          "canonical_url": "https://www.portland.gov/ppd/devhub-guide-submit-permit-application",
+          "canonical_url": "https://wetten.overheid.nl/ppd/devhub-guide-submit-permit-application",
           "title": "DevHub permit application guide",
           "evidence_label": "Guide describes dynamic application questions and save-for-later style workflow behavior.",
           "last_verified_at": "2026-05-08"
@@ -95,14 +95,14 @@
       "citations": [
         {
           "source_id": "ppd-online-permitting-tools",
-          "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+          "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
           "title": "Online permitting tools overview",
           "evidence_label": "Overview links DevHub trade permit and online permitting guidance.",
           "last_verified_at": "2026-05-08"
         },
         {
           "source_id": "ppd-devhub-faq",
-          "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+          "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
           "title": "DevHub FAQ",
           "evidence_label": "FAQ describes account-scoped permit services and trade permit workflows.",
           "last_verified_at": "2026-05-08"
@@ -125,7 +125,7 @@
       "citations": [
         {
           "source_id": "ppd-fee-payment-guide",
-          "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+          "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
           "title": "How to pay fees guide",
           "evidence_label": "Guide covers fee payment workflow and final payment behavior.",
           "last_verified_at": "2026-05-08"
@@ -148,7 +148,7 @@
       "citations": [
         {
           "source_id": "ppd-apply-permits",
-          "canonical_url": "https://www.portland.gov/ppd/get-permit/apply-permits",
+          "canonical_url": "https://wetten.overheid.nl/ppd/get-permit/apply-permits",
           "title": "Apply for permits",
           "evidence_label": "Official permit application guidance distinguishes paths for permit requests.",
           "last_verified_at": "2026-05-08"

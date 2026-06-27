@@ -10,8 +10,8 @@ export default function P2PDemo() {
       color: 'white',
       fontFamily: 'system-ui, -apple-system, sans-serif'
     }}>
-      <h1>AI Town - P2P Player Discovery Demo</h1>
-      <p>This demonstrates the P2P player discovery interface that has been added to AI Town.</p>
+      <h1>WetWijzer - P2P Player Discovery Demo</h1>
+      <p>This demonstrates the P2P player discovery interface that has been added to WetWijzer.</p>
       
       <div style={{
         marginTop: '20px',

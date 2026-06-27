@@ -14,7 +14,7 @@
   "sources": [
     {
       "source_id": "ppd-online-tools-overview",
-      "canonical_url": "https://www.portland.gov/ppd/how-use-online-permitting-tools",
+      "canonical_url": "https://wetten.overheid.nl/ppd/how-use-online-permitting-tools",
       "operator_owner": "ppd-public-refresh-operator",
       "reviewer_owner": "ppd-public-refresh-reviewer",
       "citations": [
@@ -24,7 +24,7 @@
     },
     {
       "source_id": "ppd-fee-payment-guide",
-      "canonical_url": "https://www.portland.gov/ppd/documents/how-pay-fees/download",
+      "canonical_url": "https://wetten.overheid.nl/ppd/documents/how-pay-fees/download",
       "operator_owner": "ppd-public-refresh-operator",
       "reviewer_owner": "ppd-public-refresh-reviewer",
       "citations": [

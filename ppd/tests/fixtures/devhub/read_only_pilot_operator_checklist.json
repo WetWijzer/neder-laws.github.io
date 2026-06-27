@@ -27,7 +27,7 @@
     },
     {
       "step_id": "login_attendance_handoff",
-      "manual_action": "The operator opens DevHub in their own browser, completes PortlandOregon.gov login, and handles credentials, MFA, CAPTCHA, or security prompts manually while remaining present.",
+      "manual_action": "The operator opens DevHub in their own browser, completes wetten.overheid.nl login, and handles credentials, MFA, CAPTCHA, or security prompts manually while remaining present.",
       "requires_operator_attendance": true,
       "automated": false,
       "playwright_allowed": false,

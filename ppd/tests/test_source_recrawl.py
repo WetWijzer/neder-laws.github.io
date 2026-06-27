@@ -53,7 +53,7 @@ def test_raw_body_fields_are_rejected() -> None:
         source_recrawl_decision(
             {
                 "source_id": "ppd:public:bad-raw-fixture",
-                "canonical_url": "https://www.portland.gov/ppd",
+                "canonical_url": "https://wetten.overheid.nl/ppd",
                 "crawl_frequency": "daily",
                 "last_seen_at": "2026-05-01T00:00:00Z",
                 "no_raw_body_persisted": True,
@@ -68,7 +68,7 @@ def test_source_ids_must_be_citation_ready() -> None:
         source_recrawl_decision(
             {
                 "source_id": "DevHub FAQ",
-                "canonical_url": "https://www.portland.gov/ppd/devhub-faqs",
+                "canonical_url": "https://wetten.overheid.nl/ppd/devhub-faqs",
                 "crawl_frequency": "daily",
                 "last_seen_at": "2026-05-01T00:00:00Z",
                 "no_raw_body_persisted": True,
@@ -82,7 +82,7 @@ def test_no_raw_body_persistence_must_be_explicitly_preserved_when_false_is_seen
         source_recrawl_decision(
             {
                 "source_id": "ppd:public:false-no-raw-guarantee",
-                "canonical_url": "https://www.portland.gov/ppd",
+                "canonical_url": "https://wetten.overheid.nl/ppd",
                 "crawl_frequency": "daily",
                 "last_seen_at": "2026-05-01T00:00:00Z",
                 "no_raw_body_persisted": False,
