@@ -442,8 +442,18 @@ function Header({
   manifest: WetWijzerCorpusManifest | null;
   sectionCount: number;
 }) {
+  const counts = manifest?.counts;
+  const totalArticles = counts?.articles ?? sectionCount;
+  const totalLaws = counts?.laws;
+  const release = manifest?.backend?.release ? ` · release ${manifest.backend.release.slice(0, 8)}` : '';
+  const providerLabel = manifest?.provider === 'huggingface' ? 'Hugging Face datasets' : 'local sample fallback';
   const dataSummary = manifest
-    ? `${sectionCount.toLocaleString()} articles · ${manifest.artifacts.length} dataset artifacts · refreshed ${formatDate(manifest.generatedAt)}`
+    ? [
+        totalLaws ? `${totalLaws.toLocaleString()} laws` : '',
+        `${totalArticles.toLocaleString()} articles`,
+        counts?.cidRows ? `${counts.cidRows.toLocaleString()} CID rows` : '',
+        `updated ${formatDate(manifest.generatedAt)}${release}`,
+      ].filter(Boolean).join(' · ')
     : 'Loading WetWijzer Netherlands law dataset';
 
   return (
@@ -460,8 +470,8 @@ function Header({
             Search Dutch laws with status labels, graph context, and cited answers.
           </p>
           <p className="mt-2 hidden max-w-3xl text-base leading-7 text-[#43534d] sm:block">
-            Browse a quality-audited partial Dutch legal corpus from official sources, with client-side
-            search, chat, knowledge graph context, and logic proof helpers.
+            Query the published Netherlands legal corpus, BM25 index, vector index, and knowledge graph,
+            with client-side chat and logic proof helpers layered in.
           </p>
           <p className="mt-2 max-w-4xl text-sm leading-6 text-[#6a5842]">
             WetWijzer is legal information, not legal advice. Laws may be current, historical, repealed,
@@ -470,6 +480,11 @@ function Header({
           <p aria-label="Loaded corpus version" className="mt-2 text-sm font-semibold text-[#24594f]">
             {dataSummary}
           </p>
+          {manifest && (
+            <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-[#607068]">
+              Source: {providerLabel}
+            </p>
+          )}
         </div>
       </div>
     </header>
@@ -1371,36 +1386,85 @@ function ResultCard({
   selected: boolean;
   onSelect: () => void;
 }) {
+  const section = result.section;
+  const recordCid = getRecordCid(section);
+  const lawCid = section.law_cid || '';
+  const bm25Score = result.scoreParts.bm25 ?? result.scoreParts.keyword;
+  const vectorScore = result.scoreParts.vector;
+  const graphScore = result.scoreParts.graph ?? 0;
+
   return (
-    <button
-      type="button"
-      onClick={onSelect}
-      aria-pressed={selected}
-      aria-label={`Select ${result.citation}: ${result.section.title}`}
-      className={`block min-h-12 w-full rounded-md border bg-white p-4 text-left shadow-sm transition hover:border-[#49635a] ${
+    <article
+      className={`rounded-md border bg-white shadow-sm transition hover:border-[#49635a] ${
         selected ? 'border-[#24594f] ring-2 ring-[#24594f]/15' : 'border-[#dde3d8]'
       }`}
+      aria-current={selected ? 'true' : undefined}
     >
-      <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <p className="text-sm font-semibold text-[#24594f]">{result.citation}</p>
-          <h3 className="mt-1 text-base font-semibold leading-snug text-[#172026] [overflow-wrap:anywhere]">
-            {result.section.title}
-          </h3>
+      <button
+        type="button"
+        onClick={onSelect}
+        aria-pressed={selected}
+        aria-label={`Select ${result.citation}: ${section.title}`}
+        className="block min-h-12 w-full p-4 text-left"
+      >
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-sm font-semibold text-[#24594f]">{result.citation}</p>
+            <h3 className="mt-1 text-base font-semibold leading-snug text-[#172026] [overflow-wrap:anywhere]">
+              {section.title}
+            </h3>
+          </div>
+          <div className="flex shrink-0 flex-col items-end gap-2">
+            <span
+              className={`rounded-md px-2 py-1 text-xs font-semibold ${
+                selected ? 'bg-[#24594f] text-white' : 'border border-[#8fa08a] bg-white text-[#24594f]'
+              }`}
+            >
+              {selected ? 'Selected' : 'Open article'}
+            </span>
+          </div>
         </div>
-        <div className="flex shrink-0 flex-col items-end gap-2">
-          <span
-            className={`rounded-md px-2 py-1 text-xs font-semibold ${
-              selected ? 'bg-[#24594f] text-white' : 'border border-[#8fa08a] bg-white text-[#24594f]'
-            }`}
-          >
-            {selected ? 'Selected' : 'Open article'}
-          </span>
-        </div>
-      </div>
 
-      <ResultSnippet snippet={result.snippet} />
-    </button>
+        <ResultSnippet snippet={result.snippet} />
+
+        <div className="mt-3 flex flex-wrap gap-2" aria-label="Result metadata">
+          <ResultMetaBadge label="Status" value={formatLawStatusForDisplay(section.law_status)} />
+          <ResultMetaBadge label="Jurisdiction" value={section.jurisdiction || 'Netherlands'} />
+          <ResultMetaBadge label="CID" value={formatCidForDisplay(recordCid)} />
+          <ResultMetaBadge label="Score" value={formatScoreValue(result.score)} />
+          <ResultMetaBadge label="BM25" value={formatScoreValue(bm25Score)} />
+          <ResultMetaBadge label="Vector" value={formatScoreValue(vectorScore)} />
+          <ResultMetaBadge label="Graph" value={formatScoreValue(graphScore)} />
+          {proof && <ResultMetaBadge label="Logic" value={formatResultProofStatusForBadge(proof.fol_status)} />}
+        </div>
+      </button>
+
+      <div className="flex flex-wrap items-center gap-2 border-t border-[#eef2ea] px-4 pb-3 pt-2 text-xs text-[#607068]">
+        {section.source_url && (
+          <a
+            href={section.source_url}
+            target="_blank"
+            rel="noreferrer"
+            className="font-semibold text-[#24594f] underline-offset-2 hover:underline"
+          >
+            Official source
+          </a>
+        )}
+        {recordCid && (
+          <span className="font-mono [overflow-wrap:anywhere]">{getIpfsUri(recordCid)}</span>
+        )}
+        {lawCid && <span className="font-mono [overflow-wrap:anywhere]">law {formatCidForDisplay(lawCid)}</span>}
+      </div>
+    </article>
+  );
+}
+
+function ResultMetaBadge({ label, value }: { label: string; value: string }) {
+  return (
+    <span className="inline-flex max-w-full items-center gap-1 rounded-md border border-[#d4ddd0] bg-[#f8faf5] px-2 py-1 text-xs text-[#52615c]">
+      <span className="font-semibold text-[#24594f]">{label}</span>
+      <span className="truncate">{value}</span>
+    </span>
   );
 }
 
@@ -1492,6 +1556,53 @@ function formatLawStatusForDisplay(status?: CorpusSection['law_status']) {
   if (status === 'repealed') return 'Repealed law';
   if (status === 'superseded') return 'Superseded law';
   return 'Unknown status';
+}
+
+function getRecordCid(section: CorpusSection): string {
+  return section.cid || section.ipfs_cid || '';
+}
+
+function getIpfsUri(cid?: string | null): string {
+  return cid ? `ipfs://${cid.replace(/^ipfs:\/\//, '')}` : '';
+}
+
+function formatCidForDisplay(cid?: string | null): string {
+  const normalized = cid?.replace(/^ipfs:\/\//, '') || '';
+  if (!normalized) return 'Not listed';
+  if (normalized.length <= 24) return normalized;
+  return `${normalized.slice(0, 12)}...${normalized.slice(-8)}`;
+}
+
+function formatScoreValue(value?: number): string {
+  if (typeof value !== 'number' || !Number.isFinite(value)) return '0';
+  if (Math.abs(value) >= 100) return value.toFixed(0);
+  if (Math.abs(value) >= 1) return value.toFixed(2);
+  return value.toFixed(3);
+}
+
+function formatMetadataDate(value?: string | null): string {
+  if (!value) return 'Not listed';
+  return value;
+}
+
+function formatHierarchyValue(label?: string | null, number?: string | null): string {
+  const cleanedLabel = label?.trim() || '';
+  const cleanedNumber = number?.trim() || '';
+  if (cleanedLabel && cleanedNumber && !cleanedLabel.includes(cleanedNumber)) {
+    return `${cleanedNumber} - ${cleanedLabel}`;
+  }
+  return cleanedLabel || cleanedNumber || 'Not listed';
+}
+
+function buildHierarchyFacts(section: CorpusSection): Array<{ label: string; value: string }> {
+  return [
+    { label: 'Boek', value: formatHierarchyValue(section.book_label, section.book_number) },
+    { label: 'Titel', value: formatHierarchyValue(section.title_label, section.title_number) },
+    { label: 'Hoofdstuk', value: formatHierarchyValue(section.chapter_label, section.chapter_number || section.chapter) },
+    { label: 'Afdeling', value: formatHierarchyValue(section.division_label, section.division_number) },
+    { label: 'Paragraaf', value: formatHierarchyValue(section.paragraph_label, section.paragraph_number) },
+    { label: 'Artikel', value: formatHierarchyValue(section.article_label || section.article_heading, section.article_number) },
+  ];
 }
 
 function formatLogicStatusForDisplay(status: string) {
@@ -1988,6 +2099,9 @@ function SectionReader({
   const plainSummary = summarizeSectionForAtAGlance(blocks, section);
   const chapterNumber = getChapterNumber(section);
   const statusLabel = formatLawStatusForDisplay(section.law_status);
+  const recordCid = getRecordCid(section);
+  const lawCid = section.law_cid || '';
+  const hierarchyFacts = buildHierarchyFacts(section);
   const statusDetail = [
     section.is_current === true ? 'current version' : section.is_current === false ? 'not current' : 'current status unknown',
     section.valid_from ? `valid from ${section.valid_from}` : '',
@@ -2065,8 +2179,68 @@ function SectionReader({
               <AtAGlanceFact label="Citation" value={section.bluebook_citation || section.official_cite || section.identifier} />
               <AtAGlanceFact label="Article group" value={chapterNumber || 'Not listed'} />
               <AtAGlanceFact label="Status source" value={section.status_source || 'Not listed'} />
+              <AtAGlanceFact label="CID" value={formatCidForDisplay(recordCid)} />
             </dl>
           </div>
+        </section>
+        <section
+          className="mb-4 rounded-md border border-[#dce3d6] bg-white px-3 py-3 sm:px-4"
+          aria-label="Identifiers and version metadata"
+        >
+          <div className="text-xs font-semibold uppercase tracking-wide text-[#607068]">
+            Identifiers and version
+          </div>
+          <dl className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
+            <AtAGlanceFact label="Article CID" value={formatCidForDisplay(recordCid)} />
+            <AtAGlanceFact label="Law CID" value={formatCidForDisplay(lawCid)} />
+            <AtAGlanceFact label="Article ID" value={section.article_identifier || section.identifier || 'Not listed'} />
+            <AtAGlanceFact label="Law ID" value={section.law_identifier || section.law_id || 'Not listed'} />
+            <AtAGlanceFact label="Effective date" value={formatMetadataDate(section.effective_date)} />
+            <AtAGlanceFact label="Valid from" value={formatMetadataDate(section.valid_from)} />
+            <AtAGlanceFact label="Valid to" value={formatMetadataDate(section.valid_to)} />
+            <AtAGlanceFact label="Version start" value={formatMetadataDate(section.version_start_date)} />
+            <AtAGlanceFact label="Version end" value={formatMetadataDate(section.version_end_date)} />
+            <AtAGlanceFact label="Status confidence" value={String(section.status_confidence ?? 'Not listed')} />
+          </dl>
+          {section.status_note && (
+            <p className="mt-3 rounded-md border border-[#d6c28e] bg-[#fff9e8] px-3 py-2 text-sm leading-6 text-[#735b18]">
+              {section.status_note}
+            </p>
+          )}
+          <div className="mt-3 flex flex-wrap gap-2 text-xs">
+            {recordCid && (
+              <a
+                href={getIpfsUri(recordCid)}
+                className="font-mono font-semibold text-[#24594f] underline-offset-2 hover:underline [overflow-wrap:anywhere]"
+              >
+                {getIpfsUri(recordCid)}
+              </a>
+            )}
+            {lawCid && (
+              <a
+                href={getIpfsUri(lawCid)}
+                className="font-mono font-semibold text-[#24594f] underline-offset-2 hover:underline [overflow-wrap:anywhere]"
+              >
+                law {getIpfsUri(lawCid)}
+              </a>
+            )}
+          </div>
+        </section>
+        <section
+          className="mb-4 rounded-md border border-[#dce3d6] bg-[#f8faf5] px-3 py-3 sm:px-4"
+          aria-label="Legal hierarchy"
+        >
+          <div className="text-xs font-semibold uppercase tracking-wide text-[#607068]">Hierarchy</div>
+          {section.hierarchy_path_text && (
+            <p className="mt-2 text-sm leading-6 text-[#26343a] [overflow-wrap:anywhere]">
+              {section.hierarchy_path_text}
+            </p>
+          )}
+          <dl className="mt-3 grid gap-2 text-sm sm:grid-cols-2 lg:grid-cols-3">
+            {hierarchyFacts.map((fact) => (
+              <AtAGlanceFact key={fact.label} label={fact.label} value={fact.value} />
+            ))}
+          </dl>
         </section>
         <div className="grid gap-3" aria-label="Article text">
           {blocks.map((block, index) => (
@@ -2645,7 +2819,7 @@ function sectionToResult(section: CorpusSection): SearchResult {
     ipfs_cid: section.ipfs_cid,
     section,
     score: 0,
-    scoreParts: { keyword: 0, vector: 0, title: 0, citation: 0 },
+    scoreParts: { keyword: 0, vector: 0, title: 0, citation: 0, bm25: 0, graph: 0 },
     snippet: section.text.replace(/\s+/g, ' ').slice(0, 320),
     citation: section.bluebook_citation || section.official_cite || section.identifier,
   };

@@ -1,6 +1,6 @@
 # WetWijzer
 
-WetWijzer is a Netherlands-focused legal information and search site. It provides a static React interface for browsing and querying a quality-audited partial Dutch legal corpus with cited evidence, knowledge graph context, local search, and law status metadata.
+WetWijzer is a Netherlands-focused legal information and search site. It is a thin React frontend over the published Dutch legal corpus, BM25 index, vector index, and JSON-LD knowledge graph, with cited evidence, CID lookup, graph context, and law status metadata.
 
 WetWijzer is not legal advice. Laws and articles may be labeled `current`, `historical`, `repealed`, `superseded`, or `unknown` based on parsed official metadata. Always verify the official text, version, and legal effect on [wetten.overheid.nl](https://wetten.overheid.nl/).
 
@@ -21,15 +21,17 @@ Official source references include:
 - Official BWB/SRU metadata where available
 - Official `/informatie` pages for law status and version metadata
 
-The currently referenced published corpus is a quality-audited partial Dutch corpus, not a claimed full Dutch corpus. Project metadata records the audited package size as 4,999 laws, 89,737 articles, and 94,736 CID rows. The browser ships a small deterministic sample cache for static hosting; the full published package is hosted on Hugging Face.
+The currently referenced published corpus is a quality-audited partial Dutch corpus, not a claimed full Dutch corpus. Project metadata records the audited package size as 4,999 laws, 89,737 articles, and 94,736 CID rows. The browser queries the published Hugging Face datasets through a provider abstraction and keeps a small deterministic sample cache only for local development, tests, and offline fallback.
 
 ## Features
 
 - Browse Dutch laws and article groups.
-- Search by law, article, citation, status, or topic.
+- Search by law, article, citation, CID, status, or topic.
+- Layer BM25 retrieval, vector reranking, and knowledge graph context through the data provider layer.
 - Ask local corpus questions with cited evidence.
 - Inspect related knowledge graph nodes and edges.
 - Display law status/version fields inherited by article records.
+- Display deterministic CIDs, law CIDs, and `ipfs://` identifiers without requiring an IPFS daemon.
 - Link back to the official text on `wetten.overheid.nl`.
 
 ## Development
@@ -62,13 +64,15 @@ npm test
 
 ## Runtime Data Layout
 
-Static browser artifacts live under:
+WetWijzer uses provider interfaces in `src/lib/netherlandsCorpus.ts` for corpus loading, search, graph traversal, and CID lookup. The default provider queries Hugging Face Dataset Viewer APIs for the published Netherlands dataset stack. The bundled static files are intentionally small sample/fallback artifacts, not the production source of truth.
+
+Static sample artifacts live under:
 
 ```text
 public/corpus/netherlands/current/
 ```
 
-The manifest at `public/corpus/netherlands/current/artifacts.manifest.json` records the Hugging Face dataset stack and the browser sample artifact list. Do not hardcode Hugging Face tokens or private credentials into this repository.
+The manifest at `public/corpus/netherlands/current/artifacts.manifest.json` records the Hugging Face dataset stack and the browser sample artifact list. Playwright tests force the static sample with `WETWIJZER_DATA_PROVIDER=static` in `localStorage`; normal browser sessions use the Hugging Face provider with sample fallback. Do not hardcode Hugging Face tokens or private credentials into this repository.
 
 ## Legal Notice
 

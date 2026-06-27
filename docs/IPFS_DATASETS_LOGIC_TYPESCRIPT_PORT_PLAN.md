@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This project already contains the Dutch legal corpus corpus, generated search assets, knowledge graph artifacts, and machine-generated logic proof summaries. The improvement track is to port the full `ipfs_datasets_py/ipfs_datasets_py/logic` module into a browser-native TypeScript/WASM logic stack. Heavyweight theorem provers, NLP dependencies, ML confidence scoring, cryptographic proof systems, and chain integrations should be replaced with TypeScript or WebAssembly implementations rather than external server-side calls.
+This project uses the published Dutch legal corpus, generated search assets, knowledge graph artifacts, and machine-generated logic proof summaries. The improvement track is to port the full `ipfs_datasets_py/ipfs_datasets_py/logic` module into a browser-native TypeScript/WASM logic stack. Heavyweight theorem provers, NLP dependencies, ML confidence scoring, cryptographic proof systems, and chain integrations should be replaced with TypeScript or WebAssembly implementations rather than external server-side calls.
 
 The practical goal is to translate the entire Python logic surface area into TypeScript/WASM in phases. The runtime target is browser-native TypeScript/WebAssembly only. The app must not depend on external server-side services for logic conversion, ML/NLP confidence, proving, or verification.
 
@@ -10,10 +10,10 @@ Update: Python ML confidence scoring and spaCy-style NLP extraction are required
 
 ## Current Project Fit
 
-The repository is a Vite/React/TypeScript static app with existing WetWijzer corpus support:
+The repository is a Vite/React/TypeScript app with existing WetWijzer corpus support:
 
-- `src/lib/netherlandsCorpus.ts` loads sections, BM25 documents, embeddings, entities, relationships, and graph adjacency from `public/corpus/netherlands/current/generated/`.
-- `public/corpus/netherlands/current/generated/logic-proof-summaries.json` already exposes per-section formalization data, including `deontic_temporal_fol`, `deontic_cognitive_event_calculus`, `frame_logic_ergo`, `norm_operator`, `norm_type`, `zkp_backend`, `zkp_security_note`, and `zkp_verified`.
+- `src/lib/netherlandsCorpus.ts` queries the published Hugging Face Netherlands dataset stack through provider interfaces for corpus rows, BM25, vector metadata, knowledge graph edges, and CID lookup, with `public/corpus/netherlands/current/generated/` retained only as a small deterministic sample/offline fallback.
+- `public/corpus/netherlands/current/generated/logic-proof-summaries.json` exposes sample per-section formalization data for local proof UI and test fixtures, including `deontic_temporal_fol`, `deontic_cognitive_event_calculus`, `frame_logic_ergo`, `norm_operator`, `norm_type`, `zkp_backend`, `zkp_security_note`, and `zkp_verified`.
 - `package.json` already includes browser-oriented foundations that help this port: TypeScript, Jest, Playwright, DuckDB-WASM, parquet-wasm, Transformers.js, hnswlib-wasm, and Vite workers.
 - `docs/WETWIJZER_LEGAL_CORPUS_IMPLEMENTATION_PLAN.md` already identifies proof artifact exploration and browser theorem-prover research as future phases.
 
