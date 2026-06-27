@@ -72,12 +72,12 @@ function mockFetchJson(rows: unknown[]) {
   const manifest = {
     schemaVersion: 1,
     generatedAt: '2026-04-27T19:57:04.679Z',
-    datasetId: 'justicedao/ipfs_netherlands_laws',
+    datasetId: 'justicedao/wetwijzer_netherlands_legal_corpus',
     datasetPath: 'netherlands_laws_quality_audited_partial',
     corpus: {
       jurisdiction: 'Netherlands',
       name: 'Dutch legal corpus',
-      source: 'https://huggingface.co/datasets/justicedao/ipfs_netherlands_laws',
+      source: 'https://huggingface.co/datasets/justicedao/wetwijzer_netherlands_legal_corpus',
     },
     artifacts: [],
     generatedFiles: [],

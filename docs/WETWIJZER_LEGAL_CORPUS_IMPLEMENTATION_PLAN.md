@@ -7,10 +7,11 @@ WetWijzer is a Netherlands legal research platform for browsing and searching Du
 - Official Dutch law text from `wetten.overheid.nl`.
 - Official BWB/SRU metadata where available.
 - Published dataset artifacts under the `justicedao` Hugging Face namespace:
-  - `justicedao/ipfs_netherlands_laws`
-  - `justicedao/ipfs_netherlands_laws_vector_index`
-  - `justicedao/ipfs_netherlands_laws_bm25_index`
-  - `justicedao/ipfs_netherlands_laws_knowledge_graph`
+  - Primary unified repo: `justicedao/wetwijzer_netherlands_legal_corpus`
+  - Compatibility base corpus: `justicedao/ipfs_netherlands_laws`
+  - Compatibility vector index: `justicedao/ipfs_netherlands_laws_vector_index`
+  - Compatibility BM25 index: `justicedao/ipfs_netherlands_laws_bm25_index`
+  - Compatibility knowledge graph: `justicedao/ipfs_netherlands_laws_knowledge_graph`
 
 ## Product Scope
 
@@ -22,4 +23,3 @@ WetWijzer is a Netherlands legal research platform for browsing and searching Du
 ## Boundaries
 
 WetWijzer provides legal information, not legal advice. Users should verify official text, version status, and legal effect on `wetten.overheid.nl`.
-

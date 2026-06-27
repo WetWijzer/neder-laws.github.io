@@ -1258,7 +1258,12 @@ function WorkspacePanel({
         )}
         {selected && activeTab === 'graph' && (
           <div id="panel-graph" role="tabpanel" aria-labelledby="tab-graph" tabIndex={0}>
-            <GraphPanel entities={relatedEntities} relationships={relatedRelationships} isLoading={isGraphLoading} />
+            <GraphPanel
+              entities={relatedEntities}
+              relationships={relatedRelationships}
+              selectedCid={selected.ipfs_cid}
+              isLoading={isGraphLoading}
+            />
           </div>
         )}
         {selected && activeTab === 'proof' && (
@@ -1572,6 +1577,10 @@ function formatCidForDisplay(cid?: string | null): string {
   if (!normalized) return 'Not listed';
   if (normalized.length <= 24) return normalized;
   return `${normalized.slice(0, 12)}...${normalized.slice(-8)}`;
+}
+
+function normalizeDisplayCid(cid?: string | null): string {
+  return cid?.replace(/^ipfs:\/\//, '').trim() || '';
 }
 
 function formatScoreValue(value?: number): string {
@@ -1901,10 +1910,12 @@ function ChatSummaryMetric({ label, value }: { label: string; value: string }) {
 function GraphPanel({
   entities,
   relationships,
+  selectedCid,
   isLoading,
 }: {
   entities: CorpusEntity[];
   relationships: CorpusRelationship[];
+  selectedCid: string;
   isLoading: boolean;
 }) {
   const usefulRelationships = relationships.filter((relationship) => {
@@ -1922,6 +1933,7 @@ function GraphPanel({
   const relationshipValue = isLoading ? '...' : usefulRelationships.length.toLocaleString();
   const entityTypeCounts = summarizeGraphTypes(entities.map((entity) => entity.type));
   const relationshipTypeCounts = summarizeGraphTypes(usefulRelationships.map((relationship) => relationship.type));
+  const relationshipHighlights = summarizeRelationshipHighlights(usefulRelationships);
 
   return (
     <div className="px-4 py-4 sm:px-5 sm:py-5">
@@ -1941,6 +1953,14 @@ function GraphPanel({
         <GraphTypeSummary title="Entity types" items={entityTypeCounts} emptyLabel={isLoading ? 'Loading entity types' : 'No entity types'} />
         <GraphTypeSummary title="Relationship types" items={relationshipTypeCounts} emptyLabel={isLoading ? 'Loading relationship types' : 'No relationship types'} />
       </div>
+
+      {relationshipHighlights.length > 0 && (
+        <div className="mb-5 grid gap-2 sm:grid-cols-2 xl:grid-cols-4" aria-label="Related article and logic summary">
+          {relationshipHighlights.map((item) => (
+            <GraphSummaryMetric key={item.label} label={item.label} value={item.count.toLocaleString()} detail={item.detail} />
+          ))}
+        </div>
+      )}
 
       <div className="grid gap-5 xl:grid-cols-[1fr_1fr]">
         <div>
@@ -1970,12 +1990,27 @@ function GraphPanel({
             {!isLoading && relationships.length === 0 && <EmptyState title="No relationships loaded" />}
             {visibleRelationships.map((relationship) => (
               <div key={relationship.id} role="listitem" className="rounded-md border border-[#dce3d6] bg-white px-3 py-2">
-                <div className="text-xs font-semibold uppercase tracking-wide text-[#5f7469]">
-                  {formatGraphTypeLabel(relationship.type)}
+                <div className="flex flex-wrap items-center gap-2">
+                  <div className="text-xs font-semibold uppercase tracking-wide text-[#5f7469]">
+                    {formatGraphTypeLabel(relationship.type)}
+                  </div>
+                  {formatRelationshipConfidence(relationship) && (
+                    <span className="rounded-md border border-[#d6e1d0] bg-[#f4f8f0] px-1.5 py-0.5 text-xs font-semibold text-[#486157]">
+                      {formatRelationshipConfidence(relationship)}
+                    </span>
+                  )}
                 </div>
                 <div className="mt-1 text-sm leading-5 text-[#52615c] [overflow-wrap:anywhere]">
-                  {formatGraphNodeLabel(relationship.source)} → {formatGraphNodeLabel(relationship.target)}
+                  {formatRelationshipEndpoint(relationship, 'source', selectedCid)} → {formatRelationshipEndpoint(relationship, 'target', selectedCid)}
                 </div>
+                <div className="mt-1 text-xs leading-5 text-[#697a72] [overflow-wrap:anywhere]">
+                  CID {formatRelationshipCid(relationship, 'source')} → {formatRelationshipCid(relationship, 'target')}
+                </div>
+                {formatRelationshipNote(relationship) && (
+                  <div className="mt-1 text-xs leading-5 text-[#697a72] [overflow-wrap:anywhere]">
+                    {formatRelationshipNote(relationship)}
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -1988,6 +2023,73 @@ function GraphPanel({
       </div>
     </div>
   );
+}
+
+function summarizeRelationshipHighlights(relationships: CorpusRelationship[]) {
+  const counts = new Map<string, number>();
+  for (const relationship of relationships) {
+    if (relationship.type === 'parent_law' || relationship.type === 'isPartOf') {
+      counts.set('Parent law', (counts.get('Parent law') || 0) + 1);
+    } else if (relationship.type === 'previous_article') {
+      counts.set('Previous article', (counts.get('Previous article') || 0) + 1);
+      counts.set('Sibling articles', (counts.get('Sibling articles') || 0) + 1);
+    } else if (relationship.type === 'next_article') {
+      counts.set('Next article', (counts.get('Next article') || 0) + 1);
+      counts.set('Sibling articles', (counts.get('Sibling articles') || 0) + 1);
+    } else if (relationship.type === 'referenced_article_candidate') {
+      counts.set('Referenced articles', (counts.get('Referenced articles') || 0) + 1);
+    } else {
+      counts.set('Knowledge graph neighbors', (counts.get('Knowledge graph neighbors') || 0) + 1);
+    }
+  }
+
+  return [
+    { label: 'Parent law', detail: 'Article to law' },
+    { label: 'Previous article', detail: 'Same-law order' },
+    { label: 'Next article', detail: 'Same-law order' },
+    { label: 'Sibling articles', detail: 'Adjacent articles' },
+    { label: 'Referenced articles', detail: 'Detected references' },
+    { label: 'Knowledge graph neighbors', detail: 'Graph links' },
+  ]
+    .map((item) => ({ ...item, count: counts.get(item.label) || 0 }))
+    .filter((item) => item.count > 0)
+    .slice(0, 6);
+}
+
+function formatRelationshipEndpoint(relationship: CorpusRelationship, side: 'source' | 'target', selectedCid: string) {
+  const key = side === 'source' ? 'source_label' : 'target_label';
+  const identifierKey = side === 'source' ? 'source_identifier' : 'target_identifier';
+  const id = side === 'source' ? relationship.source : relationship.target;
+  const cid = normalizeDisplayCid(id);
+  if (cid === normalizeDisplayCid(selectedCid)) return 'This article';
+
+  const label = readRelationshipProperty(relationship, key) || readRelationshipProperty(relationship, identifierKey);
+  if (label) return formatGraphValueLabel(label);
+
+  return formatGraphNodeLabel(id);
+}
+
+function formatRelationshipCid(relationship: CorpusRelationship, side: 'source' | 'target') {
+  const key = side === 'source' ? 'source_cid' : 'target_cid';
+  const cid = readRelationshipProperty(relationship, key) || (side === 'source' ? relationship.source : relationship.target);
+  return formatGraphNodeLabel(cid);
+}
+
+function formatRelationshipConfidence(relationship: CorpusRelationship) {
+  const confidence = readRelationshipProperty(relationship, 'confidence');
+  return confidence ? `${formatGraphValueLabel(confidence)} confidence` : '';
+}
+
+function formatRelationshipNote(relationship: CorpusRelationship) {
+  const note = readRelationshipProperty(relationship, 'derivation_note');
+  if (note) return note;
+  const sourceUrl = readRelationshipProperty(relationship, 'source_url');
+  return sourceUrl ? `Official source: ${sourceUrl}` : '';
+}
+
+function readRelationshipProperty(relationship: CorpusRelationship, key: string) {
+  const value = relationship.properties?.[key];
+  return typeof value === 'string' ? value : '';
 }
 
 function GraphTypeSummary({
@@ -2059,7 +2161,7 @@ function formatGraphTypeLabel(type: string) {
 }
 
 function formatGraphNodeLabel(nodeId: string) {
-  if (nodeId.startsWith('bafk')) return 'This article';
+  if (nodeId.startsWith('bafk') || nodeId.startsWith('ipfs://bafk')) return formatCidForDisplay(nodeId);
   const [prefix, value] = nodeId.split(':');
   if (!value) return nodeId;
   if (prefix === 'netherlands_law') return formatGraphValueLabel(value);

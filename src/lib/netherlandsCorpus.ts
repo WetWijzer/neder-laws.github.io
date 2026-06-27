@@ -131,6 +131,28 @@ interface GraphAdjacency {
   incoming: Record<string, CorpusRelationship[]>;
 }
 
+interface HuggingFaceDatasetProfile {
+  id: 'unified' | 'legacy-four-repo';
+  datasetId: string;
+  datasets: {
+    base: string;
+    vector: string;
+    bm25: string;
+    graph: string;
+    logic?: string;
+  };
+  configs: {
+    laws: string;
+    articles: string;
+    cidIndex: string;
+    vectorIndex: string;
+    bm25Documents: string;
+    graphNodes: string;
+    graphEdges: string;
+    logicRelationships?: string;
+  };
+}
+
 export interface CorpusArtifact {
   id: string;
   path: string;
@@ -241,14 +263,50 @@ const DEFAULT_CORPUS_BASE_URL = '/corpus/netherlands/current';
 const CORPUS_BASE_URL = DEFAULT_CORPUS_BASE_URL;
 const DATASET_VIEWER_API = 'https://datasets-server.huggingface.co';
 const HUGGING_FACE_API = 'https://huggingface.co/api/datasets';
-const REQUEST_TIMEOUT_MS = 4500;
+const REQUEST_TIMEOUT_MS = 9000;
 const INITIAL_REMOTE_ARTICLE_LIMIT = 80;
 
-const DATASETS = {
+const UNIFIED_DATASET_ID = 'justicedao/wetwijzer_netherlands_legal_corpus';
+const LEGACY_DATASETS = {
   base: 'justicedao/ipfs_netherlands_laws',
   vector: 'justicedao/ipfs_netherlands_laws_vector_index',
   bm25: 'justicedao/ipfs_netherlands_laws_bm25_index',
   graph: 'justicedao/ipfs_netherlands_laws_knowledge_graph',
+};
+const UNIFIED_PROFILE: HuggingFaceDatasetProfile = {
+  id: 'unified',
+  datasetId: UNIFIED_DATASET_ID,
+  datasets: {
+    base: UNIFIED_DATASET_ID,
+    vector: UNIFIED_DATASET_ID,
+    bm25: UNIFIED_DATASET_ID,
+    graph: UNIFIED_DATASET_ID,
+    logic: UNIFIED_DATASET_ID,
+  },
+  configs: {
+    laws: 'laws',
+    articles: 'articles',
+    cidIndex: 'cid_index',
+    vectorIndex: 'vector_index',
+    bm25Documents: 'bm25_documents',
+    graphNodes: 'knowledge_graph_nodes',
+    graphEdges: 'knowledge_graph_edges',
+    logicRelationships: 'logic_relationships',
+  },
+};
+const LEGACY_PROFILE: HuggingFaceDatasetProfile = {
+  id: 'legacy-four-repo',
+  datasetId: LEGACY_DATASETS.base,
+  datasets: LEGACY_DATASETS,
+  configs: {
+    laws: 'laws',
+    articles: 'articles',
+    cidIndex: 'cid_index',
+    vectorIndex: 'mapping',
+    bm25Documents: 'documents',
+    graphNodes: 'nodes',
+    graphEdges: 'edges',
+  },
 };
 
 let staticManifestPromise: Promise<WetWijzerCorpusManifest> | null = null;
@@ -339,6 +397,8 @@ class HuggingFaceCorpusProvider implements RetrievalProvider {
   private manifestCache: Promise<WetWijzerCorpusManifest> | null = null;
   private sectionCache = new Map<string, CorpusSection>();
 
+  constructor(private readonly profile: HuggingFaceDatasetProfile = UNIFIED_PROFILE) {}
+
   async loadManifest(): Promise<WetWijzerCorpusManifest> {
     if (!this.manifestCache) {
       this.manifestCache = this.fetchManifest();
@@ -350,8 +410,8 @@ class HuggingFaceCorpusProvider implements RetrievalProvider {
     const [manifest, rows] = await Promise.all([
       this.loadManifest(),
       viewerRows<DatasetRow>({
-        dataset: DATASETS.base,
-        config: 'articles',
+        dataset: this.profile.datasets.base,
+        config: this.profile.configs.articles,
         split: 'train',
         offset: 0,
         length: limit,
@@ -370,19 +430,34 @@ class HuggingFaceCorpusProvider implements RetrievalProvider {
     const cached = this.sectionCache.get(normalizedCid);
     if (cached) return cached;
 
-    const rows = await this.searchArticleRows(normalizedCid, 8);
+    const exactRows = await filterViewerRows<DatasetRow>({
+      dataset: this.profile.datasets.base,
+      config: this.profile.configs.articles,
+      split: 'train',
+      where: equalsPredicate('cid', normalizedCid),
+      offset: 0,
+      length: 3,
+    }).catch(() => []);
+    const rows = exactRows.length > 0 ? exactRows : await this.searchArticleRows(normalizedCid, 8);
     const exactRow = rows.find((row) => normalizeCid(readString(row, 'cid')) === normalizedCid)
       || rows.find((row) => normalizeCid(readString(row, 'content_address')) === normalizedCid)
       || rows[0];
     if (!exactRow) {
-      const cidRows = await searchViewerRows<DatasetRow>({
-        dataset: DATASETS.base,
-        config: 'cid_index',
+      const cidRows = await filterViewerRows<DatasetRow>({
+        dataset: this.profile.datasets.base,
+        config: this.profile.configs.cidIndex,
+        split: 'train',
+        where: equalsPredicate('cid', normalizedCid),
+        offset: 0,
+        length: 5,
+      }).catch(() => searchViewerRows<DatasetRow>({
+        dataset: this.profile.datasets.base,
+        config: this.profile.configs.cidIndex,
         split: 'train',
         query: normalizedCid,
         offset: 0,
         length: 5,
-      });
+      }));
       const cidRow = cidRows.find((row) => normalizeCid(readString(row, 'cid')) === normalizedCid) || cidRows[0];
       return cidRow ? this.cacheSection(mapDatasetRowToSection(cidRow, 'huggingface')) : null;
     }
@@ -456,24 +531,80 @@ class HuggingFaceCorpusProvider implements RetrievalProvider {
     depth = 1,
   ): Promise<{ entities: CorpusEntity[]; relationships: CorpusRelationship[] }> {
     const normalizedCid = normalizeCid(ipfsCid);
-    const [nodeRows, edgeRows] = await Promise.all([
-      searchViewerRows<DatasetRow>({
-        dataset: DATASETS.graph,
-        config: 'nodes',
+    const [
+      nodeRowsByCid,
+      nodeRowsBySource,
+      edgeSourceRows,
+      edgeTargetRows,
+      logicSourceRows,
+      logicTargetRows,
+    ] = await Promise.all([
+      filterViewerRows<DatasetRow>({
+        dataset: this.profile.datasets.graph,
+        config: this.profile.configs.graphNodes,
         split: 'train',
-        query: normalizedCid,
+        where: equalsPredicate('cid', normalizedCid),
         offset: 0,
         length: 20,
       }).catch(() => []),
-      searchViewerRows<DatasetRow>({
-        dataset: DATASETS.graph,
-        config: 'edges',
+      filterViewerRows<DatasetRow>({
+        dataset: this.profile.datasets.graph,
+        config: this.profile.configs.graphNodes,
+        split: 'train',
+        where: equalsPredicate('source_cid', normalizedCid),
+        offset: 0,
+        length: 20,
+      }).catch(() => []),
+      filterViewerRows<DatasetRow>({
+        dataset: this.profile.datasets.graph,
+        config: this.profile.configs.graphEdges,
+        split: 'train',
+        where: equalsPredicate('source_cid', normalizedCid),
+        offset: 0,
+        length: depth > 1 ? 80 : 40,
+      }).catch(() => []),
+      filterViewerRows<DatasetRow>({
+        dataset: this.profile.datasets.graph,
+        config: this.profile.configs.graphEdges,
+        split: 'train',
+        where: equalsPredicate('target_cid', normalizedCid),
+        offset: 0,
+        length: depth > 1 ? 80 : 40,
+      }).catch(() => []),
+      this.profile.datasets.logic && this.profile.configs.logicRelationships
+        ? filterViewerRows<DatasetRow>({
+            dataset: this.profile.datasets.logic,
+            config: this.profile.configs.logicRelationships,
+            split: 'train',
+            where: equalsPredicate('source_cid', normalizedCid),
+            offset: 0,
+            length: depth > 1 ? 80 : 40,
+          }).catch(() => [])
+        : Promise.resolve([]),
+      this.profile.datasets.logic && this.profile.configs.logicRelationships
+        ? filterViewerRows<DatasetRow>({
+            dataset: this.profile.datasets.logic,
+            config: this.profile.configs.logicRelationships,
+            split: 'train',
+            where: equalsPredicate('target_cid', normalizedCid),
+            offset: 0,
+            length: depth > 1 ? 80 : 40,
+          }).catch(() => [])
+        : Promise.resolve([]),
+    ]);
+    const nodeRows = [...nodeRowsByCid, ...nodeRowsBySource];
+    const edgeRows = [...edgeSourceRows, ...edgeTargetRows];
+    let logicRows = [...logicSourceRows, ...logicTargetRows];
+    if (logicRows.length === 0 && this.profile.datasets.logic && this.profile.configs.logicRelationships) {
+      logicRows = await searchViewerRows<DatasetRow>({
+        dataset: this.profile.datasets.logic,
+        config: this.profile.configs.logicRelationships,
         split: 'train',
         query: normalizedCid,
         offset: 0,
         length: depth > 1 ? 80 : 40,
-      }).catch(() => []),
-    ]);
+      }).catch(() => []);
+    }
 
     const entities = new Map<string, CorpusEntity>();
     const relationships = new Map<string, CorpusRelationship>();
@@ -486,22 +617,13 @@ class HuggingFaceCorpusProvider implements RetrievalProvider {
     for (const row of edgeRows) {
       const relationship = mapGraphEdgeRow(row);
       relationships.set(relationship.id, relationship);
-      if (!entities.has(relationship.source)) {
-        entities.set(relationship.source, {
-          id: relationship.source,
-          type: 'cid',
-          label: formatCidForDisplay(relationship.source),
-          properties: {},
-        });
-      }
-      if (!entities.has(relationship.target)) {
-        entities.set(relationship.target, {
-          id: relationship.target,
-          type: 'cid',
-          label: formatCidForDisplay(relationship.target),
-          properties: {},
-        });
-      }
+      addRelationshipEntities(entities, relationship);
+    }
+
+    for (const row of logicRows) {
+      const relationship = mapLogicRelationshipRow(row);
+      relationships.set(relationship.id, relationship);
+      addRelationshipEntities(entities, relationship);
     }
 
     return {
@@ -512,21 +634,25 @@ class HuggingFaceCorpusProvider implements RetrievalProvider {
 
   private async fetchManifest(): Promise<WetWijzerCorpusManifest> {
     const [size, repo] = await Promise.all([
-      fetchViewerJson<ViewerSizeResponse>('size', { dataset: DATASETS.base }),
-      fetchHubDatasetInfo(DATASETS.base).catch(() => null),
+      fetchViewerJson<ViewerSizeResponse>('size', { dataset: this.profile.datasetId }),
+      fetchHubDatasetInfo(this.profile.datasetId).catch(() => null),
     ]);
     const baseDatasetBytes = size.size?.dataset?.num_bytes_parquet_files || 0;
-    const laws = getConfigCount(size, 'laws');
-    const articles = getConfigCount(size, 'articles');
-    const cidRows = getConfigCount(size, 'cid_index');
+    const laws = getConfigCount(size, this.profile.configs.laws);
+    const articles = getConfigCount(size, this.profile.configs.articles);
+    const cidRows = getConfigCount(size, this.profile.configs.cidIndex);
+    const vectorRows = getConfigCount(size, this.profile.configs.vectorIndex);
+    const bm25Documents = getConfigCount(size, this.profile.configs.bm25Documents);
+    const graphNodes = getConfigCount(size, this.profile.configs.graphNodes);
+    const graphEdges = getConfigCount(size, this.profile.configs.graphEdges);
     const lastModified = readString(repo || {}, 'lastModified') || readString(repo || {}, 'last_modified');
     const release = readString(repo || {}, 'sha');
 
     return {
       schemaVersion: 2,
       generatedAt: lastModified || new Date().toISOString(),
-      datasetId: DATASETS.base,
-      datasetPath: `hf://datasets/${DATASETS.base}`,
+      datasetId: this.profile.datasetId,
+      datasetPath: `hf://datasets/${this.profile.datasetId}`,
       provider: 'huggingface',
       corpus: {
         jurisdiction: 'Netherlands',
@@ -534,10 +660,10 @@ class HuggingFaceCorpusProvider implements RetrievalProvider {
         source: 'Hugging Face Dataset Viewer backed by wetten.overheid.nl and official BWB/SRU metadata',
       },
       backend: {
-        baseCorpus: DATASETS.base,
-        vectorIndex: DATASETS.vector,
-        bm25Index: DATASETS.bm25,
-        knowledgeGraph: DATASETS.graph,
+        baseCorpus: this.profile.datasetId,
+        vectorIndex: this.profile.datasets.vector,
+        bm25Index: this.profile.datasets.bm25,
+        knowledgeGraph: this.profile.datasets.graph,
         release: release || undefined,
         lastModified: lastModified || undefined,
       },
@@ -545,35 +671,39 @@ class HuggingFaceCorpusProvider implements RetrievalProvider {
         laws,
         articles,
         cidRows,
+        vectorRows,
+        bm25Documents,
+        graphNodes,
+        graphEdges,
       },
       artifacts: [
         {
           id: 'base-corpus',
-          path: `hf://datasets/${DATASETS.base}`,
+          path: `hf://datasets/${this.profile.datasets.base}`,
           bytes: baseDatasetBytes,
           role: 'remote CID-indexed law and article corpus',
-          sourceUrl: `https://huggingface.co/datasets/${DATASETS.base}`,
+          sourceUrl: `https://huggingface.co/datasets/${this.profile.datasets.base}`,
         },
         {
           id: 'bm25-index',
-          path: `hf://datasets/${DATASETS.bm25}`,
+          path: `hf://datasets/${this.profile.datasets.bm25}`,
           bytes: 0,
           role: 'remote BM25 retrieval index',
-          sourceUrl: `https://huggingface.co/datasets/${DATASETS.bm25}`,
+          sourceUrl: `https://huggingface.co/datasets/${this.profile.datasets.bm25}`,
         },
         {
           id: 'vector-index',
-          path: `hf://datasets/${DATASETS.vector}`,
+          path: `hf://datasets/${this.profile.datasets.vector}`,
           bytes: 0,
           role: 'remote vector reranking index',
-          sourceUrl: `https://huggingface.co/datasets/${DATASETS.vector}`,
+          sourceUrl: `https://huggingface.co/datasets/${this.profile.datasets.vector}`,
         },
         {
           id: 'knowledge-graph',
-          path: `hf://datasets/${DATASETS.graph}`,
+          path: `hf://datasets/${this.profile.datasets.graph}`,
           bytes: 0,
           role: 'remote JSON-LD knowledge graph',
-          sourceUrl: `https://huggingface.co/datasets/${DATASETS.graph}`,
+          sourceUrl: `https://huggingface.co/datasets/${this.profile.datasets.graph}`,
         },
       ],
       generatedFiles: [],
@@ -582,8 +712,8 @@ class HuggingFaceCorpusProvider implements RetrievalProvider {
 
   private async searchArticleRows(query: string, limit: number): Promise<DatasetRow[]> {
     return searchViewerRows<DatasetRow>({
-      dataset: DATASETS.base,
-      config: 'articles',
+      dataset: this.profile.datasets.base,
+      config: this.profile.configs.articles,
       split: 'train',
       query,
       offset: 0,
@@ -593,8 +723,8 @@ class HuggingFaceCorpusProvider implements RetrievalProvider {
 
   private async searchBm25Rows(query: string, limit: number): Promise<DatasetRow[]> {
     return searchViewerRows<DatasetRow>({
-      dataset: DATASETS.bm25,
-      config: 'documents',
+      dataset: this.profile.datasets.bm25,
+      config: this.profile.configs.bm25Documents,
       split: 'train',
       query,
       offset: 0,
@@ -604,8 +734,8 @@ class HuggingFaceCorpusProvider implements RetrievalProvider {
 
   private async searchVectorRows(query: string, limit: number): Promise<DatasetRow[]> {
     return searchViewerRows<DatasetRow>({
-      dataset: DATASETS.vector,
-      config: 'mapping',
+      dataset: this.profile.datasets.vector,
+      config: this.profile.configs.vectorIndex,
       split: 'train',
       query,
       offset: 0,
@@ -657,9 +787,11 @@ class StaticCorpusProvider implements RetrievalProvider {
 
 function getProvider(): RetrievalProvider {
   if (!provider) {
+    const staticProvider = new StaticCorpusProvider();
+    const legacyProvider = new ResilientCorpusProvider(new HuggingFaceCorpusProvider(LEGACY_PROFILE), staticProvider);
     provider = getConfiguredProviderMode() === 'static'
       ? new StaticCorpusProvider()
-      : new ResilientCorpusProvider(new HuggingFaceCorpusProvider(), new StaticCorpusProvider());
+      : new ResilientCorpusProvider(new HuggingFaceCorpusProvider(UNIFIED_PROFILE), legacyProvider);
   }
   return provider;
 }
@@ -1148,20 +1280,87 @@ function mapGraphNodeRow(row: DatasetRow): CorpusEntity {
 }
 
 function mapGraphEdgeRow(row: DatasetRow): CorpusRelationship {
-  const source = normalizeGraphId(readString(row, 'source_id')) || normalizeCid(readString(row, 'source_cid'));
-  const target = normalizeGraphId(readString(row, 'target_id')) || normalizeCid(readString(row, 'target_cid'));
+  const sourceCid = normalizeCid(readString(row, 'source_cid'));
+  const targetCid = normalizeCid(readString(row, 'target_cid'));
+  const source = normalizeGraphId(readString(row, 'source_id')) || sourceCid;
+  const target = normalizeGraphId(readString(row, 'target_id')) || targetCid;
   const id = readString(row, 'edge_cid') || readString(row, 'cid') || `${source}:${readString(row, 'edge_type')}:${target}`;
+  const edgeType = readString(row, 'edge_type') || 'relatedTo';
   return {
     id,
     source,
     target,
-    type: readString(row, 'edge_type') || 'relatedTo',
+    type: edgeType,
     properties: {
       cid: readString(row, 'cid'),
+      source_cid: sourceCid,
+      target_cid: targetCid,
       law_identifier: readString(row, 'law_identifier'),
       article_identifier: readString(row, 'article_identifier'),
+      source_identifier: readString(row, 'article_identifier'),
+      target_identifier: readString(row, 'law_identifier'),
+      source_record_type: edgeType === 'isPartOf' ? 'article' : 'cid',
+      target_record_type: edgeType === 'isPartOf' ? 'law' : 'cid',
     },
   };
+}
+
+function mapLogicRelationshipRow(row: DatasetRow): CorpusRelationship {
+  const source = normalizeCid(readString(row, 'source_cid'));
+  const target = normalizeCid(readString(row, 'target_cid'));
+  const type = readString(row, 'relationship_type') || 'relatedTo';
+  const id = readString(row, 'relationship_cid') || `${source}:${type}:${target}`;
+  return {
+    id,
+    source,
+    target,
+    type,
+    properties: {
+      law_cid: readString(row, 'law_cid'),
+      law_identifier: readString(row, 'law_identifier'),
+      source_identifier: readString(row, 'source_identifier'),
+      target_identifier: readString(row, 'target_identifier'),
+      source_label: readString(row, 'source_label'),
+      target_label: readString(row, 'target_label'),
+      source_record_type: readString(row, 'source_record_type'),
+      target_record_type: readString(row, 'target_record_type'),
+      source_url: readString(row, 'source_url'),
+      confidence: readString(row, 'confidence'),
+      derivation_note: readString(row, 'derivation_note'),
+    },
+  };
+}
+
+function addRelationshipEntities(entities: Map<string, CorpusEntity>, relationship: CorpusRelationship) {
+  const sourceLabel = typeof relationship.properties?.source_label === 'string'
+    ? relationship.properties.source_label
+    : formatCidForDisplay(relationship.source);
+  const targetLabel = typeof relationship.properties?.target_label === 'string'
+    ? relationship.properties.target_label
+    : formatCidForDisplay(relationship.target);
+  const sourceType = typeof relationship.properties?.source_record_type === 'string'
+    ? relationship.properties.source_record_type
+    : 'cid';
+  const targetType = typeof relationship.properties?.target_record_type === 'string'
+    ? relationship.properties.target_record_type
+    : 'cid';
+
+  if (!entities.has(relationship.source)) {
+    entities.set(relationship.source, {
+      id: relationship.source,
+      type: sourceType || 'cid',
+      label: sourceLabel || formatCidForDisplay(relationship.source),
+      properties: {},
+    });
+  }
+  if (!entities.has(relationship.target)) {
+    entities.set(relationship.target, {
+      id: relationship.target,
+      type: targetType || 'cid',
+      label: targetLabel || formatCidForDisplay(relationship.target),
+      properties: {},
+    });
+  }
 }
 
 function addMergedResult(
@@ -1362,6 +1561,36 @@ async function searchViewerRows<T extends DatasetRow>({
   return (data.rows || []).map((item) => item.row);
 }
 
+async function filterViewerRows<T extends DatasetRow>({
+  dataset,
+  config,
+  split,
+  where,
+  orderby,
+  offset,
+  length,
+}: {
+  dataset: string;
+  config: string;
+  split: string;
+  where: string;
+  orderby?: string;
+  offset: number;
+  length: number;
+}): Promise<T[]> {
+  const params: Record<string, string> = {
+    dataset,
+    config,
+    split,
+    where,
+    offset: String(offset),
+    length: String(Math.min(length, 100)),
+  };
+  if (orderby) params.orderby = orderby;
+  const data = await fetchViewerJson<ViewerRowsResponse<T>>('filter', params);
+  return (data.rows || []).map((item) => item.row);
+}
+
 async function fetchViewerJson<T>(endpoint: string, params: Record<string, string>): Promise<T> {
   const url = `${DATASET_VIEWER_API}/${endpoint}?${new URLSearchParams(params).toString()}`;
   const data = await fetchJsonWithTimeout<T>(url);
@@ -1369,6 +1598,10 @@ async function fetchViewerJson<T>(endpoint: string, params: Record<string, strin
     throw new Error(data.error);
   }
   return data;
+}
+
+function equalsPredicate(column: string, value: string): string {
+  return `"${column.replace(/"/g, '""')}" = '${value.replace(/'/g, "''")}'`;
 }
 
 async function fetchHubDatasetInfo(dataset: string): Promise<DatasetRow> {

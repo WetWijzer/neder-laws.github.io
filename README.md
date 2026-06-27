@@ -6,14 +6,15 @@ WetWijzer is not legal advice. Laws and articles may be labeled `current`, `hist
 
 ## Data Sources
 
-The site is configured around official Dutch government sources and the published JusticeDAO Netherlands dataset stack:
+The site is configured around official Dutch government sources and the published JusticeDAO Netherlands dataset stack. The unified corpus repo is the primary frontend source; the older split repos remain as fallback/compatibility outputs.
 
 | Purpose | Dataset |
 | --- | --- |
-| Normalized laws and articles | [`justicedao/ipfs_netherlands_laws`](https://huggingface.co/datasets/justicedao/ipfs_netherlands_laws) |
-| Vector index | [`justicedao/ipfs_netherlands_laws_vector_index`](https://huggingface.co/datasets/justicedao/ipfs_netherlands_laws_vector_index) |
-| BM25 index | [`justicedao/ipfs_netherlands_laws_bm25_index`](https://huggingface.co/datasets/justicedao/ipfs_netherlands_laws_bm25_index) |
-| JSON-LD knowledge graph | [`justicedao/ipfs_netherlands_laws_knowledge_graph`](https://huggingface.co/datasets/justicedao/ipfs_netherlands_laws_knowledge_graph) |
+| Unified corpus, CID index, BM25, vector, graph, reports, relationships | [`justicedao/wetwijzer_netherlands_legal_corpus`](https://huggingface.co/datasets/justicedao/wetwijzer_netherlands_legal_corpus) |
+| Compatibility base corpus | [`justicedao/ipfs_netherlands_laws`](https://huggingface.co/datasets/justicedao/ipfs_netherlands_laws) |
+| Compatibility vector index | [`justicedao/ipfs_netherlands_laws_vector_index`](https://huggingface.co/datasets/justicedao/ipfs_netherlands_laws_vector_index) |
+| Compatibility BM25 index | [`justicedao/ipfs_netherlands_laws_bm25_index`](https://huggingface.co/datasets/justicedao/ipfs_netherlands_laws_bm25_index) |
+| Compatibility JSON-LD knowledge graph | [`justicedao/ipfs_netherlands_laws_knowledge_graph`](https://huggingface.co/datasets/justicedao/ipfs_netherlands_laws_knowledge_graph) |
 
 Official source references include:
 
@@ -21,7 +22,7 @@ Official source references include:
 - Official BWB/SRU metadata where available
 - Official `/informatie` pages for law status and version metadata
 
-The currently referenced published corpus is a quality-audited partial Dutch corpus, not a claimed full Dutch corpus. Project metadata records the audited package size as 4,999 laws, 89,737 articles, and 94,736 CID rows. The browser queries the published Hugging Face datasets through a provider abstraction and keeps a small deterministic sample cache only for local development, tests, and offline fallback.
+The currently referenced published corpus is a quality-audited partial Dutch corpus, not a claimed full Dutch corpus. Project metadata records the audited package size as 4,999 laws, 89,737 articles, 94,736 CID rows, and 261,720 derived relationship rows. The browser queries the unified Hugging Face dataset through a provider abstraction, falls back to the split compatibility repos if needed, and keeps a small deterministic sample cache only for local development, tests, and offline fallback.
 
 ## Features
 
@@ -66,7 +67,7 @@ Deployment notes for GitHub Pages live in [docs/GITHUB_PAGES_DEPLOYMENT.md](docs
 
 ## Runtime Data Layout
 
-WetWijzer uses provider interfaces in `src/lib/netherlandsCorpus.ts` for corpus loading, search, graph traversal, and CID lookup. The default provider queries Hugging Face Dataset Viewer APIs for the published Netherlands dataset stack. The bundled static files are intentionally small sample/fallback artifacts, not the production source of truth.
+WetWijzer uses provider interfaces in `src/lib/netherlandsCorpus.ts` for corpus loading, search, graph traversal, and CID lookup. The default provider queries Hugging Face Dataset Viewer APIs for `justicedao/wetwijzer_netherlands_legal_corpus`, falls back to the four split `ipfs_netherlands_laws*` repos, and then falls back to the bundled sample. The bundled static files are intentionally small sample/fallback artifacts, not the production source of truth.
 
 Static sample artifacts live under:
 

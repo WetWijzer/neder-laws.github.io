@@ -12,10 +12,11 @@ const generatedAt = '2026-06-27T00:00:00Z';
 const embeddingDimension = 384;
 
 const hfDatasets = {
-  normalized: 'justicedao/ipfs_netherlands_laws',
-  vectorIndex: 'justicedao/ipfs_netherlands_laws_vector_index',
-  bm25Index: 'justicedao/ipfs_netherlands_laws_bm25_index',
-  knowledgeGraph: 'justicedao/ipfs_netherlands_laws_knowledge_graph',
+  unified: 'justicedao/wetwijzer_netherlands_legal_corpus',
+  compatBase: 'justicedao/ipfs_netherlands_laws',
+  compatVectorIndex: 'justicedao/ipfs_netherlands_laws_vector_index',
+  compatBm25Index: 'justicedao/ipfs_netherlands_laws_bm25_index',
+  compatKnowledgeGraph: 'justicedao/ipfs_netherlands_laws_knowledge_graph',
 };
 
 const sections = [
@@ -258,17 +259,18 @@ function buildManifest(artifactStats) {
   return {
     schemaVersion: 1,
     generatedAt,
-    datasetId: hfDatasets.normalized,
+    datasetId: hfDatasets.unified,
     datasetPath: 'netherlands_laws_quality_audited_partial',
     corpus: {
       jurisdiction: 'Netherlands',
       name: 'WetWijzer Netherlands Laws',
       source: 'wetten.overheid.nl official BWB/SRU sources',
-      note: 'Browser sample cache for the published quality-audited partial Dutch corpus. Use the Hugging Face datasets for the full published package.',
+      note: 'Browser sample cache for the published quality-audited partial Dutch corpus. Use the unified Hugging Face dataset for the full published package.',
       publishedCorpus: {
         laws: 4999,
         articles: 89737,
         cidRows: 94736,
+        relationshipRows: 261720,
         coverage: 'quality-audited partial corpus, not full Dutch corpus coverage',
       },
       hfDatasets,
@@ -314,56 +316,56 @@ async function build() {
       path: 'generated/sections.json',
       bytes: await writeJson('generated/sections.json', sections),
       role: 'browser_core',
-      sourceUrl: `https://huggingface.co/datasets/${hfDatasets.normalized}`,
+      sourceUrl: `https://huggingface.co/datasets/${hfDatasets.unified}`,
     },
     {
       id: 'bm25_documents',
       path: 'generated/bm25-documents.json',
       bytes: await writeJson('generated/bm25-documents.json', bm25),
       role: 'browser_search',
-      sourceUrl: `https://huggingface.co/datasets/${hfDatasets.bm25Index}`,
+      sourceUrl: `https://huggingface.co/datasets/${hfDatasets.unified}`,
     },
     {
       id: 'embedding_index',
       path: 'generated/embedding-index.json',
       bytes: await writeJson('generated/embedding-index.json', embeddingIndex),
       role: 'browser_vector',
-      sourceUrl: `https://huggingface.co/datasets/${hfDatasets.vectorIndex}`,
+      sourceUrl: `https://huggingface.co/datasets/${hfDatasets.unified}`,
     },
     {
       id: 'embeddings',
       path: 'generated/embeddings.f32',
       bytes: await writeBinary('generated/embeddings.f32', Buffer.from(vectors.buffer)),
       role: 'browser_vector',
-      sourceUrl: `https://huggingface.co/datasets/${hfDatasets.vectorIndex}`,
+      sourceUrl: `https://huggingface.co/datasets/${hfDatasets.unified}`,
     },
     {
       id: 'entities',
       path: 'generated/entities.json',
       bytes: await writeJson('generated/entities.json', graph.entities),
       role: 'browser_graph',
-      sourceUrl: `https://huggingface.co/datasets/${hfDatasets.knowledgeGraph}`,
+      sourceUrl: `https://huggingface.co/datasets/${hfDatasets.unified}`,
     },
     {
       id: 'relationships',
       path: 'generated/relationships.json',
       bytes: await writeJson('generated/relationships.json', graph.relationships),
       role: 'browser_graph',
-      sourceUrl: `https://huggingface.co/datasets/${hfDatasets.knowledgeGraph}`,
+      sourceUrl: `https://huggingface.co/datasets/${hfDatasets.unified}`,
     },
     {
       id: 'graph_adjacency',
       path: 'generated/graph-adjacency.json',
       bytes: await writeJson('generated/graph-adjacency.json', graph.adjacency),
       role: 'browser_graph',
-      sourceUrl: `https://huggingface.co/datasets/${hfDatasets.knowledgeGraph}`,
+      sourceUrl: `https://huggingface.co/datasets/${hfDatasets.unified}`,
     },
     {
       id: 'logic_proof_summaries',
       path: 'generated/logic-proof-summaries.json',
       bytes: await writeJson('generated/logic-proof-summaries.json', logicProofSummaries),
       role: 'browser_logic',
-      sourceUrl: `https://huggingface.co/datasets/${hfDatasets.normalized}`,
+      sourceUrl: `https://huggingface.co/datasets/${hfDatasets.unified}`,
     },
   ];
 
@@ -381,7 +383,7 @@ async function validate() {
   const sectionsPath = path.join(generatedRoot, 'sections.json');
   const loadedSections = JSON.parse(await readFile(sectionsPath, 'utf8'));
   const missingStatus = loadedSections.filter((section) => !section.law_status || !section.status_source);
-  if (manifest.datasetId !== hfDatasets.normalized) {
+  if (manifest.datasetId !== hfDatasets.unified) {
     throw new Error(`Unexpected datasetId ${manifest.datasetId}`);
   }
   if (missingStatus.length > 0) {

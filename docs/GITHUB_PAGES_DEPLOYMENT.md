@@ -69,7 +69,11 @@ location.reload();
 
 ## Hugging Face Data Access
 
-WetWijzer reads small pages from these public datasets:
+WetWijzer reads small pages from the public unified dataset first:
+
+- `justicedao/wetwijzer_netherlands_legal_corpus`
+
+If the unified repo is temporarily unavailable, the provider falls back to the compatibility split repos:
 
 - `justicedao/ipfs_netherlands_laws`
 - `justicedao/ipfs_netherlands_laws_vector_index`
@@ -79,8 +83,8 @@ WetWijzer reads small pages from these public datasets:
 The browser should request Dataset Viewer endpoints such as:
 
 ```text
-https://datasets-server.huggingface.co/size?dataset=justicedao/ipfs_netherlands_laws
-https://datasets-server.huggingface.co/search?dataset=justicedao/ipfs_netherlands_laws&config=articles&split=train&query=Wetboek
+https://datasets-server.huggingface.co/size?dataset=justicedao/wetwijzer_netherlands_legal_corpus
+https://datasets-server.huggingface.co/search?dataset=justicedao/wetwijzer_netherlands_legal_corpus&config=articles&split=train&query=Wetboek
 ```
 
 The provider requests paginated rows and search results. It should not download the full corpus.
